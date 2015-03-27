@@ -1,10 +1,3 @@
-/*
- * GameSetup.h
- *
- *  Created on: Mar 24, 2015
- *      Author: gonza
- */
-
 #ifndef GAMESETUP_H_
 #define GAMESETUP_H_
 

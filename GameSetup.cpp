@@ -1,10 +1,3 @@
-/*
- * GameSetup.cpp
- *
- *  Created on: Mar 24, 2015
- *      Author: gonza
- */
-
 #include <iostream>
 #include "GameSetup.h"
 
@@ -20,7 +13,7 @@ GameSetup::GameSetup(bool* quit, int ScreenWidth, int ScreenHeight) {
 	}
 
 	renderer = NULL;
-	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_TARGETTEXTURE);
 
 	mainEvent = new SDL_Event();
 

@@ -1,36 +1,26 @@
-/*
- * MKCharacter.cpp
- *
- *  Created on: Mar 24, 2015
- *      Author: gonza
- */
-
 #include "MKCharacter.h"
 
 MKCharacter::MKCharacter(GameSetup* passed_SDL_Setup)
 {
-        gameSetup = passed_SDL_Setup;
+	gameSetup = passed_SDL_Setup;
 
-        //tamaño del png = 87*136
-        scorpion = new MKSprite(gameSetup->getRenderer(),"data/scorpionWalk.png", 200,200, 120,187);
-        scorpion->SetUpAnimation(9,1);
+	//tamaño del png = 87*136
+	scorpion = new MKSprite(gameSetup->getRenderer(),"data/scorpionWalk.png", 200,200, 120,187);
+	scorpion->SetUpAnimation(9,1);
 
-        timeCheck = SDL_GetTicks();
-        stopAnimation = false;
+	timeCheck = SDL_GetTicks();
+	stopAnimation = false;
 
 }
-
 
 MKCharacter::~MKCharacter(void)
 {
-        delete scorpion;
+	delete scorpion;
 }
-
-
 
 void MKCharacter::Draw()
 {
-		scorpion->DrawSteady();
+	scorpion->DrawSteady();
 }
 
 void MKCharacter::Update()
@@ -51,7 +41,6 @@ void MKCharacter::Update()
 		}
 		timeCheck = SDL_GetTicks();
 	}
-
 }
 
 void MKCharacter::moveRight() {
@@ -61,6 +50,3 @@ void MKCharacter::moveRight() {
 void MKCharacter::moveLeft() {
 	scorpion->setX(scorpion->getX()-1);
 }
-
-
-

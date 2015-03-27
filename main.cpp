@@ -11,4 +11,5 @@ int main() {
 
 	delete mkMain;
 
+	return 0;
 }
