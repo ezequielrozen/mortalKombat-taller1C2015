@@ -12,15 +12,13 @@ public:
 
     ~MKSprite(void);
     void DrawSteady();
-    void Draw();
 
     void Walk(int BeginFrame, int EndFrame, float Speed);
     void WalkBack(int BeginFrame, int EndFrame, float Speed);
     void SetUpAnimation(int passed_Amount_X, int passed_Amount_Y);
-
     int getX();
-
     void setX(int passedX);
+
 private:
 
     SDL_Texture* image;

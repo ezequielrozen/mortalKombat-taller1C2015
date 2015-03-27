@@ -86,17 +86,6 @@ void MKSprite::DrawSteady()
     SDL_RenderCopy(renderer,image,&crop, &rect);
 }
 
-void MKSprite::Draw()
-{
-    SDL_Rect Position;
-    Position.x = rect.x;
-    Position.y = rect.y;
-    Position.w = rect.w;
-    Position.h = rect.h;
-
-    SDL_RenderCopy(renderer,image, &crop, &Position);
-}
-
 int MKSprite::getX() {
 	return rect.x;
 }
