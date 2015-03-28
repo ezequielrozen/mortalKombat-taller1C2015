@@ -6,6 +6,8 @@
 #include <math.h>
 #include "SDL2/SDL.h"
 
+const int CHARACTER_WIDHT = 80;
+
 class MKCharacter
 {
 public:
@@ -18,6 +20,10 @@ public:
     void moveRight();
 
     void moveLeft();
+
+    int getWidth();
+
+    //int getHeight();
 
 private:
 

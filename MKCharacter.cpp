@@ -44,9 +44,22 @@ void MKCharacter::Update()
 }
 
 void MKCharacter::moveRight() {
-	scorpion->setX(scorpion->getX()+1);
+
+    //Verifico que no se vaya de la pantalla por derecha
+    if(( scorpion->getX()+1 + getWidth() < gameSetup->getScreenWidth() + getWidth()/2 ) )
+    {
+    	scorpion->setX(scorpion->getX()+1);
+    }
 }
 
 void MKCharacter::moveLeft() {
-	scorpion->setX(scorpion->getX()-1);
+	//Verifico que no se vaya de la pantalla por izquierda
+	if(( scorpion->getX()-1 + getWidth() > getWidth() ) )
+	{
+		scorpion->setX(scorpion->getX()-1);
+	}
+}
+
+int MKCharacter::getWidth(){
+	return CHARACTER_WIDHT;
 }

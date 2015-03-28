@@ -41,6 +41,16 @@ void GameSetup::Begin() {
 	SDL_RenderClear(this->getRenderer());
 }
 
+int GameSetup::getScreenWidth()
+{
+	return SCREEN_WIDTH;
+}
+
+int GameSetup::getScreenHeight()
+{
+	return SCREEN_HEIGHT;
+}
+
 void GameSetup::End() {
 
 	SDL_RenderPresent(this->getRenderer());
