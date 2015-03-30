@@ -17,6 +17,9 @@ GameSetup::GameSetup(bool* quit, int ScreenWidth, int ScreenHeight) {
 
 	mainEvent = new SDL_Event();
 
+	this->screenWidth = ScreenWidth;
+	this->screenHeight = ScreenHeight;
+
 
 }
 
@@ -43,12 +46,12 @@ void GameSetup::Begin() {
 
 int GameSetup::getScreenWidth()
 {
-	return SCREEN_WIDTH;
+	return this->screenWidth;
 }
 
 int GameSetup::getScreenHeight()
 {
-	return SCREEN_HEIGHT;
+	return this->screenHeight;
 }
 
 void GameSetup::End() {

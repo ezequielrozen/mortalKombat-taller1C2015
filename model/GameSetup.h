@@ -3,10 +3,6 @@
 
 #include "SDL2/SDL.h"
 
-//Screen dimension constants
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
-
 class GameSetup {
 public:
 	GameSetup(bool* quit, int ScreenWidth, int ScreenHeight);
@@ -18,6 +14,9 @@ public:
 
 	int getScreenWidth();
 	int getScreenHeight();
+
+	int screenWidth;
+	int screenHeight;
 
 
 

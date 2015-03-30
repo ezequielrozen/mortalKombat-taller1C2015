@@ -8,16 +8,16 @@
 class MKSprite
 {
 public:
-    MKSprite(SDL_Renderer* passed_renderer, std::string FilePath, int x, int y, int w, int h);
+    MKSprite(SDL_Renderer* passed_renderer, std::string FilePath, int x, int y, int w, int h, int frames);
 
     ~MKSprite(void);
-    void DrawSteady();
+    void Draw();
 
     void Walk(int BeginFrame, int EndFrame, float Speed);
     void WalkBack(int BeginFrame, int EndFrame, float Speed);
-    void SetUpAnimation(int passed_Amount_X, int passed_Amount_Y);
     int getX();
     void setX(int passedX);
+    void reset();
 
 private:
 
@@ -32,7 +32,6 @@ private:
     int animationDelay;
 
     int Amount_Frame_X;
-    int Amount_Frame_Y;
 
     SDL_Renderer* renderer;
 };

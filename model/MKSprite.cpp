@@ -1,6 +1,6 @@
 #include "MKSprite.h"
 
-MKSprite::MKSprite(SDL_Renderer* passed_renderer, std::string FilePath, int x, int y, int w, int h)
+MKSprite::MKSprite(SDL_Renderer* passed_renderer, std::string FilePath, int x, int y, int w, int h, int frames)
 {
     renderer = passed_renderer;
     image = NULL;
@@ -25,16 +25,9 @@ MKSprite::MKSprite(SDL_Renderer* passed_renderer, std::string FilePath, int x, i
     crop.h = 136;
 
     CurrentFrame = 0;
-    Amount_Frame_X = 0;
-    Amount_Frame_Y = 0;
+    Amount_Frame_X = frames;
 
     animationDelay = 0;
-}
-
-void MKSprite::SetUpAnimation(int passed_Amount_X, int passed_Amount_Y)
-{
-    Amount_Frame_X = passed_Amount_X;
-    Amount_Frame_Y = passed_Amount_Y;
 }
 
 void MKSprite::Walk(int BeginFrame, int EndFrame, float Speed)
@@ -50,7 +43,7 @@ void MKSprite::Walk(int BeginFrame, int EndFrame, float Speed)
         crop.x = CurrentFrame * (img_width/Amount_Frame_X);
         crop.y = 0;
         crop.w = img_width/Amount_Frame_X;
-        crop.h = img_height/Amount_Frame_Y;
+        crop.h = img_height;
 
         animationDelay = SDL_GetTicks();
 
@@ -70,7 +63,7 @@ void MKSprite::WalkBack(int BeginFrame, int EndFrame, float Speed) {
 		crop.x = CurrentFrame * (img_width/Amount_Frame_X);
 		crop.y = 0;
 	    crop.w = img_width/Amount_Frame_X;
-	    crop.h = img_height/Amount_Frame_Y;
+	    crop.h = img_height;
 
 	    animationDelay = SDL_GetTicks();
 	}
@@ -81,7 +74,7 @@ MKSprite::~MKSprite(void)
     SDL_DestroyTexture(image);
 }
 
-void MKSprite::DrawSteady()
+void MKSprite::Draw()
 {
     SDL_RenderCopy(renderer,image,&crop, &rect);
 }
@@ -94,3 +87,8 @@ void MKSprite::setX(int passedX) {
 	rect.x = passedX;
 }
 
+void MKSprite::reset() {
+    CurrentFrame = 0;
+    crop.x = 0;
+    crop.y = 0;
+}
