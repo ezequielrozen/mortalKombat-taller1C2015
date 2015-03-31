@@ -24,6 +24,7 @@ private:
     MKCharacter* scorpion;
 
     MKSprite* scorpionWalk;
+    MKSprite* scorpionStance;
 
     int ScreenWidth;
     int ScreenHeight;

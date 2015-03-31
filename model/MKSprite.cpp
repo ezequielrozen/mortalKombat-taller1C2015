@@ -21,8 +21,8 @@ MKSprite::MKSprite(SDL_Renderer* passed_renderer, std::string FilePath, int x, i
 
     crop.x = 0;
     crop.y = 0;
-    crop.w = 87;
-    crop.h = 136;
+    crop.w = img_width/frames;
+    crop.h = img_height;
 
     CurrentFrame = 0;
     Amount_Frame_X = frames;
@@ -30,7 +30,7 @@ MKSprite::MKSprite(SDL_Renderer* passed_renderer, std::string FilePath, int x, i
     animationDelay = 0;
 }
 
-void MKSprite::Walk(int BeginFrame, int EndFrame, float Speed)
+void MKSprite::Play(int BeginFrame, int EndFrame, float Speed)
 {
     if (animationDelay+Speed < SDL_GetTicks())
     {

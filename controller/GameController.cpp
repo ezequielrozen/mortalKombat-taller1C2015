@@ -7,6 +7,7 @@ GameController::GameController(GameSetup* pGameSetup)
     timeCheck = SDL_GetTicks();
 
     command = "NONE";
+
 }
 
 
@@ -22,24 +23,26 @@ string GameController::getCommand()
             if (gameSetup->getMainEvent()->key.keysym.sym == SDLK_RIGHT)
             {
                 command = "RIGHT";
+                timeCheck = SDL_GetTicks();
+                //right = true;
             }
             else if (gameSetup->getMainEvent()->key.keysym.sym == SDLK_LEFT)
             {
                 command = "LEFT";
+                timeCheck = SDL_GetTicks();
+                //left = true;
             }
         }
-        else if (gameSetup->getMainEvent()->type == SDL_KEYUP) {
-            if (gameSetup->getMainEvent()->key.keysym.sym == SDLK_RIGHT)
-            {
-                command = "NONE";
-            }
-            else if (gameSetup->getMainEvent()->key.keysym.sym == SDLK_LEFT)
-            {
-                command = "NONE";
-            }
+	//El timeCheck se ajusta para evitar delay en el cambio de movimiento del personaje. Depende del teclado y la maquina de cada uno.
+        else if (timeCheck + 500 < SDL_GetTicks()) {
+            command = "NONE";
+            timeCheck = SDL_GetTicks();
         }
         //timeCheck = SDL_GetTicks();
     //}
     return command;
 }
+
+
+
 

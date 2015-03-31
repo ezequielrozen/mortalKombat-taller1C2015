@@ -13,7 +13,7 @@ public:
     ~MKSprite(void);
     void Draw();
 
-    void Walk(int BeginFrame, int EndFrame, float Speed);
+    void Play(int BeginFrame, int EndFrame, float Speed);
     void WalkBack(int BeginFrame, int EndFrame, float Speed);
     int getX();
     void setX(int passedX);

@@ -21,16 +21,22 @@ MKCharacter::~MKCharacter(void)
 
 void MKCharacter::Update(GameController* gameController)
 {
+	//string command = gameController->getCommand();
 	if (gameController->getCommand() == "RIGHT") {
-		//this->moveRight();
+		
 		movement = "WALKINGRIGHT";
 	}
 	else if (gameController->getCommand() == "LEFT") {
-		//this->moveLeft();
+		
 		movement = "WALKINGLEFT";
+		
 	}
 	else {
+		//lastMovement = newMovement;
 		movement = "NONE";
+		//right = false;
+		//left = false;
+		//cout << "none" << endl;
 	}
 
 	if (timeCheck + 5 < SDL_GetTicks()) {

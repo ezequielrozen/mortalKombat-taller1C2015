@@ -5,6 +5,7 @@
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
 #include <string>
+#include <iostream>
 
 using namespace std;
 
@@ -15,6 +16,7 @@ public:
     ~GameController(void);
     string getCommand();
 
+
 private:
 
     GameSetup* gameSetup;
@@ -22,6 +24,7 @@ private:
     int timeCheck;
 
     string command;
+
 
 };
 

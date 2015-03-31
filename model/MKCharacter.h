@@ -2,6 +2,7 @@
 #define MKCHARACTER_H_
 
 #include <string>
+#include <iostream>
 #include "MKSprite.h"
 #include "GameSetup.h"
 #include <math.h>
