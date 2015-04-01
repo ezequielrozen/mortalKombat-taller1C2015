@@ -1,8 +1,7 @@
 #include "MKCharacter.h"
 
-MKCharacter::MKCharacter(GameSetup* passed_SDL_Setup, int initialPosX, int initialPosY)
+MKCharacter::MKCharacter(int initialPosX, int initialPosY)
 {
-	gameSetup = passed_SDL_Setup;
 
 	//tamaño del png = 87*136
 
@@ -55,7 +54,7 @@ void MKCharacter::moveRight() {
 
     //Verifico que no se vaya de la pantalla por derecha
     
-    if(( posX + 5 + getWidth() < gameSetup->getScreenWidth() ) )
+    if(( posX + 5 + getWidth() < SCREEN_WIDTH ) )
     {
     	posX = posX + 5;
     }
@@ -73,7 +72,7 @@ void MKCharacter::moveLeft() {
 }
 
 int MKCharacter::getWidth(){
-	return CHARACTER_WIDHT;
+	return CHARACTER_WIDTH;
 }
 
 int MKCharacter::getX() {

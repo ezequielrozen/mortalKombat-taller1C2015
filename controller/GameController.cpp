@@ -1,8 +1,8 @@
 #include "GameController.h"
 
-GameController::GameController(GameSetup* pGameSetup)
+GameController::GameController()
 {
-    gameSetup = pGameSetup;
+    mainEvent = new SDL_Event();
 
     timeCheck = SDL_GetTicks();
 
@@ -13,27 +13,27 @@ GameController::GameController(GameSetup* pGameSetup)
 
 GameController::~GameController(void)
 {
+    delete mainEvent;
 }
 
 string GameController::getCommand() 
 {
     //if (timeCheck + 500 < SDL_GetTicks()) {
-        if (gameSetup->getMainEvent()->type == SDL_KEYDOWN)
+        if (mainEvent->type == SDL_KEYDOWN)
         {
-            if (gameSetup->getMainEvent()->key.keysym.sym == SDLK_RIGHT)
+            if (mainEvent->key.keysym.sym == SDLK_RIGHT)
             {
                 command = "RIGHT";
                 timeCheck = SDL_GetTicks();
                 //right = true;
             }
-            else if (gameSetup->getMainEvent()->key.keysym.sym == SDLK_LEFT)
+            else if (mainEvent->key.keysym.sym == SDLK_LEFT)
             {
                 command = "LEFT";
                 timeCheck = SDL_GetTicks();
                 //left = true;
             }
         }
-	//El timeCheck se ajusta para evitar delay en el cambio de movimiento del personaje. Depende del teclado y la maquina de cada uno.
         else if (timeCheck + 500 < SDL_GetTicks()) {
             command = "NONE";
             timeCheck = SDL_GetTicks();
@@ -41,6 +41,14 @@ string GameController::getCommand()
         //timeCheck = SDL_GetTicks();
     //}
     return command;
+}
+
+SDL_Event* GameController::getEvent() {
+    return mainEvent;
+}
+
+void GameController::checkEvent() {
+    SDL_PollEvent(mainEvent);    
 }
 
 

@@ -4,17 +4,14 @@ Game::Game(int pScreenWidth, int pScreenHeight)
 {
     ScreenWidth = pScreenWidth;
     ScreenHeight = pScreenHeight;
-    quit = false;
-    gameSetup = new GameSetup(&quit, ScreenWidth, ScreenHeight);
-    scorpion = new MKCharacter(gameSetup, INITIAL_POSITION_X, INITIAL_POSITION_Y);
-    gameView = new GameView(gameSetup, scorpion);
-    gameController = new GameController(gameSetup);
+    scorpion = new MKCharacter(INITIAL_POSITION_X, INITIAL_POSITION_Y);
+    gameView = new GameView(ScreenWidth, ScreenHeight, scorpion);
+    gameController = new GameController();
 }
 
 
 Game::~Game(void)
 {
-    delete gameSetup;
     delete scorpion;
     delete gameView;
     delete gameController;
@@ -23,11 +20,12 @@ Game::~Game(void)
 
 void Game::GameLoop(void)
 {
-    while (!quit && gameSetup->getMainEvent()->type != SDL_QUIT)
+    while (gameController->getEvent()->type != SDL_QUIT)
     {
-        gameSetup->Begin();
-        gameView->Draw();
+        gameController->checkEvent();
+        gameView->startRender();
+        gameView->Render();
         scorpion->Update(gameController);
-        gameSetup->End();
+        gameView->endRender();
     }
 }

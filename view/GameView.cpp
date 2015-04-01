@@ -1,19 +1,31 @@
 #include "GameView.h"
 
-GameView::GameView(GameSetup* pGameSetup, MKCharacter* character)
+GameView::GameView(int ScreenWidth, int ScreenHeight, MKCharacter* character)
 {
-    gameSetup = pGameSetup;
+    window = NULL;
+    window = SDL_CreateWindow("Mortal Kombat", 100, 100, ScreenWidth, ScreenHeight, SDL_WINDOW_SHOWN);
+
+    if (window == NULL) {
+
+        std::cout << "Window couldn't be created" << std::endl;
+    }
+
+    renderer = NULL;
+    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_TARGETTEXTURE);
+
     scorpion = character;
  	this->LoadSprites();   
 }
 
-
 GameView::~GameView(void)
 {
 	delete scorpionWalk;
+    delete scorpionStance;
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
 }
 
-void GameView::Draw() {
+void GameView::Render() {
 
     if (scorpion->getMovement() == "NONE") {
         scorpionStance->Play(0, 6, 33);
@@ -34,7 +46,15 @@ void GameView::Draw() {
 }
 
 void GameView::LoadSprites() {
-	scorpionWalk = new MKSprite(gameSetup->getRenderer(),"data/scorpionWalk.png", scorpion->getX(),scorpion->getY(), 120,187, 9);
-    scorpionStance = new MKSprite(gameSetup->getRenderer(),"data/scorpionStance.png", scorpion->getX(),scorpion->getY(), 120,187, 7);	
+	scorpionWalk = new MKSprite(this->renderer,"data/scorpionWalk.png", scorpion->getX(),scorpion->getY(), 120,187, 9);
+    scorpionStance = new MKSprite(this->renderer,"data/scorpionStance.png", scorpion->getX(),scorpion->getY(), 120,187, 7);	
+}
+
+void GameView::startRender() {
+    SDL_RenderClear(renderer);
+}   
+
+void GameView::endRender() {
+    SDL_RenderPresent(renderer);
 }
 

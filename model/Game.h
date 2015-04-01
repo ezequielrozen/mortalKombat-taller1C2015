@@ -1,8 +1,6 @@
 #ifndef GAME_H_
 #define GAME_H_
 
-#include "GameSetup.h"
-#include "MKSprite.h"
 #include "MKCharacter.h"
 #include "../view/GameView.h"
 #include "../controller/GameController.h"
@@ -26,8 +24,6 @@ private:
 
     int ScreenWidth;
     int ScreenHeight;
-    bool quit;
-    GameSetup* gameSetup;
     GameView* gameView;
     GameController* gameController;
 

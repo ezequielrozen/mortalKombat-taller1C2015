@@ -5,10 +5,12 @@
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
 
+using namespace std;
+
 class MKSprite
 {
 public:
-    MKSprite(SDL_Renderer* passed_renderer, std::string FilePath, int x, int y, int w, int h, int frames);
+    MKSprite(SDL_Renderer* passed_renderer, string FilePath, int x, int y, int w, int h, int frames);
 
     ~MKSprite(void);
     void Draw();
@@ -21,8 +23,8 @@ public:
 
 private:
 
-    SDL_Texture* image;
-    SDL_Rect rect;
+    SDL_Texture* texture;
+    SDL_Rect draw;
 
     SDL_Rect crop;
 
@@ -31,7 +33,7 @@ private:
     int CurrentFrame;
     int animationDelay;
 
-    int Amount_Frame_X;
+    int framesX;
 
     SDL_Renderer* renderer;
 };

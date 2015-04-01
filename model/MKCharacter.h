@@ -3,20 +3,20 @@
 
 #include <string>
 #include <iostream>
-#include "MKSprite.h"
-#include "GameSetup.h"
 #include <math.h>
 #include "SDL2/SDL.h"
 #include "../controller/GameController.h"
 
 using namespace std;
 
-const int CHARACTER_WIDHT = 87;
+const int CHARACTER_WIDTH = 87;
+const int SCREEN_WIDTH = 700;
+const int SCREEN_HEIGHT = 500;
 
 class MKCharacter
 {
 public:
-    MKCharacter(GameSetup* passed_SDL_Setup, int initialPosX, int initialPosY);
+    MKCharacter(int initialPosX, int initialPosY);
     ~MKCharacter(void);
 
     void Update(GameController* gameController);
@@ -36,8 +36,6 @@ public:
     //int getHeight();
 
 private:
-
-    GameSetup* gameSetup;
 
     string movement;
 
