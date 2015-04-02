@@ -21,17 +21,19 @@ void GameController::checkEvent() {
     SDL_PollEvent(mainEvent);    
 }
 
-void GameController::update(MKCharacter* character) {
+void GameController::update(MKCharacter* character, Layer* layer) {
     if (mainEvent->type == SDL_KEYDOWN)
         {
             if (mainEvent->key.keysym.sym == SDLK_RIGHT)
             {
+                layer->moveRight();
                 character->setMovement("WALKINGRIGHT");
                 timer = SDL_GetTicks();
                 //right = true;
             }
             else if (mainEvent->key.keysym.sym == SDLK_LEFT)
             {
+                layer->moveLeft();
                 character->setMovement("WALKINGLEFT");
                 timer = SDL_GetTicks();
                 //left = true;

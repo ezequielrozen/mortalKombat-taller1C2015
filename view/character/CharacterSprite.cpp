@@ -1,12 +1,12 @@
-#include "MKSprite.h"
+#include "CharacterSprite.h"
 
-MKSprite::MKSprite(SDL_Renderer* pRenderer, string path, int x, int y, int w, int h, int frames)
+CharacterSprite::CharacterSprite(SDL_Renderer* pRenderer, string path, int x, int y, int w, int h, int frames)
 {
-    renderer = pRenderer;
-    texture = NULL;
-    texture = IMG_LoadTexture(renderer,path.c_str());
+    this->renderer = pRenderer;
+    this->texture = NULL;
+    this->texture = IMG_LoadTexture(renderer,path.c_str());
 
-    if (texture == NULL)
+    if (this->texture == NULL)
     {
         cout << "Couldn't Load " << path.c_str() << endl;
         cout << IMG_GetError() << std::endl;
@@ -30,7 +30,7 @@ MKSprite::MKSprite(SDL_Renderer* pRenderer, string path, int x, int y, int w, in
     animationDelay = 0;
 }
 
-void MKSprite::Play(int BeginFrame, int EndFrame, float Speed)
+void CharacterSprite::Play(int BeginFrame, int EndFrame, float Speed)
 {
     if (animationDelay+Speed < SDL_GetTicks())
     {
@@ -50,7 +50,7 @@ void MKSprite::Play(int BeginFrame, int EndFrame, float Speed)
     }
 }
 
-void MKSprite::WalkBack(int BeginFrame, int EndFrame, float Speed) {
+void CharacterSprite::WalkBack(int BeginFrame, int EndFrame, float Speed) {
 
 	if (animationDelay+Speed < SDL_GetTicks())
 	{
@@ -69,25 +69,25 @@ void MKSprite::WalkBack(int BeginFrame, int EndFrame, float Speed) {
 	}
 }
 
-MKSprite::~MKSprite(void)
+CharacterSprite::~CharacterSprite(void)
 {
     SDL_DestroyTexture(texture);
 }
 
-void MKSprite::Draw()
+void CharacterSprite::Draw()
 {
     SDL_RenderCopy(renderer,texture,&crop, &draw);
 }
 
-int MKSprite::getX() {
+int CharacterSprite::getX() {
 	return draw.x;
 }
 
-void MKSprite::setX(int passedX) {
+void CharacterSprite::setX(int passedX) {
 	draw.x = passedX;
 }
 
-void MKSprite::reset() {
+void CharacterSprite::reset() {
     CurrentFrame = 0;
     crop.x = 0;
     crop.y = 0;

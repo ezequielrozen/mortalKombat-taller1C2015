@@ -21,6 +21,7 @@ public:
 private:
 
     MKCharacter* scorpion;
+    Layer* layer;
 
     int ScreenWidth;
     int ScreenHeight;

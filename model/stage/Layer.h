@@ -4,17 +4,22 @@
 class Layer {
 
 public:
-    Layer(float width, int z_index);
+    Layer(int width, int z_index);
     ~Layer();
-    void move();
-    float getWidth();
-    void setWidth(float width);
+    void moveRight();
+    void moveLeft();
+    int getWidth();
+    void setWidth(int width);
     float getSpeed();
+    void setLeft_border(int left_border);
+    int getLeft_border();
+    void update();
 
 private:
-    float width;
+    int width;
     float speed;
     int z_index;
+    int left_border;
 };
 
 #endif //MORTALKOMBAT_TALLER1C2015_LAYER_H

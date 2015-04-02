@@ -7,15 +7,15 @@
 class Stage {
 
 public:
-    Stage(std::list<Layer*>* layers, float width, float heigh, float floor);
+    Stage(std::list<Layer*>* layers, int width, int heigh, int floor);
     ~Stage();
     std::list<Layer*>* getLayers();
     void setLayers(std::list<Layer*>* layers);
 
 private:
-    float width;
-    float height;
-    float floor;
+    int width;
+    int height;
+    int floor;
     std::list<Layer*>* layers;
 };
 

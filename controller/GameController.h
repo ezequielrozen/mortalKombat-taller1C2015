@@ -6,6 +6,7 @@
 #include <string>
 #include <iostream>
 #include "../model/MKCharacter.h"
+#include "../model/stage/Layer.h"
 
 using namespace std;
 
@@ -15,7 +16,7 @@ public:
     GameController();
     ~GameController(void);
 
-    void update(MKCharacter* character);
+    void update(MKCharacter* character, Layer* layer);
 
     SDL_Event* getEvent();
 

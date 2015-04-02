@@ -1,10 +1,12 @@
 #ifndef GAMEVIEW_H_
 #define GAMEVIEW_H_
 
-#include "MKSprite.h"
+#include "../view/character/CharacterSprite.h"
 #include "../model/MKCharacter.h"
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
+#include "../model/stage/Layer.h"
+#include "stage/LayerSprite.h"
 #include <string>
 #include <math.h>
 
@@ -13,7 +15,7 @@ using namespace std;
 class GameView
 {
 public:
-    GameView(int ScreenWidth, int ScreenHeight, MKCharacter* character);
+    GameView(int ScreenWidth, int ScreenHeight, MKCharacter* character, Layer* layer);
     ~GameView(void);
     void Render();
     void LoadSprites();
@@ -24,9 +26,11 @@ public:
 private:
 
     MKCharacter* scorpion;
+    Layer* layer;
 
-    MKSprite* scorpionWalk;
-    MKSprite* scorpionStance;
+    CharacterSprite * scorpionWalk;
+    CharacterSprite * scorpionStance;
+    LayerSprite* layerSprite;
 
     SDL_Window* window;
     SDL_Renderer* renderer;

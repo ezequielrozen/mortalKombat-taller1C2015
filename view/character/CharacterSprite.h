@@ -7,12 +7,12 @@
 
 using namespace std;
 
-class MKSprite
+class CharacterSprite
 {
 public:
-    MKSprite(SDL_Renderer* passed_renderer, string FilePath, int x, int y, int w, int h, int frames);
+    CharacterSprite(SDL_Renderer* passed_renderer, string FilePath, int x, int y, int w, int h, int frames);
 
-    ~MKSprite(void);
+    ~CharacterSprite(void);
     void Draw();
 
     void Play(int BeginFrame, int EndFrame, float Speed);

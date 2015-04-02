@@ -5,7 +5,8 @@ Game::Game(int pScreenWidth, int pScreenHeight)
     ScreenWidth = pScreenWidth;
     ScreenHeight = pScreenHeight;
     scorpion = new MKCharacter(INITIAL_POSITION_X, INITIAL_POSITION_Y);
-    gameView = new GameView(ScreenWidth, ScreenHeight, scorpion);
+    layer = new Layer(617,1);
+    gameView = new GameView(ScreenWidth, ScreenHeight, scorpion, layer);
     gameController = new GameController();
 }
 
@@ -25,7 +26,7 @@ void Game::GameLoop(void)
         gameController->checkEvent();
         gameView->startRender();
         gameView->Render();
-        gameController->update(scorpion);
+        gameController->update(scorpion, layer);
         gameView->endRender();
     }
 }
