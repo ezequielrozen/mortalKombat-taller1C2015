@@ -39,11 +39,11 @@ int Layer::getLeft_border() {
 }
 
 void Layer::moveLeft() {
-    this->left_border++;
+    this->left_border--;
 }
 
 void Layer::moveRight() {
-    this->left_border--;
+    this->left_border++;
 }
 
 void Layer::update() {
