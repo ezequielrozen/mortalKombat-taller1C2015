@@ -4,11 +4,12 @@ MKCharacter::MKCharacter(int initialPosX, int initialPosY)
 {
 
 	//tamaño del png = 87*136
-
 	timeCheck = SDL_GetTicks();
 
 	posX = initialPosX;
 	posY = initialPosY;
+
+	accY = 30;
 
 	movement = "NONE";
 
@@ -28,6 +29,14 @@ void MKCharacter::Update()
 		else if (movement == "WALKINGLEFT") {
 			this->moveLeft();
 		}
+		else if (movement == "JUMPUP") {
+			this->moveUp();
+		}
+		else {
+			velY = 5;
+			posY = 200;
+		}
+
 		timeCheck = SDL_GetTicks();
 	}
 
@@ -52,6 +61,20 @@ void MKCharacter::moveLeft() {
 		posX = posX - 5;
 	}
 
+}
+
+void MKCharacter::moveUp() {
+
+	if (posY > 40 && posY <= 201)
+	{
+		float time = 0.003;
+
+//		cout << "PosY:" << posY << "  Vel: " << velY << "   Time: " << time << " TimeCheck: " << timeCheckJump << endl;
+
+		velY = velY - accY * time;
+
+		posY = posY - velY;
+	}
 }
 
 int MKCharacter::getWidth(){

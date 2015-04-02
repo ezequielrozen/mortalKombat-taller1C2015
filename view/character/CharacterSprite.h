@@ -19,6 +19,7 @@ public:
     void WalkBack(int BeginFrame, int EndFrame, float Speed);
     int getX();
     void setX(int passedX);
+    void setY(int passedY);
     void reset();
 
 private:
