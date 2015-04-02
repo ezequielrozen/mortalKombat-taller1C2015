@@ -5,7 +5,6 @@
 #include <iostream>
 #include <math.h>
 #include "SDL2/SDL.h"
-#include "../controller/GameController.h"
 
 using namespace std;
 
@@ -19,11 +18,11 @@ public:
     MKCharacter(int initialPosX, int initialPosY);
     ~MKCharacter(void);
 
-    void Update(GameController* gameController);
-
     void moveRight();
 
     void moveLeft();
+
+    void Update();
 
     int getWidth();
 
@@ -32,6 +31,8 @@ public:
     int getY();
 
     string getMovement();
+
+    void setMovement(string newMovement);
 
     //int getHeight();
 

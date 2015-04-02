@@ -18,25 +18,8 @@ MKCharacter::~MKCharacter(void)
 {
 }
 
-void MKCharacter::Update(GameController* gameController)
+void MKCharacter::Update()
 {
-	//string command = gameController->getCommand();
-	if (gameController->getCommand() == "RIGHT") {
-		
-		movement = "WALKINGRIGHT";
-	}
-	else if (gameController->getCommand() == "LEFT") {
-		
-		movement = "WALKINGLEFT";
-		
-	}
-	else {
-		//lastMovement = newMovement;
-		movement = "NONE";
-		//right = false;
-		//left = false;
-		//cout << "none" << endl;
-	}
 
 	if (timeCheck + 5 < SDL_GetTicks()) {
 		if (movement == "WALKINGRIGHT") {
@@ -85,4 +68,8 @@ int MKCharacter::getY() {
 
 string MKCharacter::getMovement() {
 	return movement;
+}
+
+void MKCharacter::setMovement(string newMovement) {
+	this->movement = newMovement;
 }

@@ -25,7 +25,7 @@ void Game::GameLoop(void)
         gameController->checkEvent();
         gameView->startRender();
         gameView->Render();
-        scorpion->Update(gameController);
+        gameController->update(scorpion);
         gameView->endRender();
     }
 }

@@ -5,6 +5,7 @@
 #include "SDL2/SDL_image.h"
 #include <string>
 #include <iostream>
+#include "../model/MKCharacter.h"
 
 using namespace std;
 
@@ -13,7 +14,8 @@ class GameController
 public:
     GameController();
     ~GameController(void);
-    string getCommand();
+
+    void update(MKCharacter* character);
 
     SDL_Event* getEvent();
 
@@ -22,9 +24,7 @@ public:
 
 private:
 
-    int timeCheck;
-
-    string command;
+    int timer;
 
     SDL_Event* mainEvent;
 
