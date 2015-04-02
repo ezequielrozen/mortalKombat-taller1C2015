@@ -6,6 +6,8 @@ Layer::Layer(int width, int z_index) {
     //Here depending on the width, the speed is set. Now depends of the z-index
     this->speed = this->z_index*10;
     this->left_border = 0;
+
+    timeCheck = SDL_GetTicks();
 }
 
 Layer::~Layer() {
@@ -29,7 +31,11 @@ void Layer::setLeft_border(int left_border) {
 }
 
 int Layer::getLeft_border() {
-    return this->left_border;
+
+    int aux = this->left_border;
+    this->left_border = 0;
+
+    return aux;
 }
 
 void Layer::moveLeft() {
@@ -41,6 +47,18 @@ void Layer::moveRight() {
 }
 
 void Layer::update() {
-    //TimeCheck
+    if (timeCheck + 5 < SDL_GetTicks()) {
+        if (movement == "RIGHT") {
+            this->moveRight();
+        }
+        else if (movement == "LEFT") {
+            this->moveLeft();
+        }
+        timeCheck = SDL_GetTicks();
+    }
 
+}
+
+void Layer::setMovement(string move) {
+    movement = move;
 }

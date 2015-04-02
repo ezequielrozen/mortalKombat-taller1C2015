@@ -22,29 +22,32 @@ void GameController::checkEvent() {
 }
 
 void GameController::update(MKCharacter* character, Layer* layer) {
+    
     if (mainEvent->type == SDL_KEYDOWN)
         {
             if (mainEvent->key.keysym.sym == SDLK_RIGHT)
             {
-                layer->moveRight();
+                layer->setMovement("RIGHT");
                 character->setMovement("WALKINGRIGHT");
                 timer = SDL_GetTicks();
                 //right = true;
             }
             else if (mainEvent->key.keysym.sym == SDLK_LEFT)
             {
-                layer->moveLeft();
+                layer->setMovement("LEFT");
                 character->setMovement("WALKINGLEFT");
                 timer = SDL_GetTicks();
                 //left = true;
             }
         }
         else if (timer + 500 < SDL_GetTicks()) {
+            layer->setMovement("NONE");
             character->setMovement("NONE");
             timer = SDL_GetTicks();
         }
 
     character->Update();
+    layer->update();
 }
 
 

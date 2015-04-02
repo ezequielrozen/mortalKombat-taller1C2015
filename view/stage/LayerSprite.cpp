@@ -1,5 +1,3 @@
-#include <math.h>
-#include <SDL2/SDL_image.h>
 #include "LayerSprite.h"
 
 LayerSprite::LayerSprite(SDL_Renderer *pRenderer, string path, int screenWidth, int screenHeight) {
@@ -35,5 +33,5 @@ void LayerSprite::Draw() {
 }
 
 void LayerSprite::update(int shift) {
-    crop.x += shift;
+    crop.x = crop.x + shift;
 }
