@@ -14,7 +14,7 @@ const int INITIAL_POSITION_Y = 200;
 class Game
 {
 public:
-    Game(int pScreenWidth, int pScreenHeight);
+    Game(int pScreenWidth, int pScreenHeight, float charAncho, float charAlto);
     ~Game(void);
     void GameLoop();
 

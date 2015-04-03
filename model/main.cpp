@@ -6,9 +6,17 @@ using namespace std;
 
 int main(int argc, char* argv[]) {
 
-	bool carga = cargaArchivoJSON(argv[1]);
+    int anchoPantalla;
+    int altoPantalla;
+    float charAncho;
+    float charAlto;
+    bool carga = cargaArchivoJSON(argv[1], anchoPantalla, altoPantalla, charAncho, charAlto);
 
-	Game* game = new Game(700, 500);
+	if(!carga){
+        return 1;
+	}
+
+	Game* game = new Game(anchoPantalla, altoPantalla, charAncho, charAlto);
 
 	game->GameLoop();
 

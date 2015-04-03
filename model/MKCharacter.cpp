@@ -1,6 +1,6 @@
 #include "MKCharacter.h"
 
-MKCharacter::MKCharacter(int initialPosX, int initialPosY)
+MKCharacter::MKCharacter(int initialPosX, int initialPosY, float ancho, float alto)
 {
 
 	//tamaño del png = 87*136
@@ -8,6 +8,9 @@ MKCharacter::MKCharacter(int initialPosX, int initialPosY)
 
 	posX = initialPosX;
 	posY = initialPosY;
+
+	this->alto = alto;
+	this->ancho = ancho;
 
 	posY = 200;
 	velY = 5;
