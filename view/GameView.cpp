@@ -15,7 +15,8 @@ GameView::GameView(int ScreenWidth, int ScreenHeight, MKCharacter* character, La
 
     this->layer = layer;
     scorpion = character;
- 	this->LoadSprites();   
+ 	this->LoadSprites();
+    this->layer->setWidth((float)ScreenWidth * layerSprite->getCropWidthRelation());
 }
 
 GameView::~GameView(void)
@@ -27,8 +28,8 @@ GameView::~GameView(void)
 }
 
 void GameView::Render() {
-      layerSprite->Draw();
-      layerSprite->update(layer->getLeft_border());
+    layerSprite->update(layer->getLeft_border());
+    layerSprite->Draw();
 
     if (scorpion->isJumping()) {
             scorpionJump->Play(0, 3, 500);

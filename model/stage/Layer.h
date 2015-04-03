@@ -15,7 +15,7 @@ public:
     void moveRight();
     void moveLeft();
     int getWidth();
-    void setWidth(int width);
+    void setWidth(float width);
     float getSpeed();
     void setLeft_border(int left_border);
     int getLeft_border();

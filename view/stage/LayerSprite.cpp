@@ -1,4 +1,5 @@
 #include "LayerSprite.h"
+#include "../../model/MKCharacter.h"
 
 LayerSprite::LayerSprite(SDL_Renderer *pRenderer, string path, int screenWidth, int screenHeight) {
     this->renderer = pRenderer;
@@ -28,13 +29,14 @@ LayerSprite::~LayerSprite() {
     SDL_DestroyTexture(texture);
 }
 
+float LayerSprite::getCropWidthRelation() {
+    return (float) img_width / (float)crop.w;
+}
+
 void LayerSprite::Draw() {
     SDL_RenderCopy(renderer,texture,&crop, &draw);
 }
 
 void LayerSprite::update(int shift) {
-    
-    if (!((crop.x == 0 && shift < 0) || (crop.x == (img_width - crop.w) && shift > 0))) {
-        crop.x = shift;
-    };
+    crop.x = shift  * img_height / draw.h;
 }

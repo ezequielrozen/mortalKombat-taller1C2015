@@ -1,4 +1,5 @@
 #include "Layer.h"
+#include "../MKCharacter.h"
 
 Layer::Layer(int width, int z_index) {
     this->width = width;
@@ -18,7 +19,7 @@ int Layer::getWidth() {
     return this->width;
 }
 
-void Layer::setWidth(int width) {
+void Layer::setWidth(float width) {
     this->width = width;
 }
 
@@ -31,15 +32,22 @@ void Layer::setLeft_border(int left_border) {
 }
 
 int Layer::getLeft_border() {
-    return this->left_border;
+
+    int aux = this->left_border;
+//    this->left_border = 0;
+
+    return aux;
 }
 
 void Layer::moveLeft() {
-    this->left_border--;
+    if (this->left_border >= 0)
+        this->left_border--;
 }
 
 void Layer::moveRight() {
-    this->left_border++;
+    int backgroundWidth = this->getWidth();
+    if (this->left_border + 700 <= this->getWidth())
+        this->left_border++;
 }
 
 void Layer::update() {

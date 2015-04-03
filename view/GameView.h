@@ -23,6 +23,9 @@ public:
     void startRender();
     void endRender();
 
+    float getWidth();
+
+
 private:
 
     MKCharacter* scorpion;
@@ -32,6 +35,7 @@ private:
     CharacterSprite * scorpionStance;
     CharacterSprite* scorpionJump;
     LayerSprite* layerSprite;
+
 
     SDL_Window* window;
     SDL_Renderer* renderer;

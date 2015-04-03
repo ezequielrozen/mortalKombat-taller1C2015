@@ -15,6 +15,7 @@ public:
     ~LayerSprite();
     void Draw();
     void update(int);
+    float getCropWidthRelation();
 
 private:
     SDL_Renderer* renderer;
