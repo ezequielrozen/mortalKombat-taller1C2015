@@ -29,7 +29,14 @@ GameView::~GameView(void)
 void GameView::Render() {
       layerSprite->Draw();
       layerSprite->update(layer->getLeft_border());
-    if (scorpion->getMovement() == "NONE") {
+
+    if (scorpion->isJumping()) {
+            scorpionJump->Play(0, 3, 500);
+            scorpionJump->setX(scorpion->getX());
+            scorpionJump->setY(scorpion->getY());
+            scorpionJump->Draw();
+    }
+    else if (scorpion->getMovement() == "NONE") {
         scorpionStance->Play(0, 6, 33);
         scorpionStance->setX(scorpion->getX());
         scorpionStance->Draw();
@@ -43,13 +50,7 @@ void GameView::Render() {
         scorpionWalk->WalkBack(8, 0, 33);
         scorpionWalk->setX(scorpion->getX());
         scorpionWalk->Draw();
-    }
-    else if (scorpion->getMovement() == "JUMPUP") {
-        	scorpionJump->Play(0, 3, 300);
-        	scorpionJump->setX(scorpion->getX());
-        	scorpionJump->setY(scorpion->getY());
-        	scorpionJump->Draw();
-    	};;
+    };
 
 }
 

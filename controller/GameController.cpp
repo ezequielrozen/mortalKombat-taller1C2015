@@ -30,20 +30,20 @@ void GameController::update(MKCharacter* character, Layer* layer) {
                 layer->setMovement("RIGHT");
                 character->setMovement("WALKINGRIGHT");
                 timer = SDL_GetTicks();
-                //right = true;
+                //cout << "right" << endl;
             }
             else if (mainEvent->key.keysym.sym == SDLK_LEFT)
             {
                 layer->setMovement("LEFT");
                 character->setMovement("WALKINGLEFT");
                 timer = SDL_GetTicks();
-                //left = true;
+                
             }
             else if (mainEvent->key.keysym.sym == SDLK_UP)
 			{
 //				command = "UP";
-            	character->setMovement("JUMPUP");
-				timer = SDL_GetTicks();
+                character->setJump(true);
+                //character->jump();
 				//left = true;
 			}
         }

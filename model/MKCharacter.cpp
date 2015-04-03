@@ -9,9 +9,13 @@ MKCharacter::MKCharacter(int initialPosX, int initialPosY)
 	posX = initialPosX;
 	posY = initialPosY;
 
-	accY = 30;
+	posY = 200;
+	velY = 5;
+	accY = 60;
 
 	movement = "NONE";
+
+	jumping = false;
 
 }
 
@@ -29,12 +33,9 @@ void MKCharacter::Update()
 		else if (movement == "WALKINGLEFT") {
 			this->moveLeft();
 		}
-		else if (movement == "JUMPUP") {
+
+		if(this->isJumping() == true) {
 			this->moveUp();
-		}
-		else {
-			velY = 5;
-			posY = 200;
 		}
 
 		timeCheck = SDL_GetTicks();
@@ -69,11 +70,17 @@ void MKCharacter::moveUp() {
 	{
 		float time = 0.003;
 
-//		cout << "PosY:" << posY << "  Vel: " << velY << "   Time: " << time << " TimeCheck: " << timeCheckJump << endl;
+		//cout << "PosY:" << posY << "  Vel: " << velY << "   Time: " << time << " movement: " << movement << endl;
 
 		velY = velY - accY * time;
 
 		posY = posY - velY;
+	}
+
+	if (velY <= -4.8) {
+		posY = 200;
+		velY = 5;
+		this->setJump(false);
 	}
 }
 
@@ -94,5 +101,16 @@ string MKCharacter::getMovement() {
 }
 
 void MKCharacter::setMovement(string newMovement) {
-	this->movement = newMovement;
+	
+	if (!this->isJumping()) {
+		this->movement = newMovement;
+	}
+}
+
+void MKCharacter::setJump(bool jump) {
+	jumping = jump;
+}
+
+bool MKCharacter::isJumping() {
+	return jumping;
 }

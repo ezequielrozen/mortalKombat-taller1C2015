@@ -36,6 +36,10 @@ public:
 
     void setMovement(string newMovement);
 
+    void setJump(bool jump);
+
+    bool isJumping();
+
     //int getHeight();
 
 private:
@@ -50,6 +54,8 @@ private:
 
     float velY;
     float accY;
+
+    bool jumping;
 };
 
 #endif /* MKCHARACTER_H_ */
