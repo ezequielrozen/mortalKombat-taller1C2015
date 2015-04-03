@@ -1,4 +1,5 @@
 #include "json/json.h"
+#include "constantes.h"
 #include <fstream>
 #include <iostream>
 
@@ -57,11 +58,11 @@ bool cargaArchivoJSON(char* filename, int &screenWidth, int &screenHeight,
 		charAlto  = personaje["alto"].asFloat();
 
 		if(charAncho == 0.0){
-            cout << "valor ancho del personaje invalido: usando default" << endl;
+			std::cout << "valor ancho del personaje invalido: usando default" << std::endl;
             charAncho = ANCHOPERSONAJE;
         }
 		if(charAlto  == 0.0){
-            cout << "valor alto del personaje invalido: usando default" << endl;
+			std::cout << "valor alto del personaje invalido: usando default" << std::endl;
             charAlto  = ALTOPERSONAJE;
         }
 

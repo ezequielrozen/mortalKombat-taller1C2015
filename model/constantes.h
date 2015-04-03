@@ -16,7 +16,7 @@ const float ANCHOCAPA = 500;
 
 const float ANCHOPERSONAJE = 20;
 const float ALTOPERSONAJE = 35;
-const float ZINDEXPERSONAJE = 1
+const float ZINDEXPERSONAJE = 1;
 const float SPRITESPERSONAJE = 8;
 
 

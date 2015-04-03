@@ -37,6 +37,6 @@ void LayerSprite::Draw() {
     SDL_RenderCopy(renderer,texture,&crop, &draw);
 }
 
-void LayerSprite::update(int shift) {
+void LayerSprite::update(float shift) {
     crop.x = shift  * img_height / draw.h;
 }

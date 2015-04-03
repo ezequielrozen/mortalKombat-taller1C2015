@@ -14,7 +14,7 @@ const int INITIAL_POSITION_Y = 200;
 class Game
 {
 public:
-    Game(int pScreenWidth, int pScreenHeight, float charAncho, float charAlto);
+    Game(float pScreenWidth, float pScreenHeight, float charAncho, float charAlto);
     ~Game(void);
     void GameLoop();
 
@@ -23,8 +23,8 @@ private:
     MKCharacter* scorpion;
     Layer* layer;
 
-    int ScreenWidth;
-    int ScreenHeight;
+    float ScreenWidth;
+    float ScreenHeight;
     GameView* gameView;
     GameController* gameController;
 

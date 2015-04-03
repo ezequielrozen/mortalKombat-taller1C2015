@@ -15,16 +15,13 @@ using namespace std;
 class GameView
 {
 public:
-    GameView(int ScreenWidth, int ScreenHeight, MKCharacter* character, Layer* layer);
-    ~GameView(void);
+    GameView(float ScreenWidth, float ScreenHeight, MKCharacter* character, Layer* layer);
+    ~GameView();
     void Render();
     void LoadSprites();
 
     void startRender();
     void endRender();
-
-    float getWidth();
-
 
 private:
 

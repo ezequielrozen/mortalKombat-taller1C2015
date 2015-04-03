@@ -14,7 +14,7 @@ public:
     LayerSprite(SDL_Renderer* passed_renderer, string FilePath, int screenWidth, int screenHeight);
     ~LayerSprite();
     void Draw();
-    void update(int);
+    void update(float);
     float getCropWidthRelation();
 
 private:

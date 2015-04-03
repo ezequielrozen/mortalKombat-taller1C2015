@@ -1,11 +1,10 @@
 #include "Layer.h"
 #include "../MKCharacter.h"
 
-Layer::Layer(int width, int z_index) {
+Layer::Layer(float width) {
     this->width = width;
-    this->z_index = z_index;
     //Here depending on the width, the speed is set. Now depends of the z-index
-    this->speed = this->z_index*10;
+    this->speed = 10;
     this->left_border = 0;
 
     timeCheck = SDL_GetTicks();
@@ -15,7 +14,7 @@ Layer::~Layer() {
 
 }
 
-int Layer::getWidth() {
+float Layer::getWidth() {
     return this->width;
 }
 
@@ -27,13 +26,13 @@ float Layer::getSpeed() {
     return this->speed;
 }
 
-void Layer::setLeft_border(int left_border) {
+void Layer::setLeft_border(float left_border) {
     this->left_border = left_border;
 }
 
-int Layer::getLeft_border() {
+float Layer::getLeft_border() {
 
-    int aux = this->left_border;
+    float aux = this->left_border;
 //    this->left_border = 0;
 
     return aux;
@@ -45,7 +44,6 @@ void Layer::moveLeft() {
 }
 
 void Layer::moveRight() {
-    int backgroundWidth = this->getWidth();
     if (this->left_border + 700 <= this->getWidth())
         this->left_border++;
 }

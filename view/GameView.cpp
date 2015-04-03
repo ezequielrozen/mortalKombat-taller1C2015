@@ -1,6 +1,6 @@
 #include "GameView.h"
 
-GameView::GameView(int ScreenWidth, int ScreenHeight, MKCharacter* character, Layer* layer)
+GameView::GameView(float ScreenWidth, float ScreenHeight, MKCharacter* character, Layer* layer)
 {
     window = NULL;
     window = SDL_CreateWindow("Mortal Kombat", 100, 100, ScreenWidth, ScreenHeight, SDL_WINDOW_SHOWN);
@@ -16,10 +16,10 @@ GameView::GameView(int ScreenWidth, int ScreenHeight, MKCharacter* character, La
     this->layer = layer;
     scorpion = character;
  	this->LoadSprites();
-    this->layer->setWidth((float)ScreenWidth * layerSprite->getCropWidthRelation());
+    this->layer->setWidth(ScreenWidth * layerSprite->getCropWidthRelation());
 }
 
-GameView::~GameView(void)
+GameView::~GameView()
 {
 	delete scorpionWalk;
     delete scorpionStance;

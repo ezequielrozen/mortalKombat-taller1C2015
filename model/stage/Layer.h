@@ -10,23 +10,22 @@ using namespace std;
 class Layer {
 
 public:
-    Layer(int width, int z_index);
+    Layer(float width);
     ~Layer();
     void moveRight();
     void moveLeft();
-    int getWidth();
+    float getWidth();
     void setWidth(float width);
     float getSpeed();
-    void setLeft_border(int left_border);
-    int getLeft_border();
+    void setLeft_border(float left_border);
+    float getLeft_border();
     void update();
     void setMovement(string move);
 
 private:
-    int width;
+    float width;
     float speed;
-    int z_index;
-    int left_border;
+    float left_border;
     uint timeCheck;
     string movement;
 };
