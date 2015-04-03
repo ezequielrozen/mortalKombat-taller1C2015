@@ -22,6 +22,8 @@ public:
 
     void moveLeft();
 
+    void moveUp();
+
     void Update();
 
     int getWidth();
@@ -41,9 +43,13 @@ private:
     string movement;
 
     int timeCheck;
+    int timeCheckJump;
 
     int posX;
-    int posY;
+    float posY;
+
+    float velY;
+    float accY;
 };
 
 #endif /* MKCHARACTER_H_ */

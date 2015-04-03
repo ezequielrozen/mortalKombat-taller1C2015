@@ -39,8 +39,18 @@ void GameController::update(MKCharacter* character, Layer* layer) {
                 timer = SDL_GetTicks();
                 //left = true;
             }
+<<<<<<< HEAD
             character->Update();
             layer->update();
+=======
+            else if (mainEvent->key.keysym.sym == SDLK_UP)
+			{
+//				command = "UP";
+            	character->setMovement("JUMPUP");
+				timer = SDL_GetTicks();
+				//left = true;
+			}
+>>>>>>> 69e022887687e3c3b27ba8e939e277f6b0b2b4ec
         }
         else if (timer < SDL_GetTicks()) {
             layer->setMovement("NONE");

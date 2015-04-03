@@ -87,6 +87,10 @@ void CharacterSprite::setX(int passedX) {
 	draw.x = passedX;
 }
 
+void CharacterSprite::setY(int passedY) {
+	draw.y = passedY;
+}
+
 void CharacterSprite::reset() {
     CurrentFrame = 0;
     crop.x = 0;

@@ -30,6 +30,7 @@ private:
 
     CharacterSprite * scorpionWalk;
     CharacterSprite * scorpionStance;
+    CharacterSprite* scorpionJump;
     LayerSprite* layerSprite;
 
     SDL_Window* window;
