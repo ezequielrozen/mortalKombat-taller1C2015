@@ -42,7 +42,7 @@ bool cargaArchivoJSON(char* filename, int &screenWidth, int &screenHeight,
 
 		//std::cout << root["capas"] << "\n";
 		const Json::Value capas = root["capas"];
-		for ( int index = 0; index < capas.size(); ++index ){
+		for ( unsigned int index = 0; index < capas.size(); ++index ){
 			std::cout << capas[index]["imagen_fondo"] << "\n";
 			std::cout << capas[index]["ancho"] << "\n";
 		}
@@ -55,6 +55,15 @@ bool cargaArchivoJSON(char* filename, int &screenWidth, int &screenHeight,
 
 		charAncho = personaje["ancho"].asFloat();
 		charAlto  = personaje["alto"].asFloat();
+
+		if(charAncho == 0.0){
+            cout << "valor ancho del personaje invalido: usando default" << endl;
+            charAncho = ANCHOPERSONAJE;
+        }
+		if(charAlto  == 0.0){
+            cout << "valor alto del personaje invalido: usando default" << endl;
+            charAlto  = ALTOPERSONAJE;
+        }
 
 		std::cout << personaje["z-index"] << "\n";
 		std::cout << personaje["sprites"] << "\n";

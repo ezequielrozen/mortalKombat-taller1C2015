@@ -2,6 +2,7 @@
 #define CARGAJSON_H_
 #include <string>
 #include <fstream>
+#include "constantes.h"
 
 
 //Abre el archivo recibido por path, lo abre y carga el Json.
