@@ -1,3 +1,4 @@
+#include <unistd.h>
 #include "GameView.h"
 
 GameView::GameView(int ScreenWidth, int ScreenHeight, MKCharacter* character, Layer* layer)
@@ -29,22 +30,21 @@ GameView::~GameView(void)
 void GameView::Render() {
       layerSprite->Draw();
       layerSprite->update(layer->getLeft_border());
-//    if (scorpion->getMovement() == "NONE") {
-//        scorpionStance->Play(0, 6, 33);
-//        scorpionStance->setX(scorpion->getX());
-//        scorpionStance->Draw();
-//    }
-//    else if (scorpion->getMovement() == "WALKINGRIGHT") {
-//        scorpionWalk->Play(0, 8, 33);
-//        scorpionWalk->setX(scorpion->getX());
-//        scorpionWalk->Draw();
-//    }
-//    else if (scorpion->getMovement() == "WALKINGLEFT") {
-//        scorpionWalk->WalkBack(8, 0, 33);
-//        scorpionWalk->setX(scorpion->getX());
-//        scorpionWalk->Draw();
-//    };
-
+    if (scorpion->getMovement() == "NONE") {
+        scorpionStance->Play(0, 6, 50);
+        scorpionStance->setX(scorpion->getX());
+        scorpionStance->Draw();
+    }
+    else if (scorpion->getMovement() == "WALKINGRIGHT") {
+        scorpionWalk->Play(0, 8, 50);
+        scorpionWalk->setX(scorpion->getX());
+        scorpionWalk->Draw();
+    }
+    else if (scorpion->getMovement() == "WALKINGLEFT") {
+        scorpionWalk->WalkBack(8, 0,50);
+        scorpionWalk->setX(scorpion->getX());
+        scorpionWalk->Draw();
+    };
 }
 
 void GameView::LoadSprites() {
