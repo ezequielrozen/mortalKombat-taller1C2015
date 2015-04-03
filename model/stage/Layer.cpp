@@ -31,11 +31,7 @@ void Layer::setLeft_border(int left_border) {
 }
 
 int Layer::getLeft_border() {
-
-    int aux = this->left_border;
-    this->left_border = 0;
-
-    return aux;
+    return this->left_border;
 }
 
 void Layer::moveLeft() {

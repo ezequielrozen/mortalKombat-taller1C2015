@@ -35,6 +35,6 @@ void LayerSprite::Draw() {
 void LayerSprite::update(int shift) {
     
     if (!((crop.x == 0 && shift < 0) || (crop.x == (img_width - crop.w) && shift > 0))) {
-        crop.x = crop.x + shift;
+        crop.x = shift;
     };
 }
