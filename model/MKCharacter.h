@@ -40,14 +40,11 @@ public:
 
     bool isJumping();
 
-    //int getHeight();
-
 private:
 
     string movement;
 
-    int timeCheck;
-    int timeCheckJump;
+    uint timeCheck;
 
     int posX;
     float posY;

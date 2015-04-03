@@ -27,7 +27,7 @@ private:
     float speed;
     int z_index;
     int left_border;
-    int timeCheck;
+    uint timeCheck;
     string movement;
 };
 
