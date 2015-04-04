@@ -5,6 +5,7 @@
 #include "SDL2/SDL_image.h"
 #include <string>
 #include <iostream>
+#include <bits/stl_list.h>
 #include "../model/MKCharacter.h"
 #include "../model/stage/Layer.h"
 
@@ -16,7 +17,7 @@ public:
     GameController();
     ~GameController(void);
 
-    void update(MKCharacter* character, Layer* layer);
+    void update(MKCharacter* character, list<Layer*>* layer);
 
     SDL_Event* getEvent();
 

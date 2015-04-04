@@ -7,6 +7,7 @@
 #include "SDL2/SDL_image.h"
 #include "../model/stage/Layer.h"
 #include "stage/LayerSprite.h"
+#include "../model/stage/Stage.h"
 #include <string>
 #include <math.h>
 
@@ -15,7 +16,7 @@ using namespace std;
 class GameView
 {
 public:
-    GameView(float ScreenWidth, float ScreenHeight, MKCharacter* character, Layer* layer);
+    GameView(float ScreenWidth, float ScreenHeight, MKCharacter* character, Stage* stage);
     ~GameView();
     void Render();
     void LoadSprites();
@@ -26,7 +27,7 @@ public:
 private:
 
     MKCharacter* scorpion;
-    Layer* layer;
+    Stage* stage;
 
     CharacterSprite * scorpionWalk;
     CharacterSprite * scorpionStance;
@@ -36,6 +37,8 @@ private:
 
     SDL_Window* window;
     SDL_Renderer* renderer;
+    float screenWidth;
+    float screenHeight;
 
 };
 

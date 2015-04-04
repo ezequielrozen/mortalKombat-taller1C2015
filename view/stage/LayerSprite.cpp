@@ -1,7 +1,7 @@
 #include "LayerSprite.h"
 #include "../../model/MKCharacter.h"
 
-LayerSprite::LayerSprite(SDL_Renderer *pRenderer, string path, int screenWidth, int screenHeight) {
+LayerSprite::LayerSprite(SDL_Renderer *pRenderer, string path, float screenWidth, float screenHeight) {
     this->renderer = pRenderer;
     this->texture = NULL;
     this->texture = IMG_LoadTexture(this->renderer,path.c_str());
@@ -14,8 +14,8 @@ LayerSprite::LayerSprite(SDL_Renderer *pRenderer, string path, int screenWidth, 
 
     draw.x = 0;
     draw.y = 0;
-    draw.w = screenWidth;
-    draw.h = screenHeight;
+    draw.w = (int) screenWidth;
+    draw.h = (int) screenHeight;
 
     SDL_QueryTexture(texture,NULL,NULL, &img_width, &img_height);
 
@@ -38,5 +38,5 @@ void LayerSprite::Draw() {
 }
 
 void LayerSprite::update(float shift) {
-    crop.x = shift  * img_height / draw.h;
+    crop.x = (int) shift  * img_height / draw.h;
 }

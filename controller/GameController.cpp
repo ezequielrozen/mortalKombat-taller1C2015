@@ -21,20 +21,26 @@ void GameController::checkEvent() {
     SDL_PollEvent(mainEvent);    
 }
 
-void GameController::update(MKCharacter* character, Layer* layer) {
+void GameController::update(MKCharacter* character, std::list<Layer*>* layers) {
     
     if (mainEvent->type == SDL_KEYDOWN)
         {
             if (mainEvent->key.keysym.sym == SDLK_RIGHT)
             {
-                layer->setMovement("RIGHT");
+                list<Layer*>::iterator it = layers->begin();
+                for(it; it != layers->end(); it++) {
+                    (*it)->setMovement("RIGHT");
+                }
                 character->setMovement("WALKINGRIGHT");
                 timer = SDL_GetTicks();
                 //cout << "right" << endl;
             }
             else if (mainEvent->key.keysym.sym == SDLK_LEFT)
             {
-                layer->setMovement("LEFT");
+                list<Layer*>::iterator it = layers->begin();
+                for(it; it != layers->end(); it++) {
+                    (*it)->setMovement("LEFT");
+                }
                 character->setMovement("WALKINGLEFT");
                 timer = SDL_GetTicks();
                 
@@ -48,13 +54,19 @@ void GameController::update(MKCharacter* character, Layer* layer) {
 			}
         }
         else if (timer + 500 < SDL_GetTicks()) {
-            layer->setMovement("NONE");
+            list<Layer*>::iterator it = layers->begin();
+            for(it; it != layers->end(); it++) {
+                (*it)->setMovement("NONE");
+            }
             character->setMovement("NONE");
             timer = SDL_GetTicks();
         }
 
     character->Update();
-    layer->update();
+    std::list<Layer*>::iterator it;
+    for(it = layers->begin(); it != layers->end(); it++) {
+        (*it)->update();
+    }
 }
 
 

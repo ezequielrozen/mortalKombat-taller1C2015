@@ -1,26 +1,32 @@
 #include "GameView.h"
 
-GameView::GameView(float ScreenWidth, float ScreenHeight, MKCharacter* character, Layer* layer)
-{
-    window = NULL;
-    window = SDL_CreateWindow("Mortal Kombat", 100, 100, ScreenWidth, ScreenHeight, SDL_WINDOW_SHOWN);
+GameView::GameView(float ScreenWidth, float ScreenHeight, MKCharacter* character, Stage* pStage) {
+    this->window = NULL;
+    this->window = SDL_CreateWindow("Mortal Kombat", 100, 100, (int) ScreenWidth, (int) ScreenHeight, SDL_WINDOW_SHOWN);
 
-    if (window == NULL) {
+    if (this->window == NULL) {
 
         std::cout << "Window couldn't be created" << std::endl;
     }
 
-    renderer = NULL;
-    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_TARGETTEXTURE);
+    this->renderer = NULL;
+    this->renderer = SDL_CreateRenderer(this->window, -1, SDL_RENDERER_TARGETTEXTURE);
 
-    this->layer = layer;
-    scorpion = character;
+    this->screenWidth = ScreenWidth;
+    this->screenHeight = ScreenHeight;
+
+    this->stage = pStage;
+    this->scorpion = character;
  	this->LoadSprites();
-    this->layer->setWidth(ScreenWidth * layerSprite->getCropWidthRelation());
+    std::list<Layer*>::iterator it = this->stage->getLayers()->begin();
+    for(it; it != this->stage->getLayers()->end(); it++) {
+        (*it)->setWidth(ScreenWidth * layerSprite->getCropWidthRelation());
+    }
 }
 
-GameView::~GameView()
-{
+GameView::~GameView() {
+    delete scorpionJump;
+    delete layerSprite;
 	delete scorpionWalk;
     delete scorpionStance;
     SDL_DestroyRenderer(renderer);
@@ -28,8 +34,11 @@ GameView::~GameView()
 }
 
 void GameView::Render() {
-    layerSprite->update(layer->getLeft_border());
-    layerSprite->Draw();
+    std::list<Layer*>::iterator it = this->stage->getLayers()->begin();
+    for(it; it != this->stage->getLayers()->end(); it++) {
+        layerSprite->update((*it)->getLeft_border());
+        layerSprite->Draw();
+    }
 
     if (scorpion->isJumping()) {
             scorpionJump->Play(0, 3, 500);
@@ -59,7 +68,7 @@ void GameView::LoadSprites() {
 	scorpionWalk = new CharacterSprite(this->renderer,"data/scorpionWalk.png", scorpion->getX(),scorpion->getY(), 120,187, 9);
     scorpionStance = new CharacterSprite(this->renderer,"data/scorpionStance.png", scorpion->getX(),scorpion->getY(), 120,187, 7);
     scorpionJump = new CharacterSprite(this->renderer,"data/scorpionJump.png", scorpion->getX(),scorpion->getY(), 120,187, 9);
-    layerSprite = new LayerSprite(this->renderer,"data/stage.png",700,500);
+    layerSprite = new LayerSprite(this->renderer,"data/stage.png",screenWidth,screenHeight);
 }
 
 void GameView::startRender() {

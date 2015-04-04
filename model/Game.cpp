@@ -1,12 +1,12 @@
 #include "Game.h"
 
-Game::Game(float pScreenWidth, float pScreenHeight, float charAncho, float charAlto)
+Game::Game(float pScreenWidth, float pScreenHeight, float charAncho, float charAlto, Stage* pStage)
 {
     ScreenWidth = pScreenWidth;
     ScreenHeight = pScreenHeight;
+    stage = pStage;
     scorpion = new MKCharacter(INITIAL_POSITION_X, INITIAL_POSITION_Y, charAncho, charAlto);
-    layer = new Layer(617);
-    gameView = new GameView(ScreenWidth, ScreenHeight, scorpion, layer);
+    gameView = new GameView(ScreenWidth, ScreenHeight, scorpion, stage);
     gameController = new GameController();
 }
 
@@ -17,14 +17,14 @@ Game::~Game()
     delete gameController;
 }
 
-void Game::GameLoop(void)
+void Game::GameLoop()
 {
     while (gameController->getEvent()->type != SDL_QUIT)
     {
         gameController->checkEvent();
         gameView->startRender();
         gameView->Render();
-        gameController->update(scorpion, layer);
+        gameController->update(scorpion, stage->getLayers());
         gameView->endRender();
     }
 }

@@ -6,6 +6,7 @@
 #include "../controller/GameController.h"
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
+#include "stage/Stage.h"
 #include <math.h>
 
 const int INITIAL_POSITION_X = 200;
@@ -14,15 +15,14 @@ const int INITIAL_POSITION_Y = 200;
 class Game
 {
 public:
-    Game(float pScreenWidth, float pScreenHeight, float charAncho, float charAlto);
-    ~Game(void);
+    Game(float pScreenWidth, float pScreenHeight, float charAncho, float charAlto, Stage* stage);
+    ~Game();
     void GameLoop();
 
 private:
 
     MKCharacter* scorpion;
-    Layer* layer;
-
+    Stage* stage;
     float ScreenWidth;
     float ScreenHeight;
     GameView* gameView;
