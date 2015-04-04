@@ -93,7 +93,7 @@ void GameView::LoadSprites() {
 
     scorpionSideJump = new CharacterSprite(this->renderer, "data/scorpionSideJump.png", scorpion->getX(), scorpion->getY(), 120, 187, 8);
     layerSprite = new LayerSprite(this->renderer,"data/stage2.jpg",screenWidth,screenHeight);
-    layerSpriteSubway = new LayerSprite(this->renderer,"data/tthesubway.png",screenWidth,screenHeight);
+    layerSpriteSubway = new LayerSprite(this->renderer,"data/152.png",screenWidth,screenHeight);
 
 }
 
