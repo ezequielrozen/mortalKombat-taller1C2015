@@ -29,6 +29,7 @@ GameView::~GameView() {
     delete layerSprite;
 	delete scorpionWalk;
     delete scorpionStance;
+    delete scorpionSideJump;
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
 }
@@ -40,24 +41,36 @@ void GameView::Render() {
         layerSprite->Draw();
     }
 
-    if (scorpion->isJumping()) {
-            scorpionJump->Play(0, 3, 500);
-            scorpionJump->setX(scorpion->getX());
-            scorpionJump->setY(scorpion->getY());
-            scorpionJump->Draw();
+    if (scorpion->isJumping() && scorpion->getJumpMovement() == "NONE") {
+        scorpionJump->Play(0, 2, 300);
+        scorpionJump->setX(scorpion->getX());
+        scorpionJump->setY(scorpion->getY());
+        scorpionJump->Draw();
+    }
+    else if (scorpion->isJumping() && scorpion->getJumpMovement() == "RIGHT") {
+        scorpionSideJump->Play(0, 7, 50);
+        scorpionSideJump->setX(scorpion->getX());
+        scorpionSideJump->setY(scorpion->getY());
+        scorpionSideJump->Draw();
+    }
+    else if (scorpion->isJumping() && scorpion->getJumpMovement() == "LEFT") {
+        scorpionSideJump->WalkBack(7, 0, 50);
+        scorpionSideJump->setX(scorpion->getX());
+        scorpionSideJump->setY(scorpion->getY());
+        scorpionSideJump->Draw();
     }
     else if (scorpion->getMovement() == "NONE") {
-        scorpionStance->Play(0, 6, 33);
+        scorpionStance->Play(0, 6, 100);
         scorpionStance->setX(scorpion->getX());
         scorpionStance->Draw();
     }
-    else if (scorpion->getMovement() == "WALKINGRIGHT") {
-        scorpionWalk->Play(0, 8, 33);
+    else if (scorpion->getMovement() == "RIGHT") {
+        scorpionWalk->Play(0, 8, 100);
         scorpionWalk->setX(scorpion->getX());
         scorpionWalk->Draw();
     }
-    else if (scorpion->getMovement() == "WALKINGLEFT") {
-        scorpionWalk->WalkBack(8, 0, 33);
+    else if (scorpion->getMovement() == "LEFT") {
+        scorpionWalk->WalkBack(8, 0, 100);
         scorpionWalk->setX(scorpion->getX());
         scorpionWalk->Draw();
     };
@@ -68,6 +81,7 @@ void GameView::LoadSprites() {
 	scorpionWalk = new CharacterSprite(this->renderer,"data/scorpionWalk.png", scorpion->getX(),scorpion->getY(), 120,187, 9);
     scorpionStance = new CharacterSprite(this->renderer,"data/scorpionStance.png", scorpion->getX(),scorpion->getY(), 120,187, 7);
     scorpionJump = new CharacterSprite(this->renderer,"data/scorpionJump.png", scorpion->getX(),scorpion->getY(), 120,187, 9);
+    scorpionSideJump = new CharacterSprite(this->renderer, "data/scorpionSideJump.png", scorpion->getX(), scorpion->getY(), 120, 187, 8);
     layerSprite = new LayerSprite(this->renderer,"data/stage.png",screenWidth,screenHeight);
 }
 

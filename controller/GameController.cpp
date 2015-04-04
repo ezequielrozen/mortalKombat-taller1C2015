@@ -31,7 +31,7 @@ void GameController::update(MKCharacter* character, std::list<Layer*>* layers) {
                 for(it; it != layers->end(); it++) {
                     (*it)->setMovement("RIGHT");
                 }
-                character->setMovement("WALKINGRIGHT");
+                character->setMovement("RIGHT");
                 timer = SDL_GetTicks();
                 //cout << "right" << endl;
             }
@@ -41,7 +41,7 @@ void GameController::update(MKCharacter* character, std::list<Layer*>* layers) {
                 for(it; it != layers->end(); it++) {
                     (*it)->setMovement("LEFT");
                 }
-                character->setMovement("WALKINGLEFT");
+                character->setMovement("LEFT");
                 timer = SDL_GetTicks();
                 
             }
@@ -53,7 +53,7 @@ void GameController::update(MKCharacter* character, std::list<Layer*>* layers) {
 				//left = true;
 			}
         }
-        else if (timer + 500 < SDL_GetTicks()) {
+        else if (timer + COMMANDDELAY < SDL_GetTicks()) {
             list<Layer*>::iterator it = layers->begin();
             for(it; it != layers->end(); it++) {
                 (*it)->setMovement("NONE");

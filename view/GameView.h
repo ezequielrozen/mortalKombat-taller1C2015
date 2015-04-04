@@ -32,6 +32,7 @@ private:
     CharacterSprite * scorpionWalk;
     CharacterSprite * scorpionStance;
     CharacterSprite* scorpionJump;
+    CharacterSprite* scorpionSideJump;
     LayerSprite* layerSprite;
 
 

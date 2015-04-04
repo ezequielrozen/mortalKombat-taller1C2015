@@ -13,10 +13,11 @@ MKCharacter::MKCharacter(int initialPosX, int initialPosY, float ancho, float al
 	this->ancho = ancho;
 
 	posY = 200;
-	velY = 5;
-	accY = 60;
+	velY = SPEED;
+	accY = ACCELERATION;
 
 	movement = "NONE";
+	jumpMovement = "NONE";
 
 	jumping = false;
 
@@ -29,11 +30,11 @@ MKCharacter::~MKCharacter(void)
 void MKCharacter::Update()
 {
 
-	if (timeCheck + 5 < SDL_GetTicks()) {
-		if (movement == "WALKINGRIGHT") {
+	if (timeCheck + MOVEMENTDELAY < SDL_GetTicks()) {
+		if (movement == "RIGHT") {
 			this->moveRight();
 		}
-		else if (movement == "WALKINGLEFT") {
+		else if (movement == "LEFT") {
 			this->moveLeft();
 		}
 
@@ -80,9 +81,9 @@ void MKCharacter::moveUp() {
 		posY = posY - velY;
 	}
 
-	if (velY <= -4.8) {
+	if (velY <= (SPEED*0.04 - SPEED)) {
 		posY = 200;
-		velY = 5;
+		velY = SPEED;
 		this->setJump(false);
 	}
 }
@@ -111,9 +112,19 @@ void MKCharacter::setMovement(string newMovement) {
 }
 
 void MKCharacter::setJump(bool jump) {
-	jumping = jump;
+	this->jumping = jump;
+
+	this->setJumpMovement(this->movement);
 }
 
 bool MKCharacter::isJumping() {
-	return jumping;
+	return this->jumping;
+}
+
+string MKCharacter::getJumpMovement() {
+	return this->jumpMovement;
+}
+
+void MKCharacter::setJumpMovement(string jumpMove) {
+	this->jumpMovement = jumpMove;
 }
