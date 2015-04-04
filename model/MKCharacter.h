@@ -5,6 +5,7 @@
 #include <iostream>
 #include <math.h>
 #include "SDL2/SDL.h"
+#include "constantes.h"
 
 using namespace std;
 
@@ -40,9 +41,14 @@ public:
 
     bool isJumping();
 
+    string getJumpMovement();
+
+    void setJumpMovement(string jumpMove);
+
 private:
 
     string movement;
+    string jumpMovement;
 
     uint timeCheck;
 

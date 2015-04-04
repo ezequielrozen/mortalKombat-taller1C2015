@@ -2,6 +2,7 @@
 #define GAMECONTROLLER_H_
 
 #include "SDL2/SDL.h"
+#include "../model/constantes.h"
 #include "SDL2/SDL_image.h"
 #include <string>
 #include <iostream>

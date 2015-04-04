@@ -15,8 +15,8 @@ public:
     ~CharacterSprite(void);
     void Draw();
 
-    void Play(int BeginFrame, int EndFrame, float Speed);
-    void WalkBack(int BeginFrame, int EndFrame, float Speed);
+    void Play(float Speed);
+    void PlayBack(float Speed);
     int getX();
     void setX(int passedX);
     void setY(int passedY);

@@ -30,13 +30,13 @@ CharacterSprite::CharacterSprite(SDL_Renderer* pRenderer, string path, int x, in
     animationDelay = 0;
 }
 
-void CharacterSprite::Play(int BeginFrame, int EndFrame, float Speed)
+void CharacterSprite::Play(float Speed)
 {
     if (animationDelay+Speed < SDL_GetTicks())
     {
 
-        if (EndFrame <= CurrentFrame)
-            CurrentFrame = BeginFrame;
+        if ((this->framesX - 1) <= CurrentFrame)
+            CurrentFrame = 0;
         else
             CurrentFrame++;
 
@@ -50,13 +50,13 @@ void CharacterSprite::Play(int BeginFrame, int EndFrame, float Speed)
     }
 }
 
-void CharacterSprite::WalkBack(int BeginFrame, int EndFrame, float Speed) {
+void CharacterSprite::PlayBack(float Speed) {
 
 	if (animationDelay+Speed < SDL_GetTicks())
 	{
 
-		if (EndFrame >= CurrentFrame)
-			CurrentFrame = BeginFrame;
+		if (CurrentFrame <= 0)
+			CurrentFrame = (this->framesX - 1);
 	    else
 	        CurrentFrame--;
 

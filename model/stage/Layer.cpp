@@ -44,7 +44,7 @@ void Layer::moveLeft() {
 }
 
 void Layer::moveRight() {
-    if (this->left_border + 700 <= this->getWidth())
+    if (this->left_border + ANCHOVENTANAL < ANCHOESCENARIO)
         this->left_border++;
 }
 

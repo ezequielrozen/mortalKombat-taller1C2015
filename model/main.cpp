@@ -24,14 +24,17 @@ int main(int argc, char* argv[]) {
     list<Layer*>* layers = new list<Layer*>();
     Layer* subwayLayer = new Layer(266);
     layers->push_back(subwayLayer);
-    Layer* aLayer = new Layer(617);
+    Layer* aLayer = new Layer(1280);
     layers->push_back(aLayer);
 
 
     //Load stage
     Stage* stage = new Stage(layers, stageWidth, stageHeight, floor);
 
-	Game* game = new Game(anchoPantalla, altoPantalla, charAncho, charAlto, stage);
+    cout << "ancho: " <<anchoPantalla << endl;
+    cout << "alto: " <<altoPantalla << endl;
+
+    Game* game = new Game(anchoPantalla, altoPantalla, charAncho, charAlto, stage);
 
 	game->GameLoop();
 

@@ -45,9 +45,13 @@ void LayerSprite::Draw() {
 }
 
 void LayerSprite::update(float shift) {
-    if (!img_width <= SCREEN_WIDTH)
-        crop.x = (int) shift  * img_height / draw.h;
-    else {
-        draw.w = shift;
+
+    if (img_width <= ANCHOVENTANAL) {
+        draw.x = shift;
+    } else {
+        if (draw.h > img_height)
+            crop.x = shift  * img_height / draw.h;
+        else
+            crop.x = shift  * draw.h / img_height;
     }
 }
