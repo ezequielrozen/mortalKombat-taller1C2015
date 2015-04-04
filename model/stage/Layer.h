@@ -11,6 +11,9 @@ class Layer {
 
 public:
     Layer(float width);
+
+    Layer(float width, string path);
+
     ~Layer();
     void moveRight();
     void moveLeft();
@@ -21,6 +24,7 @@ public:
     float getLeft_border();
     void update();
     void setMovement(string move);
+    string getPath();
 
 private:
     float width;
@@ -28,6 +32,8 @@ private:
     float left_border;
     uint timeCheck;
     string movement;
+    string path;
+
 };
 
 #endif //MORTALKOMBAT_TALLER1C2015_LAYER_H

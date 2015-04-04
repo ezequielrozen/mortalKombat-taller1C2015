@@ -4,6 +4,17 @@
 Layer::Layer(float width) {
     this->width = width;
     //Here depending on the width, the speed is set. Now depends of the z-index
+    this->path = "default.png";
+    this->speed = 10;
+    this->left_border = 0;
+
+    timeCheck = SDL_GetTicks();
+}
+
+Layer::Layer(float width, string path) {
+    this->width = width;
+    this->path = path;
+    //Here depending on the width, the speed is set. Now depends of the z-index
     this->speed = 10;
     this->left_border = 0;
 
@@ -12,6 +23,10 @@ Layer::Layer(float width) {
 
 Layer::~Layer() {
 
+}
+
+string Layer::getPath() {
+    return this->path;
 }
 
 float Layer::getWidth() {

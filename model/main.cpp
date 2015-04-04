@@ -22,11 +22,12 @@ int main(int argc, char* argv[]) {
 
     //Load layers
     list<Layer*>* layers = new list<Layer*>();
-    Layer* subwayLayer = new Layer(266);
-    layers->push_back(subwayLayer);
-    Layer* aLayer = new Layer(1280);
+
+    Layer* aLayer = new Layer(1280, "data/stage2.jpg");
     layers->push_back(aLayer);
 
+    Layer* subwayLayer = new Layer(266, "data/152.png");
+    layers->push_back(subwayLayer);
 
     //Load stage
     Stage* stage = new Stage(layers, stageWidth, stageHeight, floor);

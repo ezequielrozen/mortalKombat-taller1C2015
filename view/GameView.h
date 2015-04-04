@@ -33,9 +33,9 @@ private:
     CharacterSprite * scorpionStance;
     CharacterSprite* scorpionJump;
     CharacterSprite* scorpionSideJump;
-    LayerSprite* layerSprite;
-    LayerSprite* layerSpriteSubway;
-
+    //list<LayerSprite*>* layerSprites = new list<LayerSprite*>();
+    LayerSprite** layerSprites;
+    int layerCount;
 
     SDL_Window* window;
     SDL_Renderer* renderer;
