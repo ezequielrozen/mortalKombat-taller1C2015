@@ -22,8 +22,12 @@ int main(int argc, char* argv[]) {
 
     //Load layers
     list<Layer*>* layers = new list<Layer*>();
+    Layer* subwayLayer = new Layer(266);
+    layers->push_back(subwayLayer);
     Layer* aLayer = new Layer(617);
     layers->push_back(aLayer);
+
+
     //Load stage
     Stage* stage = new Stage(layers, stageWidth, stageHeight, floor);
 
@@ -33,6 +37,7 @@ int main(int argc, char* argv[]) {
 
 	delete game;
     delete aLayer;
+    delete subwayLayer;
     delete layers;
     delete stage;
 

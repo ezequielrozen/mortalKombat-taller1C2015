@@ -33,6 +33,7 @@ private:
     CharacterSprite * scorpionStance;
     CharacterSprite* scorpionJump;
     LayerSprite* layerSprite;
+    LayerSprite* layerSpriteSubway;
 
 
     SDL_Window* window;

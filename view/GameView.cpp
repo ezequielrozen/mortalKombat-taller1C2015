@@ -18,11 +18,12 @@ GameView::GameView(float ScreenWidth, float ScreenHeight, MKCharacter* character
     this->stage = pStage;
     this->scorpion = character;
  	this->LoadSprites();
+
     std::list<Layer*>::iterator it = this->stage->getLayers()->begin();
     for(it; it != this->stage->getLayers()->end(); it++) {
         (*it)->setWidth(ScreenWidth * layerSprite->getCropWidthRelation());
     }
-}
+ }
 
 GameView::~GameView() {
     delete scorpionJump;
@@ -34,11 +35,22 @@ GameView::~GameView() {
 }
 
 void GameView::Render() {
+    float leftBorders [2];
+    int i = 0;
     std::list<Layer*>::iterator it = this->stage->getLayers()->begin();
     for(it; it != this->stage->getLayers()->end(); it++) {
-        layerSprite->update((*it)->getLeft_border());
-        layerSprite->Draw();
+        //layerSprite->update((*it)->getLeft_border());
+        //layerSprite->Draw();
+        leftBorders[i] = (*it)->getLeft_border();
+        i++;
     }
+
+    layerSprite->update(leftBorders[0]);
+    layerSprite->Draw();
+
+    layerSpriteSubway->update(leftBorders[1]);
+    layerSpriteSubway->Draw();
+
 
     if (scorpion->isJumping()) {
             scorpionJump->Play(0, 3, 500);
@@ -68,7 +80,9 @@ void GameView::LoadSprites() {
 	scorpionWalk = new CharacterSprite(this->renderer,"data/scorpionWalk.png", scorpion->getX(),scorpion->getY(), 120,187, 9);
     scorpionStance = new CharacterSprite(this->renderer,"data/scorpionStance.png", scorpion->getX(),scorpion->getY(), 120,187, 7);
     scorpionJump = new CharacterSprite(this->renderer,"data/scorpionJump.png", scorpion->getX(),scorpion->getY(), 120,187, 9);
-    layerSprite = new LayerSprite(this->renderer,"data/stage.png",screenWidth,screenHeight);
+    layerSprite = new LayerSprite(this->renderer,"data/stage2.jpg",screenWidth,screenHeight);
+    layerSpriteSubway = new LayerSprite(this->renderer,"data/tthesubway.png",screenWidth,screenHeight);
+
 }
 
 void GameView::startRender() {

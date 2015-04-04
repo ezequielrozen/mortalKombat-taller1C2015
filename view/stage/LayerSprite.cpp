@@ -23,6 +23,13 @@ LayerSprite::LayerSprite(SDL_Renderer *pRenderer, string path, float screenWidth
     crop.x = img_width/2 - crop.w/2;
     crop.y = 0;
     crop.h = img_height;
+
+    if(img_width <= screenWidth) {
+        crop.x = 0;
+        crop.w = img_width;
+        draw.w = img_width;
+        draw.h = img_height;
+    }
 }
 
 LayerSprite::~LayerSprite() {
@@ -38,5 +45,9 @@ void LayerSprite::Draw() {
 }
 
 void LayerSprite::update(float shift) {
-    crop.x = (int) shift  * img_height / draw.h;
+    if (!img_width <= SCREEN_WIDTH)
+        crop.x = (int) shift  * img_height / draw.h;
+    else {
+        draw.w = shift;
+    }
 }
