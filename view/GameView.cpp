@@ -41,39 +41,36 @@ void GameView::Render() {
         layerSprite->Draw();
     }
 
+    CharacterSprite* sprite;
+
     if (scorpion->isJumping() && scorpion->getJumpMovement() == "NONE") {
-        scorpionJump->Play(0, 2, 300);
-        scorpionJump->setX(scorpion->getX());
-        scorpionJump->setY(scorpion->getY());
-        scorpionJump->Draw();
+        sprite = scorpionJump;
+        sprite->Play(300);
     }
     else if (scorpion->isJumping() && scorpion->getJumpMovement() == "RIGHT") {
-        scorpionSideJump->Play(0, 7, 50);
-        scorpionSideJump->setX(scorpion->getX());
-        scorpionSideJump->setY(scorpion->getY());
-        scorpionSideJump->Draw();
+        sprite = scorpionSideJump;
+        sprite->Play(50);
     }
     else if (scorpion->isJumping() && scorpion->getJumpMovement() == "LEFT") {
-        scorpionSideJump->WalkBack(7, 0, 50);
-        scorpionSideJump->setX(scorpion->getX());
-        scorpionSideJump->setY(scorpion->getY());
-        scorpionSideJump->Draw();
+        sprite = scorpionSideJump;
+        sprite->PlayBack(50);
     }
     else if (scorpion->getMovement() == "NONE") {
-        scorpionStance->Play(0, 6, 100);
-        scorpionStance->setX(scorpion->getX());
-        scorpionStance->Draw();
+        sprite = scorpionStance;
+        sprite->Play(100);
     }
     else if (scorpion->getMovement() == "RIGHT") {
-        scorpionWalk->Play(0, 8, 100);
-        scorpionWalk->setX(scorpion->getX());
-        scorpionWalk->Draw();
+        sprite = scorpionWalk;
+        sprite->Play(100);
     }
     else if (scorpion->getMovement() == "LEFT") {
-        scorpionWalk->WalkBack(8, 0, 100);
-        scorpionWalk->setX(scorpion->getX());
-        scorpionWalk->Draw();
+        sprite = scorpionWalk;
+        sprite->PlayBack(100);
     };
+
+    sprite->setX(scorpion->getX());
+    sprite->setY(scorpion->getY());
+    sprite->Draw();
 
 }
 
