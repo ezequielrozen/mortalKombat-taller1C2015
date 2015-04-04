@@ -10,7 +10,7 @@ using namespace std;
 class CharacterSprite
 {
 public:
-    CharacterSprite(SDL_Renderer* passed_renderer, string FilePath, int x, int y, int w, int h, int frames);
+    CharacterSprite(SDL_Renderer* passed_renderer, string FilePath, int x, int y, int w, int h, int frames, string OponentSide);
 
     ~CharacterSprite(void);
     void Draw();
@@ -35,6 +35,8 @@ private:
     int animationDelay;
 
     int framesX;
+
+    string oponentSide;
 
     SDL_Renderer* renderer;
 };

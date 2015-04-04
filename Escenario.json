@@ -24,5 +24,8 @@
         "alto": 35,
         "z-index": 1,
         "sprites": 4
+    },
+    "oponente": {
+        "side": "right"
     }
 }

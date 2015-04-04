@@ -1,7 +1,8 @@
 #include "CharacterSprite.h"
 
-CharacterSprite::CharacterSprite(SDL_Renderer* pRenderer, string path, int x, int y, int w, int h, int frames)
+CharacterSprite::CharacterSprite(SDL_Renderer* pRenderer, string path, int x, int y, int w, int h, int frames, string OponentSide)
 {
+	oponentSide = OponentSide;
     this->renderer = pRenderer;
     this->texture = NULL;
     this->texture = IMG_LoadTexture(renderer,path.c_str());
@@ -76,7 +77,14 @@ CharacterSprite::~CharacterSprite(void)
 
 void CharacterSprite::Draw()
 {
-    SDL_RenderCopy(renderer,texture,&crop, &draw);
+	SDL_RendererFlip flipType = SDL_FLIP_NONE;
+
+	if (oponentSide == "LEFT")
+	{
+		flipType = SDL_FLIP_HORIZONTAL;
+	}
+
+	SDL_RenderCopyEx(renderer,texture,&crop, &draw,0,NULL,flipType);
 }
 
 int CharacterSprite::getX() {

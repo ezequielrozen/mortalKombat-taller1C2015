@@ -9,7 +9,7 @@
 // Devuelve 1 si estuvo OK, Devuelve 0 si hubo error.
 bool cargaArchivoJSON(char* filename, int &screenWidth, int &screenHeight,
                         float &charAncho, float &charAlto, float &stageWidth, float &stageHeight,
-                        float &floor);
+                        float &floor, string &oponentSide);
 
 
 

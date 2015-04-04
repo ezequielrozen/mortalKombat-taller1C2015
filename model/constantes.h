@@ -6,8 +6,6 @@ const int ANCHOVENTANAPX = 800;
 const int ALTOVENTANAPX = 600;
 const float ANCHOVENTANAL = 800;
 
-
-
 const float ANCHOESCENARIO = 1280;
 const float ALTOESCENARIO = 800;
 const float ALTURAPISOESCENARIO = 20;
@@ -18,6 +16,9 @@ const float ANCHOPERSONAJE = 20;
 const float ALTOPERSONAJE = 35;
 const float ZINDEXPERSONAJE = 1;
 const float SPRITESPERSONAJE = 8;
+
+//enum oponentSide_t {LEFT = 1, RIGHT = 2};
+
 
 //Constantes de fluidez del juego
 //Fija el delay que tiene el personaje para mover por la pantalla. (A mayor, mas lento se mueve)

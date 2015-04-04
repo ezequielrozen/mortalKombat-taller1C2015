@@ -1,11 +1,14 @@
 #include "json/json.h"
 #include "constantes.h"
+#include <string>
 #include <fstream>
 #include <iostream>
+#include <algorithm>
+
 
 bool cargaArchivoJSON(char* filename, int &screenWidth, int &screenHeight,
                         float &charAncho, float &charAlto, float &stageWidth,
-						float &stageHeight, float &floor){
+						float &stageHeight, float &floor, std::string &oponentSide){
 
 
 	Json::Value root;   // will contains the root value after parsing.
@@ -72,6 +75,24 @@ bool cargaArchivoJSON(char* filename, int &screenWidth, int &screenHeight,
 	std::cout << personaje["z-index"] << "\n";
 	std::cout << personaje["sprites"] << "\n";
 
+	std::cout << "--------oponente-------" << "\n";
+	std::string side;
+	const Json::Value oponente = root["oponente"];
+	side = oponente["side"].asString();
+	std::transform(side.begin(), side.end(),side.begin(), ::toupper);
+	if (side == "LEFT")
+	{
+		oponentSide="LEFT";
+	}
+	else if (side == "LEFT")
+	{
+		oponentSide="RIGHT";
+	}
+	else
+	{
+		std::cout << "Ubicacion del oponente invalida: usando default (RIGHT)" << std::endl;
+		oponentSide="RIGHT";
+	}
 	return true;
 
 }

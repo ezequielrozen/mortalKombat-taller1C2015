@@ -15,7 +15,7 @@ const int INITIAL_POSITION_Y = 200;
 class Game
 {
 public:
-    Game(float pScreenWidth, float pScreenHeight, float charAncho, float charAlto, Stage* stage);
+    Game(float pScreenWidth, float pScreenHeight, float charAncho, float charAlto, Stage* stage, string OponentSide);
     ~Game();
     void GameLoop();
 
@@ -27,6 +27,7 @@ private:
     float ScreenHeight;
     GameView* gameView;
     GameController* gameController;
+    string oponentSide;
 
 };
 

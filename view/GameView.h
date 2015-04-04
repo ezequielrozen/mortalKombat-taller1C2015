@@ -16,7 +16,7 @@ using namespace std;
 class GameView
 {
 public:
-    GameView(float ScreenWidth, float ScreenHeight, MKCharacter* character, Stage* stage);
+    GameView(float ScreenWidth, float ScreenHeight, MKCharacter* character, Stage* stage, string OponentSide);
     ~GameView();
     void Render();
     void LoadSprites();
@@ -41,6 +41,7 @@ private:
     SDL_Renderer* renderer;
     float screenWidth;
     float screenHeight;
+    string oponentSide;
 
 };
 
