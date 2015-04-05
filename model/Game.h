@@ -15,7 +15,8 @@ const int INITIAL_POSITION_Y = 200;
 class Game
 {
 public:
-    Game(float pScreenWidth, float pScreenHeight, float charAncho, float charAlto, Stage* stage, string OponentSide);
+    Game(unsigned int pScreenWidth, unsigned int pScreenHeight, float pLogicalScreenWidth,
+                float charAncho, float charAlto, Stage* stage, string OponentSide);
     ~Game();
     void GameLoop();
 
@@ -23,8 +24,9 @@ private:
 
     MKCharacter* scorpion;
     Stage* stage;
-    float ScreenWidth;
-    float ScreenHeight;
+    int ScreenWidth;
+    int ScreenHeight;
+    float logicalScreenWidth;
     GameView* gameView;
     GameController* gameController;
     string oponentSide;

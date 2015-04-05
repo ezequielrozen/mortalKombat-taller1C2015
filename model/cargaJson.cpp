@@ -11,7 +11,7 @@ using namespace std;
 
 
 
-bool cargaArchivoJSON(char* filename, int &screenWidth, int &screenHeight,
+bool cargaArchivoJSON(char* filename, int &screenWidth, int &screenHeight, float &logicalScreenWidth,
                         float &charAncho, float &charAlto, float &stageWidth,
 						float &stageHeight, float &floor, std::string &oponentSide,
 						std::list<Layer*>* layers){
@@ -39,8 +39,9 @@ bool cargaArchivoJSON(char* filename, int &screenWidth, int &screenHeight,
 //		std::cout << ventana["alto-px"] << "\n";
 	screenWidth = ventana["ancho-px"].asInt();
 	screenHeight = ventana["alto-px"].asInt();
+	logicalScreenWidth = ventana["ancho"].asFloat();
 
-	std::cout << ventana["ancho"] << "\n";
+//	std::cout << ventana["ancho"] << "\n";
 
 	std::cout << "----------Escenario-------" << "\n";
 	const Json::Value escenarios = root["escenario"];
@@ -52,8 +53,6 @@ bool cargaArchivoJSON(char* filename, int &screenWidth, int &screenHeight,
 	std::cout << escenarios["y-piso"] << "\n";
 
 	std::cout << "----------Capas-------" << "\n";
-
-
 
 	//std::cout << root["capas"] << "\n";
 	const Json::Value capas = root["capas"];
@@ -73,8 +72,6 @@ bool cargaArchivoJSON(char* filename, int &screenWidth, int &screenHeight,
         Layer* subwayLayer = new Layer(266, "data/152.png");
         layers->push_back(subwayLayer);
     }
-
-
 
 	std::cout << "--------Personaje-------" << "\n";
 

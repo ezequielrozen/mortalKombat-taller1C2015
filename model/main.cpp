@@ -8,6 +8,7 @@ int main(int argc, char* argv[]) {
 
     int anchoPantalla;
     int altoPantalla;
+    float anchoPantallaLogico;
     float stageWidth;
     float stageHeight;
     float charAncho;
@@ -19,12 +20,12 @@ int main(int argc, char* argv[]) {
 
     char* file = argv[1];
 
-    bool carga = cargaArchivoJSON(file, anchoPantalla, altoPantalla, charAncho,
+    bool carga = cargaArchivoJSON(file, anchoPantalla, altoPantalla, anchoPantallaLogico, charAncho,
                                     charAlto, stageWidth, stageHeight, floor, oponentSide,
                                     layers);
     if(!carga){
         char* file = "Escenario.json";
-        carga = cargaArchivoJSON(file, anchoPantalla, altoPantalla, charAncho,
+        carga = cargaArchivoJSON(file, anchoPantalla, altoPantalla, anchoPantallaLogico, charAncho,
                                     charAlto, stageWidth, stageHeight, floor, oponentSide,
                                     layers);
     }
@@ -40,7 +41,7 @@ int main(int argc, char* argv[]) {
     cout << "ancho: " <<anchoPantalla << endl;
     cout << "alto: " <<altoPantalla << endl;
 
-    Game* game = new Game(anchoPantalla, altoPantalla, charAncho, charAlto, stage, oponentSide);
+    Game* game = new Game(anchoPantalla, altoPantalla, anchoPantallaLogico, charAncho, charAlto, stage, oponentSide);
 
 	game->GameLoop();
 
