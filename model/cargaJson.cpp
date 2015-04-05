@@ -1,14 +1,20 @@
-#include "json/json.h"
-#include "constantes.h"
-#include <string>
-#include <fstream>
-#include <iostream>
-#include <algorithm>
+#include "CargaJson.h"
+//#include "json/json.h"
+//#include "constantes.h"
+//#include <string>
+//#include <fstream>
+//#include <iostream>
+//#include <algorithm>
+//#include <list>
+//#include "Game.h"
+using namespace std;
+
 
 
 bool cargaArchivoJSON(char* filename, int &screenWidth, int &screenHeight,
                         float &charAncho, float &charAlto, float &stageWidth,
-						float &stageHeight, float &floor, std::string &oponentSide){
+						float &stageHeight, float &floor, std::string &oponentSide,
+						std::list<Layer*>* layers){
 
 
 	Json::Value root;   // will contains the root value after parsing.
@@ -47,12 +53,28 @@ bool cargaArchivoJSON(char* filename, int &screenWidth, int &screenHeight,
 
 	std::cout << "----------Capas-------" << "\n";
 
+
+
 	//std::cout << root["capas"] << "\n";
 	const Json::Value capas = root["capas"];
 	for ( unsigned int index = 0; index < capas.size(); ++index ){
-		std::cout << capas[index]["imagen_fondo"] << "\n";
-		std::cout << capas[index]["ancho"] << "\n";
+//		std::cout << capas[index]["imagen_fondo"] << "\n";
+//		std::cout << capas[index]["ancho"] << "\n";
+
+		Layer* aLayer = new Layer(capas[index]["ancho"].asFloat(), capas[index]["imagen_fondo"].asCString());
+		layers->push_back(aLayer);
 	}
+
+    if(layers->empty()){//no hay capas en el archivo
+        std::cout << "sin capas validas: usando default" << std::endl;
+        Layer* aLayer = new Layer(1280, "data/stage2.jpg");
+        layers->push_back(aLayer);
+
+        Layer* subwayLayer = new Layer(266, "data/152.png");
+        layers->push_back(subwayLayer);
+    }
+
+
 
 	std::cout << "--------Personaje-------" << "\n";
 

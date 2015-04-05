@@ -1,15 +1,15 @@
 #include "CharacterSprite.h"
 
-CharacterSprite::CharacterSprite(SDL_Renderer* pRenderer, string path, int x, int y, int w, int h, int frames, string OponentSide)
+CharacterSprite::CharacterSprite(SDL_Renderer* pRenderer, char* path, int x, int y, int w, int h, int frames, string OponentSide)
 {
 	oponentSide = OponentSide;
     this->renderer = pRenderer;
     this->texture = NULL;
-    this->texture = IMG_LoadTexture(renderer,path.c_str());
+    this->texture = IMG_LoadTexture(renderer,path);
 
     if (this->texture == NULL)
     {
-        cout << "Couldn't Load " << path.c_str() << endl;
+        cout << "Couldn't Load " << path << endl;
         cout << IMG_GetError() << std::endl;
     }
 

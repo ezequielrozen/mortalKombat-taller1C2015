@@ -14,22 +14,25 @@ int main(int argc, char* argv[]) {
     float charAlto;
     float floor;
     string oponentSide;
-
-    bool carga = cargaArchivoJSON(argv[1], anchoPantalla, altoPantalla, charAncho, charAlto, stageWidth, stageHeight, floor, oponentSide);
-
-	if(!carga) {
-        char* file = "Escenario.json";
-        cargaArchivoJSON(file, anchoPantalla, altoPantalla, charAncho, charAlto, stageWidth, stageHeight, floor, oponentSide);
-	}
-
     //Load layers
     list<Layer*>* layers = new list<Layer*>();
 
-    Layer* aLayer = new Layer(1280, "data/stage2.jpg");
-    layers->push_back(aLayer);
+    char* file = argv[1];
 
-    Layer* subwayLayer = new Layer(266, "data/152.png");
-    layers->push_back(subwayLayer);
+    bool carga = cargaArchivoJSON(file, anchoPantalla, altoPantalla, charAncho,
+                                    charAlto, stageWidth, stageHeight, floor, oponentSide,
+                                    layers);
+    if(!carga){
+        char* file = "Escenario.json";
+        carga = cargaArchivoJSON(file, anchoPantalla, altoPantalla, charAncho,
+                                    charAlto, stageWidth, stageHeight, floor, oponentSide,
+                                    layers);
+    }
+    if(!carga){
+        return 1;
+    }
+
+
 
     //Load stage
     Stage* stage = new Stage(layers, stageWidth, stageHeight, floor);
@@ -42,8 +45,6 @@ int main(int argc, char* argv[]) {
 	game->GameLoop();
 
 	delete game;
-    delete aLayer;
-    delete subwayLayer;
     delete layers;
     delete stage;
 

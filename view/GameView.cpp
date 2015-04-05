@@ -102,7 +102,7 @@ void GameView::LoadSprites() {
 
 void GameView::startRender() {
     SDL_RenderClear(renderer);
-}   
+}
 
 void GameView::endRender() {
     SDL_RenderPresent(renderer);
