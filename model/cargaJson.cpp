@@ -84,7 +84,7 @@ bool cargaArchivoJSON(char* filename, int &screenWidth, int &screenHeight,
 	{
 		oponentSide="LEFT";
 	}
-	else if (side == "LEFT")
+	else if (side == "RIGHT")
 	{
 		oponentSide="RIGHT";
 	}
