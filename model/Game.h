@@ -1,5 +1,5 @@
-#ifndef GAME_H_
-#define GAME_H_
+#ifndef GAME_H
+#define GAME_H
 
 #include "MKCharacter.h"
 #include "../view/GameView.h"
@@ -11,6 +11,7 @@
 
 const int INITIAL_POSITION_X = 200;
 const int INITIAL_POSITION_Y = 200;
+
 
 class Game
 {
@@ -33,4 +34,4 @@ private:
 
 };
 
-#endif /* GAME_H_ */
+#endif // GAME_H

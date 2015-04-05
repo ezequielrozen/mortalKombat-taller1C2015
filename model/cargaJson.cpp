@@ -16,6 +16,20 @@ bool cargaArchivoJSON(char* filename, int &screenWidth, int &screenHeight, float
 						float &stageHeight, float &floor, std::string &oponentSide,
 						std::list<Layer*>* layers){
 
+    extern logger* Mylog;
+    char mensaje[200];
+    strcpy(mensaje, "Intentando parsear archivo ");
+    strcat(mensaje, filename);
+    Mylog->Log(mensaje, ERROR_LEVEL_INFO);
+
+    //verificar si existe filename
+    if(!std::ifstream(filename)){
+        strcpy(mensaje, "No existe el archivo ");
+        strcat(mensaje, filename);
+        Mylog->Log(mensaje, ERROR_LEVEL_ERROR);
+        return false;
+    }
+
 
 	Json::Value root;   // will contains the root value after parsing.
 	Json::Reader reader;
@@ -24,77 +38,100 @@ bool cargaArchivoJSON(char* filename, int &screenWidth, int &screenHeight, float
 	if ( !parsingSuccessful )
 	{
 		//report to the user the failure and their locations in the document.
-		std::cout  << reader.getFormatedErrorMessages() << "\n";
-
+		Mylog->Log(reader.getFormatedErrorMessages().c_str(), ERROR_LEVEL_ERROR);
 		return false;
 	}
 
-	std::string encoding = root.get("encoding", "UTF-8" ).asString();
-	std::cout << encoding << "\n";
-
-	std::cout << "----------Ventana-------" << "\n";
+	Mylog->Log("----------Ventana-------", ERROR_LEVEL_INFO);
 	const Json::Value ventana = root["ventana"];
 
-//		std::cout << ventana["ancho-px"] << "\n";
-//		std::cout << ventana["alto-px"] << "\n";
 	screenWidth = ventana["ancho-px"].asInt();
 	screenHeight = ventana["alto-px"].asInt();
 	logicalScreenWidth = ventana["ancho"].asFloat();
 
-//	std::cout << ventana["ancho"] << "\n";
+    strcpy(mensaje, "ancho-px: ");
+    strcat(mensaje, ventana["ancho-px"].asString().c_str());
+    strcat(mensaje, ", alto-px: ");
+    strcat(mensaje, ventana["alto-px"].asString().c_str());
+    strcat(mensaje, ", ancho logico: ");
+    strcat(mensaje, ventana["ancho"].asString().c_str());
+    Mylog->Log(mensaje, ERROR_LEVEL_INFO);
 
-	std::cout << "----------Escenario-------" << "\n";
+	Mylog->Log("----------Escenario-------", ERROR_LEVEL_INFO);
 	const Json::Value escenarios = root["escenario"];
 	stageHeight = escenarios["alto"].asFloat();
 	stageWidth = escenarios["ancho"].asFloat();
 	floor = escenarios["y-piso"].asFloat();
-	std::cout << escenarios["alto"] << "\n";
-	std::cout << escenarios["ancho"] << "\n";
-	std::cout << escenarios["y-piso"] << "\n";
 
-	std::cout << "----------Capas-------" << "\n";
+    strcpy(mensaje, "alto: ");
+    strcat(mensaje, escenarios["alto"].asString().c_str());
+    strcat(mensaje, ", ancho: ");
+    strcat(mensaje, escenarios["ancho"].asString().c_str());
+    strcat(mensaje, ", y-piso: ");
+    strcat(mensaje, escenarios["y-piso"].asString().c_str());
+    Mylog->Log(mensaje, ERROR_LEVEL_INFO);
 
-	//std::cout << root["capas"] << "\n";
+
+	Mylog->Log("----------Capas-------", ERROR_LEVEL_INFO);
+
 	const Json::Value capas = root["capas"];
 	for ( unsigned int index = 0; index < capas.size(); ++index ){
-//		std::cout << capas[index]["imagen_fondo"] << "\n";
-//		std::cout << capas[index]["ancho"] << "\n";
+        strcpy(mensaje, "Capa ");
+        strcat(mensaje, "%i");
+        sprintf(mensaje, mensaje, index+1);
+
+        strcat(mensaje, " imagen_fondo: ");
+        strcat(mensaje, capas[index]["imagen_fondo"].asString().c_str());
+        strcat(mensaje, ", ancho: ");
+        strcat(mensaje, capas[index]["ancho"].asString().c_str());
+
+        Mylog->Log(mensaje, ERROR_LEVEL_INFO);
 
 		Layer* aLayer = new Layer(capas[index]["ancho"].asFloat(), capas[index]["imagen_fondo"].asCString());
 		layers->push_back(aLayer);
 	}
 
     if(layers->empty()){//no hay capas en el archivo
-        std::cout << "sin capas validas: usando default" << std::endl;
+        Mylog->Log("sin capas validas: usando default", ERROR_LEVEL_ERROR);
+
+        Mylog->Log("Capa 1: imagen_fondo: data/stage2.jpg, ancho: 1280", ERROR_LEVEL_ERROR);
         Layer* aLayer = new Layer(1280, "data/stage2.jpg");
         layers->push_back(aLayer);
 
+        Mylog->Log("Capa 2: imagen_fondo: data/152.png, ancho: 266", ERROR_LEVEL_ERROR);
         Layer* subwayLayer = new Layer(266, "data/152.png");
         layers->push_back(subwayLayer);
     }
 
-	std::cout << "--------Personaje-------" << "\n";
+	Mylog->Log("--------Personaje-------", ERROR_LEVEL_INFO);
 
 	const Json::Value personaje = root["personaje"];
-//		std::cout << personaje["ancho"] << "\n";
-//		std::cout << personaje["alto"] << "\n";
 
 	charAncho = personaje["ancho"].asFloat();
 	charAlto  = personaje["alto"].asFloat();
 
+    strcpy(mensaje, "alto: ");
+    strcat(mensaje, personaje["alto"].asString().c_str());
+    strcat(mensaje, ", ancho: ");
+    strcat(mensaje, personaje["ancho"].asString().c_str());
+    strcat(mensaje, ", z-index: ");
+    strcat(mensaje, personaje["z-index"].asString().c_str());
+    strcat(mensaje, ", sprites: ");
+    strcat(mensaje, personaje["sprites"].asString().c_str());
+    Mylog->Log(mensaje, ERROR_LEVEL_INFO);
+
+
 	if(charAncho == 0.0){
-		std::cout << "valor ancho del personaje invalido: usando default" << std::endl;
+		Mylog->Log("valor ancho del personaje invalido: usando default", ERROR_LEVEL_ERROR);
 		charAncho = ANCHOPERSONAJE;
 	}
 	if(charAlto  == 0.0){
-		std::cout << "valor alto del personaje invalido: usando default" << std::endl;
+		Mylog->Log("valor alto del personaje invalido: usando default", ERROR_LEVEL_ERROR);
 		charAlto  = ALTOPERSONAJE;
 	}
 
-	std::cout << personaje["z-index"] << "\n";
-	std::cout << personaje["sprites"] << "\n";
 
-	std::cout << "--------oponente-------" << "\n";
+	Mylog->Log("--------oponente-------", ERROR_LEVEL_INFO);
 	std::string side;
 	const Json::Value oponente = root["oponente"];
 	side = oponente["side"].asString();
@@ -102,16 +139,20 @@ bool cargaArchivoJSON(char* filename, int &screenWidth, int &screenHeight, float
 	if (side == "LEFT")
 	{
 		oponentSide="LEFT";
+		Mylog->Log("Lado Izquierdo", ERROR_LEVEL_INFO);
 	}
 	else if (side == "RIGHT")
 	{
 		oponentSide="RIGHT";
+		Mylog->Log("Lado Derecho", ERROR_LEVEL_INFO);
 	}
 	else
 	{
-		std::cout << "Ubicacion del oponente invalida: usando default (RIGHT)" << std::endl;
+		Mylog->Log("Ubicacion del oponente invalida: usando default (RIGHT)", ERROR_LEVEL_ERROR);
 		oponentSide="RIGHT";
 	}
+
+	Mylog->Log("Parseo completo", ERROR_LEVEL_INFO);
 	return true;
 
 }

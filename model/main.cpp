@@ -1,10 +1,17 @@
 #include <iostream>
 #include "Game.h"
 #include "CargaJson.h"
+#include "logger.h"
 
 using namespace std;
 
+logger* Mylog;
+
 int main(int argc, char* argv[]) {
+
+    Mylog = new logger("./Mylog.txt", ERROR_LEVEL_ALL);
+
+    Mylog->Log("Iniciando MortalKombat", ERROR_LEVEL_INFO);
 
     int anchoPantalla;
     int altoPantalla;
@@ -18,11 +25,15 @@ int main(int argc, char* argv[]) {
     //Load layers
     list<Layer*>* layers = new list<Layer*>();
 
-    char* file = argv[1];
-
-    bool carga = cargaArchivoJSON(file, anchoPantalla, altoPantalla, anchoPantallaLogico, charAncho,
+    char* file = "Escenario.json";
+    if(argc > 1){
+        file = argv[1];
+    }
+    bool carga = false;
+    carga = cargaArchivoJSON(file, anchoPantalla, altoPantalla, anchoPantallaLogico, charAncho,
                                     charAlto, stageWidth, stageHeight, floor, oponentSide,
                                     layers);
+
     if(!carga){
         char* file = "Escenario.json";
         carga = cargaArchivoJSON(file, anchoPantalla, altoPantalla, anchoPantallaLogico, charAncho,
@@ -48,6 +59,10 @@ int main(int argc, char* argv[]) {
 	delete game;
     delete layers;
     delete stage;
+
+
+    Mylog->Log("Saliendo del programa", ERROR_LEVEL_INFO);
+    delete Mylog;
 
 	return 0;
 }

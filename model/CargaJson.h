@@ -8,8 +8,10 @@
 #include "Game.h"
 #include <iostream>
 #include <algorithm>
+#include "logger.h"
 
 using namespace std;
+
 
 //Abre el archivo recibido por path, lo abre y carga el Json.
 // Devuelve 1 si estuvo OK, Devuelve 0 si hubo error.
