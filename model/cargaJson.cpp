@@ -1,12 +1,4 @@
 #include "CargaJson.h"
-//#include "json/json.h"
-//#include "constantes.h"
-//#include <string>
-//#include <fstream>
-//#include <iostream>
-//#include <algorithm>
-//#include <list>
-//#include "Game.h"
 using namespace std;
 
 
