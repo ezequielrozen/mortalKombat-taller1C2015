@@ -1,11 +1,12 @@
 #include "MKCharacter.h"
 
-MKCharacter::MKCharacter(int initialPosX, int initialPosY, float ancho, float alto)
+MKCharacter::MKCharacter(int initialPosX, int initialPosY, float ancho, float alto, int z_index)
 {
 
 	//tamaño del png = 87*136
 	timeCheck = SDL_GetTicks();
 
+	this->z_index = z_index;
 	posX = initialPosX;
 	posY = initialPosY;
 
@@ -38,7 +39,7 @@ void MKCharacter::Update()
 			this->moveLeft();
 		}
 
-		if(this->isJumping() == true) {
+		if(this->isJumping()) {
 			this->moveUp();
 		}
 
@@ -127,4 +128,8 @@ string MKCharacter::getJumpMovement() {
 
 void MKCharacter::setJumpMovement(string jumpMove) {
 	this->jumpMovement = jumpMove;
+}
+
+int MKCharacter::getZ_index() {
+	return this->z_index;
 }

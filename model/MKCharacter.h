@@ -16,7 +16,7 @@ const int SCREEN_HEIGHT = 500;
 class MKCharacter
 {
 public:
-    MKCharacter(int initialPosX, int initialPosY, float ancho, float alto);
+    MKCharacter(int initialPosX, int initialPosY, float ancho, float alto, int z_index);
     ~MKCharacter(void);
 
     void moveRight();
@@ -45,6 +45,8 @@ public:
 
     void setJumpMovement(string jumpMove);
 
+    int getZ_index();
+
 private:
 
     string movement;
@@ -55,6 +57,7 @@ private:
     int posX;
     float posY;
 
+    int z_index;
     float ancho;
     float alto;
 

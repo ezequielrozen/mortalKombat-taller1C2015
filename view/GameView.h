@@ -43,6 +43,7 @@ private:
     float screenHeight;
     string oponentSide;
 
+    void runCharacter();
 };
 
 #endif /* GAMEVIEW_H_ */

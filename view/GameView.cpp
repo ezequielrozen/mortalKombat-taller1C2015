@@ -55,11 +55,35 @@ void GameView::Render() {
     // We render the layers' sprites iterating through the layerSprites' array
     std::list<Layer*>::iterator it = this->stage->getLayers()->begin();
     for(it; it != this->stage->getLayers()->end(); it++) {
-        layerSprites[i]->update((*it)->getLeft_border());
-        layerSprites[i]->Draw();
+        int aux = i + 1;
+        if (aux == scorpion->getZ_index()) {
+            this->runCharacter();
+            layerSprites[i]->update((*it)->getLeft_border());
+            layerSprites[i]->Draw();
+        } else {
+            layerSprites[i]->update((*it)->getLeft_border());
+            layerSprites[i]->Draw();
+        }
         i++;
     }
+}
 
+void GameView::LoadSprites() {
+	scorpionWalk = new CharacterSprite(this->renderer,"data/scorpionWalk.png", scorpion->getX(),scorpion->getY(), 120,187, 9, oponentSide);
+    scorpionStance = new CharacterSprite(this->renderer,"data/scorpionStance.png", scorpion->getX(),scorpion->getY(), 120,187, 7, oponentSide);
+    scorpionJump = new CharacterSprite(this->renderer,"data/scorpionJump.png", scorpion->getX(),scorpion->getY(), 120,187, 9, oponentSide);
+    scorpionSideJump = new CharacterSprite(this->renderer, "data/scorpionSideJump.png", scorpion->getX(), scorpion->getY(), 120, 187, 8, oponentSide);
+}
+
+void GameView::startRender() {
+    SDL_RenderClear(renderer);
+}
+
+void GameView::endRender() {
+    SDL_RenderPresent(renderer);
+}
+
+void GameView::runCharacter() {
     CharacterSprite* sprite;
 
     if (scorpion->isJumping() && scorpion->getJumpMovement() == "NONE") {
@@ -90,21 +114,5 @@ void GameView::Render() {
     sprite->setX(scorpion->getX());
     sprite->setY(scorpion->getY());
     sprite->Draw();
-
-}
-
-void GameView::LoadSprites() {
-	scorpionWalk = new CharacterSprite(this->renderer,"data/scorpionWalk.png", scorpion->getX(),scorpion->getY(), 120,187, 9, oponentSide);
-    scorpionStance = new CharacterSprite(this->renderer,"data/scorpionStance.png", scorpion->getX(),scorpion->getY(), 120,187, 7, oponentSide);
-    scorpionJump = new CharacterSprite(this->renderer,"data/scorpionJump.png", scorpion->getX(),scorpion->getY(), 120,187, 9, oponentSide);
-    scorpionSideJump = new CharacterSprite(this->renderer, "data/scorpionSideJump.png", scorpion->getX(), scorpion->getY(), 120, 187, 8, oponentSide);
-}
-
-void GameView::startRender() {
-    SDL_RenderClear(renderer);
-}
-
-void GameView::endRender() {
-    SDL_RenderPresent(renderer);
 }
 
