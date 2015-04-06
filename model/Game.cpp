@@ -8,7 +8,7 @@ Game::Game(unsigned int pScreenWidth, unsigned int pScreenHeight, float pLogical
     this->logicalScreenWidth = pLogicalScreenWidth;
     this->stage = pStage;
     this->oponentSide = OponentSide;
-    scorpion = new MKCharacter(INITIAL_POSITION_X, INITIAL_POSITION_Y, charAncho, charAlto, 2);
+    scorpion = new MKCharacter(INITIAL_POSITION_X, INITIAL_POSITION_Y, charAncho, charAlto, 3);
     this->gameView = new GameView(ScreenWidth, ScreenHeight, scorpion, stage, oponentSide);
     this->gameController = new GameController();
 

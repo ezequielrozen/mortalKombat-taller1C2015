@@ -63,6 +63,7 @@ void GameView::Render() {
         } else {
             layerSprites[i]->update((*it)->getLeft_border());
             layerSprites[i]->Draw();
+            this->runCharacter();
         }
         i++;
     }
