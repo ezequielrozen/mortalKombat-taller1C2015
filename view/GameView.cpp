@@ -66,7 +66,7 @@ void GameView::Render() {
         }
         i++;
     }
-    if (!drow) {
+    if (!painted) {
         this->runCharacter();
     }
 }
