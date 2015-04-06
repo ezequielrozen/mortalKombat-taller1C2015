@@ -51,21 +51,23 @@ GameView::~GameView() {
 
 void GameView::Render() {
     int i = 0;
-
+    bool drow = false;
     // We render the layers' sprites iterating through the layerSprites' array
     std::list<Layer*>::iterator it = this->stage->getLayers()->begin();
     for(it; it != this->stage->getLayers()->end(); it++) {
-        int aux = i + 1;
-        if (aux == scorpion->getZ_index()) {
+        if (scorpion->getZ_index() == i+1) {
             this->runCharacter();
             layerSprites[i]->update((*it)->getLeft_border());
             layerSprites[i]->Draw();
+            drow = true;
         } else {
             layerSprites[i]->update((*it)->getLeft_border());
             layerSprites[i]->Draw();
-            this->runCharacter();
         }
         i++;
+    }
+    if (!drow) {
+        this->runCharacter();
     }
 }
 
