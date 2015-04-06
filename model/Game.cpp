@@ -1,14 +1,14 @@
 #include "Game.h"
 
 Game::Game(unsigned int pScreenWidth, unsigned int pScreenHeight, float pLogicalScreenWidth,
-                float charAncho, float charAlto, Stage* pStage, string OponentSide)
+                float charAncho, float charAlto, Stage* pStage, string OponentSide, int z_index)
 {
     this->ScreenWidth = pScreenWidth;
     this->ScreenHeight = pScreenHeight;
     this->logicalScreenWidth = pLogicalScreenWidth;
     this->stage = pStage;
     this->oponentSide = OponentSide;
-    scorpion = new MKCharacter(INITIAL_POSITION_X, INITIAL_POSITION_Y, charAncho, charAlto, 3);
+    scorpion = new MKCharacter(INITIAL_POSITION_X, INITIAL_POSITION_Y, charAncho, charAlto, z_index);
     this->gameView = new GameView(ScreenWidth, ScreenHeight, scorpion, stage, oponentSide);
     this->gameController = new GameController();
 

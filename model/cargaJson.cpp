@@ -6,7 +6,7 @@ using namespace std;
 bool cargaArchivoJSON(char* filename, int &screenWidth, int &screenHeight, float &logicalScreenWidth,
                         float &charAncho, float &charAlto, float &stageWidth,
 						float &stageHeight, float &floor, std::string &oponentSide,
-						std::list<Layer*>* layers){
+						std::list<Layer*>* layers, int &z_index){
 
     extern logger* Mylog;
     char mensaje[200];
@@ -101,6 +101,7 @@ bool cargaArchivoJSON(char* filename, int &screenWidth, int &screenHeight, float
 
 	charAncho = personaje["ancho"].asFloat();
 	charAlto  = personaje["alto"].asFloat();
+	z_index = personaje["z-index"].asInt();
 
     strcpy(mensaje, "alto: ");
     strcat(mensaje, personaje["alto"].asString().c_str());

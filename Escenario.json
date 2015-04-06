@@ -22,7 +22,7 @@
     "personaje": {
         "ancho": 20,
         "alto": 35,
-        "z-index": 1,
+        "z-index": 3,
         "sprites": 4
     },
     "oponente": {

@@ -21,6 +21,7 @@ int main(int argc, char* argv[]) {
     float charAncho;
     float charAlto;
     float floor;
+    int z_index;
     string oponentSide;
     //Load layers
     list<Layer*>* layers = new list<Layer*>();
@@ -32,13 +33,13 @@ int main(int argc, char* argv[]) {
     bool carga = false;
     carga = cargaArchivoJSON(file, anchoPantalla, altoPantalla, anchoPantallaLogico, charAncho,
                                     charAlto, stageWidth, stageHeight, floor, oponentSide,
-                                    layers);
+                                    layers, z_index);
 
     if(!carga){
         char* file = "Escenario.json";
         carga = cargaArchivoJSON(file, anchoPantalla, altoPantalla, anchoPantallaLogico, charAncho,
                                     charAlto, stageWidth, stageHeight, floor, oponentSide,
-                                    layers);
+                                    layers, z_index);
     }
     if(!carga){
         return 1;
@@ -52,7 +53,7 @@ int main(int argc, char* argv[]) {
     cout << "ancho: " <<anchoPantalla << endl;
     cout << "alto: " <<altoPantalla << endl;
 
-    Game* game = new Game(anchoPantalla, altoPantalla, anchoPantallaLogico, charAncho, charAlto, stage, oponentSide);
+    Game* game = new Game(anchoPantalla, altoPantalla, anchoPantallaLogico, charAncho, charAlto, stage, oponentSide, z_index);
 
 	game->GameLoop();
 
