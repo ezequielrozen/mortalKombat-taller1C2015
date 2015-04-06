@@ -51,7 +51,7 @@ GameView::~GameView() {
 
 void GameView::Render() {
     int i = 0;
-    bool drow = false;
+    bool painted = false;
     // We render the layers' sprites iterating through the layerSprites' array
     std::list<Layer*>::iterator it = this->stage->getLayers()->begin();
     for(it; it != this->stage->getLayers()->end(); it++) {
@@ -59,7 +59,7 @@ void GameView::Render() {
             this->runCharacter();
             layerSprites[i]->update((*it)->getLeft_border());
             layerSprites[i]->Draw();
-            drow = true;
+            painted = true;
         } else {
             layerSprites[i]->update((*it)->getLeft_border());
             layerSprites[i]->Draw();
