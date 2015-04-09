@@ -1,7 +1,7 @@
 #include "LayerSprite.h"
 #include "../../model/MKCharacter.h"
 
-LayerSprite::LayerSprite(SDL_Renderer *pRenderer, string path, float screenWidth, float screenHeight) {
+LayerSprite::LayerSprite(SDL_Renderer *pRenderer, string path, float screenWidth, float screenHeight, float layerWidth) {
     this->renderer = pRenderer;
     this->texture = NULL;
     this->texture = IMG_LoadTexture(this->renderer,path.c_str());
@@ -20,15 +20,16 @@ LayerSprite::LayerSprite(SDL_Renderer *pRenderer, string path, float screenWidth
     SDL_QueryTexture(texture,NULL,NULL, &img_width, &img_height);
 
     crop.w = (int) floor(screenWidth*img_height/screenHeight);
-    crop.x = img_width/2 - crop.w/2;
+    crop.x = 0;
     crop.y = 0;
     crop.h = img_height;
 
-    if(img_width <= screenWidth) {
+    if(layerWidth <= screenWidth) {
         crop.x = 0;
         crop.w = img_width;
-        draw.w = img_width;
-        draw.h = img_height;
+        //Llenar constante de ANCHOVENTAL con dato del json
+        draw.w = (layerWidth / ANCHOVENTANAL) * screenWidth;
+        draw.h = screenHeight;
     }
 }
 

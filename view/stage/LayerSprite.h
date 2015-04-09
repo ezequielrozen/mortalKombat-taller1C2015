@@ -11,7 +11,7 @@ using namespace std;
 class LayerSprite {
 
 public:
-    LayerSprite(SDL_Renderer* passed_renderer, string FilePath, float screenWidth, float screenHeight);
+    LayerSprite(SDL_Renderer* passed_renderer, string FilePath, float screenWidth, float screenHeight, float layerWidth);
     ~LayerSprite();
     void Draw();
     void update(float);

@@ -12,11 +12,11 @@
     "capas": [
         {
             "imagen_fondo": "data/stage2.jpg",
-            "ancho": 500
+            "ancho": 400
         },
         {
             "imagen_fondo": "data/152.png",
-            "ancho": 1000.5
+            "ancho": 100
         }
     ],
     "personaje": {

@@ -4,11 +4,11 @@
 //ventana
 const int ANCHOVENTANAPX                    =  800;
 const int ALTOVENTANAPX                     =  600;
-const float ANCHOVENTANAL                   =  800;
+const float ANCHOVENTANAL                   =  200;
 
 //escenario
-const float ANCHOESCENARIO                  = 1280;
-const float ALTOESCENARIO                   =  800;
+const float ANCHOESCENARIO                  = 1000.5;
+const float ALTOESCENARIO                   =  150;
 const float ALTURAPISOESCENARIO             =   20;
 
 //capa
