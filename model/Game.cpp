@@ -30,5 +30,6 @@ void Game::GameLoop()
         gameView->Render();
         gameController->update(scorpion, stage->getLayers());
         gameView->endRender();
+        SDL_Delay(20);
     }
 }

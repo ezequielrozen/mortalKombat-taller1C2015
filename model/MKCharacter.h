@@ -52,7 +52,7 @@ private:
     string movement;
     string jumpMovement;
 
-    uint timeCheck;
+    //uint timeCheck;
 
     int posX;
     float posY;

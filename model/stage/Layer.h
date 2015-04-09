@@ -30,7 +30,7 @@ private:
     float width;
     float speed;
     float left_border;
-    uint timeCheck;
+    //uint timeCheck;
     string movement;
     string path;
 

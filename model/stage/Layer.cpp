@@ -8,7 +8,7 @@ Layer::Layer(float width) {
     this->speed = this->width / ANCHOVENTANAL;
     this->left_border = 0;
 
-    timeCheck = SDL_GetTicks();
+    //timeCheck = SDL_GetTicks();
 }
 
 Layer::Layer(float width, string path) {
@@ -19,7 +19,7 @@ Layer::Layer(float width, string path) {
     if (this->width <= ANCHOVENTANAL)
         this->speed = 0;
     this->left_border = 0;
-    timeCheck = SDL_GetTicks();
+    //timeCheck = SDL_GetTicks();
 }
 
 Layer::~Layer() {
@@ -62,15 +62,15 @@ void Layer::moveRight() {
 }
 
 void Layer::update() {
-    if (timeCheck + 5 < SDL_GetTicks()) {
+    //if (timeCheck + 5 < SDL_GetTicks()) {
         if (movement == "RIGHT") {
             this->moveRight();
         }
         else if (movement == "LEFT") {
             this->moveLeft();
         }
-        timeCheck = SDL_GetTicks();
-    }
+        //timeCheck = SDL_GetTicks();
+    //}
 
 }
 

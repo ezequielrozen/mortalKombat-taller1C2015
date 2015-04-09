@@ -4,7 +4,7 @@ MKCharacter::MKCharacter(int initialPosX, int initialPosY, float ancho, float al
 {
 
 	//tamaño del png = 87*136
-	timeCheck = SDL_GetTicks();
+	//timeCheck = SDL_GetTicks();
 
 	this->z_index = z_index;
 	posX = initialPosX;
@@ -31,7 +31,7 @@ MKCharacter::~MKCharacter(void)
 void MKCharacter::Update()
 {
 
-	if (timeCheck + MOVEMENTDELAY < SDL_GetTicks()) {
+	//if (timeCheck + MOVEMENTDELAY < SDL_GetTicks()) {
 		if (movement == "RIGHT") {
 			this->moveRight();
 		}
@@ -43,8 +43,8 @@ void MKCharacter::Update()
 			this->moveUp();
 		}
 
-		timeCheck = SDL_GetTicks();
-	}
+		//timeCheck = SDL_GetTicks();
+	//}
 
 }
 
