@@ -29,6 +29,7 @@ LayerSprite::LayerSprite(SDL_Renderer *pRenderer, string path, float screenWidth
         crop.w = img_width;
         //Llenar constante de ANCHOVENTAL con dato del json
         draw.w = (layerWidth / ANCHOVENTANAL) * screenWidth;
+        draw.x = screenWidth / 2 - draw.w / 2;
         draw.h = screenHeight;
     }
 }
