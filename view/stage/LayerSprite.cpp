@@ -24,7 +24,7 @@ LayerSprite::LayerSprite(SDL_Renderer *pRenderer, string path, float screenWidth
     crop.y = 0;
     crop.h = img_height;
 
-    if(layerWidth <= screenWidth) {
+    if(layerWidth <= ANCHOVENTANAL) {
         crop.x = 0;
         crop.w = img_width;
         //Llenar constante de ANCHOVENTAL con dato del json
