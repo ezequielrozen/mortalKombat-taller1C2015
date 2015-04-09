@@ -58,7 +58,8 @@ void LayerSprite::update(float shift) {
                 draw.x = -shift;
                 draw.y = 230;
             }
-            else
-            crop.x = shift  * draw.h / img_height;
+            else {
+                crop.x = shift * draw.h / img_height;
+            }
     //}
 }

@@ -57,6 +57,7 @@ void Layer::moveLeft() {
 }
 
 void Layer::moveRight() {
+    //POTENCIAL ERROR: COMPARA PIXELS (LEFT_BORDER) CON ANCHOS LOGICOS (ANCHOVENTANAL Y ANCHOESCENARIO)
     if (this->left_border + ANCHOVENTANAL < ANCHOESCENARIO)
         this->left_border += speed;
 }

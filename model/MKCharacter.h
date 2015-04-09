@@ -27,6 +27,8 @@ public:
 
     void Update();
 
+    void UpdateJump();
+
     int getWidth();
 
     int getX();
@@ -46,6 +48,7 @@ public:
     void setJumpMovement(string jumpMove);
 
     int getZ_index();
+    
 
 private:
 

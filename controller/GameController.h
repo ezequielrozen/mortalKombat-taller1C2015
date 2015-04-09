@@ -18,7 +18,7 @@ public:
     GameController();
     ~GameController(void);
 
-    void update(MKCharacter* character, list<Layer*>* layer);
+    void update(MKCharacter* character);
 
     SDL_Event* getEvent();
 

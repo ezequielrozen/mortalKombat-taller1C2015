@@ -39,13 +39,15 @@ void MKCharacter::Update()
 			this->moveLeft();
 		}
 
-		if(this->isJumping()) {
-			this->moveUp();
-		}
-
 		//timeCheck = SDL_GetTicks();
 	//}
+}
 
+void MKCharacter::UpdateJump() {
+	
+	if(this->isJumping()) {
+		this->moveUp();
+	}
 }
 
 void MKCharacter::moveRight() {

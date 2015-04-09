@@ -21,51 +21,31 @@ void GameController::checkEvent() {
     SDL_PollEvent(mainEvent);    
 }
 
-void GameController::update(MKCharacter* character, std::list<Layer*>* layers) {
+void GameController::update(MKCharacter* character) {
     
     if (mainEvent->type == SDL_KEYDOWN)
+    {
+        if (mainEvent->key.keysym.sym == SDLK_RIGHT)
         {
-            if (mainEvent->key.keysym.sym == SDLK_RIGHT)
-            {
-                list<Layer*>::iterator it = layers->begin();
-                for(it; it != layers->end(); it++) {
-                    (*it)->setMovement("RIGHT");
-                }
-                character->setMovement("RIGHT");
-                timer = SDL_GetTicks();
-                //cout << "right" << endl;
-            }
-            else if (mainEvent->key.keysym.sym == SDLK_LEFT)
-            {
-                list<Layer*>::iterator it = layers->begin();
-                for(it; it != layers->end(); it++) {
-                    (*it)->setMovement("LEFT");
-                }
-                character->setMovement("LEFT");
-                timer = SDL_GetTicks();
-                
-            }
-            else if (mainEvent->key.keysym.sym == SDLK_UP)
-			{
-//				command = "UP";
-                character->setJump(true);
-                //character->jump();
-				//left = true;
-			}
-        }
-        else if (timer + COMMANDDELAY < SDL_GetTicks()) {
-            list<Layer*>::iterator it = layers->begin();
-            for(it; it != layers->end(); it++) {
-                (*it)->setMovement("NONE");
-            }
-            character->setMovement("NONE");
+            character->setMovement("RIGHT");
             timer = SDL_GetTicks();
+            //cout << "right" << endl;
         }
-
-    character->Update();
-    std::list<Layer*>::iterator it;
-    for(it = layers->begin(); it != layers->end(); it++) {
-        (*it)->update();
+        else if (mainEvent->key.keysym.sym == SDLK_LEFT)
+        {
+            character->setMovement("LEFT");
+            timer = SDL_GetTicks();
+            
+        }
+        else if (mainEvent->key.keysym.sym == SDLK_UP)
+		{
+            character->setJump(true); 
+		}
+    }
+    else if (timer + COMMANDDELAY < SDL_GetTicks()) {
+        
+        character->setMovement("NONE");
+        timer = SDL_GetTicks();
     }
 }
 

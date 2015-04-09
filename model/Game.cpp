@@ -11,6 +11,7 @@ Game::Game(unsigned int pScreenWidth, unsigned int pScreenHeight, float pLogical
     scorpion = new MKCharacter(INITIAL_POSITION_X, INITIAL_POSITION_Y, charAncho, charAlto, z_index);
     this->gameView = new GameView(ScreenWidth, ScreenHeight, scorpion, stage, oponentSide);
     this->gameController = new GameController();
+    this->cameraController = new CameraController(ScreenWidth);
 
 }
 
@@ -28,7 +29,8 @@ void Game::GameLoop()
         gameController->checkEvent();
         gameView->startRender();
         gameView->Render();
-        gameController->update(scorpion, stage->getLayers());
+        gameController->update(scorpion);
+        cameraController->update(scorpion, stage->getLayers());
         gameView->endRender();
         SDL_Delay(20);
     }
