@@ -5,4 +5,5 @@ cmake_install.cmake
 install_manifest.txt
 CMakeLists.txt
 mortalKombat_taller1C2015
+Mylog.txt
 .idea
