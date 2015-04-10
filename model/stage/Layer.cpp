@@ -10,10 +10,12 @@ Layer::Layer(float width) {
 Layer::Layer(float width, string path) {
     this->width = width;
     this->path = path;
-    this->speed = ((this->getWidth() - ANCHOVENTANAL) / ANCHOESCENARIO) * VELOCIDAD_DESPLAZAMIENTO_CAPAS;
+    //Here depending on the width, the speed is set. Now depends of the z-index
+    this->speed = ((this->getWidth() - ANCHOVENTANAL) / ANCHOESCENARIO) * 5;
     if (this->width <= ANCHOVENTANAL)
         this->speed = 0;
-    this->left_border = 0;
+    this->left_border = (this->width - ANCHOVENTANAL) /2;
+    //timeCheck = SDL_GetTicks();
 }
 
 Layer::~Layer() {

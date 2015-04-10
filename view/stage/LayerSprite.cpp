@@ -22,12 +22,11 @@ LayerSprite::LayerSprite(SDL_Renderer *pRenderer, string path, float screenWidth
     SDL_QueryTexture(texture,NULL,NULL, &img_width, &img_height);
 
     crop.w = /*(int) floor(screenWidth*img_height/screenHeight)*/ img_width * ANCHOVENTANAL / layerWidth;
-    crop.x = 0;
+    crop.x = img_width/2 - crop.w/2;
     crop.y = 0;
     crop.h = img_height;
 
     if(layerWidth <= ANCHOVENTANAL) {
-        crop.x = 0;
         crop.w = img_width;
         //Llenar constante de ANCHOVENTAL con dato del json
         draw.w = (layerWidth / ANCHOVENTANAL) * screenWidth;

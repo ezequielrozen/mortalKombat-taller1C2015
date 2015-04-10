@@ -36,7 +36,6 @@ int main(int argc, char* argv[]) {
                                     layers, z_index);
 
     if(!carga){
-        char* file = "Escenario.json";
         carga = cargaArchivoJSON(file, anchoPantalla, altoPantalla, anchoPantallaLogico, charAncho,
                                     charAlto, stageWidth, stageHeight, floor, oponentSide,
                                     layers, z_index);

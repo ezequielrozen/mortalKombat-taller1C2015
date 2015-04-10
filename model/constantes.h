@@ -29,7 +29,7 @@ const int OPONENTRIGHT                      =    2;
 //Fija el delay que tiene el personaje para mover por la pantalla. (A mayor, mas lento se mueve)
 const int MOVEMENTDELAY                     =   15;
 //Fija el delay que tiene el personaje para cambiar de direccion. (A mayor, mas tarda en cambiar de direccion. Osea, a mayor, patina mas)
-const int COMMANDDELAY                      =  500;
+const int COMMANDDELAY                      =  150;
 //Velocidad inicial del salto del personaje.
 const int SPEED                             =   30;
 //Aceleracion aplicada al salto del personaje.
