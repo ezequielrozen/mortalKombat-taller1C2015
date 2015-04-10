@@ -20,8 +20,8 @@
         }
     ],
     "personaje": {
-        "ancho": 20,
-        "alto": 35,
+        "ancho": 34, 
+        "alto": 53,
         "z-index": 3,
         "sprites": 4
     },

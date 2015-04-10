@@ -2,8 +2,8 @@
 #define CONSTANTES_H_
 
 //ventana
-const int ANCHOVENTANAPX                    =  800;
-const int ALTOVENTANAPX                     =  600;
+const int ANCHOVENTANAPX                    =  700;
+const int ALTOVENTANAPX                     =  500;
 const float ANCHOVENTANAL                   =  200;
 
 //escenario
@@ -31,9 +31,12 @@ const int MOVEMENTDELAY                     =   15;
 //Fija el delay que tiene el personaje para cambiar de direccion. (A mayor, mas tarda en cambiar de direccion. Osea, a mayor, patina mas)
 const int COMMANDDELAY                      =  150;
 //Velocidad inicial del salto del personaje.
-const int SPEED                             =   30;
+const float SPEED                             =  0.04285*ANCHOVENTANAL;
 //Aceleracion aplicada al salto del personaje.
-const int ACCELERATION                      =  860;
+const float ACCELERATION                      =  1.2285*ANCHOVENTANAL;
+
+const float INITIAL_POSITION_X = 0.2857*ANCHOVENTANAL;
+const float INITIAL_POSITION_Y = 0.2857*ANCHOVENTANAL;
 
 
 #endif /* CONSTANTES_H_ */

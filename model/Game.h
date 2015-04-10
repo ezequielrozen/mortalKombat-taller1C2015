@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include "MKCharacter.h"
+#include "constantes.h"
 #include "../view/GameView.h"
 #include "../controller/GameController.h"
 #include "../controller/CameraController.h"
@@ -12,10 +13,6 @@
 #include <iostream>
 
 using namespace std;
-
-const int INITIAL_POSITION_X = 200;
-const int INITIAL_POSITION_Y = 200;
-
 
 class Game
 {

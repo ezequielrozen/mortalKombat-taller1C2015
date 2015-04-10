@@ -1,8 +1,7 @@
 #include "CameraController.h"
 
-CameraController::CameraController(int pScreenWidth)
+CameraController::CameraController()
 {
-    this->ScreenWidth = pScreenWidth;
 
     this->cameraMovement = "NONE";
 }
@@ -16,10 +15,10 @@ void CameraController::update(MKCharacter* character, std::list<Layer*>* layers)
     
     //cout << "posX: " << character->getX() << endl;
 
-    if ((character->getX() < this->ScreenWidth/10) && (character->getMovement() == "LEFT")) {
+    if ((character->getX() < ANCHOVENTANAL/10) && (character->getMovement() == "LEFT")) {
         this->cameraMovement = "LEFT";
     }
-    else if ((character->getX() > this->ScreenWidth - this->ScreenWidth/10 - character->getWidth()) && (character->getMovement() == "RIGHT")) {
+    else if ((character->getX() > ANCHOVENTANAL - ANCHOVENTANAL/10 - character->getWidth()) && (character->getMovement() == "RIGHT")) {
         this->cameraMovement = "RIGHT";
     }
     else {

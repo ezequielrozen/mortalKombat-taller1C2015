@@ -1,6 +1,6 @@
 #include "MKCharacter.h"
 
-MKCharacter::MKCharacter(int initialPosX, int initialPosY, float ancho, float alto, int z_index)
+MKCharacter::MKCharacter(float initialPosX, float initialPosY, float ancho, float alto, int z_index)
 {
 
 	//tamaño del png = 87*136
@@ -10,10 +10,12 @@ MKCharacter::MKCharacter(int initialPosX, int initialPosY, float ancho, float al
 	posX = initialPosX;
 	posY = initialPosY;
 
+	step = 0.00714*ANCHOVENTANAL;
+
 	this->alto = alto;
 	this->ancho = ancho;
 
-	posY = 200;
+	posY = initialPosY;
 	velY = SPEED;
 	accY = ACCELERATION;
 
@@ -54,9 +56,9 @@ void MKCharacter::moveRight() {
 
     //Verifico que no se vaya de la pantalla por derecha
     
-    if(( posX + 5 + getWidth() < SCREEN_WIDTH ) )
+    if(( posX + step + getWidth() < ANCHOVENTANAL ) )
     {
-    	posX = posX + 5;
+    	posX = posX + step;
     }
 
 }
@@ -64,16 +66,16 @@ void MKCharacter::moveRight() {
 void MKCharacter::moveLeft() {
 	//Verifico que no se vaya de la pantalla por izquierda
 	
-	if(( posX - 5 + getWidth() > getWidth() ) )
+	if(( posX - step + getWidth() > getWidth() ) )
 	{
-		posX = posX - 5;
+		posX = posX - step;
 	}
 
 }
 
 void MKCharacter::moveUp() {
 
-	if (posY > 40 && posY <= 201)
+	if (posY > (0.0571*ANCHOVENTANAL) && posY <= (0.2871*ANCHOVENTANAL))
 	{
 		float time = 0.003;
 
@@ -85,21 +87,27 @@ void MKCharacter::moveUp() {
 	}
 
 	if (velY <= (SPEED*0.04 - SPEED)) {
-		posY = 200;
+		posY = INITIAL_POSITION_Y;
 		velY = SPEED;
 		this->setJump(false);
 	}
 }
 
-int MKCharacter::getWidth(){
-	return CHARACTER_WIDTH;
+//PASAR A FLOAT
+float MKCharacter::getWidth(){
+	return this->ancho;
 }
 
-int MKCharacter::getX() {
+//PASAR A FLOAT
+float MKCharacter::getHeight(){
+	return this->alto;
+}
+
+float MKCharacter::getX() {
 	return posX;
 }
 
-int MKCharacter::getY() {
+float MKCharacter::getY() {
 	return posY;
 }
 

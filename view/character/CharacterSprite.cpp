@@ -1,6 +1,6 @@
 #include "CharacterSprite.h"
 
-CharacterSprite::CharacterSprite(SDL_Renderer* pRenderer, char* path, int x, int y, int w, int h, int frames, string OponentSide)
+CharacterSprite::CharacterSprite(SDL_Renderer* pRenderer, char* path, float x, float y, float w, float h, int frames, string OponentSide)
 {
 	oponentSide = OponentSide;
     this->renderer = pRenderer;
@@ -13,10 +13,12 @@ CharacterSprite::CharacterSprite(SDL_Renderer* pRenderer, char* path, int x, int
         cout << IMG_GetError() << std::endl;
     }
 
-    draw.x = x;
-    draw.y = y;
-    draw.w = w;
-    draw.h = h;
+    scalingConstant = ANCHOVENTANAPX/ANCHOVENTANAL;
+
+    draw.x = x*scalingConstant;
+    draw.y = y*scalingConstant;
+    draw.w = w*scalingConstant;
+    draw.h = h*scalingConstant;
 
     SDL_QueryTexture(texture,NULL,NULL, &img_width, &img_height);
 
@@ -87,16 +89,16 @@ void CharacterSprite::Draw()
 	SDL_RenderCopyEx(renderer,texture,&crop, &draw,0,NULL,flipType);
 }
 
-int CharacterSprite::getX() {
-	return draw.x;
+float CharacterSprite::getX() {
+	return draw.x/scalingConstant;
 }
 
-void CharacterSprite::setX(int passedX) {
-	draw.x = passedX;
+void CharacterSprite::setX(float passedX) {
+	draw.x = passedX*scalingConstant;
 }
 
-void CharacterSprite::setY(int passedY) {
-	draw.y = passedY;
+void CharacterSprite::setY(float passedY) {
+	draw.y = passedY*scalingConstant;
 }
 
 void CharacterSprite::reset() {

@@ -9,14 +9,12 @@
 
 using namespace std;
 
-const int CHARACTER_WIDTH = 87;
 const int SCREEN_WIDTH = 700;
-const int SCREEN_HEIGHT = 500;
 
 class MKCharacter
 {
 public:
-    MKCharacter(int initialPosX, int initialPosY, float ancho, float alto, int z_index);
+    MKCharacter(float initialPosX, float initialPosY, float ancho, float alto, int z_index);
     ~MKCharacter(void);
 
     void moveRight();
@@ -29,11 +27,13 @@ public:
 
     void UpdateJump();
 
-    int getWidth();
+    float getWidth();
 
-    int getX();
+    float getHeight();
 
-    int getY();
+    float getX();
+
+    float getY();
 
     string getMovement();
 
@@ -57,7 +57,7 @@ private:
 
     //uint timeCheck;
 
-    int posX;
+    float posX;
     float posY;
 
     int z_index;
@@ -68,6 +68,8 @@ private:
     float accY;
 
     bool jumping;
+
+    float step;
 };
 
 #endif /* MKCHARACTER_H_ */

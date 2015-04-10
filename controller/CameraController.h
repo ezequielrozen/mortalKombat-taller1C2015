@@ -15,7 +15,7 @@ using namespace std;
 class CameraController
 {
 public:
-    CameraController(int pScreenWidth);
+    CameraController();
     ~CameraController(void);
 
     void update(MKCharacter* character, list<Layer*>* layer);
@@ -24,7 +24,6 @@ private:
 
 	string cameraMovement;
 
-	int ScreenWidth;
 
 };
 

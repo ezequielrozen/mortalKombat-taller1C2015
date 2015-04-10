@@ -4,22 +4,23 @@
 #include <iostream>
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
+#include "../../model/constantes.h"
 
 using namespace std;
 
 class CharacterSprite
 {
 public:
-    CharacterSprite(SDL_Renderer* passed_renderer, char* FilePath, int x, int y, int w, int h, int frames, string OponentSide);
+    CharacterSprite(SDL_Renderer* passed_renderer, char* FilePath, float x, float y, float w, float h, int frames, string OponentSide);
 
     ~CharacterSprite(void);
     void Draw();
 
     void Play(float Speed);
     void PlayBack(float Speed);
-    int getX();
-    void setX(int passedX);
-    void setY(int passedY);
+    float getX();
+    void setX(float passedX);
+    void setY(float passedY);
     void reset();
 
 private:
@@ -35,6 +36,8 @@ private:
     int animationDelay;
 
     int framesX;
+
+    float scalingConstant;
 
     string oponentSide;
 
