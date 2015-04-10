@@ -16,7 +16,7 @@
         },
         {
             "imagen_fondo": "data/152.png",
-            "ancho": 500
+            "ancho": 250
         }
     ],
     "personaje": {

@@ -11,8 +11,9 @@ const float ANCHOESCENARIO                  = 1000;
 const float ALTOESCENARIO                   =  150;
 const float ALTURAPISOESCENARIO             =   20;
 
-//capa
-const float ANCHOCAPA                       =  500;
+// capa
+
+const float VELOCIDAD_DESPLAZAMIENTO_CAPAS = 4;
 
 //personaje
 const float ANCHOPERSONAJE                  =   20;
