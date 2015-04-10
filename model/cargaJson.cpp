@@ -1,10 +1,11 @@
 #include "CargaJson.h"
+#include "util/Util.h"
+
 using namespace std;
 
 
 
-bool cargaArchivoJSON(char* filename, int &screenWidth, int &screenHeight, float &logicalScreenWidth,
-                        float &charAncho, float &charAlto, float &stageWidth,
+bool cargaArchivoJSON(char* filename, float &charAncho, float &charAlto, float &stageWidth,
 						float &stageHeight, float &floor, std::string &oponentSide,
 						std::list<Layer*>* layers, int &z_index){
 
@@ -37,9 +38,9 @@ bool cargaArchivoJSON(char* filename, int &screenWidth, int &screenHeight, float
 	Mylog->Log("----------Ventana-------", ERROR_LEVEL_INFO);
 	const Json::Value ventana = root["ventana"];
 
-	screenWidth = ventana["ancho-px"].asInt();
-	screenHeight = ventana["alto-px"].asInt();
-	logicalScreenWidth = ventana["ancho"].asFloat();
+	Util::getInstance()->setWindowWidth(ventana["ancho-px"].asInt());
+	Util::getInstance()->setWindowHeight(ventana["alto-px"].asInt());
+	Util::getInstance()->setLogicalWindowWidth(ventana["ancho"].asFloat());
 
     strcpy(mensaje, "ancho-px: ");
     strcat(mensaje, ventana["ancho-px"].asString().c_str());
@@ -51,8 +52,10 @@ bool cargaArchivoJSON(char* filename, int &screenWidth, int &screenHeight, float
 
 	Mylog->Log("----------Escenario-------", ERROR_LEVEL_INFO);
 	const Json::Value escenarios = root["escenario"];
+	Util::getInstance()->setLogicalWindowHeight(escenarios["alto"].asFloat());
 	stageHeight = escenarios["alto"].asFloat();
 	stageWidth = escenarios["ancho"].asFloat();
+	Util::getInstance()->setLogicalStageWidth(stageWidth);
 	floor = escenarios["y-piso"].asFloat();
 
     strcpy(mensaje, "alto: ");

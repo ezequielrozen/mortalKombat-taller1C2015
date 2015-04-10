@@ -1,6 +1,6 @@
 #include "Game.h"
 
-Game::Game(unsigned int pScreenWidth, unsigned int pScreenHeight, float pLogicalScreenWidth,
+Game::Game(int pScreenWidth, int pScreenHeight, float pLogicalScreenWidth,
                 float charAncho, float charAlto, Stage* pStage, string OponentSide, int z_index)
 {
     this->ScreenWidth = pScreenWidth;

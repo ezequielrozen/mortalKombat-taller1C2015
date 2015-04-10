@@ -17,7 +17,7 @@ using namespace std;
 class Game
 {
 public:
-    Game(unsigned int pScreenWidth, unsigned int pScreenHeight, float pLogicalScreenWidth,
+    Game(int pScreenWidth, int pScreenHeight, float pLogicalScreenWidth,
                 float charAncho, float charAlto, Stage* stage, string OponentSide, int z_index);
     ~Game();
     void GameLoop();

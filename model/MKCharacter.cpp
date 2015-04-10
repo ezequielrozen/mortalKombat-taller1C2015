@@ -10,14 +10,13 @@ MKCharacter::MKCharacter(float initialPosX, float initialPosY, float ancho, floa
 	posX = initialPosX;
 	posY = initialPosY;
 
-	step = 0.00714*ANCHOVENTANAL;
+	step = 0.00714*Util::getInstance()->getLogicalWindowWidth();
 
 	this->alto = alto;
 	this->ancho = ancho;
 
-	posY = initialPosY;
-	velY = SPEED;
-	accY = ACCELERATION;
+	velY = 0.04285*Util::getInstance()->getLogicalWindowWidth();
+	accY = 1.2285*Util::getInstance()->getLogicalWindowWidth();;
 
 	movement = "NONE";
 	jumpMovement = "NONE";
@@ -56,7 +55,7 @@ void MKCharacter::moveRight() {
 
     //Verifico que no se vaya de la pantalla por derecha
     
-    if(( posX + step + getWidth() < ANCHOVENTANAL ) )
+    if(( posX + step + getWidth() < Util::getInstance()->getLogicalWindowWidth() ) )
     {
     	posX = posX + step;
     }
@@ -75,7 +74,7 @@ void MKCharacter::moveLeft() {
 
 void MKCharacter::moveUp() {
 
-	if (posY > (0.0571*ANCHOVENTANAL) && posY <= (0.2871*ANCHOVENTANAL))
+	if (posY > (0.0571*Util::getInstance()->getLogicalWindowWidth()) && posY <= (0.2871*Util::getInstance()->getLogicalWindowWidth()))
 	{
 		float time = 0.003;
 
@@ -86,9 +85,9 @@ void MKCharacter::moveUp() {
 		posY = posY - velY;
 	}
 
-	if (velY <= (SPEED*0.04 - SPEED)) {
+	if (velY <= (0.04285*Util::getInstance()->getLogicalWindowWidth()*0.04 - 0.04285*Util::getInstance()->getLogicalWindowWidth())) {
 		posY = INITIAL_POSITION_Y;
-		velY = SPEED;
+		velY = 0.04285*Util::getInstance()->getLogicalWindowWidth();
 		this->setJump(false);
 	}
 }
@@ -103,11 +102,11 @@ float MKCharacter::getHeight(){
 	return this->alto;
 }
 
-float MKCharacter::getX() {
+double MKCharacter::getX() {
 	return posX;
 }
 
-float MKCharacter::getY() {
+double MKCharacter::getY() {
 	return posY;
 }
 

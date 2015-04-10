@@ -2,6 +2,7 @@
 #include "Game.h"
 #include "CargaJson.h"
 #include "logger.h"
+#include "util/Util.h"
 
 using namespace std;
 
@@ -13,9 +14,6 @@ int main(int argc, char* argv[]) {
 
     Mylog->Log("Iniciando MortalKombat", ERROR_LEVEL_INFO);
 
-    int anchoPantalla;
-    int altoPantalla;
-    float anchoPantallaLogico;
     float stageWidth;
     float stageHeight;
     float charAncho;
@@ -31,28 +29,18 @@ int main(int argc, char* argv[]) {
         file = argv[1];
     }
     bool carga = false;
-    carga = cargaArchivoJSON(file, anchoPantalla, altoPantalla, anchoPantallaLogico, charAncho,
-                                    charAlto, stageWidth, stageHeight, floor, oponentSide,
-                                    layers, z_index);
+    carga = cargaArchivoJSON(file, charAncho, charAlto, stageWidth, stageHeight, floor, oponentSide, layers, z_index);
 
     if(!carga){
-        carga = cargaArchivoJSON(file, anchoPantalla, altoPantalla, anchoPantallaLogico, charAncho,
-                                    charAlto, stageWidth, stageHeight, floor, oponentSide,
-                                    layers, z_index);
+        carga = cargaArchivoJSON(file, charAncho, charAlto, stageWidth, stageHeight, floor, oponentSide, layers, z_index);
     }
-    if(!carga){
-        return 1;
-    }
-
-
 
     //Load stage
     Stage* stage = new Stage(layers, stageWidth, stageHeight, floor);
 
-    cout << "ancho: " <<anchoPantalla << endl;
-    cout << "alto: " <<altoPantalla << endl;
 
-    Game* game = new Game(anchoPantalla, altoPantalla, anchoPantallaLogico, charAncho, charAlto, stage, oponentSide, z_index);
+    Game* game = new Game(Util::getInstance()->getWindowWidth(), Util::getInstance()->getWindowHeight(),
+                          Util::getInstance()->getLogicalWindowWidth(), charAncho, charAlto, stage, oponentSide, z_index);
 
 	game->GameLoop();
 

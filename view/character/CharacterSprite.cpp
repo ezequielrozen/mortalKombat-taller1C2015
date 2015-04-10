@@ -1,4 +1,5 @@
 #include "CharacterSprite.h"
+#include "../../model/util/Util.h"
 
 CharacterSprite::CharacterSprite(SDL_Renderer* pRenderer, char* path, float x, float y, float w, float h, int frames, string OponentSide)
 {
@@ -13,12 +14,10 @@ CharacterSprite::CharacterSprite(SDL_Renderer* pRenderer, char* path, float x, f
         cout << IMG_GetError() << std::endl;
     }
 
-    scalingConstant = ANCHOVENTANAPX/ANCHOVENTANAL;
-
-    draw.x = x*scalingConstant;
-    draw.y = y*scalingConstant;
-    draw.w = w*scalingConstant;
-    draw.h = h*scalingConstant;
+    draw.x = x*Util::getInstance()->getScalingConstant();
+    draw.y = y*Util::getInstance()->getScalingConstant();
+    draw.w = w*Util::getInstance()->getScalingConstant();
+    draw.h = h*Util::getInstance()->getScalingConstant();
 
     SDL_QueryTexture(texture,NULL,NULL, &img_width, &img_height);
 
@@ -90,15 +89,15 @@ void CharacterSprite::Draw()
 }
 
 float CharacterSprite::getX() {
-	return draw.x/scalingConstant;
+	return draw.x/Util::getInstance()->getScalingConstant();
 }
 
 void CharacterSprite::setX(float passedX) {
-	draw.x = passedX*scalingConstant;
+	draw.x = passedX*Util::getInstance()->getScalingConstant();
 }
 
 void CharacterSprite::setY(float passedY) {
-	draw.y = passedY*scalingConstant;
+	draw.y = passedY*Util::getInstance()->getScalingConstant();
 }
 
 void CharacterSprite::reset() {

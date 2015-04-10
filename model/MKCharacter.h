@@ -9,8 +9,6 @@
 
 using namespace std;
 
-const int SCREEN_WIDTH = 700;
-
 class MKCharacter
 {
 public:
@@ -31,9 +29,9 @@ public:
 
     float getHeight();
 
-    float getX();
+    double getX();
 
-    float getY();
+    double getY();
 
     string getMovement();
 
@@ -57,19 +55,19 @@ private:
 
     //uint timeCheck;
 
-    float posX;
-    float posY;
+    double posX;
+    double posY;
 
     int z_index;
     float ancho;
     float alto;
 
-    float velY;
-    float accY;
+    double velY;
+    double accY;
 
     bool jumping;
 
-    float step;
+    double step;
 };
 
 #endif /* MKCHARACTER_H_ */

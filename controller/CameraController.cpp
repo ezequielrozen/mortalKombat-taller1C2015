@@ -1,4 +1,5 @@
 #include "CameraController.h"
+#include "../model/util/Util.h"
 
 CameraController::CameraController()
 {
@@ -15,10 +16,11 @@ void CameraController::update(MKCharacter* character, std::list<Layer*>* layers)
     
     //cout << "posX: " << character->getX() << endl;
 
-    if ((character->getX() < ANCHOVENTANAL/10) && (character->getMovement() == "LEFT")) {
+    if ((character->getX() < Util::getInstance()->getLogicalWindowWidth()/10) && (character->getMovement() == "LEFT")) {
         this->cameraMovement = "LEFT";
     }
-    else if ((character->getX() > ANCHOVENTANAL - ANCHOVENTANAL/10 - character->getWidth()) && (character->getMovement() == "RIGHT")) {
+    else if ((character->getX() > Util::getInstance()->getLogicalWindowWidth() - Util::getInstance()->getLogicalWindowWidth()/10 - character->getWidth()) &&
+            (character->getMovement() == "RIGHT")) {
         this->cameraMovement = "RIGHT";
     }
     else {

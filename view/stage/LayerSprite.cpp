@@ -1,5 +1,6 @@
 #include "LayerSprite.h"
 #include "../../model/MKCharacter.h"
+#include "../../model/util/Util.h"
 
 LayerSprite::LayerSprite(SDL_Renderer *pRenderer, string path, float screenWidth, float screenHeight, float layerWidth) {
     this->renderer = pRenderer;
@@ -21,15 +22,15 @@ LayerSprite::LayerSprite(SDL_Renderer *pRenderer, string path, float screenWidth
 
     SDL_QueryTexture(texture,NULL,NULL, &img_width, &img_height);
 
-    crop.w = /*(int) floor(screenWidth*img_height/screenHeight)*/ img_width * ANCHOVENTANAL / layerWidth;
+    crop.w = /*(int) floor(screenWidth*img_height/screenHeight)*/ img_width * Util::getInstance()->getLogicalWindowWidth() / layerWidth;
     crop.x = img_width/2 - crop.w/2;
     crop.y = 0;
     crop.h = img_height;
 
-    if(layerWidth <= ANCHOVENTANAL) {
+    if(layerWidth <= Util::getInstance()->getLogicalWindowWidth()) {
         crop.w = img_width;
         //Llenar constante de ANCHOVENTAL con dato del json
-        draw.w = (layerWidth / ANCHOVENTANAL) * screenWidth;
+        draw.w = (layerWidth / Util::getInstance()->getLogicalWindowWidth()) * screenWidth;
         draw.x = screenWidth / 2 - draw.w / 2;
         draw.h = screenHeight;
     }
@@ -49,6 +50,6 @@ void LayerSprite::Draw() {
 
 void LayerSprite::update(float shift) {
     // El shift es lógico, hay que pasarlo a píxeles (ahora la relación es 1 a 1 así que es como si fuera en píxeles
-        if ( layerWidth > ANCHOVENTANAL )
-                crop.x = shift * (img_width - crop.w)  / (layerWidth - ANCHOVENTANAL);
+        if ( layerWidth > Util::getInstance()->getLogicalWindowWidth() )
+                crop.x = shift * (img_width - crop.w)  / (layerWidth - Util::getInstance()->getLogicalWindowWidth());
 }

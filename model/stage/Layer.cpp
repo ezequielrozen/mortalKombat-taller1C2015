@@ -1,5 +1,6 @@
 #include "Layer.h"
 #include "../MKCharacter.h"
+#include "../util/Util.h"
 
 Layer::Layer(float width) {
     this->width = width;
@@ -11,10 +12,10 @@ Layer::Layer(float width, string path) {
     this->width = width;
     this->path = path;
     //Here depending on the width, the speed is set. Now depends of the z-index
-    this->speed = ((this->getWidth() - ANCHOVENTANAL) / ANCHOESCENARIO) * 5;
-    if (this->width <= ANCHOVENTANAL)
+    this->speed = ((this->getWidth() - Util::getInstance()->getLogicalWindowWidth()) / Util::getInstance()->getLogicalStageWidth()) * 5;
+    if (this->width <= Util::getInstance()->getLogicalWindowWidth())
         this->speed = 0;
-    this->left_border = (this->width - ANCHOVENTANAL) /2;
+    this->left_border = (this->width - Util::getInstance()->getLogicalWindowWidth()) /2;
     //timeCheck = SDL_GetTicks();
 }
 
@@ -53,7 +54,7 @@ void Layer::moveLeft() {
 }
 
 void Layer::moveRight() {
-    if (this->left_border + ANCHOVENTANAL < this->getWidth())
+    if (this->left_border + Util::getInstance()->getLogicalWindowWidth() < this->getWidth())
         this->left_border += speed;
 }
 
