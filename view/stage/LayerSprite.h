@@ -25,6 +25,7 @@ private:
     SDL_Rect crop;
     int img_width;
     int img_height;
+    float layerWidth;
 };
 
 

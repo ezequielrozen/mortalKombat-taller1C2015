@@ -12,6 +12,8 @@ LayerSprite::LayerSprite(SDL_Renderer *pRenderer, string path, float screenWidth
         cout << IMG_GetError() << std::endl;
     }
 
+    this->layerWidth = layerWidth;
+
     draw.x = 0;
     draw.y = 0;
     draw.w = (int) screenWidth;
@@ -19,7 +21,7 @@ LayerSprite::LayerSprite(SDL_Renderer *pRenderer, string path, float screenWidth
 
     SDL_QueryTexture(texture,NULL,NULL, &img_width, &img_height);
 
-    crop.w = (int) floor(screenWidth*img_height/screenHeight);
+    crop.w = /*(int) floor(screenWidth*img_height/screenHeight)*/ img_width * ANCHOVENTANAL / layerWidth;
     crop.x = 0;
     crop.y = 0;
     crop.h = img_height;
@@ -60,8 +62,8 @@ void LayerSprite::update(float shift) {
             }
             else {*/
     // El shift es lógico, hay que pasarlo a píxeles (ahora la relación es 1 a 1 así que es como si fuera en píxeles
-        if (shift + ANCHOVENTANAPX < draw.w * this->getCropWidthRelation() )
-                crop.x = shift * draw.h / img_height;
-            //}
+        if ( layerWidth > ANCHOVENTANAL )
+                crop.x = shift * (img_width - crop.w)  / (layerWidth - ANCHOVENTANAL);
+
     //}
 }
