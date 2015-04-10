@@ -7,7 +7,7 @@ const int ALTOVENTANAPX                     =  600;
 const float ANCHOVENTANAL                   =  200;
 
 //escenario
-const float ANCHOESCENARIO                  = 1000.5;
+const float ANCHOESCENARIO                  = 1000;
 const float ALTOESCENARIO                   =  150;
 const float ALTURAPISOESCENARIO             =   20;
 

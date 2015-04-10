@@ -5,18 +5,18 @@
         "alto-px": 500
     },
     "escenario": {
-        "ancho": 1000.5,
+        "ancho": 1000,
         "alto": 150,
         "y-piso": 20
     },
     "capas": [
         {
             "imagen_fondo": "data/stage2.jpg",
-            "ancho": 400
+            "ancho": 1000
         },
         {
             "imagen_fondo": "data/152.png",
-            "ancho": 100
+            "ancho": 500
         }
     ],
     "personaje": {

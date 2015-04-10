@@ -15,7 +15,7 @@ Layer::Layer(float width, string path) {
     this->width = width;
     this->path = path;
     //Here depending on the width, the speed is set. Now depends of the z-index
-    this->speed = this->width * 1 / ANCHOVENTANAL;
+    this->speed = (this->getWidth() / ANCHOESCENARIO) * 2;
     if (this->width <= ANCHOVENTANAL)
         this->speed = 0;
     this->left_border = 0;
@@ -53,7 +53,7 @@ float Layer::getLeft_border() {
 
 void Layer::moveLeft() {
     if (this->left_border >= 0)
-        this->left_border -= speed;
+        this->left_border -= speed ;
 }
 
 void Layer::moveRight() {
