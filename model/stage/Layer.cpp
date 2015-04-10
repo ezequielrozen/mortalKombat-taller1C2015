@@ -5,7 +5,7 @@ Layer::Layer(float width) {
     this->width = width;
     //Here depending on the width, the speed is set. Now depends of the z-index
     this->path = "default.png";
-    this->speed = this->width / ANCHOVENTANAL;
+    //this->speed = this->width / ANCHOVENTANAL;
     this->left_border = 0;
 
     //timeCheck = SDL_GetTicks();
@@ -15,7 +15,7 @@ Layer::Layer(float width, string path) {
     this->width = width;
     this->path = path;
     //Here depending on the width, the speed is set. Now depends of the z-index
-    this->speed = (this->getWidth() / ANCHOESCENARIO) * 2;
+    this->speed = ((this->getWidth() - ANCHOVENTANAL) / ANCHOESCENARIO) * 5;
     if (this->width <= ANCHOVENTANAL)
         this->speed = 0;
     this->left_border = 0;
@@ -60,6 +60,7 @@ void Layer::moveRight() {
     //POTENCIAL ERROR: COMPARA PIXELS (LEFT_BORDER) CON ANCHOS LOGICOS (ANCHOVENTANAL Y ANCHOESCENARIO)
     if (this->left_border + ANCHOVENTANAL < this->getWidth())
         this->left_border += speed;
+    cout << left_border << endl;
 }
 
 void Layer::update() {
