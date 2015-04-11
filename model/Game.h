@@ -20,7 +20,7 @@ class Game
 public:
     Game(GameLoader* aGameLoader, char* filePath);
     ~Game();
-    void GameLoop();
+    bool GameLoop();
     void initGame(char*);
 
 private:

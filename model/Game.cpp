@@ -26,8 +26,9 @@ Game::~Game()
     delete cameraController;
 }
 
-void Game::GameLoop() {
-    while (gameController->getEvent()->type != SDL_QUIT && gameController->getEvent()->key.keysym.sym != SDLK_r) {
+bool Game::GameLoop() {
+
+    while (gameController->getEvent()->type != SDL_QUIT) {
         gameController->checkEvent();
         gameView->startRender();
         gameView->Render();
@@ -35,5 +36,10 @@ void Game::GameLoop() {
         cameraController->update(scorpion, stage->getLayers());
         gameView->endRender();
         SDL_Delay(15);
+
+        if (gameController->getEvent()->key.keysym.sym == SDLK_r) {
+            return true;
+        }
     }
+    return false;
 }

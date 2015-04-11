@@ -11,13 +11,19 @@ int main(int argc, char* argv[]) {
 
     Mylog->Log("Iniciando MortalKombat", ERROR_LEVEL_INFO);
 
-    GameLoader* gameLoader = new GameLoader();
+    bool restart = true;
 
-    Game* game = new Game(gameLoader, argv[1]);
+    while (restart == true) {
 
-	game->GameLoop();
+        GameLoader* gameLoader = new GameLoader();
 
-	delete game;
+        Game* game = new Game(gameLoader, argv[1]);
+
+	    restart = game->GameLoop();
+
+	    delete game;
+
+    };
 
 
     Mylog->Log("Saliendo del programa", ERROR_LEVEL_INFO);
