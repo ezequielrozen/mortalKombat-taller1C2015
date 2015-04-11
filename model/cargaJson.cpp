@@ -113,58 +113,53 @@ bool cargaArchivoJSON(char* filename, float &charAncho, float &charAlto, float &
 
 	Mylog->Log("----------Capas-------", ERROR_LEVEL_INFO);
 
-	const Json::Value capas = root["capas"];
-	for ( unsigned int index = 0; index < capas.size(); ++index ){
+    if(root.isMember("capas") && root["capas"].isArray()){
+        const Json::Value capas = root["capas"];
+        for ( unsigned int index = 0; index < capas.size(); ++index ){
 
-        //*****************************
+            //*****************************
 
-        // VALIDAR QUE EL ANCHO Y LA IMAGEN SEAN CORRECTAS (QUE SEA NUMERO VALIDO EL ANCHO O QUE LA IMAGEN EXISTA
-        // DE LO CONTRARIO, PONER POR DEFECTO)
+            // VALIDAR QUE EL ANCHO Y LA IMAGEN SEAN CORRECTAS (QUE SEA NUMERO VALIDO EL ANCHO O QUE LA IMAGEN EXISTA
+            // DE LO CONTRARIO, PONER POR DEFECTO)
 
-        //*****************************
-        strcpy(mensaje, "Capa ");
-        strcat(mensaje, "%i");
-        sprintf(mensaje, mensaje, index+1);
+            //*****************************
+            if(!capas[index].isMember("imagen_fondo") || !capas[index].isMember("ancho")){
+                Mylog->Log("Archivo JSON invalido: capas mal formadas", ERROR_LEVEL_ERROR);
+                break;
+            }
 
-        strcat(mensaje, " imagen_fondo: ");
-        strcat(mensaje, capas[index]["imagen_fondo"].asString().c_str());
-        strcat(mensaje, ", ancho: ");
-        strcat(mensaje, capas[index]["ancho"].asString().c_str());
+            const char* filenameIMG = capas[index]["imagen_fondo"].asCString();
 
-        Mylog->Log(mensaje, ERROR_LEVEL_INFO);
+            //verificar si existe filename
+            if(!std::ifstream(filenameIMG)){
+                sprintf(mensaje, "No existe el archivo %s. Usando fileNotFound.png", filenameIMG);
+                Mylog->Log(mensaje, ERROR_LEVEL_ERROR);
+                filenameIMG = "data/fileNotFound.png";
+            }
+            strcpy(mensaje, "Capa ");
+            strcat(mensaje, "%i");
+            sprintf(mensaje, mensaje, index+1);
+            strcat(mensaje, " imagen_fondo: ");
+            strcat(mensaje, filenameIMG);
+            strcat(mensaje, ", ancho: ");
+            strcat(mensaje, capas[index]["ancho"].asString().c_str());
 
-		Layer* aLayer = new Layer(capas[index]["ancho"].asFloat(), capas[index]["imagen_fondo"].asCString());
-		layers->push_back(aLayer);
+            Mylog->Log(mensaje, ERROR_LEVEL_INFO);
+
+            Layer* aLayer = new Layer(capas[index]["ancho"].asFloat(), filenameIMG);
+            layers->push_back(aLayer);
+        }
+
 	}
 
     if(layers->empty()){//no hay capas en el archivo
-
-
-        //*****************************
-        // MODIFICAR EN EL LOGUEO LA PARTE DE HARDCODEO DE NUMEROS Y PATH. PONER LO QUE DICE EN CONSTANTE.H
-        //*****************************
-
-
-        // LOGGEO NIVEL DEBUG
-        Mylog->Log("sin capas validas: usando default", ERROR_LEVEL_INFO);
-        Mylog->Log("Capa 1: imagen_fondo: data/stage2.jpg, ancho: 1280", ERROR_LEVEL_INFO);
-        Mylog->Log("Capa 2: imagen_fondo: data/152.png, ancho: 266", ERROR_LEVEL_INFO);
-
-        // LOGGEO NIVEL WARNING
-        Mylog->Log("----------Capas-------", ERROR_LEVEL_WARNING);
         Mylog->Log("sin capas validas: usando default", ERROR_LEVEL_WARNING);
+
         Mylog->Log("Capa 1: imagen_fondo: data/stage2.jpg, ancho: 1280", ERROR_LEVEL_WARNING);
-        Mylog->Log("Capa 2: imagen_fondo: data/152.png, ancho: 266", ERROR_LEVEL_WARNING);
-
-
-        // LOGGEO NIVEL ERRORES
-        Mylog->Log("----------Capas-------", ERROR_LEVEL_ERROR);
-        Mylog->Log("sin capas validas: usando default", ERROR_LEVEL_ERROR);
-
         Layer* aLayer = new Layer(1280, "data/stage2.jpg");
         layers->push_back(aLayer);
 
-        Mylog->Log("Capa 2: imagen_fondo: data/152.png, ancho: 266", ERROR_LEVEL_ERROR);
+        Mylog->Log("Capa 2: imagen_fondo: data/152.png, ancho: 266", ERROR_LEVEL_WARNING);
         Layer* subwayLayer = new Layer(266, "data/152.png");
         layers->push_back(subwayLayer);
     }
