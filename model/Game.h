@@ -9,6 +9,7 @@
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
 #include "stage/Stage.h"
+#include "GameLoader.h"
 #include <math.h>
 #include <iostream>
 
@@ -17,10 +18,10 @@ using namespace std;
 class Game
 {
 public:
-    Game(int pScreenWidth, int pScreenHeight, float pLogicalScreenWidth,
-                float charAncho, float charAlto, Stage* stage, string OponentSide, int z_index);
+    Game(GameLoader* aGameLoader, char* filePath);
     ~Game();
     void GameLoop();
+    void initGame(char*);
 
 private:
 
@@ -28,12 +29,12 @@ private:
     Stage* stage;
     int ScreenWidth;
     int ScreenHeight;
-    float logicalScreenWidth;
     GameView* gameView;
     GameController* gameController;
     CameraController* cameraController;
     string oponentSide;
 
+    GameLoader *gameLoader;
 };
 
 #endif // GAME_H

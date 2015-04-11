@@ -1,9 +1,6 @@
 #include "CargaJson.h"
-#include "util/Util.h"
 
 using namespace std;
-
-
 
 bool cargaArchivoJSON(char* filename, float &charAncho, float &charAlto, float &stageWidth,
 						float &stageHeight, float &floor, std::string &oponentSide,
