@@ -24,17 +24,14 @@ void logger::Log(const char* mensaje, unsigned char level){
         //char* nivel;
         char const *nivel;
         switch(level){//los espacios son importantes
-            case ERROR_LEVEL_CRITICAL:
-                nivel = "[CRITICAL] ";
-                break;
             case ERROR_LEVEL_ERROR:
-                nivel = "[ERROR] ";
+                nivel = "[ERROR]   ";
                 break;
             case ERROR_LEVEL_WARNING:
                 nivel = "[WARNING] ";
                 break;
             case ERROR_LEVEL_INFO:
-                nivel = "[INFO] ";
+                nivel = "[DEBUG]   ";
                 break;
         }
         //armo mensaje

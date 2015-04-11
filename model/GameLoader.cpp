@@ -9,7 +9,7 @@ void GameLoader::loadJSON(char* passed_path) {
 
     extern logger* Mylog;
     char* file = "Escenario.json";
-    if(passed_path != nullptr){
+    if(passed_path != NULL){
         file = passed_path;
     }
 

@@ -19,10 +19,13 @@ public:
 
 private:
     static Util* instance;
+    //ventana
     int windowWidth;
     int windowHeight;
+    //ventana logica
     float logicalWindowWidth;
     float logicalWindowHeight;
+    //escenario
     float logicalStageWidth;
 };
 

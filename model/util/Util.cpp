@@ -1,6 +1,6 @@
 #include "Util.h"
 
-Util* Util::instance = nullptr;
+Util* Util::instance = 0;
 
 Util* Util::getInstance() {
 

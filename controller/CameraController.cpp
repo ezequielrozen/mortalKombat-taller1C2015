@@ -1,5 +1,6 @@
 #include "CameraController.h"
 #include "../model/util/Util.h"
+#include "../model/logger.h"
 
 CameraController::CameraController()
 {
@@ -13,7 +14,8 @@ CameraController::~CameraController(void)
 }
 
 void CameraController::update(MKCharacter* character, std::list<Layer*>* layers) {
-    
+     extern logger* Mylog;
+
     //cout << "posX: " << character->getX() << endl;
 
     if ((character->getX() < Util::getInstance()->getLogicalWindowWidth()/10) && (character->getMovement() == "LEFT")) {

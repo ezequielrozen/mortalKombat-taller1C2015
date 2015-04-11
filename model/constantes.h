@@ -4,14 +4,14 @@
 #include "util/Util.h"
 
 ////ventana
-//const int ANCHOVENTANAPX                    =  700;
-//const int ALTOVENTANAPX                     =  500;
-//const float ANCHOVENTANAL                   =  200;
+const int ANCHOVENTANAPX                    =  700;
+const int ALTOVENTANAPX                     =  500;
+const float ANCHOVENTANAL                   =  200;
 
 //escenario
-//const float ANCHOESCENARIO                  = 1000;
-//const float ALTOESCENARIO                   =  150;
-//const float ALTURAPISOESCENARIO             =   20;
+const float ANCHOESCENARIO                  = 1000;
+const float ALTOESCENARIO                   =  150;
+const float ALTURAPISOESCENARIO             =   20;
 //
 //// capa
 //

@@ -4,10 +4,9 @@
 #include <time.h>
 #include <cstring>
 
-const unsigned char ERROR_LEVEL_CRITICAL  =   1;
-const unsigned char ERROR_LEVEL_ERROR     =   2;
-const unsigned char ERROR_LEVEL_WARNING   =   4;
-const unsigned char ERROR_LEVEL_INFO      =   8;
+const unsigned char ERROR_LEVEL_ERROR     =   1;
+const unsigned char ERROR_LEVEL_WARNING   =   2;
+const unsigned char ERROR_LEVEL_INFO      =   4;
 const unsigned char ERROR_LEVEL_ALL       = 255;
 
 

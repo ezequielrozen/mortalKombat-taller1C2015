@@ -1,4 +1,5 @@
 #include "GameController.h"
+#include "../model/logger.h"
 
 GameController::GameController()
 {
@@ -18,32 +19,36 @@ SDL_Event* GameController::getEvent() {
 }
 
 void GameController::checkEvent() {
-    SDL_PollEvent(mainEvent);    
+    SDL_PollEvent(mainEvent);
 }
 
 void GameController::update(MKCharacter* character) {
-    
+     extern logger* Mylog;
+
     if (mainEvent->type == SDL_KEYDOWN)
     {
         if (mainEvent->key.keysym.sym == SDLK_RIGHT)
         {
+            Mylog->Log("movimiento del personaje hacia la derecha", ERROR_LEVEL_INFO);
             character->setMovement("RIGHT");
             timer = SDL_GetTicks();
             //cout << "right" << endl;
         }
         else if (mainEvent->key.keysym.sym == SDLK_LEFT)
         {
+            Mylog->Log("movimiento del personaje hacia la izquierda", ERROR_LEVEL_INFO);
             character->setMovement("LEFT");
             timer = SDL_GetTicks();
-            
+
         }
         else if (mainEvent->key.keysym.sym == SDLK_UP)
 		{
-            character->setJump(true); 
+            Mylog->Log("movimiento del personaje hacia arriba", ERROR_LEVEL_INFO);
+            character->setJump(true);
 		}
     }
     else if (timer + COMMANDDELAY < SDL_GetTicks()) {
-        
+
         character->setMovement("NONE");
         timer = SDL_GetTicks();
     }
