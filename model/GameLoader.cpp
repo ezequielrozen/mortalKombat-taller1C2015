@@ -23,8 +23,8 @@ GameLoader::~GameLoader() {
     delete this->stage;
 }
 
-float GameLoader::getCharacterWith() {
-    return this->characterHeight;
+float GameLoader::getCharacterWidth() {
+    return this->characterWidth;
 }
 
 float GameLoader::getCharacterHeight() {

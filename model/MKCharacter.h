@@ -65,6 +65,8 @@ private:
     double velY;
     double accY;
 
+    double stageFloor;
+
     bool jumping;
 
     double step;

@@ -10,7 +10,7 @@ public:
     GameLoader();
     ~GameLoader();
     void loadJSON(char* file);
-    float getCharacterWith();
+    float getCharacterWidth();
     float getCharacterHeight();
     int getZ_index();
     string getOponentSide();

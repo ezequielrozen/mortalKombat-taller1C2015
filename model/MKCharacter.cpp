@@ -9,6 +9,7 @@ MKCharacter::MKCharacter(float initialPosX, float initialPosY, float ancho, floa
 	this->z_index = z_index;
 	posX = initialPosX;
 	posY = initialPosY;
+	stageFloor = initialPosY;
 
 	step = 0.00714*Util::getInstance()->getLogicalWindowWidth();
 
@@ -86,7 +87,7 @@ void MKCharacter::moveUp() {
 	}
 
 	if (velY <= (0.04285*Util::getInstance()->getLogicalWindowWidth()*0.04 - 0.04285*Util::getInstance()->getLogicalWindowWidth())) {
-		posY = INITIAL_POSITION_Y;
+		posY = this->stageFloor;
 		velY = 0.04285*Util::getInstance()->getLogicalWindowWidth();
 		this->setJump(false);
 	}
