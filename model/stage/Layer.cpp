@@ -14,10 +14,12 @@ Layer::Layer(float width, string path) {
     //Here depending on the width, the speed is set. Now depends of the z-index
     this->left_border = (this->width - Util::getInstance()->getLogicalWindowWidth()) /2;
 
-    this->speed = ((this->getWidth() - Util::getInstance()->getLogicalWindowWidth()) / Util::getInstance()->getLogicalStageWidth()) * 5;
+    this->speed =  ((this->getWidth() - Util::getInstance()->getLogicalWindowWidth()) / Util::getInstance()->getLogicalStageWidth()) * 5;
     if (this->width <= Util::getInstance()->getLogicalWindowWidth()) {
         this->left_border = (Util::getInstance()->getLogicalWindowWidth() - this->width) / 2;
-        this->speed = ((Util::getInstance()->getLogicalWindowWidth() - this->getWidth()) / Util::getInstance()->getLogicalWindowWidth()) * 5;
+        this->speed =  ((Util::getInstance()->getLogicalWindowWidth() - this->getWidth()) / Util::getInstance()->getLogicalStageWidth()) * 5;
+
+        //this->speed = ((Util::getInstance()->getLogicalWindowWidth() - this->getWidth()) / Util::getInstance()->getLogicalWindowWidth()) * 5;
        // this->speed = - this->speed;
     }
     //timeCheck = SDL_GetTicks();
@@ -53,14 +55,14 @@ float Layer::getLeft_border() {
 }
 
 void Layer::moveLeft() {
-    if (this->getWidth() > Util::getInstance()->getLogicalWindowWidth()) {
+    /*if (this->getWidth() > Util::getInstance()->getLogicalWindowWidth()) {
         if (this->left_border >= 0)
             this->left_border -= speed;
     }
     else {
-        if ( this->left_border >= 0 )
+        */if ( this->left_border >= speed  )
             this->left_border -= speed;
-    }
+    //}
 }
 
 void Layer::moveRight() {
