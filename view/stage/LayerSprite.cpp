@@ -30,8 +30,9 @@ LayerSprite::LayerSprite(SDL_Renderer *pRenderer, string path, float screenWidth
     if(layerWidth <= Util::getInstance()->getLogicalWindowWidth()) {
         crop.w = img_width;
         //Llenar constante de ANCHOVENTAL con dato del json
+        crop.x = 0;
         draw.w = (layerWidth / Util::getInstance()->getLogicalWindowWidth()) * screenWidth;
-        draw.x = screenWidth / 2 - draw.w / 2;
+        draw.x = (Util::getInstance()->getLogicalWindowWidth() / 2 - layerWidth / 2) * (Util::getInstance()->getWindowWidth() / Util::getInstance()->getLogicalWindowWidth());
         draw.h = screenHeight;
     }
 }
@@ -52,4 +53,6 @@ void LayerSprite::update(float shift) {
     // El shift es lógico, hay que pasarlo a píxeles (ahora la relación es 1 a 1 así que es como si fuera en píxeles
         if ( layerWidth > Util::getInstance()->getLogicalWindowWidth() )
                 crop.x = shift * (img_width - crop.w)  / (layerWidth - Util::getInstance()->getLogicalWindowWidth());
+        else
+           draw.x = shift * (Util::getInstance()->getWindowWidth() / Util::getInstance()->getLogicalWindowWidth());
 }
