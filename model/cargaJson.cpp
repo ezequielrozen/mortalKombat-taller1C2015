@@ -4,7 +4,7 @@ using namespace std;
 
 bool cargaArchivoJSON(char* filename, float &charAncho, float &charAlto, float &stageWidth,
 						float &stageHeight, float &floor, std::string &oponentSide,
-						std::list<Layer*>* layers, int &z_index){
+						std::list<Layer*>* layers, int &z_index/*, std::list<Layer*> *charSprites*/){
 
     extern logger* Mylog;
     char mensaje[200];
@@ -166,37 +166,68 @@ bool cargaArchivoJSON(char* filename, float &charAncho, float &charAlto, float &
 
 	Mylog->Log("--------Personaje-------", ERROR_LEVEL_INFO);
 
-	const Json::Value personaje = root["personaje"];
+	if(root.isMember("personaje")){
+        const Json::Value personaje = root["personaje"];
+        //*****************************
+        // AGREGAR LO DE LOS SPRITES. VA A VENIRME UN ARRAY CON PATH A LOS SPRITES DEL PERSONAJE. CUANDO SE LEVANTAN
+        // DEL JSON HAY QUE CARGARLOS EN SDL EN VEZ DEL PATH QUE ESTA HARCODEADO AHORA (MODIFICARLO).
+        // VALIDAR QUE LA RUTA EXISTE, SINO PONER POR DEFECTO LA IMAGEN DE UN SIGNO DE PREGUNTA...PORQUE VAN A HACER LA PRUEBA DE PONER
+        // UNA RUTA QUE NO EXISTE. LOGUEAR TODO ESTO TAMBIEN.
+        //*****************************
+
+         charAlto = (personaje.isMember("alto") && personaje["alto"].isNumeric() ) ?
+                                                        personaje["alto"].asFloat() : 0.0;
+         charAncho = (personaje.isMember("ancho") && personaje["ancho"].isNumeric() ) ?
+                                                        personaje["ancho"].asFloat() : 0.0;
+         z_index = (personaje.isMember("z-index") && personaje["z-index"].isInt() ) ?
+                                                        personaje["z-index"].asFloat() : 0;
+
+//        if(personaje.isMember("sprites"){
+//            const Json::Value sprites = personaje["sprites"];
+//             if(!sprites.isMember("walk")){
+//                Mylog->Log("Archivo JSON invalido: capas mal formadas", ERROR_LEVEL_ERROR);
+//                break;
+//            }
+//
+//            const char* filenameIMG = sprites[index]["imagen"].asCString();
+//
+//            //verificar si existe filename
+//            if(!std::ifstream(filenameIMG)){
+//                sprintf(mensaje, "No existe el archivo %s. Usando fileNotFound.png", filenameIMG);
+//                Mylog->Log(mensaje, ERROR_LEVEL_ERROR);
+//                filenameIMG = "data/fileNotFound.png";
+//            }
+//            strcpy(mensaje, "Sprite ");
+//            strcat(mensaje, "%i");
+//            sprintf(mensaje, mensaje, index+1);
+//            strcat(mensaje, " imagen: ");
+//            strcat(mensaje, filenameIMG);
+//
+//            Mylog->Log(mensaje, ERROR_LEVEL_INFO);
+//
+//            //TODO: pasar al generador de escenario
+//            Layer* aLayer = new Layer(charWidth, filenameIMG);
+//            charSprites->push_back(aLayer);
+//        }
+    }
 
 
-    //*****************************
-
-    // AGREGAR LO DE LOS SPRITES. VA A VENIRME UN ARRAY CON PATH A LOS SPRITES DEL PERSONAJE. CUANDO SE LEVANTAN
-    // DEL JSON HAY QUE CARGARLOS EN SDL EN VEZ DEL PATH QUE ESTA HARCODEADO AHORA (MODIFICARLO).
-    // VALIDAR QUE LA RUTA EXISTE, SINO PONER POR DEFECTO LA IMAGEN DE UN SIGNO DE PREGUNTA...PORQUE VAN A HACER LA PRUEBA DE PONER
-    // UNA RUTA QUE NO EXISTE. LOGUEAR TODO ESTO TAMBIEN.
-
-    //*****************************
-
-	charAncho = personaje["ancho"].asFloat();
-	charAlto  = personaje["alto"].asFloat();
-	z_index = personaje["z-index"].asInt();
 
 
     //*****************************
     // ANTES DE LOGGEAR ESTO, TAL VEZ ES MEJOR VERIFICAR QUE LOS NUMEROS SON ALGO VALIDO, PQ SINO ES MEJOR
     // AVISAR QUE POR EJ EL ANCHO ES INVALIDO, Y QUE SE VA A USAR EL DEFAULT, Y DESPUES LOGUEAR LA INFO CORRECTA
     // CON TODO ESTO.
-
-    strcpy(mensaje, "alto: ");
-    strcat(mensaje, personaje["alto"].asString().c_str());
-    strcat(mensaje, ", ancho: ");
-    strcat(mensaje, personaje["ancho"].asString().c_str());
-    strcat(mensaje, ", z-index: ");
-    strcat(mensaje, personaje["z-index"].asString().c_str());
-    strcat(mensaje, ", sprites: ");
-    strcat(mensaje, personaje["sprites"].asString().c_str());
-    Mylog->Log(mensaje, ERROR_LEVEL_INFO);
+//
+//    strcpy(mensaje, "alto: ");
+//    strcat(mensaje, charAlto);
+//    strcat(mensaje, ", ancho: ");
+//    strcat(mensaje, charAncho);
+//    strcat(mensaje, ", z-index: ");
+//    strcat(mensaje, z_index);
+//    strcat(mensaje, ", sprites: ");
+//    strcat(mensaje, personaje["sprites"].asString().c_str());
+//    Mylog->Log(mensaje, ERROR_LEVEL_INFO);
     //*****************************
 
 
