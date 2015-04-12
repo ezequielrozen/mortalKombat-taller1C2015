@@ -1,27 +1,27 @@
 {
     "ventana": {
-        "ancho": 200,
+        "ancho": 400,
         "ancho-px": 700,
         "alto-px": 500
     },
     "escenario": {
         "ancho": 1000,
-        "alto": 150,
-        "y-piso": 57.14
+        "alto": 400,
+        "y-piso": 150
     },
     "capas": [
         {
-            "imagen_fondo": "data/stage2.jpg",
-            "ancho": 1000
+            "imagen_fondo": "data/bg_2.png",
+            "ancho": 800
         },
         {
-            "imagen_fondo": "data/152.png",
-            "ancho": 100
+            "imagen_fondo": "data/bg_1.png",
+            "ancho": 600
         }
     ],
     "personaje": {
-        "ancho": 34, 
-        "alto": 53,
+        "ancho": 68, 
+        "alto": 106,
         "z-index": 3,
         "sprites": 4
     },
