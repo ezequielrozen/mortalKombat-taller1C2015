@@ -107,6 +107,10 @@ bool cargaArchivoJSON(char* filename, float &charAncho, float &charAlto, float &
     }
     sprintf(mensaje, "ancho-px: %f, alto px: %f, ancho: %f", stageWidth, stageHeight, floor);
     Mylog->Log(mensaje, ERROR_LEVEL_INFO);
+    
+    Util::getInstance()->setLogicalStageWidth(stageWidth);
+    
+    Util::getInstance()->setLogicalWindowHeight(stageHeight);
 
 
     //*****************************
