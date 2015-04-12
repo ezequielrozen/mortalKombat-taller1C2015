@@ -1,6 +1,6 @@
 {
     "ventana": {
-        "ancho": 200,
+        "ancho": 0,
         "ancho-px": 700,
         "alto-px": 500
     },
@@ -16,14 +16,20 @@
         },
         {
             "imagen_fondo": "data/152.png",
-            "ancho": 100
+            "ancho": 150
         }
     ],
     "personaje": {
         "ancho": 34, 
         "alto": 53,
         "z-index": 3,
-        "sprites": 4
+        "sprites": 
+		{
+		"walk": "data/scorpionWalk.png",
+		"stance": "data/scorpionStance.png",
+		"jump": "data/scorpionJump.png",
+		"sideJump": "data/scorpionSideJump.png"
+		}
     },
     "oponente": {
         "side": "right"

@@ -13,7 +13,8 @@ void GameLoader::loadJSON(char* passed_path) {
         file = passed_path;
     }
 
-    cargaArchivoJSON(file, characterWidth, characterHeight, stageWidth, stageHeight, floor, oponentSide, layers, z_index);
+    cargaArchivoJSON(file, characterWidth, characterHeight, stageWidth, stageHeight,
+                            floor, oponentSide, layers, z_index);
 
     this->stage = new Stage(layers, stageWidth, stageHeight, floor);
 }

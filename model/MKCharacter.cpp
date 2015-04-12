@@ -1,6 +1,7 @@
 #include "MKCharacter.h"
 
-MKCharacter::MKCharacter(float initialPosX, float initialPosY, float ancho, float alto, int z_index)
+MKCharacter::MKCharacter(float initialPosX, float initialPosY, float ancho, float alto, int z_index,
+                            char* walkFile, char* stanceFile, char* jumpFile, char* sideJumpFile)
 {
 
 	//tamaño del png = 87*136
@@ -24,6 +25,11 @@ MKCharacter::MKCharacter(float initialPosX, float initialPosY, float ancho, floa
 
 	jumping = false;
 
+	this->walk = walkFile;
+    this->stance = stanceFile;
+    this->jump = jumpFile;
+    this->sideJump = sideJumpFile;
+
 }
 
 MKCharacter::~MKCharacter(void)
@@ -46,7 +52,7 @@ void MKCharacter::Update()
 }
 
 void MKCharacter::UpdateJump() {
-	
+
 	if(this->isJumping()) {
 		this->moveUp();
 	}
@@ -55,7 +61,7 @@ void MKCharacter::UpdateJump() {
 void MKCharacter::moveRight() {
 
     //Verifico que no se vaya de la pantalla por derecha
-    
+
     if(( posX + step + getWidth() < Util::getInstance()->getLogicalWindowWidth() ) )
     {
     	posX = posX + step;
@@ -65,7 +71,7 @@ void MKCharacter::moveRight() {
 
 void MKCharacter::moveLeft() {
 	//Verifico que no se vaya de la pantalla por izquierda
-	
+
 	if(( posX - step + getWidth() > getWidth() ) )
 	{
 		posX = posX - step;
@@ -116,7 +122,7 @@ string MKCharacter::getMovement() {
 }
 
 void MKCharacter::setMovement(string newMovement) {
-	
+
 	if (!this->isJumping()) {
 		this->movement = newMovement;
 	}
@@ -143,3 +149,9 @@ void MKCharacter::setJumpMovement(string jumpMove) {
 int MKCharacter::getZ_index() {
 	return this->z_index;
 }
+
+
+char* MKCharacter::getWalk(){return this->walk;}
+char* MKCharacter::getStance(){return this->stance;}
+char* MKCharacter::getJump(){return this->jump;}
+char* MKCharacter::getSideJump(){return this->sideJump;}

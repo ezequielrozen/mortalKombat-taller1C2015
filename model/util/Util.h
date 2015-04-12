@@ -1,6 +1,11 @@
 #ifndef MORTALKOMBAT_TALLER1C2015_UTIL_H
 #define MORTALKOMBAT_TALLER1C2015_UTIL_H
 
+#include <string>
+#include <fstream>
+#include <iostream>
+#include <cstring>
+
 class Util {
 
 public:
@@ -16,6 +21,14 @@ public:
     float getLogicalWindowHeight();
     void setLogicalWindowHeight(float);
     float getScalingConstant();
+    void setWalk(const char*);
+    void setStance(const char*);
+    void setJump(const char*);
+    void setSideJump(const char*);
+    char* getWalk();
+    char* getStance();
+    char* getJump();
+    char* getSideJump();
 
 private:
     static Util* instance;
@@ -27,6 +40,11 @@ private:
     float logicalWindowHeight;
     //escenario
     float logicalStageWidth;
+    //personaje
+    char* walk;
+    char* stance;
+    char* jump;
+    char* sideJump;
 };
 
 

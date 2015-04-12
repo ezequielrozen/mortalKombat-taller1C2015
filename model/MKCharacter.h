@@ -12,7 +12,8 @@ using namespace std;
 class MKCharacter
 {
 public:
-    MKCharacter(float initialPosX, float initialPosY, float ancho, float alto, int z_index);
+    MKCharacter(float initialPosX, float initialPosY, float ancho, float alto, int z_index,
+                        char* walkFile, char* stanceFile, char* jumpFile, char* sideJumpFile);
     ~MKCharacter(void);
 
     void moveRight();
@@ -46,7 +47,12 @@ public:
     void setJumpMovement(string jumpMove);
 
     int getZ_index();
-    
+
+    char* getWalk();
+    char* getStance();
+    char* getJump();
+    char* getSideJump();
+
 
 private:
 
@@ -70,6 +76,11 @@ private:
     bool jumping;
 
     double step;
+
+    char* walk;
+    char* stance;
+    char* jump;
+    char* sideJump;
 };
 
 #endif /* MKCHARACTER_H_ */

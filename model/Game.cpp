@@ -12,7 +12,9 @@ void Game::initGame(char* filePath) {
     this->stage = this->gameLoader->getStage();
     this->oponentSide = this->gameLoader->getOponentSide();
     this->scorpion = new MKCharacter(0.5*(Util::getInstance()->getLogicalWindowWidth()-this->gameLoader->getCharacterWidth()), this->stage->getFloor(), this->gameLoader->getCharacterWidth(),
-                                     this->gameLoader->getCharacterHeight(), this->gameLoader->getZ_index());
+                                     this->gameLoader->getCharacterHeight(), this->gameLoader->getZ_index(),
+                                     Util::getInstance()->getWalk(), Util::getInstance()->getStance(),
+                                     Util::getInstance()->getJump(), Util::getInstance()->getSideJump());
     this->gameView = new GameView(ScreenWidth, ScreenHeight, scorpion, stage, oponentSide);
     this->gameController = new GameController();
     this->cameraController = new CameraController();
