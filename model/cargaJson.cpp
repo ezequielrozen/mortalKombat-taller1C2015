@@ -63,7 +63,7 @@ bool cargaArchivoJSON(char* filename, float &charAncho, float &charAlto, float &
         Util::getInstance()->setWindowWidth(ANCHOVENTANAPX);
         Mylog->Log("valor ancho de la ventana invalido: usando default", ERROR_LEVEL_WARNING);
     }
-    sprintf(mensaje, "ancho-px: %i, alto px: %i, ancho: %f",
+    sprintf(mensaje, "ancho-px: %i, alto px: %i, ancho: %1.2f",
                 Util::getInstance()->getWindowWidth(),
                 Util::getInstance()->getWindowHeight(),
                 Util::getInstance()->getLogicalWindowWidth()
@@ -105,7 +105,7 @@ bool cargaArchivoJSON(char* filename, float &charAncho, float &charAlto, float &
         floor = ALTURAPISOESCENARIO;
         Mylog->Log("valor altura piso invalido: usando default", ERROR_LEVEL_WARNING);
     }
-    sprintf(mensaje, "ancho-px: %f, alto px: %f, ancho: %f", stageWidth, stageHeight, floor);
+    sprintf(mensaje, "ancho-px: %1.2f, alto px: %1.2f, ancho: %1.2f", stageWidth, stageHeight, floor);
     Mylog->Log(mensaje, ERROR_LEVEL_INFO);
 
     Util::getInstance()->setLogicalStageWidth(stageWidth);
@@ -257,7 +257,7 @@ bool cargaArchivoJSON(char* filename, float &charAncho, float &charAlto, float &
     }
 
     //log
-    sprintf(mensaje, "Ancho: %f, Alto: %f, z-index: %i,\n Jump: %s, Walk: %s, Side jump: %s, Stance: %s",
+    sprintf(mensaje, "Ancho: %1.2f, Alto: %1.2f, z-index: %i,\n Jump: %s, Walk: %s, Side jump: %s, Stance: %s",
                     charAncho, charAlto, z_index,
                     filenameJump, filenameWalk, filenameSideJump, filenameStance);
 
