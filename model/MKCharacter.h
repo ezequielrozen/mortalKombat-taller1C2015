@@ -53,7 +53,7 @@ public:
     char* getStance();
     char* getJump();
     char* getSideJump();
-
+    void RestartSpeed();
 
 private:
 
@@ -71,7 +71,7 @@ private:
 
     double velY;
     double accY;
-
+    float proporcionVel;
     double stageFloor;
 
     bool jumping;
