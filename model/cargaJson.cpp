@@ -283,9 +283,7 @@ bool cargaArchivoJSON(char* filename, float &charAncho, float &charAlto, float &
 	}
 	else
 	{
-		Mylog->Log("Ubicacion del oponente invalida: usando default (RIGHT)", ERROR_LEVEL_ERROR);
-        Mylog->Log("Ubicacion del oponente invalida: usando default (RIGHT)", ERROR_LEVEL_INFO);
-        Mylog->Log("Ubicacion del oponente invalida: usando default (RIGHT)", ERROR_LEVEL_WARNING);
+		Mylog->Log("Ubicacion del oponente invalida: usando default (RIGHT)", ERROR_LEVEL_WARNING);
 		oponentSide="RIGHT";
 	}
 
@@ -295,13 +293,3 @@ bool cargaArchivoJSON(char* filename, float &charAncho, float &charAlto, float &
 }
 
 
-bool fileExists(const char* filename){
-    extern logger* Mylog;
-    if(!std::ifstream(filename)){
-        char mensaje[200];
-        sprintf(mensaje, "No existe el archivo %s. Usando archivo por defecto", filename);
-        Mylog->Log(mensaje, ERROR_LEVEL_ERROR);
-        return false;
-    }
-    return true;
-}

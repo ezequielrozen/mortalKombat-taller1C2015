@@ -86,6 +86,10 @@ void MKCharacter::moveUp() {
 		float time = 0.003;
 
 		//cout << "PosY:" << posY << "  Vel: " << velY << "   Time: " << time << " movement: " << movement << endl;
+		char buffer[500];
+        snprintf(buffer, sizeof(buffer), "personaje salta : PosY: %g, vel: %g, Time: %g, Movement: %s", posY, velY, time, movement.c_str());
+        extern logger* Mylog;
+    	Mylog->Log(buffer, ERROR_LEVEL_INFO);
 
 		velY = velY - accY * time;
 

@@ -18,7 +18,6 @@ using namespace std;
 bool cargaArchivoJSON(char* filename, float &charAncho, float &charAlto, float &stageWidth, float &stageHeight,
                         float &floor, string &oponentSide, std::list<Layer*> *layers, int &z_index);
 
-bool fileExists(const char* filename);
 
 
 #endif /* CARGAJSON_H_ */

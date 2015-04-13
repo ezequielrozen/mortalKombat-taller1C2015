@@ -6,6 +6,7 @@
 #include <math.h>
 #include "SDL2/SDL.h"
 #include "constantes.h"
+#include "logger.h"
 
 using namespace std;
 
