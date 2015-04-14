@@ -29,21 +29,20 @@ void GameController::update(MKCharacter* character) {
     {
         if (mainEvent->key.keysym.sym == SDLK_RIGHT)
         {
-            Mylog->Log("movimiento del personaje hacia la derecha", ERROR_LEVEL_INFO);
+            Mylog->Log("movimiento del personaje: hacia la derecha", ERROR_LEVEL_INFO);
             character->setMovement("RIGHT");
             timer = SDL_GetTicks();
             //cout << "right" << endl;
         }
         else if (mainEvent->key.keysym.sym == SDLK_LEFT)
         {
-            Mylog->Log("movimiento del personaje hacia la izquierda", ERROR_LEVEL_INFO);
+            Mylog->Log("movimiento del personaje: hacia la izquierda", ERROR_LEVEL_INFO);
             character->setMovement("LEFT");
             timer = SDL_GetTicks();
 
         }
         else if (mainEvent->key.keysym.sym == SDLK_UP)
 		{
-            Mylog->Log("movimiento del personaje hacia arriba", ERROR_LEVEL_INFO);
             character->setJump(true);
 		}
     }

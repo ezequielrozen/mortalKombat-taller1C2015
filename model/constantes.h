@@ -20,7 +20,11 @@ const float ALTURAPISOESCENARIO             =   20;
 //personaje
 const float ANCHOPERSONAJE                  =   20;
 const float ALTOPERSONAJE                   =   35;
-//const float ZINDEXPERSONAJE                 =    1;
+const float ZINDEXPERSONAJE                 =    1;
+const char* const DEFAULT_WALK              = "data/scorpionWalk.png";
+const char* const DEFAULT_STANCE            = "data/scorpionStance.png";
+const char* const DEFAULT_JUMP              = "data/scorpionJump.png";
+const char* const DEFAULT_SIDEJUMP          = "data/scorpionSideJump.png";
 //
 //const int OPONENTLEFT                       =    1;
 //const int OPONENTRIGHT                      =    2;

@@ -4,7 +4,7 @@ using namespace std;
 
 bool cargaArchivoJSON(char* filename, float &charAncho, float &charAlto, float &stageWidth,
 						float &stageHeight, float &floor, std::string &oponentSide,
-						std::list<Layer*>* layers, int &z_index/*, std::list<Layer*> *charSprites*/){
+						std::list<Layer*>* layers, int &z_index){
 
     extern logger* Mylog;
     char mensaje[200];
@@ -63,7 +63,7 @@ bool cargaArchivoJSON(char* filename, float &charAncho, float &charAlto, float &
         Util::getInstance()->setWindowWidth(ANCHOVENTANAPX);
         Mylog->Log("valor ancho de la ventana invalido: usando default", ERROR_LEVEL_WARNING);
     }
-    sprintf(mensaje, "ancho-px: %i, alto px: %i, ancho: %f",
+    sprintf(mensaje, "ancho-px: %i, alto px: %i, ancho: %1.2f",
                 Util::getInstance()->getWindowWidth(),
                 Util::getInstance()->getWindowHeight(),
                 Util::getInstance()->getLogicalWindowWidth()
@@ -105,11 +105,11 @@ bool cargaArchivoJSON(char* filename, float &charAncho, float &charAlto, float &
         floor = ALTURAPISOESCENARIO;
         Mylog->Log("valor altura piso invalido: usando default", ERROR_LEVEL_WARNING);
     }
-    sprintf(mensaje, "ancho-px: %f, alto px: %f, ancho: %f", stageWidth, stageHeight, floor);
+    sprintf(mensaje, "ancho-px: %1.2f, alto-px: %1.2f, y-piso: %1.2f", stageWidth, stageHeight, floor);
     Mylog->Log(mensaje, ERROR_LEVEL_INFO);
-    
+
     Util::getInstance()->setLogicalStageWidth(stageWidth);
-    
+
     Util::getInstance()->setLogicalWindowHeight(stageHeight);
 
 
@@ -170,6 +170,10 @@ bool cargaArchivoJSON(char* filename, float &charAncho, float &charAlto, float &
 
 	Mylog->Log("--------Personaje-------", ERROR_LEVEL_INFO);
 
+    const char* filenameWalk = new char[200] ;
+    const char* filenameStance = new char[200];
+    const char* filenameJump = new char[200];
+    const char* filenameSideJump = new char[200];
 	if(root.isMember("personaje")){
         const Json::Value personaje = root["personaje"];
         //*****************************
@@ -184,107 +188,81 @@ bool cargaArchivoJSON(char* filename, float &charAncho, float &charAlto, float &
          charAncho = (personaje.isMember("ancho") && personaje["ancho"].isNumeric() ) ?
                                                         personaje["ancho"].asFloat() : 0.0;
          z_index = (personaje.isMember("z-index") && personaje["z-index"].isInt() ) ?
-                                                        personaje["z-index"].asFloat() : 0;
+                                                        personaje["z-index"].asInt() : 0;
 
-//        if(personaje.isMember("sprites"){
-//            const Json::Value sprites = personaje["sprites"];
-//             if(!sprites.isMember("walk")){
-//                Mylog->Log("Archivo JSON invalido: capas mal formadas", ERROR_LEVEL_ERROR);
-//                break;
-//            }
-//
-//            const char* filenameIMG = sprites[index]["imagen"].asCString();
-//
-//            //verificar si existe filename
-//            if(!std::ifstream(filenameIMG)){
-//                sprintf(mensaje, "No existe el archivo %s. Usando fileNotFound.png", filenameIMG);
-//                Mylog->Log(mensaje, ERROR_LEVEL_ERROR);
-//                filenameIMG = "data/fileNotFound.png";
-//            }
-//            strcpy(mensaje, "Sprite ");
-//            strcat(mensaje, "%i");
-//            sprintf(mensaje, mensaje, index+1);
-//            strcat(mensaje, " imagen: ");
-//            strcat(mensaje, filenameIMG);
-//
-//            Mylog->Log(mensaje, ERROR_LEVEL_INFO);
-//
-//            //TODO: pasar al generador de escenario
-//            Layer* aLayer = new Layer(charWidth, filenameIMG);
-//            charSprites->push_back(aLayer);
-//        }
+
+        if(personaje.isMember("sprites")){
+            const Json::Value sprites = personaje["sprites"];
+
+
+            if(!sprites.isMember("walk") || !sprites.isMember("stance")
+                    || !sprites.isMember("jump") || !sprites.isMember("sideJump")){
+                Mylog->Log("Archivo JSON invalido: capas mal formadas. Usando default", ERROR_LEVEL_ERROR);
+                //CARGAR DEFAULT
+                filenameWalk = strdup(DEFAULT_WALK);
+                filenameStance = strdup(DEFAULT_STANCE);
+                filenameJump = strdup(DEFAULT_JUMP);
+                filenameSideJump = strdup(DEFAULT_SIDEJUMP);
+
+            }else{
+                filenameWalk = strdup(sprites["walk"].asString().c_str());
+                filenameStance = strdup(sprites["stance"].asString().c_str());
+                filenameJump = strdup(sprites["jump"].asString().c_str());
+                filenameSideJump = strdup(sprites["sideJump"].asString().c_str());
+            }
+
+        }
     }
 
 
-
-
-    //*****************************
-    // ANTES DE LOGGEAR ESTO, TAL VEZ ES MEJOR VERIFICAR QUE LOS NUMEROS SON ALGO VALIDO, PQ SINO ES MEJOR
-    // AVISAR QUE POR EJ EL ANCHO ES INVALIDO, Y QUE SE VA A USAR EL DEFAULT, Y DESPUES LOGUEAR LA INFO CORRECTA
-    // CON TODO ESTO.
-//
-//    strcpy(mensaje, "alto: ");
-//    strcat(mensaje, charAlto);
-//    strcat(mensaje, ", ancho: ");
-//    strcat(mensaje, charAncho);
-//    strcat(mensaje, ", z-index: ");
-//    strcat(mensaje, z_index);
-//    strcat(mensaje, ", sprites: ");
-//    strcat(mensaje, personaje["sprites"].asString().c_str());
-//    Mylog->Log(mensaje, ERROR_LEVEL_INFO);
-    //*****************************
-
-
-    if(charAlto == 0.0 || charAncho == 0.0){
-        Mylog->Log("--------Personaje-------", ERROR_LEVEL_ERROR);
-        Mylog->Log("--------Personaje-------", ERROR_LEVEL_WARNING);
-
-        if(charAncho == 0.0){
-            charAncho = ANCHOPERSONAJE;
-
-            // LOGGEO NIVEL DEBUG
-            Mylog->Log("valor ancho del personaje invalido: usando default", ERROR_LEVEL_INFO);
-            strcpy(mensaje, "ancho : ");
-            strcat(mensaje, "%charAncho");
-            Mylog->Log(mensaje, ERROR_LEVEL_INFO);
-
-            // LOGGEO NIVEL WARNING
-            Mylog->Log("----------Capas-------", ERROR_LEVEL_WARNING);
-            Mylog->Log("valor ancho del personaje invalido: usando default", ERROR_LEVEL_WARNING);
-            strcpy(mensaje, "ancho : ");
-            strcat(mensaje, "%charAncho");
-            Mylog->Log(mensaje, ERROR_LEVEL_WARNING);
-
-            //LOGGEO NIVEL ERRORES
-            Mylog->Log("valor ancho del personaje invalido: usando default", ERROR_LEVEL_ERROR);
-
-        }
-        if(charAlto  == 0.0){
-            charAlto  = ALTOPERSONAJE;
-
-            // LOGGEO NIVEL DEBUG
-            Mylog->Log("valor alto del personaje invalido: usando default", ERROR_LEVEL_INFO);
-            strcpy(mensaje, "alto : ");
-            strcat(mensaje, "%charAlto");
-            Mylog->Log(mensaje, ERROR_LEVEL_INFO);
-
-            // LOGGEO NIVEL WARNING
-            Mylog->Log("----------Capas-------", ERROR_LEVEL_WARNING);
-            Mylog->Log("valor ancho del personaje invalido: usando default", ERROR_LEVEL_WARNING);
-            strcpy(mensaje, "alto : ");
-            strcat(mensaje, "%charAlto");
-            Mylog->Log(mensaje, ERROR_LEVEL_WARNING);
-
-            //LOGGEO NIVEL ERRORES
-            Mylog->Log("valor alto del personaje invalido: usando default", ERROR_LEVEL_ERROR);
-
-        }
-
-        //*****************************
-        // FALTA HACER LAS VALIDACIONES DEL Z-INDEX Y DEL SPRITES
-        //*****************************
-
+    //verificar si existe filename
+    if(!std::ifstream(filenameWalk)){
+        sprintf(mensaje, "No existe el archivo %s. Usando archivo por defecto", filenameWalk);
+        Mylog->Log(mensaje, ERROR_LEVEL_ERROR);
+        filenameWalk = DEFAULT_WALK;
     }
+    if(!std::ifstream(filenameStance)){
+        sprintf(mensaje, "No existe el archivo %s. Usando archivo por defecto", filenameStance);
+        Mylog->Log(mensaje, ERROR_LEVEL_ERROR);
+        filenameWalk = DEFAULT_STANCE;
+    }
+    if(!std::ifstream(filenameJump)){
+        sprintf(mensaje, "No existe el archivo %s. Usando archivo por defecto", filenameJump);
+        Mylog->Log(mensaje, ERROR_LEVEL_ERROR);
+        filenameWalk = DEFAULT_JUMP;
+    }
+    if(!std::ifstream(filenameSideJump)){
+        sprintf(mensaje, "No existe el archivo %s. Usando archivo por defecto", filenameSideJump);
+        Mylog->Log(mensaje, ERROR_LEVEL_ERROR);
+        filenameWalk = DEFAULT_SIDEJUMP;
+    }
+
+    Util::getInstance()->setWalk(filenameWalk);
+    Util::getInstance()->setStance(filenameStance);
+    Util::getInstance()->setJump(filenameJump);
+    Util::getInstance()->setSideJump(filenameSideJump);
+
+
+    if(charAlto == 0.0){
+        charAlto  = ALTOPERSONAJE;
+        Mylog->Log("valor alto del personaje invalido: usando default", ERROR_LEVEL_WARNING);
+    }
+    if(charAncho == 0.0){
+        charAlto  = ANCHOPERSONAJE;
+        Mylog->Log("valor ancho del personaje invalido: usando default", ERROR_LEVEL_WARNING);
+    }
+    if(z_index == 0){
+        charAlto  = ZINDEXPERSONAJE;
+        Mylog->Log("valor z-index del personaje invalido: usando default", ERROR_LEVEL_WARNING);
+    }
+
+    //log
+    sprintf(mensaje, "Ancho: %1.2f, Alto: %1.2f, z-index: %i,\n Jump: %s, Walk: %s, Side jump: %s, Stance: %s",
+                    charAncho, charAlto, z_index,
+                    filenameJump, filenameWalk, filenameSideJump, filenameStance);
+
+    Mylog->Log(mensaje, ERROR_LEVEL_INFO);
+
 
 
 
@@ -305,9 +283,7 @@ bool cargaArchivoJSON(char* filename, float &charAncho, float &charAlto, float &
 	}
 	else
 	{
-		Mylog->Log("Ubicacion del oponente invalida: usando default (RIGHT)", ERROR_LEVEL_ERROR);
-        Mylog->Log("Ubicacion del oponente invalida: usando default (RIGHT)", ERROR_LEVEL_INFO);
-        Mylog->Log("Ubicacion del oponente invalida: usando default (RIGHT)", ERROR_LEVEL_WARNING);
+		Mylog->Log("Ubicacion del oponente invalida: usando default (RIGHT)", ERROR_LEVEL_WARNING);
 		oponentSide="RIGHT";
 	}
 
@@ -315,6 +291,5 @@ bool cargaArchivoJSON(char* filename, float &charAncho, float &charAlto, float &
 	return true;
 
 }
-
 
 

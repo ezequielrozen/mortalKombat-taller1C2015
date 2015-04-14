@@ -17,6 +17,15 @@ void CameraController::update(MKCharacter* character, std::list<Layer*>* layers)
      extern logger* Mylog;
 
     //cout << "posX: " << character->getX() << endl;
+    static double tempposx = 0;
+    double posX = character->getX();
+    if(tempposx != posX){
+        tempposx = posX;
+        extern logger* Mylog;
+        char mensaje[200] = "Personaje se mueve respecto a pantalla. Nueva posicion: %f";
+        sprintf(mensaje, mensaje, posX);
+        Mylog->Log(mensaje, ERROR_LEVEL_INFO);
+    }
 
     if ((character->getX() < Util::getInstance()->getLogicalWindowWidth()/10) && (character->getMovement() == "LEFT")) {
         this->cameraMovement = "LEFT";

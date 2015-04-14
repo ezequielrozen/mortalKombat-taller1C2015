@@ -20,7 +20,7 @@ Layer::Layer(float width, string path) {
         this->speed =  ((Util::getInstance()->getLogicalWindowWidth() - this->getWidth()) / Util::getInstance()->getLogicalStageWidth()) * 5;
 
     }
-    
+
 }
 
 Layer::~Layer() {
@@ -55,6 +55,14 @@ float Layer::getLeft_border() {
 void Layer::moveLeft() {
         if ( this->left_border >= speed  )
             this->left_border -= speed;
+
+    extern logger* Mylog;
+    char mensaje[200] = "";
+    strcpy(mensaje, "capa ");
+    strcat(mensaje, this->getPath().c_str());
+    strcat(mensaje, " se mueve. Nueva posicion: %1.2f");
+    sprintf(mensaje, mensaje, left_border);
+    Mylog->Log(mensaje, ERROR_LEVEL_INFO);
 }
 
 void Layer::moveRight() {
@@ -67,7 +75,13 @@ void Layer::moveRight() {
         if (this->left_border + this->getWidth() < Util::getInstance()->getLogicalWindowWidth())
             this->left_border += speed;
     }
-
+    extern logger* Mylog;
+    char mensaje[200] = "";
+    strcpy(mensaje, "capa ");
+    strcat(mensaje, this->getPath().c_str());
+    strcat(mensaje, " se mueve. Nueva posicion: %1.2f");
+    sprintf(mensaje, mensaje, left_border);
+    Mylog->Log(mensaje, ERROR_LEVEL_INFO);
 }
 
 void Layer::update() {

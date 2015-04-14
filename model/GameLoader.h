@@ -23,6 +23,10 @@ private:
     float characterHeight;
     float floor;
     int z_index;
+    char* walkFile;
+    char* stanceFile;
+    char* jumpFile;
+    char* sideJumpFile;
     string oponentSide;
     list<Layer*>* layers;
     Stage* stage;

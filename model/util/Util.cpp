@@ -1,5 +1,7 @@
 #include "Util.h"
 
+using namespace std;
+
 Util* Util::instance = 0;
 
 Util* Util::getInstance() {
@@ -46,6 +48,10 @@ float Util::getScalingConstant() {
     return this->windowWidth/this->logicalWindowWidth;
 }
 
+float Util::getScalingYConstant() {
+    return this->windowHeight/this->logicalWindowHeight;
+}
+
 float Util::getLogicalStageWidth() {
     return this->logicalStageWidth;
 }
@@ -53,3 +59,25 @@ float Util::getLogicalStageWidth() {
 void Util::setLogicalStageWidth(float stageWidth) {
     this->logicalStageWidth = stageWidth;
 }
+
+void Util::setWalk(const char* p){//tal vez joda valgrind
+    this->walk = strdup(p);
+}
+
+void Util::setStance(const char* p){
+    this->stance = strdup(p);
+}
+
+void Util::setJump(const char* p){
+    this->jump = strdup(p);
+}
+
+void Util::setSideJump(const char* p){
+    this->sideJump = strdup(p);
+}
+
+char* Util::getWalk(){return this->walk;}
+char* Util::getStance(){return this->stance;}
+char* Util::getJump(){return this->jump;}
+char* Util::getSideJump(){return this->sideJump;}
+
