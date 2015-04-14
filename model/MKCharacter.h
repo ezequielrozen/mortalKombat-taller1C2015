@@ -53,10 +53,10 @@ public:
     char* getStance();
     char* getJump();
     char* getSideJump();
-    void RestartSpeed();
+
 
 private:
-
+    void RestartJump();
     string movement;
     string jumpMovement;
 
@@ -82,6 +82,9 @@ private:
     char* stance;
     char* jump;
     char* sideJump;
+
+    //uso esta variable para controlar que no se vaya de la pantalla por arriba cuando ponen valores raros: "alto-px": 300; "alto": 300; y-piso: 50
+	float limiteSuperior;
 };
 
 #endif /* MKCHARACTER_H_ */

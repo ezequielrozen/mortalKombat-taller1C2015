@@ -18,9 +18,10 @@ MKCharacter::MKCharacter(float initialPosX, float initialPosY, float ancho, floa
 	this->ancho = ancho;
 
 	proporcionVel = 0.04285;
-	RestartSpeed();
-//	velY = 0.04285*Util::getInstance()->getLogicalWindowWidth();
 	accY = 1.2285*Util::getInstance()->getLogicalWindowHeight();;
+	RestartJump();
+//	velY = 0.04285*Util::getInstance()->getLogicalWindowWidth();
+
 
 	movement = "NONE";
 	jumpMovement = "NONE";
@@ -73,29 +74,45 @@ void MKCharacter::moveLeft() {
 
 }
 
-void MKCharacter::RestartSpeed()
+void MKCharacter::RestartJump()
 {
 	velY = proporcionVel*Util::getInstance()->getLogicalWindowHeight();
+
+	float winHeight = Util::getInstance()->getLogicalWindowHeight();
+
+	//El numero 0.4954 salió de la proporcion entre la altura logica de la ventana y el y-piso del escenario (PosY inicial del psje)
+	//encontrada en varios casos en los que saltaba bien.
+	//cuanto mas abajo ponga el piso, mayor recorrido disponible dentro del escenario tendre.
+	float proporcion = (winHeight - (winHeight - stageFloor)) * 0.4954;
+
+	//para q no se vaya por arriba de la pantalla.
+	if (stageFloor-proporcion < 0){
+		limiteSuperior = 0;
+	}
+	else{
+		limiteSuperior = stageFloor-proporcion;
+	}
+
+	//si quedo un limite sup menor a 60 es porq el salto es muy cortito. Lo agrando lo mas q pueda subiendo el limiteSup
+	if (limiteSuperior < 90)
+	{
+		limiteSuperior = 0;
+	}
+
+//	//si el recorrido del salto quedo muy corto aumento la velocidad y la aceleracion para q sea mas armonico.
+//	if (stageFloor - limiteSuperior < 90)
+//	{
+//		accY = 600;
+//		velY = 8;
+//	}
 }
 
 void MKCharacter::moveUp() {
 
-	//El numero 0.4954 salió de la proporcion entre la altura logica de la ventana y el y-piso del escenario (PosY inicial del psje)
-	//encontrada en varios casos en los que saltaba bien.
-	float proporcion = (Util::getInstance()->getLogicalWindowHeight() - stageFloor) * 0.4954;
-
-	//uso esta variable para controlar que no se vaya de la pantalla por arriba cuando ponen valores raros: "alto-px": 300; "alto": 300; y-piso: 50
-	float limiteSuperior;
-
-	if (stageFloor-proporcion < 0)
-		limiteSuperior = 0;
-	else
-		limiteSuperior = stageFloor-proporcion;
-
 	if (posY > (limiteSuperior) && posY <= (stageFloor+1))
 	{
 		float time = 0.003;
-//		cout << "PosY:" << posY << " Vel: " << velY << " accY: " << accY << " limitePosY: " << stageFloor-proporcion  << endl;
+		cout << "PosY:" << posY << " Vel: " << velY << " accY: " << accY << " limiteSuperior: " << limiteSuperior  << " stageFloor - limiteSup: " << stageFloor - limiteSuperior << " y-pisp px: " << stageFloor * Util::getInstance()->getScalingYConstant() << endl;
 
 		velY = velY - accY * time;
 
@@ -104,7 +121,7 @@ void MKCharacter::moveUp() {
 	else
 	{
 		posY = this->stageFloor;
-		RestartSpeed();
+		RestartJump();
 		this->setJump(false);
 	}
 }
