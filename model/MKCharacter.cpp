@@ -5,7 +5,6 @@ MKCharacter::MKCharacter(float initialPosX, float initialPosY, float ancho, floa
 {
 
 	//tamaño del png = 87*136
-	//timeCheck = SDL_GetTicks();
 
 	this->z_index = z_index;
 	posX = initialPosX;
@@ -20,8 +19,6 @@ MKCharacter::MKCharacter(float initialPosX, float initialPosY, float ancho, floa
 	proporcionVel = 0.04285;
 	accY = 1.2285*Util::getInstance()->getLogicalWindowHeight();;
 	RestartJump();
-//	velY = 0.04285*Util::getInstance()->getLogicalWindowWidth();
-
 
 	movement = "NONE";
 	jumpMovement = "NONE";
@@ -98,13 +95,6 @@ void MKCharacter::RestartJump()
 	{
 		limiteSuperior = 0;
 	}
-
-//	//si el recorrido del salto quedo muy corto aumento la velocidad y la aceleracion para q sea mas armonico.
-//	if (stageFloor - limiteSuperior < 90)
-//	{
-//		accY = 600;
-//		velY = 8;
-//	}
 }
 
 void MKCharacter::moveUp() {
@@ -112,11 +102,16 @@ void MKCharacter::moveUp() {
 	if (posY > (limiteSuperior) && posY <= (stageFloor+1))
 	{
 		float time = 0.003;
-		cout << "PosY:" << posY << " Vel: " << velY << " accY: " << accY << " limiteSuperior: " << limiteSuperior  << " stageFloor - limiteSup: " << stageFloor - limiteSuperior << " y-pisp px: " << stageFloor * Util::getInstance()->getScalingYConstant() << endl;
+//		cout << "PosY:" << posY << " Vel: " << velY << " accY: " << accY << " limiteSuperior: " << limiteSuperior  << " stageFloor - limiteSup: " << stageFloor - limiteSuperior << " y-pisp px: " << stageFloor * Util::getInstance()->getScalingYConstant() << endl;
 
 		velY = velY - accY * time;
 
 		posY = posY - velY;
+	}
+	else if (posY <= limiteSuperior)
+	{
+		velY = (-1)* velY;
+		posY = limiteSuperior + 1;
 	}
 	else
 	{
@@ -125,30 +120,6 @@ void MKCharacter::moveUp() {
 		this->setJump(false);
 	}
 }
-
-//void MKCharacter::moveUp() {
-//
-//	if (posY > (0.0571*Util::getInstance()->getLogicalWindowWidth()) && posY <= (0.2871*Util::getInstance()->getLogicalWindowWidth()))
-//	{
-//		float time = 0.003;
-//
-//		//cout << "PosY:" << posY << "  Vel: " << velY << "   Time: " << time << " movement: " << movement << endl;
-//		char buffer[500];
-//        snprintf(buffer, sizeof(buffer), "personaje salta : PosY: %g, vel: %g, Time: %g, Movement: %s", posY, velY, time, movement.c_str());
-//        extern logger* Mylog;
-//    	Mylog->Log(buffer, ERROR_LEVEL_INFO);
-//
-//		velY = velY - accY * time;
-//
-//		posY = posY - velY;
-//	}
-//
-//	if (velY <= (0.04285*Util::getInstance()->getLogicalWindowWidth()*0.04 - 0.04285*Util::getInstance()->getLogicalWindowWidth())) {
-//		posY = this->stageFloor;
-//		velY = 0.04285*Util::getInstance()->getLogicalWindowWidth();
-//		this->setJump(false);
-//	}
-//}
 
 //PASAR A FLOAT
 float MKCharacter::getWidth(){
