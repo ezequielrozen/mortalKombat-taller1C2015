@@ -7,21 +7,22 @@
     "escenario": {
         "ancho": 1000,
         "alto": 400,
-        "y-piso": 150
+        "y-piso": 200
     },
     "capas": [
         {
-            "imagen_fondo": "data/stage2.jpg",
-            "ancho": 1000
+            "imagen_fondo": "data/bg_2.png",
+            "ancho": 800
         },
         {
-            "imagen_fondo": "data/152.png",
-            "ancho": 150
-        }
+            "imagen_fondo": "data/bg_1.png",
+            "ancho": 600
+	}
+
     ],
     "personaje": {
-        "ancho": 34, 
-        "alto": 53,
+        "ancho": 68, 
+        "alto": 106,
         "z-index": 3,
         "sprites": 
 		{
