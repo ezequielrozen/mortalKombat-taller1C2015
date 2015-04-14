@@ -48,6 +48,10 @@ float Util::getScalingConstant() {
     return this->windowWidth/this->logicalWindowWidth;
 }
 
+float Util::getScalingYConstant() {
+    return this->windowHeight/this->logicalWindowHeight;
+}
+
 float Util::getLogicalStageWidth() {
     return this->logicalStageWidth;
 }

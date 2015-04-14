@@ -20,7 +20,7 @@ MKCharacter::MKCharacter(float initialPosX, float initialPosY, float ancho, floa
 	proporcionVel = 0.04285;
 	RestartSpeed();
 //	velY = 0.04285*Util::getInstance()->getLogicalWindowWidth();
-	accY = 1.2285*Util::getInstance()->getLogicalWindowWidth();;
+	accY = 1.2285*Util::getInstance()->getLogicalWindowHeight();;
 
 	movement = "NONE";
 	jumpMovement = "NONE";
@@ -82,12 +82,20 @@ void MKCharacter::moveUp() {
 
 	//El numero 0.4954 salió de la proporcion entre la altura logica de la ventana y el y-piso del escenario (PosY inicial del psje)
 	//encontrada en varios casos en los que saltaba bien.
-	float limiteSuperior = (Util::getInstance()->getLogicalWindowHeight() - stageFloor) * 0.4954;
+	float proporcion = (Util::getInstance()->getLogicalWindowHeight() - stageFloor) * 0.4954;
 
-	if (posY > (stageFloor-limiteSuperior) && posY <= (stageFloor+1))
+	//uso esta variable para controlar que no se vaya de la pantalla por arriba cuando ponen valores raros: "alto-px": 300; "alto": 300; y-piso: 50
+	float limiteSuperior;
+
+	if (stageFloor-proporcion < 0)
+		limiteSuperior = 0;
+	else
+		limiteSuperior = stageFloor-proporcion;
+
+	if (posY > (limiteSuperior) && posY <= (stageFloor+1))
 	{
 		float time = 0.003;
-		//cout << "PosY:" << posY << " Vel: " << velY << " accY: " << accY << " limitePosY: " << stageFloor-limiteSuperior  << endl;
+//		cout << "PosY:" << posY << " Vel: " << velY << " accY: " << accY << " limitePosY: " << stageFloor-proporcion  << endl;
 
 		velY = velY - accY * time;
 

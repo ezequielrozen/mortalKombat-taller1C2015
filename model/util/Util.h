@@ -21,6 +21,7 @@ public:
     float getLogicalWindowHeight();
     void setLogicalWindowHeight(float);
     float getScalingConstant();
+    float getScalingYConstant();
     void setWalk(const char*);
     void setStance(const char*);
     void setJump(const char*);

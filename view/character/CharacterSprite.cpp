@@ -15,9 +15,11 @@ CharacterSprite::CharacterSprite(SDL_Renderer* pRenderer, char* path, float x, f
     }
 
     draw.x = x*Util::getInstance()->getScalingConstant();
-    draw.y = y*Util::getInstance()->getScalingConstant();
+//    draw.y = y*Util::getInstance()->getScalingConstant();
+    draw.y = y*Util::getInstance()->getScalingYConstant();
     draw.w = w*Util::getInstance()->getScalingConstant();
-    draw.h = h*Util::getInstance()->getScalingConstant();
+    //draw.h = h*Util::getInstance()->getScalingConstant();
+    draw.h = h*Util::getInstance()->getScalingYConstant();
 
     SDL_QueryTexture(texture,NULL,NULL, &img_width, &img_height);
 
@@ -84,20 +86,21 @@ void CharacterSprite::Draw()
 	{
 		flipType = SDL_FLIP_HORIZONTAL;
 	}
-
 	SDL_RenderCopyEx(renderer,texture,&crop, &draw,0,NULL,flipType);
 }
 
-float CharacterSprite::getX() {
-	return draw.x/Util::getInstance()->getScalingConstant();
-}
+//float CharacterSprite::getX() {
+//	return draw.x/Util::getInstance()->getScalingConstant();
+//}
 
 void CharacterSprite::setX(float passedX) {
 	draw.x = passedX*Util::getInstance()->getScalingConstant();
 }
 
 void CharacterSprite::setY(float passedY) {
-	draw.y = passedY*Util::getInstance()->getScalingConstant();
+//	draw.y = passedY*Util::getInstance()->getScalingConstant();
+	draw.y = passedY*Util::getInstance()->getScalingYConstant();
+
 }
 
 void CharacterSprite::reset() {
