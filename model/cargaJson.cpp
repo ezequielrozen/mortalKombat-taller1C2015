@@ -37,11 +37,11 @@ bool cargaArchivoJSON(char* filename, float &charAncho, float &charAlto, float &
 	if(root.isMember("ventana")){
         const Json::Value ventana = root["ventana"];
 
-        Util::getInstance()->setWindowWidth( (ventana.isMember("ancho-px") && ventana["ancho-px"].isInt() ) ?
+        Util::getInstance()->setWindowWidth( (ventana.isMember("ancho-px") && ventana["ancho-px"].isInt()  && ventana["ancho"].asInt()>0) ?
                                                         ventana["ancho-px"].asInt() : 0);
-        Util::getInstance()->setWindowHeight( (ventana.isMember("alto-px") && ventana["alto-px"].isInt()) ?
+        Util::getInstance()->setWindowHeight( (ventana.isMember("alto-px") && ventana["alto-px"].isInt() && ventana["ancho"].asInt()>0) ?
                                                         ventana["alto-px"].asInt(): 0);
-        Util::getInstance()->setLogicalWindowWidth( (ventana.isMember("ancho") && ventana["ancho"].isNumeric()) ?
+        Util::getInstance()->setLogicalWindowWidth( (ventana.isMember("ancho") && ventana["ancho"].isNumeric() && ventana["ancho"].asFloat()>0) ?
                                                         ventana["ancho"].asFloat() : 0.0);
     }else{ //se usan 0s para que control de errores (abajo) se encargue de cargar default values
         Mylog->Log("JSON invalido: falta nodo ventana. Usando default", ERROR_LEVEL_ERROR);
@@ -76,13 +76,13 @@ bool cargaArchivoJSON(char* filename, float &charAncho, float &charAlto, float &
 	if(root.isMember("escenario")){
         const Json::Value escenarios = root["escenario"];
 
-        stageWidth = (escenarios.isMember("ancho") && escenarios["ancho"].isNumeric() ) ?
+        stageWidth = (escenarios.isMember("ancho") && escenarios["ancho"].isNumeric() && escenarios["ancho"].asFloat()>0) ?
                                                         escenarios["ancho"].asFloat() : 0.0;
 
-        stageHeight = (escenarios.isMember("alto") && escenarios["alto"].isNumeric() ) ?
+        stageHeight = (escenarios.isMember("alto") && escenarios["alto"].isNumeric()  && escenarios["alto"].asFloat()>0 ) ?
                                                         escenarios["alto"].asFloat() : 0.0;
 
-        floor = (escenarios.isMember("y-piso") && escenarios["y-piso"].isNumeric() ) ?
+        floor = (escenarios.isMember("y-piso") && escenarios["y-piso"].isNumeric()  && escenarios["y-piso"].asFloat()>0 ) ?
                                                         escenarios["y-piso"].asFloat() : 0.0;
 	}else{ //se usan 0s para que control de errores (abajo) se encargue de cargar default values
         Mylog->Log("JSON invalido: falta nodo ventana. Usando default", ERROR_LEVEL_ERROR);
@@ -140,6 +140,15 @@ bool cargaArchivoJSON(char* filename, float &charAncho, float &charAlto, float &
                 Mylog->Log(mensaje, ERROR_LEVEL_ERROR);
                 filenameIMG = "data/fileNotFound.png";
             }
+
+            float capaAncho = (capas[index].isMember("ancho") && capas[index]["ancho"].isNumeric()  && capas[index]["ancho"].asFloat()>0) ? capas[index]["ancho"].asFloat() : 0.0;
+
+
+            if( capaAncho == 0.0){
+            	capaAncho = ANCHOESCENARIO;
+                   Mylog->Log("valor ancho de capa invalido: usando default", ERROR_LEVEL_WARNING);
+               }
+
             strcpy(mensaje, "Capa ");
             strcat(mensaje, "%i");
             sprintf(mensaje, mensaje, index+1);
@@ -150,7 +159,7 @@ bool cargaArchivoJSON(char* filename, float &charAncho, float &charAlto, float &
 
             Mylog->Log(mensaje, ERROR_LEVEL_INFO);
 
-            Layer* aLayer = new Layer(capas[index]["ancho"].asFloat(), filenameIMG);
+            Layer* aLayer = new Layer(capaAncho, filenameIMG);
             layers->push_back(aLayer);
         }
 
@@ -160,11 +169,11 @@ bool cargaArchivoJSON(char* filename, float &charAncho, float &charAlto, float &
         Mylog->Log("sin capas validas: usando default", ERROR_LEVEL_WARNING);
 
         Mylog->Log("Capa 1: imagen_fondo: data/stage2.jpg, ancho: 1280", ERROR_LEVEL_WARNING);
-        Layer* aLayer = new Layer(1280, "data/stage2.jpg");
+        Layer* aLayer = new Layer(1000, "data/bg_2.png");
         layers->push_back(aLayer);
 
         Mylog->Log("Capa 2: imagen_fondo: data/152.png, ancho: 266", ERROR_LEVEL_WARNING);
-        Layer* subwayLayer = new Layer(266, "data/152.png");
+        Layer* subwayLayer = new Layer(600, "data/bg_1.png");
         layers->push_back(subwayLayer);
     }
 
@@ -176,22 +185,17 @@ bool cargaArchivoJSON(char* filename, float &charAncho, float &charAlto, float &
     const char* filenameSideJump = new char[200];
 	if(root.isMember("personaje")){
         const Json::Value personaje = root["personaje"];
-        //*****************************
-        // AGREGAR LO DE LOS SPRITES. VA A VENIRME UN ARRAY CON PATH A LOS SPRITES DEL PERSONAJE. CUANDO SE LEVANTAN
-        // DEL JSON HAY QUE CARGARLOS EN SDL EN VEZ DEL PATH QUE ESTA HARCODEADO AHORA (MODIFICARLO).
-        // VALIDAR QUE LA RUTA EXISTE, SINO PONER POR DEFECTO LA IMAGEN DE UN SIGNO DE PREGUNTA...PORQUE VAN A HACER LA PRUEBA DE PONER
-        // UNA RUTA QUE NO EXISTE. LOGUEAR TODO ESTO TAMBIEN.
-        //*****************************
 
-         charAlto = (personaje.isMember("alto") && personaje["alto"].isNumeric() ) ?
+
+         charAlto = (personaje.isMember("alto") && personaje["alto"].isNumeric() && personaje["alto"].asFloat()>0) ?
                                                         personaje["alto"].asFloat() : 0.0;
-         charAncho = (personaje.isMember("ancho") && personaje["ancho"].isNumeric() ) ?
+         charAncho = (personaje.isMember("ancho") && personaje["ancho"].isNumeric() && personaje["ancho"].asFloat()>0) ?
                                                         personaje["ancho"].asFloat() : 0.0;
-         z_index = (personaje.isMember("z-index") && personaje["z-index"].isInt() ) ?
+         z_index = (personaje.isMember("z-index") && personaje["z-index"].isInt() && personaje["z-index"].asInt()>0) ?
                                                         personaje["z-index"].asInt() : 0;
 
-
         if(personaje.isMember("sprites")){
+
             const Json::Value sprites = personaje["sprites"];
 
 
@@ -248,11 +252,11 @@ bool cargaArchivoJSON(char* filename, float &charAncho, float &charAlto, float &
         Mylog->Log("valor alto del personaje invalido: usando default", ERROR_LEVEL_WARNING);
     }
     if(charAncho == 0.0){
-        charAlto  = ANCHOPERSONAJE;
+        charAncho  = ANCHOPERSONAJE;
         Mylog->Log("valor ancho del personaje invalido: usando default", ERROR_LEVEL_WARNING);
     }
     if(z_index == 0){
-        charAlto  = ZINDEXPERSONAJE;
+    	z_index  = ZINDEXPERSONAJE;
         Mylog->Log("valor z-index del personaje invalido: usando default", ERROR_LEVEL_WARNING);
     }
 

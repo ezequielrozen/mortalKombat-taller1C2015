@@ -43,6 +43,7 @@ void GameController::update(MKCharacter* character) {
         }
         else if (mainEvent->key.keysym.sym == SDLK_UP)
 		{
+        	Mylog->Log("movimiento del personaje: hacia arriba", ERROR_LEVEL_INFO);
             character->setJump(true);
 		}
     }

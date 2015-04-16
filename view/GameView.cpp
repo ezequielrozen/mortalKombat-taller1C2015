@@ -31,7 +31,7 @@ GameView::GameView(float ScreenWidth, float ScreenHeight, MKCharacter* character
     // We load the sprites and put them into an array
     for(it; it != this->stage->getLayers()->end(); it++) {
         layerSprites[i] = new LayerSprite(this->renderer,(*it)->getPath(),screenWidth,screenHeight, (*it)->getWidth());
-        cout << "paths; " << (*it)->getPath() << endl;
+        //cout << "paths; " << (*it)->getPath() << endl;
 
         i++;
     }

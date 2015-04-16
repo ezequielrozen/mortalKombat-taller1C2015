@@ -35,6 +35,8 @@ private:
     string oponentSide;
 
     GameLoader *gameLoader;
+
+    int peviousKey;
 };
 
 #endif // GAME_H

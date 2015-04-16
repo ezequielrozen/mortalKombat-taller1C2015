@@ -39,9 +39,17 @@ bool Game::GameLoop() {
         gameView->endRender();
         SDL_Delay(15);
 
-        if (gameController->getEvent()->key.keysym.sym == SDLK_r) {
+//        if (gameController->getEvent()->key.keysym.sym != 0)
+//        	cout << gameController->getEvent()->key.keysym.sym << endl;
+
+        if (peviousKey == SDLK_r && gameController->getEvent()->key.keysym.sym == SDLK_e) {
             return true;
         }
+        else
+        {
+        	peviousKey = gameController->getEvent()->key.keysym.sym;
+        }
+
     }
     return false;
 }

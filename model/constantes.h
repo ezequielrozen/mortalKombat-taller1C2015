@@ -6,11 +6,11 @@
 ////ventana
 const int ANCHOVENTANAPX                    =  700;
 const int ALTOVENTANAPX                     =  500;
-const float ANCHOVENTANAL                   =  200;
+const float ANCHOVENTANAL                   =  400;
 
 //escenario
 const float ANCHOESCENARIO                  = 1000;
-const float ALTOESCENARIO                   =  150;
+const float ALTOESCENARIO                   =  400;
 const float ALTURAPISOESCENARIO             =   20;
 //
 //// capa
@@ -18,9 +18,9 @@ const float ALTURAPISOESCENARIO             =   20;
 //const float VELOCIDAD_DESPLAZAMIENTO_CAPAS = 4;
 
 //personaje
-const float ANCHOPERSONAJE                  =   20;
-const float ALTOPERSONAJE                   =   35;
-const float ZINDEXPERSONAJE                 =    1;
+const float ANCHOPERSONAJE                  =   68;
+const float ALTOPERSONAJE                   =   125;
+const float ZINDEXPERSONAJE                 =    3;
 const char* const DEFAULT_WALK              = "data/scorpionWalk.png";
 const char* const DEFAULT_STANCE            = "data/scorpionStance.png";
 const char* const DEFAULT_JUMP              = "data/scorpionJump.png";

@@ -13,8 +13,18 @@ void GameLoader::loadJSON(char* passed_path) {
         file = passed_path;
     }
 
-    cargaArchivoJSON(file, characterWidth, characterHeight, stageWidth, stageHeight,
+    bool respuesta = cargaArchivoJSON(file, characterWidth, characterHeight, stageWidth, stageHeight,
                             floor, oponentSide, layers, z_index);
+
+    if (!respuesta)
+    {
+
+    	cargaArchivoJSON("Escenario.json", characterWidth, characterHeight, stageWidth, stageHeight,
+    	                            floor, oponentSide, layers, z_index);
+
+    	Mylog->Log("Cargando Escenario default por JSON mal formado. ", ERROR_LEVEL_WARNING);
+    }
+
 
     this->stage = new Stage(layers, stageWidth, stageHeight, floor);
 }

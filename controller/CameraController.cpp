@@ -22,7 +22,7 @@ void CameraController::update(MKCharacter* character, std::list<Layer*>* layers)
     if(tempposx != posX){
         tempposx = posX;
         extern logger* Mylog;
-        char mensaje[200] = "Personaje se mueve respecto a pantalla. Nueva posicion: %f";
+        char mensaje[200] = "Personaje se mueve respecto a pantalla. Nueva posicion: %1.2f";
         sprintf(mensaje, mensaje, posX);
         Mylog->Log(mensaje, ERROR_LEVEL_INFO);
     }
