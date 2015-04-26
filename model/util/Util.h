@@ -22,14 +22,19 @@ public:
     void setLogicalWindowHeight(float);
     float getScalingConstant();
     float getScalingYConstant();
-    void setWalk(const char*);
-    void setStance(const char*);
-    void setJump(const char*);
-    void setSideJump(const char*);
+    void setWalkStanceJumpSideJump(const char*, const char*, const char*, const char*);
     char* getWalk();
     char* getStance();
     char* getJump();
     char* getSideJump();
+    void setWalk(const char*, unsigned char);
+    void setStance(const char*, unsigned char);
+    void setJump(const char*, unsigned char);
+    void setSideJump(const char*, unsigned char);
+    char* getWalk(unsigned char);
+    char* getStance(unsigned char);
+    char* getJump(unsigned char);
+    char* getSideJump(unsigned char);
 
 private:
     static Util* instance;
@@ -42,10 +47,11 @@ private:
     //escenario
     float logicalStageWidth;
     //personaje
-    char* walk;
-    char* stance;
-    char* jump;
-    char* sideJump;
+    static unsigned char cantidadPersonajes;
+    char* walk[16];
+    char* stance[16];
+    char* jump[16];
+    char* sideJump[16];
 };
 
 

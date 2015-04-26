@@ -3,6 +3,7 @@
 using namespace std;
 
 Util* Util::instance = 0;
+unsigned char Util::cantidadPersonajes = 0;
 
 Util* Util::getInstance() {
 
@@ -60,24 +61,39 @@ void Util::setLogicalStageWidth(float stageWidth) {
     this->logicalStageWidth = stageWidth;
 }
 
-void Util::setWalk(const char* p){//tal vez joda valgrind
-    this->walk = strdup(p);
+void Util::setWalkStanceJumpSideJump(const char* w, const char* s, const char* j, const char* sj){
+    this->walk[cantidadPersonajes] = strdup(w);
+    this->stance[cantidadPersonajes] = strdup(s);
+    this->jump[cantidadPersonajes] = strdup(j);
+    this->sideJump[cantidadPersonajes] = strdup(sj);
+    ++cantidadPersonajes;
 }
 
-void Util::setStance(const char* p){
-    this->stance = strdup(p);
+void Util::setWalk(const char* p, unsigned char idPersonaje){
+    this->walk[idPersonaje] = strdup(p);
 }
 
-void Util::setJump(const char* p){
-    this->jump = strdup(p);
+
+void Util::setStance(const char* p, unsigned char idPersonaje){
+    this->stance[idPersonaje] = strdup(p);
 }
 
-void Util::setSideJump(const char* p){
-    this->sideJump = strdup(p);
+
+void Util::setJump(const char* p, unsigned char idPersonaje){
+    this->jump[idPersonaje] = strdup(p);
 }
 
-char* Util::getWalk(){return this->walk;}
-char* Util::getStance(){return this->stance;}
-char* Util::getJump(){return this->jump;}
-char* Util::getSideJump(){return this->sideJump;}
+void Util::setSideJump(const char* p, unsigned char idPersonaje){
+    this->sideJump[idPersonaje] = strdup(p);
+}
+
+char* Util::getWalk(){return this->walk[0];}
+char* Util::getStance(){return this->stance[0];}
+char* Util::getJump(){return this->jump[0];}
+char* Util::getSideJump(){return this->sideJump[0];}
+
+char* Util::getWalk(unsigned char id){return this->walk[id];}
+char* Util::getStance(unsigned char id){return this->stance[id];}
+char* Util::getJump(unsigned char id){return this->jump[id];}
+char* Util::getSideJump(unsigned char id){return this->sideJump[id];}
 
