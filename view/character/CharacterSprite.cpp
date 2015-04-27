@@ -108,3 +108,7 @@ void CharacterSprite::reset() {
     crop.x = 0;
     crop.y = 0;
 }
+
+void CharacterSprite::switchSide(const char c){
+    this->oponentSide = (c == 'l') ? "LEFT" : "RIGHT";
+}

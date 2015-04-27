@@ -30,6 +30,8 @@ MKCharacter::MKCharacter(float initialPosX, float initialPosY, float ancho, floa
     this->jump = jumpFile;
     this->sideJump = sideJumpFile;
 
+    this->vida = 100;
+
 }
 
 MKCharacter::~MKCharacter(void)
@@ -177,3 +179,14 @@ char* MKCharacter::getWalk(){return this->walk;}
 char* MKCharacter::getStance(){return this->stance;}
 char* MKCharacter::getJump(){return this->jump;}
 char* MKCharacter::getSideJump(){return this->sideJump;}
+
+int MKCharacter::getVida(){return this->vida;}
+
+void MKCharacter::recibirGolpe(int fuerza){
+    extern logger* Mylog;
+    this->vida = this->vida - fuerza;
+    Mylog->Log("Personaje (PONERLE NOMBRE) recibe golpe", ERROR_LEVEL_INFO); //FALTA: nombre, vida restada, vida restante.
+    if(this->vida <= 0){
+        //marcar fin de juego. Preferentemente donde se invoca esta función (control de colisión y golpe)
+    }
+}

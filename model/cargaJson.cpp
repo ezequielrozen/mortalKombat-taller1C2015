@@ -118,8 +118,13 @@ bool cargaArchivoJSON(char* filename, float &charAncho, float &charAlto, float &
 
 	Mylog->Log("--------Personaje-------", ERROR_LEVEL_INFO);
 
-	if(root.isMember("personaje")){
-        cargaPersonaje(root["personaje"], charAlto, charAncho, z_index);
+	if(root.isMember("personaje") && root["personaje"].isArray()){
+        const Json::Value personaje = root["personaje"];
+        for ( unsigned int index = 0; index < personaje.size(); ++index ){
+            cargaPersonaje(personaje[index], charAlto, charAncho, z_index);
+        }
+    }else{
+        //CARGAR POR DEFAULT
     }
 
 

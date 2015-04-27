@@ -26,6 +26,7 @@ public:
 private:
 
     MKCharacter* scorpion;
+    MKCharacter* raiden;
     Stage* stage;
     int ScreenWidth;
     int ScreenHeight;

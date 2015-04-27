@@ -54,6 +54,9 @@ public:
     char* getJump();
     char* getSideJump();
 
+    void recibirGolpe(int fuerza);
+    int getVida();
+
 
 private:
     void RestartJump();
@@ -85,6 +88,8 @@ private:
 
     //uso esta variable para controlar que no se vaya de la pantalla por arriba cuando ponen valores raros: "alto-px": 300; "alto": 300; y-piso: 50
 	float limiteSuperior;
+
+	int vida;
 };
 
 #endif /* MKCHARACTER_H_ */

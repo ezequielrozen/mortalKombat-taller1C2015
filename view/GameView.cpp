@@ -1,6 +1,6 @@
 #include "GameView.h"
 
-GameView::GameView(float ScreenWidth, float ScreenHeight, MKCharacter* character, Stage* pStage, string OponentSide) {
+GameView::GameView(float ScreenWidth, float ScreenHeight, MKCharacter* character, MKCharacter* character2, Stage* pStage, string OponentSide) {
 
 	oponentSide = OponentSide;
 	this->window = NULL;
@@ -19,6 +19,7 @@ GameView::GameView(float ScreenWidth, float ScreenHeight, MKCharacter* character
 
     this->stage = pStage;
     this->scorpion = character;
+    this->raiden = character2;
  	this->LoadSprites();
 
     layerCount = this->stage->getLayers()->size();
@@ -77,6 +78,10 @@ void GameView::LoadSprites() {
     scorpionStance = new CharacterSprite(this->renderer, scorpion->getStance(), scorpion->getX(),scorpion->getY(), scorpion->getWidth(),scorpion->getHeight(), 7, oponentSide);
     scorpionJump = new CharacterSprite(this->renderer, scorpion->getJump(), scorpion->getX(),scorpion->getY(), scorpion->getWidth(),scorpion->getHeight(), 9, oponentSide);
     scorpionSideJump = new CharacterSprite(this->renderer, scorpion->getSideJump(), scorpion->getX(), scorpion->getY(), scorpion->getWidth(), scorpion->getHeight(), 8, oponentSide);
+    raidenWalk = new CharacterSprite(this->renderer, raiden->getWalk(), raiden->getX(),raiden->getY(), raiden->getWidth(),raiden->getHeight(), 9, (oponentSide == "RIGHT") ? "LEFT" : "RIGHT" );
+    raidenStance = new CharacterSprite(this->renderer, raiden->getStance(), raiden->getX(),raiden->getY(), raiden->getWidth(),raiden->getHeight(), 7, (oponentSide == "RIGHT") ? "LEFT" : "RIGHT");
+    raidenJump = new CharacterSprite(this->renderer, raiden->getJump(), raiden->getX(),raiden->getY(), raiden->getWidth(),raiden->getHeight(), 9, (oponentSide == "RIGHT") ? "LEFT" : "RIGHT");
+    raidenSideJump = new CharacterSprite(this->renderer, raiden->getSideJump(), raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 8, (oponentSide == "RIGHT") ? "LEFT" : "RIGHT");
 }
 
 void GameView::startRender() {
@@ -115,8 +120,47 @@ void GameView::runCharacter() {
         sprite->PlayBack(100);
     };
 
+    CharacterSprite* sprite2;
+
+    if (raiden->isJumping() && raiden->getJumpMovement() == "NONE") {
+        sprite2 = scorpionJump;
+        sprite2->Play(300);
+    }
+    else if (raiden->isJumping() && raiden->getJumpMovement() == "RIGHT") {
+        sprite2 = raidenSideJump;
+        sprite2->Play(50);
+    }
+    else if (raiden->isJumping() && raiden->getJumpMovement() == "LEFT") {
+        sprite2 = raidenSideJump;
+        sprite2->PlayBack(50);
+    }
+    else if (raiden->getMovement() == "NONE") {
+        sprite2 = raidenStance;
+        sprite2->Play(100);
+    }
+    else if (raiden->getMovement() == "RIGHT") {
+        sprite2 = raidenWalk;
+        sprite2->Play(100);
+    }
+    else if (raiden->getMovement() == "LEFT") {
+        sprite2 = raidenWalk;
+        sprite2->PlayBack(100);
+    };
+
+    if(scorpion->getX() < raiden->getX()){
+        sprite->switchSide('r');
+        sprite2->switchSide('l');
+    }else{
+        sprite->switchSide('l');
+        sprite2->switchSide('r');
+    }
+
     sprite->setX(scorpion->getX());
     sprite->setY(scorpion->getY());
     sprite->Draw();
+
+    sprite2->setX(raiden->getX());
+    sprite2->setY(raiden->getY());
+    sprite2->Draw();
 }
 

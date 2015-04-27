@@ -22,6 +22,7 @@ public:
     void setX(float passedX);
     void setY(float passedY);
     void reset();
+    void switchSide(const char c);
 
 private:
 

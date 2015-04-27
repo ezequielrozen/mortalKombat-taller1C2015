@@ -16,7 +16,7 @@ using namespace std;
 class GameView
 {
 public:
-    GameView(float ScreenWidth, float ScreenHeight, MKCharacter* character, Stage* stage, string OponentSide);
+    GameView(float ScreenWidth, float ScreenHeight, MKCharacter* character, MKCharacter* character2, Stage* stage, string OponentSide);
     ~GameView();
     void Render();
     void LoadSprites();
@@ -27,12 +27,17 @@ public:
 private:
 
     MKCharacter* scorpion;
+    MKCharacter* raiden;
     Stage* stage;
 
     CharacterSprite * scorpionWalk;
     CharacterSprite * scorpionStance;
     CharacterSprite* scorpionJump;
     CharacterSprite* scorpionSideJump;
+    CharacterSprite * raidenWalk;
+    CharacterSprite * raidenStance;
+    CharacterSprite* raidenJump;
+    CharacterSprite* raidenSideJump;
     //list<LayerSprite*>* layerSprites = new list<LayerSprite*>();
     LayerSprite** layerSprites;
     int layerCount;

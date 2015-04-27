@@ -24,18 +24,32 @@
 	}
 
     ],
-    "personaje": {
-        "ancho": 68, 
-        "alto": 125,
-        "z-index": 3,
-        "sprites": 
+    "personaje": [
 		{
-		"walk": "data/scorpionWalk.png",
-		"stance": "data/scorpionStance.png",
-		"jump": "data/scorpionJump.png",
-		"sideJump": "data/scorpionSideJump.png"
+			"ancho": 68, 
+			"alto": 125,
+			"z-index": 3,
+			"sprites": 
+			{
+			"walk": "data/scorpionWalk.png",
+			"stance": "data/scorpionStance.png",
+			"jump": "data/scorpionJump.png",
+			"sideJump": "data/scorpionSideJump.png"
+			}
+		},
+		{
+			"ancho": 68, 
+			"alto": 125,
+			"z-index": 3,
+			"sprites": 
+			{
+			"walk": "data/scorpionWalk.png",
+			"stance": "data/scorpionStance.png",
+			"jump": "data/scorpionJump.png",
+			"sideJump": "data/scorpionSideJump.png"
+			}
 		}
-    },
+    ],
     "oponente": {
         "side": "right"
     }
