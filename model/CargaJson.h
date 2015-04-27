@@ -20,5 +20,18 @@ bool cargaArchivoJSON(char* filename, float &charAncho, float &charAlto, float &
 
 void cargaPersonaje(Json::Value personaje, float &charAlto, float &charAncho, int &z_index);
 
+void cargaVentana(Json::Value ventana);
+
+void cargarVentanaPorDefault();
+
+void controlErroresVentana();
+
+void cargaEscenario(Json::Value escenarios, float &stageWidth, float &stageHeight, float &floor);
+
+void cargaEscenarioPorDefault(float &stageWidth, float &stageHeight, float &floor);
+
+void controlErroresEscenario(float &stageWidth, float &stageHeight, float &floor);
+
+
 
 #endif /* CARGAJSON_H_ */

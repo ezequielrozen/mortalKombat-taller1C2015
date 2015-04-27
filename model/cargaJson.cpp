@@ -32,86 +32,31 @@ bool cargaArchivoJSON(char* filename, float &charAncho, float &charAlto, float &
 		return false;
 	}
 
+
 	Mylog->Log("----------Ventana-------", ERROR_LEVEL_INFO);
 
 	if(root.isMember("ventana")){
-        const Json::Value ventana = root["ventana"];
-
-        Util::getInstance()->setWindowWidth( (ventana.isMember("ancho-px") && ventana["ancho-px"].isInt()  && ventana["ancho"].asInt()>0) ?
-                                                        ventana["ancho-px"].asInt() : 0);
-        Util::getInstance()->setWindowHeight( (ventana.isMember("alto-px") && ventana["alto-px"].isInt() && ventana["ancho"].asInt()>0) ?
-                                                        ventana["alto-px"].asInt(): 0);
-        Util::getInstance()->setLogicalWindowWidth( (ventana.isMember("ancho") && ventana["ancho"].isNumeric() && ventana["ancho"].asFloat()>0) ?
-                                                        ventana["ancho"].asFloat() : 0.0);
-    }else{ //se usan 0s para que control de errores (abajo) se encargue de cargar default values
-        Mylog->Log("JSON invalido: falta nodo ventana. Usando default", ERROR_LEVEL_ERROR);
-        Util::getInstance()->setWindowWidth(0);
-        Util::getInstance()->setWindowHeight(0);
-        Util::getInstance()->setLogicalWindowWidth(0.0);
+        cargaVentana(root["ventana"]);
+    }else{
+        cargarVentanaPorDefault();
     }
 
-    //control de errores ventana
-    if( Util::getInstance()->getLogicalWindowWidth() == 0.0){
-        Util::getInstance()->setLogicalWindowWidth(ANCHOVENTANAL);
-        Mylog->Log("valor ancho logico de la ventana invalido: usando default", ERROR_LEVEL_WARNING);
-    }
-    if( Util::getInstance()->getWindowHeight() <= 0){
-        Util::getInstance()->setWindowHeight(ALTOVENTANAPX);
-        Mylog->Log("valor alto de la ventana invalido: usando default", ERROR_LEVEL_WARNING);
-    }
-    if( Util::getInstance()->getWindowWidth() <= 0){
-        Util::getInstance()->setWindowWidth(ANCHOVENTANAPX);
-        Mylog->Log("valor ancho de la ventana invalido: usando default", ERROR_LEVEL_WARNING);
-    }
-    sprintf(mensaje, "ancho-px: %i, alto px: %i, ancho: %1.2f",
-                Util::getInstance()->getWindowWidth(),
-                Util::getInstance()->getWindowHeight(),
-                Util::getInstance()->getLogicalWindowWidth()
-    );
-    Mylog->Log(mensaje, ERROR_LEVEL_INFO);
-
-
+    controlErroresVentana();
 
 	Mylog->Log("----------Escenario-------", ERROR_LEVEL_INFO);
+	stageWidth = 0.0;
+	stageHeight = 0.0;
+	floor = 0.0;
+
+    const Json::Value escenarios = root["escenario"];
+
 	if(root.isMember("escenario")){
-        const Json::Value escenarios = root["escenario"];
+        cargaEscenario(escenarios, stageWidth, stageHeight,floor);
+	}else{
+        cargaEscenarioPorDefault(stageWidth, stageHeight,floor);
+	}
 
-        stageWidth = (escenarios.isMember("ancho") && escenarios["ancho"].isNumeric() && escenarios["ancho"].asFloat()>0) ?
-                                                        escenarios["ancho"].asFloat() : 0.0;
-
-        stageHeight = (escenarios.isMember("alto") && escenarios["alto"].isNumeric()  && escenarios["alto"].asFloat()>0 ) ?
-                                                        escenarios["alto"].asFloat() : 0.0;
-
-        floor = (escenarios.isMember("y-piso") && escenarios["y-piso"].isNumeric()  && escenarios["y-piso"].asFloat()>0 ) ?
-                                                        escenarios["y-piso"].asFloat() : 0.0;
-	}else{ //se usan 0s para que control de errores (abajo) se encargue de cargar default values
-        Mylog->Log("JSON invalido: falta nodo ventana. Usando default", ERROR_LEVEL_ERROR);
-
-        stageWidth = 0.0 ;
-        stageHeight = 0.0;
-        floor = 0.0;
-    }
-
-    //control de errores escenario
-    if( stageWidth == 0.0){
-        stageWidth = ANCHOESCENARIO;
-        Mylog->Log("valor ancho de escenario invalido: usando default", ERROR_LEVEL_WARNING);
-    }
-    if( stageHeight <= 0){
-        stageHeight = ALTOESCENARIO;
-        Mylog->Log("valor alto de escenario invalido: usando default", ERROR_LEVEL_WARNING);
-    }
-    if( floor <= 0){
-        floor = ALTURAPISOESCENARIO;
-        Mylog->Log("valor altura piso invalido: usando default", ERROR_LEVEL_WARNING);
-    }
-    sprintf(mensaje, "ancho-px: %1.2f, alto-px: %1.2f, y-piso: %1.2f", stageWidth, stageHeight, floor);
-    Mylog->Log(mensaje, ERROR_LEVEL_INFO);
-
-    Util::getInstance()->setLogicalStageWidth(stageWidth);
-
-    Util::getInstance()->setLogicalWindowHeight(stageHeight);
-
+	controlErroresEscenario(stageWidth, stageHeight, floor);
 
     //*****************************
 
@@ -121,12 +66,6 @@ bool cargaArchivoJSON(char* filename, float &charAncho, float &charAlto, float &
         const Json::Value capas = root["capas"];
         for ( unsigned int index = 0; index < capas.size(); ++index ){
 
-            //*****************************
-
-            // VALIDAR QUE EL ANCHO Y LA IMAGEN SEAN CORRECTAS (QUE SEA NUMERO VALIDO EL ANCHO O QUE LA IMAGEN EXISTA
-            // DE LO CONTRARIO, PONER POR DEFECTO)
-
-            //*****************************
             if(!capas[index].isMember("imagen_fondo") || !capas[index].isMember("ancho")){
                 Mylog->Log("Archivo JSON invalido: capas mal formadas", ERROR_LEVEL_ERROR);
                 break;
@@ -294,3 +233,96 @@ void cargaPersonaje(Json::Value personaje, float &charAlto, float &charAncho, in
     Mylog->Log(mensaje, ERROR_LEVEL_INFO);
 
 }
+
+
+void cargaVentana(Json::Value ventana){
+    Util::getInstance()->setWindowWidth( (ventana.isMember("ancho-px") && ventana["ancho-px"].isInt()  && ventana["ancho"].asInt()>0) ?
+                                                        ventana["ancho-px"].asInt() : 0);
+    Util::getInstance()->setWindowHeight( (ventana.isMember("alto-px") && ventana["alto-px"].isInt() && ventana["ancho"].asInt()>0) ?
+                                                        ventana["alto-px"].asInt(): 0);
+    Util::getInstance()->setLogicalWindowWidth( (ventana.isMember("ancho") && ventana["ancho"].isNumeric() && ventana["ancho"].asFloat()>0) ?
+                                                        ventana["ancho"].asFloat() : 0.0);
+}
+
+void cargarVentanaPorDefault(){
+    extern logger* Mylog;
+    Mylog->Log("JSON invalido: falta nodo ventana. Usando default", ERROR_LEVEL_ERROR);
+    Util::getInstance()->setWindowWidth(0);
+    Util::getInstance()->setWindowHeight(0);
+    Util::getInstance()->setLogicalWindowWidth(0.0);
+
+}
+
+void controlErroresVentana(){
+    extern logger* Mylog;
+    char mensaje[200];
+
+        //control de errores ventana
+        if( Util::getInstance()->getLogicalWindowWidth() == 0.0){
+            Util::getInstance()->setLogicalWindowWidth(ANCHOVENTANAL);
+            Mylog->Log("valor ancho logico de la ventana invalido: usando default", ERROR_LEVEL_WARNING);
+        }
+        if( Util::getInstance()->getWindowHeight() <= 0){
+            Util::getInstance()->setWindowHeight(ALTOVENTANAPX);
+            Mylog->Log("valor alto de la ventana invalido: usando default", ERROR_LEVEL_WARNING);
+        }
+        if( Util::getInstance()->getWindowWidth() <= 0){
+            Util::getInstance()->setWindowWidth(ANCHOVENTANAPX);
+            Mylog->Log("valor ancho de la ventana invalido: usando default", ERROR_LEVEL_WARNING);
+        }
+        sprintf(mensaje, "ancho-px: %i, alto px: %i, ancho: %1.2f",
+                    Util::getInstance()->getWindowWidth(),
+                    Util::getInstance()->getWindowHeight(),
+                    Util::getInstance()->getLogicalWindowWidth()
+        );
+        Mylog->Log(mensaje, ERROR_LEVEL_INFO);
+ }
+
+	void cargaEscenario(Json::Value escenarios, float &stageWidth, float &stageHeight, float &floor){
+
+        stageWidth = (escenarios.isMember("ancho") && escenarios["ancho"].isNumeric() && escenarios["ancho"].asFloat()>0) ?
+                                                        escenarios["ancho"].asFloat() : 0.0;
+
+        stageHeight = (escenarios.isMember("alto") && escenarios["alto"].isNumeric()  && escenarios["alto"].asFloat()>0 ) ?
+                                                        escenarios["alto"].asFloat() : 0.0;
+
+        floor = (escenarios.isMember("y-piso") && escenarios["y-piso"].isNumeric()  && escenarios["y-piso"].asFloat()>0 ) ?
+                                                        escenarios["y-piso"].asFloat() : 0.0;
+
+	}
+
+	void cargaEscenarioPorDefault(float &stageWidth, float &stageHeight, float &floor){
+        extern logger* Mylog;
+        Mylog->Log("JSON invalido: falta nodo ventana. Usando default", ERROR_LEVEL_ERROR);
+
+        stageWidth = 0.0 ;
+        stageHeight = 0.0;
+        floor = 0.0;
+    }
+
+void controlErroresEscenario(float &stageWidth, float &stageHeight, float &floor){
+    extern logger* Mylog;
+    char mensaje[200];
+    //control de errores escenario
+    if( stageWidth == 0.0){
+        stageWidth = ANCHOESCENARIO;
+        Mylog->Log("valor ancho de escenario invalido: usando default", ERROR_LEVEL_WARNING);
+    }
+    if( stageHeight <= 0){
+        stageHeight = ALTOESCENARIO;
+        Mylog->Log("valor alto de escenario invalido: usando default", ERROR_LEVEL_WARNING);
+    }
+    if( floor <= 0){
+        floor = ALTURAPISOESCENARIO;
+        Mylog->Log("valor altura piso invalido: usando default", ERROR_LEVEL_WARNING);
+    }
+    sprintf(mensaje, "ancho-px: %1.2f, alto-px: %1.2f, y-piso: %1.2f", stageWidth, stageHeight, floor);
+    Mylog->Log(mensaje, ERROR_LEVEL_INFO);
+
+    Util::getInstance()->setLogicalStageWidth(stageWidth);
+
+    Util::getInstance()->setLogicalWindowHeight(stageHeight);
+
+}
+
+
