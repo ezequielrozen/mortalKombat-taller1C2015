@@ -125,6 +125,9 @@ bool cargaArchivoJSON(char* filename, float &charAncho, float &charAlto, float &
         }
     }else{
         //CARGAR POR DEFAULT
+        cargaPersonaje(root, charAlto, charAncho, z_index); /*root tiene escenario, capas, personaje, etc.
+                                                                no tiene propiedades como ancho, alto, etc.
+                                                                ver si hay forma mejor de hacerlo*/
     }
 
 
@@ -176,7 +179,7 @@ void cargaPersonaje(Json::Value personaje, float &charAlto, float &charAncho, in
 
             if(!sprites.isMember("walk") || !sprites.isMember("stance")
                     || !sprites.isMember("jump") || !sprites.isMember("sideJump")){
-                Mylog->Log("Archivo JSON invalido: capas mal formadas. Usando default", ERROR_LEVEL_ERROR);
+                Mylog->Log("Archivo JSON invalido: sprites mal formadas. Usando default", ERROR_LEVEL_ERROR);
                 //CARGAR DEFAULT
                 filenameWalk = strdup(DEFAULT_WALK);
                 filenameStance = strdup(DEFAULT_STANCE);
