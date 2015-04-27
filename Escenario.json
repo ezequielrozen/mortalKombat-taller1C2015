@@ -7,7 +7,7 @@
     "escenario": {
         "ancho": 1000,
         "alto": 400,
-        "y-piso": 200
+        "y-piso": 260
     },
     "capas": [
         {
@@ -17,20 +17,24 @@
         {
             "imagen_fondo": "data/bg_1.png",
             "ancho": 600
-        }
+	},
+	{
+	    "imagen_fondo": "data/bg_3b.png",
+	    "ancho": 600
+	}
 
     ],
     "personaje": {
-        "ancho": 68,
-        "alto": 106,
+        "ancho": 68, 
+        "alto": 125,
         "z-index": 3,
-        "sprites":
-        {
-            "walk": "data/scorpionWalk.png",
-            "stance": "data/scorpionStance.png",
-            "jump": "data/scorpionJump.png",
-            "sideJump": "data/scorpionSideJump.png"
-        }
+        "sprites": 
+		{
+		"walk": "data/scorpionWalk.png",
+		"stance": "data/scorpionStance.png",
+		"jump": "data/scorpionJump.png",
+		"sideJump": "data/scorpionSideJump.png"
+		}
     },
     "oponente": {
         "side": "right"
