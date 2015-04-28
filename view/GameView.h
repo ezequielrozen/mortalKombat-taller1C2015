@@ -33,10 +33,12 @@ private:
     CharacterSprite * scorpionWalk;
     CharacterSprite * scorpionStance;
     CharacterSprite* scorpionJump;
+    CharacterSprite* scorpionDuck;
     CharacterSprite* scorpionSideJump;
     CharacterSprite * raidenWalk;
     CharacterSprite * raidenStance;
     CharacterSprite* raidenJump;
+    CharacterSprite* raidenDuck;
     CharacterSprite* raidenSideJump;
     //list<LayerSprite*>* layerSprites = new list<LayerSprite*>();
     LayerSprite** layerSprites;

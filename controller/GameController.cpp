@@ -46,6 +46,12 @@ void GameController::update(MKCharacter* character) {
         	Mylog->Log("movimiento del personaje: hacia arriba", ERROR_LEVEL_INFO);
             character->setJump(true);
 		}
+        else if (mainEvent->key.keysym.sym == SDLK_DOWN)
+		{
+        	Mylog->Log("movimiento del personaje: agachandose", ERROR_LEVEL_INFO);
+            character->setMovement("DUCK");
+            timer = SDL_GetTicks();
+		}
     }
     else if (timer + COMMANDDELAY < SDL_GetTicks()) {
 

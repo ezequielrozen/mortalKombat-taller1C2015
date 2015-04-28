@@ -14,7 +14,7 @@ class MKCharacter
 {
 public:
     MKCharacter(float initialPosX, float initialPosY, float ancho, float alto, int z_index,
-                        char* walkFile, char* stanceFile, char* jumpFile, char* sideJumpFile);
+                        char* walkFile, char* stanceFile, char* jumpFile, char* sideJumpFile, char* duckFile);
     ~MKCharacter(void);
 
     void moveRight();
@@ -53,6 +53,7 @@ public:
     char* getStance();
     char* getJump();
     char* getSideJump();
+    char* getDuck();
 
     void recibirGolpe(int fuerza);
     int getVida();
@@ -85,6 +86,7 @@ private:
     char* stance;
     char* jump;
     char* sideJump;
+    char* duck;
 
     //uso esta variable para controlar que no se vaya de la pantalla por arriba cuando ponen valores raros: "alto-px": 300; "alto": 300; y-piso: 50
 	float limiteSuperior;

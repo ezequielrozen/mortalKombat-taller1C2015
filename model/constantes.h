@@ -25,6 +25,7 @@ const char* const DEFAULT_WALK              = "data/scorpionWalk.png";
 const char* const DEFAULT_STANCE            = "data/scorpionStance.png";
 const char* const DEFAULT_JUMP              = "data/scorpionJump.png";
 const char* const DEFAULT_SIDEJUMP          = "data/scorpionSideJump.png";
+const char* const DEFAULT_DUCK          	= "data/scorpionDuck.png";
 //
 //const int OPONENTLEFT                       =    1;
 //const int OPONENTRIGHT                      =    2;

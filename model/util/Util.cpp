@@ -61,11 +61,12 @@ void Util::setLogicalStageWidth(float stageWidth) {
     this->logicalStageWidth = stageWidth;
 }
 
-void Util::setWalkStanceJumpSideJump(const char* w, const char* s, const char* j, const char* sj){
+void Util::setWalkStanceJumpSideJump(const char* w, const char* s, const char* j, const char* sj, const char* duck){
     this->walk[cantidadPersonajes] = strdup(w);
     this->stance[cantidadPersonajes] = strdup(s);
     this->jump[cantidadPersonajes] = strdup(j);
     this->sideJump[cantidadPersonajes] = strdup(sj);
+    this->duck[cantidadPersonajes] = strdup(duck);
     ++cantidadPersonajes;
 }
 
@@ -91,9 +92,12 @@ char* Util::getWalk(){return this->walk[0];}
 char* Util::getStance(){return this->stance[0];}
 char* Util::getJump(){return this->jump[0];}
 char* Util::getSideJump(){return this->sideJump[0];}
+char* Util::getDuck(){return this->duck[0];}
 
 char* Util::getWalk(unsigned char id){return this->walk[id];}
 char* Util::getStance(unsigned char id){return this->stance[id];}
 char* Util::getJump(unsigned char id){return this->jump[id];}
 char* Util::getSideJump(unsigned char id){return this->sideJump[id];}
+char* Util::getDuck(unsigned char id){return this->duck[id];}
+
 

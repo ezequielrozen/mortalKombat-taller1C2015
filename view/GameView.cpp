@@ -78,10 +78,12 @@ void GameView::LoadSprites() {
     scorpionStance = new CharacterSprite(this->renderer, scorpion->getStance(), scorpion->getX(),scorpion->getY(), scorpion->getWidth(),scorpion->getHeight(), 7, oponentSide);
     scorpionJump = new CharacterSprite(this->renderer, scorpion->getJump(), scorpion->getX(),scorpion->getY(), scorpion->getWidth(),scorpion->getHeight(), 9, oponentSide);
     scorpionSideJump = new CharacterSprite(this->renderer, scorpion->getSideJump(), scorpion->getX(), scorpion->getY(), scorpion->getWidth(), scorpion->getHeight(), 8, oponentSide);
+    scorpionDuck = new CharacterSprite(this->renderer, scorpion->getDuck(), scorpion->getX(), scorpion->getY(), scorpion->getWidth(), scorpion->getHeight(), 6, oponentSide);
     raidenWalk = new CharacterSprite(this->renderer, raiden->getWalk(), raiden->getX(),raiden->getY(), raiden->getWidth(),raiden->getHeight(), 9, (oponentSide == "RIGHT") ? "LEFT" : "RIGHT" );
     raidenStance = new CharacterSprite(this->renderer, raiden->getStance(), raiden->getX(),raiden->getY(), raiden->getWidth(),raiden->getHeight(), 7, (oponentSide == "RIGHT") ? "LEFT" : "RIGHT");
     raidenJump = new CharacterSprite(this->renderer, raiden->getJump(), raiden->getX(),raiden->getY(), raiden->getWidth(),raiden->getHeight(), 9, (oponentSide == "RIGHT") ? "LEFT" : "RIGHT");
     raidenSideJump = new CharacterSprite(this->renderer, raiden->getSideJump(), raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 8, (oponentSide == "RIGHT") ? "LEFT" : "RIGHT");
+    raidenDuck = new CharacterSprite(this->renderer, raiden->getDuck(), scorpion->getX(), scorpion->getY(), scorpion->getWidth(), scorpion->getHeight(), 6, oponentSide);
 }
 
 void GameView::startRender() {
@@ -118,6 +120,10 @@ void GameView::runCharacter() {
     else if (scorpion->getMovement() == "LEFT") {
         sprite = scorpionWalk;
         sprite->PlayBack(100);
+    }
+    else if (scorpion->getMovement() == "DUCK") {
+        sprite = scorpionDuck;
+        sprite->PlayBack(100);
     };
 
     CharacterSprite* sprite2;
@@ -145,6 +151,10 @@ void GameView::runCharacter() {
     else if (raiden->getMovement() == "LEFT") {
         sprite2 = raidenWalk;
         sprite2->PlayBack(100);
+    }
+    else if (scorpion->getMovement() == "DUCK") {
+        sprite = scorpionDuck;
+        sprite->PlayBack(100);
     };
 
     if(scorpion->getX() < raiden->getX()){

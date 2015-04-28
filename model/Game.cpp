@@ -14,11 +14,11 @@ void Game::initGame(char* filePath) {
     this->scorpion = new MKCharacter(0.2*(Util::getInstance()->getLogicalWindowWidth()-this->gameLoader->getCharacterWidth()), this->stage->getFloor(), this->gameLoader->getCharacterWidth(),
                                      this->gameLoader->getCharacterHeight(), this->gameLoader->getZ_index(),
                                      Util::getInstance()->getWalk(0), Util::getInstance()->getStance(0),
-                                     Util::getInstance()->getJump(0), Util::getInstance()->getSideJump(0));
+                                     Util::getInstance()->getJump(0), Util::getInstance()->getSideJump(0), Util::getInstance()->getDuck(0));
     this->raiden = new MKCharacter(0.8*(Util::getInstance()->getLogicalWindowWidth()-this->gameLoader->getCharacterWidth()), this->stage->getFloor(), this->gameLoader->getCharacterWidth(),
                                      this->gameLoader->getCharacterHeight(), this->gameLoader->getZ_index(),
                                      Util::getInstance()->getWalk(1), Util::getInstance()->getStance(1),
-                                     Util::getInstance()->getJump(1), Util::getInstance()->getSideJump(1));
+                                     Util::getInstance()->getJump(1), Util::getInstance()->getSideJump(1), Util::getInstance()->getDuck(1));
     this->gameView = new GameView(ScreenWidth, ScreenHeight, scorpion, raiden, stage, oponentSide);
     this->gameController = new GameController();
     this->cameraController = new CameraController();

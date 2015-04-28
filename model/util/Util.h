@@ -22,10 +22,11 @@ public:
     void setLogicalWindowHeight(float);
     float getScalingConstant();
     float getScalingYConstant();
-    void setWalkStanceJumpSideJump(const char*, const char*, const char*, const char*);
+    void setWalkStanceJumpSideJump(const char*, const char*, const char*, const char*, const char*);
     char* getWalk();
     char* getStance();
     char* getJump();
+    char* getDuck();
     char* getSideJump();
     void setWalk(const char*, unsigned char);
     void setStance(const char*, unsigned char);
@@ -34,6 +35,7 @@ public:
     char* getWalk(unsigned char);
     char* getStance(unsigned char);
     char* getJump(unsigned char);
+    char* getDuck(unsigned char);
     char* getSideJump(unsigned char);
 
 private:
@@ -52,6 +54,7 @@ private:
     char* stance[16];
     char* jump[16];
     char* sideJump[16];
+    char* duck[16];
 };
 
 
