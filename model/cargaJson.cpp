@@ -164,6 +164,7 @@ void cargaPersonaje(Json::Value personaje, float &charAlto, float &charAncho, in
     const char* filenameStance = new char[200];
     const char* filenameJump = new char[200];
     const char* filenameSideJump = new char[200];
+    const char* filenameDuck = new char[200];
 
      charAlto = (personaje.isMember("alto") && personaje["alto"].isNumeric() && personaje["alto"].asFloat()>0) ?
                                                     personaje["alto"].asFloat() : 0.0;
@@ -185,12 +186,14 @@ void cargaPersonaje(Json::Value personaje, float &charAlto, float &charAncho, in
                 filenameStance = strdup(DEFAULT_STANCE);
                 filenameJump = strdup(DEFAULT_JUMP);
                 filenameSideJump = strdup(DEFAULT_SIDEJUMP);
+                filenameDuck = strdup(DEFAULT_DUCK);
 
             }else{
                 filenameWalk = strdup(sprites["walk"].asString().c_str());
                 filenameStance = strdup(sprites["stance"].asString().c_str());
                 filenameJump = strdup(sprites["jump"].asString().c_str());
                 filenameSideJump = strdup(sprites["sideJump"].asString().c_str());
+                filenameDuck  = strdup(sprites["duck"].asString().c_str());
             }
 
         }
@@ -216,8 +219,12 @@ void cargaPersonaje(Json::Value personaje, float &charAlto, float &charAncho, in
         Mylog->Log(mensaje, ERROR_LEVEL_ERROR);
         filenameWalk = DEFAULT_SIDEJUMP;
     }
-
-    Util::getInstance()->setWalkStanceJumpSideJump(filenameWalk, filenameStance, filenameJump, filenameSideJump);
+    if(!std::ifstream(filenameDuck)){
+            sprintf(mensaje, "No existe el archivo %s. Usando archivo por defecto", filenameDuck);
+            Mylog->Log(mensaje, ERROR_LEVEL_ERROR);
+            filenameWalk = DEFAULT_DUCK;
+	}
+    Util::getInstance()->setWalkStanceJumpSideJump(filenameWalk, filenameStance, filenameJump, filenameSideJump, filenameDuck);
 
 
     if(charAlto == 0.0){

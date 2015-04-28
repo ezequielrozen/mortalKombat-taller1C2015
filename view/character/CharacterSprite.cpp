@@ -1,7 +1,7 @@
 #include "CharacterSprite.h"
 #include "../../model/util/Util.h"
 
-CharacterSprite::CharacterSprite(SDL_Renderer* pRenderer, char* path, float x, float y, float w, float h, int frames, string OponentSide)
+CharacterSprite::CharacterSprite(SDL_Renderer* pRenderer, char* path, float x, float y, float w, float h, int frames, string OponentSide, bool repearLastSp)
 {
 	oponentSide = OponentSide;
     this->renderer = pRenderer;
@@ -15,10 +15,8 @@ CharacterSprite::CharacterSprite(SDL_Renderer* pRenderer, char* path, float x, f
     }
 
     draw.x = x*Util::getInstance()->getScalingConstant();
-//    draw.y = y*Util::getInstance()->getScalingConstant();
     draw.y = y*Util::getInstance()->getScalingYConstant();
     draw.w = w*Util::getInstance()->getScalingConstant();
-    //draw.h = h*Util::getInstance()->getScalingConstant();
     draw.h = h*Util::getInstance()->getScalingYConstant();
 
     SDL_QueryTexture(texture,NULL,NULL, &img_width, &img_height);
@@ -32,6 +30,8 @@ CharacterSprite::CharacterSprite(SDL_Renderer* pRenderer, char* path, float x, f
     framesX = frames;
 
     animationDelay = 0;
+
+    setRepeatLastSprite(repearLastSp);
 }
 
 void CharacterSprite::Play(float Speed)
@@ -40,7 +40,12 @@ void CharacterSprite::Play(float Speed)
     {
 
         if ((this->framesX - 1) <= CurrentFrame)
-            CurrentFrame = 0;
+        {
+        	if (this->getRepeatLastSprite())
+        		CurrentFrame = this->framesX -1;
+        	else
+        		CurrentFrame = 0;
+        }
         else
             CurrentFrame++;
 
@@ -89,16 +94,11 @@ void CharacterSprite::Draw()
 	SDL_RenderCopyEx(renderer,texture,&crop, &draw,0,NULL,flipType);
 }
 
-//float CharacterSprite::getX() {
-//	return draw.x/Util::getInstance()->getScalingConstant();
-//}
-
 void CharacterSprite::setX(float passedX) {
 	draw.x = passedX*Util::getInstance()->getScalingConstant();
 }
 
 void CharacterSprite::setY(float passedY) {
-//	draw.y = passedY*Util::getInstance()->getScalingConstant();
 	draw.y = passedY*Util::getInstance()->getScalingYConstant();
 
 }
@@ -111,4 +111,14 @@ void CharacterSprite::reset() {
 
 void CharacterSprite::switchSide(const char c){
     this->oponentSide = (c == 'l') ? "LEFT" : "RIGHT";
+}
+
+bool CharacterSprite::getRepeatLastSprite()
+{
+	return this->repeatLastSprite;
+}
+
+void CharacterSprite::setRepeatLastSprite(bool repeat)
+{
+	this->repeatLastSprite = repeat;
 }

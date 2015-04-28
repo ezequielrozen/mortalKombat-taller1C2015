@@ -11,7 +11,7 @@ using namespace std;
 class CharacterSprite
 {
 public:
-    CharacterSprite(SDL_Renderer* passed_renderer, char* FilePath, float x, float y, float w, float h, int frames, string OponentSide);
+    CharacterSprite(SDL_Renderer* passed_renderer, char* FilePath, float x, float y, float w, float h, int frames, string OponentSide, bool repearLastSprite);
 
     ~CharacterSprite(void);
     void Draw();
@@ -23,6 +23,8 @@ public:
     void setY(float passedY);
     void reset();
     void switchSide(const char c);
+    bool getRepeatLastSprite();
+    void setRepeatLastSprite(bool repeat);
 
 private:
 
@@ -43,6 +45,8 @@ private:
     string oponentSide;
 
     SDL_Renderer* renderer;
+
+    bool repeatLastSprite;
 };
 
 #endif /* MKSPRITE_H_ */
