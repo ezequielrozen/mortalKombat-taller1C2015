@@ -13,6 +13,36 @@ Util* Util::getInstance() {
     return instance;
 }
 
+Util::Util()
+{
+	characterMovements = new list<charactersFile*>();
+}
+
+Util::~Util()
+{
+	std::list<Util::charactersFile*>::iterator it = characterMovements->begin();
+
+	for(it; it != characterMovements->end(); it++) {
+
+			delete (*it)->fileName;
+			delete (*it)->movementName;
+
+		delete (*it);
+	}
+
+	delete characterMovements;
+}
+
+unsigned char Util::getCantidadPersonajes()
+{
+	return cantidadPersonajes - 1;
+}
+
+void Util::setCantidadPersonajes()
+{
+	cantidadPersonajes++;
+}
+
 int Util::getWindowWidth() {
     return this->windowWidth;
 }
@@ -61,43 +91,45 @@ void Util::setLogicalStageWidth(float stageWidth) {
     this->logicalStageWidth = stageWidth;
 }
 
-void Util::setWalkStanceJumpSideJump(const char* w, const char* s, const char* j, const char* sj, const char* duck){
-    this->walk[cantidadPersonajes] = strdup(w);
-    this->stance[cantidadPersonajes] = strdup(s);
-    this->jump[cantidadPersonajes] = strdup(j);
-    this->sideJump[cantidadPersonajes] = strdup(sj);
-    this->duck[cantidadPersonajes] = strdup(duck);
-    ++cantidadPersonajes;
+void Util::addMovement(const char* moveName, const char* p)
+{
+	charactersFile *file = new charactersFile();
+	file->movementName = new char();
+	file->movementName = moveName;
+	file->fileName = strdup(p);
+	file->characterNumber = getCantidadPersonajes();
+	characterMovements->push_back(file);
 }
 
-void Util::setWalk(const char* p, unsigned char idPersonaje){
-    this->walk[idPersonaje] = strdup(p);
+void Util::setWalk(const char* p){
+    this->addMovement(MOVE_NAME_WALK, p);
 }
 
-
-void Util::setStance(const char* p, unsigned char idPersonaje){
-    this->stance[idPersonaje] = strdup(p);
+void Util::setStance(const char* p){
+    this->addMovement(MOVE_NAME_STANCE, p);
 }
 
-
-void Util::setJump(const char* p, unsigned char idPersonaje){
-    this->jump[idPersonaje] = strdup(p);
+void Util::setJump(const char* p){
+    this->addMovement(MOVE_NAME_JUMP, p);
 }
 
-void Util::setSideJump(const char* p, unsigned char idPersonaje){
-    this->sideJump[idPersonaje] = strdup(p);
+void Util::setSideJump(const char* p){
+    this->addMovement(MOVE_NAME_SIDEJUMP, p);
 }
 
-char* Util::getWalk(){return this->walk[0];}
-char* Util::getStance(){return this->stance[0];}
-char* Util::getJump(){return this->jump[0];}
-char* Util::getSideJump(){return this->sideJump[0];}
-char* Util::getDuck(){return this->duck[0];}
+void Util::setDuck(const char* p){
+    this->addMovement(MOVE_NAME_DUCK, p);
+}
 
 char* Util::getWalk(unsigned char id){return this->walk[id];}
 char* Util::getStance(unsigned char id){return this->stance[id];}
 char* Util::getJump(unsigned char id){return this->jump[id];}
 char* Util::getSideJump(unsigned char id){return this->sideJump[id];}
 char* Util::getDuck(unsigned char id){return this->duck[id];}
+
+std::list<Util::charactersFile*>* Util::getCharacterMovements()
+{
+	return this->characterMovements;
+}
 
 

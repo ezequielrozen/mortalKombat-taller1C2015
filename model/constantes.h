@@ -26,6 +26,14 @@ const char* const DEFAULT_STANCE            = "data/scorpionStance.png";
 const char* const DEFAULT_JUMP              = "data/scorpionJump.png";
 const char* const DEFAULT_SIDEJUMP          = "data/scorpionSideJump.png";
 const char* const DEFAULT_DUCK          	= "data/scorpionDuck.png";
+
+const char* const MOVE_NAME_WALK          	= "walk";
+const char* const MOVE_NAME_STANCE         	= "stance";
+const char* const MOVE_NAME_JUMP         	= "jump";
+const char* const MOVE_NAME_SIDEJUMP       	= "sideJump";
+const char* const MOVE_NAME_DUCK         	= "duck";
+
+
 //
 //const int OPONENTLEFT                       =    1;
 //const int OPONENTRIGHT                      =    2;
@@ -43,6 +51,7 @@ const int COMMANDDELAY                      =  300;
 
 //const float INITIAL_POSITION_X = 0.2857*ANCHOVENTANAL;
 //const float INITIAL_POSITION_Y = 0.2857*ANCHOVENTANAL;
+
 
 
 #endif /* CONSTANTES_H_ */

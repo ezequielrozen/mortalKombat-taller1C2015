@@ -224,7 +224,14 @@ void cargaPersonaje(Json::Value personaje, float &charAlto, float &charAncho, in
             Mylog->Log(mensaje, ERROR_LEVEL_ERROR);
             filenameWalk = DEFAULT_DUCK;
 	}
-    Util::getInstance()->setWalkStanceJumpSideJump(filenameWalk, filenameStance, filenameJump, filenameSideJump, filenameDuck);
+
+    Util::getInstance()->setCantidadPersonajes();
+
+    Util::getInstance()->setWalk(filenameWalk);
+    Util::getInstance()->setStance(filenameStance);
+    Util::getInstance()->setJump(filenameJump);
+    Util::getInstance()->setSideJump(filenameSideJump);
+    Util::getInstance()->setDuck(filenameDuck);
 
 
     if(charAlto == 0.0){

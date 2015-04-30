@@ -1,10 +1,6 @@
 #include "MKCharacter.h"
 
-MKCharacter::MKCharacter(float initialPosX, float initialPosY, float ancho,
-		float alto, int z_index, char* walkFile, char* stanceFile,
-		char* jumpFile, char* sideJumpFile, char* duckFile) {
-
-	//tamaño del png = 87*136
+MKCharacter::MKCharacter(float initialPosX, float initialPosY, float ancho, float alto, int z_index, int pCharacterNumber) {
 
 	this->z_index = z_index;
 	posX = initialPosX;
@@ -26,13 +22,9 @@ MKCharacter::MKCharacter(float initialPosX, float initialPosY, float ancho,
 
 	jumping = false;
 
-	this->walk = walkFile;
-	this->stance = stanceFile;
-	this->jump = jumpFile;
-	this->sideJump = sideJumpFile;
-	this->duck = duckFile;
-
 	this->vida = 100;
+
+	this->characterNumber = pCharacterNumber;
 
 }
 
@@ -59,7 +51,6 @@ void MKCharacter::moveRight() {
 	if ((posX + step + getWidth() < Util::getInstance()->getLogicalWindowWidth())) {
 		posX = posX + step;
 	}
-
 }
 
 void MKCharacter::moveLeft() {
@@ -163,26 +154,43 @@ int MKCharacter::getZ_index() {
 	return this->z_index;
 }
 
-char* MKCharacter::getWalk() {
-	return this->walk;
+char* MKCharacter::getWalk()
+{
+	return getFileMovement(MOVE_NAME_WALK);
 }
+
 char* MKCharacter::getStance() {
-	return this->stance;
+	return getFileMovement(MOVE_NAME_STANCE);
 }
+
 char* MKCharacter::getJump() {
-	return this->jump;
+	return getFileMovement(MOVE_NAME_JUMP);
 }
+
 char* MKCharacter::getSideJump() {
-	return this->sideJump;
+	return getFileMovement(MOVE_NAME_SIDEJUMP);
 }
+
 char* MKCharacter::getDuck() {
-	return this->duck;
+	return getFileMovement(MOVE_NAME_DUCK);
 }
 
 int MKCharacter::getVida() {
 	return this->vida;
 }
 
+char* MKCharacter::getFileMovement(const char* moveName)
+{
+	std::list<Util::charactersFile*>::iterator it = Util::getInstance()->getCharacterMovements()->begin();
+
+	for(it; it != Util::getInstance()->getCharacterMovements()->end(); it++) {
+
+		if (strcmp(((*it)->movementName),moveName) == 0 && (*it)->characterNumber == this->characterNumber)
+		{
+			return ((*it)->fileName);
+		}
+	}
+}
 void MKCharacter::recibirGolpe(int fuerza) {
 	extern logger* Mylog;
 	this->vida = this->vida - fuerza;

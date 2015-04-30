@@ -79,6 +79,9 @@ void GameView::LoadSprites() {
     scorpionJump = new CharacterSprite(this->renderer, scorpion->getJump(), scorpion->getX(),scorpion->getY(), scorpion->getWidth(),scorpion->getHeight(), 9, oponentSide, false);
     scorpionSideJump = new CharacterSprite(this->renderer, scorpion->getSideJump(), scorpion->getX(), scorpion->getY(), scorpion->getWidth(), scorpion->getHeight(), 8, oponentSide, false);
     scorpionDuck = new CharacterSprite(this->renderer, scorpion->getDuck(), scorpion->getX(), scorpion->getY(), scorpion->getWidth(), scorpion->getHeight(), 6, oponentSide, true);
+
+
+
     raidenWalk = new CharacterSprite(this->renderer, raiden->getWalk(), raiden->getX(),raiden->getY(), raiden->getWidth(),raiden->getHeight(), 9, (oponentSide == "RIGHT") ? "LEFT" : "RIGHT" , false);
     raidenStance = new CharacterSprite(this->renderer, raiden->getStance(), raiden->getX(),raiden->getY(), raiden->getWidth(),raiden->getHeight(), 7, (oponentSide == "RIGHT") ? "LEFT" : "RIGHT", false);
     raidenJump = new CharacterSprite(this->renderer, raiden->getJump(), raiden->getX(),raiden->getY(), raiden->getWidth(),raiden->getHeight(), 9, (oponentSide == "RIGHT") ? "LEFT" : "RIGHT", false);

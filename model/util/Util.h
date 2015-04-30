@@ -5,11 +5,18 @@
 #include <fstream>
 #include <iostream>
 #include <cstring>
+#include <list>
+#include "../constantes.h"
+
+using namespace std;
 
 class Util {
 
 public:
+
     static Util* getInstance();
+    Util();
+    ~Util();
     int getWindowWidth();
     void setWindowWidth(int);
     int getWindowHeight();
@@ -23,20 +30,28 @@ public:
     float getScalingConstant();
     float getScalingYConstant();
     void setWalkStanceJumpSideJump(const char*, const char*, const char*, const char*, const char*);
-    char* getWalk();
-    char* getStance();
-    char* getJump();
-    char* getDuck();
-    char* getSideJump();
-    void setWalk(const char*, unsigned char);
-    void setStance(const char*, unsigned char);
-    void setJump(const char*, unsigned char);
-    void setSideJump(const char*, unsigned char);
+
+    void setWalk(const char*);
+    void setStance(const char*);
+    void setJump(const char*);
+    void setSideJump(const char*);
+    void setDuck(const char*);
+
     char* getWalk(unsigned char);
     char* getStance(unsigned char);
     char* getJump(unsigned char);
     char* getDuck(unsigned char);
     char* getSideJump(unsigned char);
+
+    struct charactersFile {
+		const char* movementName;
+		char* fileName;
+		int characterNumber;
+	};
+    std::list<charactersFile*> *getCharacterMovements();
+
+    unsigned char getCantidadPersonajes();
+    void setCantidadPersonajes();
 
 private:
     static Util* instance;
@@ -55,6 +70,10 @@ private:
     char* jump[16];
     char* sideJump[16];
     char* duck[16];
+
+	std::list<charactersFile*>* characterMovements;
+
+	void addMovement(const char*, const char*);
 };
 
 
