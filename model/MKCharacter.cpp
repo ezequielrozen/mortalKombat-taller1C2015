@@ -22,7 +22,7 @@ MKCharacter::MKCharacter(float initialPosX, float initialPosY, float ancho, floa
 
 	jumping = false;
 
-	this->vida = 100;
+	this->life = 100;
 
 	this->characterNumber = pCharacterNumber;
 
@@ -58,7 +58,6 @@ void MKCharacter::moveLeft() {
 	if ((posX - step + getWidth() > getWidth())) {
 		posX = posX - step;
 	}
-
 }
 
 void MKCharacter::RestartJump() {
@@ -154,48 +153,31 @@ int MKCharacter::getZ_index() {
 	return this->z_index;
 }
 
-char* MKCharacter::getWalk()
-{
-	return getFileMovement(MOVE_NAME_WALK);
+
+int MKCharacter::getLife() {
+	return this->life;
 }
 
-char* MKCharacter::getStance() {
-	return getFileMovement(MOVE_NAME_STANCE);
-}
-
-char* MKCharacter::getJump() {
-	return getFileMovement(MOVE_NAME_JUMP);
-}
-
-char* MKCharacter::getSideJump() {
-	return getFileMovement(MOVE_NAME_SIDEJUMP);
-}
-
-char* MKCharacter::getDuck() {
-	return getFileMovement(MOVE_NAME_DUCK);
-}
-
-int MKCharacter::getVida() {
-	return this->vida;
-}
-
-char* MKCharacter::getFileMovement(const char* moveName)
-{
+char* MKCharacter::getFileMovement(const char* moveName){
 	std::list<Util::charactersFile*>::iterator it = Util::getInstance()->getCharacterMovements()->begin();
 
 	for(it; it != Util::getInstance()->getCharacterMovements()->end(); it++) {
 
-		if (strcmp(((*it)->movementName),moveName) == 0 && (*it)->characterNumber == this->characterNumber)
-		{
+		if (strcmp(((*it)->movementName),moveName) == 0 && (*it)->characterNumber == this->characterNumber)		{
 			return ((*it)->fileName);
 		}
 	}
 }
-void MKCharacter::recibirGolpe(int fuerza) {
+
+bool MKCharacter::isAlive() {
+	return this->life > 0;
+
+}
+void MKCharacter::receiveBlow(int force) {
 	extern logger* Mylog;
-	this->vida = this->vida - fuerza;
+	this->life = this->life - force;
 	Mylog->Log("Personaje (PONERLE NOMBRE) recibe golpe", ERROR_LEVEL_INFO); //FALTA: nombre, vida restada, vida restante.
-	if (this->vida <= 0) {
+	if (this->life <= 0) {
 		//marcar fin de juego. Preferentemente donde se invoca esta función (control de colisión y golpe)
 	}
 }

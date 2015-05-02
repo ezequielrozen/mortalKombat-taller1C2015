@@ -160,11 +160,27 @@ bool cargaArchivoJSON(char* filename, float &charAncho, float &charAlto, float &
 void cargaPersonaje(Json::Value personaje, float &charAlto, float &charAncho, int &z_index){
     extern logger* Mylog;
     char mensaje[200];
-    const char* filenameWalk = new char[200] ;
-    const char* filenameStance = new char[200];
-    const char* filenameJump = new char[200];
-    const char* filenameSideJump = new char[200];
-    const char* filenameDuck = new char[200];
+    char* filenameWalk = new char[200] ;
+    char* filenameStance = new char[200];
+    char* filenameJump = new char[200];
+    char* filenameSideJump = new char[200];
+    char* filenameDuck = new char[200];
+    char* filenameKick = new char[200];
+    char* filenameKickDown = new char[200];
+    char* filenamePunchJump = new char[200];
+    char* filenamePunchUp = new char[200];
+    char* filenamePunch = new char[200];
+    char* filenameWinner = new char[200];
+    char* filenameBodyParts = new char[200];
+    char* filenameFinisher = new char[200];
+    char* filenameShoot = new char[200];
+    char* filenameDizzy = new char[200];
+    char* filenameFall = new char[200];
+    char* filenameBeingHit = new char[200];
+    char* filenameBlock = new char[200];
+    char* filenameBlockDown = new char[200];
+    char* filenameHead = new char[200];
+
 
      charAlto = (personaje.isMember("alto") && personaje["alto"].isNumeric() && personaje["alto"].asFloat()>0) ?
                                                     personaje["alto"].asFloat() : 0.0;
@@ -181,57 +197,96 @@ void cargaPersonaje(Json::Value personaje, float &charAlto, float &charAncho, in
             if(!sprites.isMember("walk") || !sprites.isMember("stance")
                     || !sprites.isMember("jump") || !sprites.isMember("sideJump")){
                 Mylog->Log("Archivo JSON invalido: sprites mal formadas. Usando default", ERROR_LEVEL_ERROR);
+
                 //CARGAR DEFAULT
                 filenameWalk = strdup(DEFAULT_WALK);
                 filenameStance = strdup(DEFAULT_STANCE);
                 filenameJump = strdup(DEFAULT_JUMP);
                 filenameSideJump = strdup(DEFAULT_SIDEJUMP);
                 filenameDuck = strdup(DEFAULT_DUCK);
-
+                filenameKick = strdup(DEFAULT_KICK);
+                filenameKickDown = strdup(DEFAULT_KICKDOWN);
+                filenamePunchJump = strdup(DEFAULT_PUNCHJUMP);
+                filenamePunchUp = strdup(DEFAULT_PUNCHUP);
+                filenamePunch = strdup(DEFAULT_PUNCH);
+                filenameWinner = strdup(DEFAULT_WINNER);
+                filenameBodyParts = strdup(DEFAULT_BODYPARTS);
+                filenameFinisher = strdup(DEFAULT_FINISHER);
+                filenameShoot = strdup(DEFAULT_SHOOT);
+                filenameDizzy = strdup(DEFAULT_DIZZY);
+                filenameFall = strdup(DEFAULT_FALL);
+                filenameBeingHit = strdup(DEFAULT_BEINGHIT);
+                filenameBlock = strdup(DEFAULT_BLOCK);
+                filenameBlockDown = strdup(DEFAULT_BLOCKDOWN);
+                filenameHead = strdup(DEFAULT_HEAD);
             }else{
-                filenameWalk = strdup(sprites["walk"].asString().c_str());
-                filenameStance = strdup(sprites["stance"].asString().c_str());
-                filenameJump = strdup(sprites["jump"].asString().c_str());
-                filenameSideJump = strdup(sprites["sideJump"].asString().c_str());
-                filenameDuck  = strdup(sprites["duck"].asString().c_str());
+                filenameWalk = strdup(sprites[MOVE_NAME_WALK].asString().c_str());
+                filenameStance = strdup(sprites[MOVE_NAME_STANCE].asString().c_str());
+                filenameJump = strdup(sprites[MOVE_NAME_JUMP].asString().c_str());
+                filenameSideJump = strdup(sprites[MOVE_NAME_SIDEJUMP].asString().c_str());
+                filenameDuck  = strdup(sprites[MOVE_NAME_DUCK].asString().c_str());
+                filenameKick  = strdup(sprites[MOVE_NAME_KICK].asString().c_str());
+                filenameKickDown  = strdup(sprites[DEFAULT_KICKDOWN].asString().c_str());
+                filenamePunchJump  = strdup(sprites[DEFAULT_PUNCHJUMP].asString().c_str());
+                filenamePunchUp  = strdup(sprites[DEFAULT_PUNCHUP].asString().c_str());
+                filenamePunch  = strdup(sprites[DEFAULT_PUNCH].asString().c_str());
+                filenameWinner  = strdup(sprites[DEFAULT_WINNER].asString().c_str());
+                filenameBodyParts  = strdup(sprites[DEFAULT_BODYPARTS].asString().c_str());
+                filenameFinisher  = strdup(sprites[DEFAULT_FINISHER].asString().c_str());
+                filenameShoot  = strdup(sprites[DEFAULT_SHOOT].asString().c_str());
+                filenameDizzy  = strdup(sprites[DEFAULT_DIZZY].asString().c_str());
+                filenameFall  = strdup(sprites[DEFAULT_FALL].asString().c_str());
+                filenameBeingHit  = strdup(sprites[DEFAULT_BEINGHIT].asString().c_str());
+                filenameBlock  = strdup(sprites[DEFAULT_BLOCK].asString().c_str());
+                filenameBlockDown  = strdup(sprites[DEFAULT_BLOCKDOWN].asString().c_str());
+                filenameHead  = strdup(sprites[DEFAULT_HEAD].asString().c_str());
             }
-
         }
 
     //verificar si existe filename
-    if(!std::ifstream(filenameWalk)){
-        sprintf(mensaje, "No existe el archivo %s. Usando archivo por defecto", filenameWalk);
-        Mylog->Log(mensaje, ERROR_LEVEL_ERROR);
-        filenameWalk = DEFAULT_WALK;
-    }
-    if(!std::ifstream(filenameStance)){
-        sprintf(mensaje, "No existe el archivo %s. Usando archivo por defecto", filenameStance);
-        Mylog->Log(mensaje, ERROR_LEVEL_ERROR);
-        filenameWalk = DEFAULT_STANCE;
-    }
-    if(!std::ifstream(filenameJump)){
-        sprintf(mensaje, "No existe el archivo %s. Usando archivo por defecto", filenameJump);
-        Mylog->Log(mensaje, ERROR_LEVEL_ERROR);
-        filenameWalk = DEFAULT_JUMP;
-    }
-    if(!std::ifstream(filenameSideJump)){
-        sprintf(mensaje, "No existe el archivo %s. Usando archivo por defecto", filenameSideJump);
-        Mylog->Log(mensaje, ERROR_LEVEL_ERROR);
-        filenameWalk = DEFAULT_SIDEJUMP;
-    }
-    if(!std::ifstream(filenameDuck)){
-            sprintf(mensaje, "No existe el archivo %s. Usando archivo por defecto", filenameDuck);
-            Mylog->Log(mensaje, ERROR_LEVEL_ERROR);
-            filenameWalk = DEFAULT_DUCK;
-	}
+    validarExistenciaArchivo(DEFAULT_WALK,filenameWalk);
+    validarExistenciaArchivo(DEFAULT_STANCE, filenameStance);
+    validarExistenciaArchivo(DEFAULT_JUMP, filenameJump);
+    validarExistenciaArchivo(DEFAULT_SIDEJUMP, filenameSideJump);
+    validarExistenciaArchivo(DEFAULT_DUCK, filenameDuck);
+    validarExistenciaArchivo(DEFAULT_KICK, filenameKick);
+    validarExistenciaArchivo(DEFAULT_KICKDOWN, filenameKickDown);
+    validarExistenciaArchivo(DEFAULT_PUNCHJUMP, filenamePunchJump);
+    validarExistenciaArchivo(DEFAULT_PUNCHUP, filenamePunchUp);
+    validarExistenciaArchivo(DEFAULT_PUNCH, filenamePunch);
+    validarExistenciaArchivo(DEFAULT_WINNER, filenameWinner);
+    validarExistenciaArchivo(DEFAULT_BODYPARTS, filenameBodyParts);
+    validarExistenciaArchivo(DEFAULT_FINISHER, filenameFinisher);
+    validarExistenciaArchivo(DEFAULT_SHOOT, filenameShoot);
+    validarExistenciaArchivo(DEFAULT_DIZZY, filenameDizzy);
+    validarExistenciaArchivo(DEFAULT_FALL, filenameFall);
+    validarExistenciaArchivo(DEFAULT_BEINGHIT, filenameBeingHit);
+    validarExistenciaArchivo(DEFAULT_BLOCK, filenameBlock);
+    validarExistenciaArchivo(DEFAULT_BLOCKDOWN, filenameBlockDown);
+    validarExistenciaArchivo(DEFAULT_HEAD, filenameHead);
 
     Util::getInstance()->setCantidadPersonajes();
 
-    Util::getInstance()->setWalk(filenameWalk);
-    Util::getInstance()->setStance(filenameStance);
-    Util::getInstance()->setJump(filenameJump);
-    Util::getInstance()->setSideJump(filenameSideJump);
-    Util::getInstance()->setDuck(filenameDuck);
+    Util::getInstance()->addMovement(MOVE_NAME_WALK, filenameWalk);
+    Util::getInstance()->addMovement(MOVE_NAME_STANCE, filenameStance);
+    Util::getInstance()->addMovement(MOVE_NAME_JUMP, filenameJump);
+    Util::getInstance()->addMovement(MOVE_NAME_SIDEJUMP, filenameSideJump);
+    Util::getInstance()->addMovement(MOVE_NAME_DUCK, filenameDuck);
+    Util::getInstance()->addMovement(MOVE_NAME_KICK, filenameKick);
+    Util::getInstance()->addMovement(MOVE_NAME_KICKDOWN, filenameKickDown);
+    Util::getInstance()->addMovement(MOVE_NAME_PUNCHJUMP, filenamePunchJump);
+    Util::getInstance()->addMovement(MOVE_NAME_PUNCHUP, filenamePunchUp);
+    Util::getInstance()->addMovement(MOVE_NAME_PUNCH, filenamePunch);
+    Util::getInstance()->addMovement(MOVE_NAME_WINNER, filenameWinner);
+    Util::getInstance()->addMovement(MOVE_NAME_BODYPARTS, filenameBodyParts);
+    Util::getInstance()->addMovement(MOVE_NAME_FINISHER, filenameFinisher);
+    Util::getInstance()->addMovement(MOVE_NAME_SHOOT, filenameShoot);
+    Util::getInstance()->addMovement(MOVE_NAME_DIZZY, filenameDizzy);
+    Util::getInstance()->addMovement(MOVE_NAME_FALL, filenameFall);
+    Util::getInstance()->addMovement(MOVE_NAME_BEINGHIT, filenameBeingHit);
+    Util::getInstance()->addMovement(MOVE_NAME_BLOCK, filenameBlock);
+    Util::getInstance()->addMovement(MOVE_NAME_BLOCKDOWN, filenameBlockDown);
+    Util::getInstance()->addMovement(MOVE_NAME_HEAD, filenameHead);
 
 
     if(charAlto == 0.0){
@@ -256,6 +311,16 @@ void cargaPersonaje(Json::Value personaje, float &charAlto, float &charAncho, in
 
 }
 
+void validarExistenciaArchivo(const char* defaultFile,char* fileNameToValidate)
+{
+	extern logger* Mylog;
+	char mensaje[200];
+	if(!std::ifstream(fileNameToValidate)){
+			sprintf(mensaje, "No existe el archivo %s. Usando archivo por defecto", fileNameToValidate);
+			Mylog->Log(mensaje, ERROR_LEVEL_ERROR);
+			strcpy(fileNameToValidate, defaultFile);
+	}
+}
 
 void cargaVentana(Json::Value ventana){
     Util::getInstance()->setWindowWidth( (ventana.isMember("ancho-px") && ventana["ancho-px"].isInt()  && ventana["ancho"].asInt()>0) ?

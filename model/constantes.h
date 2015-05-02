@@ -26,13 +26,42 @@ const char* const DEFAULT_STANCE            = "data/scorpionStance.png";
 const char* const DEFAULT_JUMP              = "data/scorpionJump.png";
 const char* const DEFAULT_SIDEJUMP          = "data/scorpionSideJump.png";
 const char* const DEFAULT_DUCK          	= "data/scorpionDuck.png";
+const char* const DEFAULT_KICK          	= "data/scorpionKicking.png";
+const char* const DEFAULT_KICKDOWN			= "data/scorpionKickingDown.png";
+const char* const DEFAULT_PUNCHJUMP			= "data/scorpionPunchingJump.png";
+const char* const DEFAULT_PUNCHUP			= "data/scorpionPunchingUp.png";
+const char* const DEFAULT_PUNCH				= "data/scorpionPunching.png";
+const char* const DEFAULT_WINNER			= "data/scorpionWinner.png";
+const char* const DEFAULT_BODYPARTS			= "data/scorpionBodyParts.png";
+const char* const DEFAULT_FINISHER			= "data/scorpionFinisher.png";
+const char* const DEFAULT_SHOOT				= "data/scorpionShooting.png";
+const char* const DEFAULT_DIZZY				= "data/scorpionDizzy.png";
+const char* const DEFAULT_FALL				= "data/scorpionFalling.png";
+const char* const DEFAULT_BEINGHIT			= "data/scorpionBeingHit.png";
+const char* const DEFAULT_BLOCK				= "data/scorpionBlocking.png";
+const char* const DEFAULT_BLOCKDOWN			= "data/scorpionBlockingDown.png";
+const char* const DEFAULT_HEAD				= "data/scorpionHead.png";
 
 const char* const MOVE_NAME_WALK          	= "walk";
 const char* const MOVE_NAME_STANCE         	= "stance";
 const char* const MOVE_NAME_JUMP         	= "jump";
 const char* const MOVE_NAME_SIDEJUMP       	= "sideJump";
 const char* const MOVE_NAME_DUCK         	= "duck";
-
+const char* const MOVE_NAME_KICK         	= "kick";
+const char* const MOVE_NAME_KICKDOWN		= "kickDown";
+const char* const MOVE_NAME_PUNCHJUMP		= "punchJump";
+const char* const MOVE_NAME_PUNCHUP			= "punchUp";
+const char* const MOVE_NAME_PUNCH			= "punch";
+const char* const MOVE_NAME_WINNER			= "winner";
+const char* const MOVE_NAME_BODYPARTS		= "bodyParts";
+const char* const MOVE_NAME_FINISHER		= "finisher";
+const char* const MOVE_NAME_SHOOT			= "shoot";
+const char* const MOVE_NAME_DIZZY			= "dizzy";
+const char* const MOVE_NAME_FALL			= "fall";
+const char* const MOVE_NAME_BEINGHIT		= "behingHit";
+const char* const MOVE_NAME_BLOCK			= "block";
+const char* const MOVE_NAME_BLOCKDOWN		= "blockDown";
+const char* const MOVE_NAME_HEAD			= "head";
 
 //
 //const int OPONENTLEFT                       =    1;

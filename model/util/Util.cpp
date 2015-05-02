@@ -101,32 +101,6 @@ void Util::addMovement(const char* moveName, const char* p)
 	characterMovements->push_back(file);
 }
 
-void Util::setWalk(const char* p){
-    this->addMovement(MOVE_NAME_WALK, p);
-}
-
-void Util::setStance(const char* p){
-    this->addMovement(MOVE_NAME_STANCE, p);
-}
-
-void Util::setJump(const char* p){
-    this->addMovement(MOVE_NAME_JUMP, p);
-}
-
-void Util::setSideJump(const char* p){
-    this->addMovement(MOVE_NAME_SIDEJUMP, p);
-}
-
-void Util::setDuck(const char* p){
-    this->addMovement(MOVE_NAME_DUCK, p);
-}
-
-char* Util::getWalk(unsigned char id){return this->walk[id];}
-char* Util::getStance(unsigned char id){return this->stance[id];}
-char* Util::getJump(unsigned char id){return this->jump[id];}
-char* Util::getSideJump(unsigned char id){return this->sideJump[id];}
-char* Util::getDuck(unsigned char id){return this->duck[id];}
-
 std::list<Util::charactersFile*>* Util::getCharacterMovements()
 {
 	return this->characterMovements;

@@ -31,24 +31,13 @@ public:
     float getScalingYConstant();
     void setWalkStanceJumpSideJump(const char*, const char*, const char*, const char*, const char*);
 
-    void setWalk(const char*);
-    void setStance(const char*);
-    void setJump(const char*);
-    void setSideJump(const char*);
-    void setDuck(const char*);
-
-    char* getWalk(unsigned char);
-    char* getStance(unsigned char);
-    char* getJump(unsigned char);
-    char* getDuck(unsigned char);
-    char* getSideJump(unsigned char);
-
     struct charactersFile {
 		const char* movementName;
 		char* fileName;
 		int characterNumber;
 	};
     std::list<charactersFile*> *getCharacterMovements();
+    void addMovement(const char*, const char*);
 
     unsigned char getCantidadPersonajes();
     void setCantidadPersonajes();
@@ -65,15 +54,10 @@ private:
     float logicalStageWidth;
     //personaje
     static unsigned char cantidadPersonajes;
-    char* walk[16];
-    char* stance[16];
-    char* jump[16];
-    char* sideJump[16];
-    char* duck[16];
 
 	std::list<charactersFile*>* characterMovements;
 
-	void addMovement(const char*, const char*);
+
 };
 
 

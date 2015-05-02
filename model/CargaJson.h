@@ -32,6 +32,6 @@ void cargaEscenarioPorDefault(float &stageWidth, float &stageHeight, float &floo
 
 void controlErroresEscenario(float &stageWidth, float &stageHeight, float &floor);
 
-
+void validarExistenciaArchivo(const char* defaultFile,char* fileNameToValidate);
 
 #endif /* CARGAJSON_H_ */

@@ -48,28 +48,13 @@ public:
 
     int getZ_index();
 
-    char* getWalk();
-    char* getStance();
-    char* getJump();
-    char* getSideJump();
-    char* getDuck();
-    char* getWinner();
-    char* getPunch();
-    char* getPunchUp();
-    char* getPunchJump();
-    char* getKick();
-    char* getKickDown();
-    char* getBlock();
-    char* getBlockDown();
-    char* getBeingHit();
-    char* getFalling();
-    char* getDizzy();
-    char* getShoot();
-    char* getFinisher();
-    char* getBodyParts();
+    char* getFileMovement(const char* moveName);
 
-    void recibirGolpe(int fuerza);
-    int getVida();
+    void receiveBlow(int force);
+
+    int getLife();
+
+    bool isAlive();
 
 
 private:
@@ -96,9 +81,9 @@ private:
     //uso esta variable para controlar que no se vaya de la pantalla por arriba cuando ponen valores raros: "alto-px": 300; "alto": 300; y-piso: 50
 	float limiteSuperior;
 
-	int vida;
+	int life;
 	int characterNumber;
-	char* getFileMovement(const char* moveName);
+
 
 };
 

@@ -30,16 +30,49 @@ private:
     MKCharacter* raiden;
     Stage* stage;
 
-    CharacterSprite * scorpionWalk;
-    CharacterSprite * scorpionStance;
+    CharacterSprite* scorpionWalk;
+    CharacterSprite* scorpionStance;
     CharacterSprite* scorpionJump;
     CharacterSprite* scorpionDuck;
     CharacterSprite* scorpionSideJump;
-    CharacterSprite * raidenWalk;
-    CharacterSprite * raidenStance;
+    CharacterSprite* scorpionKick;
+    CharacterSprite* scorpionKickDown;
+    CharacterSprite* scorpionPunchJump;
+    CharacterSprite* scorpionPunchUp;
+    CharacterSprite* scorpionPunch;
+    CharacterSprite* scorpionWinner;
+    CharacterSprite* scorpionBodyParts;
+    CharacterSprite* scorpionFinisher;
+    CharacterSprite* scorpionShoot;
+    CharacterSprite* scorpionDizzy;
+    CharacterSprite* scorpionFall;
+    CharacterSprite* scorpionBeingHit;
+    CharacterSprite* scorpionBlockDown;
+    CharacterSprite* scorpionBlock;
+    CharacterSprite* scorpionHead;
+
+
+    CharacterSprite* raidenWalk;
+    CharacterSprite* raidenStance;
     CharacterSprite* raidenJump;
     CharacterSprite* raidenDuck;
     CharacterSprite* raidenSideJump;
+    CharacterSprite* raidenKick;
+    CharacterSprite* raidenKickDown;
+	CharacterSprite* raidenPunchJump;
+	CharacterSprite* raidenPunchUp;
+	CharacterSprite* raidenPunch;
+	CharacterSprite* raidenWinner;
+	CharacterSprite* raidenBodyParts;
+	CharacterSprite* raidenFinisher;
+	CharacterSprite* raidenShoot;
+	CharacterSprite* raidenDizzy;
+	CharacterSprite* raidenFall;
+	CharacterSprite* raidenBeingHit;
+	CharacterSprite* raidenBlockDown;
+	CharacterSprite* raidenBlock;
+	CharacterSprite* raidenHead;
+
     //list<LayerSprite*>* layerSprites = new list<LayerSprite*>();
     LayerSprite** layerSprites;
     int layerCount;

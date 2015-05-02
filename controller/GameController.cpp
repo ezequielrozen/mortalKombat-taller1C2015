@@ -52,6 +52,12 @@ void GameController::update(MKCharacter* character) {
             character->setMovement("DUCK");
             timer = SDL_GetTicks();
 		}
+        else if (mainEvent->key.keysym.sym == SDLK_k)
+		{
+        	Mylog->Log("movimiento del personaje: Pateando", ERROR_LEVEL_INFO);
+            character->setMovement("KICK");
+            timer = SDL_GetTicks();
+		}
     }
     else if (timer + COMMANDDELAY < SDL_GetTicks()) {
 

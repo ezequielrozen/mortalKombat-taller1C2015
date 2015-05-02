@@ -1,7 +1,5 @@
 #include <iostream>
 #include "Game.h"
-#include "CargaJson.h"
-#include "logger.h"
 
 using namespace std;
 
@@ -17,7 +15,7 @@ int main(int argc, char* argv[]) {
 
     bool restart = true;
 
-    while (restart == true) {
+    while (restart) {
 
         GameLoader* gameLoader = new GameLoader();
 
