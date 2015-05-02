@@ -18,7 +18,7 @@ public:
     CameraController();
     ~CameraController(void);
 
-    void update(MKCharacter* character, list<Layer*>* layer);
+    bool update(MKCharacter* character, list<Layer*>* layer);
 
 private:
 

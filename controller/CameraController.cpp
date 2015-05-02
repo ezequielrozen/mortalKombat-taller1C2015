@@ -13,8 +13,10 @@ CameraController::~CameraController(void)
 {
 }
 
-void CameraController::update(MKCharacter* character, std::list<Layer*>* layers) {
+bool CameraController::update(MKCharacter* character, std::list<Layer*>* layers) {
      extern logger* Mylog;
+
+     bool cameraMoved;
 
     //cout << "posX: " << character->getX() << endl;
     static double tempposx = 0;
@@ -29,14 +31,16 @@ void CameraController::update(MKCharacter* character, std::list<Layer*>* layers)
 
     if ((character->getX() < Util::getInstance()->getLogicalWindowWidth()/10) && (character->getMovement() == "LEFT")) {
         this->cameraMovement = "LEFT";
+        cameraMoved = true;
     }
     else if ((character->getX() > Util::getInstance()->getLogicalWindowWidth() - Util::getInstance()->getLogicalWindowWidth()/10 - character->getWidth()) &&
             (character->getMovement() == "RIGHT")) {
         this->cameraMovement = "RIGHT";
+        cameraMoved = true;
     }
     else {
         this->cameraMovement = "NONE";
-        character->Update();
+        cameraMoved = false;
     }
 
     list<Layer*>::iterator it = layers->begin();
@@ -48,4 +52,6 @@ void CameraController::update(MKCharacter* character, std::list<Layer*>* layers)
     }
 
     character->UpdateJump();
+
+    return cameraMoved;
 }

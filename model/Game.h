@@ -6,6 +6,7 @@
 #include "../view/GameView.h"
 #include "../controller/GameController.h"
 #include "../controller/CameraController.h"
+#include "../controller/Collider.h"
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
 #include "stage/Stage.h"
@@ -33,6 +34,7 @@ private:
     GameView* gameView;
     GameController* gameController;
     CameraController* cameraController;
+    Collider* collider;
     string oponentSide;
 
     GameLoader *gameLoader;

@@ -21,6 +21,7 @@ void Game::initGame(char* filePath) {
     this->gameView = new GameView(ScreenWidth, ScreenHeight, scorpion, raiden, stage, oponentSide);
     this->gameController = new GameController();
     this->cameraController = new CameraController();
+    this->collider = new Collider();
 }
 
 Game::~Game(){
@@ -29,16 +30,20 @@ Game::~Game(){
     delete gameView;
     delete gameController;
     delete cameraController;
+    delete collider;
 }
 
 bool Game::GameLoop() {
+
+    bool cameraMoved;
 
     while (gameController->getEvent()->type != SDL_QUIT) {
         gameController->checkEvent();
         gameView->startRender();
         gameView->Render();
         gameController->update(scorpion);
-        cameraController->update(scorpion, stage->getLayers());
+        cameraMoved = cameraController->update(scorpion, stage->getLayers());
+        collider->update(scorpion, raiden, cameraMoved);
         gameView->endRender();
         SDL_Delay(15);
 
