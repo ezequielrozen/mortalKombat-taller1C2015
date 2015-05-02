@@ -23,8 +23,8 @@ void Game::initGame(char* filePath) {
     this->cameraController = new CameraController();
 }
 
-Game::~Game()
-{
+Game::~Game() {
+    delete raiden;
     delete scorpion;
     delete gameView;
     delete gameController;
@@ -47,9 +47,7 @@ bool Game::GameLoop() {
 
         if (peviousKey == SDLK_r && gameController->getEvent()->key.keysym.sym == SDLK_e) {
             return true;
-        }
-        else
-        {
+        } else {
         	peviousKey = gameController->getEvent()->key.keysym.sym;
         }
 
