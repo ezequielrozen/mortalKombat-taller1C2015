@@ -43,10 +43,48 @@ GameView::~GameView() {
 	delete scorpionWalk;
     delete scorpionStance;
     delete scorpionSideJump;
+    delete scorpionDuck;
+    delete  scorpionKick;
+    delete  scorpionKickDown;
+    delete  scorpionPunchJump;
+    delete  scorpionPunchUp;
+    delete  scorpionPunch;
+    delete  scorpionWinner;
+    delete  scorpionBodyParts;
+    delete  scorpionFinisher;
+    delete  scorpionShoot;
+    delete  scorpionDizzy;
+    delete  scorpionFall;
+    delete  scorpionBeingHit;
+    delete  scorpionBlockDown;
+    delete  scorpionBlock;
+    delete  scorpionHead;
+    delete  raidenWalk;
+    delete  raidenStance;
+    delete  raidenJump;
+    delete  raidenSideJump;
+    delete  raidenDuck;
+    delete  raidenKick;
+    delete  raidenKickDown;
+    delete  raidenPunchJump;
+    delete  raidenPunchUp;
+    delete  raidenPunch;
+    delete  raidenWinner;
+    delete  raidenBodyParts;
+    delete  raidenFinisher;
+    delete  raidenShoot;
+    delete  raidenDizzy;
+    delete  raidenFall;
+    delete  raidenBeingHit;
+    delete  raidenBlockDown;
+    delete  raidenBlock;
+    delete  raidenHead;
+
     for (int i = 1 ; i < layerCount ; i++) {
         delete layerSprites[i];
     }
     delete layerSprites;
+
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
 }
