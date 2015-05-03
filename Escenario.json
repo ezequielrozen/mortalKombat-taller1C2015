@@ -36,7 +36,8 @@
 				"jump": "data/scorpionJump.png",
 				"sideJump": "data/scorpionSideJump.png",
 				"duck": "data/scorpionDuck.png",
-				"kick": "data/scorpionKicking.png"
+				"kick": "data/scorpionKicking.png",
+				"kickDown": "data/scorpionKickingDown.png"
 			}
 		},
 		{
@@ -50,7 +51,8 @@
 			"jump": "data/scorpionJump.png",
 			"sideJump": "data/scorpionSideJump.png",
 			"duck": "data/scorpionDuck.png",
-			"kick": "data/scorpionKicking.png"
+			"kick": "data/scorpionKicking.png",
+			"kickDown": "data/scorpionKickingDown.png"
 			}
 		}
     ],

@@ -308,7 +308,6 @@ void cargaPersonaje(Json::Value personaje, float &charAlto, float &charAncho, in
                     filenameJump, filenameWalk, filenameSideJump, filenameStance);
 
     Mylog->Log(mensaje, ERROR_LEVEL_INFO);
-
 }
 
 void validarExistenciaArchivo(const char* defaultFile,char* fileNameToValidate)
