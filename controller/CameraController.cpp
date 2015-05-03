@@ -42,7 +42,7 @@ bool CameraController::update(MKCharacter* character, MKCharacter* character2, s
     else if ((character2->getX() < Util::getInstance()->getLogicalWindowWidth()/10) && (character2->getMovement() == "LEFT")) {
         this->cameraMovement = "LEFT";
         cameraMoved = true;
-    } else if ((character2->getX() + character2->getWidth() > Util::getInstance()->getLogicalWindowWidth() - Util::getInstance()->getLogicalWindowWidth()/10) &&
+    } else if ((character2->getX() > Util::getInstance()->getLogicalWindowWidth() - Util::getInstance()->getLogicalWindowWidth()/10 - character2->getWidth()) &&
              (character2->getMovement() == "RIGHT")) {
         this->cameraMovement = "RIGHT";
         cameraMoved = true;
