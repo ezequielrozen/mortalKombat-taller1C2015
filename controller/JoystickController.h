@@ -16,8 +16,9 @@ public:
     ~JoystickController(void);
 
     void update(MKCharacter* character, MKCharacter* character2);
-
+    SDL_Event* getEvent();
 private:
-
+    SDL_Joystick* joystick;
+    SDL_Event* joystickEvent;
 };
 #endif //MORTALKOMBAT_TALLER1C2015_JOYSTICKCONTROLLER_H

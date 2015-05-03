@@ -9,6 +9,7 @@
 #include <bits/stl_list.h>
 #include "../model/MKCharacter.h"
 #include "../model/stage/Layer.h"
+#include "JoystickController.h"
 
 using namespace std;
 
@@ -28,7 +29,7 @@ public:
 private:
 
     int timer;
-
+    JoystickController* joystickController;
     SDL_Event* mainEvent;
 
 

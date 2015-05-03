@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "../controller/JoystickController.h"
 
 Game::Game(GameLoader* aGameLoader, char* filePath) {
     this->gameLoader = aGameLoader;

@@ -4,13 +4,14 @@
 GameController::GameController()
 {
     mainEvent = new SDL_Event();
-
+    joystickController = new JoystickController();
     timer = SDL_GetTicks();
 }
 
 
 GameController::~GameController(void)
 {
+    delete joystickController;
     delete mainEvent;
 }
 
@@ -24,6 +25,8 @@ void GameController::checkEvent() {
 
 void GameController::update(MKCharacter* character, MKCharacter* character2) {
      extern logger* Mylog;
+
+    this->joystickController->update(character,character2);
 
     if (mainEvent->type == SDL_KEYDOWN)
     {
