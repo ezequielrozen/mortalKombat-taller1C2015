@@ -22,7 +22,7 @@ public:
 
     void moveUp();
 
-    void Update();
+    void move();
 
     void UpdateJump();
 

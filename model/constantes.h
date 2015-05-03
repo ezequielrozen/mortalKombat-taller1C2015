@@ -2,6 +2,7 @@
 #define CONSTANTES_H_
 
 #include "util/Util.h"
+#include <map>
 
 ////ventana
 const int ANCHOVENTANAPX                    =  700;
@@ -63,6 +64,12 @@ const char* const MOVE_NAME_BLOCK			= "block";
 const char* const MOVE_NAME_BLOCKDOWN		= "blockDown";
 const char* const MOVE_NAME_HEAD			= "head";
 
+typedef std::map<std::string, int> Map;
+const Map DAMAGE = {{"KICK", 5},
+                    {MOVE_NAME_KICKDOWN, 5},
+                    {MOVE_NAME_PUNCHJUMP, 5},
+                    {MOVE_NAME_PUNCHUP, 5},
+                    {MOVE_NAME_PUNCH, 5}};
 //
 //const int OPONENTLEFT                       =    1;
 //const int OPONENTRIGHT                      =    2;

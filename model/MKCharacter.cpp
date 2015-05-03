@@ -19,7 +19,6 @@ MKCharacter::MKCharacter(float initialPosX, float initialPosY, float ancho, floa
 
 	movement = "NONE";
 	jumpMovement = "NONE";
-
 	jumping = false;
 
 	this->life = 100;
@@ -31,7 +30,7 @@ MKCharacter::MKCharacter(float initialPosX, float initialPosY, float ancho, floa
 MKCharacter::~MKCharacter(void) {
 }
 
-void MKCharacter::Update() {
+void MKCharacter::move() {
 	if (movement == "RIGHT") {
 		this->moveRight();
 	} else if (movement == "LEFT") {

@@ -41,8 +41,8 @@ bool Game::GameLoop() {
         gameController->checkEvent();
         gameView->startRender();
         gameView->Render();
-        gameController->update(scorpion);
-        cameraMoved = cameraController->update(scorpion, stage->getLayers());
+        gameController->update(scorpion, raiden);
+        cameraMoved = cameraController->update(scorpion, raiden, stage->getLayers());
         collider->update(scorpion, raiden, cameraMoved);
         gameView->endRender();
         SDL_Delay(15);

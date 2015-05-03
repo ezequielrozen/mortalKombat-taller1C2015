@@ -13,7 +13,10 @@ public:
 
 private:
 
+//    bool superpositionX(MKCharacter *character1, MKCharacter *character2);
+    bool superpositionLeft(MKCharacter* character1, MKCharacter* character2);
 
+    bool superpositionRight(MKCharacter *character1, MKCharacter *character2);
 };
 
 

@@ -18,7 +18,7 @@ public:
     GameController();
     ~GameController(void);
 
-    void update(MKCharacter* character);
+    void update(MKCharacter* character, MKCharacter* character2);
 
     SDL_Event* getEvent();
 
