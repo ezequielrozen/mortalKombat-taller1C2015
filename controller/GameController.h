@@ -31,6 +31,7 @@ private:
 
     SDL_Event* mainEvent;
 
+    SDL_Keycode previousKey;
 
 };
 

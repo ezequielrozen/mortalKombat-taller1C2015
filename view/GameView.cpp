@@ -199,7 +199,11 @@ void GameView::runCharacter() {
     else if (scorpion->getMovement() == "KICK") {
 		sprite = scorpionKick;
 		sprite->Play(100);
-	};
+	}
+    else if (scorpion->getMovement() == "KICKDOWN") {
+    		sprite = scorpionKickDown;
+    		sprite->Play(100);
+    };
 
     CharacterSprite* sprite2;
 
@@ -233,6 +237,10 @@ void GameView::runCharacter() {
     }
     else if (raiden->getMovement() == "KICK") {
         sprite = raidenKick;
+        sprite->Play(100);
+    }
+    else if (raiden->getMovement() == "KICKDOWN") {
+        sprite = raidenKickDown;
         sprite->Play(100);
     };
 
