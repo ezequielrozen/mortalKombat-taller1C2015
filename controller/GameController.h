@@ -32,6 +32,7 @@ private:
     JoystickController* joystickController;
     SDL_Event* mainEvent;
 
+    SDL_Keycode previousKey;
 
 };
 
