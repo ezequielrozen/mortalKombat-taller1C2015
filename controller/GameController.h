@@ -17,6 +17,7 @@ class GameController
 {
 public:
     GameController();
+
     ~GameController(void);
 
     void update(MKCharacter* character, MKCharacter* character2);
