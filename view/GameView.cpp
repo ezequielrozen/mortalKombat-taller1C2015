@@ -207,6 +207,14 @@ void GameView::runCharacter() {
     else if (scorpion->getMovement() == "PUNCH") {
     		sprite = scorpionPunch;
     		sprite->Play(100);
+    }
+    else if (scorpion->getMovement() == "PUNCHUP") {
+    		sprite = scorpionPunchUp;
+    		sprite->Play(100);
+    }
+    else if (scorpion->getMovement() == "PUNCHJUMP") {
+    		sprite = scorpionPunchJump;
+    		sprite->Play(100);
     };
 
     CharacterSprite* sprite2;
@@ -249,6 +257,14 @@ void GameView::runCharacter() {
     }
     else if (raiden->getMovement() == "PUNCH") {
         sprite = raidenPunch;
+        sprite->Play(100);
+    }
+    else if (raiden->getMovement() == "PUNCHUP") {
+        sprite = raidenPunchUp;
+        sprite->Play(100);
+    }
+    else if (raiden->getMovement() == "PUNCHJUMP") {
+        sprite = raidenPunchJump;
         sprite->Play(100);
     };
 

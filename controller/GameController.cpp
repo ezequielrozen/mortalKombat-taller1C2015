@@ -100,10 +100,24 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
 					timer = SDL_GetTicks();
 					break;
 				case SDLK_p:
-					Mylog->Log("movimiento del personaje: Golpe de puño.", ERROR_LEVEL_INFO);
-					character->setMovement("PUNCH");
-					previousKey = mainEvent->key.keysym.sym;
-					timer = SDL_GetTicks();
+					if (previousKey == SDLK_UP){
+							Mylog->Log("movimiento del personaje: Golpe de puño alto.", ERROR_LEVEL_INFO);
+							character->setMovement("PUNCHUP");
+							previousKey = SDLK_UP;
+							timer = SDL_GetTicks();
+					}
+					else if (previousKey == SDLK_LEFT || previousKey == SDLK_RIGHT){
+						Mylog->Log("movimiento del personaje: Golpe de puño con salto.", ERROR_LEVEL_INFO);
+						character->setMovement("PUNCHJUMP");
+						previousKey = SDLK_UP;
+						timer = SDL_GetTicks();
+					}
+					else{
+						Mylog->Log("movimiento del personaje: Golpe de puño.", ERROR_LEVEL_INFO);
+						character->setMovement("PUNCH");
+						previousKey = mainEvent->key.keysym.sym;
+						timer = SDL_GetTicks();
+					}
 					break;
 				default:
 					previousKey = mainEvent->key.keysym.sym;
