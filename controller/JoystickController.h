@@ -12,7 +12,7 @@ using namespace std;
 class JoystickController
 {
 public:
-    JoystickController();
+    JoystickController(SDL_Event* event);
     ~JoystickController(void);
 
     void update(MKCharacter* character, MKCharacter* character2);

@@ -3,8 +3,9 @@
 //
 
 #include "JoystickController.h"
+#include "GameController.h"
 
-JoystickController::JoystickController()
+JoystickController::JoystickController(SDL_Event* event)
 {
     // Constructor
     SDL_Init(SDL_INIT_JOYSTICK);
@@ -19,20 +20,18 @@ JoystickController::JoystickController()
         cout << SDL_JoystickName(joystick) << endl;
     }
 
-    joystickEvent = new SDL_Event();
+    joystickEvent = event;
 }
 
 JoystickController::~JoystickController(void)
 {
-    delete this->joystickEvent;
-    // Desctructor
+    SDL_JoystickClose(this->joystick);
 }
 
 void JoystickController::update(MKCharacter *character, MKCharacter *character2) {
     SDL_PollEvent(this->joystickEvent);
-    while ( SDL_PollEvent(this->joystickEvent) != 0 ) {
 
-       // if (this->joystickEvent->type == AXIS)
-            cout << "JOYSTICK BUTTON PRESSED" << endl;
-    }
+    if (this->joystickEvent->type == SDL_JOYBUTTONDOWN)
+        cout << "JOYSTICK BUTTON PRESSED: " << (int) this->joystickEvent->jbutton.button << endl;
+    // HACER SWTICH DE NUMERO DE JOYSTICK Y LUEGO DE CADA KEY PRESIONADA
 }

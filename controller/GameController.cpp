@@ -1,10 +1,11 @@
 #include "GameController.h"
 #include "../model/logger.h"
 
+
 GameController::GameController()
 {
     mainEvent = new SDL_Event();
-    joystickController = new JoystickController();
+    this->joystickController = new JoystickController(mainEvent);
     previousKey = 0;
     timer = SDL_GetTicks();
 }
@@ -25,9 +26,8 @@ void GameController::checkEvent() {
 }
 
 void GameController::update(MKCharacter* character, MKCharacter* character2) {
-     extern logger* Mylog;
-
-    this->joystickController->update(character,character2);
+    extern logger* Mylog;
+    //this->joystickController->update(character,character2);
 
     if (mainEvent->type == SDL_KEYDOWN)
     {
