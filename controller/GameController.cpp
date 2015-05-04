@@ -100,7 +100,7 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
 					timer = SDL_GetTicks();
 					break;
 				case SDLK_p:
-					Mylog->Log("movimiento del personaje: Piña.", ERROR_LEVEL_INFO);
+					Mylog->Log("movimiento del personaje: Golpe de puño.", ERROR_LEVEL_INFO);
 					character->setMovement("PUNCH");
 					previousKey = mainEvent->key.keysym.sym;
 					timer = SDL_GetTicks();
