@@ -25,6 +25,7 @@ public:
     void switchSide(const char c);
     bool getRepeatLastSprite();
     void setRepeatLastSprite(bool repeat);
+    void PlayShoot(float);
 
 private:
 

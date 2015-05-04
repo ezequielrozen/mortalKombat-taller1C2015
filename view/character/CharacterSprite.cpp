@@ -78,6 +78,95 @@ void CharacterSprite::PlayBack(float Speed) {
 	}
 }
 
+void CharacterSprite::PlayShoot(float Speed) {
+
+    if (animationDelay+Speed < SDL_GetTicks())
+    {
+
+        if ((this->framesX - 1) <= CurrentFrame)
+        {
+        	if (this->getRepeatLastSprite())
+        		CurrentFrame = this->framesX -1;
+        	else
+        		CurrentFrame = 0;
+        }
+        else{
+            CurrentFrame++;
+        }
+
+
+
+        if (CurrentFrame == 0)
+        {
+			crop.x = 0;
+			crop.y = 0;
+			crop.w = 140;
+			crop.h = 135;
+        }
+        if (CurrentFrame == 1)
+        {
+			crop.x = 140;
+			crop.y = 0;
+			crop.w = 290-140;
+			crop.h = 135;
+        }
+        if (CurrentFrame == 2)
+        {
+			crop.x = 290;
+			crop.y = 0;
+			crop.w = 425-290;
+			crop.h = 135;
+        }
+        else if (CurrentFrame == 3)
+        {
+			crop.x = 425;
+			crop.y = 0;
+			crop.w = 803-425;
+			crop.h = 135;
+        }
+        else if (CurrentFrame ==4)
+        {
+			crop.x = 803;
+			crop.y = 0;
+			crop.w = 1172-803;
+			crop.h = 135;
+        }
+        else if (CurrentFrame == 5)
+        {
+			crop.x = 1172;
+			crop.y = 0;
+			crop.w = 1553-1172;
+			crop.h = 135;
+        }
+        else if (CurrentFrame == 6)
+        {
+			crop.x = 1553;
+			crop.y = 0;
+			crop.w = 1922-1553;
+			crop.h = 135;
+        }
+        else if (CurrentFrame == 7)
+        {
+			crop.x = 1922;
+			crop.y = 0;
+			crop.w = 2264-1922;
+			crop.h = 135;
+        }
+        else if (CurrentFrame == 8)
+        {
+			crop.x = 2264;
+			crop.y = 0;
+			crop.w = 2565-2264;
+			crop.h = 135;
+        }
+
+		draw.w = crop.w;
+
+        animationDelay = SDL_GetTicks();
+
+    }
+}
+
 CharacterSprite::~CharacterSprite(void)
 {
     SDL_DestroyTexture(texture);

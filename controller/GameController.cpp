@@ -40,7 +40,7 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
 					previousKey = mainEvent->key.keysym.sym;
 					timer = SDL_GetTicks();
 					break;
-				case SDLK_d:
+				case SDLK_g:
 					Mylog->Log("movimiento del personaje: hacia la derecha", ERROR_LEVEL_INFO);
 					character2->setMovement("RIGHT");
 					previousKey = mainEvent->key.keysym.sym;
@@ -107,12 +107,12 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
 							previousKey = SDLK_UP;
 							timer = SDL_GetTicks();
 					}
-					else if (previousKey == SDLK_LEFT || previousKey == SDLK_RIGHT){
-						Mylog->Log("movimiento del personaje: Golpe de puño con salto.", ERROR_LEVEL_INFO);
-						character->setMovement("PUNCHJUMP");
-						previousKey = SDLK_UP;
-						timer = SDL_GetTicks();
-					}
+//					else if (previousKey == SDLK_LEFT || previousKey == SDLK_RIGHT){
+//						Mylog->Log("movimiento del personaje: Golpe de puño con salto.", ERROR_LEVEL_INFO);
+//						character->setMovement("PUNCHJUMP");
+//						previousKey = SDLK_UP;
+//						timer = SDL_GetTicks();
+//					}
 					else{
 						Mylog->Log("movimiento del personaje: Golpe de puño.", ERROR_LEVEL_INFO);
 						character->setMovement("PUNCH");
@@ -120,6 +120,18 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
 						timer = SDL_GetTicks();
 					}
 					break;
+				case SDLK_o:
+						Mylog->Log("movimiento del personaje: Disparando.", ERROR_LEVEL_INFO);
+						character->setMovement("SHOOT");
+						previousKey = mainEvent->key.keysym.sym;
+						timer = SDL_GetTicks();
+						break;
+				case SDLK_d:
+						Mylog->Log("movimiento del personaje: Defensa.", ERROR_LEVEL_INFO);
+						character->setMovement("DEFENSE");
+						previousKey = mainEvent->key.keysym.sym;
+						timer = SDL_GetTicks();
+						break;
 				default:
 					previousKey = mainEvent->key.keysym.sym;
 					break;
@@ -129,6 +141,9 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
 			switch(mainEvent->key.keysym.sym){
 				case SDLK_DOWN:
 					previousKey = SDLK_k;
+					break;
+				case SDLK_UP:
+					previousKey = SDLK_p;
 					break;
 				default:
 					break;
