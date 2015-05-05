@@ -17,6 +17,8 @@ private:
     bool superpositionLeft(MKCharacter* character1, MKCharacter* character2);
 
     bool superpositionRight(MKCharacter *character1, MKCharacter *character2);
+
+    bool superpositionUp(MKCharacter* character1, MKCharacter* character2);
 };
 
 
