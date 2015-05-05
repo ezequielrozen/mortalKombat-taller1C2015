@@ -223,6 +223,10 @@ void GameView::runCharacter() {
     else if (scorpion->getMovement() == "DEFENSE") {
     		sprite = scorpionBlock;
     		sprite->Play(100);
+    }
+    else if (scorpion->getMovement() == "DIZZY") {
+    		sprite = scorpionDizzy;
+    		sprite->Play(150);
     };
 
     CharacterSprite* sprite2;

@@ -29,7 +29,7 @@ void GameController::checkEvent() {
 void GameController::update(MKCharacter* character, MKCharacter* character2) {
 
     extern logger* Mylog;
-    //this->joystickController->update(character,character2);
+//    this->joystickController->update(character,character2);
 
     switch (mainEvent->type){
     	case SDL_KEYDOWN:
@@ -132,6 +132,12 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
 				case SDLK_d:
 						Mylog->Log("movimiento del personaje: Defensa.", ERROR_LEVEL_INFO);
 						character->setMovement("DEFENSE");
+						previousKey = mainEvent->key.keysym.sym;
+						timer = SDL_GetTicks();
+						break;
+				case SDLK_q:
+						Mylog->Log("movimiento del personaje: Mareado.", ERROR_LEVEL_INFO);
+						character->setMovement("DIZZY");
 						previousKey = mainEvent->key.keysym.sym;
 						timer = SDL_GetTicks();
 						break;
