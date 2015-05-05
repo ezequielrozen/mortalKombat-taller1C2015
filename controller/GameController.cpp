@@ -59,8 +59,11 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
 					timer = SDL_GetTicks();
 					break;
 				case SDLK_UP:
-					Mylog->Log("movimiento del personaje: hacia arriba", ERROR_LEVEL_INFO);
-					character->setJump(true);
+					if (previousKey == SDLK_UP)
+					{
+						Mylog->Log("movimiento del personaje: hacia arriba", ERROR_LEVEL_INFO);
+						character->setJump(true);
+					}
 					previousKey = mainEvent->key.keysym.sym;
 					break;
 				case SDLK_w:
