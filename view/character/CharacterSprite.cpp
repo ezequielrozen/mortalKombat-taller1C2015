@@ -94,8 +94,6 @@ void CharacterSprite::PlayShoot(float Speed) {
             CurrentFrame++;
         }
 
-
-
         if (CurrentFrame == 0)
         {
 			crop.x = 0;
@@ -165,6 +163,29 @@ void CharacterSprite::PlayShoot(float Speed) {
         animationDelay = SDL_GetTicks();
 
     }
+}
+
+void CharacterSprite::PlayFall(float Speed) {
+
+	if (animationDelay+Speed < SDL_GetTicks())
+	{
+		if ((this->framesX - 1) <= CurrentFrame)
+		{
+			if (this->getRepeatLastSprite())
+				CurrentFrame = this->framesX -1;
+			else
+				CurrentFrame = 0;
+		}
+		else
+			CurrentFrame++;
+
+		crop.x = CurrentFrame * (img_width/framesX);
+		crop.y = 0;
+		crop.w = img_width/framesX;
+		crop.h = img_height;
+
+		animationDelay = SDL_GetTicks();
+	}
 }
 
 CharacterSprite::~CharacterSprite(void)

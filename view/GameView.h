@@ -84,6 +84,8 @@ private:
     string oponentSide;
 
     void runCharacter();
+	void RestarAllScorpionSprites();
+	void RestarAllRaidenSprites();
 };
 
 #endif /* GAMEVIEW_H_ */

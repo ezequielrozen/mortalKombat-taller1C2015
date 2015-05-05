@@ -105,17 +105,22 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
 					break;
 				case SDLK_p:
 					if (previousKey == SDLK_UP){
-							Mylog->Log("movimiento del personaje: Golpe de puño alto.", ERROR_LEVEL_INFO);
+							Mylog->Log("movimiento del personaje: Golpe de puño, gancho.", ERROR_LEVEL_INFO);
 							character->setMovement("PUNCHUP");
-							previousKey = SDLK_UP;
 							timer = SDL_GetTicks();
 					}
-//					else if (previousKey == SDLK_LEFT || previousKey == SDLK_RIGHT){
-//						Mylog->Log("movimiento del personaje: Golpe de puño con salto.", ERROR_LEVEL_INFO);
-//						character->setMovement("PUNCHJUMP");
-//						previousKey = SDLK_UP;
-//						timer = SDL_GetTicks();
-//					}
+					else if (previousKey == SDLK_LEFT){
+						character->setMovement("PUNCHJUMPLEFT");
+						character->setJump(true);
+						Mylog->Log("movimiento del personaje: Golpe de puño con salto hacia la izquierda.", ERROR_LEVEL_INFO);
+						timer = SDL_GetTicks();
+					}
+					else if (previousKey == SDLK_RIGHT){
+						character->setMovement("PUNCHJUMPRIGHT");
+						character->setJump(true);
+						Mylog->Log("movimiento del personaje: Golpe de puño con salto hacia la derecha.", ERROR_LEVEL_INFO);
+						timer = SDL_GetTicks();
+					}
 					else{
 						Mylog->Log("movimiento del personaje: Golpe de puño.", ERROR_LEVEL_INFO);
 						character->setMovement("PUNCH");
@@ -138,6 +143,20 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
 				case SDLK_q:
 						Mylog->Log("movimiento del personaje: Mareado.", ERROR_LEVEL_INFO);
 						character->setMovement("DIZZY");
+						previousKey = mainEvent->key.keysym.sym;
+						timer = SDL_GetTicks();
+						break;
+				case SDLK_h:
+						Mylog->Log("movimiento del personaje: Recibiendo golpe.", ERROR_LEVEL_INFO);
+						character->setMovement("BEINGHIT");
+						previousKey = mainEvent->key.keysym.sym;
+						timer = SDL_GetTicks();
+						break;
+				case SDLK_e:
+						Mylog->Log("movimiento del personaje: Siendo arrojado.", ERROR_LEVEL_INFO);
+						character->setMovement("FALLING");
+						//HA: Aca tengo q ver si se tiene q mover a izq o a derecha
+						character->moveLeft();
 						previousKey = mainEvent->key.keysym.sym;
 						timer = SDL_GetTicks();
 						break;

@@ -39,9 +39,9 @@ MKCharacter::~MKCharacter(void) {
 }
 
 void MKCharacter::move() {
-	if (movement == "RIGHT") {
+	if (movement == "RIGHT" || movement == "PUNCHJUMPRIGHT") {
 		this->moveRight();
-	} else if (movement == "LEFT") {
+	} else if (movement == "LEFT"  || movement == "PUNCHJUMPLEFT") {
 		this->moveLeft();
 	}
 }

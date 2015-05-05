@@ -26,6 +26,7 @@ public:
     bool getRepeatLastSprite();
     void setRepeatLastSprite(bool repeat);
     void PlayShoot(float);
+    void PlayFall(float);
 
 private:
 
