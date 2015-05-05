@@ -12,10 +12,18 @@ MKCharacter::MKCharacter(float initialPosX, float initialPosY, float ancho, floa
 	this->alto = alto;
 	this->ancho = ancho;
 
-	proporcionVel = 0.04285;
-	accY = 1.2285 * Util::getInstance()->getLogicalWindowHeight();
+	//proporcionVel = 0.04285;
+	//accY = 1.2285 * Util::getInstance()->getLogicalWindowHeight();
 
-	RestartJump();
+	//RestartJump();
+
+	jumpTime = 0;
+	//El 1.20 esta para que el personaje salte al otro personaje y 0.2 mas, para tener un margen.
+	yMax = stageFloor - (this->alto)*1.20;
+	//Se dedujo empiricamente
+	velY = 6.4 * (this->alto);
+	//Parte de la ecuacion de tiro vertical. El 0.5 sale de que el salto total dura 1seg, por lo cual al punto maximo del salto llega en 0.5seg
+	accY = (-2*(yMax-stageFloor+velY*0.5))/(pow(0.5,2));
 
 	movement = "NONE";
 	jumpMovement = "NONE";
@@ -58,7 +66,7 @@ void MKCharacter::moveLeft() {
 		posX = posX - step;
 	}
 }
-
+/*
 void MKCharacter::RestartJump() {
 	velY = proporcionVel * Util::getInstance()->getLogicalWindowHeight();
 
@@ -98,6 +106,39 @@ void MKCharacter::moveUp() {
 		posY = this->stageFloor;
 		RestartJump();
 		this->setJump(false);
+	}
+}
+*/
+
+void MKCharacter::moveUp() {
+	jumpTime = jumpTime + 0.015;
+
+	//double velPrev = actualVel;
+	//double yMaxShow;
+
+	posY = stageFloor - velY*jumpTime - (accY*pow(jumpTime,2))/2;
+	//actualVel = velY + accY*jumpTime;
+	//cout << "PosY: " << posY << " velY: " << actualVel << " time: " << jumpTime << endl;
+
+	/*if (velPrev >= 0 && actualVel <= 0) {
+		yMaxShow = posY;
+		cout << "yMaxShow: " << yMaxShow << endl;
+	}*/
+	if (posY <= 0) {
+		double time1;
+		double time2;
+
+		time1 = (velY + sqrt(pow(velY,2)-4*(-accY/2)*stageFloor))/(-accY);
+		time2 = (velY - sqrt(pow(velY,2)-4*(-accY/2)*stageFloor))/(-accY);
+
+		jumpTime = fmax(time1, time2);
+	}
+	
+	if (posY > stageFloor) {
+		this->setJump(false);
+		posY = stageFloor;
+		jumpTime = 0;
+		cout << "yMax: " << yMax << endl;
 	}
 }
 

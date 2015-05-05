@@ -71,6 +71,9 @@ private:
 
     double velY;
     double accY;
+    double jumpTime;
+    double yMax;
+    double actualVel;
     float proporcionVel;
     double stageFloor;
 
@@ -83,7 +86,6 @@ private:
 
 	int life;
 	int characterNumber;
-
 
 };
 
