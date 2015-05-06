@@ -27,13 +27,24 @@ void Collider::update(MKCharacter* character1, MKCharacter* character2, bool cam
 		if (!(this->superpositionLeft(character1, character2) && this->superpositionUp(character1, character2) && character1->getMovement() == "RIGHT" ||
 			this->superpositionRight(character1, character2) && this->superpositionUp(character1, character2) && character1->getMovement() == "LEFT")) {
 			character1->move();
+		};
+		if (!(this->superpositionLeft(character2, character1) && this->superpositionUp(character2, character1) && character2->getMovement() == "RIGHT" ||
+			this->superpositionRight(character2, character1) && this->superpositionUp(character2, character1) && character2->getMovement() == "LEFT")) {
 			character2->move();
-		} else if ((superpositionRight(character1,character2) || superpositionLeft(character1, character2)) &&
-				character1->getMovement() == "KICK") {
-			cout << "ENTRO" << endl;
-			character2->receiveBlow(DAMAGE.at("KICK"));
-			cout << character2->getLife() << endl;
-
-		}
+		};
 	}
+	if ((superpositionRight(character1,character2) || superpositionLeft(character1, character2)) &&
+		character1->getMovement() == "KICK") {
+		cout << "ENTRO" << endl;
+		character2->receiveBlow(DAMAGE.at("KICK"));
+		cout << character2->getLife() << endl;
+
+	};
+	if ((superpositionRight(character2,character1) || superpositionLeft(character2, character1)) &&
+		character2->getMovement() == "KICK") {
+		cout << "ENTRO" << endl;
+		character1->receiveBlow(DAMAGE.at("KICK"));
+		cout << character2->getLife() << endl;
+
+	};
 }

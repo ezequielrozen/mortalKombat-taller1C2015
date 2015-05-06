@@ -138,7 +138,7 @@ void MKCharacter::moveUp() {
 		this->setJump(false);
 		posY = stageFloor;
 		jumpTime = 0;
-		cout << "yMax: " << yMax << endl;
+		//cout << "yMax: " << yMax << endl;
 	}
 }
 
