@@ -83,6 +83,12 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
 					previousKey = mainEvent->key.keysym.sym;;
 					timer = SDL_GetTicks();
 					break;
+				case SDLK_l:
+					character2->setLife(character2->getLife()-10);
+					character->setLife(character2->getLife()-10);
+					previousKey = mainEvent->key.keysym.sym;;
+					timer = SDL_GetTicks();
+					break;
 				case SDLK_k:
 					if (previousKey == SDLK_DOWN){
 						Mylog->Log("movimiento del personaje: Patada baja", ERROR_LEVEL_INFO);

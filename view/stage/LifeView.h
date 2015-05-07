@@ -16,10 +16,12 @@ class LifeView {
         LifeView(SDL_Renderer* renderer, string filePath, float width, float height, bool inverted);
         LifeView(SDL_Renderer* renderer, string filePath, float width, bool inverted);
         ~LifeView();
-        void Draw();
+        void Draw(float currentLife);
     private:
         SDL_Renderer* renderer;
         SDL_Texture* texture;
+        SDL_Texture* insideTexture;
+        SDL_Rect insideDraw;
         SDL_Rect draw;
         bool inverted;
 };

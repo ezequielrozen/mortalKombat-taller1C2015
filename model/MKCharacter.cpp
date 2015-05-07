@@ -198,6 +198,13 @@ int MKCharacter::getLife() {
 	return this->life;
 }
 
+void MKCharacter::setLife(int life) {
+	if (life > 0)
+		this->life = life;
+	else
+		this->life = 100;
+}
+
 char* MKCharacter::getFileMovement(const char* moveName){
 	std::list<Util::charactersFile*>::iterator it = Util::getInstance()->getCharacterMovements()->begin();
 

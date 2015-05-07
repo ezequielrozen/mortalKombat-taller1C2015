@@ -54,6 +54,8 @@ public:
 
     int getLife();
 
+    void setLife(int life);
+
     bool isAlive();
 
 
