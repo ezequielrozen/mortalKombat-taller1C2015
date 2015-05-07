@@ -13,6 +13,7 @@ const float ANCHOVENTANAL                   =  400;
 const float ANCHOESCENARIO                  = 1000;
 const float ALTOESCENARIO                   =  400;
 const float ALTURAPISOESCENARIO             =   20;
+const float LIFEBAR_RELATIVE_WIDTH          = 0.35; // Relative to logical window size
 //
 //// capa
 //

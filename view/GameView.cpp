@@ -25,6 +25,10 @@ GameView::GameView(float ScreenWidth, float ScreenHeight, MKCharacter* character
     layerCount = this->stage->getLayers()->size();
     layerSprites = new LayerSprite*[layerCount-1];
 
+
+    this->characterOneLifebarView = new LifeView(this->renderer, "data/lifebar.png", Util::getInstance()->getLogicalWindowWidth() * LIFEBAR_RELATIVE_WIDTH, false);
+    this->characterTwoLifebarView = new LifeView(this->renderer, "data/lifebar.png", Util::getInstance()->getLogicalWindowWidth() * LIFEBAR_RELATIVE_WIDTH, true);
+
     std::list<Layer*>::iterator it = this->stage->getLayers()->begin();
 
     int i = 0;
@@ -39,6 +43,9 @@ GameView::GameView(float ScreenWidth, float ScreenHeight, MKCharacter* character
 }
 
 GameView::~GameView() {
+    delete characterOneLifebarView;
+    delete characterTwoLifebarView;
+
     delete scorpionJump;
 	delete scorpionWalk;
     delete scorpionStance;
@@ -106,6 +113,10 @@ void GameView::Render() {
         }
         i++;
     }
+
+    characterOneLifebarView->Draw();
+    characterTwoLifebarView->Draw();
+
     if (!painted) {
         this->runCharacter();
     }

@@ -8,6 +8,7 @@
 #include "../model/stage/Layer.h"
 #include "stage/LayerSprite.h"
 #include "../model/stage/Stage.h"
+#include "stage/LifeView.h"
 #include <string>
 #include <math.h>
 
@@ -30,6 +31,8 @@ private:
     MKCharacter* raiden;
     Stage* stage;
 
+    LifeView* characterOneLifebarView;
+    LifeView* characterTwoLifebarView;
     CharacterSprite* scorpionWalk;
     CharacterSprite* scorpionStance;
     CharacterSprite* scorpionJump;
