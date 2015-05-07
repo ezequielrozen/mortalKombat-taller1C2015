@@ -30,12 +30,16 @@ public:
 private:
 
     int timer;
+    int timerChar2;
     int hitTimer;
+    int hitTimerChar2;
     JoystickController* joystickController;
     SDL_Event* mainEvent;
 
     SDL_Keycode previousKey;
+    SDL_Keycode previousKeyChar2;
 
+	void testElapsedTime(MKCharacter* character, MKCharacter* character2);
 };
 
 #endif /* GAMECONTROLLER_H_ */

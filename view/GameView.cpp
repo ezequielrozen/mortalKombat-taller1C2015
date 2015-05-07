@@ -254,23 +254,23 @@ void GameView::runCharacter() {
     		sprite = scorpionPunch;
     		sprite->Play(100);
     }
-    else if (scorpion->getMovement() == "SHOOT") {
+    else if (scorpion->getHit() == "SHOOT") {
     		sprite = scorpionShoot;
     		sprite->PlayShoot(100);
     }
-    else if (scorpion->getMovement() == "DEFENSE") {
+    else if (scorpion->getHit() == "DEFENSE") {
     		sprite = scorpionBlock;
     		sprite->Play(100);
     }
-    else if (scorpion->getMovement() == "DIZZY") {
+    else if (scorpion->getHit() == "DIZZY") {
     		sprite = scorpionDizzy;
     		sprite->Play(150);
     }
-    else if (scorpion->getMovement() == "BEINGHIT") {
+    else if (scorpion->getHit() == "BEINGHIT") {
     		sprite = scorpionBeingHit;
     		sprite->Play(150);
     }
-    else if (scorpion->getMovement() == "FALLING") {
+    else if (scorpion->getHit() == "FALLING") {
     		sprite = scorpionFall;
     		sprite->PlayFall(250);
     }
@@ -332,23 +332,23 @@ void GameView::runCharacter() {
     		sprite2 = raidenPunch;
     		sprite2->Play(100);
     }
-    else if (raiden->getMovement() == "SHOOT") {
+    else if (raiden->getHit() == "SHOOT") {
     		sprite2 = raidenShoot;
     		sprite2->PlayShoot(100);
     }
-    else if (raiden->getMovement() == "DEFENSE") {
+    else if (raiden->getHit() == "DEFENSE") {
     		sprite2 = raidenBlock;
     		sprite2->Play(100);
     }
-    else if (raiden->getMovement() == "DIZZY") {
+    else if (raiden->getHit() == "DIZZY") {
     		sprite2 = raidenDizzy;
     		sprite2->Play(150);
     }
-    else if (raiden->getMovement() == "BEINGHIT") {
+    else if (raiden->getHit() == "BEINGHIT") {
     		sprite2 = raidenBeingHit;
     		sprite2->Play(150);
     }
-    else if (raiden->getMovement() == "FALLING") {
+    else if (raiden->getHit() == "FALLING") {
     		sprite2 = raidenFall;
     		sprite2->PlayFall(250);
     }
