@@ -155,6 +155,12 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
 							previousKey = mainEvent->key.keysym.sym;
 							hitTimer = SDL_GetTicks();
 							break;
+				case SDLK_y:
+							Mylog->Log("movimiento del personaje: Siendo arrojado.", ERROR_LEVEL_INFO);
+							character->setHit("WINNER");
+							previousKey = mainEvent->key.keysym.sym;
+							hitTimer = SDL_GetTicks();
+							break;
 
 				/****************************************************************************************************/
 
@@ -254,6 +260,15 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
 							previousKeyChar2 = mainEvent->key.keysym.sym;
 							hitTimerChar2 = SDL_GetTicks();
 							break;
+				case SDLK_z:
+							Mylog->Log("movimiento del personaje: Siendo arrojado.", ERROR_LEVEL_INFO);
+							character2->setHit("WINNER");
+							previousKeyChar2 = mainEvent->key.keysym.sym;
+							hitTimerChar2 = SDL_GetTicks();
+							break;
+
+
+
 				default:
 					previousKey = mainEvent->key.keysym.sym;
 					break;
