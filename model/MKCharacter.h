@@ -38,6 +38,10 @@ public:
 
     void setMovement(string newMovement);
 
+    string getHit();
+
+    void setHit(string newHit);
+
     void setJump(bool jump);
 
     bool isJumping();
@@ -63,6 +67,7 @@ private:
     void RestartJump();
     string movement;
     string jumpMovement;
+    string hitMovement;
 
     double posX;
     double posY;

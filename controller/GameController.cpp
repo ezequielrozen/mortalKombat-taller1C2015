@@ -67,8 +67,11 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
 					previousKey = mainEvent->key.keysym.sym;
 					break;
 				case SDLK_w:
-					Mylog->Log("movimiento del personaje: hacia arriba", ERROR_LEVEL_INFO);
-					character2->setJump(true);
+					if (previousKey == SDLK_w)
+					{
+						Mylog->Log("movimiento del personaje: hacia arriba", ERROR_LEVEL_INFO);
+						character2->setJump(true);
+					}
 					previousKey = mainEvent->key.keysym.sym;
 					break;
 				case SDLK_DOWN:
@@ -92,46 +95,50 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
 				case SDLK_k:
 					if (previousKey == SDLK_DOWN){
 						Mylog->Log("movimiento del personaje: Patada baja", ERROR_LEVEL_INFO);
-						character->setMovement("KICKDOWN");
+						character->setHit("KICKDOWN");
 						previousKey = SDLK_DOWN;
-						timer = SDL_GetTicks();
+						hitTimer = SDL_GetTicks();
 					}
 					else{
 						Mylog->Log("movimiento del personaje: Pateando", ERROR_LEVEL_INFO);
-						character->setMovement("KICK");
+						character->setHit("KICK");
 						previousKey = mainEvent->key.keysym.sym;
-						timer = SDL_GetTicks();
+						hitTimer = SDL_GetTicks();
 					}
 					break;
 				case SDLK_f:
-					Mylog->Log("movimiento del personaje: Pateando", ERROR_LEVEL_INFO);
-					character2->setMovement("KICK");
-					previousKey = mainEvent->key.keysym.sym;
-					timer = SDL_GetTicks();
+					if (previousKey == SDLK_DOWN){
+						Mylog->Log("movimiento del personaje: Patada baja", ERROR_LEVEL_INFO);
+						character2->setHit("KICKDOWN");
+						previousKey = SDLK_DOWN;
+						hitTimer = SDL_GetTicks();
+					}
+					else{
+						Mylog->Log("movimiento del personaje: Pateando", ERROR_LEVEL_INFO);
+						character2->setHit("KICK");
+						previousKey = mainEvent->key.keysym.sym;
+						hitTimer = SDL_GetTicks();
+					}
 					break;
 				case SDLK_p:
-					if (previousKey == SDLK_UP){
-							Mylog->Log("movimiento del personaje: Golpe de puño, gancho.", ERROR_LEVEL_INFO);
-							character->setMovement("PUNCHUP");
-							timer = SDL_GetTicks();
-					}
-					else if (previousKey == SDLK_LEFT){
-						character->setMovement("PUNCHJUMPLEFT");
+					if (previousKey == SDLK_LEFT){
+						character->setHit("PUNCHJUMPLEFT");
 						character->setJump(true);
 						Mylog->Log("movimiento del personaje: Golpe de puño con salto hacia la izquierda.", ERROR_LEVEL_INFO);
-						timer = SDL_GetTicks();
+						hitTimer = SDL_GetTicks();
 					}
 					else if (previousKey == SDLK_RIGHT){
-						character->setMovement("PUNCHJUMPRIGHT");
+						character->setHit("PUNCHJUMPRIGHT");
 						character->setJump(true);
 						Mylog->Log("movimiento del personaje: Golpe de puño con salto hacia la derecha.", ERROR_LEVEL_INFO);
-						timer = SDL_GetTicks();
+						hitTimer = SDL_GetTicks();
 					}
 					else{
 						Mylog->Log("movimiento del personaje: Golpe de puño.", ERROR_LEVEL_INFO);
-						character->setMovement("PUNCH");
+						character->setHit("PUNCH");
 						previousKey = mainEvent->key.keysym.sym;
-						timer = SDL_GetTicks();
+						hitTimer = SDL_GetTicks();
+						cout << "PUNCH" << endl;
 					}
 					break;
 				case SDLK_o:
@@ -174,10 +181,16 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
 		case SDL_KEYUP:
 			switch(mainEvent->key.keysym.sym){
 				case SDLK_DOWN:
-					previousKey = SDLK_k;
+					previousKey = SDLK_0;
 					break;
 				case SDLK_UP:
-					previousKey = SDLK_p;
+					previousKey = SDLK_0;
+					break;
+				case SDLK_RIGHT:
+					previousKey = SDLK_0;
+					break;
+				case SDLK_LEFT:
+					previousKey = SDLK_0;
 					break;
 				default:
 					break;
@@ -188,6 +201,11 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
 				character2->setMovement("NONE");
 				timer = SDL_GetTicks();
     		}
+    		if (hitTimer + COMMANDDELAYKIT < SDL_GetTicks()) {
+    			character->setHit("NONE");
+				character2->setHit("NONE");
+				hitTimer = SDL_GetTicks();
+    		}
 			break;
     	default:
     		if (timer + COMMANDDELAY < SDL_GetTicks()) {
@@ -195,6 +213,11 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
 				character2->setMovement("NONE");
 				timer = SDL_GetTicks();
     		}
+    		if (hitTimer + COMMANDDELAYKIT < SDL_GetTicks()) {
+				character->setHit("NONE");
+				character2->setHit("NONE");
+				hitTimer = SDL_GetTicks();
+			}
     		break;
     }
 }

@@ -212,29 +212,29 @@ void GameView::endRender() {
 void GameView::runCharacter() {
     CharacterSprite* sprite;
 
-    if (scorpion->isJumping() && scorpion->getJumpMovement() == "NONE") {
+    if (scorpion->isJumping() && scorpion->getJumpMovement() == "NONE" && scorpion->getHit() == "NONE") {
         sprite = scorpionJump;
         sprite->Play(300);
     }
     //HA: Aca hay q preguntar de q lado esta el oponente para ver si gira para un lado o el otro
-    else if (scorpion->isJumping() && scorpion->getJumpMovement() == "RIGHT") {
+    else if (scorpion->isJumping() && scorpion->getJumpMovement() == "RIGHT" && scorpion->getHit() == "NONE") {
         sprite = scorpionSideJump;
         sprite->Play(50);
     }
-    else if (scorpion->isJumping() && scorpion->getJumpMovement() == "LEFT") {
+    else if (scorpion->isJumping() && scorpion->getJumpMovement() == "LEFT" && scorpion->getHit() == "NONE") {
         sprite = scorpionSideJump;
         sprite->PlayBack(50);
     }
-    else if (scorpion->getMovement() == "NONE") {
+    else if (scorpion->getMovement() == "NONE" && scorpion->getHit() == "NONE") {
         sprite = scorpionStance;
         RestarAllScorpionSprites();
         sprite->Play(100);
     }
-    else if (scorpion->getMovement() == "RIGHT") {
+    else if (scorpion->getMovement() == "RIGHT" && scorpion->getHit() == "NONE") {
         sprite = scorpionWalk;
         sprite->Play(100);
     }
-    else if (scorpion->getMovement() == "LEFT") {
+    else if (scorpion->getMovement() == "LEFT" && scorpion->getHit() == "NONE") {
         sprite = scorpionWalk;
         sprite->PlayBack(100);
     }
@@ -242,20 +242,16 @@ void GameView::runCharacter() {
         sprite = scorpionDuck;
         sprite->Play(20);
     }
-    else if (scorpion->getMovement() == "KICK") {
+    else if (scorpion->getHit() == "KICK") {
 		sprite = scorpionKick;
 		sprite->Play(100);
 	}
-    else if (scorpion->getMovement() == "KICKDOWN") {
+    else if (scorpion->getHit() == "KICKDOWN") {
     		sprite = scorpionKickDown;
     		sprite->Play(100);
     }
-    else if (scorpion->getMovement() == "PUNCH") {
+    else if (scorpion->getHit() == "PUNCH") {
     		sprite = scorpionPunch;
-    		sprite->Play(100);
-    }
-    else if (scorpion->getMovement() == "PUNCHUP") {
-    		sprite = scorpionPunchUp;
     		sprite->Play(100);
     }
     else if (scorpion->getMovement() == "SHOOT") {
@@ -278,7 +274,7 @@ void GameView::runCharacter() {
     		sprite = scorpionFall;
     		sprite->PlayFall(250);
     }
-    else if ((scorpion->getJumpMovement() == "PUNCHJUMPLEFT" || scorpion->getJumpMovement() == "PUNCHJUMPRIGHT")) {
+    else if ((scorpion->getHit() == "PUNCHJUMPLEFT" || scorpion->getHit() == "PUNCHJUMPRIGHT")) {
     	if (scorpion->isJumping() )
     	{
 			sprite = scorpionPunchJump;
@@ -292,89 +288,81 @@ void GameView::runCharacter() {
     	}
 	};
 
-
     CharacterSprite* sprite2;
 
-    if (raiden->isJumping() && raiden->getJumpMovement() == "NONE") {
-        sprite2 = scorpionJump;
+    if (raiden->isJumping() && raiden->getJumpMovement() == "NONE" && raiden->getHit() == "NONE") {
+        sprite2 = raidenJump;
         sprite2->Play(300);
     }
-    else if (raiden->isJumping() && raiden->getJumpMovement() == "RIGHT") {
+    //HA: Aca hay q preguntar de q lado esta el oponente para ver si gira para un lado o el otro
+    else if (raiden->isJumping() && raiden->getJumpMovement() == "RIGHT" && raiden->getHit() == "NONE") {
         sprite2 = raidenSideJump;
         sprite2->Play(50);
     }
-    else if (raiden->isJumping() && raiden->getJumpMovement() == "LEFT") {
+    else if (raiden->isJumping() && raiden->getJumpMovement() == "LEFT" && raiden->getHit() == "NONE") {
         sprite2 = raidenSideJump;
         sprite2->PlayBack(50);
     }
-    else if (raiden->getMovement() == "NONE") {
+    else if (raiden->getMovement() == "NONE" && raiden->getHit() == "NONE") {
         sprite2 = raidenStance;
         RestarAllRaidenSprites();
         sprite2->Play(100);
     }
-    else if (raiden->getMovement() == "RIGHT") {
+    else if (raiden->getMovement() == "RIGHT" && raiden->getHit() == "NONE") {
         sprite2 = raidenWalk;
         sprite2->Play(100);
     }
-    else if (raiden->getMovement() == "LEFT") {
+    else if (raiden->getMovement() == "LEFT" && raiden->getHit() == "NONE") {
         sprite2 = raidenWalk;
         sprite2->PlayBack(100);
     }
     else if (raiden->getMovement() == "DUCK") {
-        sprite = raidenDuck;
-        sprite->Play(20);
+        sprite2 = raidenDuck;
+        sprite2->Play(20);
     }
-    else if (raiden->getMovement() == "KICK") {
-        sprite = raidenKick;
-        sprite->Play(100);
+    else if (raiden->getHit() == "KICK") {
+		sprite2 = raidenKick;
+		sprite2->Play(100);
+	}
+    else if (raiden->getHit() == "KICKDOWN") {
+    		sprite2 = raidenKickDown;
+    		sprite2->Play(100);
     }
-    else if (raiden->getMovement() == "KICKDOWN") {
-        sprite = raidenKickDown;
-        sprite->Play(100);
-    }
-    else if (raiden->getMovement() == "PUNCH") {
-        sprite = raidenPunch;
-        sprite->Play(100);
-    }
-    else if (raiden->getMovement() == "PUNCHUP") {
-        sprite = raidenPunchUp;
-        sprite->Play(100);
-    }
-    else if (raiden->getMovement() == "PUNCHJUMP") {
-        sprite = raidenPunchJump;
-        sprite->Play(100);
+    else if (raiden->getHit() == "PUNCH") {
+    		sprite2 = raidenPunch;
+    		sprite2->Play(100);
     }
     else if (raiden->getMovement() == "SHOOT") {
-        sprite = raidenShoot;
-        sprite->PlayShoot(100);
+    		sprite2 = raidenShoot;
+    		sprite2->PlayShoot(100);
     }
     else if (raiden->getMovement() == "DEFENSE") {
-        sprite = raidenBlock;
-        sprite->Play(100);
+    		sprite2 = raidenBlock;
+    		sprite2->Play(100);
     }
     else if (raiden->getMovement() == "DIZZY") {
-    	sprite = raidenDizzy;
-    	sprite->Play(150);
+    		sprite2 = raidenDizzy;
+    		sprite2->Play(150);
     }
     else if (raiden->getMovement() == "BEINGHIT") {
-        sprite = raidenBeingHit;
-        sprite->Play(150);
+    		sprite2 = raidenBeingHit;
+    		sprite2->Play(150);
     }
     else if (raiden->getMovement() == "FALLING") {
-        sprite = raidenFall;
-        sprite->PlayFall(250);
+    		sprite2 = raidenFall;
+    		sprite2->PlayFall(250);
     }
-    else if ((raiden->getJumpMovement() == "PUNCHJUMPLEFT" || raiden->getJumpMovement() == "PUNCHJUMPRIGHT")) {
+    else if ((raiden->getHit() == "PUNCHJUMPLEFT" || raiden->getHit() == "PUNCHJUMPRIGHT")) {
     	if (raiden->isJumping() )
     	{
-			sprite = raidenPunchJump;
-			sprite->Play(400);
+			sprite2 = raidenPunchJump;
+			sprite2->Play(400);
     	}
     	else
     	{
-            sprite = raidenStance;
+            sprite2 = raidenStance;
             RestarAllRaidenSprites();
-            sprite->Play(100);
+            sprite2->Play(100);
     	}
 	};
 

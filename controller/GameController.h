@@ -30,6 +30,7 @@ public:
 private:
 
     int timer;
+    int hitTimer;
     JoystickController* joystickController;
     SDL_Event* mainEvent;
 

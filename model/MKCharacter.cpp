@@ -27,6 +27,7 @@ MKCharacter::MKCharacter(float initialPosX, float initialPosY, float ancho, floa
 
 	movement = "NONE";
 	jumpMovement = "NONE";
+	hitMovement = "NONE";
 	jumping = false;
 
 	this->life = 100;
@@ -175,6 +176,14 @@ void MKCharacter::setJump(bool jump) {
 	this->jumping = jump;
 
 	this->setJumpMovement(this->movement);
+}
+
+void MKCharacter::setHit(string newHit) {
+	this->hitMovement = newHit;
+}
+
+string MKCharacter::getHit() {
+	return this->hitMovement;
 }
 
 bool MKCharacter::isJumping() {

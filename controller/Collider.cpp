@@ -2,7 +2,7 @@
 
 
 Collider::Collider() {
-
+	timer = 0;
 }
 
 Collider::~Collider() {
@@ -34,17 +34,32 @@ void Collider::update(MKCharacter* character1, MKCharacter* character2, bool cam
 		};
 	}
 	if ((superpositionRight(character1,character2) || superpositionLeft(character1, character2)) &&
-		character1->getMovement() == "KICK") {
-		cout << "ENTRO" << endl;
-		character2->receiveBlow(DAMAGE.at("KICK"));
-		cout << character2->getLife() << endl;
+		character1->getHit() == "KICK") {
+		if (timer + COMMANDDELAYKIT < SDL_GetTicks()) {
+			cout << "KICK" << endl;
+			character2->receiveBlow(DAMAGE.at("KICK"));
+			cout << character2->getLife() << endl;
+			timer = SDL_GetTicks();
+		}
 
 	};
+
 	if ((superpositionRight(character2,character1) || superpositionLeft(character2, character1)) &&
-		character2->getMovement() == "KICK") {
+		character2->getHit() == "KICK") {
 		cout << "ENTRO" << endl;
 		character1->receiveBlow(DAMAGE.at("KICK"));
 		cout << character2->getLife() << endl;
+
+	};
+
+	if ((superpositionRight(character1,character2) || superpositionLeft(character1, character2)) &&
+		character1->getHit() == "PUNCH") {
+		if (timer + COMMANDDELAYKIT < SDL_GetTicks()) {
+			cout << "PUNCH" << endl;
+			character2->receiveBlow(DAMAGE.at("KICK"));
+			cout << character2->getLife() << endl;
+			timer = SDL_GetTicks();
+		}
 
 	};
 }
