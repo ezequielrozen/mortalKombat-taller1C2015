@@ -16,7 +16,9 @@ class LifeView {
         LifeView(SDL_Renderer* renderer, string filePath, float width, float height, bool inverted);
         LifeView(SDL_Renderer* renderer, string filePath, float width, bool inverted);
         ~LifeView();
-        void Draw(float currentLife);
+
+        // Maybe it's better to have an update method.
+        void Draw(float currentLifePercentage);
     private:
         SDL_Renderer* renderer;
         SDL_Texture* texture;

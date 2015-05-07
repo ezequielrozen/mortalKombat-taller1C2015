@@ -52,16 +52,17 @@ LifeView::~LifeView() {
     SDL_DestroyTexture(this->insideTexture);
 }
 
-void LifeView::Draw(float currentLife) {
+void LifeView::Draw(float currentLifePercentage) {
     if (!inverted) {
         SDL_RenderCopy(this->renderer, this->texture, NULL, &draw);
-        insideDraw.w = draw.w * currentLife / 100;
+        insideDraw.w = draw.w * currentLifePercentage / 100;
         SDL_RenderCopy(this->renderer, this->insideTexture, NULL, &insideDraw);
 
     } else {
         SDL_RendererFlip flip = SDL_FLIP_HORIZONTAL;
         SDL_RenderCopyEx(this->renderer, this->texture, NULL, &draw, NULL, NULL, flip);
-        insideDraw.w = draw.w * currentLife / 100;
+        insideDraw.w = draw.w * currentLifePercentage / 100;
+        insideDraw.x = draw.x + (draw.w - insideDraw.w);
         SDL_RenderCopy(this->renderer, this->insideTexture, NULL, &insideDraw);
 
     }
