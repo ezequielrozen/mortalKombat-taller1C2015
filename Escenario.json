@@ -46,8 +46,8 @@
 			"z-index": 3,
 			"sprites": 
 			{
-				"walk": "data/scorpionWalk.png",
-				"stance": "data/scorpionStance.png",
+				"walk": "data/raidenWalk.png",
+				"stance": "data/raidenStance.png",
 				"jump": "data/scorpionJump.png",
 				"sideJump": "data/scorpionSideJump.png",
 				"duck": "data/scorpionDuck.png",

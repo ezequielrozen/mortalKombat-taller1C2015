@@ -145,7 +145,7 @@ void GameView::LoadSprites() {
     scorpionHead = new CharacterSprite(this->renderer, scorpion->getFileMovement(MOVE_NAME_HEAD), scorpion->getX(), scorpion->getY(), scorpion->getWidth(), scorpion->getHeight(), 9, oponentSide, false);
 
     raidenWalk = new CharacterSprite(this->renderer, raiden->getFileMovement(MOVE_NAME_WALK) , raiden->getX(),raiden->getY(), raiden->getWidth(),raiden->getHeight(), 9, oponentSide, false);
-	raidenStance = new CharacterSprite(this->renderer, raiden->getFileMovement(MOVE_NAME_STANCE), raiden->getX(),raiden->getY(), raiden->getWidth(),raiden->getHeight(), 7, oponentSide, false);
+	raidenStance = new CharacterSprite(this->renderer, raiden->getFileMovement(MOVE_NAME_STANCE), raiden->getX(),raiden->getY(), raiden->getWidth(),raiden->getHeight(), 10, oponentSide, false);
 	raidenJump = new CharacterSprite(this->renderer, raiden->getFileMovement(MOVE_NAME_JUMP), raiden->getX(),raiden->getY(), raiden->getWidth(),raiden->getHeight(), 9, oponentSide, false);
 	raidenSideJump = new CharacterSprite(this->renderer, raiden->getFileMovement(MOVE_NAME_SIDEJUMP), raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 8, oponentSide, false);
 	raidenDuck = new CharacterSprite(this->renderer, raiden->getFileMovement(MOVE_NAME_DUCK), raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 6, oponentSide, true);
@@ -312,15 +312,15 @@ void GameView::runCharacter() {
     else if (raiden->getMovement() == "NONE" && raiden->getHit() == "NONE") {
         sprite2 = raidenStance;
         RestarAllRaidenSprites();
-        sprite2->Play(100);
+        sprite2->Play(50);
     }
     else if (raiden->getMovement() == "RIGHT" && raiden->getHit() == "NONE") {
         sprite2 = raidenWalk;
-        sprite2->Play(100);
+        sprite2->PlayBack(100);
     }
     else if (raiden->getMovement() == "LEFT" && raiden->getHit() == "NONE") {
         sprite2 = raidenWalk;
-        sprite2->PlayBack(100);
+        sprite2->Play(100);
     }
     else if (raiden->getMovement() == "DUCK") {
         sprite2 = raidenDuck;
