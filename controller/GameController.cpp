@@ -47,9 +47,11 @@ void GameController::testElapsedTime(MKCharacter* character,
 }
 
 void GameController::update(MKCharacter* character, MKCharacter* character2) {
-
     extern logger* Mylog;
 //    this->joystickController->update(character,character2);
+
+	double distance =character->getX() - character2->getX();
+	distance = fabs(distance);
 
     switch (mainEvent->type){
     	case SDL_KEYDOWN:
@@ -126,10 +128,13 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
 							}
 							break;
 				case SDLK_o:
-							Mylog->Log("movimiento del personaje: Disparando.", ERROR_LEVEL_INFO);
-							character->setHit("SHOOT");
-							previousKey = mainEvent->key.keysym.sym;
-							hitTimer = SDL_GetTicks();
+//							cout << distance << endl;
+//							if (180 <= distance){
+								Mylog->Log("movimiento del personaje: Disparando.", ERROR_LEVEL_INFO);
+								character->setHit("SHOOT");
+								previousKey = mainEvent->key.keysym.sym;
+								hitTimer = SDL_GetTicks();
+//							}
 							break;
 				case SDLK_d:
 							Mylog->Log("movimiento del personaje: Defensa.", ERROR_LEVEL_INFO);

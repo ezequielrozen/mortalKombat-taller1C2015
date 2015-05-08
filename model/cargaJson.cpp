@@ -226,20 +226,20 @@ void cargaPersonaje(Json::Value personaje, float &charAlto, float &charAncho, in
                 filenameSideJump = strdup(sprites[MOVE_NAME_SIDEJUMP].asString().c_str());
                 filenameDuck  = strdup(sprites[MOVE_NAME_DUCK].asString().c_str());
                 filenameKick  = strdup(sprites[MOVE_NAME_KICK].asString().c_str());
-                filenameKickDown  = strdup(sprites[DEFAULT_KICKDOWN].asString().c_str());
-                filenamePunchJump  = strdup(sprites[DEFAULT_PUNCHJUMP].asString().c_str());
-                filenamePunchUp  = strdup(sprites[DEFAULT_PUNCHUP].asString().c_str());
-                filenamePunch  = strdup(sprites[DEFAULT_PUNCH].asString().c_str());
-                filenameWinner  = strdup(sprites[DEFAULT_WINNER].asString().c_str());
-                filenameBodyParts  = strdup(sprites[DEFAULT_BODYPARTS].asString().c_str());
-                filenameFinisher  = strdup(sprites[DEFAULT_FINISHER].asString().c_str());
-                filenameShoot  = strdup(sprites[DEFAULT_SHOOT].asString().c_str());
-                filenameDizzy  = strdup(sprites[DEFAULT_DIZZY].asString().c_str());
-                filenameFall  = strdup(sprites[DEFAULT_FALL].asString().c_str());
-                filenameBeingHit  = strdup(sprites[DEFAULT_BEINGHIT].asString().c_str());
-                filenameBlock  = strdup(sprites[DEFAULT_BLOCK].asString().c_str());
-                filenameBlockDown  = strdup(sprites[DEFAULT_BLOCKDOWN].asString().c_str());
-                filenameHead  = strdup(sprites[DEFAULT_HEAD].asString().c_str());
+                filenameKickDown  = strdup(sprites[MOVE_NAME_KICKDOWN].asString().c_str());
+                filenamePunchJump  = strdup(sprites[MOVE_NAME_PUNCHJUMP].asString().c_str());
+                filenamePunchUp  = strdup(sprites[MOVE_NAME_PUNCHUP].asString().c_str());
+                filenamePunch  = strdup(sprites[MOVE_NAME_PUNCH].asString().c_str());
+                filenameWinner  = strdup(sprites[MOVE_NAME_WINNER].asString().c_str());
+                filenameBodyParts  = strdup(sprites[MOVE_NAME_BODYPARTS].asString().c_str());
+                filenameFinisher  = strdup(sprites[MOVE_NAME_FINISHER].asString().c_str());
+                filenameShoot  = strdup(sprites[MOVE_NAME_SHOOT].asString().c_str());
+                filenameDizzy  = strdup(sprites[MOVE_NAME_DIZZY].asString().c_str());
+                filenameFall  = strdup(sprites[MOVE_NAME_FALL].asString().c_str());
+                filenameBeingHit  = strdup(sprites[MOVE_NAME_BEINGHIT].asString().c_str());
+                filenameBlock  = strdup(sprites[MOVE_NAME_BLOCK].asString().c_str());
+                filenameBlockDown  = strdup(sprites[MOVE_NAME_BLOCKDOWN].asString().c_str());
+                filenameHead  = strdup(sprites[MOVE_NAME_HEAD].asString().c_str());
             }
         }
 
