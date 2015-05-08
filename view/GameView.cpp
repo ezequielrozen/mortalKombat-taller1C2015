@@ -298,7 +298,11 @@ void GameView::runCharacter() {
     else if (scorpion->getHit() == "WINNER") {
     		sprite = scorpionWinner;
     		sprite->Play(150);
-    };
+    }
+    else if (scorpion->getHit() == "PUNCHUP") {
+        		sprite = scorpionPunchUp;
+        		sprite->Play(150);
+	};
 
     /****************************************************************************************************/
 
@@ -390,7 +394,11 @@ void GameView::runCharacter() {
     else if (raiden->getHit() == "WINNER") {
     		sprite2 = raidenWinner;
     		sprite2->Play(150);
-    };
+    }
+    else if (raiden->getHit() == "PUNCHUP") {
+		sprite2 = raidenPunchUp;
+		sprite2->Play(150);
+	};
 
     if(scorpion->getX() < raiden->getX()){
         sprite->switchSide('r');

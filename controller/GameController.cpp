@@ -112,6 +112,11 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
 								Mylog->Log("movimiento del personaje: Golpe de puño con salto hacia la derecha.", ERROR_LEVEL_INFO);
 								hitTimer = SDL_GetTicks();
 							}
+							else if (previousKey == SDLK_DOWN){
+								character->setHit("PUNCHUP");
+								Mylog->Log("movimiento del personaje: Golpe de puño ascendente.", ERROR_LEVEL_INFO);
+								hitTimer = SDL_GetTicks();
+							}
 							else{
 								Mylog->Log("movimiento del personaje: Golpe de puño.", ERROR_LEVEL_INFO);
 								character->setHit("PUNCH");
@@ -215,6 +220,11 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
 								character2->setHit("PUNCHJUMPRIGHT");
 								character2->setJump(true);
 								Mylog->Log("movimiento del personaje: Golpe de puño con salto hacia la derecha.", ERROR_LEVEL_INFO);
+								hitTimerChar2 = SDL_GetTicks();
+							}
+							else if (previousKeyChar2 == SDLK_s){
+								character2->setHit("PUNCHUP");
+								Mylog->Log("movimiento del personaje: Golpe de puño ascendente.", ERROR_LEVEL_INFO);
 								hitTimerChar2 = SDL_GetTicks();
 							}
 							else{
