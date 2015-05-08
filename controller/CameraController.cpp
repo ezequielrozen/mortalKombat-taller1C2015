@@ -13,14 +13,24 @@ CameraController::~CameraController(void)
 {
 }
 
-bool CameraController::update(MKCharacter* character, MKCharacter* character2, std::list<Layer*>* layers) {
+bool CameraController::cameraMoveLeft(MKCharacter* character1, MKCharacter* character2) {
+    return ((character1->getX() < Util::getInstance()->getLogicalWindowWidth()/10) && (character1->getMovement() == "LEFT")
+        && !(character2->getX() > Util::getInstance()->getLogicalWindowWidth() - Util::getInstance()->getLogicalWindowWidth()/10 - character2->getWidth()));
+}
+
+bool CameraController::cameraMoveRight(MKCharacter* character1, MKCharacter* character2) {
+    return ((character1->getX() > Util::getInstance()->getLogicalWindowWidth() - Util::getInstance()->getLogicalWindowWidth()/10 - character1->getWidth()) &&
+        (character1->getMovement() == "RIGHT") && !(character2->getX() < Util::getInstance()->getLogicalWindowWidth()/10));
+}
+
+bool CameraController::update(MKCharacter* character1, MKCharacter* character2, std::list<Layer*>* layers) {
      extern logger* Mylog;
 
      bool cameraMoved;
 
     //cout << "posXchar1: " << character->getX() << endl;
     static double tempposx = 0;
-    double posXchar1 = character->getX();
+    double posXchar1 = character1->getX();
     double posXchar2 = character2->getX();
     if(tempposx != posXchar1) {
         tempposx = posXchar1;
@@ -30,26 +40,33 @@ bool CameraController::update(MKCharacter* character, MKCharacter* character2, s
         Mylog->Log(mensaje, ERROR_LEVEL_INFO);
     }
 
-    if ((character->getX() < Util::getInstance()->getLogicalWindowWidth()) && (character->getMovement() == "LEFT")) {
-        this->cameraMovement = "LEFT";
-        cameraMoved = true;
-    }
-    else if ((character->getX() > Util::getInstance()->getLogicalWindowWidth() - Util::getInstance()->getLogicalWindowWidth()/10 - character->getWidth()) &&
-            (character->getMovement() == "RIGHT")) {
-        this->cameraMovement = "RIGHT";
-        cameraMoved = true;
-    }
+    if ((this->cameraMoveLeft(character1, character2) && this->cameraMoveRight(character2, character1)) || 
+        (this->cameraMoveLeft(character2, character1) && this->cameraMoveRight(character1, character2)) ||
+        !(this->cameraMoveLeft(character1, character2) || this->cameraMoveRight(character1, character2) ||
+         this->cameraMoveLeft(character2, character1) || this->cameraMoveRight(character2, character1))) {
 
-    if ((character2->getX() < Util::getInstance()->getLogicalWindowWidth()/10) && (character2->getMovement() == "LEFT")) {
-        this->cameraMovement = "LEFT";
-        cameraMoved = true;
-    } else if ((character2->getX() > Util::getInstance()->getLogicalWindowWidth() - Util::getInstance()->getLogicalWindowWidth()/10 - character2->getWidth()) &&
-             (character2->getMovement() == "RIGHT")) {
-        this->cameraMovement = "RIGHT";
-        cameraMoved = true;
-    } else {
         this->cameraMovement = "NONE";
         cameraMoved = false;
+    }
+    else if (this->cameraMoveLeft(character1, character2)) {
+        this->cameraMovement = "LEFT";
+        cameraMoved = true;
+        character2->moveRight();
+    }
+    else if (this->cameraMoveLeft(character2, character1)) {
+        this->cameraMovement = "LEFT";
+        cameraMoved = true;
+        character1->moveRight();
+    }
+    else if (this->cameraMoveRight(character1, character2)) {
+        this->cameraMovement = "RIGHT";
+        cameraMoved = true;
+        character2->moveLeft();
+    }
+    else if (this->cameraMoveRight(character2, character1)) {
+        this->cameraMovement = "RIGHT";
+        cameraMoved = true;
+        character1->moveLeft();
     }
 
     list<Layer*>::iterator it = layers->begin();
@@ -60,7 +77,7 @@ bool CameraController::update(MKCharacter* character, MKCharacter* character2, s
     (*it)->update();
     }
 
-    character->UpdateJump();
+    character1->UpdateJump();
     character2->UpdateJump();
 
     return cameraMoved;

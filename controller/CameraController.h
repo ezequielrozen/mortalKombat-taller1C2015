@@ -20,6 +20,10 @@ public:
 
     bool update(MKCharacter* character, MKCharacter* character2, list<Layer*>* layer);
 
+    bool cameraMoveLeft(MKCharacter* character1, MKCharacter* character2);
+
+    bool cameraMoveRight(MKCharacter* character1, MKCharacter* character2);
+
 private:
 
 	string cameraMovement;

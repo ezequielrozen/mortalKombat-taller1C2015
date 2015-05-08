@@ -7,11 +7,11 @@ MKCharacter::MKCharacter(float initialPosX, float initialPosY, float ancho, floa
 	posY = initialPosY;
 	stageFloor = initialPosY;
 
-	step = 0.00714 * Util::getInstance()->getLogicalWindowWidth();
-
 	this->alto = alto;
 	this->ancho = ancho;
 
+	step = 0.042 * this->ancho;
+	
 	//proporcionVel = 0.04285;
 	//accY = 1.2285 * Util::getInstance()->getLogicalWindowHeight();
 
