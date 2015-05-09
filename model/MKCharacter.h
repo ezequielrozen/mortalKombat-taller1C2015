@@ -13,7 +13,7 @@ using namespace std;
 class MKCharacter
 {
 public:
-    MKCharacter(float initialPosX, float initialPosY, float ancho, float alto, int z_index, int pCharacterNumber);
+    MKCharacter(float initialPosX, float ancho, float alto, int z_index, int pCharacterNumber, string name);
     ~MKCharacter(void);
 
     void moveRight();
@@ -62,6 +62,13 @@ public:
 
     bool isAlive();
 
+    void setName(string aName);
+
+    string getName();
+
+    void setStageFloor(double);
+
+    void setPosY(double);
 
 private:
     void RestartJump();
@@ -94,6 +101,7 @@ private:
 	int life;
 	int characterNumber;
 
+    string name;
 };
 
 #endif /* MKCHARACTER_H_ */

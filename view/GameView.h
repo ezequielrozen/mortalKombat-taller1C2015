@@ -20,7 +20,7 @@ public:
     GameView(float ScreenWidth, float ScreenHeight, MKCharacter* character, MKCharacter* character2, Stage* stage, string OponentSide);
     ~GameView();
     void Render();
-    void LoadSprites();
+    void LoadSprites(string name1, string name2);
 
     void startRender();
     void endRender();

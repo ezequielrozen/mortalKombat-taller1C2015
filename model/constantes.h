@@ -22,7 +22,7 @@ const float LIFEBAR_RELATIVE_WIDTH          = 0.35; // Relative to logical windo
 //personaje
 const float ANCHOPERSONAJE                  =   68;
 const float ALTOPERSONAJE                   =   125;
-const float ZINDEXPERSONAJE                 =    3;
+const int ZINDEXPERSONAJE                   =   3;
 const char* const DEFAULT_WALK              = "data/scorpionWalk.png";
 const char* const DEFAULT_STANCE            = "data/scorpionStance.png";
 const char* const DEFAULT_JUMP              = "data/scorpionJump.png";
@@ -64,6 +64,8 @@ const char* const MOVE_NAME_BEINGHIT		= "beingHit";
 const char* const MOVE_NAME_BLOCK			= "block";
 const char* const MOVE_NAME_BLOCKDOWN		= "blockDown";
 const char* const MOVE_NAME_HEAD			= "head";
+const char* const NAME_CHARACTER_1          = "scorpion";
+const char* const NAME_CHARACTER_2          = "raiden";
 
 typedef std::map<std::string, int> Map;
 const Map DAMAGE = {{"KICK", 5},

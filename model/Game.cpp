@@ -13,11 +13,13 @@ void Game::initGame(char* filePath) {
     this->stage = this->gameLoader->getStage();
     this->oponentSide = this->gameLoader->getOponentSide();
 
-    this->scorpion = new MKCharacter(0.2*(Util::getInstance()->getLogicalWindowWidth()-this->gameLoader->getCharacterWidth()), this->stage->getFloor(),
-    								this->gameLoader->getCharacterWidth(),this->gameLoader->getCharacterHeight(), this->gameLoader->getZ_index(), 0);
-
-    this->raiden = new MKCharacter(0.8*(Util::getInstance()->getLogicalWindowWidth()-this->gameLoader->getCharacterWidth()), this->stage->getFloor(),
-    								this->gameLoader->getCharacterWidth(), this->gameLoader->getCharacterHeight(), this->gameLoader->getZ_index(), 1);
+    this->scorpion = this->gameLoader->getCharacters()->front();
+    this->raiden = this->gameLoader->getCharacters()->back();
+    //This is very important!
+    this->scorpion->setPosY(this->stage->getFloor());
+    this->scorpion->setStageFloor(this->stage->getFloor());
+    this->raiden->setPosY(this->stage->getFloor());
+    this->raiden->setStageFloor(this->stage->getFloor());
 
     this->gameView = new GameView(ScreenWidth, ScreenHeight, scorpion, raiden, stage, oponentSide);
     this->gameController = new GameController();
@@ -25,9 +27,8 @@ void Game::initGame(char* filePath) {
     this->collider = new Collider();
 }
 
-Game::~Game(){
-    delete scorpion;
-    delete raiden;
+Game::~Game() {
+    delete gameLoader;
     delete gameView;
     delete gameController;
     delete cameraController;

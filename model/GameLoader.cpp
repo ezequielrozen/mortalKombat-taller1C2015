@@ -3,6 +3,7 @@
 
 GameLoader::GameLoader() {
     this->layers = new list<Layer*>();
+    this->characters = new list<MKCharacter*>();
 }
 
 void GameLoader::loadJSON(char* passed_path) {
@@ -13,14 +14,12 @@ void GameLoader::loadJSON(char* passed_path) {
         file = passed_path;
     }
 
-    bool respuesta = cargaArchivoJSON(file, characterWidth, characterHeight, stageWidth, stageHeight,
-                            floor, oponentSide, layers, z_index);
+    bool respuesta = cargaArchivoJSON(file, stageWidth, stageHeight, floor, oponentSide, layers, this->characters);
 
     if (!respuesta)
     {
 
-    	cargaArchivoJSON("Escenario.json", characterWidth, characterHeight, stageWidth, stageHeight,
-    	                            floor, oponentSide, layers, z_index);
+    	cargaArchivoJSON("Escenario.json", stageWidth, stageHeight, floor, oponentSide, layers, this->characters);
 
     	Mylog->Log("Cargando Escenario default por JSON mal formado. ", ERROR_LEVEL_WARNING);
     }
@@ -32,20 +31,12 @@ void GameLoader::loadJSON(char* passed_path) {
 GameLoader::~GameLoader() {
     delete this->layers;
     delete this->stage;
+    std::list<MKCharacter*>::iterator it = this->characters->begin();
+    for(it; it != this->characters->end(); it++) {
+        delete (*it);
+    }
+    delete this->characters;
 }
-
-float GameLoader::getCharacterWidth() {
-    return this->characterWidth;
-}
-
-float GameLoader::getCharacterHeight() {
-    return characterHeight;
-}
-
-int GameLoader::getZ_index() {
-    return this->z_index;
-}
-
 
 string GameLoader::getOponentSide() {
     return this->oponentSide;
@@ -53,4 +44,8 @@ string GameLoader::getOponentSide() {
 
 Stage *GameLoader::getStage() {
     return this->stage;
+}
+
+list<MKCharacter *>* GameLoader::getCharacters() {
+    return this->characters;
 }

@@ -15,10 +15,9 @@ using namespace std;
 
 //Abre el archivo recibido por path, lo abre y carga el Json.
 // Devuelve 1 si estuvo OK, Devuelve 0 si hubo error.
-bool cargaArchivoJSON(char* filename, float &charAncho, float &charAlto, float &stageWidth, float &stageHeight,
-                        float &floor, string &oponentSide, std::list<Layer*> *layers, int &z_index);
+bool cargaArchivoJSON(char* filename, float &stageWidth, float &stageHeight, float &floor, string &oponentSide, std::list<Layer*> *layers, std::list<MKCharacter*>* characters);
 
-void cargaPersonaje(Json::Value personaje, float &charAlto, float &charAncho, int &z_index);
+void cargaPersonaje(Json::Value personaje, std::list<MKCharacter*>* characters, int characterNumber);
 
 void cargaVentana(Json::Value ventana);
 

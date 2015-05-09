@@ -1,10 +1,10 @@
 #include "CargaJson.h"
+#include <algorithm>
 
 using namespace std;
 
-bool cargaArchivoJSON(char* filename, float &charAncho, float &charAlto, float &stageWidth,
-						float &stageHeight, float &floor, std::string &oponentSide,
-						std::list<Layer*>* layers, int &z_index){
+bool cargaArchivoJSON(char* filename, float &stageWidth, float &stageHeight, float &floor, std::string &oponentSide,
+						std::list<Layer*>* layers, std::list<MKCharacter*>* characters) {
 
     extern logger* Mylog;
     char mensaje[200];
@@ -120,14 +120,14 @@ bool cargaArchivoJSON(char* filename, float &charAncho, float &charAlto, float &
 
 	if(root.isMember("personaje") && root["personaje"].isArray()){
         const Json::Value personaje = root["personaje"];
-        for ( unsigned int index = 0; index < personaje.size(); ++index ){
-            cargaPersonaje(personaje[index], charAlto, charAncho, z_index);
+        for ( unsigned int index = 0; index < personaje.size(); index++ ){
+            cargaPersonaje(personaje[index], characters, index);
         }
     }else{
         //CARGAR POR DEFAULT
-        cargaPersonaje(root, charAlto, charAncho, z_index); /*root tiene escenario, capas, personaje, etc.
-                                                                no tiene propiedades como ancho, alto, etc.
-                                                                ver si hay forma mejor de hacerlo*/
+        cargaPersonaje(root, characters, 0); //root tiene escenario, capas, personaje, etc.
+        cargaPersonaje(root, characters, 1);                    //no tiene propiedades como ancho, alto, etc.
+                                                                //ver si hay forma mejor de hacerlo
     }
 
 
@@ -157,7 +157,7 @@ bool cargaArchivoJSON(char* filename, float &charAncho, float &charAlto, float &
 
 }
 
-void cargaPersonaje(Json::Value personaje, float &charAlto, float &charAncho, int &z_index){
+void cargaPersonaje(Json::Value personaje, std::list<MKCharacter*>* characters, int characterNumber) {
     extern logger* Mylog;
     char mensaje[200];
     char* filenameWalk = new char[200] ;
@@ -181,67 +181,69 @@ void cargaPersonaje(Json::Value personaje, float &charAlto, float &charAncho, in
     char* filenameBlockDown = new char[200];
     char* filenameHead = new char[200];
 
+    string name = (personaje.isMember("name") && personaje["name"].isString()) ? personaje["name"].asString() : "";
+    std::transform(name.begin(), name.end(), name.begin(), ::tolower);
 
-     charAlto = (personaje.isMember("alto") && personaje["alto"].isNumeric() && personaje["alto"].asFloat()>0) ?
+    float charAlto = (personaje.isMember("alto") && personaje["alto"].isNumeric() && personaje["alto"].asFloat()>0) ?
                                                     personaje["alto"].asFloat() : 0.0;
-     charAncho = (personaje.isMember("ancho") && personaje["ancho"].isNumeric() && personaje["ancho"].asFloat()>0) ?
-                                                    personaje["ancho"].asFloat() : 0.0;
-     z_index = (personaje.isMember("z-index") && personaje["z-index"].isInt() && personaje["z-index"].asInt()>0) ?
+    float charAncho = (personaje.isMember("ancho") && personaje["ancho"].isNumeric() && personaje["ancho"].asFloat()>0) ?
+                                                personaje["ancho"].asFloat() : 0.0;
+    int z_index = (personaje.isMember("z-index") && personaje["z-index"].isInt() && personaje["z-index"].asInt()>0) ?
                                                         personaje["z-index"].asInt() : 0;
 
-        if(personaje.isMember("sprites")){
+    if(personaje.isMember("sprites")){
 
-            const Json::Value sprites = personaje["sprites"];
+        const Json::Value sprites = personaje["sprites"];
 
 
-            if(!sprites.isMember("walk") || !sprites.isMember("stance")
-                    || !sprites.isMember("jump") || !sprites.isMember("sideJump")){
-                Mylog->Log("Archivo JSON invalido: sprites mal formadas. Usando default", ERROR_LEVEL_ERROR);
+        if(!sprites.isMember("walk") || !sprites.isMember("stance")
+                || !sprites.isMember("jump") || !sprites.isMember("sideJump")){
+            Mylog->Log("Archivo JSON invalido: sprites mal formadas. Usando default", ERROR_LEVEL_ERROR);
 
-                //CARGAR DEFAULT
-                filenameWalk = strdup(DEFAULT_WALK);
-                filenameStance = strdup(DEFAULT_STANCE);
-                filenameJump = strdup(DEFAULT_JUMP);
-                filenameSideJump = strdup(DEFAULT_SIDEJUMP);
-                filenameDuck = strdup(DEFAULT_DUCK);
-                filenameKick = strdup(DEFAULT_KICK);
-                filenameKickDown = strdup(DEFAULT_KICKDOWN);
-                filenamePunchJump = strdup(DEFAULT_PUNCHJUMP);
-                filenamePunchUp = strdup(DEFAULT_PUNCHUP);
-                filenamePunch = strdup(DEFAULT_PUNCH);
-                filenameWinner = strdup(DEFAULT_WINNER);
-                filenameBodyParts = strdup(DEFAULT_BODYPARTS);
-                filenameFinisher = strdup(DEFAULT_FINISHER);
-                filenameShoot = strdup(DEFAULT_SHOOT);
-                filenameDizzy = strdup(DEFAULT_DIZZY);
-                filenameFall = strdup(DEFAULT_FALL);
-                filenameBeingHit = strdup(DEFAULT_BEINGHIT);
-                filenameBlock = strdup(DEFAULT_BLOCK);
-                filenameBlockDown = strdup(DEFAULT_BLOCKDOWN);
-                filenameHead = strdup(DEFAULT_HEAD);
-            }else{
-                filenameWalk = strdup(sprites[MOVE_NAME_WALK].asString().c_str());
-                filenameStance = strdup(sprites[MOVE_NAME_STANCE].asString().c_str());
-                filenameJump = strdup(sprites[MOVE_NAME_JUMP].asString().c_str());
-                filenameSideJump = strdup(sprites[MOVE_NAME_SIDEJUMP].asString().c_str());
-                filenameDuck  = strdup(sprites[MOVE_NAME_DUCK].asString().c_str());
-                filenameKick  = strdup(sprites[MOVE_NAME_KICK].asString().c_str());
-                filenameKickDown  = strdup(sprites[MOVE_NAME_KICKDOWN].asString().c_str());
-                filenamePunchJump  = strdup(sprites[MOVE_NAME_PUNCHJUMP].asString().c_str());
-                filenamePunchUp  = strdup(sprites[MOVE_NAME_PUNCHUP].asString().c_str());
-                filenamePunch  = strdup(sprites[MOVE_NAME_PUNCH].asString().c_str());
-                filenameWinner  = strdup(sprites[MOVE_NAME_WINNER].asString().c_str());
-                filenameBodyParts  = strdup(sprites[MOVE_NAME_BODYPARTS].asString().c_str());
-                filenameFinisher  = strdup(sprites[MOVE_NAME_FINISHER].asString().c_str());
-                filenameShoot  = strdup(sprites[MOVE_NAME_SHOOT].asString().c_str());
-                filenameDizzy  = strdup(sprites[MOVE_NAME_DIZZY].asString().c_str());
-                filenameFall  = strdup(sprites[MOVE_NAME_FALL].asString().c_str());
-                filenameBeingHit  = strdup(sprites[MOVE_NAME_BEINGHIT].asString().c_str());
-                filenameBlock  = strdup(sprites[MOVE_NAME_BLOCK].asString().c_str());
-                filenameBlockDown  = strdup(sprites[MOVE_NAME_BLOCKDOWN].asString().c_str());
-                filenameHead  = strdup(sprites[MOVE_NAME_HEAD].asString().c_str());
-            }
+            //CARGAR DEFAULT
+            filenameWalk = strdup(DEFAULT_WALK);
+            filenameStance = strdup(DEFAULT_STANCE);
+            filenameJump = strdup(DEFAULT_JUMP);
+            filenameSideJump = strdup(DEFAULT_SIDEJUMP);
+            filenameDuck = strdup(DEFAULT_DUCK);
+            filenameKick = strdup(DEFAULT_KICK);
+            filenameKickDown = strdup(DEFAULT_KICKDOWN);
+            filenamePunchJump = strdup(DEFAULT_PUNCHJUMP);
+            filenamePunchUp = strdup(DEFAULT_PUNCHUP);
+            filenamePunch = strdup(DEFAULT_PUNCH);
+            filenameWinner = strdup(DEFAULT_WINNER);
+            filenameBodyParts = strdup(DEFAULT_BODYPARTS);
+            filenameFinisher = strdup(DEFAULT_FINISHER);
+            filenameShoot = strdup(DEFAULT_SHOOT);
+            filenameDizzy = strdup(DEFAULT_DIZZY);
+            filenameFall = strdup(DEFAULT_FALL);
+            filenameBeingHit = strdup(DEFAULT_BEINGHIT);
+            filenameBlock = strdup(DEFAULT_BLOCK);
+            filenameBlockDown = strdup(DEFAULT_BLOCKDOWN);
+            filenameHead = strdup(DEFAULT_HEAD);
+        }else{
+            filenameWalk = strdup(sprites[MOVE_NAME_WALK].asString().c_str());
+            filenameStance = strdup(sprites[MOVE_NAME_STANCE].asString().c_str());
+            filenameJump = strdup(sprites[MOVE_NAME_JUMP].asString().c_str());
+            filenameSideJump = strdup(sprites[MOVE_NAME_SIDEJUMP].asString().c_str());
+            filenameDuck  = strdup(sprites[MOVE_NAME_DUCK].asString().c_str());
+            filenameKick  = strdup(sprites[MOVE_NAME_KICK].asString().c_str());
+            filenameKickDown  = strdup(sprites[MOVE_NAME_KICKDOWN].asString().c_str());
+            filenamePunchJump  = strdup(sprites[MOVE_NAME_PUNCHJUMP].asString().c_str());
+            filenamePunchUp  = strdup(sprites[MOVE_NAME_PUNCHUP].asString().c_str());
+            filenamePunch  = strdup(sprites[MOVE_NAME_PUNCH].asString().c_str());
+            filenameWinner  = strdup(sprites[MOVE_NAME_WINNER].asString().c_str());
+            filenameBodyParts  = strdup(sprites[MOVE_NAME_BODYPARTS].asString().c_str());
+            filenameFinisher  = strdup(sprites[MOVE_NAME_FINISHER].asString().c_str());
+            filenameShoot  = strdup(sprites[MOVE_NAME_SHOOT].asString().c_str());
+            filenameDizzy  = strdup(sprites[MOVE_NAME_DIZZY].asString().c_str());
+            filenameFall  = strdup(sprites[MOVE_NAME_FALL].asString().c_str());
+            filenameBeingHit  = strdup(sprites[MOVE_NAME_BEINGHIT].asString().c_str());
+            filenameBlock  = strdup(sprites[MOVE_NAME_BLOCK].asString().c_str());
+            filenameBlockDown  = strdup(sprites[MOVE_NAME_BLOCKDOWN].asString().c_str());
+            filenameHead  = strdup(sprites[MOVE_NAME_HEAD].asString().c_str());
         }
+    }
 
     //verificar si existe filename
     validarExistenciaArchivo(DEFAULT_WALK,filenameWalk);
@@ -300,6 +302,25 @@ void cargaPersonaje(Json::Value personaje, float &charAlto, float &charAncho, in
     if(z_index == 0){
     	z_index  = ZINDEXPERSONAJE;
         Mylog->Log("valor z-index del personaje invalido: usando default", ERROR_LEVEL_WARNING);
+    }
+
+
+    if (characterNumber == 0) {
+        if (name == "") {
+            name = NAME_CHARACTER_1;
+            Mylog->Log("nombre del personaje 1 invalido: usando default", ERROR_LEVEL_WARNING);
+        }
+        MKCharacter* character = new MKCharacter(0.2*(Util::getInstance()->getLogicalWindowWidth()-charAncho),charAncho,
+                                                charAlto,z_index, characterNumber, name);
+        characters->push_back(character);
+    } else {
+        if (name == "") {
+            name = NAME_CHARACTER_2;
+            Mylog->Log("nombre del personaje 2 invalido: usando default", ERROR_LEVEL_WARNING);
+        }
+        MKCharacter* character = new MKCharacter(0.8*(Util::getInstance()->getLogicalWindowWidth()-charAncho),charAncho,
+                                                 charAlto,z_index, characterNumber, name);
+        characters->push_back(character);
     }
 
     //log

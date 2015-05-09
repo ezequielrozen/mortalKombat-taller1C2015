@@ -1,12 +1,10 @@
 #include "MKCharacter.h"
 
-MKCharacter::MKCharacter(float initialPosX, float initialPosY, float ancho, float alto, int z_index, int pCharacterNumber) {
+MKCharacter::MKCharacter(float initialPosX, float ancho, float alto, int z_index, int pCharacterNumber, string name) {
 
 	this->z_index = z_index;
 	posX = initialPosX;
-	posY = initialPosY;
-	stageFloor = initialPosY;
-
+	this->name = name;
 	this->alto = alto;
 	this->ancho = ancho;
 
@@ -236,4 +234,21 @@ void MKCharacter::receiveBlow(int force) {
 	if (this->life <= 0) {
 		//marcar fin de juego. Preferentemente donde se invoca esta función (control de colisión y golpe)
 	}
+}
+
+string MKCharacter::getName() {
+	return this->name;
+}
+
+void MKCharacter::setName(string aName) {
+	this->name = aName;
+}
+
+void MKCharacter::setStageFloor(double d) {
+	this->stageFloor = d;
+
+}
+
+void MKCharacter::setPosY(double d) {
+	this->posY = d;
 }

@@ -3,6 +3,7 @@
 
 #include "stage/Layer.h"
 #include "stage/Stage.h"
+#include "MKCharacter.h"
 
 class GameLoader {
 
@@ -10,25 +11,18 @@ public:
     GameLoader();
     ~GameLoader();
     void loadJSON(char* file);
-    float getCharacterWidth();
-    float getCharacterHeight();
-    int getZ_index();
     string getOponentSide();
     Stage* getStage();
+    list<MKCharacter*>* getCharacters();
+
 
 private:
     float stageWidth;
     float stageHeight;
-    float characterWidth;
-    float characterHeight;
     float floor;
-    int z_index;
-    char* walkFile;
-    char* stanceFile;
-    char* jumpFile;
-    char* sideJumpFile;
     string oponentSide;
     list<Layer*>* layers;
+    list<MKCharacter*>* characters;
     Stage* stage;
 };
 

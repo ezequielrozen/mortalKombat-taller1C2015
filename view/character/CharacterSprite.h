@@ -11,7 +11,8 @@ using namespace std;
 class CharacterSprite
 {
 public:
-    CharacterSprite(SDL_Renderer* passed_renderer, char* FilePath, float x, float y, float w, float h, int frames, string OponentSide, bool repearLastSprite);
+    CharacterSprite(SDL_Renderer* passed_renderer, char* FilePath, float x, float y, float w, float h,
+                    int frames, string OponentSide, bool repearLastSprite, bool colorAltered);
 
     ~CharacterSprite(void);
     void Draw();

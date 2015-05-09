@@ -1,12 +1,22 @@
 #include "CharacterSprite.h"
-#include "../../model/util/Util.h"
+#include "Painter.h"
 
-CharacterSprite::CharacterSprite(SDL_Renderer* pRenderer, char* path, float x, float y, float w, float h, int frames, string OponentSide, bool repearLastSp)
+CharacterSprite::CharacterSprite(SDL_Renderer* pRenderer, char* path, float x, float y, float w, float h,
+								 int frames, string OponentSide, bool repearLastSp, bool colorAltered)
 {
 	oponentSide = OponentSide;
     this->renderer = pRenderer;
     this->texture = NULL;
-    this->texture = IMG_LoadTexture(renderer,path);
+	SDL_Surface* surface = IMG_Load(path);
+	if (colorAltered) {
+		Painter* painter = new Painter();
+		SDL_LockSurface(surface);
+		//paint here if it's necessary
+		SDL_UnlockSurface(surface);
+		delete painter;
+	}
+	this->texture = SDL_CreateTextureFromSurface(this->renderer,surface);
+//    this->texture = IMG_LoadTexture(renderer,path);
 
     if (this->texture == NULL)
     {
