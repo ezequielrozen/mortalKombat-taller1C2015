@@ -104,71 +104,24 @@ void CharacterSprite::PlayShoot(float Speed) {
             CurrentFrame++;
         }
 
-        if (CurrentFrame == 0)
-        {
-			crop.x = 0;
-			crop.y = 0;
-			crop.w = 140;
-			crop.h = 135;
-        }
-        if (CurrentFrame == 1)
-        {
-			crop.x = 140;
-			crop.y = 0;
-			crop.w = 290-140;
-			crop.h = 135;
-        }
-        if (CurrentFrame == 2)
-        {
-			crop.x = 290;
-			crop.y = 0;
-			crop.w = 425-290;
-			crop.h = 135;
-        }
-        else if (CurrentFrame == 3)
-        {
-			crop.x = 425;
-			crop.y = 0;
-			crop.w = 803-425;
-			crop.h = 135;
-        }
-        else if (CurrentFrame ==4)
-        {
-			crop.x = 803;
-			crop.y = 0;
-			crop.w = 1172-803;
-			crop.h = 135;
-        }
-        else if (CurrentFrame == 5)
-        {
-			crop.x = 1172;
-			crop.y = 0;
-			crop.w = 1553-1172;
-			crop.h = 135;
-        }
-        else if (CurrentFrame == 6)
-        {
-			crop.x = 1553;
-			crop.y = 0;
-			crop.w = 1922-1553;
-			crop.h = 135;
-        }
-        else if (CurrentFrame == 7)
-        {
-			crop.x = 1922;
-			crop.y = 0;
-			crop.w = 2264-1922;
-			crop.h = 135;
-        }
-        else if (CurrentFrame == 8)
-        {
-			crop.x = 2264;
-			crop.y = 0;
-			crop.w = 2565-2264;
-			crop.h = 135;
-        }
+        int vec[framesX+1];
+        vec[0] =0;
+        vec[1] =92;
+        vec[2] =204;
+        vec[3] =308;
+        vec[4] =582;
+        vec[5] =850;
+        vec[6] =1124;
+        vec[7] =1394;
+        vec[8] =1643;
+        vec[9] =1860;
 
-		draw.w = crop.w;
+        crop.x = vec[CurrentFrame];
+        crop.w = vec[CurrentFrame+1] - vec[CurrentFrame];
+
+        draw.w = crop.w * Util::getInstance()->getScalingConstant();
+
+
 
         animationDelay = SDL_GetTicks();
 

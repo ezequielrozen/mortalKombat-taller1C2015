@@ -1,6 +1,6 @@
 {
     "ventana": {
-        "ancho": 400,
+        "ancho": 600,
         "ancho-px": 700,
         "alto-px": 500
     },
@@ -43,7 +43,7 @@
 				"punchUp": "data/scorpionPunchUp.png",
 				"bodyParts": "data/scorpionBodyParts.png",
 				"finisher": "data/scorpionFinisher.png",
-				"shoot": "data/scorpionShot.png",
+				"shoot": "data/scorpionShooting.png",
 				"punch": "data/scorpionPunching.png",
 				"block": "data/scorpionBlocking.png",
 				"beingHit": "data/scorpionBeingHit.png",
