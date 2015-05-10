@@ -21,7 +21,7 @@ void Game::initGame(char* filePath) {
     this->raiden->setPosY(this->stage->getFloor());
     this->raiden->setStageFloor(this->stage->getFloor());
 
-    this->gameView = new GameView(ScreenWidth, ScreenHeight, scorpion, raiden, stage, oponentSide);
+    this->gameView = new GameView(ScreenWidth, ScreenHeight, scorpion, raiden, stage, oponentSide, this->gameLoader->getPainter());
     this->gameController = new GameController();
     GameController::setVibrating(false);
     this->cameraController = new CameraController();

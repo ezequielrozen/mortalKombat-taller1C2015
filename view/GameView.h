@@ -9,6 +9,7 @@
 #include "stage/LayerSprite.h"
 #include "../model/stage/Stage.h"
 #include "stage/LifeView.h"
+#include "character/Painter.h"
 #include <string>
 #include <math.h>
 
@@ -17,7 +18,8 @@ using namespace std;
 class GameView
 {
 public:
-    GameView(float ScreenWidth, float ScreenHeight, MKCharacter* character, MKCharacter* character2, Stage* stage, string OponentSide);
+    GameView(float ScreenWidth, float ScreenHeight, MKCharacter* character, MKCharacter* character2,
+             Stage* stage, string OponentSide, Painter* painter);
     ~GameView();
     void Render();
     void LoadSprites(string name1, string name2);
@@ -89,6 +91,7 @@ private:
     void runCharacter();
 	void RestarAllScorpionSprites();
 	void RestarAllRaidenSprites();
+    Painter* painter;
 };
 
 #endif /* GAMEVIEW_H_ */

@@ -4,6 +4,7 @@
 #include "stage/Layer.h"
 #include "stage/Stage.h"
 #include "MKCharacter.h"
+#include "../view/character/Painter.h"
 
 class GameLoader {
 
@@ -14,13 +15,14 @@ public:
     string getOponentSide();
     Stage* getStage();
     list<MKCharacter*>* getCharacters();
-
+    Painter* getPainter();
 
 private:
     float stageWidth;
     float stageHeight;
     float floor;
     string oponentSide;
+    Painter* painter;
     list<Layer*>* layers;
     list<MKCharacter*>* characters;
     Stage* stage;

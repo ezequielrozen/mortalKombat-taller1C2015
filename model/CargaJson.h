@@ -15,7 +15,8 @@ using namespace std;
 
 //Abre el archivo recibido por path, lo abre y carga el Json.
 // Devuelve 1 si estuvo OK, Devuelve 0 si hubo error.
-bool cargaArchivoJSON(char* filename, float &stageWidth, float &stageHeight, float &floor, string &oponentSide, std::list<Layer*> *layers, std::list<MKCharacter*>* characters);
+bool cargaArchivoJSON(char* filename, float &stageWidth, float &stageHeight, float &floor,
+                      string &oponentSide, std::list<Layer*> *layers, std::list<MKCharacter*>* characters, double& initialH, double& finalH, double& offset);
 
 void cargaPersonaje(Json::Value personaje, std::list<MKCharacter*>* characters, int characterNumber);
 
@@ -33,4 +34,9 @@ void controlErroresEscenario(float &stageWidth, float &stageHeight, float &floor
 
 void validarExistenciaArchivo(const char* defaultFile,char* fileNameToValidate);
 
+void loadPainter(Json::Value value, double& initialH, double& finalH, double& offset);
+
+void loadDefautPainter(double& initialH, double& finalH, double& offset);
+
+void errorPainterController(double& initialH, double& finalH, double& offset);
 #endif /* CARGAJSON_H_ */

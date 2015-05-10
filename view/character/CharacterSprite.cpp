@@ -3,7 +3,7 @@
 #include "../../controller/GameController.h"
 
 CharacterSprite::CharacterSprite(SDL_Renderer* pRenderer, char* path, float x, float y, float w, float h,
-								 int frames, string OponentSide, bool repearLastSp, bool colorAltered)
+								 int frames, string OponentSide, bool repearLastSp, bool colorAltered, Painter* painter)
 {
 	oponentSide = OponentSide;
     this->renderer = pRenderer;
@@ -11,13 +11,11 @@ CharacterSprite::CharacterSprite(SDL_Renderer* pRenderer, char* path, float x, f
     yPosition = 0;
     initiated = false;
     finished = false;
-    SDL_Surface* surface = IMG_Load(path);
+	SDL_Surface* surface = IMG_Load(path);
 	if (colorAltered) {
-		Painter* painter = new Painter();
 		SDL_LockSurface(surface);
-		//paint here if it's necessary
+		painter->paint(surface);
 		SDL_UnlockSurface(surface);
-		delete painter;
 	}
 	this->texture = SDL_CreateTextureFromSurface(this->renderer,surface);
 //    this->texture = IMG_LoadTexture(renderer,path);

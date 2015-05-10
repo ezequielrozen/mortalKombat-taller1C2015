@@ -94,6 +94,9 @@ const int COMMANDDELAYKIT                   =  600;
 //const float INITIAL_POSITION_X = 0.2857*ANCHOVENTANAL;
 //const float INITIAL_POSITION_Y = 0.2857*ANCHOVENTANAL;
 
-
+//Alternative color
+const double DEFAULT_INITIAL_H              = 40;
+const double DEFAULT_FINAL_H                = 45;
+const double DEFAULT_OFFSET                 = 30;
 
 #endif /* CONSTANTES_H_ */
