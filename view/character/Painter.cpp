@@ -174,12 +174,13 @@ rgb Painter::convertToRGB(hsv hsv_param) {
 void Painter::paint(SDL_Surface *surface) {
     for (int x = 0; x < surface->w; x++) {
         for (int y = 0; y < surface->h; y++) {
+            Uint8 alpha;
             Uint32 px = this->getpixel(surface, x, y);
             rgb aRGB;
-            Uint32 transparentPx;
-            SDL_GetColorKey(surface,&transparentPx);
-//            std::cout << unsigned(px) << std::endl;
-            SDL_GetRGB(px, surface->format,&aRGB.r,&aRGB.g,&aRGB.b);
+            SDL_GetRGBA(px, surface->format,&aRGB.r,&aRGB.g,&aRGB.b,&alpha);
+            if (alpha == 0) {
+                continue;
+            }
             hsv hsvConverted = this->convertToHSV(aRGB);
             if (this->initialH <= hsvConverted.h && hsvConverted.h <= this->finalH) {
                 hsvConverted.h += this->offset;
