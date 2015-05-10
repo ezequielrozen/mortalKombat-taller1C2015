@@ -28,7 +28,9 @@ public:
     void setRepeatLastSprite(bool repeat);
     void PlayShoot(float);
     void PlayFall(float);
-
+    void vibrate();
+    bool vibrationFinished();
+    void resetFinished();
 private:
 
     SDL_Texture* texture;
@@ -40,9 +42,10 @@ private:
     int img_height;
     int CurrentFrame;
     int animationDelay;
-
+    int yPosition;
     int framesX;
-
+    bool initiated;
+    bool finished;
     float scalingConstant;
 
     string oponentSide;
@@ -50,6 +53,8 @@ private:
     SDL_Renderer* renderer;
 
     bool repeatLastSprite;
+
+    float vibrateProgress;
 };
 
 #endif /* MKSPRITE_H_ */

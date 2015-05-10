@@ -1,12 +1,14 @@
 #include "LayerSprite.h"
 #include "../../model/MKCharacter.h"
 #include "../../model/util/Util.h"
+#include "../../controller/GameController.h"
 
 LayerSprite::LayerSprite(SDL_Renderer *pRenderer, string path, float screenWidth, float screenHeight, float layerWidth) {
     this->renderer = pRenderer;
     this->texture = NULL;
     this->texture = IMG_LoadTexture(this->renderer,path.c_str());
 
+    this->finished = false;
     if (this->texture == NULL)
     {
         cout << "Couldn't Load " << path.c_str() << endl;
@@ -14,7 +16,7 @@ LayerSprite::LayerSprite(SDL_Renderer *pRenderer, string path, float screenWidth
     }
 
     this->layerWidth = layerWidth;
-
+    this->vibrateProgress = 0;
     draw.x = 0;
     draw.y = 0;
     draw.w = (int) screenWidth;
@@ -24,8 +26,8 @@ LayerSprite::LayerSprite(SDL_Renderer *pRenderer, string path, float screenWidth
 
     crop.w = /*(int) floor(screenWidth*img_height/screenHeight)*/ img_width * Util::getInstance()->getLogicalWindowWidth() / layerWidth;
     crop.x = img_width/2 - crop.w/2;
-    crop.y = 0;
-    crop.h = img_height;
+    crop.y = img_height * 0.05;
+    crop.h = img_height * 0.9;
 
     if(layerWidth <= Util::getInstance()->getLogicalWindowWidth()) {
         crop.w = img_width;
@@ -55,4 +57,24 @@ void LayerSprite::update(float shift) {
                 crop.x = shift * (img_width - crop.w)  / (layerWidth - Util::getInstance()->getLogicalWindowWidth());
         else
            draw.x = shift * (Util::getInstance()->getWindowWidth() / Util::getInstance()->getLogicalWindowWidth());
+}
+
+void LayerSprite::vibrate() {
+    crop.y = img_height * 0.05 + this->img_height * 0.05 * sin(vibrateProgress);
+    vibrateProgress += VIBRATION_SPEED;
+
+    if (vibrateProgress >= VIBRATION_DURATION) {
+        vibrateProgress = 0;
+        finished = true;
+    }
+
+}
+
+bool LayerSprite::vibrationFinished() {
+    return finished;
+}
+
+void LayerSprite::resetFinished() {
+    finished = false;
+    vibrateProgress = 0;
 }

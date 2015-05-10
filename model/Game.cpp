@@ -23,6 +23,7 @@ void Game::initGame(char* filePath) {
 
     this->gameView = new GameView(ScreenWidth, ScreenHeight, scorpion, raiden, stage, oponentSide);
     this->gameController = new GameController();
+    GameController::setVibrating(false);
     this->cameraController = new CameraController();
     this->collider = new Collider();
 }

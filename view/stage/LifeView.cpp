@@ -20,7 +20,8 @@ LifeView::LifeView(SDL_Renderer *renderer, string filePath, float width, bool in
     SDL_QueryTexture(texture,NULL,NULL, &img_width, &img_height);
 
     float scale = (width / img_width);
-
+    draw.y = 0;
+    insideDraw.y = 0;
     if (!inverted) {
         this->draw.x = 0;
         this->insideDraw.x = 0;

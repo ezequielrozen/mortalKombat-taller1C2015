@@ -15,7 +15,11 @@ public:
     ~LayerSprite();
     void Draw();
     void update(float);
+    void vibrate();
     float getCropWidthRelation();
+    void vibrate(float vibrateProgress);
+    bool vibrationFinished();
+    void resetFinished();
 
 private:
     SDL_Renderer* renderer;
@@ -26,6 +30,8 @@ private:
     int img_width;
     int img_height;
     float layerWidth;
+    float vibrateProgress;
+    bool finished;
 };
 
 

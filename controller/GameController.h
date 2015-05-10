@@ -26,9 +26,13 @@ public:
 
     void checkEvent();
 
+    static bool isVibrating();
+
+    static void setVibrating(bool vibrating);
 
 private:
 
+    static bool vibrating;
     int timer;
     int timerChar2;
     int hitTimer;

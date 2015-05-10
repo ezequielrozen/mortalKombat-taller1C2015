@@ -1,4 +1,5 @@
 #include "GameView.h"
+#include "../controller/GameController.h"
 
 GameView::GameView(float ScreenWidth, float ScreenHeight, MKCharacter* character, MKCharacter* character2, Stage* pStage, string OponentSide) {
 
@@ -19,6 +20,7 @@ GameView::GameView(float ScreenWidth, float ScreenHeight, MKCharacter* character
 
     this->stage = pStage;
     this->scorpion = character;
+
     this->raiden = character2;
  	this->LoadSprites(this->scorpion->getName(), this->raiden->getName());
 
@@ -111,6 +113,13 @@ void GameView::Render() {
             layerSprites[i]->update((*it)->getLeft_border());
             layerSprites[i]->Draw();
         }
+        if(GameController::isVibrating())
+            if (!layerSprites[i]->vibrationFinished())
+                layerSprites[i]->vibrate();
+            else
+                GameController::setVibrating(false);
+        else
+            layerSprites[i]->resetFinished();
         i++;
     }
 
@@ -414,10 +423,28 @@ void GameView::runCharacter() {
 
     sprite->setX(scorpion->getX());
     sprite->setY(scorpion->getY());
+
+    if (GameController::isVibrating())
+        if(!sprite->vibrationFinished())
+            sprite->vibrate();
+        else
+            GameController::setVibrating(false);
+    else
+        sprite->resetFinished();
+
     sprite->Draw();
 
     sprite2->setX(raiden->getX());
     sprite2->setY(raiden->getY());
+
+    if (GameController::isVibrating())
+        if(!sprite2->vibrationFinished())
+           sprite2->vibrate();
+        else
+            GameController::setVibrating(false);
+    else
+        sprite2->resetFinished();
+
     sprite2->Draw();
 }
 

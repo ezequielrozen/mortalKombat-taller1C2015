@@ -1,6 +1,7 @@
 #include "GameController.h"
 #include "../model/logger.h"
 
+bool GameController::vibrating = false;
 
 GameController::GameController()
 {
@@ -82,8 +83,9 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
 							timer = SDL_GetTicks();
 							break;
 				case SDLK_l:
-							character2->setLife(character2->getLife()-10);
-							character->setLife(character->getLife()-10);
+							//character2->setLife(character2->getLife()-10);
+							//character->setLife(character->getLife()-10);
+							GameController::setVibrating(true);
 							previousKey = mainEvent->key.keysym.sym;
 							previousKeyChar2 = mainEvent->key.keysym.sym;
 							break;
@@ -325,6 +327,14 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
     		testElapsedTime(character, character2);
     		break;
     }
+}
+
+void GameController::setVibrating(bool vibratingFlag) {
+	vibrating = vibratingFlag;
+}
+
+bool GameController::isVibrating() {
+	return vibrating;
 }
 
 

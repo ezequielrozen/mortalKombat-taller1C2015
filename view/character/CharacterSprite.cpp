@@ -1,5 +1,6 @@
 #include "CharacterSprite.h"
 #include "Painter.h"
+#include "../../controller/GameController.h"
 
 CharacterSprite::CharacterSprite(SDL_Renderer* pRenderer, char* path, float x, float y, float w, float h,
 								 int frames, string OponentSide, bool repearLastSp, bool colorAltered)
@@ -7,7 +8,10 @@ CharacterSprite::CharacterSprite(SDL_Renderer* pRenderer, char* path, float x, f
 	oponentSide = OponentSide;
     this->renderer = pRenderer;
     this->texture = NULL;
-	SDL_Surface* surface = IMG_Load(path);
+    yPosition = 0;
+    initiated = false;
+    finished = false;
+    SDL_Surface* surface = IMG_Load(path);
 	if (colorAltered) {
 		Painter* painter = new Painter();
 		SDL_LockSurface(surface);
@@ -172,8 +176,9 @@ void CharacterSprite::setX(float passedX) {
 }
 
 void CharacterSprite::setY(float passedY) {
-	draw.y = passedY*Util::getInstance()->getScalingYConstant();
-
+    if (!initiated) {
+        draw.y = passedY * Util::getInstance()->getScalingYConstant();
+    }
 }
 
 void CharacterSprite::reset() {
@@ -182,8 +187,35 @@ void CharacterSprite::reset() {
     crop.y = 0;
 }
 
-void CharacterSprite::switchSide(const char c){
+void CharacterSprite::switchSide(const char c) {
     this->oponentSide = (c == 'l') ? "LEFT" : "RIGHT";
+}
+
+void CharacterSprite::vibrate() {
+    if (!initiated) {
+        yPosition = draw.y;
+        initiated = true;
+    } else {
+        draw.y = yPosition + Util::getInstance()->getLogicalWindowHeight() * Util::getInstance()->getScalingYConstant() * 0.05 * (-1) * sin(vibrateProgress);
+        vibrateProgress += VIBRATION_SPEED;
+    }
+
+    if (vibrateProgress >= VIBRATION_DURATION) {
+        draw.y = yPosition;
+        vibrateProgress = 0;
+        initiated = false;
+        finished = true;
+    }
+}
+
+bool CharacterSprite::vibrationFinished() {
+    return finished;
+}
+
+void CharacterSprite::resetFinished() {
+    finished = false;
+    vibrateProgress = 0;
+    initiated = false;
 }
 
 bool CharacterSprite::getRepeatLastSprite()
