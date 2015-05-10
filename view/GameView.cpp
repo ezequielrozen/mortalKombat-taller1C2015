@@ -123,8 +123,8 @@ void GameView::Render() {
         i++;
     }
 
-    characterOneLifebarView->Draw(this->scorpion->getLife());
-    characterTwoLifebarView->Draw(this->raiden->getLife());
+    characterOneLifebarView->Draw(FULL_LIFE - this->scorpion->getLife());
+    characterTwoLifebarView->Draw(FULL_LIFE - this->raiden->getLife());
 
     if (!painted) {
         this->runCharacter();

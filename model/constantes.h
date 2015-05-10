@@ -68,6 +68,7 @@ const char* const MOVE_NAME_BLOCKDOWN		= "blockDown";
 const char* const MOVE_NAME_HEAD			= "head";
 const char* const NAME_CHARACTER_1          = "scorpion";
 const char* const NAME_CHARACTER_2          = "raiden";
+const int         FULL_LIFE                 = 100;
 
 typedef std::map<std::string, int> Map;
 const Map DAMAGE = {{"KICK", 5},
