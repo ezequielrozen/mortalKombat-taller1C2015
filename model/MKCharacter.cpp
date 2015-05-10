@@ -31,7 +31,7 @@ MKCharacter::MKCharacter(float initialPosX, float ancho, float alto, int z_index
 	hitMovement = "NONE";
 	jumping = false;
 
-	this->life = 100;
+	this->life = FULL_LIFE;
 
 	this->characterNumber = pCharacterNumber;
 
