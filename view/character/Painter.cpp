@@ -88,7 +88,7 @@ hsv Painter::convertToHSV(rgb rgb_param) {
     newHSV.v = max;                                // v
     delta = max - min;
     if( max > 0.0 ) { // NOTE: if Max is == 0, this divide would cause a crash
-        newHSV.s = (delta / max);                  // s
+        newHSV.s = (delta*1.0 / max);                  // s
     } else {
         // if max is 0, then r = g = b = 0
         // s = 0, v is undefined
@@ -98,12 +98,11 @@ hsv Painter::convertToHSV(rgb rgb_param) {
     }
     if (delta > 0) {
         if( rgb_param.r >= max )                           // > is bogus, just keeps compilor happy
-            newHSV.h = ( rgb_param.g - rgb_param.b ) / delta;        // between yellow & magenta
+            newHSV.h = ( rgb_param.g - rgb_param.b ) / delta*1.0;        // between yellow & magenta
+        else if( rgb_param.g >= max )
+                newHSV.h = 2.0 + ( rgb_param.b - rgb_param.r ) / delta*1.0;  // between cyan & yellow
         else
-        if( rgb_param.g >= max )
-            newHSV.h = 2.0 + ( rgb_param.b - rgb_param.r ) / delta;  // between cyan & yellow
-        else
-            newHSV.h = 4.0 + ( rgb_param.r - rgb_param.g ) / delta;  // between magenta & cyan
+            newHSV.h = 4.0 + ( rgb_param.r - rgb_param.g ) / delta*1.0;  // between magenta & cyan
     }
 
     newHSV.h *= 60.0;                              // degrees
