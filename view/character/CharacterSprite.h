@@ -27,7 +27,7 @@ public:
     void switchSide(const char c);
     bool getRepeatLastSprite();
     void setRepeatLastSprite(bool repeat);
-    void PlayShoot(float);
+    void PlayShoot(float,float);
     void PlayFall(float);
     void vibrate();
     bool vibrationFinished();

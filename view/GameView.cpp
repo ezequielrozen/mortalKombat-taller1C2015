@@ -277,7 +277,7 @@ void GameView::runCharacter() {
     }
     else if (scorpion->getHit() == "SHOOT") {
     		sprite = scorpionShoot;
-    		sprite->PlayShoot(100);
+    		sprite->PlayShoot(100, scorpion->getWidth());
     }
     else if (scorpion->getHit() == "DEFENSE") {
     		sprite = scorpionBlock;
@@ -373,7 +373,7 @@ void GameView::runCharacter() {
     }
     else if (raiden->getHit() == "SHOOT") {
     		sprite2 = raidenShoot;
-    		sprite2->PlayShoot(100);
+    		sprite2->PlayShoot(100, raiden->getWidth());
     }
     else if (raiden->getHit() == "DEFENSE") {
     		sprite2 = raidenBlock;

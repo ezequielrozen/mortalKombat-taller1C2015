@@ -92,7 +92,7 @@ void CharacterSprite::PlayBack(float Speed) {
 	}
 }
 
-void CharacterSprite::PlayShoot(float Speed) {
+void CharacterSprite::PlayShoot(float Speed, float characterWidth) {
 
     if (animationDelay+Speed < SDL_GetTicks())
     {
@@ -123,9 +123,11 @@ void CharacterSprite::PlayShoot(float Speed) {
         crop.x = vec[CurrentFrame];
         crop.w = vec[CurrentFrame+1] - vec[CurrentFrame];
 
+        //Seteo el ancho para el render segun el ancho de la imagen
         draw.w = crop.w * Util::getInstance()->getScalingConstant();
 
-
+        //Lo escalo para q se ajuste dependiendo del ancho del personaje. El spritesheet se hizo para el ancho default: ANCHOPERSONAJE=68.
+        draw.w = draw.w * ((characterWidth * Util::getInstance()->getScalingConstant()) / (ANCHOPERSONAJE * Util::getInstance()->getScalingConstant()));
 
         animationDelay = SDL_GetTicks();
 
@@ -168,6 +170,7 @@ void CharacterSprite::Draw()
 	{
 		flipType = SDL_FLIP_HORIZONTAL;
 	}
+
 	SDL_RenderCopyEx(renderer,texture,&crop, &draw,0,NULL,flipType);
 }
 

@@ -12,11 +12,6 @@ MKCharacter::MKCharacter(float initialPosX, float ancho, float alto, int z_index
 	this->hitDelay = 0;
 
 	step = 0.042 * this->ancho;
-	
-	//proporcionVel = 0.04285;
-	//accY = 1.2285 * Util::getInstance()->getLogicalWindowHeight();
-
-	//RestartJump();
 
 	jumpTime = 0;
 	//El 1.20 esta para que el personaje salte al otro personaje y 0.2 mas, para tener un margen.
@@ -68,49 +63,6 @@ void MKCharacter::moveLeft() {
 		posX = posX - step;
 	}
 }
-/*
-void MKCharacter::RestartJump() {
-	velY = proporcionVel * Util::getInstance()->getLogicalWindowHeight();
-
-	float winHeight = Util::getInstance()->getLogicalWindowHeight();
-
-	//El numero 0.4954 salió de la proporcion entre la altura logica de la ventana y el y-piso del escenario (PosY inicial del psje)
-	//encontrada en varios casos en los que saltaba bien.
-	//cuanto mas abajo ponga el piso, mayor recorrido disponible dentro del escenario tendre.
-	float proporcion = (winHeight - (winHeight - stageFloor)) * 0.4954;
-
-	//para q no se vaya por arriba de la pantalla.
-	if (stageFloor - proporcion < 0) {
-		limiteSuperior = 0;
-	} else {
-		limiteSuperior = stageFloor - proporcion;
-	}
-
-	//si quedo un limite sup menor a 60 es porq el salto es muy cortito. Lo agrando lo mas q pueda subiendo el limiteSup
-	if (limiteSuperior < 90) {
-		limiteSuperior = 0;
-	}
-}
-
-void MKCharacter::moveUp() {
-
-	if (posY > (limiteSuperior) && posY <= (stageFloor + 1)) {
-		float time = 0.003;
-//		cout << "PosY:" << posY << " Vel: " << velY << " accY: " << accY << " limiteSuperior: " << limiteSuperior  << " stageFloor - limiteSup: " << stageFloor - limiteSuperior << " y-pisp px: " << stageFloor * Util::getInstance()->getScalingYConstant() << endl;
-
-		velY = velY - accY * time;
-
-		posY = posY - velY;
-	} else if (posY <= limiteSuperior) {
-		velY = (-1) * velY;
-		posY = limiteSuperior + 1;
-	} else {
-		posY = this->stageFloor;
-		RestartJump();
-		this->setJump(false);
-	}
-}
-*/
 
 void MKCharacter::moveUp() {
 	jumpTime = jumpTime + 0.015;
@@ -144,12 +96,10 @@ void MKCharacter::moveUp() {
 	}
 }
 
-//PASAR A FLOAT
 float MKCharacter::getWidth() {
 	return this->ancho;
 }
 
-//PASAR A FLOAT
 float MKCharacter::getHeight() {
 	return this->alto;
 }
