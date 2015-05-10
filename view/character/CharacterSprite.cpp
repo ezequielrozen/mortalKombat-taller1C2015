@@ -48,7 +48,7 @@ CharacterSprite::CharacterSprite(SDL_Renderer* pRenderer, char* path, float x, f
     setRepeatLastSprite(repearLastSp);
 }
 
-void CharacterSprite::Play(float Speed)
+void CharacterSprite::Play(float Speed, float width)
 {
     if (animationDelay+Speed < SDL_GetTicks())
     {
@@ -62,6 +62,8 @@ void CharacterSprite::Play(float Speed)
         }
         else
             CurrentFrame++;
+
+        draw.w = width*Util::getInstance()->getScalingConstant();
 
         crop.x = CurrentFrame * (img_width/framesX);
         crop.y = 0;

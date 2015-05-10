@@ -21,6 +21,8 @@ private:
     bool superpositionUp(MKCharacter* character1, MKCharacter* character2);
 
     int timer;
+
+    int beingHitTimer;
 };
 
 

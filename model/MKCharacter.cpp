@@ -8,6 +8,9 @@ MKCharacter::MKCharacter(float initialPosX, float ancho, float alto, int z_index
 	this->alto = alto;
 	this->ancho = ancho;
 
+	this->hitWidth = ancho;
+	this->hitDelay = 0;
+
 	step = 0.042 * this->ancho;
 	
 	//proporcionVel = 0.04285;
@@ -178,6 +181,21 @@ void MKCharacter::setJump(bool jump) {
 
 void MKCharacter::setHit(string newHit) {
 	this->hitMovement = newHit;
+
+	if (newHit == "KICK") {
+		this->setHitWidth(this->getWidth()*1.88);
+		if (this->getHitDelay() <= 0) {
+			this->setHitDelay(4);
+		}
+	}
+	else if (newHit == "BEINGHIT") {
+		if (this->getHitDelay() <= 0) {
+			this->setHitDelay(3);
+		}
+	}
+	else if (newHit == "NONE") {
+		this->setHitWidth(this->getWidth());
+	}
 }
 
 string MKCharacter::getHit() {
@@ -230,6 +248,7 @@ bool MKCharacter::isAlive() {
 void MKCharacter::receiveBlow(int force) {
 	extern logger* Mylog;
 	this->life = this->life - force;
+	this->setHit("BEINGHIT");
 	Mylog->Log("Personaje (PONERLE NOMBRE) recibe golpe", ERROR_LEVEL_INFO); //FALTA: nombre, vida restada, vida restante.
 	if (this->life <= 0) {
 		//marcar fin de juego. Preferentemente donde se invoca esta función (control de colisión y golpe)
@@ -251,4 +270,20 @@ void MKCharacter::setStageFloor(double d) {
 
 void MKCharacter::setPosY(double d) {
 	this->posY = d;
+}
+
+void MKCharacter::setHitWidth(float width) {
+	this->hitWidth = width;
+}
+
+float MKCharacter::getHitWidth() {
+	return this->hitWidth;
+}
+
+void MKCharacter::setHitDelay(int delay) {
+	this->hitDelay = delay;
+}
+
+int MKCharacter::getHitDelay() {
+	return this->hitDelay;
 }

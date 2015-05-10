@@ -17,7 +17,7 @@ public:
     ~CharacterSprite(void);
     void Draw();
 
-    void Play(float Speed);
+    void Play(float Speed, float width);
     void PlayBack(float Speed);
     float getX();
     void setX(float passedX);

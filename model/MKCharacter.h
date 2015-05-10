@@ -70,6 +70,14 @@ public:
 
     void setPosY(double);
 
+    void setHitWidth(float width);
+
+    float getHitWidth();
+
+    void setHitDelay(int delay);
+
+    int getHitDelay();
+
 private:
     void RestartJump();
     string movement;
@@ -82,6 +90,9 @@ private:
     int z_index;
     float ancho;
     float alto;
+
+    float hitWidth;
+    int hitDelay;
 
     double velY;
     double accY;

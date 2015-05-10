@@ -1,6 +1,6 @@
 {
     "ventana": {
-        "ancho": 600,
+        "ancho": 400,
         "ancho-px": 700,
         "alto-px": 500
     },
@@ -26,8 +26,7 @@
     ],
     "personaje": [
 		{
-			"name": "scorpion",
-			"ancho": 68,
+			"ancho": 68, 
 			"alto": 125,
 			"z-index": 3,
 			"sprites": 
@@ -43,7 +42,7 @@
 				"punchUp": "data/scorpionPunchUp.png",
 				"bodyParts": "data/scorpionBodyParts.png",
 				"finisher": "data/scorpionFinisher.png",
-				"shoot": "data/scorpionShooting.png",
+				"shoot": "data/scorpionShot.png",
 				"punch": "data/scorpionPunching.png",
 				"block": "data/scorpionBlocking.png",
 				"beingHit": "data/scorpionBeingHit.png",
@@ -56,8 +55,7 @@
 			}
 		},
 		{
-		  	"name": "raiden",
-			"ancho": 68,
+			"ancho": 68, 
 			"alto": 125,
 			"z-index": 3,
 			"sprites": 
@@ -68,22 +66,24 @@
 				"sideJump": "data/raidenSideJump.png",
 				"duck": "data/raidenDuck.png",
 				"kick": "data/raidenKicking.png",
+				"kickDown": "data/NOESTA.png",				
+				"bodyParts": "data/NOESTA.png",
+				"punchJump": "data/NOESTA.png",
+				"finisher": "data/NOESTA.png",
+				"shoot": "data/NOESTA.png",
 				"punch": "data/raidenPunching.png",
 				"block": "data/raidenBlocking.png",
 				"beingHit": "data/raidenBeingHit.png",
 				"dizzy": "data/raidenDizzy.png",
 				"punchUp": "data/raidenPunchUp.png",
 				"fall": "data/raidenFalling.png",
-				"winner": "data/raidenWinner.png"
+				"winner": "data/raidenWinner.png",
+				"blockDown": "data/NOESTA.png",
+				"head": "data/NOESTA.png"
 			}
 		}
     ],
     "oponente": {
         "side": "right"
-    },
-  	"color-alternativo": {
-		"h-inicial": 40,
-		"h-final": 45,
-		"desplazamiento": 30
-	}
+    }
 }
