@@ -48,7 +48,6 @@
 				"block": "data/scorpionBlocking.png",
 				"beingHit": "data/scorpionBeingHit.png",
 				"dizzy": "data/scorpionDizzy.png",
-				"punchUp": "data/scorpionPunchingUp.png",
 				"fall": "data/scorpionFalling.png",
 				"winner": "data/scorpionWinner.png",
 				"blockDown": "data/scorpionBlockingDown.png",

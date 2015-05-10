@@ -130,14 +130,22 @@ void MKCharacter::setJump(bool jump) {
 }
 
 void MKCharacter::setHit(string newHit) {
+	int stanceWidth = 76;
+
 	this->hitMovement = newHit;
 
 	if (newHit == "KICK") {
-		this->setHitWidth(this->getWidth()*1.88);
+		this->setHitWidth(this->getWidth()*143/stanceWidth);
 		if (this->getHitDelay() <= 0) {
 			this->setHitDelay(4);
 		}
-	}
+	}else if (newHit == "PUNCH") {
+			cout << "newHit" << endl;
+			this->setHitWidth(this->getWidth() * 118 / stanceWidth);
+			if (this->getHitDelay() <= 0) {
+				this->setHitDelay(4);
+			}
+		}
 	else if (newHit == "BEINGHIT") {
 		if (this->getHitDelay() <= 0) {
 			this->setHitDelay(3);
