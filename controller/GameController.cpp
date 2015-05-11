@@ -143,8 +143,8 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
 								Mylog->Log("movimiento del personaje: Golpe de puño.", ERROR_LEVEL_INFO);
 								character->setHit("PUNCH");
 								previousKey = mainEvent->key.keysym.sym;
-								hitTimer = SDL_GetTicks();
 								character->setIsHiting(true);
+								hitTimer = SDL_GetTicks();
 							}
 							break;
 				case SDLK_o:
@@ -195,18 +195,21 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
 							Mylog->Log("movimiento del personaje: hacia la derecha", ERROR_LEVEL_INFO);
 							character2->setMovement("RIGHT");
 							previousKeyChar2 = mainEvent->key.keysym.sym;
+							setCharacterSide(character, character2);
 							timerChar2 = SDL_GetTicks();
 							break;
 				case SDLK_a:
 							Mylog->Log("movimiento del personaje: hacia la izquierda", ERROR_LEVEL_INFO);
 							character2->setMovement("LEFT");
 							previousKeyChar2 = mainEvent->key.keysym.sym;
+							setCharacterSide(character, character2);
 							timerChar2 = SDL_GetTicks();
 							break;
 				case SDLK_w:
 							if (previousKeyChar2 == SDLK_w)	{
 								Mylog->Log("movimiento del personaje: hacia arriba", ERROR_LEVEL_INFO);
 								character2->setJump(true);
+								setCharacterSide(character, character2);
 							}
 							previousKeyChar2 = mainEvent->key.keysym.sym;
 							break;
@@ -222,12 +225,14 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
 								Mylog->Log("movimiento del personaje: Patada baja", ERROR_LEVEL_INFO);
 								character2->setHit("KICKDOWN");
 								previousKeyChar2 = SDLK_s;
+								character2->setIsHiting(true);
 								hitTimerChar2 = SDL_GetTicks();
 							}
 							else{
 								Mylog->Log("movimiento del personaje: Pateando", ERROR_LEVEL_INFO);
 								character2->setHit("KICK");
 								previousKeyChar2 = mainEvent->key.keysym.sym;
+								character2->setIsHiting(true);
 								hitTimerChar2 = SDL_GetTicks();
 							}
 							break;
@@ -236,25 +241,28 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
 								character2->setHit("PUNCHJUMPLEFT");
 								character2->setJump(true);
 								Mylog->Log("movimiento del personaje: Golpe de puño con salto hacia la izquierda.", ERROR_LEVEL_INFO);
+								character2->setIsHiting(true);
 								hitTimerChar2 = SDL_GetTicks();
 							}
 							else if (previousKeyChar2 == SDLK_g){
 								character2->setHit("PUNCHJUMPRIGHT");
 								character2->setJump(true);
 								Mylog->Log("movimiento del personaje: Golpe de puño con salto hacia la derecha.", ERROR_LEVEL_INFO);
+								character2->setIsHiting(true);
 								hitTimerChar2 = SDL_GetTicks();
 							}
 							else if (previousKeyChar2 == SDLK_s){
 								character2->setHit("PUNCHUP");
 								Mylog->Log("movimiento del personaje: Golpe de puño ascendente.", ERROR_LEVEL_INFO);
+								character2->setIsHiting(true);
 								hitTimerChar2 = SDL_GetTicks();
 							}
 							else{
 								Mylog->Log("movimiento del personaje: Golpe de puño.", ERROR_LEVEL_INFO);
 								character2->setHit("PUNCH");
 								previousKeyChar2 = mainEvent->key.keysym.sym;
+								character2->setIsHiting(true);
 								hitTimerChar2 = SDL_GetTicks();
-								cout << "PUNCH" << endl;
 							}
 							break;
 				case SDLK_t:
