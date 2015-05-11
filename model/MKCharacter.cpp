@@ -129,31 +129,57 @@ void MKCharacter::setJump(bool jump) {
 	this->setJumpMovement(this->movement);
 }
 
+//void MKCharacter::setHit(string newHit) {
+//	this->hitMovement = newHit;
+//
+//	if (newHit == "KICK") {
+//		this->setHitWidth(this->getWidth()*1.88);
+//		if (this->getHitDelay() <= 0) {
+//			this->setHitDelay(4);
+//		}
+//	}
+//	else if (newHit == "BEINGHIT") {
+//		if (this->getHitDelay() <= 0) {
+//			this->setHitDelay(3);
+//		}
+//	}
+//	else if (newHit == "NONE") {
+//		this->setHitWidth(this->getWidth());
+//	}
+//}
+
 void MKCharacter::setHit(string newHit) {
 	int stanceWidth = 76;
 
 	this->hitMovement = newHit;
 
-	if (newHit == "KICK") {
-		this->setHitWidth(this->getWidth()*143/stanceWidth);
+	if (newHit == "NONE") {
+		this->setHitWidth(this->getWidth());
+	}
+	else
+	{
+		if (newHit == "BEINGHIT") {
+			if (this->getHitDelay() <= 0) {
+				this->setHitDelay(3);
+			}
+		}
 		if (this->getHitDelay() <= 0) {
 			this->setHitDelay(4);
 		}
-	}else if (newHit == "PUNCH") {
-			cout << "newHit" << endl;
+
+		if (newHit == "KICK") {
+			this->setHitWidth(this->getWidth()*143/stanceWidth);
+		}
+
+		if (newHit == "KICKDOWN") {
+			this->setHitWidth(this->getWidth() * 136 / stanceWidth);
+		}
+
+		if (newHit == "PUNCH") {
 			this->setHitWidth(this->getWidth() * 118 / stanceWidth);
-			if (this->getHitDelay() <= 0) {
-				this->setHitDelay(4);
-			}
-		}
-	else if (newHit == "BEINGHIT") {
-		if (this->getHitDelay() <= 0) {
-			this->setHitDelay(3);
 		}
 	}
-	else if (newHit == "NONE") {
-		this->setHitWidth(this->getWidth());
-	}
+
 }
 
 string MKCharacter::getHit() {
