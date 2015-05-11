@@ -228,6 +228,43 @@ void GameView::endRender() {
     SDL_RenderPresent(renderer);
 }
 
+//Segun la distancia entre los oponentnes muestro el sprite mas ancho o lo contraigo.
+double GameView::shootWidthCalculate() {
+	double distancia = raiden->getX() - (scorpion->getX() + scorpion->getHitWidth()-15);
+	double distanciaMaxima = scorpion->getHitWidth() * 1.3;
+
+
+	if(scorpion->getX() < raiden->getX()){
+		distancia = raiden->getX() - (scorpion->getX() + scorpion->getHitWidth()-15);
+
+//		cout << "raiden->getX(): " << raiden->getX() << " scorpion->getX(): " << scorpion->getX() << " scorpion->getHitWidth(): " << scorpion->getHitWidth() << " distancia: " << distancia << endl;
+		if (distancia>= distanciaMaxima)
+		{
+			return distanciaMaxima;
+		}
+		else
+		{
+			return distancia + 30;
+		}
+	}
+	else
+	{
+		distancia = scorpion->getX() - (raiden->getX() + raiden->getHitWidth()-15);
+
+//		cout << "raiden->getX(): " << endl;
+		if (distancia>= distanciaMaxima)
+		{
+			return distanciaMaxima;
+		}
+		else
+		{
+//			cout << "menor: " << distancia + 30 << endl;
+			return distancia + 30;
+		}
+
+	}
+}
+
 void GameView::runCharacter() {
     CharacterSprite* sprite = NULL;
     CharacterSprite* shootChar1 = NULL;
@@ -300,7 +337,7 @@ void GameView::runCharacter() {
     		if (currentFrame >= 3 && currentFrame <=6)
     		{
     			shootChar1 = scorpionShootTwo;
-    			shootChar1->PlayShoot2(150, scorpion->getHitWidth()*2);
+    			shootChar1->PlayShoot2(150, shootWidthCalculate());
     		}
     		else
     			shootChar1 = NULL;
@@ -446,16 +483,13 @@ void GameView::runCharacter() {
 
         if (shootChar1 != NULL) {
         	shootChar1->switchSide('l');
-			shootChar1->setX(scorpion->getX() - (scorpion->getHitWidth()*2)+15);
+        	shootChar1->setX(scorpion->getX() - (shootWidthCalculate())+15);
 			shootChar1->setY(scorpion->getY()+20);
         }
     }
 
 	sprite->setX(scorpion->getX());
     sprite->setY(scorpion->getY());
-    if (shootChar1 != NULL) {
-
-    }
 
     if (GameController::isVibrating())
         if(!sprite->vibrationFinished())
@@ -464,6 +498,7 @@ void GameView::runCharacter() {
             GameController::setVibrating(false);
     else
         sprite->resetFinished();
+
 
     sprite2->setX(raiden->getX());
     sprite2->setY(raiden->getY());
@@ -477,7 +512,9 @@ void GameView::runCharacter() {
         sprite2->resetFinished();
 
     sprite2->Draw();
+
     sprite->Draw();
+
     if (shootChar1 != NULL) {
     	shootChar1->Draw();
     }

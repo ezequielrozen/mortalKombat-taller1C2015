@@ -24,19 +24,30 @@ bool Collider::superpositionUp(MKCharacter* character1, MKCharacter* character2)
 
 void Collider::checkHits(MKCharacter* character1, MKCharacter* character2) {
 	if ((superpositionRight(character1,character2) || superpositionLeft(character1, character2)) &&
-		(!(character1->getHit() == "NONE")) && (!(character1->getHit() == "BEINGHIT"))) {
-		if (timer + 100 < SDL_GetTicks()) {
-			cout << "hitDelay: " << character1->getHitDelay() << endl;
-			if (character1->getHitDelay() == 0) {
-				character2->receiveBlow(DAMAGE.at(character1->getHit()));
-				cout << character1->getHit() << endl;
-				cout << character2->getLife() << endl;
+		(!(character1->getHit() == "NONE")) && (!(character1->getHit() == "BEINGHIT")) && (!(character1->getHit() == "SHOOT"))) {
+			if (timer + 100 < SDL_GetTicks()) {
+				cout << "hitDelay: " << character1->getHitDelay() << endl;
+				if (character1->getHitDelay() == 0) {
+					character2->receiveBlow(DAMAGE.at(character1->getHit()));
+					cout << character1->getHit() << endl;
+					cout << character2->getLife() << endl;
+				}
+				character1->setHitDelay(character1->getHitDelay()-1);
+				timer = SDL_GetTicks();
 			}
-			character1->setHitDelay(character1->getHitDelay()-1);
-			timer = SDL_GetTicks();
+		};
+
+	if (character1->getHit() == "SHOOT")
+	{
+		if (character1->getX() < character2->getX()){
+			int aux = character1->getHitWidth()*1.3*Util::getInstance()->getScalingConstant();
+			if (character1->getX()+aux  >= character2->getX())
+			{
+//				cout << "left" << endl;
+			}
 		}
 
-	};
+	}
 }
 
 void Collider::update(MKCharacter* character1, MKCharacter* character2, bool cameraMoved) {

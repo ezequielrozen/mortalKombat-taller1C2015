@@ -93,6 +93,8 @@ private:
     void runCharacter();
 	void RestarAllScorpionSprites();
 	void RestarAllRaidenSprites();
+	double shootWidthCalculate();
+
     Painter* painter;
 };
 
