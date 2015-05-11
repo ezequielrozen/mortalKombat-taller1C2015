@@ -84,6 +84,7 @@ private:
     string jumpMovement;
     string hitMovement;
 
+    double auxPosX;
     double posX;
     double posY;
 

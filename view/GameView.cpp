@@ -314,7 +314,7 @@ void GameView::runCharacter() {
     }
     else if (scorpion->getHit() == "PUNCHUP") {
         		sprite = scorpionPunchUp;
-        		sprite->Play(150, scorpion->getHitWidth());
+        		sprite->Play(100, scorpion->getHitWidth());
 	};
 
     /****************************************************************************************************/

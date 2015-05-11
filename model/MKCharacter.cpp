@@ -4,6 +4,7 @@ MKCharacter::MKCharacter(float initialPosX, float ancho, float alto, int z_index
 
 	this->z_index = z_index;
 	posX = initialPosX;
+	auxPosX = initialPosX;
 	this->name = name;
 	this->alto = alto;
 	this->ancho = ancho;
@@ -178,8 +179,11 @@ void MKCharacter::setHit(string newHit) {
 		if (newHit == "PUNCH") {
 			this->setHitWidth(this->getWidth() * 118 / stanceWidth);
 		}
-	}
 
+		if (newHit == "PUNCHUP") {
+			this->setHitWidth(this->getWidth() * 115 / stanceWidth);
+		}
+	}
 }
 
 string MKCharacter::getHit() {
