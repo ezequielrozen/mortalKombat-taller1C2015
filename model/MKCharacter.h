@@ -24,7 +24,7 @@ public:
 
     void move();
 
-    void UpdateJump();
+    void update();
 
     float getWidth();
 
@@ -86,6 +86,10 @@ public:
 
     void setCharacterSide(char);
 
+    string getHitReception();
+
+    void setHitReception(string reception);
+
 
 private:
     void RestartJump();
@@ -104,6 +108,9 @@ private:
 
     float hitWidth;
     int hitDelay;
+
+    string hitReception;
+    int hitReceptionDelay;
 
     double velY;
     double accY;

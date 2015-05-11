@@ -22,6 +22,23 @@ bool Collider::superpositionUp(MKCharacter* character1, MKCharacter* character2)
 	return (character1->getY()+character1->getHeight() >= character2->getY());
 }
 
+void Collider::checkHits(MKCharacter* character1, MKCharacter* character2) {
+	if ((superpositionRight(character1,character2) || superpositionLeft(character1, character2)) &&
+		(!(character1->getHit() == "NONE")) && (!(character1->getHit() == "BEINGHIT"))) {
+		if (timer + 100 < SDL_GetTicks()) {
+			cout << "hitDelay: " << character1->getHitDelay() << endl;
+			if (character1->getHitDelay() == 0) {
+				character2->receiveBlow(DAMAGE.at(character1->getHit()));
+				cout << character1->getHit() << endl;
+				cout << character2->getLife() << endl;
+			}
+			character1->setHitDelay(character1->getHitDelay()-1);
+			timer = SDL_GetTicks();
+		}
+
+	};
+}
+
 void Collider::update(MKCharacter* character1, MKCharacter* character2, bool cameraMoved) {
 
 	if (!cameraMoved) {
@@ -34,50 +51,8 @@ void Collider::update(MKCharacter* character1, MKCharacter* character2, bool cam
 			character2->move();
 		};
 	}
-	
-	if ((superpositionRight(character1,character2) || superpositionLeft(character1, character2)) &&
-		character1->getHit() == "KICK") {
-		if (timer + 100 < SDL_GetTicks()) {
-//			cout << "hitDelay: " << character1->getHitDelay() << endl;
-			if (character1->getHitDelay() == 0) {
-				character2->receiveBlow(DAMAGE.at("KICK"));
-				cout << "GOLPE RECIBIDO" << endl;
-				cout << character2->getLife() << endl;
-			}
-			character1->setHitDelay(character1->getHitDelay()-1);
-			timer = SDL_GetTicks();
-		}
 
-	};
-
-	if (character2->getHit() == "BEINGHIT") {
-		if (beingHitTimer + 100 < SDL_GetTicks()) {
-//			cout << "hitDelay2: " << character2->getHitDelay() << endl;
-			if (character2->getHitDelay() == 0) {
-				character2->setHit("NONE");
-			}
-			character2->setHitDelay(character2->getHitDelay()-1);
-			beingHitTimer = SDL_GetTicks();
-		}
-	}
-
-	if ((superpositionRight(character2,character1) || superpositionLeft(character2, character1)) &&
-		character2->getHit() == "KICK") {
-		cout << "ENTRO" << endl;
-		character1->receiveBlow(DAMAGE.at("KICK"));
-		cout << character2->getLife() << endl;
-
-	};
-
-	if ((superpositionRight(character1,character2) || superpositionLeft(character1, character2)) &&
-		character1->getHit() == "PUNCH") {
-		if (timer + COMMANDDELAYKIT < SDL_GetTicks()) {
-			cout << "PUNCH" << endl;
-			character2->receiveBlow(DAMAGE.at("KICK"));
-			cout << character2->getLife() << endl;
-			timer = SDL_GetTicks();
-		}
-
-	};
+	this->checkHits(character1, character2);
+	this->checkHits(character2, character1);
 	
 }

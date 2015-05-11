@@ -77,8 +77,8 @@ bool CameraController::update(MKCharacter* character1, MKCharacter* character2, 
     (*it)->update();
     }
 
-    character1->UpdateJump();
-    character2->UpdateJump();
+    character1->update();
+    character2->update();
 
 
     return cameraMoved;

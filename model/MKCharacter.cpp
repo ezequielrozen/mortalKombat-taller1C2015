@@ -25,6 +25,7 @@ MKCharacter::MKCharacter(float initialPosX, float ancho, float alto, int z_index
 	movement = "NONE";
 	jumpMovement = "NONE";
 	hitMovement = "NONE";
+	this->hitReception = "NONE";
 	jumping = false;
 
 	this->life = FULL_LIFE;
@@ -44,10 +45,18 @@ void MKCharacter::move() {
 	}
 }
 
-void MKCharacter::UpdateJump() {
+void MKCharacter::update() {
 
 	if (this->isJumping()) {
 		this->moveUp();
+	}
+
+	if (this->hitReceptionDelay == 0) {
+		this->setHitReception("NONE");
+	}
+
+	if (this->hitReception != "NONE") {
+		this->hitReceptionDelay = this->hitReceptionDelay - 1;
 	}
 }
 
@@ -187,12 +196,12 @@ void MKCharacter::setHit(string newHit) {
 
 			if (newHit == "PUNCH") {
 				spriteWidth = (this->name == "scorpion") ? 118 : 124;
-				delay = 4;
+				delay = 2;
 			}
 
 			if (newHit == "PUNCHUP") {
 				spriteWidth = (this->name == "scorpion") ? 115 : 105;
-				delay = 4;
+				delay = 3;
 			}
 
 			if ((newHit == "KICK") || (newHit == "KICKDOWN")  || (newHit == "PUNCH")  || (newHit == "PUNCHUP")){
@@ -273,7 +282,12 @@ bool MKCharacter::isAlive() {
 void MKCharacter::receiveBlow(int force) {
 	extern logger* Mylog;
 	this->life = this->life - force;
-	this->setHit("BEINGHIT");
+	if (force >= 20) {
+		this->setHitReception("FALLING");	
+	}
+	else {
+		this->setHitReception("BEINGHIT");
+	}
 	Mylog->Log("Personaje (PONERLE NOMBRE) recibe golpe", ERROR_LEVEL_INFO); //FALTA: nombre, vida restada, vida restante.
 	if (this->life <= 0) {
 		//marcar fin de juego. Preferentemente donde se invoca esta función (control de colisión y golpe)
@@ -319,4 +333,24 @@ void MKCharacter::setCharacterSide(char side) {
 
 char MKCharacter::getCharacterSide() {
 	return this->characterSide;
+}
+
+string MKCharacter::getHitReception() {
+	return this->hitReception;
+}
+
+void MKCharacter::setHitReception(string reception) {
+	this->hitReception = reception;
+
+	//PERDON POR HARDCODEAR ESTOS NUMEROS. ESTOY BUSCANDO UNA ALTERNATIVA. ATTE: GONZALO
+
+	if (reception == "BEINGHIT") {
+		this->hitReceptionDelay = 20;
+	}
+	else if (reception == "FALLING") {
+		this->hitReceptionDelay = 80;
+	}
+	else if (reception == "NONE") {
+		this->hitReceptionDelay = 0;
+	}
 }

@@ -172,7 +172,7 @@ void GameView::LoadSprites(string name1, string name2) {
 	raidenFinisher = new CharacterSprite(this->renderer, raiden->getFileMovement(MOVE_NAME_FINISHER), raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 26, oponentSide, false, colorAltered, this->painter);
 	raidenShoot = new CharacterSprite(this->renderer, raiden->getFileMovement(MOVE_NAME_SHOOT), raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 9, oponentSide, false, colorAltered, this->painter);
 	raidenDizzy = new CharacterSprite(this->renderer, raiden->getFileMovement(MOVE_NAME_DIZZY), raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 7, oponentSide, false, colorAltered, this->painter);
-	raidenFall = new CharacterSprite(this->renderer, raiden->getFileMovement(MOVE_NAME_FALL), raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 6, oponentSide, true, colorAltered, this->painter);
+	raidenFall = new CharacterSprite(this->renderer, raiden->getFileMovement(MOVE_NAME_FALL), raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 12, oponentSide, true, colorAltered, this->painter);
 	raidenBeingHit = new CharacterSprite(this->renderer, raiden->getFileMovement(MOVE_NAME_BEINGHIT), raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 4, oponentSide, false, colorAltered, this->painter);
 	raidenBlockDown = new CharacterSprite(this->renderer, raiden->getFileMovement(MOVE_NAME_BLOCKDOWN), raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 2, oponentSide, false, colorAltered, this->painter);
 	raidenBlock = new CharacterSprite(this->renderer, raiden->getFileMovement(MOVE_NAME_BLOCK), raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 3, oponentSide, false, colorAltered, this->painter);
@@ -238,6 +238,15 @@ void GameView::runCharacter() {
         sprite = scorpionSideJump;
         sprite->PlayBack(50);
     }
+    else if (scorpion->getHitReception() == "BEINGHIT") {
+            sprite = scorpionBeingHit;
+            cout << "BEINGHIT" << endl;
+            sprite->Play(150, scorpion->getHitWidth());
+    }
+    else if (scorpion->getHitReception() == "FALLING") {
+            sprite = scorpionFall;
+            sprite->Play(100, scorpion->getHitWidth());
+    }
     else if (scorpion->getMovement() == "NONE" && scorpion->getHit() == "NONE") {
         sprite = scorpionStance;
         RestarAllScorpionSprites();
@@ -287,14 +296,6 @@ void GameView::runCharacter() {
     		sprite = scorpionDizzy;
     		sprite->Play(150, scorpion->getHitWidth());
     }
-    else if (scorpion->getHit() == "BEINGHIT") {
-    		sprite = scorpionBeingHit;
-    		sprite->Play(150, scorpion->getHitWidth());
-    }
-    else if (scorpion->getHit() == "FALLING") {
-    		sprite = scorpionFall;
-    		sprite->PlayFall(250);
-    }
     else if ((scorpion->getHit() == "PUNCHJUMPLEFT" || scorpion->getHit() == "PUNCHJUMPRIGHT")) {
     	if (scorpion->isJumping() )
     	{
@@ -333,6 +334,14 @@ void GameView::runCharacter() {
     else if (raiden->isJumping() && raiden->getJumpMovement() == "LEFT" && raiden->getHit() == "NONE") {
         sprite2 = raidenSideJump;
         sprite2->PlayBack(50);
+    }
+    else if (raiden->getHitReception() == "BEINGHIT") {
+            sprite2 = raidenBeingHit;
+            sprite2->Play(100, raiden->getHitWidth());
+    }
+    else if (raiden->getHitReception() == "FALLING") {
+            sprite2 = raidenFall;
+            sprite2->Play(100, raiden->getHitWidth());
     }
     else if (raiden->getMovement() == "NONE" && raiden->getHit() == "NONE") {
         sprite2 = raidenStance;
@@ -382,14 +391,6 @@ void GameView::runCharacter() {
     else if (raiden->getHit() == "DIZZY") {
     		sprite2 = raidenDizzy;
     		sprite2->Play(150, raiden->getHitWidth());
-    }
-    else if (raiden->getHit() == "BEINGHIT") {
-    		sprite2 = raidenBeingHit;
-    		sprite2->Play(100, raiden->getHitWidth());
-    }
-    else if (raiden->getHit() == "FALLING") {
-    		sprite2 = raidenFall;
-    		sprite2->PlayFall(250);
     }
     else if ((raiden->getHit() == "PUNCHJUMPLEFT" || raiden->getHit() == "PUNCHJUMPRIGHT")) {
     	if (raiden->isJumping() )
