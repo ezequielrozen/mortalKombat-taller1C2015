@@ -44,6 +44,7 @@ private:
     SDL_Keycode previousKeyChar2;
 
 	void testElapsedTime(MKCharacter* character, MKCharacter* character2);
+	void setCharacterSide(MKCharacter* character, MKCharacter* character2);
 };
 
 #endif /* GAMECONTROLLER_H_ */

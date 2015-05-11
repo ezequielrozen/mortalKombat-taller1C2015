@@ -38,7 +38,7 @@ void Collider::update(MKCharacter* character1, MKCharacter* character2, bool cam
 	if ((superpositionRight(character1,character2) || superpositionLeft(character1, character2)) &&
 		character1->getHit() == "KICK") {
 		if (timer + 100 < SDL_GetTicks()) {
-			cout << "hitDelay: " << character1->getHitDelay() << endl;
+//			cout << "hitDelay: " << character1->getHitDelay() << endl;
 			if (character1->getHitDelay() == 0) {
 				character2->receiveBlow(DAMAGE.at("KICK"));
 				cout << "GOLPE RECIBIDO" << endl;
@@ -52,7 +52,7 @@ void Collider::update(MKCharacter* character1, MKCharacter* character2, bool cam
 
 	if (character2->getHit() == "BEINGHIT") {
 		if (beingHitTimer + 100 < SDL_GetTicks()) {
-			cout << "hitDelay2: " << character2->getHitDelay() << endl;
+//			cout << "hitDelay2: " << character2->getHitDelay() << endl;
 			if (character2->getHitDelay() == 0) {
 				character2->setHit("NONE");
 			}

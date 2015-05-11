@@ -78,6 +78,15 @@ public:
 
     int getHitDelay();
 
+    bool getIsHiting();
+
+    void setIsHiting(bool);
+
+    char getCharacterSide();
+
+    void setCharacterSide(char);
+
+
 private:
     void RestartJump();
     string movement;
@@ -87,6 +96,7 @@ private:
     double auxPosX;
     double posX;
     double posY;
+    bool isHiting;
 
     int z_index;
     float ancho;
@@ -112,6 +122,7 @@ private:
 
 	int life;
 	int characterNumber;
+	char characterSide;
 
     string name;
 };

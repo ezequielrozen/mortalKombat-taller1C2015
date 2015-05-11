@@ -27,14 +27,14 @@ void GameController::checkEvent() {
     SDL_PollEvent(mainEvent);
 }
 
-void GameController::testElapsedTime(MKCharacter* character,
-		MKCharacter* character2) {
+void GameController::testElapsedTime(MKCharacter* character, MKCharacter* character2) {
 	if (timer + COMMANDDELAY < SDL_GetTicks()) {
 		character->setMovement("NONE");
 		timer = SDL_GetTicks();
 	}
 	if (hitTimer + COMMANDDELAYKIT < SDL_GetTicks()) {
 		character->setHit("NONE");
+		character->setIsHiting(false);
 		hitTimer = SDL_GetTicks();
 	}
 	if (timerChar2 + COMMANDDELAY < SDL_GetTicks()) {
@@ -43,8 +43,20 @@ void GameController::testElapsedTime(MKCharacter* character,
 	}
 	if (hitTimerChar2 + COMMANDDELAYKIT < SDL_GetTicks()) {
 		character2->setHit("NONE");
+		character2->setIsHiting(false);
 		hitTimerChar2 = SDL_GetTicks();
 	}
+}
+
+void GameController::setCharacterSide(MKCharacter* character, MKCharacter* character2)
+{
+    if(character->getX() <= character2->getX()){
+    	character->setCharacterSide('l');
+    	character2->setCharacterSide('r');
+    }else{
+    	character->setCharacterSide('r');
+    	character2->setCharacterSide('l');
+    }
 }
 
 void GameController::update(MKCharacter* character, MKCharacter* character2) {
@@ -59,18 +71,21 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
 							Mylog->Log("movimiento del personaje: hacia la derecha", ERROR_LEVEL_INFO);
 							character->setMovement("RIGHT");
 							previousKey = mainEvent->key.keysym.sym;
+							setCharacterSide(character, character2);
 							timer = SDL_GetTicks();
 							break;
 				case SDLK_LEFT:
 							Mylog->Log("movimiento del personaje: hacia la izquierda", ERROR_LEVEL_INFO);
 							character->setMovement("LEFT");
 							previousKey = mainEvent->key.keysym.sym;
+							setCharacterSide(character, character2);
 							timer = SDL_GetTicks();
 							break;
 				case SDLK_UP:
 							if (previousKey == SDLK_UP){
 								Mylog->Log("movimiento del personaje: hacia arriba", ERROR_LEVEL_INFO);
 								character->setJump(true);
+								setCharacterSide(character, character2);
 							}
 							previousKey = mainEvent->key.keysym.sym;
 							break;
@@ -92,12 +107,14 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
 								Mylog->Log("movimiento del personaje: Patada baja", ERROR_LEVEL_INFO);
 								character->setHit("KICKDOWN");
 								previousKey = SDLK_DOWN;
+								character->setIsHiting(true);
 								hitTimer = SDL_GetTicks();
 							}
 							else{
 								Mylog->Log("movimiento del personaje: Pateando", ERROR_LEVEL_INFO);
 								character->setHit("KICK");
 								previousKey = mainEvent->key.keysym.sym;
+								character->setIsHiting(true);
 								hitTimer = SDL_GetTicks();
 							}
 							break;
@@ -106,17 +123,20 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
 								character->setHit("PUNCHJUMPLEFT");
 								character->setJump(true);
 								Mylog->Log("movimiento del personaje: Golpe de puño con salto hacia la izquierda.", ERROR_LEVEL_INFO);
+								character->setIsHiting(true);
 								hitTimer = SDL_GetTicks();
 							}
 							else if (previousKey == SDLK_RIGHT){
 								character->setHit("PUNCHJUMPRIGHT");
 								character->setJump(true);
 								Mylog->Log("movimiento del personaje: Golpe de puño con salto hacia la derecha.", ERROR_LEVEL_INFO);
+								character->setIsHiting(true);
 								hitTimer = SDL_GetTicks();
 							}
 							else if (previousKey == SDLK_DOWN){
 								character->setHit("PUNCHUP");
 								Mylog->Log("movimiento del personaje: Golpe de puño ascendente.", ERROR_LEVEL_INFO);
+								character->setIsHiting(true);
 								hitTimer = SDL_GetTicks();
 							}
 							else{
@@ -124,7 +144,7 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
 								character->setHit("PUNCH");
 								previousKey = mainEvent->key.keysym.sym;
 								hitTimer = SDL_GetTicks();
-								cout << "PUNCH" << endl;
+								character->setIsHiting(true);
 							}
 							break;
 				case SDLK_o:

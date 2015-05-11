@@ -150,12 +150,18 @@ void MKCharacter::setJump(bool jump) {
 //}
 
 void MKCharacter::setHit(string newHit) {
-	int stanceWidth = 76;
+	double stanceWidth = 76;
+	double spriteWidth = 0;
+	int delay = 0;
 
 	this->hitMovement = newHit;
 
 	if (newHit == "NONE") {
 		this->setHitWidth(this->getWidth());
+
+		if ((this->getCharacterSide() == 'r') && (this->getIsHiting())) {
+			this->posX = this->auxPosX;
+		}
 	}
 	else
 	{
@@ -164,24 +170,44 @@ void MKCharacter::setHit(string newHit) {
 				this->setHitDelay(3);
 			}
 		}
-		if (this->getHitDelay() <= 0) {
-			this->setHitDelay(4);
-		}
+		else
+		{
+			if (newHit == "KICK") {
+				spriteWidth = 143;
+				delay = 4;
+			}
 
-		if (newHit == "KICK") {
-			this->setHitWidth(this->getWidth()*143/stanceWidth);
-		}
+			if (newHit == "KICKDOWN") {
+				spriteWidth = 136;
+				delay = 4;
+			}
 
-		if (newHit == "KICKDOWN") {
-			this->setHitWidth(this->getWidth() * 136 / stanceWidth);
-		}
+			if (newHit == "PUNCH") {
+				spriteWidth = 118;
+				delay = 4;
+			}
 
-		if (newHit == "PUNCH") {
-			this->setHitWidth(this->getWidth() * 118 / stanceWidth);
-		}
+			if (newHit == "PUNCHUP") {
+				spriteWidth = 115;
+				delay = 4;
+			}
 
-		if (newHit == "PUNCHUP") {
-			this->setHitWidth(this->getWidth() * 115 / stanceWidth);
+			if ((newHit == "KICK") || (newHit == "KICKDOWN")  || (newHit == "PUNCH")  || (newHit == "PUNCHUP")){
+
+				if (this->getHitDelay() <= 0) {
+					this->setHitDelay(delay);
+				}
+
+				if ((this->getCharacterSide() == 'r') && (!this->getIsHiting())) {
+					this->auxPosX = this->posX;
+
+//					cout << posX << endl;
+					this->posX = this->posX - ((this->getWidth()*(spriteWidth/stanceWidth)) - this->getWidth());
+//					cout << posX << endl;
+				}
+
+				this->setHitWidth(this->getWidth()*spriteWidth/stanceWidth);
+			}
 		}
 	}
 }
@@ -192,6 +218,14 @@ string MKCharacter::getHit() {
 
 bool MKCharacter::isJumping() {
 	return this->jumping;
+}
+
+bool MKCharacter::getIsHiting() {
+	return this->isHiting;
+}
+
+void MKCharacter::setIsHiting(bool state) {
+	this->isHiting = state;
 }
 
 string MKCharacter::getJumpMovement() {
@@ -274,4 +308,12 @@ void MKCharacter::setHitDelay(int delay) {
 
 int MKCharacter::getHitDelay() {
 	return this->hitDelay;
+}
+
+void MKCharacter::setCharacterSide(char side) {
+	this->characterSide = side;
+}
+
+char MKCharacter::getCharacterSide() {
+	return this->characterSide;
 }
