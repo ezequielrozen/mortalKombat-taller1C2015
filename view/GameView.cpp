@@ -229,15 +229,15 @@ void GameView::endRender() {
 }
 
 //Segun la distancia entre los oponentnes muestro el sprite mas ancho o lo contraigo.
+//Esto trabaja igual q el codigo del Collider::checkHits para el bloque del SHOOT. Si se modifica aca se debe modificar tb alla.
 double GameView::shootWidthCalculate() {
-	double distancia = raiden->getX() - (scorpion->getX() + scorpion->getHitWidth()-15);
-	double distanciaMaxima = scorpion->getHitWidth() * 1.3;
+	double distancia;
+	double distanciaMaxima = scorpion->getHitWidth() * 2;
 
 
 	if(scorpion->getX() < raiden->getX()){
 		distancia = raiden->getX() - (scorpion->getX() + scorpion->getHitWidth()-15);
 
-//		cout << "raiden->getX(): " << raiden->getX() << " scorpion->getX(): " << scorpion->getX() << " scorpion->getHitWidth(): " << scorpion->getHitWidth() << " distancia: " << distancia << endl;
 		if (distancia>= distanciaMaxima)
 		{
 			return distanciaMaxima;
@@ -251,17 +251,14 @@ double GameView::shootWidthCalculate() {
 	{
 		distancia = scorpion->getX() - (raiden->getX() + raiden->getHitWidth()-15);
 
-//		cout << "raiden->getX(): " << endl;
 		if (distancia>= distanciaMaxima)
 		{
 			return distanciaMaxima;
 		}
 		else
 		{
-//			cout << "menor: " << distancia + 30 << endl;
 			return distancia + 30;
 		}
-
 	}
 }
 

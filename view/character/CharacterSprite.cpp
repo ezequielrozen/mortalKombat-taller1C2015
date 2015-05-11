@@ -186,7 +186,7 @@ int CharacterSprite::PlayShoot(float Speed, float characterWidth) {
         }
         animationDelay = SDL_GetTicks();
     }
-    cout << "shoot1 " << CurrentFrame << endl;
+//    cout << "shoot1 " << CurrentFrame << endl;
     return CurrentFrame;
 }
 
@@ -211,7 +211,7 @@ void CharacterSprite::PlayShoot2(float Speed, float width)
 
         animationDelay = SDL_GetTicks();
     }
-    cout << "shoot2 " << CurrentFrame << endl;
+//    cout << "shoot2 " << CurrentFrame << endl;
 }
 
 void CharacterSprite::PlayFall(float Speed) {
