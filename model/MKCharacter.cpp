@@ -190,7 +190,7 @@ void MKCharacter::setHit(string newHit) {
 			}
 
 			if (newHit == "KICKDOWN") {
-				spriteWidth = (this->name == "scorpion") ? 136 : 73;
+				spriteWidth = (this->name == "scorpion") ? 136 : 146;
 				delay = 4;
 			}
 

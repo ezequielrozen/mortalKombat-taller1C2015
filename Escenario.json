@@ -69,6 +69,7 @@
 				"sideJump": "data/raidenSideJump.png",
 				"duck": "data/raidenDuck.png",
 				"kick": "data/raidenKicking.png",
+				"kickDown": "data/raidenKickingDown.png",
 				"punch": "data/raidenPunching.png",
 				"block": "data/raidenBlocking.png",
 				"beingHit": "data/raidenBeingHit.png",
