@@ -213,9 +213,7 @@ void MKCharacter::setHit(string newHit) {
 				if ((this->getCharacterSide() == 'r') && (!this->getIsHiting())) {
 					this->auxPosX = this->posX;
 
-//					cout << posX << endl;
 					this->posX = this->posX - ((this->getWidth()*(spriteWidth/stanceWidth)) - this->getWidth());
-//					cout << posX << endl;
 				}
 
 				this->setHitWidth(this->getWidth()*spriteWidth/stanceWidth);
@@ -334,7 +332,6 @@ void MKCharacter::setCharacterSide(char side) {
 char MKCharacter::getCharacterSide() {
 	return this->characterSide;
 }
-
 string MKCharacter::getHitReception() {
 	return this->hitReception;
 }

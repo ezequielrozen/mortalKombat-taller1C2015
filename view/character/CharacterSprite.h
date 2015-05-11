@@ -56,6 +56,9 @@ private:
     bool repeatLastSprite;
 
     float vibrateProgress;
+
+    int lastDraw_w;
+    int lastDraw_x;
 };
 
 #endif /* MKSPRITE_H_ */

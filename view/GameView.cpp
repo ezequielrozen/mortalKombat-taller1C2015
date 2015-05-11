@@ -422,7 +422,9 @@ void GameView::runCharacter() {
         sprite2->switchSide('r');
     }
 
-    sprite->setX(scorpion->getX());
+    if (scorpion->getHit() != "SHOOT")
+    	sprite->setX(scorpion->getX());
+
     sprite->setY(scorpion->getY());
 
     if (GameController::isVibrating())
