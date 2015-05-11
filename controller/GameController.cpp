@@ -151,6 +151,7 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
 							Mylog->Log("movimiento del personaje: Disparando.", ERROR_LEVEL_INFO);
 							character->setHit("SHOOT");
 							previousKey = mainEvent->key.keysym.sym;
+							character->setIsHiting(true);
 							hitTimer = SDL_GetTicks();
 							break;
 				case SDLK_d:

@@ -62,6 +62,8 @@ GameView::~GameView() {
     delete  scorpionBodyParts;
     delete  scorpionFinisher;
     delete  scorpionShoot;
+    delete  scorpionShootOne;
+    delete  scorpionShootTwo;
     delete  scorpionDizzy;
     delete  scorpionFall;
     delete  scorpionBeingHit;
@@ -150,6 +152,8 @@ void GameView::LoadSprites(string name1, string name2) {
     scorpionBodyParts = new CharacterSprite(this->renderer, scorpion->getFileMovement(MOVE_NAME_BODYPARTS), scorpion->getX(), scorpion->getY(), scorpion->getWidth(), scorpion->getHeight(), 8, oponentSide, false, false, NULL);
     scorpionFinisher = new CharacterSprite(this->renderer, scorpion->getFileMovement(MOVE_NAME_FINISHER), scorpion->getX(), scorpion->getY(), scorpion->getWidth(), scorpion->getHeight(), 26, oponentSide, false, false, NULL);
     scorpionShoot = new CharacterSprite(this->renderer, scorpion->getFileMovement(MOVE_NAME_SHOOT), scorpion->getX(), scorpion->getY(), scorpion->getWidth(), scorpion->getHeight(), 9, oponentSide, false, false, NULL);
+    scorpionShootOne = new CharacterSprite(this->renderer, scorpion->getFileMovement(MOVE_NAME_SHOOT_ONE), scorpion->getX(), scorpion->getY(), scorpion->getWidth(), scorpion->getHeight(), 7, oponentSide, false, false, NULL);
+    scorpionShootTwo = new CharacterSprite(this->renderer, scorpion->getFileMovement(MOVE_NAME_SHOOT_TWO), scorpion->getX(), scorpion->getY(), scorpion->getWidth(), scorpion->getHeight(), 4, oponentSide, true, false, NULL);
     scorpionDizzy = new CharacterSprite(this->renderer, scorpion->getFileMovement(MOVE_NAME_DIZZY), scorpion->getX(), scorpion->getY(), scorpion->getWidth(), scorpion->getHeight(), 7, oponentSide, false, false, NULL);
     scorpionFall = new CharacterSprite(this->renderer, scorpion->getFileMovement(MOVE_NAME_FALL), scorpion->getX(), scorpion->getY(), scorpion->getWidth(), scorpion->getHeight(), 7, oponentSide, false, false, NULL);
     scorpionBeingHit = new CharacterSprite(this->renderer, scorpion->getFileMovement(MOVE_NAME_BEINGHIT), scorpion->getX(), scorpion->getY(), scorpion->getWidth(), scorpion->getHeight(), 3, oponentSide, false, false, NULL);
@@ -191,6 +195,8 @@ void GameView::RestarAllScorpionSprites()
 	scorpionPunch->reset();
 	scorpionPunchJump->reset();
 	scorpionShoot->reset();
+	scorpionShootOne->reset();
+	scorpionShootTwo->reset();
 	scorpionDizzy->reset();
 	scorpionBeingHit->reset();
 	scorpionBlockDown->reset();
@@ -223,7 +229,10 @@ void GameView::endRender() {
 }
 
 void GameView::runCharacter() {
-    CharacterSprite* sprite;
+    CharacterSprite* sprite = NULL;
+    CharacterSprite* shootChar1 = NULL;
+    CharacterSprite* shootChar2 = NULL;
+    int currentFrame=-1;
 
     if (scorpion->isJumping() && scorpion->getJumpMovement() == "NONE" && scorpion->getHit() == "NONE") {
         sprite = scorpionJump;
@@ -285,8 +294,16 @@ void GameView::runCharacter() {
     		sprite->Play(100, scorpion->getHitWidth());
     }
     else if (scorpion->getHit() == "SHOOT") {
-    		sprite = scorpionShoot;
-    		sprite->PlayShoot(100, scorpion->getHitWidth());
+    		sprite = scorpionShootOne;
+
+    		currentFrame = sprite->PlayShoot(90, scorpion->getHitWidth());
+    		if (currentFrame >= 3 && currentFrame <=6)
+    		{
+    			shootChar1 = scorpionShootTwo;
+    			shootChar1->PlayShoot2(150, scorpion->getHitWidth()*2);
+    		}
+    		else
+    			shootChar1 = NULL;
     }
     else if (scorpion->getHit() == "DEFENSE") {
     		sprite = scorpionBlock;
@@ -381,8 +398,8 @@ void GameView::runCharacter() {
     		sprite2->Play(100, raiden->getHitWidth());
     }
     else if (raiden->getHit() == "SHOOT") {
-    		sprite2 = raidenShoot;
-    		sprite2->PlayShoot(100, raiden->getHitWidth());
+//    		sprite2 = raidenShoot;
+//    		sprite2->PlayShoot(100, raiden->getHitWidth(), shootChar2);
     }
     else if (raiden->getHit() == "DEFENSE") {
     		sprite2 = raidenBlock;
@@ -416,16 +433,29 @@ void GameView::runCharacter() {
 
     if(scorpion->getX() < raiden->getX()){
         sprite->switchSide('r');
+        if (shootChar1 != NULL) {
+        	shootChar1->switchSide('r');
+			shootChar1->setX(scorpion->getX() + scorpion->getHitWidth()-15);
+			shootChar1->setY(scorpion->getY()+20);
+        }
         sprite2->switchSide('l');
+
     }else{
         sprite->switchSide('l');
         sprite2->switchSide('r');
+
+        if (shootChar1 != NULL) {
+        	shootChar1->switchSide('l');
+			shootChar1->setX(scorpion->getX() - (scorpion->getHitWidth()*2)+15);
+			shootChar1->setY(scorpion->getY()+20);
+        }
     }
 
-    if (scorpion->getHit() != "SHOOT")
-    	sprite->setX(scorpion->getX());
-
+	sprite->setX(scorpion->getX());
     sprite->setY(scorpion->getY());
+    if (shootChar1 != NULL) {
+
+    }
 
     if (GameController::isVibrating())
         if(!sprite->vibrationFinished())
@@ -448,5 +478,9 @@ void GameView::runCharacter() {
 
     sprite2->Draw();
     sprite->Draw();
+    if (shootChar1 != NULL) {
+    	shootChar1->Draw();
+    }
+
 }
 

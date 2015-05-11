@@ -69,7 +69,6 @@ void CharacterSprite::Play(float Speed, float width)
         crop.h = img_height;
 
         animationDelay = SDL_GetTicks();
-
     }
 }
 
@@ -92,46 +91,127 @@ void CharacterSprite::PlayBack(float Speed) {
 	}
 }
 
-void CharacterSprite::PlayShoot(float Speed, float characterWidth) {
+//void CharacterSprite::PlayShoot(float Speed, float characterWidth) {
+//
+//    if (animationDelay+Speed < SDL_GetTicks())
+//    {
+//        if ((this->framesX - 1) <= CurrentFrame)
+//        {
+//        	if (this->getRepeatLastSprite())
+//        		CurrentFrame = this->framesX -1;
+//        	else
+//        		CurrentFrame = 0;
+//        }
+//        else{
+//            CurrentFrame++;
+//        }
+//
+//        if (CurrentFrame == 0)
+//        {
+//        	shootInitialPosX = draw.x;
+//        }
+//
+//        //vector con las posiciones X de donde comienza cada sprite en el spriteSheet.
+//        int vec[framesX+1][framesX+1];
+//        vec[0][0] =0; 		vec[0][1] = 0;
+//        vec[1][0] =92; 		vec[1][1] = -4;
+//        vec[2][0] =204;		vec[2][1] = 50;
+//        vec[3][0] =308;		vec[3][1] = -3;
+//        vec[4][0] =582;		vec[4][1] = 3;
+//        vec[5][0] =850;		vec[5][1] = -2;
+//        vec[6][0] =1124;		vec[6][1] = 3;
+//        vec[7][0] =1394;		vec[7][1] = -1;
+//        vec[8][0] =1643;		vec[8][1] = -10;
+//        vec[9][0] =1860;		vec[9][1] = 0;
+//
+//
+//
+//        crop.x = vec[CurrentFrame][0];
+//        crop.w = vec[CurrentFrame+1][0] - vec[CurrentFrame][0];
+//
+//        //Seteo el ancho para el render segun el ancho de la imagen
+//        draw.w = crop.w * Util::getInstance()->getScalingConstant();
+//
+//        //Lo escalo para q se ajuste dependiendo del ancho del personaje. El spritesheet se hizo para el ancho default: ANCHOPERSONAJE=68.
+//        draw.w = draw.w * ((characterWidth * Util::getInstance()->getScalingConstant()) / (ANCHOPERSONAJE * Util::getInstance()->getScalingConstant()));
+//
+//
+////        if (CurrentFrame <= 1)
+////        {
+////        	this->lastDraw_w = draw.w;
+////        	this->lastDraw_x = draw.x;
+////        }
+////
+////        cout << "w: " << draw.w  << endl;
+////        cout << "x: " << draw.x  << endl;
+////
+////        if (lastDraw_w >= draw.w){
+////        	this->draw.x -= (lastDraw_w - draw.w) * 0.3;
+////        }else{
+////        	this->draw.x += (draw.w - lastDraw_w)* 0.3;
+////        }
+////
+////        this->lastDraw_x = draw.x;
+////        this->lastDraw_w = draw.w;
+//
+//        draw.x += vec[CurrentFrame][1];
+//        cout << draw.x  << endl;
+//
+//        animationDelay = SDL_GetTicks();
+//
+//    }
+//}
+
+int CharacterSprite::PlayShoot(float Speed, float characterWidth) {
 
     if (animationDelay+Speed < SDL_GetTicks())
     {
-
-        if ((this->framesX - 1) <= CurrentFrame)
+        if ((this->framesX ) <= CurrentFrame)
         {
-        	if (this->getRepeatLastSprite())
+        	if (this->getRepeatLastSprite()){
         		CurrentFrame = this->framesX -1;
-        	else
+        	}else{
         		CurrentFrame = 0;
+        	}
         }
         else{
+			draw.w = characterWidth*Util::getInstance()->getScalingConstant();
+
+			crop.x = CurrentFrame * (img_width/this->framesX);
+			crop.y = 0;
+			crop.w = img_width/framesX;
+			crop.h = img_height;
+
             CurrentFrame++;
         }
+        animationDelay = SDL_GetTicks();
+    }
+    cout << "shoot1 " << CurrentFrame << endl;
+    return CurrentFrame;
+}
 
-        int vec[framesX+1];
-        vec[0] =0;
-        vec[1] =92;
-        vec[2] =204;
-        vec[3] =308;
-        vec[4] =582;
-        vec[5] =850;
-        vec[6] =1124;
-        vec[7] =1394;
-        vec[8] =1643;
-        vec[9] =1860;
+void CharacterSprite::PlayShoot2(float Speed, float width)
+{
+    if (animationDelay+Speed < SDL_GetTicks())
+    {
+        if ((this->framesX) <= CurrentFrame)
+        {
+			CurrentFrame = 0;
+        }
+        else
+            CurrentFrame++;
 
-        crop.x = vec[CurrentFrame];
-        crop.w = vec[CurrentFrame+1] - vec[CurrentFrame];
+        draw.w = width*Util::getInstance()->getScalingConstant();
+        draw.h= 30;
 
-        //Seteo el ancho para el render segun el ancho de la imagen
-        draw.w = crop.w * Util::getInstance()->getScalingConstant();
-
-        //Lo escalo para q se ajuste dependiendo del ancho del personaje. El spritesheet se hizo para el ancho default: ANCHOPERSONAJE=68.
-        draw.w = draw.w * ((characterWidth * Util::getInstance()->getScalingConstant()) / (ANCHOPERSONAJE * Util::getInstance()->getScalingConstant()));
+        crop.x = CurrentFrame * (img_width/framesX);
+        crop.y = 0;
+        crop.w = img_width/framesX;
+        crop.h = img_height;
 
         animationDelay = SDL_GetTicks();
-
     }
+    cout << "shoot2 " << CurrentFrame << endl;
 }
 
 void CharacterSprite::PlayFall(float Speed) {

@@ -204,7 +204,12 @@ void MKCharacter::setHit(string newHit) {
 				delay = 3;
 			}
 
-			if ((newHit == "KICK") || (newHit == "KICKDOWN")  || (newHit == "PUNCH")  || (newHit == "PUNCHUP")){
+			if (newHit == "SHOOT") {
+				spriteWidth = (this->name == "scorpion") ? 120 : 105;
+				delay = 3;
+			}
+
+			if ((newHit == "KICK") || (newHit == "KICKDOWN")  || (newHit == "PUNCH")  || (newHit == "PUNCHUP") || (newHit == "SHOOT")){
 
 				if (this->getHitDelay() <= 0) {
 					this->setHitDelay(delay);

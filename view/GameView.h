@@ -49,6 +49,8 @@ private:
     CharacterSprite* scorpionBodyParts;
     CharacterSprite* scorpionFinisher;
     CharacterSprite* scorpionShoot;
+    CharacterSprite* scorpionShootOne;
+    CharacterSprite* scorpionShootTwo;
     CharacterSprite* scorpionDizzy;
     CharacterSprite* scorpionFall;
     CharacterSprite* scorpionBeingHit;

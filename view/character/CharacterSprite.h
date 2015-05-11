@@ -9,56 +9,56 @@
 
 using namespace std;
 
-class CharacterSprite
-{
+class CharacterSprite {
 public:
-    CharacterSprite(SDL_Renderer* passed_renderer, char* FilePath, float x, float y, float w, float h,
-                    int frames, string OponentSide, bool repearLastSprite, bool colorAltered, Painter* painter);
+	CharacterSprite(SDL_Renderer* passed_renderer, char* FilePath, float x,
+			float y, float w, float h, int frames, string OponentSide,
+			bool repearLastSprite, bool colorAltered, Painter* painter);
 
-    ~CharacterSprite(void);
-    void Draw();
+	~CharacterSprite(void);
+	void Draw();
 
-    void Play(float Speed, float width);
-    void PlayBack(float Speed);
-    float getX();
-    void setX(float passedX);
-    void setY(float passedY);
-    void reset();
-    void switchSide(const char c);
-    bool getRepeatLastSprite();
-    void setRepeatLastSprite(bool repeat);
-    void PlayShoot(float,float);
-    void PlayFall(float);
-    void vibrate();
-    bool vibrationFinished();
-    void resetFinished();
+	void Play(float Speed, float width);
+	void PlayBack(float Speed);
+	float getX();
+	void setX(float passedX);
+	void setY(float passedY);
+	void reset();
+	void switchSide(const char c);
+	bool getRepeatLastSprite();
+	void setRepeatLastSprite(bool repeat);
+	int PlayShoot(float, float);
+	void PlayShoot2(float, float);
+	void PlayFall(float);
+	void vibrate();
+	bool vibrationFinished();
+	void resetFinished();
+
 private:
 
-    SDL_Texture* texture;
-    SDL_Rect draw;
+	SDL_Texture* texture;
+	SDL_Rect draw;
 
-    SDL_Rect crop;
+	SDL_Rect crop;
 
-    int img_width;
-    int img_height;
-    int CurrentFrame;
-    int animationDelay;
-    int yPosition;
-    int framesX;
-    bool initiated;
-    bool finished;
-    float scalingConstant;
+	int img_width;
+	int img_height;
+	int CurrentFrame;
+	int animationDelay;
+	int yPosition;
+	int framesX;
+	bool initiated;
+	bool finished;
+	float scalingConstant;
 
-    string oponentSide;
+	string oponentSide;
 
-    SDL_Renderer* renderer;
+	SDL_Renderer* renderer;
 
-    bool repeatLastSprite;
+	bool repeatLastSprite;
 
-    float vibrateProgress;
+	float vibrateProgress;
 
-    int lastDraw_w;
-    int lastDraw_x;
 };
 
 #endif /* MKSPRITE_H_ */

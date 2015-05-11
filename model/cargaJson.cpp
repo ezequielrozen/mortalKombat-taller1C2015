@@ -216,6 +216,8 @@ void cargaPersonaje(Json::Value personaje, std::list<MKCharacter*>* characters, 
     char* filenameBodyParts = new char[200];
     char* filenameFinisher = new char[200];
     char* filenameShoot = new char[200];
+    char* filenameShootOne = new char[200];
+    char* filenameShootTwo = new char[200];
     char* filenameDizzy = new char[200];
     char* filenameFall = new char[200];
     char* filenameBeingHit = new char[200];
@@ -257,6 +259,8 @@ void cargaPersonaje(Json::Value personaje, std::list<MKCharacter*>* characters, 
             filenameBodyParts = strdup(DEFAULT_BODYPARTS);
             filenameFinisher = strdup(DEFAULT_FINISHER);
             filenameShoot = strdup(DEFAULT_SHOOT);
+            filenameShootOne = strdup(DEFAULT_SHOOT_ONE);
+            filenameShootTwo = strdup(DEFAULT_SHOOT_TWO);
             filenameDizzy = strdup(DEFAULT_DIZZY);
             filenameFall = strdup(DEFAULT_FALL);
             filenameBeingHit = strdup(DEFAULT_BEINGHIT);
@@ -278,6 +282,8 @@ void cargaPersonaje(Json::Value personaje, std::list<MKCharacter*>* characters, 
             filenameBodyParts  = strdup(sprites[MOVE_NAME_BODYPARTS].asString().c_str());
             filenameFinisher  = strdup(sprites[MOVE_NAME_FINISHER].asString().c_str());
             filenameShoot  = strdup(sprites[MOVE_NAME_SHOOT].asString().c_str());
+            filenameShootOne  = strdup(sprites[MOVE_NAME_SHOOT_ONE].asString().c_str());
+            filenameShootTwo  = strdup(sprites[MOVE_NAME_SHOOT_TWO].asString().c_str());
             filenameDizzy  = strdup(sprites[MOVE_NAME_DIZZY].asString().c_str());
             filenameFall  = strdup(sprites[MOVE_NAME_FALL].asString().c_str());
             filenameBeingHit  = strdup(sprites[MOVE_NAME_BEINGHIT].asString().c_str());
@@ -302,6 +308,8 @@ void cargaPersonaje(Json::Value personaje, std::list<MKCharacter*>* characters, 
     validarExistenciaArchivo(DEFAULT_BODYPARTS, filenameBodyParts);
     validarExistenciaArchivo(DEFAULT_FINISHER, filenameFinisher);
     validarExistenciaArchivo(DEFAULT_SHOOT, filenameShoot);
+    validarExistenciaArchivo(DEFAULT_SHOOT_ONE, filenameShootOne);
+    validarExistenciaArchivo(DEFAULT_SHOOT_TWO, filenameShootTwo);
     validarExistenciaArchivo(DEFAULT_DIZZY, filenameDizzy);
     validarExistenciaArchivo(DEFAULT_FALL, filenameFall);
     validarExistenciaArchivo(DEFAULT_BEINGHIT, filenameBeingHit);
@@ -325,6 +333,8 @@ void cargaPersonaje(Json::Value personaje, std::list<MKCharacter*>* characters, 
     Util::getInstance()->addMovement(MOVE_NAME_BODYPARTS, filenameBodyParts);
     Util::getInstance()->addMovement(MOVE_NAME_FINISHER, filenameFinisher);
     Util::getInstance()->addMovement(MOVE_NAME_SHOOT, filenameShoot);
+    Util::getInstance()->addMovement(MOVE_NAME_SHOOT_ONE, filenameShootOne);
+    Util::getInstance()->addMovement(MOVE_NAME_SHOOT_TWO, filenameShootTwo);
     Util::getInstance()->addMovement(MOVE_NAME_DIZZY, filenameDizzy);
     Util::getInstance()->addMovement(MOVE_NAME_FALL, filenameFall);
     Util::getInstance()->addMovement(MOVE_NAME_BEINGHIT, filenameBeingHit);

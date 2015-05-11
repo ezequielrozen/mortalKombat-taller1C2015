@@ -39,6 +39,8 @@ const char* const DEFAULT_WINNER			= "data/scorpionWinner.png";
 const char* const DEFAULT_BODYPARTS			= "data/scorpionBodyParts.png";
 const char* const DEFAULT_FINISHER			= "data/scorpionFinisher.png";
 const char* const DEFAULT_SHOOT				= "data/scorpionShooting.png";
+const char* const DEFAULT_SHOOT_ONE			= "data/scorpionShootingOne.png";
+const char* const DEFAULT_SHOOT_TWO			= "data/scorpionShootingTwo.png";
 const char* const DEFAULT_DIZZY				= "data/scorpionDizzy.png";
 const char* const DEFAULT_FALL				= "data/scorpionFalling.png";
 const char* const DEFAULT_BEINGHIT			= "data/scorpionBeingHit.png";
@@ -60,6 +62,8 @@ const char* const MOVE_NAME_WINNER			= "winner";
 const char* const MOVE_NAME_BODYPARTS		= "bodyParts";
 const char* const MOVE_NAME_FINISHER		= "finisher";
 const char* const MOVE_NAME_SHOOT			= "shoot";
+const char* const MOVE_NAME_SHOOT_ONE		= "shootOne";
+const char* const MOVE_NAME_SHOOT_TWO		= "shootTwo";
 const char* const MOVE_NAME_DIZZY			= "dizzy";
 const char* const MOVE_NAME_FALL			= "fall";
 const char* const MOVE_NAME_BEINGHIT		= "beingHit";
@@ -71,7 +75,7 @@ const char* const NAME_CHARACTER_2          = "raiden";
 const int         FULL_LIFE                 = 100;
 
 typedef std::map<std::string, int> Map;
-const Map DAMAGE = {{"KICK", 10},{"PUNCH", 5}, {"KICKDOWN", 20} ,{"PUNCHUP", 20}};
+const Map DAMAGE = {{"KICK", 10},{"PUNCH", 5}, {"KICKDOWN", 20} ,{"PUNCHUP", 20},{"SHOOT", 5}};
 //
 //const int OPONENTLEFT                       =    1;
 //const int OPONENTRIGHT                      =    2;
