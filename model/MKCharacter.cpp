@@ -150,7 +150,9 @@ void MKCharacter::setJump(bool jump) {
 //}
 
 void MKCharacter::setHit(string newHit) {
-	double stanceWidth = 76;
+
+	double stanceWidth = (this->name == "scorpion") ? 76 : 73;
+
 	double spriteWidth = 0;
 	int delay = 0;
 
@@ -173,22 +175,23 @@ void MKCharacter::setHit(string newHit) {
 		else
 		{
 			if (newHit == "KICK") {
-				spriteWidth = 143;
+				spriteWidth = (this->name == "scorpion") ? 143 : 142;
 				delay = 4;
+				cout << name << endl;
 			}
 
 			if (newHit == "KICKDOWN") {
-				spriteWidth = 136;
+				spriteWidth = (this->name == "scorpion") ? 136 : 73;
 				delay = 4;
 			}
 
 			if (newHit == "PUNCH") {
-				spriteWidth = 118;
+				spriteWidth = (this->name == "scorpion") ? 118 : 124;
 				delay = 4;
 			}
 
 			if (newHit == "PUNCHUP") {
-				spriteWidth = 115;
+				spriteWidth = (this->name == "scorpion") ? 115 : 105;
 				delay = 4;
 			}
 
