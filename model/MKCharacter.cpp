@@ -1,4 +1,5 @@
 #include "MKCharacter.h"
+#include "../controller/GameController.h"
 
 MKCharacter::MKCharacter(float initialPosX, float ancho, float alto, int z_index, int pCharacterNumber, string name) {
 
@@ -284,11 +285,11 @@ bool MKCharacter::isAlive() {
 }
 void MKCharacter::receiveBlow(int force) {
 	extern logger* Mylog;
-	this->life = this->life - force;
+	this->life -= force;
 	if (force >= 20) {
-		this->setHitReception("FALLING");	
-	}
-	else {
+		this->setHitReception("FALLING");
+		GameController::setVibrating(true);
+	} else {
 		this->setHitReception("BEINGHIT");
 	}
 	Mylog->Log("Personaje (PONERLE NOMBRE) recibe golpe", ERROR_LEVEL_INFO); //FALTA: nombre, vida restada, vida restante.
