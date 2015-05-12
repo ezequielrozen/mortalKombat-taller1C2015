@@ -209,7 +209,7 @@ void loadPainter(Json::Value painterOptions, double& initialH, double& finalH, d
 
 void cargaPersonaje(Json::Value personaje, std::list<MKCharacter*>* characters, int characterNumber) {
     extern logger* Mylog;
-    char mensaje[200];
+    char mensaje[2000];
     char* filenameWalk = new char[200] ;
     char* filenameStance = new char[200];
     char* filenameJump = new char[200];
@@ -389,9 +389,9 @@ void cargaPersonaje(Json::Value personaje, std::list<MKCharacter*>* characters, 
     }
 
     //log
-    sprintf(mensaje, "Ancho: %1.2f, Alto: %1.2f, z-index: %i,\n Jump: %s, Walk: %s, Side jump: %s, Stance: %s",
+    sprintf(mensaje, "Ancho: %1.2f, Alto: %1.2f, z-index: %i,\n Jump: %s, Walk: %s, Side jump: %s, Stance: %s, Duck: %s, Kick: %s,\n KickDown: %s, PunchJump: %s, PunchUp: %s, Punch: %s,\n Winner: %s, BodyParts: %s, Finisher: %s, Shoot: %s, ShootOne: %s, ShootTwo: %s, Dizzy: %s, Fall: %s, BeingHit: %s, BeingHitDown: %s, Block: %s, BlockDown: %s, Head: %s, ",
                     charAncho, charAlto, z_index,
-                    filenameJump, filenameWalk, filenameSideJump, filenameStance);
+                    filenameJump, filenameWalk, filenameSideJump, filenameStance, filenameDuck, filenameKick, filenameKickDown, filenamePunchJump, filenamePunchUp, filenamePunch, filenameWinner, filenameBodyParts, filenameFinisher, filenameShoot, filenameShootOne, filenameShootTwo, filenameDizzy, filenameFall, filenameBeingHit, filenameBeingHitDown, filenameBlock, filenameBlockDown,filenameHead);
 
     Mylog->Log(mensaje, ERROR_LEVEL_INFO);
 }
