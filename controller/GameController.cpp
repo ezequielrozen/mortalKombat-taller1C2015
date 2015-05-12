@@ -61,12 +61,12 @@ void setCharacterSide(MKCharacter* character, MKCharacter* character2)
 
 void GameController::update(MKCharacter* character, MKCharacter* character2) {
     extern logger* Mylog;
-//    this->joystickController->update(character,character2);
+    //this->joystickController->update(character,character2);
 
 
     switch (mainEvent->type){
     	case SDL_KEYDOWN:
-			switch(mainEvent->key.keysym.sym){
+			switch(mainEvent->key.keysym.sym) {
 				case SDLK_RIGHT:
 							Mylog->Log("movimiento del personaje: hacia la derecha", ERROR_LEVEL_INFO);
 							character->setMovement("RIGHT");
@@ -315,6 +315,7 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
 					break;
 			}
 			break;
+
 		case SDL_KEYUP:
 			switch(mainEvent->key.keysym.sym){
 				case SDLK_DOWN:

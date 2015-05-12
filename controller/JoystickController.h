@@ -27,7 +27,10 @@ private:
     int hitTimer;
     int hitTimerChar2;
 
-    //botones
+    void testElapsedTime(MKCharacter* character, MKCharacter* character2);
+
+
+        //botones
     unsigned char c1jump;
     unsigned char c1duck;
     unsigned char c1left;
@@ -48,6 +51,11 @@ private:
     unsigned char c2kickDown;
     unsigned char c2block;
     unsigned char c2shoot;
+
+    int c1previousAxis;
+    int c1previousValue;
+    int c2previousAxis;
+    int c2previousValue;
 
     unsigned char c1previousKey;
     unsigned char c2previousKey;
