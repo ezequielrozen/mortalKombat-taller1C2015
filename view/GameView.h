@@ -78,30 +78,46 @@ private:
 	CharacterSprite* raidenBodyParts;
 	CharacterSprite* raidenFinisher;
 	CharacterSprite* raidenShoot;
+	CharacterSprite* raidenShootOne;
+	CharacterSprite* raidenShootTwo;
+	CharacterSprite* raidenShootThree;
+	CharacterSprite* raidenShootFour;
+	CharacterSprite* raidenShootFive;
+	CharacterSprite* raidenShootSix;
+	CharacterSprite* raidenShootSeven;
+	CharacterSprite* raidenShootEight;
+	CharacterSprite* raidenShootNine;
+	CharacterSprite* raidenShootTen;
+	CharacterSprite* raidenShootEleven;
+	CharacterSprite* raidenShootZero;
 	CharacterSprite* raidenDizzy;
 	CharacterSprite* raidenFall;
 	CharacterSprite* raidenBeingHit;
     CharacterSprite* raidenBeingHitDown;
     CharacterSprite* raidenBlockDown;
     CharacterSprite* raidenBlock;
-
 	CharacterSprite* raidenHead;
+
     //list<LayerSprite*>* layerSprites = new list<LayerSprite*>();
     LayerSprite** layerSprites;
-
     int layerCount;
+
     SDL_Window* window;
     SDL_Renderer* renderer;
     float screenWidth;
     float screenHeight;
-
     string oponentSide;
-    void runCharacter();
-    void RestarAllScorpionSprites();
-    void RestarAllRaidenSprites();
 
-	double shootWidthCalculate();
+    void runCharacter();
+	void RestartAllScorpionSprites();
+	void RestartAllRaidenSprites();
+	double shootWidthCalculatedDistance();
+	double shootWidthCalculatedDistanceRaiden();
+	void restartRaidenShootSprites();
+	void RaidenShootSetPosX(int currentFrame2, CharacterSprite* shootChar2);
     Painter* painter;
+
+    int currenFramePrevious;
 };
 
 #endif /* GAMEVIEW_H_ */

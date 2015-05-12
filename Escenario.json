@@ -76,7 +76,8 @@
 				"dizzy": "data/raidenDizzy.png",
 				"punchUp": "data/raidenPunchUp.png",
 				"fall": "data/raidenFalling.png",
-				"winner": "data/raidenWinner.png"
+				"winner": "data/raidenWinner.png",
+				"shoot": "data/raidenShooting.png"
 			}
 		}
     ],

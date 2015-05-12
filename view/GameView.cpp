@@ -50,13 +50,13 @@ GameView::GameView(float ScreenWidth, float ScreenHeight, MKCharacter* character
     transform(charName.begin(), charName.end(), charName.begin(), ::toupper);
     characterName = new Text(charName.c_str(), this->renderer, "left");
 
-
     SDL_Rect characterTwoNameDraw;
     characterOneNameDraw.x = 5;
     string charTwoName = character2->getName();
     transform(charTwoName.begin(), charTwoName.end(), charTwoName.begin(), ::toupper);
     characterTwoName = new Text(charTwoName.c_str(), this->renderer, "right");
 
+    this->currenFramePrevious = 0;
 }
 
 GameView::~GameView() {
@@ -86,6 +86,7 @@ GameView::~GameView() {
     delete  scorpionBlock;
     delete  scorpionHead;
     delete  raidenWalk;
+
     delete  raidenStance;
     delete  raidenJump;
     delete  raidenSideJump;
@@ -99,6 +100,18 @@ GameView::~GameView() {
     delete  raidenBodyParts;
     delete  raidenFinisher;
     delete  raidenShoot;
+    delete  raidenShootOne;
+    delete  raidenShootTwo;
+    delete  raidenShootThree;
+    delete  raidenShootFour;
+    delete  raidenShootFive;
+    delete  raidenShootSix;
+    delete  raidenShootSeven;
+    delete  raidenShootEight;
+    delete  raidenShootNine;
+    delete  raidenShootTen;
+    delete 	raidenShootEleven;
+    delete	raidenShootZero;
     delete  raidenDizzy;
     delete  raidenFall;
     delete  raidenBeingHit;
@@ -146,7 +159,6 @@ void GameView::Render() {
 
     characterName->Draw();
     characterTwoName->Draw();
-
     if (!painted) {
         this->runCharacter();
     }
@@ -194,7 +206,20 @@ void GameView::LoadSprites(string name1, string name2) {
 	raidenWinner = new CharacterSprite(this->renderer, raiden->getFileMovement(MOVE_NAME_WINNER), raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 14, oponentSide, false, colorAltered, this->painter);
 	raidenBodyParts = new CharacterSprite(this->renderer, raiden->getFileMovement(MOVE_NAME_BODYPARTS), raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 8, oponentSide, false, colorAltered, this->painter);
 	raidenFinisher = new CharacterSprite(this->renderer, raiden->getFileMovement(MOVE_NAME_FINISHER), raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 26, oponentSide, false, colorAltered, this->painter);
-	raidenShoot = new CharacterSprite(this->renderer, raiden->getFileMovement(MOVE_NAME_SHOOT), raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 9, oponentSide, false, colorAltered, this->painter);
+	raidenShoot = new CharacterSprite(this->renderer, raiden->getFileMovement(MOVE_NAME_SHOOT), raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 4, oponentSide, true, colorAltered, this->painter);
+	raidenShootZero = new CharacterSprite(this->renderer, "data/raidenShooting100.png", raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 1, oponentSide, false, colorAltered, this->painter);
+	raidenShootOne = new CharacterSprite(this->renderer, "data/raidenShooting101.png", raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 1, oponentSide, false, colorAltered, this->painter);
+	raidenShootTwo = new CharacterSprite(this->renderer, "data/raidenShooting102.png", raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 1, oponentSide, false, colorAltered, this->painter);
+	raidenShootThree = new CharacterSprite(this->renderer, "data/raidenShooting103.png", raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 1, oponentSide, false, colorAltered, this->painter);
+	raidenShootFour = new CharacterSprite(this->renderer, "data/raidenShooting104.png", raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 1, oponentSide, false, colorAltered, this->painter);
+	raidenShootFive = new CharacterSprite(this->renderer, "data/raidenShooting105.png", raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 1, oponentSide, false, colorAltered, this->painter);
+	raidenShootSix = new CharacterSprite(this->renderer, "data/raidenShooting106.png", raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 1, oponentSide, false, colorAltered, this->painter);
+	raidenShootSeven = new CharacterSprite(this->renderer, "data/raidenShooting107.gif", raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 1, oponentSide, false, colorAltered, this->painter);
+	raidenShootEight = new CharacterSprite(this->renderer, "data/raidenShooting108.gif", raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 1, oponentSide, false, colorAltered, this->painter);
+	raidenShootNine = new CharacterSprite(this->renderer, "data/raidenShooting109.gif", raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 1, oponentSide, false, colorAltered, this->painter);
+	raidenShootTen = new CharacterSprite(this->renderer, "data/raidenShooting110.gif", raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 1, oponentSide, false, colorAltered, this->painter);
+	raidenShootEleven = new CharacterSprite(this->renderer, "data/raidenShooting111.gif", raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 1, oponentSide, false, colorAltered, this->painter);
+
 	raidenDizzy = new CharacterSprite(this->renderer, raiden->getFileMovement(MOVE_NAME_DIZZY), raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 7, oponentSide, false, colorAltered, this->painter);
 	raidenFall = new CharacterSprite(this->renderer, raiden->getFileMovement(MOVE_NAME_FALL), raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 12, oponentSide, true, colorAltered, this->painter);
 	raidenBeingHit = new CharacterSprite(this->renderer, raiden->getFileMovement(MOVE_NAME_BEINGHIT), raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 4, oponentSide, false, colorAltered, this->painter);
@@ -204,7 +229,7 @@ void GameView::LoadSprites(string name1, string name2) {
 	raidenHead = new CharacterSprite(this->renderer, raiden->getFileMovement(MOVE_NAME_HEAD), raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 9, oponentSide, false, colorAltered, this->painter);
 
 }
-void GameView::RestarAllScorpionSprites()
+void GameView::RestartAllScorpionSprites()
 {
 	scorpionFall->reset();
 	scorpionDuck->reset();
@@ -225,7 +250,24 @@ void GameView::RestarAllScorpionSprites()
 	scorpionBlock->reset();
 }
 
-void GameView::RestarAllRaidenSprites()
+void GameView::restartRaidenShootSprites() {
+	raidenShoot->reset();
+	raidenShootOne->reset();
+	raidenShootTwo->reset();
+	raidenShootThree->reset();
+	raidenShootFour->reset();
+	raidenShootFive->reset();
+	raidenShootSix->reset();
+	raidenShootSeven->reset();
+	raidenShootEight->reset();
+	raidenShootNine->reset();
+	raidenShootTen->reset();
+	raidenShootEleven->reset();
+	raidenShootZero->reset();
+	this->currenFramePrevious = 0;
+}
+
+void GameView::RestartAllRaidenSprites()
 {
 	raidenFall->reset();
 	raidenDuck->reset();
@@ -236,12 +278,13 @@ void GameView::RestarAllRaidenSprites()
 	raidenPunchUp->reset();
 	raidenPunchJump->reset();
 	raidenPunch->reset();
-	raidenShoot->reset();
 	raidenDizzy->reset();
 	raidenBeingHit->reset();
 	raidenBeingHitDown->reset();
 	raidenBlockDown->reset();
 	raidenBlock->reset();
+
+	restartRaidenShootSprites();
 }
 void GameView::startRender() {
     SDL_RenderClear(renderer);
@@ -253,7 +296,7 @@ void GameView::endRender() {
 
 //Segun la distancia entre los oponentnes muestro el sprite mas ancho o lo contraigo.
 //Esto trabaja igual q el codigo del Collider::checkHits para el bloque del SHOOT. Si se modifica aca se debe modificar tb alla.
-double GameView::shootWidthCalculate() {
+double GameView::shootWidthCalculatedDistance() {
 	double distancia;
 	double distanciaMaxima = scorpion->getHitWidth() * 2;
 
@@ -285,11 +328,49 @@ double GameView::shootWidthCalculate() {
 	}
 }
 
+//Segun la distancia entre los oponentnes muestro el sprite mas ancho o lo contraigo.
+//Esto trabaja igual q el codigo del Collider::checkHits para el bloque del SHOOT. Si se modifica aca se debe modificar tb alla.
+double GameView::shootWidthCalculatedDistanceRaiden() {
+	double distancia;
+	double distanciaMaxima = scorpion->getHitWidth() * 5;
+
+	//si raiden esta en la derecha de la pantalla
+	if(scorpion->getX() < raiden->getX()){
+		distancia = raiden->getX() - (scorpion->getX() + scorpion->getHitWidth());
+
+		if (distancia>= distanciaMaxima)
+		{
+			cout << "max" << endl;
+			return distanciaMaxima;
+		}
+		else
+		{
+			cout << "30_1" << endl;
+			return distancia + 30;
+		}
+	}
+	else
+	{
+		distancia = scorpion->getX() - (raiden->getX() + raiden->getHitWidth());
+
+		if (distancia>= distanciaMaxima)
+		{
+			cout << "max2" << endl;
+			return distanciaMaxima;
+		}
+		else
+		{
+			cout << "30_2" << endl;
+			return distancia + 30;
+		}
+	}
+}
 void GameView::runCharacter() {
     CharacterSprite* sprite = NULL;
     CharacterSprite* shootChar1 = NULL;
     CharacterSprite* shootChar2 = NULL;
     int currentFrame=-1;
+    int currentFrame2=-1;
 
     if (scorpion->isJumping() && scorpion->getJumpMovement() == "NONE" && scorpion->getHit() == "NONE") {
         sprite = scorpionJump;
@@ -306,11 +387,11 @@ void GameView::runCharacter() {
     }
     else if (scorpion->getHitReception() == "BEINGHIT") {
             sprite = scorpionBeingHit;
-            cout << "BEINGHIT" << endl;
+//            cout << "BEINGHIT" << endl;
             sprite->Play(150, scorpion->getWidth());
     } else if (scorpion->getHitReception() == "BEINGHITDOWN") {
             sprite = scorpionBeingHitDown;
-            cout << "BEINGHITDOWN" << endl;
+//            cout << "BEINGHITDOWN" << endl;
             sprite->Play(150, scorpion->getHitWidth());
     }
     else if (scorpion->getHitReception() == "FALLING") {
@@ -319,7 +400,7 @@ void GameView::runCharacter() {
     }
     else if (scorpion->getMovement() == "NONE" && scorpion->getHit() == "NONE") {
         sprite = scorpionStance;
-        RestarAllScorpionSprites();
+        RestartAllScorpionSprites();
         sprite->Play(100, scorpion->getWidth());
     }
     else if (scorpion->getMovement() == "RIGHT" && scorpion->getHit() == "NONE") {
@@ -361,7 +442,7 @@ void GameView::runCharacter() {
     		if (currentFrame >= 3 && currentFrame <=6)
     		{
     			shootChar1 = scorpionShootTwo;
-    			shootChar1->PlayShoot2(150, shootWidthCalculate());
+    			shootChar1->PlayShoot2(150, shootWidthCalculatedDistance());
     		}
     		else
     			shootChar1 = NULL;
@@ -386,7 +467,7 @@ void GameView::runCharacter() {
     	else
     	{
             sprite = scorpionStance;
-            RestarAllScorpionSprites();
+            RestartAllScorpionSprites();
             sprite->Play(100, scorpion->getWidth());
     	}
 	}
@@ -429,7 +510,7 @@ void GameView::runCharacter() {
     }
     else if (raiden->getMovement() == "NONE" && raiden->getHit() == "NONE") {
         sprite2 = raidenStance;
-        RestarAllRaidenSprites();
+        RestartAllRaidenSprites();
         sprite2->Play(50, raiden->getWidth());
     }
     else if (raiden->getMovement() == "RIGHT" && raiden->getHit() == "NONE") {
@@ -465,8 +546,68 @@ void GameView::runCharacter() {
     		sprite2->Play(100, raiden->getHitWidth());
     }
     else if (raiden->getHit() == "SHOOT") {
-//    		sprite2 = raidenShoot;
-//    		sprite2->PlayShoot(100, raiden->getHitWidth(), shootChar2);
+    		sprite2 = raidenShoot;
+    		currentFrame2 = sprite2->PlayShoot(200, raiden->getHitWidth());
+
+    		//*****************************Sprites de salida del disparo*****************************
+			if (currentFrame2 == 0 && (currenFramePrevious == 0 )){
+				shootChar2 = raidenShootZero;
+				shootChar2->PlayShoot2(100, 50);
+				currenFramePrevious = 0;
+			}else if (currentFrame2 == 1 && currenFramePrevious == 0){
+				shootChar2 = raidenShootOne;
+				shootChar2->PlayShoot2(100, 50);
+				currenFramePrevious = 0;
+			}else if (currentFrame2 == 2 && currenFramePrevious == 0){
+				shootChar2 = raidenShootTwo;
+				shootChar2->PlayShoot2(100, 50);
+				currenFramePrevious = 0;
+			}else if (currentFrame2 == 3 && currenFramePrevious == 0){
+				shootChar2 = raidenShootThree;
+				shootChar2->PlayShoot2(100, 50);
+				currenFramePrevious = 0;
+			}else if (currentFrame2 == 4 && currenFramePrevious == 0){
+					shootChar2 = raidenShootFour;
+					shootChar2->PlayShoot2(100, shootWidthCalculatedDistanceRaiden());
+					currenFramePrevious = 5;
+			//*****************************Sprites de desplazamiento del disparo*********************
+			}else if (currenFramePrevious >= 5 && currenFramePrevious <= 7){
+				shootChar2 = raidenShootFive;
+				shootChar2->PlayShoot2(70, shootWidthCalculatedDistanceRaiden());
+				currenFramePrevious++;
+			}else if (currenFramePrevious == 8){
+				shootChar2 = raidenShootSix;
+				shootChar2->PlayShoot2(150, shootWidthCalculatedDistanceRaiden());
+				currenFramePrevious++;
+			//*****************************Sprites de llegada del disparo****************************
+			}else if (currenFramePrevious >= 9 && currenFramePrevious <= 15){
+				shootChar2 = raidenShootSeven;
+				shootChar2->PlayShoot2(150, scorpion->getWidth());
+				currenFramePrevious++;
+			}else if (currenFramePrevious >= 16 && currenFramePrevious <= 20){
+				shootChar2 = raidenShootEight;
+				shootChar2->PlayShoot2(150, scorpion->getWidth());
+				currenFramePrevious++;
+			}else if (currenFramePrevious >= 15 && currenFramePrevious <= 20){
+				shootChar2 = raidenShootNine;
+				shootChar2->PlayShoot2(150, scorpion->getWidth());
+				currenFramePrevious++;
+			}else if (currenFramePrevious >= 21 && currenFramePrevious <= 25){
+				shootChar2 = raidenShootTen;
+				shootChar2->PlayShoot2(150, scorpion->getWidth());
+				currenFramePrevious++;
+			}else if (currenFramePrevious >= 26 && currenFramePrevious <= 35){
+				shootChar2 = raidenShootEleven;
+				shootChar2->PlayShoot2(150, scorpion->getWidth());
+				currenFramePrevious++;
+			}else
+			{
+				if (currenFramePrevious > 35){
+					shootChar2 = NULL;
+					this->currenFramePrevious = 0;
+//					restartRaidenShootSprites();
+				}
+			}
     }
     else if (raiden->getHit() == "DEFENSE") {
     		sprite2 = raidenBlock;
@@ -488,7 +629,7 @@ void GameView::runCharacter() {
     	else
     	{
             sprite2 = raidenStance;
-            RestarAllRaidenSprites();
+            RestartAllRaidenSprites();
             sprite2->Play(100, raiden->getWidth());
     	}
 	}
@@ -503,22 +644,34 @@ void GameView::runCharacter() {
 
     if(scorpion->getX() < raiden->getX()){
         sprite->switchSide('r');
+        sprite2->switchSide('l');
+
         if (shootChar1 != NULL) {
         	shootChar1->switchSide('r');
 			shootChar1->setX(scorpion->getX() + scorpion->getHitWidth()-15);
 			shootChar1->setY(scorpion->getY()+20);
         }
-        sprite2->switchSide('l');
+        if (shootChar2 != NULL) {
+			shootChar2->switchSide('l');
+			shootChar2->setY(raiden->getY()+20);
+			RaidenShootSetPosX(currentFrame2, shootChar2);
 
+		}
     }else{
         sprite->switchSide('l');
         sprite2->switchSide('r');
 
         if (shootChar1 != NULL) {
         	shootChar1->switchSide('l');
-        	shootChar1->setX(scorpion->getX() - (shootWidthCalculate())+15);
+        	shootChar1->setX(scorpion->getX() - (shootWidthCalculatedDistance())+15);
 			shootChar1->setY(scorpion->getY()+20);
         }
+
+        if (shootChar2 != NULL) {
+			shootChar2->switchSide('r');
+			shootChar2->setY(raiden->getY()+20);
+			RaidenShootSetPosX(currentFrame2, shootChar2);
+		}
     }
 
 	sprite->setX(scorpion->getX());
@@ -557,5 +710,20 @@ void GameView::runCharacter() {
     	shootChar1->Draw();
     }
 
+    if (shootChar2 != NULL) {
+    	shootChar2->Draw();
+    }
+
 }
 
+void GameView::RaidenShootSetPosX(int currentFrame2, CharacterSprite* shootChar2 )
+{
+	int signo =  (scorpion->getX() < raiden->getX()) ? -1 : 1;
+	if (currentFrame2 <= 4)
+		shootChar2->setX(raiden->getX());
+	if (currenFramePrevious >= 5 && currenFramePrevious <= 9 )
+		//estos son los sprites del desplazamiento del tiro, los estiro un poco para q parece q lo traspasan algunas "esquirlas"
+		shootChar2->setX(raiden->getX() + (signo * (shootWidthCalculatedDistanceRaiden())+(signo*scorpion->getWidth()*5/2)));
+	if (this->currenFramePrevious >= 10)
+		shootChar2->setX(raiden->getX() + signo * shootWidthCalculatedDistanceRaiden());
+}

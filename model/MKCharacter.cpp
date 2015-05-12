@@ -166,7 +166,6 @@ void MKCharacter::setHit(string newHit) {
 			if (newHit == "KICK") {
 				spriteWidth = (this->name == "scorpion") ? 143 : 142;
 				delay = 4;
-				cout << name << endl;
 			}
 
 			if (newHit == "KICKDOWN") {
@@ -185,7 +184,7 @@ void MKCharacter::setHit(string newHit) {
 			}
 
 			if (newHit == "SHOOT") {
-				spriteWidth = (this->name == "scorpion") ? 120 : 105;
+				spriteWidth = (this->name == "scorpion") ? 120 : 81;
 				delay = 3;
 			}
 
@@ -339,7 +338,6 @@ void MKCharacter::setHitReception(string reception) {
 		this->hitReceptionDelay = 0;
 	}
 }
-
 bool MKCharacter::isAscending() {
 	return this->ascending;
 }
