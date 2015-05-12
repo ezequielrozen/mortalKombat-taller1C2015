@@ -155,6 +155,13 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
 							hitTimer = SDL_GetTicks();
 							break;
 				case SDLK_d:
+							if (previousKey == SDLK_DOWN) {
+								Mylog->Log("movimiento del personaje: Defensa.", ERROR_LEVEL_INFO);
+								character->setHit("DEFENSEDOWN");
+								previousKey = mainEvent->key.keysym.sym;
+								hitTimer = SDL_GetTicks();
+								break;
+							}
 							Mylog->Log("movimiento del personaje: Defensa.", ERROR_LEVEL_INFO);
 							character->setHit("DEFENSE");
 							previousKey = mainEvent->key.keysym.sym;
@@ -273,11 +280,18 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
 							hitTimerChar2 = SDL_GetTicks();
 							break;
 				case SDLK_n:
-							Mylog->Log("movimiento del personaje: Defensa.", ERROR_LEVEL_INFO);
-							character2->setHit("DEFENSE");
-							previousKeyChar2 = mainEvent->key.keysym.sym;
-							hitTimerChar2 = SDL_GetTicks();
-							break;
+							if (previousKeyChar2 == SDLK_s) {
+								Mylog->Log("movimiento del personaje: Defensa.", ERROR_LEVEL_INFO);
+								character2->setHit("DEFENSEDOWN");
+								previousKeyChar2 = mainEvent->key.keysym.sym;
+								hitTimerChar2 = SDL_GetTicks();
+								break;
+							}
+					        Mylog->Log("movimiento del personaje: Defensa.", ERROR_LEVEL_INFO);
+					        character2->setHit("DEFENSE");
+					        previousKeyChar2 = mainEvent->key.keysym.sym;
+					        hitTimerChar2 = SDL_GetTicks();
+					        break;
 				case SDLK_i:
 							Mylog->Log("movimiento del personaje: Mareado.", ERROR_LEVEL_INFO);
 							character2->setHit("DIZZY");
@@ -307,9 +321,6 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
 							previousKeyChar2 = mainEvent->key.keysym.sym;
 							hitTimerChar2 = SDL_GetTicks();
 							break;
-
-
-
 				default:
 					previousKey = mainEvent->key.keysym.sym;
 					break;

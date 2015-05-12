@@ -229,6 +229,7 @@ void cargaPersonaje(Json::Value personaje, std::list<MKCharacter*>* characters, 
     char* filenameDizzy = new char[200];
     char* filenameFall = new char[200];
     char* filenameBeingHit = new char[200];
+    char* filenameBeingHitDown = new char[200];
     char* filenameBlock = new char[200];
     char* filenameBlockDown = new char[200];
     char* filenameHead = new char[200];
@@ -272,6 +273,7 @@ void cargaPersonaje(Json::Value personaje, std::list<MKCharacter*>* characters, 
             filenameDizzy = strdup(DEFAULT_DIZZY);
             filenameFall = strdup(DEFAULT_FALL);
             filenameBeingHit = strdup(DEFAULT_BEINGHIT);
+            filenameBeingHitDown = strdup(DEFAULT_BEINGHIT_DOWN);
             filenameBlock = strdup(DEFAULT_BLOCK);
             filenameBlockDown = strdup(DEFAULT_BLOCKDOWN);
             filenameHead = strdup(DEFAULT_HEAD);
@@ -295,6 +297,7 @@ void cargaPersonaje(Json::Value personaje, std::list<MKCharacter*>* characters, 
             filenameDizzy  = strdup(sprites[MOVE_NAME_DIZZY].asString().c_str());
             filenameFall  = strdup(sprites[MOVE_NAME_FALL].asString().c_str());
             filenameBeingHit  = strdup(sprites[MOVE_NAME_BEINGHIT].asString().c_str());
+            filenameBeingHitDown  = strdup(sprites[MOVE_NAME_BEINGHIT_DOWN].asString().c_str());
             filenameBlock  = strdup(sprites[MOVE_NAME_BLOCK].asString().c_str());
             filenameBlockDown  = strdup(sprites[MOVE_NAME_BLOCKDOWN].asString().c_str());
             filenameHead  = strdup(sprites[MOVE_NAME_HEAD].asString().c_str());
@@ -321,6 +324,7 @@ void cargaPersonaje(Json::Value personaje, std::list<MKCharacter*>* characters, 
     validarExistenciaArchivo(DEFAULT_DIZZY, filenameDizzy);
     validarExistenciaArchivo(DEFAULT_FALL, filenameFall);
     validarExistenciaArchivo(DEFAULT_BEINGHIT, filenameBeingHit);
+    validarExistenciaArchivo(DEFAULT_BEINGHIT_DOWN, filenameBeingHitDown);
     validarExistenciaArchivo(DEFAULT_BLOCK, filenameBlock);
     validarExistenciaArchivo(DEFAULT_BLOCKDOWN, filenameBlockDown);
     validarExistenciaArchivo(DEFAULT_HEAD, filenameHead);
@@ -346,6 +350,7 @@ void cargaPersonaje(Json::Value personaje, std::list<MKCharacter*>* characters, 
     Util::getInstance()->addMovement(MOVE_NAME_DIZZY, filenameDizzy);
     Util::getInstance()->addMovement(MOVE_NAME_FALL, filenameFall);
     Util::getInstance()->addMovement(MOVE_NAME_BEINGHIT, filenameBeingHit);
+    Util::getInstance()->addMovement(MOVE_NAME_BEINGHIT_DOWN, filenameBeingHitDown);
     Util::getInstance()->addMovement(MOVE_NAME_BLOCK, filenameBlock);
     Util::getInstance()->addMovement(MOVE_NAME_BLOCKDOWN, filenameBlockDown);
     Util::getInstance()->addMovement(MOVE_NAME_HEAD, filenameHead);

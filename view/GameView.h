@@ -54,6 +54,7 @@ private:
     CharacterSprite* scorpionDizzy;
     CharacterSprite* scorpionFall;
     CharacterSprite* scorpionBeingHit;
+    CharacterSprite* scorpionBeingHitDown;
     CharacterSprite* scorpionBlockDown;
     CharacterSprite* scorpionBlock;
     CharacterSprite* scorpionHead;
@@ -76,25 +77,26 @@ private:
 	CharacterSprite* raidenDizzy;
 	CharacterSprite* raidenFall;
 	CharacterSprite* raidenBeingHit;
-	CharacterSprite* raidenBlockDown;
-	CharacterSprite* raidenBlock;
-	CharacterSprite* raidenHead;
+    CharacterSprite* raidenBeingHitDown;
+    CharacterSprite* raidenBlockDown;
+    CharacterSprite* raidenBlock;
 
+	CharacterSprite* raidenHead;
     //list<LayerSprite*>* layerSprites = new list<LayerSprite*>();
     LayerSprite** layerSprites;
-    int layerCount;
 
+    int layerCount;
     SDL_Window* window;
     SDL_Renderer* renderer;
     float screenWidth;
     float screenHeight;
+
     string oponentSide;
-
     void runCharacter();
-	void RestarAllScorpionSprites();
-	void RestarAllRaidenSprites();
-	double shootWidthCalculate();
+    void RestarAllScorpionSprites();
+    void RestarAllRaidenSprites();
 
+	double shootWidthCalculate();
     Painter* painter;
 };
 
