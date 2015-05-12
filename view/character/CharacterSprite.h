@@ -32,15 +32,16 @@ public:
 	void PlayFall(float);
 	void vibrate();
 	bool vibrationFinished();
+	void playBlock(float speed, float width);
+
 	void resetFinished();
 
 private:
-
 	SDL_Texture* texture;
+
 	SDL_Rect draw;
 
 	SDL_Rect crop;
-
 	int img_width;
 	int img_height;
 	int CurrentFrame;
@@ -49,6 +50,7 @@ private:
 	int framesX;
 	bool initiated;
 	bool finished;
+
 	float scalingConstant;
 
 	string oponentSide;
@@ -58,7 +60,6 @@ private:
 	bool repeatLastSprite;
 
 	float vibrateProgress;
-
 };
 
 #endif /* MKSPRITE_H_ */

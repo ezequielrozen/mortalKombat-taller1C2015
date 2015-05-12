@@ -289,6 +289,9 @@ void MKCharacter::receiveBlow(int force) {
 	if (force >= 20) {
 		this->setHitReception("FALLING");
 		GameController::setVibrating(true);
+	}
+	else if (this->movement == "DUCK") {
+		this->setHitReception("BEINGHITDOWN");
 	} else {
 		this->setHitReception("BEINGHIT");
 	}
@@ -347,7 +350,7 @@ void MKCharacter::setHitReception(string reception) {
 
 	//PERDON POR HARDCODEAR ESTOS NUMEROS. ESTOY BUSCANDO UNA ALTERNATIVA. ATTE: GONZALO
 
-	if (reception == "BEINGHIT") {
+	if (reception == "BEINGHIT" || reception == "BEINGHITDOWN") {
 		this->hitReceptionDelay = 20;
 	}
 	else if (reception == "FALLING") {
