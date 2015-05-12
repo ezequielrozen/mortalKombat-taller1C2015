@@ -10,6 +10,7 @@
 #include "../model/stage/Stage.h"
 #include "stage/LifeView.h"
 #include "character/Painter.h"
+#include "Text.h"
 #include <string>
 #include <math.h>
 
@@ -32,6 +33,9 @@ private:
     MKCharacter* scorpion;
     MKCharacter* raiden;
     Stage* stage;
+
+    Text* characterName;
+    Text *characterTwoName;
 
     LifeView* characterOneLifebarView;
     LifeView* characterTwoLifebarView;

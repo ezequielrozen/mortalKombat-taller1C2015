@@ -31,10 +31,10 @@ LifeView::LifeView(SDL_Renderer *renderer, string filePath, float width, bool in
         this->insideDraw.x = (Util::getInstance()->getLogicalWindowWidth() - width) * Util::getInstance()->getScalingConstant();
     }
     this->draw.w = width * Util::getInstance()->getScalingConstant();
-    this->draw.h = img_height * scale * Util::getInstance()->getScalingConstant();
+    this->draw.h = img_height * scale * Util::getInstance()->getScalingConstant() * 2;
 
     this->insideDraw.w = width * Util::getInstance()->getScalingConstant();
-    this->insideDraw.h = img_height * scale * Util::getInstance()->getScalingConstant();
+    this->insideDraw.h = img_height * scale * Util::getInstance()->getScalingConstant() * 2;
 
     if (this->texture == NULL) {
         cout << "Couldn't Load " << filePath.c_str() << endl;

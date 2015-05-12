@@ -1,5 +1,7 @@
+#include <bits/algorithmfwd.h>
 #include "GameView.h"
 #include "../controller/GameController.h"
+#include "Text.h"
 
 GameView::GameView(float ScreenWidth, float ScreenHeight, MKCharacter* character, MKCharacter* character2, Stage* pStage, string OponentSide, Painter* painter) {
 
@@ -42,6 +44,19 @@ GameView::GameView(float ScreenWidth, float ScreenHeight, MKCharacter* character
 
         i++;
     }
+    SDL_Rect characterOneNameDraw;
+    characterOneNameDraw.x = 5;
+    string charName = character->getName();
+    transform(charName.begin(), charName.end(), charName.begin(), ::toupper);
+    characterName = new Text(charName.c_str(), this->renderer, "left");
+
+
+    SDL_Rect characterTwoNameDraw;
+    characterOneNameDraw.x = 5;
+    string charTwoName = character2->getName();
+    transform(charTwoName.begin(), charTwoName.end(), charTwoName.begin(), ::toupper);
+    characterTwoName = new Text(charTwoName.c_str(), this->renderer, "right");
+
 }
 
 GameView::~GameView() {
@@ -127,6 +142,9 @@ void GameView::Render() {
 
     characterOneLifebarView->Draw(FULL_LIFE - this->scorpion->getLife());
     characterTwoLifebarView->Draw(FULL_LIFE - this->raiden->getLife());
+
+    characterName->Draw();
+    characterTwoName->Draw();
 
     if (!painted) {
         this->runCharacter();
