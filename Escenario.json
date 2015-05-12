@@ -77,7 +77,19 @@
 				"punchUp": "data/raidenPunchUp.png",
 				"fall": "data/raidenFalling.png",
 				"winner": "data/raidenWinner.png",
-				"shoot": "data/raidenShooting.png"
+				"shoot": "data/raidenShooting.png",
+				"shootZero": "data/raidenShooting100.png",
+				"shootOne": "data/raidenShooting101.png",
+				"shootTwo": "data/raidenShooting102.png",
+				"shootThree": "data/raidenShooting103.png",
+				"shootFour": "data/raidenShooting104.png",
+				"shootFive": "data/raidenShooting105.png",
+				"shootSix": "data/raidenShooting106.png",
+				"shootSeven": "data/raidenShooting107.gif",
+				"shootEight": "data/raidenShooting108.gif",
+				"shootNine": "data/raidenShooting109.gif",
+				"shootTen": "data/raidenShooting110.gif",
+				"shootEleven": "data/raidenShooting111.gif"
 			}
 		}
     ],
