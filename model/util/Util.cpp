@@ -107,3 +107,9 @@ std::list<Util::charactersFile*>* Util::getCharacterMovements()
 }
 
 
+unsigned char Util::getMapaDeCaracteres(int i){
+    return this->mapaDeCaracteres[i];
+}
+void Util::setMapaDeCaracteres(unsigned char m, int i){
+    this->mapaDeCaracteres[i] = m;
+}

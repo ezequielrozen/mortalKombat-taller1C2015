@@ -42,6 +42,10 @@ public:
     unsigned char getCantidadPersonajes();
     void setCantidadPersonajes();
 
+    unsigned char getMapaDeCaracteres(int i);
+    void setMapaDeCaracteres(unsigned char m, int i);
+
+
 private:
     static Util* instance;
     //ventana
@@ -58,6 +62,7 @@ private:
 	std::list<charactersFile*>* characterMovements;
 
 
+    unsigned char mapaDeCaracteres[20];
 };
 
 

@@ -100,4 +100,7 @@ const double DEFAULT_INITIAL_H              = 40;
 const double DEFAULT_FINAL_H                = 45;
 const double DEFAULT_OFFSET                 = 30;
 
+//joystick
+const unsigned char DEFAULT_KEY[20] = "adwscezqxokljmnbypb";
+
 #endif /* CONSTANTES_H_ */

@@ -48,7 +48,7 @@ void GameController::testElapsedTime(MKCharacter* character, MKCharacter* charac
 	}
 }
 
-void GameController::setCharacterSide(MKCharacter* character, MKCharacter* character2)
+void setCharacterSide(MKCharacter* character, MKCharacter* character2)
 {
     if(character->getX() <= character2->getX()){
     	character->setCharacterSide('l');

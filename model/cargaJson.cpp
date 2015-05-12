@@ -161,6 +161,14 @@ bool cargaArchivoJSON(char* filename, float &stageWidth, float &stageHeight, flo
 
     errorPainterController(initialH, finalH, offset);
 
+    Mylog->Log("----------Botones----------", ERROR_LEVEL_INFO);
+    if(root.isMember("botones")){
+        cargaMapbotones(root["botones"], 0);
+    }else{
+        Mylog->Log("Cargando botones por default por no estar presente seccion en JSON", ERROR_LEVEL_INFO);
+        cargaMapbotones(root, 1);
+    }
+
     Mylog->Log("Parseo completo", ERROR_LEVEL_INFO);
     return true;
 }
@@ -484,4 +492,116 @@ void controlErroresEscenario(float &stageWidth, float &stageHeight, float &floor
 
 }
 
+void cargaMapbotones(Json::Value botones, int default_){
+    //inicializamos como Default
+    extern logger* Mylog;
+    Mylog->Log("Inicializando default botones joystick", ERROR_LEVEL_INFO);
+    for(int i=0; i<20; ++i){
+        Util::getInstance()->setMapaDeCaracteres(DEFAULT_KEY[i], i);
+    }
 
+    if(default_ == 1){return;}//salgo si no existe (pasé root)
+
+    char mensaje[200];
+    if(botones.isMember("c1jump") && botones["c1jump"].isUInt()){
+        sprintf(mensaje, "Mapeando boton c1Jump: %d", botones["c1jump"].asUInt());
+        Mylog->Log(mensaje, ERROR_LEVEL_INFO);
+        Util::getInstance()->setMapaDeCaracteres(botones["c1jump"].asUInt(), 0);
+    }
+    if(botones.isMember("c1duck") && botones["c1duck"].isUInt()){
+        sprintf(mensaje, "Mapeando boton c1duck: %d", botones["c1duck"].asUInt());
+        Mylog->Log(mensaje, ERROR_LEVEL_INFO);
+        Util::getInstance()->setMapaDeCaracteres(botones["c1duck"].asUInt(), 1);
+    }
+    if(botones.isMember("c1left") && botones["c1left"].isUInt()){
+        sprintf(mensaje, "Mapeando boton c1left: %d", botones["c1left"].asUInt());
+        Mylog->Log(mensaje, ERROR_LEVEL_INFO);
+        Util::getInstance()->setMapaDeCaracteres(botones["c1left"].asUInt(), 2);
+    }
+    if(botones.isMember("c1right") && botones["c1right"].isUInt()){
+        sprintf(mensaje, "Mapeando boton c1right: %d", botones["c1right"].asUInt());
+        Mylog->Log(mensaje, ERROR_LEVEL_INFO);
+        Util::getInstance()->setMapaDeCaracteres(botones["c1right"].asUInt(), 3);
+    }
+    if(botones.isMember("c1punch") && botones["c1punch"].isUInt()){
+        sprintf(mensaje, "Mapeando boton c1punch: %d", botones["c1punch"].asUInt());
+        Mylog->Log(mensaje, ERROR_LEVEL_INFO);
+        Util::getInstance()->setMapaDeCaracteres(botones["c1punch"].asUInt(), 4);
+    }
+    if(botones.isMember("c1punchUp") && botones["c1punchUp"].isUInt()){
+        sprintf(mensaje, "Mapeando boton c1punchUp: %d", botones["c1punchUp"].asUInt());
+        Mylog->Log(mensaje, ERROR_LEVEL_INFO);
+        Util::getInstance()->setMapaDeCaracteres(botones["c1punchUp"].asUInt(), 5);
+    }
+    if(botones.isMember("c1kick") && botones["c1kick"].isUInt()){
+        sprintf(mensaje, "Mapeando boton c1kick: %d", botones["c1kick"].asUInt());
+        Mylog->Log(mensaje, ERROR_LEVEL_INFO);
+        Util::getInstance()->setMapaDeCaracteres(botones["c1kick"].asUInt(), 6);
+    }
+    if(botones.isMember("c1kickDown") && botones["c1kickDown"].isUInt()){
+        sprintf(mensaje, "Mapeando boton c1kickDown: %d", botones["c1kickDown"].asUInt());
+        Mylog->Log(mensaje, ERROR_LEVEL_INFO);
+        Util::getInstance()->setMapaDeCaracteres(botones["c1kickDown"].asUInt(), 7);
+    }
+    if(botones.isMember("c1block") && botones["c1block"].isUInt()){
+        sprintf(mensaje, "Mapeando boton c1block: %d", botones["c1block"].asUInt());
+        Mylog->Log(mensaje, ERROR_LEVEL_INFO);
+        Util::getInstance()->setMapaDeCaracteres(botones["c1block"].asUInt(), 8);
+    }
+    if(botones.isMember("c1shoot") && botones["c1shoot"].isUInt()){
+        sprintf(mensaje, "Mapeando boton c1shoot: %d", botones["c1shoot"].asUInt());
+        Mylog->Log(mensaje, ERROR_LEVEL_INFO);
+        Util::getInstance()->setMapaDeCaracteres(botones["c1shoot"].asUInt(), 9);
+    }
+
+    if(botones.isMember("c2jump") && botones["c2jump"].isUInt()){
+        sprintf(mensaje, "Mapeando boton c2jump: %d", botones["c2jump"].asUInt());
+        Mylog->Log(mensaje, ERROR_LEVEL_INFO);
+        Util::getInstance()->setMapaDeCaracteres(botones["c2jump"].asUInt(), 10);
+    }
+    if(botones.isMember("c2duck") && botones["c2duck"].isUInt()){
+        sprintf(mensaje, "Mapeando boton c2duck: %d", botones["c2duck"].asUInt());
+        Mylog->Log(mensaje, ERROR_LEVEL_INFO);
+        Util::getInstance()->setMapaDeCaracteres(botones["c2duck"].asUInt(), 11);
+    }
+    if(botones.isMember("c2left") && botones["c2left"].isUInt()){
+        sprintf(mensaje, "Mapeando boton c2left: %d", botones["c2left"].asUInt());
+        Mylog->Log(mensaje, ERROR_LEVEL_INFO);
+        Util::getInstance()->setMapaDeCaracteres(botones["c2left"].asUInt(), 12);
+    }
+    if(botones.isMember("c2right") && botones["c2right"].isUInt()){
+        sprintf(mensaje, "Mapeando boton c2right: %d", botones["c2right"].asUInt());
+        Mylog->Log(mensaje, ERROR_LEVEL_INFO);
+        Util::getInstance()->setMapaDeCaracteres(botones["c2right"].asUInt(), 13);
+    }
+    if(botones.isMember("c2punch") && botones["c2punch"].isUInt()){
+        sprintf(mensaje, "Mapeando boton c2punch: %d", botones["c2punch"].asUInt());
+        Mylog->Log(mensaje, ERROR_LEVEL_INFO);
+        Util::getInstance()->setMapaDeCaracteres(botones["c2punch"].asUInt(), 14);
+    }
+    if(botones.isMember("c2punchUp") && botones["c2punchUp"].isUInt()){
+        sprintf(mensaje, "Mapeando boton c2punchUp: %d", botones["c2punchUp"].asUInt());
+        Mylog->Log(mensaje, ERROR_LEVEL_INFO);
+        Util::getInstance()->setMapaDeCaracteres(botones["c2punchUp"].asUInt(), 15);
+    }
+    if(botones.isMember("c2kick") && botones["c2kick"].isUInt()){
+        sprintf(mensaje, "Mapeando boton c2kick: %d", botones["c2kick"].asUInt());
+        Mylog->Log(mensaje, ERROR_LEVEL_INFO);
+        Util::getInstance()->setMapaDeCaracteres(botones["c2kick"].asUInt(), 16);
+    }
+    if(botones.isMember("c2kickDown") && botones["c2kickDown"].isUInt()){
+        sprintf(mensaje, "Mapeando boton c2kickDown: %d", botones["c2kickDown"].asUInt());
+        Mylog->Log(mensaje, ERROR_LEVEL_INFO);
+        Util::getInstance()->setMapaDeCaracteres(botones["c2kickDown"].asUInt(), 17);
+    }
+    if(botones.isMember("c2block") && botones["c2block"].isUInt()){
+        sprintf(mensaje, "Mapeando boton c2block: %d", botones["c2block"].asUInt());
+        Mylog->Log(mensaje, ERROR_LEVEL_INFO);
+        Util::getInstance()->setMapaDeCaracteres(botones["c2block"].asUInt(), 18);
+    }
+    if(botones.isMember("c2shoot") && botones["c2shoot"].isUInt()){
+        sprintf(mensaje, "Mapeando boton c2shoot: %d", botones["c2shoot"].asUInt());
+        Mylog->Log(mensaje, ERROR_LEVEL_INFO);
+        Util::getInstance()->setMapaDeCaracteres(botones["c2shoot"].asUInt(), 19);
+    }
+}

@@ -87,5 +87,29 @@
 		"h-inicial": 40,
 		"h-final": 45,
 		"desplazamiento": 30
+  },
+  
+  "botones":{
+	"c1left": 1,
+    "c1right": 2,
+    "c1jump": 3, 
+    "c1duck": 4,
+    "c1punch": 5,
+    "c1punchUp": 6,
+    "c1kick": 7,
+    "c1kickDown": 8,
+    "c1block": 9,
+    "c1shoot": 10,
+    
+    "c2left": 1,
+    "c2right": 2,
+    "c2jump": 3,
+    "c2duck": 4,
+    "c2punch": 5,
+    "c2punchUp": 6,
+    "c2kick": 7,
+    "c2kickDown": 8,
+    "c2block": 9,
+    "c2shoot": 10
   }
 }

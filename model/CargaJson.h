@@ -39,4 +39,6 @@ void loadPainter(Json::Value value, double& initialH, double& finalH, double& of
 void loadDefautPainter(double& initialH, double& finalH, double& offset);
 
 void errorPainterController(double& initialH, double& finalH, double& offset);
+
+void cargaMapbotones(Json::Value botones, int default_);
 #endif /* CARGAJSON_H_ */
