@@ -91,7 +91,7 @@ void Collider::checkHits(MKCharacter* character1, MKCharacter* character2) {
 
 		if (distancia <= distanciaMaxima)
 		{
-			if (timer + 75 < SDL_GetTicks()) {
+			if (timer + 67 < SDL_GetTicks()) {
 //				cout << "hitDelay: " << character1->getHitDelay() << endl;
 				if (character2->getHitDelay() == 0) {
 					character1->receiveBlow(DAMAGE.at(character2->getHit()));

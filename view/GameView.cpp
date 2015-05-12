@@ -723,7 +723,7 @@ void GameView::RaidenShootSetPosX(int currentFrame2, CharacterSprite* shootChar2
 		shootChar2->setX(raiden->getX());
 	if (currenFramePrevious >= 5 && currenFramePrevious <= 9 )
 		//estos son los sprites del desplazamiento del tiro, los estiro un poco para q parece q lo traspasan algunas "esquirlas"
-		shootChar2->setX(raiden->getX() + (signo * (shootWidthCalculatedDistanceRaiden())+(signo*scorpion->getWidth()*5/2)));
+		shootChar2->setX(raiden->getX() + (signo * (shootWidthCalculatedDistanceRaiden())/*+(signo*scorpion->getWidth()*5/2)*/));
 	if (this->currenFramePrevious >= 10)
 		shootChar2->setX(raiden->getX() + signo * shootWidthCalculatedDistanceRaiden());
 }
