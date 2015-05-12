@@ -84,7 +84,7 @@ void JoystickController::update(MKCharacter *character, MKCharacter *character2)
                                 timer = SDL_GetTicks();
                 }
                     if(pressedButton == c1jump){
-                                if (c1previousKey == SDLK_UP){
+                                if (c1previousKey == this->c1jump){
                                     Mylog->Log("movimiento del personaje: hacia arriba", ERROR_LEVEL_INFO);
                                     character->setJump(true);
                                     setCharacterSide(character, character2);
