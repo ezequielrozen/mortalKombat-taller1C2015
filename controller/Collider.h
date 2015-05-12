@@ -1,6 +1,7 @@
 #ifndef MORTALKOMBAT_TALLER1C2015_COLLIDER_H
 #define MORTALKOMBAT_TALLER1C2015_COLLIDER_H
 
+#include <stdlib.h>
 #include "../model/MKCharacter.h"
 
 class Collider {

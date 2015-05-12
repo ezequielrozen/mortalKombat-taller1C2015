@@ -116,8 +116,18 @@ void Collider::update(MKCharacter* character1, MKCharacter* character2, bool cam
 		}
 	}
 
-	this->checkHits(character1, character2);
-	this->checkHits(character2, character1);
+	//En caso de que los dos golpeen al mismo tiempo, se decide aleatoriamente quien pega primero.
+	//En caso de que no golpeen al mismo tiempo, no tiene importancia.
+	int randomizer = rand() % 2;
+
+	if (randomizer == 0) {
+		this->checkHits(character1, character2);
+		this->checkHits(character2, character1);
+	}
+	else {
+		this->checkHits(character2, character1);
+		this->checkHits(character1, character2);
+	}
 
 	character1->update();
     character2->update();
