@@ -74,6 +74,35 @@ void Collider::checkHits(MKCharacter* character1, MKCharacter* character2) {
 			}
 		}
 	}
+
+
+	//Esto trabaja igual q la funcion double GameView::shootWidthCalculate(). Si se modifica aca se debe modificar tb alla.
+	//Veo si llego a hacer contacto con la soga teniendo en cuenta q la estiro y la contraigo segun la distancia entre los personajes.
+	distancia;
+	distanciaMaxima = character1->getHitWidth() * 5;
+	if (character2->getHit() == "SHOOT")
+	{
+		if (character1->getX() < character2->getX()){
+			distancia = character2->getX() - (character1->getX() + character1->getHitWidth());
+		}
+		else{
+			distancia = character1->getX() - (character2->getX() + character2->getHitWidth());
+		}
+
+		if (distancia <= distanciaMaxima)
+		{
+			if (timer + 75 < SDL_GetTicks()) {
+//				cout << "hitDelay: " << character1->getHitDelay() << endl;
+				if (character2->getHitDelay() == 0) {
+					character1->receiveBlow(DAMAGE.at(character2->getHit()));
+//					cout << character1->getHit() << endl;
+//					cout << character2->getLife() << endl;
+				}
+				character2->setHitDelay(character2->getHitDelay()-1);
+				timer = SDL_GetTicks();
+			}
+		}
+	}
 }
 
 void Collider::update(MKCharacter* character1, MKCharacter* character2, bool cameraMoved) {

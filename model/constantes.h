@@ -98,7 +98,7 @@ const char* const NAME_CHARACTER_2          = "raiden";
 const int         FULL_LIFE                 = 100;
 
 typedef std::map<std::string, int> Map;
-const Map DAMAGE = {{"KICK", 10},{"PUNCH", 5}, {"KICKDOWN", 20} ,{"PUNCHUP", 20},{"SHOOT", 5}, {"DEFENSE", 0}};
+const Map DAMAGE = {{"KICK", 10},{"PUNCH", 5}, {"KICKDOWN", 20} ,{"PUNCHUP", 20},{"SHOOT", 21}, {"DEFENSE", 0}};
 //
 //const int OPONENTLEFT                       =    1;
 //const int OPONENTRIGHT                      =    2;
