@@ -19,7 +19,15 @@ bool Collider::superpositionRight(MKCharacter* character1, MKCharacter* characte
 };
 
 bool Collider::superpositionUp(MKCharacter* character1, MKCharacter* character2) {
-	return (character1->getY()+character1->getHeight() >= character2->getY());
+	//return (character1->getY()/*+character1->getHeight()*/ >= character2->getY());
+
+	if (character1->isAscending()) {
+		return (character1->getY()/*+character1->getHeight()*/ >= character2->getY());
+	}
+	else {
+		return (character1->getY()+character1->getHeight() >= character2->getY());
+	}
+
 }
 
 void Collider::checkHits(MKCharacter* character1, MKCharacter* character2) {
@@ -78,9 +86,40 @@ void Collider::update(MKCharacter* character1, MKCharacter* character2, bool cam
 			this->superpositionRight(character2, character1) && this->superpositionUp(character2, character1) && character2->getMovement() == "LEFT")) {
 			character2->move();
 		};
+
+		if ((this->superpositionLeft(character1, character2) && this->superpositionUp(character1, character2) && character1->getMovement() == "RIGHT" ||
+			this->superpositionRight(character1, character2) && this->superpositionUp(character1, character2) && character1->getMovement() == "LEFT") && 
+			character1->isJumping())
+		{
+			if (character1->getX()+character1->getWidth() <= character2->getX()+(character2->getWidth()/2)) {
+				character1->moveLeft();
+				character1->moveLeft();
+			}
+			else {
+				character1->moveRight();
+				character1->moveRight();
+			}
+		}
+
+		if ((this->superpositionLeft(character2, character1) && this->superpositionUp(character2, character1) && character2->getMovement() == "RIGHT" ||
+			this->superpositionRight(character2, character1) && this->superpositionUp(character2, character1) && character2->getMovement() == "LEFT") && 
+			character2->isJumping()) 
+		{
+			if (character2->getX()+character2->getWidth() <= character1->getX()+(character1->getWidth()/2)) {
+				character2->moveLeft();
+				character2->moveLeft();
+			}
+			else {
+				character2->moveRight();
+				character2->moveRight();
+			}
+		}
 	}
 
 	this->checkHits(character1, character2);
 	this->checkHits(character2, character1);
+
+	character1->update();
+    character2->update();
 	
 }

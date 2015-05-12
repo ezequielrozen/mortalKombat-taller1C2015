@@ -90,6 +90,7 @@ public:
 
     void setHitReception(string reception);
 
+    bool isAscending();
 
 private:
     void RestartJump();
@@ -116,9 +117,9 @@ private:
     double accY;
     double jumpTime;
     double yMax;
-    double actualVel;
     float proporcionVel;
     double stageFloor;
+    bool ascending;
 
     bool jumping;
 

@@ -22,6 +22,8 @@ MKCharacter::MKCharacter(float initialPosX, float ancho, float alto, int z_index
 	velY = 6.4 * (this->alto);
 	//Parte de la ecuacion de tiro vertical. El 0.5 sale de que el salto total dura 1seg, por lo cual al punto maximo del salto llega en 0.5seg
 	accY = (-2*(yMax-stageFloor+velY*0.5))/(pow(0.5,2));
+	//Si el salto esta en etapa ascendente o descendente.
+	ascending = false;
 
 	movement = "NONE";
 	jumpMovement = "NONE";
@@ -76,19 +78,15 @@ void MKCharacter::moveLeft() {
 }
 
 void MKCharacter::moveUp() {
+
+	double lastPosY = stageFloor - velY*jumpTime - (accY*pow(jumpTime,2))/2;
+
 	jumpTime = jumpTime + 0.015;
 
-	//double velPrev = actualVel;
-	//double yMaxShow;
-
 	posY = stageFloor - velY*jumpTime - (accY*pow(jumpTime,2))/2;
-	//actualVel = velY + accY*jumpTime;
-	//cout << "PosY: " << posY << " velY: " << actualVel << " time: " << jumpTime << endl;
 
-	/*if (velPrev >= 0 && actualVel <= 0) {
-		yMaxShow = posY;
-		cout << "yMaxShow: " << yMaxShow << endl;
-	}*/
+	ascending = lastPosY > posY;
+	
 	if (posY <= 0) {
 		double time1;
 		double time2;
@@ -139,25 +137,6 @@ void MKCharacter::setJump(bool jump) {
 
 	this->setJumpMovement(this->movement);
 }
-
-//void MKCharacter::setHit(string newHit) {
-//	this->hitMovement = newHit;
-//
-//	if (newHit == "KICK") {
-//		this->setHitWidth(this->getWidth()*1.88);
-//		if (this->getHitDelay() <= 0) {
-//			this->setHitDelay(4);
-//		}
-//	}
-//	else if (newHit == "BEINGHIT") {
-//		if (this->getHitDelay() <= 0) {
-//			this->setHitDelay(3);
-//		}
-//	}
-//	else if (newHit == "NONE") {
-//		this->setHitWidth(this->getWidth());
-//	}
-//}
 
 void MKCharacter::setHit(string newHit) {
 
@@ -359,4 +338,8 @@ void MKCharacter::setHitReception(string reception) {
 	else if (reception == "NONE") {
 		this->hitReceptionDelay = 0;
 	}
+}
+
+bool MKCharacter::isAscending() {
+	return this->ascending;
 }
