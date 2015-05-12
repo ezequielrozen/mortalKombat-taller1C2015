@@ -71,7 +71,7 @@ void JoystickController::update(MKCharacter *character, MKCharacter *character2)
         // HACER SWTICH DE NUMERO DE JOYSTICK Y LUEGO DE CADA KEY PRESIONADA
         switch (pressedJoystick) {
             case 0:
-                if (pressedAxis == 0 && pressedValue > 30000) {
+                if (pressedAxis == 0 && pressedValue > 1000) {
                     Mylog->Log("movimiento del personaje: hacia la derecha", ERROR_LEVEL_INFO);
                     character->setMovement("RIGHT");
                     c1previousAxis = pressedAxis;
@@ -80,7 +80,7 @@ void JoystickController::update(MKCharacter *character, MKCharacter *character2)
                     timer = SDL_GetTicks();
 
                 }
-                if (pressedAxis == 0 && pressedValue < -30000) {
+                if (pressedAxis == 0 && pressedValue < -1000) {
                     Mylog->Log("movimiento del personaje: hacia la izquierda", ERROR_LEVEL_INFO);
                     character->setMovement("LEFT");
                     c1previousAxis = pressedAxis;
@@ -88,7 +88,7 @@ void JoystickController::update(MKCharacter *character, MKCharacter *character2)
                     setCharacterSide(character, character2);
                     timer = SDL_GetTicks();
                 }
-                if (pressedAxis == 1 && pressedValue < 30000) {
+                if (pressedAxis == 1 && pressedValue > 1000) {
                     //if (c1previ) {
                         Mylog->Log("movimiento del personaje: hacia arriba", ERROR_LEVEL_INFO);
                         character->setJump(true);
@@ -97,7 +97,7 @@ void JoystickController::update(MKCharacter *character, MKCharacter *character2)
                     c1previousAxis = pressedAxis;
                     c1previousKey = pressedValue;
                 }
-                if (pressedAxis == 1 && pressedValue > -1000) {
+                if (pressedAxis == 1 && pressedValue < -1000) {
                     Mylog->Log("movimiento del personaje: agachandose", ERROR_LEVEL_INFO);
                     character->setMovement("DUCK");
                     c1previousAxis = pressedAxis;
@@ -105,7 +105,7 @@ void JoystickController::update(MKCharacter *character, MKCharacter *character2)
                     timer = SDL_GetTicks();
                 }
                 if (pressedButton == c1kickDown) {
-                    if (c1previousKey == this->c1duck) {
+                    if (c1previousAxis == 1 && c1previousValue < -1000) {
                         Mylog->Log("movimiento del personaje: Patada baja", ERROR_LEVEL_INFO);
                         character->setHit("KICKDOWN");
                         c1previousKey = this->c1duck;
@@ -121,15 +121,14 @@ void JoystickController::update(MKCharacter *character, MKCharacter *character2)
                     }
                 }
                 if (pressedButton == c1punch) {
-                    if (c1previousKey == this->c1left) {
+                    if (c1previousAxis == 0 && c1previousValue < -1000) {
                         character->setHit("PUNCHJUMPLEFT");
                         character->setJump(true);
-                        Mylog->Log("movimiento del personaje: Golpe de puño con salto hacia la izquierda.",
-                                   ERROR_LEVEL_INFO);
+                        Mylog->Log("movimiento del personaje: Golpe de puño con salto hacia la izquierda.", ERROR_LEVEL_INFO);
                         character->setIsHiting(true);
                         hitTimer = SDL_GetTicks();
                     }
-                    else if (c1previousKey == this->c1right) {
+                    else if (c1previousAxis == 0 && c1previousValue > 1000) {
                         character->setHit("PUNCHJUMPRIGHT");
                         character->setJump(true);
                         Mylog->Log("movimiento del personaje: Golpe de puño con salto hacia la derecha.",
@@ -137,7 +136,7 @@ void JoystickController::update(MKCharacter *character, MKCharacter *character2)
                         character->setIsHiting(true);
                         hitTimer = SDL_GetTicks();
                     }
-                    else if (c1previousKey == this->c1duck) {
+                    if (c1previousAxis == 1 && c1previousValue < -1000) {
                         character->setHit("PUNCHUP");
                         Mylog->Log("movimiento del personaje: Golpe de puño ascendente.", ERROR_LEVEL_INFO);
                         character->setIsHiting(true);
