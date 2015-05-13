@@ -7,6 +7,8 @@
 
 JoystickController::JoystickController(SDL_Event* event)
 {
+    joystickOne = NULL;
+    joystickTwo = NULL;
     extern logger* Mylog;
     //cargando variables mapeo botones
     this->c1jump = Util::getInstance()->getMapaDeCaracteres(0);
@@ -63,8 +65,8 @@ JoystickController::JoystickController(SDL_Event* event)
 
 JoystickController::~JoystickController(void)
 {
-//    SDL_JoystickClose(this->joystickOne);
-//    SDL_JoystickClose(this->joystickTwo);
+    SDL_JoystickClose(this->joystickOne);
+    SDL_JoystickClose(this->joystickTwo);
 }
 
 void JoystickController::update(MKCharacter *character, MKCharacter *character2) {
