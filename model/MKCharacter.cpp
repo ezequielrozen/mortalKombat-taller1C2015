@@ -257,8 +257,8 @@ char* MKCharacter::getFileMovement(const char* moveName){
 }
 
 bool MKCharacter::isAlive() {
-//	return this->life > 0;
-	return true;
+	return this->life > 0;
+//	return true;
 
 }
 void MKCharacter::receiveBlow(int force, char direction) {

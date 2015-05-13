@@ -396,7 +396,7 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
 					break;
 				case SDLK_o:
 					//Uso este evento para q no vuelva a disparar hasta q no suelte la tecla
-					scorpionShootTimeOutCompleted = true;
+					scorpionShootTimeOutCompleted = false;
 					break;
 
 				default:

@@ -549,7 +549,7 @@ void GameView::runCharacter() {
     		currentFrame2 = sprite2->PlayShoot(200, raiden->getHitWidth());
     		float aux = 0;
     		float prop = aux/3;
-    		cout << currentFrame2 << " - " << currenFramePrevious << " - " << prop << endl;
+//    		cout << currentFrame2 << " - " << currenFramePrevious << " - " << prop << endl;
 
     		//*****************************Sprites de salida del disparo*****************************
 			if (currentFrame2 == 0 && (currenFramePrevious == 0 )){
