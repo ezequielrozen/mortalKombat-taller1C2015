@@ -187,7 +187,13 @@ void MKCharacter::setHit(string newHit) {
 				delay = 3;
 			}
 
-			if ((newHit == "KICK") || (newHit == "KICKDOWN")  || (newHit == "PUNCH")  || (newHit == "PUNCHUP") || (newHit == "SHOOT")){
+			if (newHit == "PUNCHJUMPLEFT" || newHit == "PUNCHJUMPRIGHT") {
+				spriteWidth = stanceWidth;
+				delay = 0;
+			}
+
+			if ((newHit == "KICK") || (newHit == "KICKDOWN")  || (newHit == "PUNCH")  || (newHit == "PUNCHUP") || (newHit == "SHOOT") ||
+				(newHit == "PUNCHJUMPLEFT") || (newHit == "PUNCHJUMPRIGHT")){
 
 				if (this->getHitDelay() <= 0) {
 					this->setHitDelay(delay);
@@ -269,6 +275,7 @@ void MKCharacter::receiveBlow(int force, char direction) {
 		GameController::setVibrating(true);
 		if (direction != 0)
 		{
+			cout << direction << endl;
 			(direction == 'l') ? this->setMovement("LEFT") : this->setMovement("RIGHT");
 		}
 	}
