@@ -11,6 +11,7 @@ GameController::GameController()
 
     timer = SDL_GetTicks();
     hitTimerRaidenShootCheck = SDL_GetTicks();
+    raidenShootTimeOutCompleted = true;
 }
 
 
@@ -191,17 +192,17 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
 							previousKey = mainEvent->key.keysym.sym;
 							hitTimer = SDL_GetTicks();
 							break;
-				case SDLK_e:
-							Mylog->Log("movimiento del personaje: Siendo arrojado.", ERROR_LEVEL_INFO);
-							character->setHit("FALLING");
-							if(character->getX() > character2->getX()){
-								character->moveRight();
-							}else{
-								character->moveLeft();
-							}
-							previousKey = mainEvent->key.keysym.sym;
-							hitTimer = SDL_GetTicks();
-							break;
+//				case SDLK_e:
+//							Mylog->Log("movimiento del personaje: Siendo arrojado.", ERROR_LEVEL_INFO);
+//							character->setHit("FALLING");
+//							if(character->getX() > character2->getX()){
+//								character->moveRight();
+//							}else{
+//								character->moveLeft();
+//							}
+//							previousKey = mainEvent->key.keysym.sym;
+//							hitTimer = SDL_GetTicks();
+//							break;
 				case SDLK_y:
 							Mylog->Log("movimiento del personaje: Siendo arrojado.", ERROR_LEVEL_INFO);
 							character->setHit("WINNER");
@@ -287,19 +288,22 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
 							}
 							break;
 				case SDLK_t:
-//							if (SDL_GetTicks() - hitTimerRaidenShootCheck > 1000)
-//							{
+							if ((SDL_GetTicks() < 1000 + hitTimerRaidenShootCheck) || raidenShootTimeOutCompleted){
 								Mylog->Log("movimiento del personaje: Disparando.", ERROR_LEVEL_INFO);
 								character2->setHit("SHOOT");
 								previousKeyChar2 = mainEvent->key.keysym.sym;
-//								character2->setHitDelay(400);
 								character2->setIsHiting(true);
 								hitTimerChar2 = SDL_GetTicks();
-								hitTimerRaidenShootCheck = SDL_GetTicks();
-//							}else
-//							{
-////								character2->setHit("NONE");
-//							}
+
+								raidenShootTimeOutCompleted = false;
+								if (hitTimerRaidenShootCheck == 0)
+									hitTimerRaidenShootCheck = SDL_GetTicks();
+							}else
+							{
+//								character2->setHit("NONE");
+								hitTimerRaidenShootCheck = 0;
+
+							}
 							break;
 				case SDLK_n:
 							if (previousKeyChar2 == SDLK_s) {
@@ -375,6 +379,9 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
 					break;
 				case SDLK_a:
 					previousKeyChar2 = SDLK_0;
+					break;
+				case SDLK_t:
+					raidenShootTimeOutCompleted = true;
 					break;
 				default:
 					break;

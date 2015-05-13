@@ -39,6 +39,7 @@ private:
     int hitTimer;
     int hitTimerChar2;
     int hitTimerRaidenShootCheck;
+    bool raidenShootTimeOutCompleted;
     JoystickController* joystickController;
     SDL_Event* mainEvent;
 

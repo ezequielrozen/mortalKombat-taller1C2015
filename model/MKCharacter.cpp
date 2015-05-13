@@ -268,7 +268,6 @@ void MKCharacter::receiveBlow(int force, char direction) {
 		GameController::setVibrating(true);
 		if (direction != 0)
 		{
-			cout << direction << endl;
 			(direction == 'l') ? this->setMovement("LEFT") : this->setMovement("RIGHT");
 		}
 	}
