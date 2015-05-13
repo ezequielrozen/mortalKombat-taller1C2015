@@ -45,17 +45,6 @@ public:
     unsigned char getMapaDeCaracteres(int i);
     void setMapaDeCaracteres(unsigned char m, int i);
 
-
-    void setInitialH(double d);
-
-    void setFinalH(double d);
-
-    void setOffset(double d);
-
-    double getInitialH();
-    double getFinalH();
-    double getOffset();
-
 private:
     static Util* instance;
     //ventana
@@ -73,9 +62,6 @@ private:
 
 
     unsigned char mapaDeCaracteres[20];
-    double initialH;
-    double finalH;
-    double offset;
 };
 
 

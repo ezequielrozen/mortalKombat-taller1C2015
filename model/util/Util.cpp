@@ -113,27 +113,3 @@ unsigned char Util::getMapaDeCaracteres(int i){
 void Util::setMapaDeCaracteres(unsigned char m, int i){
     this->mapaDeCaracteres[i] = m;
 }
-
-void Util::setInitialH(double d) {
-    initialH = d;
-}
-
-void Util::setFinalH(double d) {
-    finalH = d;
-}
-
-void Util::setOffset(double d) {
-    offset = d;
-}
-
-double Util::getInitialH() {
-    return initialH;
-}
-
-double Util::getFinalH() {
-    return finalH;
-}
-
-double Util::getOffset() {
-    return offset;
-}

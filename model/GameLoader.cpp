@@ -26,9 +26,6 @@ void GameLoader::loadJSON(char* passed_path) {
 
 
     this->stage = new Stage(layers, stageWidth, stageHeight, floor);
-    Util::getInstance()->setInitialH(initialH);
-    Util::getInstance()->setFinalH(finalH);
-    Util::getInstance()->setOffset(offset);
     this->painter = new Painter(initialH, finalH, offset);
 }
 

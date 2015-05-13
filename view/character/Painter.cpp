@@ -182,8 +182,8 @@ void Painter::paint(SDL_Surface *surface) {
                 continue;
             }
             hsv hsvConverted = this->convertToHSV(aRGB);
-            if (Util::getInstance()->getInitialH() <= hsvConverted.h && hsvConverted.h <= Util::getInstance()->getFinalH()) {
-                hsvConverted.h += Util::getInstance()->getOffset();
+            if (this->initialH <= hsvConverted.h && hsvConverted.h <= this->finalH) {
+                hsvConverted.h += this->offset;
             }
             aRGB = this->convertToRGB(hsvConverted);
             this->putpixel(surface,x,y,SDL_MapRGB(surface->format,aRGB.r,aRGB.g,aRGB.b));
