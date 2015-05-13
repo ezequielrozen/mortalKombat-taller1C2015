@@ -222,7 +222,6 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
 							hitTimer = SDL_GetTicks();
 							break;
 
-
 				/****************************************************************************************************/
 
 				case SDLK_g:

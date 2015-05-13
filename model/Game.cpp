@@ -15,6 +15,10 @@ void Game::initGame(char* filePath) {
 
     this->scorpion = this->gameLoader->getCharacters()->front();
     this->raiden = this->gameLoader->getCharacters()->back();
+    if (this->scorpion->getX() == this->raiden->getX()) {
+        this->scorpion->setInitialPosition(0.2*(Util::getInstance()->getLogicalWindowWidth()-this->scorpion->getWidth()));
+        this->raiden->setInitialPosition(0.8*(Util::getInstance()->getLogicalWindowWidth()-this->scorpion->getWidth()));
+    };
     //This is very important!
     this->scorpion->setPosY(this->stage->getFloor());
     this->scorpion->setStageFloor(this->stage->getFloor());
@@ -41,7 +45,7 @@ bool Game::GameLoop() {
     bool cameraMoved;
 
     while (gameController->getEvent()->type != SDL_QUIT) {
-            gameController->checkEvent();
+        gameController->checkEvent();
         gameView->startRender();
         gameView->Render();
         if ( scorpion->isAlive() && raiden->isAlive() )
