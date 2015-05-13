@@ -61,7 +61,7 @@ void setCharacterSide(MKCharacter* character, MKCharacter* character2)
 
 void GameController::update(MKCharacter* character, MKCharacter* character2) {
     extern logger* Mylog;
-    //this->joystickController->update(character,character2);
+    this->joystickController->update(character,character2);
 
 
     switch (mainEvent->type){

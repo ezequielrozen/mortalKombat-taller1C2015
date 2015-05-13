@@ -19,7 +19,8 @@ public:
     void update(MKCharacter* character, MKCharacter* character2);
     SDL_Event* getEvent();
 private:
-    SDL_Joystick* joystick;
+    SDL_Joystick* joystickOne;
+    SDL_Joystick* joystickTwo;
     SDL_Event* joystickEvent;
 
     int timer;
