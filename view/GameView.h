@@ -25,8 +25,24 @@ public:
     void Render();
     void LoadSprites(string name1, string name2);
 
+    void loadAsScorpion(CharacterSprite*& walk, CharacterSprite*& stance, CharacterSprite*& jump, CharacterSprite*& duck, CharacterSprite*& sideJump,
+                        CharacterSprite*& kick, CharacterSprite*& kickDown, CharacterSprite*& punchJump, CharacterSprite*& punchUp,
+                        CharacterSprite*& punch, CharacterSprite*& winner, CharacterSprite*& bodyParts, CharacterSprite*& finisher,
+                        CharacterSprite*& shoot, CharacterSprite*& shootOne, CharacterSprite*& shootTwo, CharacterSprite*& dizzy,
+                        CharacterSprite*& fall, CharacterSprite*& beingHit, CharacterSprite*& beingHitDown, CharacterSprite*& blockDown,
+                        CharacterSprite*& block, CharacterSprite*& head, bool colorAltered);
+    void loadAsRaiden(CharacterSprite*& walk, CharacterSprite*& stance, CharacterSprite*& jump, CharacterSprite*& sideJump,
+                      CharacterSprite*& duck, CharacterSprite*& kick, CharacterSprite*& kickDown, CharacterSprite*& punchJump,
+                      CharacterSprite*& punchUp, CharacterSprite*& punch, CharacterSprite*& winner, CharacterSprite*& bodyParts,
+                      CharacterSprite*& finisher, CharacterSprite*& shoot, CharacterSprite*& shootZero, CharacterSprite*& shootOne,
+                      CharacterSprite*& shootTwo, CharacterSprite*& sootThree, CharacterSprite*& shootFour, CharacterSprite*& shootFive,
+                      CharacterSprite*& shootSix, CharacterSprite*& shootSeven, CharacterSprite*& shootEight, CharacterSprite*& shootNine,
+                      CharacterSprite*& shootTen, CharacterSprite*& shootEleven, CharacterSprite*& dizzy, CharacterSprite*& fall,
+                      CharacterSprite*& beingHit, CharacterSprite*& beingHitDown, CharacterSprite*& blockDown, CharacterSprite*& block,
+                      CharacterSprite*& head, bool colorAltered);
     void startRender();
     void endRender();
+    void initializeCharactersSprites();
 
 private:
 
@@ -53,8 +69,18 @@ private:
     CharacterSprite* scorpionBodyParts;
     CharacterSprite* scorpionFinisher;
     CharacterSprite* scorpionShoot;
+    CharacterSprite* scorpionShootZero;
     CharacterSprite* scorpionShootOne;
     CharacterSprite* scorpionShootTwo;
+    CharacterSprite* scorpionShootThree;
+    CharacterSprite* scorpionShootFour;
+    CharacterSprite* scorpionShootFive;
+    CharacterSprite* scorpionShootSix;
+    CharacterSprite* scorpionShootSeven;
+    CharacterSprite* scorpionShootEight;
+    CharacterSprite* scorpionShootNine;
+    CharacterSprite* scorpionShootTen;
+    CharacterSprite* scorpionShootEleven;
     CharacterSprite* scorpionDizzy;
     CharacterSprite* scorpionFall;
     CharacterSprite* scorpionBeingHit;
@@ -118,6 +144,8 @@ private:
     Painter* painter;
 
     int currenFramePrevious;
+
+    void loadAsRaiden();
 };
 
 #endif /* GAMEVIEW_H_ */

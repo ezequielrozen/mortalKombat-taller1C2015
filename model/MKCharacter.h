@@ -32,6 +32,8 @@ public:
 
     double getX();
 
+    void setInitialPosition(double);
+
     double getY();
 
     string getMovement();

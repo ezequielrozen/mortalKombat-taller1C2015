@@ -141,13 +141,13 @@ bool cargaArchivoJSON(char* filename, float &stageWidth, float &stageHeight, flo
 //        int index2 = 0;
         for ( unsigned int index = 0; index < personaje.size(); index++ ){
             if(index == j1elige){
-                cargaPersonaje(personaje[index], characters, 0);
+                cargaPersonaje(personaje[index], characters, index);
 //                index2++;
             }
         }
         for ( unsigned int index = 0; index < personaje.size(); index++ ){
             if(index == j2elige){
-                cargaPersonaje(personaje[index], characters, 1);
+                cargaPersonaje(personaje[index], characters, index);
 //                index2++;
             }
         }

@@ -45,7 +45,6 @@ public:
     unsigned char getMapaDeCaracteres(int i);
     void setMapaDeCaracteres(unsigned char m, int i);
 
-
 private:
     static Util* instance;
     //ventana

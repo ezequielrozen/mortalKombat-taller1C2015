@@ -352,3 +352,8 @@ void MKCharacter::setHitReception(string reception) {
 bool MKCharacter::isAscending() {
 	return this->ascending;
 }
+
+void MKCharacter::setInitialPosition(double d) {
+	posX = d;
+	auxPosX = d;
+}

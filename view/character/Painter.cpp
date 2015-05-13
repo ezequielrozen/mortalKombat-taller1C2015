@@ -3,11 +3,12 @@
 #include <SDL2/SDL_surface.h>
 #include <iostream>
 #include "Painter.h"
+#include "../../model/util/Util.h"
 
-Painter::Painter(double initH, double finalH, double offset) {
+Painter::Painter(double initH, double finalHparam, double offsetParam) {
     this->initialH = initH;
-    this->finalH = finalH;
-    this->offset = offset;
+    this->finalH = finalHparam;
+    this->offset = offsetParam;
 }
 
 Painter::~Painter() {
