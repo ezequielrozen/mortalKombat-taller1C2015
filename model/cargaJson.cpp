@@ -118,11 +118,45 @@ bool cargaArchivoJSON(char* filename, float &stageWidth, float &stageHeight, flo
 
 	Mylog->Log("--------Personaje-------", ERROR_LEVEL_INFO);
 
+
 	if(root.isMember("personaje") && root["personaje"].isArray()){
+
         const Json::Value personaje = root["personaje"];
-        for ( unsigned int index = 0; index < personaje.size(); index++ ){
-            cargaPersonaje(personaje[index], characters, index);
+
+        Mylog->Log("----------Seleccion de personaje--------", ERROR_LEVEL_INFO);
+        unsigned int cantidadDePersonajes = personaje.size();
+        int j1elige;
+        int j2elige;
+        //verifico si existe, es entero positivo y está en rango.
+        if(root.isMember("j1elige") && root["j1elige"].isUInt() && root["j1elige"].asInt() < cantidadDePersonajes){
+            j1elige = root["j1elige"].asInt();
+        }else{
+            j1elige = 0;
         }
+        if(root.isMember("j2elige") && root["j2elige"].isUInt() && root["j2elige"].asInt() < cantidadDePersonajes){
+            j2elige = root["j2elige"].asInt();
+        }else{
+            j2elige=1;
+        }
+//        int index2 = 0;
+        for ( unsigned int index = 0; index < personaje.size(); index++ ){
+            if(index == j1elige){
+                cargaPersonaje(personaje[index], characters, 0);
+//                index2++;
+            }
+        }
+        for ( unsigned int index = 0; index < personaje.size(); index++ ){
+            if(index == j2elige){
+                cargaPersonaje(personaje[index], characters, 1);
+//                index2++;
+            }
+        }
+//        for ( unsigned int index = 0; index < personaje.size(); index++ ){
+//            if(index != j1elige && index != j2elige){
+//                cargaPersonaje(personaje[index], characters, index2);
+//                index2++;
+//            }
+//        }
     }else{
         //CARGAR POR DEFAULT
         cargaPersonaje(root, characters, 0); //root tiene escenario, capas, personaje, etc.
