@@ -473,7 +473,7 @@ void GameView::runCharacter() {
     else if (scorpion->getMovement() == "NONE" && scorpion->getHit() == "NONE") {
         sprite = scorpionStance;
         RestartAllScorpionSprites();
-        sprite->Play(100, scorpion->getWidth());
+        sprite->Play(75, scorpion->getWidth());
     }
     else if (scorpion->getMovement() == "RIGHT" && scorpion->getHit() == "NONE") {
     	sprite = scorpionWalk;
@@ -540,7 +540,7 @@ void GameView::runCharacter() {
     	{
             sprite = scorpionStance;
             RestartAllScorpionSprites();
-            sprite->Play(100, scorpion->getWidth());
+            sprite->Play(75, scorpion->getWidth());
     	}
 	}
     else if (scorpion->getHit() == "WINNER") {
@@ -583,7 +583,7 @@ void GameView::runCharacter() {
     else if (raiden->getMovement() == "NONE" && raiden->getHit() == "NONE") {
         sprite2 = raidenStance;
         RestartAllRaidenSprites();
-        sprite2->Play(50, raiden->getWidth());
+        sprite2->Play(75, raiden->getWidth());
     }
     else if (raiden->getMovement() == "RIGHT" && raiden->getHit() == "NONE") {
 		sprite2 = raidenWalk;
@@ -706,7 +706,7 @@ void GameView::runCharacter() {
     	{
             sprite2 = raidenStance;
             RestartAllRaidenSprites();
-            sprite2->Play(100, raiden->getWidth());
+            sprite2->Play(75, raiden->getWidth());
     	}
 	}
     else if (raiden->getHit() == "WINNER") {

@@ -3,11 +3,12 @@
 #include <SDL2/SDL_surface.h>
 #include <iostream>
 #include "Painter.h"
+#include "../../model/util/Util.h"
 
-Painter::Painter(double initH, double finalH, double offset) {
+Painter::Painter(double initH, double finalHparam, double offsetParam) {
     this->initialH = initH;
-    this->finalH = finalH;
-    this->offset = offset;
+    this->finalH = finalHparam;
+    this->offset = offsetParam;
 }
 
 Painter::~Painter() {
@@ -173,7 +174,6 @@ rgb Painter::convertToRGB(hsv hsv_param) {
 void Painter::paint(SDL_Surface *surface) {
     for (int x = 0; x < surface->w; x++) {
         for (int y = 0; y < surface->h; y++) {
-//            std::cout << x << " - " << y << std::endl;
             Uint8 alpha;
             Uint32 px = this->getpixel(surface, x, y);
             rgb aRGB;
@@ -182,8 +182,8 @@ void Painter::paint(SDL_Surface *surface) {
                 continue;
             }
             hsv hsvConverted = this->convertToHSV(aRGB);
-            if (this->initialH <= hsvConverted.h && hsvConverted.h <= this->finalH) {
-                hsvConverted.h += this->offset;
+            if (Util::getInstance()->getInitialH() <= hsvConverted.h && hsvConverted.h <= Util::getInstance()->getFinalH()) {
+                hsvConverted.h += Util::getInstance()->getOffset();
             }
             aRGB = this->convertToRGB(hsvConverted);
             this->putpixel(surface,x,y,SDL_MapRGB(surface->format,aRGB.r,aRGB.g,aRGB.b));
