@@ -63,7 +63,6 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
     extern logger* Mylog;
     this->joystickController->update(character,character2);
 
-
     switch (mainEvent->type){
     	case SDL_KEYDOWN:
 			switch(mainEvent->key.keysym.sym) {

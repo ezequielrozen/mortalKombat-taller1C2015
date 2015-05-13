@@ -57,17 +57,8 @@ JoystickController::JoystickController(SDL_Event* event)
             Mylog->Log("No se detectaron los joysticks", ERROR_LEVEL_WARNING);
             break;
     }
-    /*if (SDL_NumJoysticks() < 1)
-        Mylog->Log("No se detectaron los joysticks", ERROR_LEVEL_WARNING);
-        // Loggear que no se detectaron joysticks
-    else {
-
-        this->joystickOne = SDL_JoystickOpen(0);
-        Mylog->Log(SDL_JoystickName(joystickOne), ERROR_LEVEL_INFO);
-//        cout << SDL_JoystickName(joystick) << endl;
-    }*/
-
-    joystickEvent = event;
+    SDL_JoystickEventState(SDL_ENABLE);
+      joystickEvent = event;
 }
 
 JoystickController::~JoystickController(void)
@@ -86,7 +77,7 @@ void JoystickController::update(MKCharacter *character, MKCharacter *character2)
         unsigned char pressedButton = this->joystickEvent->jbutton.button;
         unsigned  char pressedAxis = this->joystickEvent->jaxis.axis;
         int pressedValue = this->joystickEvent->jaxis.value;
-        //cout << "Joystick number: " << (int) pressedJoystick << "Pressed button: " << (int) pressedButton << "Pressed axis: " << (int) pressedAxis << pressedValue << endl;
+        cout << "Joystick number: " << (int) pressedJoystick << "Pressed button: " << (int) pressedButton << "Pressed axis: " << (int) pressedAxis << "Pressed value: "<< pressedValue << endl;
         sprintf(mensaje, "JOYSTICK %d BUTTON PRESSED: %d", (int) pressedJoystick, (int) pressedButton);
         Mylog->Log(mensaje, ERROR_LEVEL_INFO);
 
@@ -100,7 +91,6 @@ void JoystickController::update(MKCharacter *character, MKCharacter *character2)
                     c1previousKey = pressedValue;
                     setCharacterSide(character, character2);
                     timer = SDL_GetTicks();
-
                 }
                 if (pressedAxis == 0 && pressedValue < -1000) {
                     Mylog->Log("movimiento del personaje: hacia la izquierda", ERROR_LEVEL_INFO);
@@ -110,7 +100,7 @@ void JoystickController::update(MKCharacter *character, MKCharacter *character2)
                     setCharacterSide(character, character2);
                     timer = SDL_GetTicks();
                 }
-                if (pressedAxis == 1 && pressedValue < 1000) {
+                if (pressedAxis == 1 && pressedValue > 1000) {
                     //if (c1previ) {
                         Mylog->Log("movimiento del personaje: hacia arriba", ERROR_LEVEL_INFO);
                         character->setJump(true);
@@ -119,7 +109,7 @@ void JoystickController::update(MKCharacter *character, MKCharacter *character2)
                     c1previousAxis = pressedAxis;
                     c1previousKey = pressedValue;
                 }
-                if (pressedAxis == 1 && pressedValue > -1000) {
+                if (pressedAxis == 1 && pressedValue < -1000) {
                     Mylog->Log("movimiento del personaje: agachandose", ERROR_LEVEL_INFO);
                     character->setMovement("DUCK");
                     c1previousAxis = pressedAxis;
@@ -204,7 +194,7 @@ void JoystickController::update(MKCharacter *character, MKCharacter *character2)
                     setCharacterSide(character, character2);
                     timerChar2 = SDL_GetTicks();
                 }
-                if (pressedAxis == 1 && pressedValue < 1000) {
+                if (pressedAxis == 1 && pressedValue > 1000) {
                  //   if (c2previousKey == this->c2jump) {
                         Mylog->Log("movimiento del personaje: hacia arriba", ERROR_LEVEL_INFO);
                         character2->setJump(true);
@@ -212,7 +202,7 @@ void JoystickController::update(MKCharacter *character, MKCharacter *character2)
                    // }
                     c2previousKey = pressedButton;
                 }
-                if (pressedAxis == 1 && pressedValue > -1000) {
+                if (pressedAxis == 1 && pressedValue < -1000) {
                     Mylog->Log("movimiento del personaje: agachandose", ERROR_LEVEL_INFO);
                     character2->setMovement("DUCK");
                     c2previousKey = pressedButton;;
@@ -282,40 +272,28 @@ void JoystickController::update(MKCharacter *character, MKCharacter *character2)
                 c2previousKey = pressedButton;
         }
 
-    } /*else if (joystickEvent->type == SDL_JOYBUTTONUP) {
+    }/* else if (joystickEvent->type == SDL_JOYBUTTONUP) {
             switch(joystickEvent->jbutton.button){
-                case SDLK_DOWN:
-                    c1previousKey = SDLK_0;
-                    break;
-                case SDLK_UP:
-                    c1previousKey = SDLK_0;
-                    break;
-                case SDLK_RIGHT:
-                    c1previousKey = SDLK_0;
-                    break;
-                case SDLK_LEFT:
-                    c1previousKey = SDLK_0;
-                    break;
-
-                case 0:
-                    c2previousKey = 99;
+                 case 0:
+                    c2previousKey = -1;
                     break;
                 case 1:
-                    c2previousKey = 99;
+                    c2previousKey = -1;
                     break;
                 case 2:
-                    c2previousKey = 99;
+                    c2previousKey = -1;
                     break;
                 case 3:
-                    c2previousKey = 99;
+                    c2previousKey = -1;
                     break;
                 default:
                     testElapsedTime(character, character2);
                     break;
             }
-    }*/ else {
+
+        } else {
         testElapsedTime(character, character2);
-    }
+    }*/
 }
 
 
