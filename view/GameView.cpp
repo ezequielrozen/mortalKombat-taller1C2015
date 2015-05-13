@@ -3,6 +3,65 @@
 #include "../controller/GameController.h"
 #include "Text.h"
 
+void GameView::InicializeCharactersSprites() {
+	scorpionJump=NULL;
+		scorpionWalk=NULL;
+	    scorpionStance=NULL;
+	    scorpionSideJump=NULL;
+	    scorpionDuck=NULL;
+	    scorpionKick=NULL;
+	    scorpionKickDown=NULL;
+	    scorpionPunchJump=NULL;
+	    scorpionPunchUp=NULL;
+	    scorpionPunch=NULL;
+	    scorpionWinner=NULL;
+	    scorpionBodyParts=NULL;
+	    scorpionFinisher=NULL;
+	    scorpionShoot=NULL;
+	    scorpionShootOne=NULL;
+	    scorpionShootTwo=NULL;
+	    scorpionDizzy=NULL;
+	    scorpionFall=NULL;
+	    scorpionBeingHit=NULL;
+	    scorpionBlockDown=NULL;
+	    scorpionBlock=NULL;
+	    scorpionHead=NULL;
+	    raidenWalk=NULL;
+
+	    raidenStance=NULL;
+	    raidenJump=NULL;
+	    raidenSideJump=NULL;
+	    raidenDuck=NULL;
+	    raidenKick=NULL;
+	    raidenKickDown=NULL;
+	    raidenPunchJump=NULL;
+	    raidenPunchUp=NULL;
+	    raidenPunch=NULL;
+	    raidenWinner=NULL;
+	    raidenBodyParts=NULL;
+	    raidenFinisher=NULL;
+	    raidenShoot=NULL;
+	    raidenShootOne=NULL;
+	    raidenShootTwo=NULL;
+	    raidenShootThree=NULL;
+	    raidenShootFour=NULL;
+	    raidenShootFive=NULL;
+	    raidenShootSix=NULL;
+	    raidenShootSeven=NULL;
+	    raidenShootEight=NULL;
+	    raidenShootNine=NULL;
+	    raidenShootTen=NULL;
+	    raidenShootEleven=NULL;
+	    raidenShootZero=NULL;
+	    raidenDizzy=NULL;
+	    raidenFall=NULL;
+	    raidenBeingHit=NULL;
+	    scorpionBeingHitDown=NULL;
+	    raidenBlockDown=NULL;
+	    raidenBlock=NULL;
+	    raidenHead=NULL;
+}
+
 GameView::GameView(float ScreenWidth, float ScreenHeight, MKCharacter* character, MKCharacter* character2, Stage* pStage, string OponentSide, Painter* painter) {
 	oponentSide = OponentSide;
 	this->window = NULL;
@@ -21,9 +80,10 @@ GameView::GameView(float ScreenWidth, float ScreenHeight, MKCharacter* character
     this->painter = painter;
     this->stage = pStage;
     this->scorpion = character;
-
     this->raiden = character2;
-    raidenShootEight = NULL;
+
+	InicializeCharactersSprites();
+
  	this->LoadSprites(this->scorpion->getName(), this->raiden->getName());
 
     layerCount = this->stage->getLayers()->size();
