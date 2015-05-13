@@ -186,7 +186,7 @@ void GameView::LoadSprites(string name1, string name2) {
     scorpionShootOne = new CharacterSprite(this->renderer, scorpion->getFileMovement(MOVE_NAME_SHOOT_ONE), scorpion->getX(), scorpion->getY(), scorpion->getWidth(), scorpion->getHeight(), 7, oponentSide, false, false, NULL);
     scorpionShootTwo = new CharacterSprite(this->renderer, scorpion->getFileMovement(MOVE_NAME_SHOOT_TWO), scorpion->getX(), scorpion->getY(), scorpion->getWidth(), scorpion->getHeight(), 4, oponentSide, true, false, NULL);
     scorpionDizzy = new CharacterSprite(this->renderer, scorpion->getFileMovement(MOVE_NAME_DIZZY), scorpion->getX(), scorpion->getY(), scorpion->getWidth(), scorpion->getHeight(), 7, oponentSide, false, false, NULL);
-    scorpionFall = new CharacterSprite(this->renderer, scorpion->getFileMovement(MOVE_NAME_FALL), scorpion->getX(), scorpion->getY(), scorpion->getWidth(), scorpion->getHeight(), 7, oponentSide, false, false, NULL);
+    scorpionFall = new CharacterSprite(this->renderer, scorpion->getFileMovement(MOVE_NAME_FALL), scorpion->getX(), scorpion->getY(), scorpion->getWidth(), scorpion->getHeight(), 7, oponentSide, true, false, NULL);
     scorpionBeingHit = new CharacterSprite(this->renderer, scorpion->getFileMovement(MOVE_NAME_BEINGHIT), scorpion->getX(), scorpion->getY(), scorpion->getWidth(), scorpion->getHeight(), 3, oponentSide, false, false, NULL);
     scorpionBeingHitDown = new CharacterSprite(this->renderer, scorpion->getFileMovement(MOVE_NAME_BEINGHIT_DOWN), scorpion->getX(), scorpion->getY(), scorpion->getWidth(), scorpion->getHeight(), 3, oponentSide, false, false, NULL);
     scorpionBlockDown = new CharacterSprite(this->renderer, scorpion->getFileMovement(MOVE_NAME_BLOCKDOWN), scorpion->getX(), scorpion->getY(), scorpion->getWidth(), scorpion->getHeight(), 2, oponentSide, true, false, NULL);
@@ -339,12 +339,12 @@ double GameView::shootWidthCalculatedDistanceRaiden() {
 
 		if (distancia>= distanciaMaxima)
 		{
-			cout << "max" << endl;
+			//cout << "max" << endl;
 			return distanciaMaxima;
 		}
 		else
 		{
-			cout << "30_1" << endl;
+			//cout << "30_1" << endl;
 			return distancia + 30;
 		}
 	}
@@ -354,12 +354,12 @@ double GameView::shootWidthCalculatedDistanceRaiden() {
 
 		if (distancia>= distanciaMaxima)
 		{
-			cout << "max2" << endl;
+			//cout << "max2" << endl;
 			return distanciaMaxima;
 		}
 		else
 		{
-			cout << "30_2" << endl;
+			//cout << "30_2" << endl;
 			return distancia + 30;
 		}
 	}
@@ -395,7 +395,7 @@ void GameView::runCharacter() {
     }
     else if (scorpion->getHitReception() == "FALLING") {
             sprite = scorpionFall;
-            sprite->Play(100, scorpion->getWidth());
+            sprite->Play(200, scorpion->getWidth());
     }
     else if (scorpion->getMovement() == "NONE" && scorpion->getHit() == "NONE") {
         sprite = scorpionStance;
@@ -505,7 +505,7 @@ void GameView::runCharacter() {
     }
     else if (raiden->getHitReception() == "FALLING") {
             sprite2 = raidenFall;
-            sprite2->Play(100, raiden->getWidth());
+            sprite2->Play(50, raiden->getWidth());
     }
     else if (raiden->getMovement() == "NONE" && raiden->getHit() == "NONE") {
         sprite2 = raidenStance;
@@ -548,57 +548,59 @@ void GameView::runCharacter() {
     		sprite2 = raidenShoot;
 
     		currentFrame2 = sprite2->PlayShoot(200, raiden->getHitWidth());
+    		float aux = 2/3;
+//    		cout << currentFrame2 << " - " << currenFramePrevious << " - " << aux << endl;
 
     		//*****************************Sprites de salida del disparo*****************************
 			if (currentFrame2 == 0 && (currenFramePrevious == 0 )){
 				shootChar2 = raidenShootZero;
-				shootChar2->PlayShoot2(100, 50);
+				shootChar2->PlayShoot2(100*aux, 50);
 				currenFramePrevious = 0;
 			}else if (currentFrame2 == 1 && currenFramePrevious == 0){
 				shootChar2 = raidenShootOne;
-				shootChar2->PlayShoot2(100, 50);
+				shootChar2->PlayShoot2(100*aux, 50);
 				currenFramePrevious = 0;
 			}else if (currentFrame2 == 2 && currenFramePrevious == 0){
 				shootChar2 = raidenShootTwo;
-				shootChar2->PlayShoot2(100, 50);
+				shootChar2->PlayShoot2(100*aux, 50);
 				currenFramePrevious = 0;
 			}else if (currentFrame2 == 3 && currenFramePrevious == 0){
 				shootChar2 = raidenShootThree;
-				shootChar2->PlayShoot2(100, 50);
+				shootChar2->PlayShoot2(100*aux, 50);
 				currenFramePrevious = 0;
 			}else if (currentFrame2 == 4 && currenFramePrevious == 0){
 					shootChar2 = raidenShootFour;
-					shootChar2->PlayShoot2(100, shootWidthCalculatedDistanceRaiden());
+					shootChar2->PlayShoot2(100*aux, shootWidthCalculatedDistanceRaiden());
 					currenFramePrevious = 5;
 			//*****************************Sprites de desplazamiento del disparo*********************
 			}else if (currenFramePrevious >= 5 && currenFramePrevious <= 7){
 				shootChar2 = raidenShootFive;
-				shootChar2->PlayShoot2(70, shootWidthCalculatedDistanceRaiden());
+				shootChar2->PlayShoot2(70*aux, shootWidthCalculatedDistanceRaiden());
 				currenFramePrevious++;
 			}else if (currenFramePrevious == 8){
 				shootChar2 = raidenShootSix;
-				shootChar2->PlayShoot2(150, shootWidthCalculatedDistanceRaiden());
+				shootChar2->PlayShoot2(150*aux, shootWidthCalculatedDistanceRaiden());
 				currenFramePrevious++;
 			//*****************************Sprites de llegada del disparo****************************
 			}else if (currenFramePrevious >= 9 && currenFramePrevious <= 15){
 				shootChar2 = raidenShootSeven;
-				shootChar2->PlayShoot2(150, scorpion->getWidth());
+				shootChar2->PlayShoot2(150*aux, scorpion->getWidth());
 				currenFramePrevious++;
 			}else if (currenFramePrevious >= 16 && currenFramePrevious <= 20){
 				shootChar2 = raidenShootEight;
-				shootChar2->PlayShoot2(150, scorpion->getWidth());
+				shootChar2->PlayShoot2(150*aux, scorpion->getWidth());
 				currenFramePrevious++;
 			}else if (currenFramePrevious >= 15 && currenFramePrevious <= 20){
 				shootChar2 = raidenShootNine;
-				shootChar2->PlayShoot2(150, scorpion->getWidth());
+				shootChar2->PlayShoot2(150*aux, scorpion->getWidth());
 				currenFramePrevious++;
 			}else if (currenFramePrevious >= 21 && currenFramePrevious <= 25){
 				shootChar2 = raidenShootTen;
-				shootChar2->PlayShoot2(150, scorpion->getWidth());
+				shootChar2->PlayShoot2(150*aux, scorpion->getWidth());
 				currenFramePrevious++;
 			}else if (currenFramePrevious >= 26 && currenFramePrevious <= 35){
 				shootChar2 = raidenShootEleven;
-				shootChar2->PlayShoot2(150, scorpion->getWidth());
+				shootChar2->PlayShoot2(150*aux, scorpion->getWidth());
 				currenFramePrevious++;
 			}else
 			{

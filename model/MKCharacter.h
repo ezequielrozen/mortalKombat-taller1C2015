@@ -54,7 +54,7 @@ public:
 
     char* getFileMovement(const char* moveName);
 
-    void receiveBlow(int force);
+    void receiveBlow(int force, char direction);
 
     int getLife();
 

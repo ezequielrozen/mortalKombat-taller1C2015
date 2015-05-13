@@ -126,7 +126,6 @@ string MKCharacter::getMovement() {
 }
 
 void MKCharacter::setMovement(string newMovement) {
-
 	if (!this->isJumping()) {
 		this->movement = newMovement;
 	}
@@ -261,12 +260,17 @@ bool MKCharacter::isAlive() {
 	return this->life > 0;
 
 }
-void MKCharacter::receiveBlow(int force) {
+void MKCharacter::receiveBlow(int force, char direction) {
 	extern logger* Mylog;
 	this->life -= force;
 	if (force >= 20) {
 		this->setHitReception("FALLING");
 		GameController::setVibrating(true);
+		if (direction != 0)
+		{
+			cout << direction << endl;
+			(direction == 'l') ? this->setMovement("LEFT") : this->setMovement("RIGHT");
+		}
 	}
 	else if (this->movement == "DUCK") {
 		this->setHitReception("BEINGHITDOWN");
@@ -275,9 +279,7 @@ void MKCharacter::receiveBlow(int force) {
 	}
 	Mylog->Log("Personaje (PONERLE NOMBRE) recibe golpe", ERROR_LEVEL_INFO); //FALTA: nombre, vida restada, vida restante.
 	if (this->life <= 0) {
-		this->life = 0;
 		//marcar fin de juego. Preferentemente donde se invoca esta función (control de colisión y golpe)
-
 	}
 }
 

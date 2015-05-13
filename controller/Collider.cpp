@@ -32,14 +32,15 @@ bool Collider::superpositionUp(MKCharacter* character1, MKCharacter* character2)
 
 void Collider::checkHits(MKCharacter* character1, MKCharacter* character2) {
 	if ((superpositionRight(character1,character2) || superpositionLeft(character1, character2)) &&
-		(!(character1->getHit() == "NONE")) && (!(character1->getHit() == "DEFENSE")) && (!(character1->getHit() == "BEINGHIT"))
-		&& ((character1->getHit() != "SHOOT")) && ((character2->getHit() != "SHOOT"))) {
+		(character1->getHit() != "NONE") &&
+		(character1->getHit() != "BEINGHIT") &&
+		(character1->getHit() != "SHOOT") &&
+		(character1->getHit() != "DEFENSE") &&
+		(character2->getHit() != "SHOOT")) {
+
 			if (timer + 100 < SDL_GetTicks()) {
-//				cout << "hitDelay: " << character1->getHitDelay() << endl;
 				if (character1->getHitDelay() == 0) {
-					character2->receiveBlow(DAMAGE.at(character1->getHit()));
-//					cout << character1->getHit() << endl;
-//					cout << character2->getLife() << endl;
+					character2->receiveBlow(DAMAGE.at(character1->getHit()),0);
 				}
 				character1->setHitDelay(character1->getHitDelay()-1);
 				timer = SDL_GetTicks();
@@ -47,29 +48,39 @@ void Collider::checkHits(MKCharacter* character1, MKCharacter* character2) {
 		};
 
 
+	//Como los shoot de los personajes son distintos necesito identificarlos.
+	MKCharacter* scorpion;
+	MKCharacter* raiden;
+
+	if (character1->getName() == "scorpion"){
+		scorpion =character1;
+		raiden = character2;
+	}else if (character1->getName() == "raiden"){
+		scorpion =character2;
+		raiden = character1;
+	}
+
+
 	//Esto trabaja igual q la funcion double GameView::shootWidthCalculate(). Si se modifica aca se debe modificar tb alla.
 	//Veo si llego a hacer contacto con la soga teniendo en cuenta q la estiro y la contraigo segun la distancia entre los personajes.
 	double distancia;
-	double distanciaMaxima = character1->getHitWidth() * 2;
-	if (character1->getHit() == "SHOOT")
+	double distanciaMaxima = scorpion->getHitWidth() * 2;
+	if (scorpion->getHit() == "SHOOT")
 	{
-		if (character1->getX() < character2->getX()){
-			distancia = character2->getX() - (character1->getX() + character1->getHitWidth()-15);
+		if (scorpion->getX() < raiden->getX()){
+			distancia = raiden->getX() - (scorpion->getX() + scorpion->getHitWidth()-15);
 		}
 		else{
-			distancia = character1->getX() - (character2->getX() + character2->getHitWidth()-15);
+			distancia = scorpion->getX() - (raiden->getX() + raiden->getHitWidth()-15);
 		}
 
 		if (distancia <= distanciaMaxima)
 		{
 			if (timer + 100 < SDL_GetTicks()) {
-//				cout << "hitDelay: " << character1->getHitDelay() << endl;
-				if (character1->getHitDelay() == 0) {
-					character2->receiveBlow(DAMAGE.at(character1->getHit()));
-//					cout << character1->getHit() << endl;
-//					cout << character2->getLife() << endl;
+				if (scorpion->getHitDelay() == 0) {
+					raiden->receiveBlow(DAMAGE.at(scorpion->getHit()), 0);
 				}
-				character1->setHitDelay(character1->getHitDelay()-1);
+				scorpion->setHitDelay(scorpion->getHitDelay()-1);
 				timer = SDL_GetTicks();
 			}
 		}
@@ -79,26 +90,25 @@ void Collider::checkHits(MKCharacter* character1, MKCharacter* character2) {
 	//Esto trabaja igual q la funcion double GameView::shootWidthCalculate(). Si se modifica aca se debe modificar tb alla.
 	//Veo si llego a hacer contacto con la soga teniendo en cuenta q la estiro y la contraigo segun la distancia entre los personajes.
 	distancia;
-	distanciaMaxima = character1->getHitWidth() * 5;
-	if (character2->getHit() == "SHOOT")
+	distanciaMaxima = scorpion->getHitWidth() * 5;
+	if (raiden->getHit() == "SHOOT")
 	{
-		if (character1->getX() < character2->getX()){
-			distancia = character2->getX() - (character1->getX() + character1->getHitWidth());
+		if (scorpion->getX() < raiden->getX()){
+			distancia = raiden->getX() - (scorpion->getX() + scorpion->getHitWidth());
 		}
 		else{
-			distancia = character1->getX() - (character2->getX() + character2->getHitWidth());
+			distancia = scorpion->getX() - (raiden->getX() + raiden->getHitWidth());
 		}
-
 		if (distancia <= distanciaMaxima)
 		{
-			if (timer + 67 < SDL_GetTicks()) {
-//				cout << "hitDelay: " << character1->getHitDelay() << endl;
-				if (character2->getHitDelay() == 0) {
-					character1->receiveBlow(DAMAGE.at(character2->getHit()));
-//					cout << character1->getHit() << endl;
-//					cout << character2->getLife() << endl;
+			if (timer + 200 < SDL_GetTicks()) {
+				if (raiden->getHitDelay() == 0) {
+					cout << scorpion->getX() << endl;
+					cout <<  raiden->getX() << endl;
+					scorpion->receiveBlow(DAMAGE.at(raiden->getHit()), (scorpion->getX() < raiden->getX()) ? 'l' :'r');
+
 				}
-				character2->setHitDelay(character2->getHitDelay()-1);
+				raiden->setHitDelay(raiden->getHitDelay()-1);
 				timer = SDL_GetTicks();
 			}
 		}

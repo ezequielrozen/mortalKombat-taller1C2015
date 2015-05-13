@@ -10,6 +10,7 @@ GameController::GameController()
     previousKey = 0;
 
     timer = SDL_GetTicks();
+    hitTimerRaidenShootCheck = SDL_GetTicks();
 }
 
 
@@ -41,10 +42,21 @@ void GameController::testElapsedTime(MKCharacter* character, MKCharacter* charac
 		character2->setMovement("NONE");
 		timerChar2 = SDL_GetTicks();
 	}
-	if (hitTimerChar2 + COMMANDDELAYKIT < SDL_GetTicks()) {
-		character2->setHit("NONE");
-		character2->setIsHiting(false);
-		hitTimerChar2 = SDL_GetTicks();
+
+	//raiden necesita mas tiempo para disparar q para todos los demas Hits
+	if (character2->getHit() == "SHOOT"){
+		if (hitTimerChar2 + COMMANDDELAYKIT + 500 < SDL_GetTicks()) {
+			character2->setHit("NONE");
+			character2->setIsHiting(false);
+			hitTimerChar2 = SDL_GetTicks();
+		}
+	}else
+	{
+		if (hitTimerChar2 + COMMANDDELAYKIT < SDL_GetTicks()) {
+			character2->setHit("NONE");
+			character2->setIsHiting(false);
+			hitTimerChar2 = SDL_GetTicks();
+		}
 	}
 }
 
@@ -61,7 +73,8 @@ void setCharacterSide(MKCharacter* character, MKCharacter* character2)
 
 void GameController::update(MKCharacter* character, MKCharacter* character2) {
     extern logger* Mylog;
-    this->joystickController->update(character,character2);
+    //this->joystickController->update(character,character2);
+
 
     switch (mainEvent->type){
     	case SDL_KEYDOWN:
@@ -196,6 +209,7 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
 							hitTimer = SDL_GetTicks();
 							break;
 
+
 				/****************************************************************************************************/
 
 				case SDLK_g:
@@ -273,11 +287,19 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
 							}
 							break;
 				case SDLK_t:
-							Mylog->Log("movimiento del personaje: Disparando.", ERROR_LEVEL_INFO);
-							character2->setHit("SHOOT");
-							previousKeyChar2 = mainEvent->key.keysym.sym;
-							character2->setIsHiting(true);
-							hitTimerChar2 = SDL_GetTicks();
+//							if (SDL_GetTicks() - hitTimerRaidenShootCheck > 1000)
+//							{
+								Mylog->Log("movimiento del personaje: Disparando.", ERROR_LEVEL_INFO);
+								character2->setHit("SHOOT");
+								previousKeyChar2 = mainEvent->key.keysym.sym;
+//								character2->setHitDelay(400);
+								character2->setIsHiting(true);
+								hitTimerChar2 = SDL_GetTicks();
+								hitTimerRaidenShootCheck = SDL_GetTicks();
+//							}else
+//							{
+////								character2->setHit("NONE");
+//							}
 							break;
 				case SDLK_n:
 							if (previousKeyChar2 == SDLK_s) {
@@ -363,7 +385,6 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
     		testElapsedTime(character, character2);
     		break;
     }
-
 }
 
 void GameController::victory(MKCharacter* character, MKCharacter* character2 ) {

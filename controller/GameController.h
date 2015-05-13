@@ -27,8 +27,8 @@ public:
     void checkEvent();
 
     void victory(MKCharacter* character, MKCharacter* character2);
-
     static bool isVibrating();
+
     static void setVibrating(bool vibrating);
 
 private:
@@ -38,6 +38,7 @@ private:
     int timerChar2;
     int hitTimer;
     int hitTimerChar2;
+    int hitTimerRaidenShootCheck;
     JoystickController* joystickController;
     SDL_Event* mainEvent;
 
