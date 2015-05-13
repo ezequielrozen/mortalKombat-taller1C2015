@@ -32,7 +32,7 @@ bool Collider::superpositionUp(MKCharacter* character1, MKCharacter* character2)
 
 void Collider::checkHits(MKCharacter* character1, MKCharacter* character2) {
 	if ((superpositionRight(character1,character2) || superpositionLeft(character1, character2)) &&
-		(!(character1->getHit() == "NONE")) && (!(character1->getHit() == "BEINGHIT"))
+		(!(character1->getHit() == "NONE")) && (!(character1->getHit() == "DEFENSE")) && (!(character1->getHit() == "BEINGHIT"))
 		&& ((character1->getHit() != "SHOOT")) && ((character2->getHit() != "SHOOT"))) {
 			if (timer + 100 < SDL_GetTicks()) {
 //				cout << "hitDelay: " << character1->getHitDelay() << endl;

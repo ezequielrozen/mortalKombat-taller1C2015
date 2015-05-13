@@ -423,6 +423,7 @@ void cargaPersonaje(Json::Value personaje, std::list<MKCharacter*>* characters, 
     Util::getInstance()->addMovement(MOVE_NAME_BODYPARTS, filenameBodyParts);
     Util::getInstance()->addMovement(MOVE_NAME_FINISHER, filenameFinisher);
     Util::getInstance()->addMovement(MOVE_NAME_SHOOT, filenameShoot);
+    Util::getInstance()->addMovement(MOVE_NAME_SHOOT_ZERO, filenameShootZero);
     Util::getInstance()->addMovement(MOVE_NAME_SHOOT_ONE, filenameShootOne);
     Util::getInstance()->addMovement(MOVE_NAME_SHOOT_TWO, filenameShootTwo);
     Util::getInstance()->addMovement(MOVE_NAME_SHOOT_THREE, filenameShootThree);
