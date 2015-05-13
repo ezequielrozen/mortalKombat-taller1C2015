@@ -275,6 +275,7 @@ void MKCharacter::receiveBlow(int force) {
 	}
 	Mylog->Log("Personaje (PONERLE NOMBRE) recibe golpe", ERROR_LEVEL_INFO); //FALTA: nombre, vida restada, vida restante.
 	if (this->life <= 0) {
+		this->life = 0;
 		//marcar fin de juego. Preferentemente donde se invoca esta función (control de colisión y golpe)
 
 	}
