@@ -42,6 +42,7 @@ public:
                       CharacterSprite*& head, bool colorAltered);
     void startRender();
     void endRender();
+    void initializeCharactersSprites();
 
 private:
 

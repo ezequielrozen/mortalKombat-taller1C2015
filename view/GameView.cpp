@@ -3,65 +3,6 @@
 #include "../controller/GameController.h"
 #include "Text.h"
 
-void GameView::InicializeCharactersSprites() {
-	scorpionJump=NULL;
-		scorpionWalk=NULL;
-	    scorpionStance=NULL;
-	    scorpionSideJump=NULL;
-	    scorpionDuck=NULL;
-	    scorpionKick=NULL;
-	    scorpionKickDown=NULL;
-	    scorpionPunchJump=NULL;
-	    scorpionPunchUp=NULL;
-	    scorpionPunch=NULL;
-	    scorpionWinner=NULL;
-	    scorpionBodyParts=NULL;
-	    scorpionFinisher=NULL;
-	    scorpionShoot=NULL;
-	    scorpionShootOne=NULL;
-	    scorpionShootTwo=NULL;
-	    scorpionDizzy=NULL;
-	    scorpionFall=NULL;
-	    scorpionBeingHit=NULL;
-	    scorpionBlockDown=NULL;
-	    scorpionBlock=NULL;
-	    scorpionHead=NULL;
-	    raidenWalk=NULL;
-
-	    raidenStance=NULL;
-	    raidenJump=NULL;
-	    raidenSideJump=NULL;
-	    raidenDuck=NULL;
-	    raidenKick=NULL;
-	    raidenKickDown=NULL;
-	    raidenPunchJump=NULL;
-	    raidenPunchUp=NULL;
-	    raidenPunch=NULL;
-	    raidenWinner=NULL;
-	    raidenBodyParts=NULL;
-	    raidenFinisher=NULL;
-	    raidenShoot=NULL;
-	    raidenShootOne=NULL;
-	    raidenShootTwo=NULL;
-	    raidenShootThree=NULL;
-	    raidenShootFour=NULL;
-	    raidenShootFive=NULL;
-	    raidenShootSix=NULL;
-	    raidenShootSeven=NULL;
-	    raidenShootEight=NULL;
-	    raidenShootNine=NULL;
-	    raidenShootTen=NULL;
-	    raidenShootEleven=NULL;
-	    raidenShootZero=NULL;
-	    raidenDizzy=NULL;
-	    raidenFall=NULL;
-	    raidenBeingHit=NULL;
-	    scorpionBeingHitDown=NULL;
-	    raidenBlockDown=NULL;
-	    raidenBlock=NULL;
-	    raidenHead=NULL;
-}
-
 GameView::GameView(float ScreenWidth, float ScreenHeight, MKCharacter* character, MKCharacter* character2, Stage* pStage, string OponentSide, Painter* painter) {
 	oponentSide = OponentSide;
 	this->window = NULL;
@@ -82,7 +23,7 @@ GameView::GameView(float ScreenWidth, float ScreenHeight, MKCharacter* character
     this->scorpion = character;
     this->raiden = character2;
 
-	InicializeCharactersSprites();
+    initializeCharactersSprites();
 
  	this->LoadSprites(this->scorpion->getName(), this->raiden->getName());
 
@@ -242,7 +183,7 @@ void GameView::LoadSprites(string name1, string name2) {
                                 raidenKickDown,raidenPunchJump,raidenPunchUp,raidenPunch,raidenWinner,
                                 raidenBodyParts,raidenFinisher,raidenShoot,raidenShootOne, raidenShootTwo,
                                 raidenDizzy,raidenFall,raidenBeingHit,raidenBeingHitDown, raidenBlockDown,
-                                raidenBlock,raidenHead,false);
+                                raidenBlock,raidenHead,colorAltered);
         } else {
             this->loadAsRaiden(scorpionWalk,scorpionStance,scorpionJump,scorpionSideJump,scorpionDuck,scorpionKick,
                                 scorpionKickDown,scorpionPunchJump,scorpionPunchUp,scorpionPunch,scorpionWinner,scorpionBodyParts,
@@ -861,4 +802,63 @@ void GameView::RaidenShootSetPosX(int currentFrame2, CharacterSprite* shootChar2
 		shootChar2->setX(raiden->getX() + (signo * (shootWidthCalculatedDistanceRaiden())/*+(signo*scorpion->getWidth()*5/2)*/));
 	if (this->currenFramePrevious >= 10)
 		shootChar2->setX(raiden->getX() + signo * shootWidthCalculatedDistanceRaiden());
+}
+
+void GameView::initializeCharactersSprites() {
+    scorpionJump=NULL;
+    scorpionWalk=NULL;
+    scorpionStance=NULL;
+    scorpionSideJump=NULL;
+    scorpionDuck=NULL;
+    scorpionKick=NULL;
+    scorpionKickDown=NULL;
+    scorpionPunchJump=NULL;
+    scorpionPunchUp=NULL;
+    scorpionPunch=NULL;
+    scorpionWinner=NULL;
+    scorpionBodyParts=NULL;
+    scorpionFinisher=NULL;
+    scorpionShoot=NULL;
+    scorpionShootOne=NULL;
+    scorpionShootTwo=NULL;
+    scorpionDizzy=NULL;
+    scorpionFall=NULL;
+    scorpionBeingHit=NULL;
+    scorpionBlockDown=NULL;
+    scorpionBlock=NULL;
+    scorpionHead=NULL;
+    raidenWalk=NULL;
+
+    raidenStance=NULL;
+    raidenJump=NULL;
+    raidenSideJump=NULL;
+    raidenDuck=NULL;
+    raidenKick=NULL;
+    raidenKickDown=NULL;
+    raidenPunchJump=NULL;
+    raidenPunchUp=NULL;
+    raidenPunch=NULL;
+    raidenWinner=NULL;
+    raidenBodyParts=NULL;
+    raidenFinisher=NULL;
+    raidenShoot=NULL;
+    raidenShootOne=NULL;
+    raidenShootTwo=NULL;
+    raidenShootThree=NULL;
+    raidenShootFour=NULL;
+    raidenShootFive=NULL;
+    raidenShootSix=NULL;
+    raidenShootSeven=NULL;
+    raidenShootEight=NULL;
+    raidenShootNine=NULL;
+    raidenShootTen=NULL;
+    raidenShootEleven=NULL;
+    raidenShootZero=NULL;
+    raidenDizzy=NULL;
+    raidenFall=NULL;
+    raidenBeingHit=NULL;
+    scorpionBeingHitDown=NULL;
+    raidenBlockDown=NULL;
+    raidenBlock=NULL;
+    raidenHead=NULL;
 }

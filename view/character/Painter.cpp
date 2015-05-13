@@ -173,6 +173,7 @@ rgb Painter::convertToRGB(hsv hsv_param) {
 void Painter::paint(SDL_Surface *surface) {
     for (int x = 0; x < surface->w; x++) {
         for (int y = 0; y < surface->h; y++) {
+//            std::cout << x << " - " << y << std::endl;
             Uint8 alpha;
             Uint32 px = this->getpixel(surface, x, y);
             rgb aRGB;
