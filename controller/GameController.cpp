@@ -10,8 +10,12 @@ GameController::GameController()
     previousKey = 0;
 
     timer = SDL_GetTicks();
+
     hitTimerRaidenShootCheck = SDL_GetTicks();
     raidenShootTimeOutCompleted = true;
+
+    hitTimerScorpionShootCheck = SDL_GetTicks();
+    scorpionShootTimeOutCompleted = true;
 }
 
 
@@ -161,11 +165,19 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
 							}
 							break;
 				case SDLK_o:
-							Mylog->Log("movimiento del personaje: Disparando.", ERROR_LEVEL_INFO);
-							character->setHit("SHOOT");
-							previousKey = mainEvent->key.keysym.sym;
-							character->setIsHiting(true);
-							hitTimer = SDL_GetTicks();
+							if ((SDL_GetTicks() < 150 + hitTimerScorpionShootCheck) || scorpionShootTimeOutCompleted){
+									Mylog->Log("movimiento del personaje: Disparando.", ERROR_LEVEL_INFO);
+									character->setHit("SHOOT");
+									previousKey = mainEvent->key.keysym.sym;
+									character->setIsHiting(true);
+									hitTimer = SDL_GetTicks();
+									scorpionShootTimeOutCompleted = false;
+									if (hitTimerScorpionShootCheck == 0)
+										hitTimerScorpionShootCheck = SDL_GetTicks();
+							}else
+							{
+								hitTimerScorpionShootCheck = 0;
+							}
 							break;
 				case SDLK_d:
 							if (previousKey == SDLK_DOWN) {
@@ -288,7 +300,7 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
 							}
 							break;
 				case SDLK_t:
-							if ((SDL_GetTicks() < 1000 + hitTimerRaidenShootCheck) || raidenShootTimeOutCompleted){
+							if ((SDL_GetTicks() < 150 + hitTimerRaidenShootCheck) || raidenShootTimeOutCompleted){
 								Mylog->Log("movimiento del personaje: Disparando.", ERROR_LEVEL_INFO);
 								character2->setHit("SHOOT");
 								previousKeyChar2 = mainEvent->key.keysym.sym;
@@ -300,9 +312,7 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
 									hitTimerRaidenShootCheck = SDL_GetTicks();
 							}else
 							{
-//								character2->setHit("NONE");
 								hitTimerRaidenShootCheck = 0;
-
 							}
 							break;
 				case SDLK_n:
@@ -381,8 +391,14 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
 					previousKeyChar2 = SDLK_0;
 					break;
 				case SDLK_t:
+					//Uso este evento para q no vuelva a disparar hasta q no suelte la tecla
 					raidenShootTimeOutCompleted = true;
 					break;
+				case SDLK_o:
+					//Uso este evento para q no vuelva a disparar hasta q no suelte la tecla
+					scorpionShootTimeOutCompleted = true;
+					break;
+
 				default:
 					break;
 			}

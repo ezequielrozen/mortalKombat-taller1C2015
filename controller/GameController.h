@@ -40,6 +40,8 @@ private:
     int hitTimerChar2;
     int hitTimerRaidenShootCheck;
     bool raidenShootTimeOutCompleted;
+    int hitTimerScorpionShootCheck;
+    bool scorpionShootTimeOutCompleted;
     JoystickController* joystickController;
     SDL_Event* mainEvent;
 
