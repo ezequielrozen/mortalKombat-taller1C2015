@@ -263,7 +263,7 @@ bool MKCharacter::isAlive() {
 void MKCharacter::receiveBlow(int force, char direction) {
 	extern logger* Mylog;
 	this->life -= force;
-	if (force >= 20) {
+	if (force >= 15) {
 		this->setHitReception("FALLING");
 		GameController::setVibrating(true);
 		if (direction != 0)

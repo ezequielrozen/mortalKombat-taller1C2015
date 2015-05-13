@@ -39,8 +39,12 @@ void Collider::checkHits(MKCharacter* character1, MKCharacter* character2) {
 		(character2->getHit() != "SHOOT")) {
 
 			if (timer + 100 < SDL_GetTicks()) {
-				if (character1->getHitDelay() == 0) {
-					character2->receiveBlow(DAMAGE.at(character1->getHit()),0);
+				if (character1->getHitDelay() == 0 && (!(character2->getHit() == "DEFENSE") || character1->getHit() == "KICKDOWN")) {
+					if (!((character1->getHit() == "PUNCH" || character1->getHit() == "KICK" || character1->getHit() == "PUNCHUP") &&
+						(character2->getMovement() == "DUCK"))) 
+					{
+						character2->receiveBlow(DAMAGE.at(character1->getHit()), 0);
+					}
 				}
 				character1->setHitDelay(character1->getHitDelay()-1);
 				timer = SDL_GetTicks();
