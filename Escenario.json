@@ -124,5 +124,11 @@
     "c2kickDown": 8,
     "c2block": 9,
     "c2shoot": 10
-  }
+  },
+  
+  
+  "j1elige": 0,
+  "j2elige": 1
+  
+  
 }
