@@ -41,17 +41,17 @@ bool Game::GameLoop() {
     bool cameraMoved;
 
     while (gameController->getEvent()->type != SDL_QUIT) {
-        gameController->checkEvent();
+            gameController->checkEvent();
         gameView->startRender();
         gameView->Render();
-        gameController->update(scorpion, raiden);
+        if ( scorpion->isAlive() && raiden->isAlive() )
+            gameController->update(scorpion, raiden);
+        else // fin de juego. loguearlo (1 sola vez)
+            gameController->victory(scorpion, raiden);
         cameraMoved = cameraController->update(scorpion, raiden, stage->getLayers());
         collider->update(scorpion, raiden, cameraMoved);
         gameView->endRender();
         SDL_Delay(15);
-
-//        if (gameController->getEvent()->key.keysym.sym != 0)
-//        	cout << gameController->getEvent()->key.keysym.sym << endl;
 
         if (peviousKey == SDLK_r && gameController->getEvent()->key.keysym.sym == SDLK_e) {
             return true;

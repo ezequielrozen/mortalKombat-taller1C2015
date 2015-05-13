@@ -4,7 +4,7 @@
 
 #include "../model/json/json.h"
 #include "Text.h"
-#include <SDL2/SDL_ttf.h>
+#include <SDL_ttf.h>
 #include <iostream>
 #include "../model/util/Util.h"
 using namespace std;

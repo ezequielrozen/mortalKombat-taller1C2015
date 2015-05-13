@@ -364,6 +364,17 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
     		testElapsedTime(character, character2);
     		break;
     }
+
+}
+
+void GameController::victory(MKCharacter* character, MKCharacter* character2 ) {
+	if (character->isAlive() && !character2->isAlive()) { // Ganó el 1. Loguear
+		character->setHit("WINNER");
+		character2->setHit("DIZZY");
+	} else if (character->isAlive() && !character2->isAlive()) { // Ganó el 2. Loguear.
+		character->setHit("DIZZY");
+		character2->setHit("WINNER");
+	}
 }
 
 void GameController::setVibrating(bool vibratingFlag) {

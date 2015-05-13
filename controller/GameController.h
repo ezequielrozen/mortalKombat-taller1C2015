@@ -26,8 +26,9 @@ public:
 
     void checkEvent();
 
-    static bool isVibrating();
+    void victory(MKCharacter* character, MKCharacter* character2);
 
+    static bool isVibrating();
     static void setVibrating(bool vibrating);
 
 private:
