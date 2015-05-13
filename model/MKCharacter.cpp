@@ -147,7 +147,7 @@ void MKCharacter::setHit(string newHit) {
 
 	this->hitMovement = newHit;
 
-	if (newHit == "NONE") {
+	if (newHit == "NONE" || newHit =="WINNER") {
 		this->setHitWidth(this->getWidth());
 
 		if ((this->getCharacterSide() == 'r') && (this->getIsHiting())) {
