@@ -107,10 +107,7 @@ void Collider::checkHits(MKCharacter* character1, MKCharacter* character2) {
 		{
 			if (timer + 200 < SDL_GetTicks()) {
 				if (raiden->getHitDelay() == 0) {
-					cout << scorpion->getX() << endl;
-					cout <<  raiden->getX() << endl;
 					scorpion->receiveBlow(DAMAGE.at(raiden->getHit()), (scorpion->getX() < raiden->getX()) ? 'l' :'r');
-
 				}
 				raiden->setHitDelay(raiden->getHitDelay()-1);
 				timer = SDL_GetTicks();
@@ -169,18 +166,18 @@ void Collider::update(MKCharacter* character1, MKCharacter* character2, bool cam
 	//En caso de que los dos golpeen al mismo tiempo, se decide aleatoriamente quien pega primero.
 	//En caso de que no golpeen al mismo tiempo, no tiene importancia.
 	if (character1->isAlive() && character2->isAlive()) {
-	int randomizer = rand() % 2;
+		int randomizer = rand() % 2;
 
-	if (randomizer == 0) {
-		this->checkHits(character1, character2);
-		this->checkHits(character2, character1);
+		if (randomizer == 0) {
+			this->checkHits(character1, character2);
+			this->checkHits(character2, character1);
+		}
+		else {
+			this->checkHits(character2, character1);
+			this->checkHits(character1, character2);
+		}
 	}
-	else {
-		this->checkHits(character2, character1);
-		this->checkHits(character1, character2);
-	}
-	}
-		character1->update();
-		character2->update();
+	character1->update();
+	character2->update();
 
 }

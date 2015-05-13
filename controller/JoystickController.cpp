@@ -63,8 +63,8 @@ JoystickController::JoystickController(SDL_Event* event)
 
 JoystickController::~JoystickController(void)
 {
-    SDL_JoystickClose(this->joystickOne);
-    SDL_JoystickClose(this->joystickTwo);
+//    SDL_JoystickClose(this->joystickOne);
+//    SDL_JoystickClose(this->joystickTwo);
 }
 
 void JoystickController::update(MKCharacter *character, MKCharacter *character2) {

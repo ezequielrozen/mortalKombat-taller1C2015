@@ -78,7 +78,7 @@ void setCharacterSide(MKCharacter* character, MKCharacter* character2)
 
 void GameController::update(MKCharacter* character, MKCharacter* character2) {
     extern logger* Mylog;
-    //this->joystickController->update(character,character2);
+//    this->joystickController->update(character,character2);
 
 
     switch (mainEvent->type){
@@ -396,7 +396,7 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
 					break;
 				case SDLK_o:
 					//Uso este evento para q no vuelva a disparar hasta q no suelte la tecla
-					scorpionShootTimeOutCompleted = false;
+					scorpionShootTimeOutCompleted = true;
 					break;
 
 				default:
@@ -414,9 +414,17 @@ void GameController::victory(MKCharacter* character, MKCharacter* character2 ) {
 	if (character->isAlive() && !character2->isAlive()) { // Ganó el 1. Loguear
 		character->setHit("WINNER");
 		character2->setHit("DIZZY");
+		//Esto deberia estar aca sino en el MKCharacter setHit. Lo arreglo rapido para la entrega.
+		if (character->getName() == "raiden")
+			character->setHitWidth(character->getWidth()*1.5);
+
 	} else if (!character->isAlive() && character2->isAlive()) { // Ganó el 2. Loguear.
 		character->setHit("DIZZY");
 		character2->setHit("WINNER");
+
+		//Esto deberia estar aca sino en el MKCharacter setHit. Lo arreglo rapido para la entrega.
+		if (character2->getName() == "raiden")
+			character2->setHitWidth(character2->getWidth()*1.5);
 	}
 }
 
