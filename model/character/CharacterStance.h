@@ -8,8 +8,6 @@ class CharacterStance : public CharacterState {
 public:
     CharacterStance();
     ~CharacterStance();
-
-    void update(Character *character);
 };
 
 

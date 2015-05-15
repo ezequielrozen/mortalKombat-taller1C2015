@@ -9,8 +9,8 @@ Character::~Character() {
 
 }
 
-void Character::update() {
-    this->state->update(this);
+void Character::update(MKEvent aEvent) {
+    this->state->update(this, aEvent);
 }
 
 void Character::setState(CharacterState* state) {

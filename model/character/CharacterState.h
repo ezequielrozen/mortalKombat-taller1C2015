@@ -2,11 +2,15 @@
 #define MORTALKOMBAT_TALLER1C2015_CHARACTERSTATE_H
 
 #include "Character.h"
+#include "../MKEvents/MoveLeft.h"
+#include "../MKEvents/MoveRight.h"
+
 
 class CharacterState {
 
 public:
-    virtual void update(Character*);
+    virtual inline void update(Character* character, MoveRight* aEvent ) = 0;
+    virtual inline void update(Character* character, MoveLeft* aEvent ) = 0;
 
 protected:
     void setState(Character*, CharacterState*);

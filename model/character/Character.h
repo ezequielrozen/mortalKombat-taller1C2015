@@ -4,6 +4,7 @@
 #include "CharacterState.h"
 
 class Character {
+friend class CharacterState;
 
 public:
     Character();
@@ -11,13 +12,8 @@ public:
 
 private:
     void update();
-
-private:
-    friend class CharacterState;
-    void setState(CharacterState* state);
-
-private:
-    CharacterState* state;
+   // void setState(CharacterState* state, Event* aEvent);
+//   CharacterState* state;
 
 };
 
