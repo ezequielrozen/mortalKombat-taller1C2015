@@ -13,8 +13,11 @@
 #include "Text.h"
 #include <string>
 #include <math.h>
+#include <map>
 
 using namespace std;
+
+typedef std::map<std::string, CharacterSprite*> SpriteMap;
 
 class GameView
 {
@@ -52,6 +55,9 @@ private:
 
     Text* characterName;
     Text *characterTwoName;
+
+    SpriteMap scorpionSprites;
+    SpriteMap raidenSprites;
 
     LifeView* characterOneLifebarView;
     LifeView* characterTwoLifebarView;

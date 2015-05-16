@@ -168,6 +168,7 @@ void GameView::Render() {
 void GameView::LoadSprites(string name1, string name2) {
     bool colorAltered = false;
     string name = "";
+
     if (name1 == name2) {
         colorAltered = true;
         name = name1;
@@ -225,6 +226,18 @@ void GameView::LoadSprites(string name1, string name2) {
                              raidenDizzy,raidenFall,raidenBeingHit,raidenBeingHitDown, raidenBlockDown,
                              raidenBlock,raidenHead,false);
     }
+
+    scorpionSprites = {{"STANCE", scorpionStance},{"RIGHT", scorpionWalk},{"LEFT", scorpionWalk},{"JUMP", scorpionJump},{"JUMPRIGHT", scorpionSideJump},
+    {"JUMPLEFT", scorpionSideJump},{"DUCK", scorpionDuck},{"KICK", scorpionKick},{"KICKDOWN", scorpionKickDown},{"PUNCHJUMPLEFT", scorpionPunchJump},
+    {"PUNCHJUMPLEFT", scorpionPunchJump},{"PUNCH", scorpionPunch},{"WINNER", scorpionWinner},{"PUNCHUP", scorpionPunchUp},
+    {"FINISHER", scorpionFinisher},{"DEFENSE", scorpionBlock},{"SHOOT", scorpionShoot},{"DIZZY", scorpionDizzy},{"FALLING", scorpionFall},
+    {"BEINGHIT", scorpionBeingHit},{"BEINGHITDOWN", scorpionBeingHitDown},{"BLOCKDOWN", scorpionBlockDown}};
+
+    raidenSprites = {{"STANCE", raidenStance},{"RIGHT", raidenWalk},{"LEFT", raidenWalk},{"JUMP", raidenJump},{"JUMPRIGHT", raidenSideJump},
+    {"JUMPLEFT", raidenSideJump},{"DUCK", raidenDuck},{"KICK", raidenKick},{"KICKDOWN", raidenKickDown},{"PUNCHJUMPLEFT", raidenPunchJump},
+    {"PUNCHJUMPLEFT", raidenPunchJump},{"PUNCH", raidenPunch},{"WINNER", raidenWinner},{"PUNCHUP", raidenPunchUp},
+    {"FINISHER", raidenFinisher},{"DEFENSE", raidenBlock},{"SHOOT", raidenShoot},{"DIZZY", raidenDizzy},{"FALLING", raidenFall},
+    {"BEINGHIT", raidenBeingHit},{"BEINGHITDOWN", raidenBeingHitDown},{"BLOCKDOWN", raidenBlockDown}};
 
 }
 
