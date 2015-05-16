@@ -4,18 +4,22 @@
 #include "Character.h"
 #include "../MKEvents/MoveLeft.h"
 #include "../MKEvents/MoveRight.h"
+#include "../constantes.h"
+#include <map>
+class Character;
+
+enum Events { MoveRight, MoveLeft, Jump, Duck};
 
 
 class CharacterState {
 
 public:
-    //virtual void update(Character* character, MoveRight* aEvent ) = 0;
-    //virtual void update(Character* character, MoveLeft* aEvent ) = 0;
+    virtual void update(Character* character, MKEvent* aEvent );
+    virtual void getState();
 
 protected:
-    //void setState(Character*, CharacterState*);
-public:
-    //void update(Character *character, MKEvent *anEvent);
+    void setState(Character* character, CharacterState* aState);
+    map<Events, CharacterState> eventMap;
 };
 
 

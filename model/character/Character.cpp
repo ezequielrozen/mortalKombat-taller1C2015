@@ -3,7 +3,7 @@
 #include "CharacterStance.h"
 
 Character::Character() {
-    //this->state = new CharacterStance();
+    this->state = new CharacterStance();
 }
 
 Character::~Character() {
@@ -11,7 +11,7 @@ Character::~Character() {
 }
 
 void Character::update(MKEvent* aEvent) {
-    //this->state->update(this, aEvent);
+    this->state->update(this, aEvent);
 }
 
 void Character::setState(CharacterState *state) {

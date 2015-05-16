@@ -13,7 +13,7 @@ public:
     Character();
     ~Character();
     void setState(CharacterState* state);
-    void update(MKEvent*);
+    void update(MKEvent* aEvent);
 
 private:
     CharacterState* state;
