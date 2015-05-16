@@ -9,11 +9,11 @@ CharacterStance::CharacterStance() {
     map<Events, CharacterState>::iterator p;
     //p = eventMap.find(MoveRight);
     p = eventMap.find(MoveRight);
-    if(p != eventMap.end())
+/*    if(p != eventMap.end())
         cout << "Phone number: " << p->second.getState() << endl;
     else
         cout << "Name not in directory.\n";
-
+*/
 }
 
 CharacterStance::~CharacterStance() {
