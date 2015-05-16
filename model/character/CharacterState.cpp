@@ -9,3 +9,8 @@ void CharacterState::setState(Character *character, CharacterState *state) {
 }
 
 void CharacterState::getState() { }
+
+bool CharacterState::operator <(const CharacterState& rhs) const
+{
+    return true;
+}

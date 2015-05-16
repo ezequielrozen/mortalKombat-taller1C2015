@@ -19,7 +19,9 @@ public:
 
 protected:
     void setState(Character* character, CharacterState* aState);
-    map<Events, CharacterState> eventMap;
+    map<Events, CharacterState>* eventMap;
+    bool operator <(const CharacterState& rhs) const;
+
 };
 
 

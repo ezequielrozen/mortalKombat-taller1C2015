@@ -4,16 +4,9 @@
 #include "MovingLeft.h"
 
 CharacterStance::CharacterStance() {
-    eventMap = map<Events, CharacterState>();
-    eventMap.insert(pair<Events, CharacterState>(MoveRight, MovingRight()));
-    map<Events, CharacterState>::iterator p;
-    //p = eventMap.find(MoveRight);
-    p = eventMap.find(MoveRight);
-/*    if(p != eventMap.end())
-        cout << "Phone number: " << p->second.getState() << endl;
-    else
-        cout << "Name not in directory.\n";
-*/
+    eventMap = new map<Events, CharacterState>();
+    eventMap->insert(pair<Events, CharacterState>(MoveRight, CharacterStance()));
+   // CharacterState mr = eventMap.at(MoveRight);
 }
 
 CharacterStance::~CharacterStance() {
@@ -29,4 +22,10 @@ void CharacterStance::update(Character* character, MKEvent* aEvent) {
 
 void CharacterStance::getState() {
     std::cout << "Stance State." << endl;
+}
+
+// Must define less than relative to Name objects.
+bool operator<(CharacterState a, CharacterState b)
+{
+    return true;
 }

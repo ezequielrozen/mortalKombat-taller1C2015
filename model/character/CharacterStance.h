@@ -11,6 +11,8 @@ public:
 
     void update(Character* character, MKEvent* aEvent);
     void getState();
+    bool operator <(CharacterState rhs);
+
 };
 
 
