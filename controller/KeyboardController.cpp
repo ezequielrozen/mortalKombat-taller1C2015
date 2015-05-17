@@ -70,38 +70,38 @@ void KeyboardController::update(MKCharacter* character, MKCharacter* character2,
     switch (mainEvent->type){
     	case SDL_KEYDOWN:
 			switch(mainEvent->key.keysym.sym) {
-				case SDLK_RIGHT:
+			case SDLK_RIGHT:
 //							Mylog->Log("movimiento del personaje: hacia la derecha", ERROR_LEVEL_INFO);
 //							character->setMovement("RIGHT");
 //							previousKey = mainEvent->key.keysym.sym;
 //							setCharacterSide(character, character2);
 //							timer = SDL_GetTicks();
 
-							EventController::moveRight(character, character2);
-							break;
-				case SDLK_LEFT:
+						EventController::moveRight(character, character2);
+						break;
+			case SDLK_LEFT:
 //							Mylog->Log("movimiento del personaje: hacia la izquierda", ERROR_LEVEL_INFO);
 //							character->setMovement("LEFT");
 //							previousKey = mainEvent->key.keysym.sym;
 //							setCharacterSide(character, character2);
 //							timer = SDL_GetTicks();
-							EventController::moveLeft(character, character2);
-							break;
-				case SDLK_UP:
+						EventController::moveLeft(character, character2);
+						break;
+			case SDLK_UP:
 //							if (previousKey == SDLK_UP){
 //								Mylog->Log("movimiento del personaje: hacia arriba", ERROR_LEVEL_INFO);
 //								character->setJump(true);
 //								setCharacterSide(character, character2);
 //							}
 //							previousKey = mainEvent->key.keysym.sym;
-							EventController::moveUp(character, character2);
-							break;
-				case SDLK_DOWN:
+						EventController::moveUp(character, character2);
+						break;
+			case SDLK_DOWN:
 //							Mylog->Log("movimiento del personaje: agachandose", ERROR_LEVEL_INFO);
 //							character->setMovement("DUCK");
 //							previousKey = mainEvent->key.keysym.sym;
 //							timer = SDL_GetTicks();
-							EventController::moveDown(character, character2);
+						EventController::moveDown(character, character2);
 
 //				case SDLK_l:
 //							//character2->setLife(character2->getLife()-10);
@@ -110,7 +110,7 @@ void KeyboardController::update(MKCharacter* character, MKCharacter* character2,
 //							previousKey = mainEvent->key.keysym.sym;
 //							previousKeyChar2 = mainEvent->key.keysym.sym;
 //							break;
-				case SDLK_k:
+			case SDLK_k:
 //							if (previousKey == SDLK_DOWN){
 //								Mylog->Log("movimiento del personaje: Patada baja", ERROR_LEVEL_INFO);
 //								character->setHit("KICKDOWN");
@@ -125,13 +125,13 @@ void KeyboardController::update(MKCharacter* character, MKCharacter* character2,
 //								character->setIsHiting(true);
 //								hitTimer = SDL_GetTicks();
 //							}
-								EventController::highKick(character, character2);
+							EventController::highKick(character, character2);
 
-							break;
-				case SDLK_l:
-								EventController::lowKick(character, character2);
-							break;
-				case SDLK_p:
+						break;
+			case SDLK_l:
+							EventController::lowKick(character, character2);
+						break;
+			case SDLK_p:
 //							if (previousKey == SDLK_LEFT){
 //								character->setHit("PUNCHJUMPLEFT");
 //								character->setJump(true);
@@ -160,12 +160,12 @@ void KeyboardController::update(MKCharacter* character, MKCharacter* character2,
 //								hitTimer = SDL_GetTicks();
 //							}
 
-								EventController::highPunch(character, character2);
-							break;
-				case SDLK_i:
-								EventController::lowPunch(character, character2);
-							break;
-				case SDLK_b:
+							EventController::highPunch(character, character2);
+						break;
+			case SDLK_i:
+							EventController::lowPunch(character, character2);
+						break;
+			case SDLK_b:
 //							if (previousKey == SDLK_DOWN) {
 //								Mylog->Log("movimiento del personaje: Defensa.", ERROR_LEVEL_INFO);
 //								character->setHit("DEFENSEDOWN");
@@ -178,9 +178,9 @@ void KeyboardController::update(MKCharacter* character, MKCharacter* character2,
 //							previousKey = mainEvent->key.keysym.sym;
 //							hitTimer = SDL_GetTicks();
 
-								EventController::block(character, character2);
-							break;
-				case SDLK_u:
+							EventController::block(character, character2);
+						break;
+			case SDLK_u:
 //							if ((SDL_GetTicks() < 150 + hitTimerScorpionShootCheck) || scorpionShootTimeOutCompleted){
 //									Mylog->Log("movimiento del personaje: Disparando.", ERROR_LEVEL_INFO);
 //									character->setHit("SHOOT");
@@ -194,8 +194,8 @@ void KeyboardController::update(MKCharacter* character, MKCharacter* character2,
 //							{
 //								hitTimerScorpionShootCheck = 0;
 //							}
-								EventController::shoot(character, character2);
-							break;
+							EventController::shoot(character, character2);
+						break;
 //				case SDLK_q:
 //							Mylog->Log("movimiento del personaje: Mareado.", ERROR_LEVEL_INFO);
 //							character->setHit("DIZZY");
@@ -226,43 +226,43 @@ void KeyboardController::update(MKCharacter* character, MKCharacter* character2,
 //							hitTimer = SDL_GetTicks();
 //							break;
 
-				/****************************************************************************************************/
+			/****************************************************************************************************/
 
-				case SDLK_d:
+			case SDLK_d:
 //							Mylog->Log("movimiento del personaje: hacia la derecha", ERROR_LEVEL_INFO);
 //							character2->setMovement("RIGHT");
 //							previousKeyChar2 = mainEvent->key.keysym.sym;
 //							setCharacterSide(character, character2);
 //							timerChar2 = SDL_GetTicks();
-							EventController::moveRight(character2, character);
-							break;
+						EventController::moveRight(character2, character);
+						break;
 
-				case SDLK_a:
+			case SDLK_a:
 //							Mylog->Log("movimiento del personaje: hacia la izquierda", ERROR_LEVEL_INFO);
 //							character2->setMovement("LEFT");
 //							previousKeyChar2 = mainEvent->key.keysym.sym;
 //							setCharacterSide(character, character2);
 //							timerChar2 = SDL_GetTicks();
-							EventController::moveLeft(character2, character);
-							break;
-				case SDLK_w:
+						EventController::moveLeft(character2, character);
+						break;
+			case SDLK_w:
 //							if (previousKeyChar2 == SDLK_w)	{
 //								Mylog->Log("movimiento del personaje: hacia arriba", ERROR_LEVEL_INFO);
 //								character2->setJump(true);
 //								setCharacterSide(character, character2);
 //							}
 //							previousKeyChar2 = mainEvent->key.keysym.sym;
-							EventController::moveUp(character2, character);
-							break;
-				case SDLK_z:
+						EventController::moveUp(character2, character);
+						break;
+			case SDLK_z:
 //							Mylog->Log("movimiento del personaje: agachandose", ERROR_LEVEL_INFO);
 //							character2->setMovement("DUCK");
 //							previousKeyChar2 = mainEvent->key.keysym.sym;;
 //							timerChar2 = SDL_GetTicks();
-							EventController::moveDown(character2, character);
-							break;
+						EventController::moveDown(character2, character);
+						break;
 
-				case SDLK_f:
+			case SDLK_f:
 //							if (previousKeyChar2 == SDLK_s){
 //								Mylog->Log("movimiento del personaje: Patada baja", ERROR_LEVEL_INFO);
 //								character2->setHit("KICKDOWN");
@@ -277,12 +277,12 @@ void KeyboardController::update(MKCharacter* character, MKCharacter* character2,
 //								character2->setIsHiting(true);
 //								hitTimerChar2 = SDL_GetTicks();
 //							}
-							EventController::highKick(character2, character);
-							break;
-				case SDLK_g:
-							EventController::lowKick(character2, character);
-							break;
-				case SDLK_c:
+						EventController::highKick(character2, character);
+						break;
+			case SDLK_g:
+						EventController::lowKick(character2, character);
+						break;
+			case SDLK_c:
 //							if (previousKeyChar2 == SDLK_a){
 //								character2->setHit("PUNCHJUMPLEFT");
 //								character2->setJump(true);
@@ -310,32 +310,32 @@ void KeyboardController::update(MKCharacter* character, MKCharacter* character2,
 //								character2->setIsHiting(true);
 //								hitTimerChar2 = SDL_GetTicks();
 //							}
-							EventController::highPunch(character2, character);
-							break;
-				case SDLK_v:
-							EventController::lowPunch(character2, character);
-							break;
-				case SDLK_x:
-							EventController::block(character2, character);
-							break;
+						EventController::highPunch(character2, character);
+						break;
+			case SDLK_v:
+						EventController::lowPunch(character2, character);
+						break;
+			case SDLK_x:
+						EventController::block(character2, character);
+						break;
 
-				case SDLK_e:
+			case SDLK_e:
 //							if ((SDL_GetTicks() < 150 + hitTimerRaidenShootCheck) || raidenShootTimeOutCompleted){
 //								Mylog->Log("movimiento del personaje: Disparando.", ERROR_LEVEL_INFO);
 //								character2->setHit("SHOOT");
 //								previousKeyChar2 = mainEvent->key.keysym.sym;
 //								character2->setIsHiting(true);
 //								hitTimerChar2 = SDL_GetTicks();
-//
-//								raidenShootTimeOutCompleted = false;
+
+//						raidenShootTimeOutCompleted = false;
 //								if (hitTimerRaidenShootCheck == 0)
 //									hitTimerRaidenShootCheck = SDL_GetTicks();
 //							}else
 //							{
 //								hitTimerRaidenShootCheck = 0;
 //							}
-							EventController::shoot(character2, character);
-							break;
+						EventController::shoot(character2, character);
+						break;
 //				case SDLK_n:
 //							if (previousKeyChar2 == SDLK_s) {
 //								Mylog->Log("movimiento del personaje: Defensa.", ERROR_LEVEL_INFO);
@@ -378,11 +378,11 @@ void KeyboardController::update(MKCharacter* character, MKCharacter* character2,
 //							previousKeyChar2 = mainEvent->key.keysym.sym;
 //							hitTimerChar2 = SDL_GetTicks();
 //							break;
-				default:
-					previousKey = mainEvent->key.keysym.sym;
-					break;
+			default:
+				previousKey = mainEvent->key.keysym.sym;
+				break;
 			}
-//			break;
+		break;
 
 //		case SDL_KEYUP:
 //			switch(mainEvent->key.keysym.sym){
