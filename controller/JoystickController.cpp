@@ -4,6 +4,7 @@
 
 #include "JoystickController.h"
 #include "InputController.h"
+#include "EventController.h"
 
 JoystickController::JoystickController()
 {
@@ -316,188 +317,220 @@ void JoystickController::update(MKCharacter *character, MKCharacter *character2,
         switch (pressedJoystick) {
             case 0:
                 if (pressedAxis == 0 && pressedValue > 1000) {
-                    Mylog->Log("movimiento del personaje: hacia la derecha", ERROR_LEVEL_INFO);
-                    character->setMovement("RIGHT");
-                    c1previousAxis = pressedAxis;
-                    c1previousKey = pressedValue;
-                    setCharacterSide(character, character2);
-                    timer = SDL_GetTicks();
+//                    Mylog->Log("movimiento del personaje: hacia la derecha", ERROR_LEVEL_INFO);
+//                    character->setMovement("RIGHT");
+//                    c1previousAxis = pressedAxis;
+//                    c1previousKey = pressedValue;
+//                    setCharacterSide(character, character2);
+//                    timer = SDL_GetTicks();
+                	  EventController::moveRight(character, character2);
                 }
                 if (pressedAxis == 0 && pressedValue < -1000) {
-                    Mylog->Log("movimiento del personaje: hacia la izquierda", ERROR_LEVEL_INFO);
-                    character->setMovement("LEFT");
-                    c1previousAxis = pressedAxis;
-                    c1previousKey = pressedValue;
-                    setCharacterSide(character, character2);
-                    timer = SDL_GetTicks();
+//                    Mylog->Log("movimiento del personaje: hacia la izquierda", ERROR_LEVEL_INFO);
+//                    character->setMovement("LEFT");
+//                    c1previousAxis = pressedAxis;
+//                    c1previousKey = pressedValue;
+//                    setCharacterSide(character, character2);
+//                    timer = SDL_GetTicks();
+                	  EventController::moveLeft(character, character2);
                 }
                 if (pressedAxis == 1 && pressedValue > 1000) {
-                    //if (c1previ) {
-                        Mylog->Log("movimiento del personaje: hacia arriba", ERROR_LEVEL_INFO);
-                        character->setJump(true);
-                        setCharacterSide(character, character2);
-                    //}
-                    c1previousAxis = pressedAxis;
-                    c1previousKey = pressedValue;
+//                    //if (c1previ) {
+//                        Mylog->Log("movimiento del personaje: hacia arriba", ERROR_LEVEL_INFO);
+//                        character->setJump(true);
+//                        setCharacterSide(character, character2);
+//                    //}
+//                    c1previousAxis = pressedAxis;
+//                    c1previousKey = pressedValue;
+                	  EventController::moveUp(character, character2);
                 }
                 if (pressedAxis == 1 && pressedValue < -1000) {
-                    Mylog->Log("movimiento del personaje: agachandose", ERROR_LEVEL_INFO);
-                    character->setMovement("DUCK");
-                    c1previousAxis = pressedAxis;
-                    c1previousKey = pressedValue;
-                    timer = SDL_GetTicks();
+//                    Mylog->Log("movimiento del personaje: agachandose", ERROR_LEVEL_INFO);
+//                    character->setMovement("DUCK");
+//                    c1previousAxis = pressedAxis;
+//                    c1previousKey = pressedValue;
+//                    timer = SDL_GetTicks();
+                	EventController::moveDown(character, character2);
+                }
+                if (pressedButton == c1kick) {
+//                    if (c1previousAxis == 1 && c1previousValue < -1000) {
+//                        Mylog->Log("movimiento del personaje: Patada baja", ERROR_LEVEL_INFO);
+//                        character->setHit("KICKDOWN");
+//                        c1previousKey = this->c1duck;
+//                        character->setIsHiting(true);
+//                        hitTimer = SDL_GetTicks();
+//                    }
+//                    else {
+//                        Mylog->Log("movimiento del personaje: Pateando", ERROR_LEVEL_INFO);
+//                        character->setHit("KICK");
+//                        c1previousKey = pressedButton;
+//                        character->setIsHiting(true);
+//                        hitTimer = SDL_GetTicks();
+//                    }
+                	EventController::highKick(character, character2);
                 }
                 if (pressedButton == c1kickDown) {
-                    if (c1previousAxis == 1 && c1previousValue < -1000) {
-                        Mylog->Log("movimiento del personaje: Patada baja", ERROR_LEVEL_INFO);
-                        character->setHit("KICKDOWN");
-                        c1previousKey = this->c1duck;
-                        character->setIsHiting(true);
-                        hitTimer = SDL_GetTicks();
-                    }
-                    else {
-                        Mylog->Log("movimiento del personaje: Pateando", ERROR_LEVEL_INFO);
-                        character->setHit("KICK");
-                        c1previousKey = pressedButton;
-                        character->setIsHiting(true);
-                        hitTimer = SDL_GetTicks();
-                    }
+                	EventController::lowKick(character, character2);
                 }
+
                 if (pressedButton == c1punch) {
-                    if (c1previousAxis == 0 && c1previousValue < -1000) {
-                        character->setHit("PUNCHJUMPLEFT");
-                        character->setJump(true);
-                        Mylog->Log("movimiento del personaje: Golpe de puño con salto hacia la izquierda.", ERROR_LEVEL_INFO);
-                        character->setIsHiting(true);
-                        hitTimer = SDL_GetTicks();
-                    }
-                    else if (c1previousAxis == 0 && c1previousValue > 1000) {
-                        character->setHit("PUNCHJUMPRIGHT");
-                        character->setJump(true);
-                        Mylog->Log("movimiento del personaje: Golpe de puño con salto hacia la derecha.",
-                                   ERROR_LEVEL_INFO);
-                        character->setIsHiting(true);
-                        hitTimer = SDL_GetTicks();
-                    }
-                    if (c1previousAxis == 1 && c1previousValue < -1000) {
-                        character->setHit("PUNCHUP");
-                        Mylog->Log("movimiento del personaje: Golpe de puño ascendente.", ERROR_LEVEL_INFO);
-                        character->setIsHiting(true);
-                        hitTimer = SDL_GetTicks();
-                    }
-                    else {
-                        Mylog->Log("movimiento del personaje: Golpe de puño.", ERROR_LEVEL_INFO);
-                        character->setHit("PUNCH");
-                        c1previousKey = pressedButton;
-                        character->setIsHiting(true);
-                        hitTimer = SDL_GetTicks();
-                    }
+//                    if (c1previousAxis == 0 && c1previousValue < -1000) {
+//                        character->setHit("PUNCHJUMPLEFT");
+//                        character->setJump(true);
+//                        Mylog->Log("movimiento del personaje: Golpe de puño con salto hacia la izquierda.", ERROR_LEVEL_INFO);
+//                        character->setIsHiting(true);
+//                        hitTimer = SDL_GetTicks();
+//                    }
+//                    else if (c1previousAxis == 0 && c1previousValue > 1000) {
+//                        character->setHit("PUNCHJUMPRIGHT");
+//                        character->setJump(true);
+//                        Mylog->Log("movimiento del personaje: Golpe de puño con salto hacia la derecha.",
+//                                   ERROR_LEVEL_INFO);
+//                        character->setIsHiting(true);
+//                        hitTimer = SDL_GetTicks();
+//                    }
+//                    if (c1previousAxis == 1 && c1previousValue < -1000) {
+//                        character->setHit("PUNCHUP");
+//                        Mylog->Log("movimiento del personaje: Golpe de puño ascendente.", ERROR_LEVEL_INFO);
+//                        character->setIsHiting(true);
+//                        hitTimer = SDL_GetTicks();
+//                    }
+//                    else {
+//                        Mylog->Log("movimiento del personaje: Golpe de puño.", ERROR_LEVEL_INFO);
+//                        character->setHit("PUNCH");
+//                        c1previousKey = pressedButton;
+//                        character->setIsHiting(true);
+//                        hitTimer = SDL_GetTicks();
+//                    }
+                	EventController::lowPunch(character, character2);
                 }
+
+                if (pressedButton == c1punchUp) {
+                	EventController::highPunch(character, character2);
+                }
+
                 if (pressedButton == c1shoot) {
-                    Mylog->Log("movimiento del personaje: Disparando.", ERROR_LEVEL_INFO);
-                    character->setHit("SHOOT");
-                    c1previousKey = pressedButton;
-                    character->setIsHiting(true);
-                    hitTimer = SDL_GetTicks();
+//                    Mylog->Log("movimiento del personaje: Disparando.", ERROR_LEVEL_INFO);
+//                    character->setHit("SHOOT");
+//                    c1previousKey = pressedButton;
+//                    character->setIsHiting(true);
+//                    hitTimer = SDL_GetTicks();
+                	EventController::shoot(character, character2);
                 }
                 if (pressedButton == c1block) {
-                    Mylog->Log("movimiento del personaje: Defensa.", ERROR_LEVEL_INFO);
-                    character->setHit("DEFENSE");
-                    c1previousKey = pressedButton;
-                    hitTimer = SDL_GetTicks();
+//                    Mylog->Log("movimiento del personaje: Defensa.", ERROR_LEVEL_INFO);
+//                    character->setHit("DEFENSE");
+//                    c1previousKey = pressedButton;
+//                    hitTimer = SDL_GetTicks();
+                	EventController::block(character, character2);
                 }
                 c1previousKey = pressedButton;
-
-
                 break;
+
+  /*****************************************************************************************/
             case 1:
                 if (pressedAxis == 0 && pressedValue > 1000) {
-                    Mylog->Log("movimiento del personaje: hacia la derecha", ERROR_LEVEL_INFO);
-                    character2->setMovement("RIGHT");
-                    c2previousKey = pressedButton;
-                    setCharacterSide(character, character2);
-                    timerChar2 = SDL_GetTicks();
+//                    Mylog->Log("movimiento del personaje: hacia la derecha", ERROR_LEVEL_INFO);
+//                    character2->setMovement("RIGHT");
+//                    c2previousKey = pressedButton;
+//                    setCharacterSide(character, character2);
+//                    timerChar2 = SDL_GetTicks();
+                	EventController::moveRight(character2, character);
                 }
                 if (pressedAxis == 0 && pressedValue < -1000) {
-                    Mylog->Log("movimiento del personaje: hacia la izquierda", ERROR_LEVEL_INFO);
-                    character2->setMovement("LEFT");
-                    c2previousKey = pressedButton;
-                    setCharacterSide(character, character2);
-                    timerChar2 = SDL_GetTicks();
+//                    Mylog->Log("movimiento del personaje: hacia la izquierda", ERROR_LEVEL_INFO);
+//                    character2->setMovement("LEFT");
+//                    c2previousKey = pressedButton;
+//                    setCharacterSide(character, character2);
+//                    timerChar2 = SDL_GetTicks();
+                	EventController::moveLeft(character2, character);
                 }
                 if (pressedAxis == 1 && pressedValue > 1000) {
-                 //   if (c2previousKey == this->c2jump) {
-                        Mylog->Log("movimiento del personaje: hacia arriba", ERROR_LEVEL_INFO);
-                        character2->setJump(true);
-                        setCharacterSide(character, character2);
-                   // }
-                    c2previousKey = pressedButton;
+//                 //   if (c2previousKey == this->c2jump) {
+//                        Mylog->Log("movimiento del personaje: hacia arriba", ERROR_LEVEL_INFO);
+//                        character2->setJump(true);
+//                        setCharacterSide(character, character2);
+//                   // }
+//                    c2previousKey = pressedButton;
+                	EventController::moveUp(character2, character);
                 }
                 if (pressedAxis == 1 && pressedValue < -1000) {
-                    Mylog->Log("movimiento del personaje: agachandose", ERROR_LEVEL_INFO);
-                    character2->setMovement("DUCK");
-                    c2previousKey = pressedButton;;
-                    timerChar2 = SDL_GetTicks();
+//                    Mylog->Log("movimiento del personaje: agachandose", ERROR_LEVEL_INFO);
+//                    character2->setMovement("DUCK");
+//                    c2previousKey = pressedButton;;
+//                    timerChar2 = SDL_GetTicks();
+                	EventController::moveDown(character2, character);
                 }
 
                 if (pressedButton == c2kickDown) {
-                    if (c2previousKey == this->c2duck) {
-                        Mylog->Log("movimiento del personaje: Patada baja", ERROR_LEVEL_INFO);
-                        character2->setHit("KICKDOWN");
-                        c2previousKey = this->c2duck;
-                        character2->setIsHiting(true);
-                        hitTimerChar2 = SDL_GetTicks();
-                    }
-                    else {
-                        Mylog->Log("movimiento del personaje: Pateando", ERROR_LEVEL_INFO);
-                        character2->setHit("KICK");
-                        c2previousKey = pressedButton;
-                        character2->setIsHiting(true);
-                        hitTimerChar2 = SDL_GetTicks();
-                    }
+//                    if (c2previousKey == this->c2duck) {
+//                        Mylog->Log("movimiento del personaje: Patada baja", ERROR_LEVEL_INFO);
+//                        character2->setHit("KICKDOWN");
+//                        c2previousKey = this->c2duck;
+//                        character2->setIsHiting(true);
+//                        hitTimerChar2 = SDL_GetTicks();
+//                    }
+//                    else {
+//                        Mylog->Log("movimiento del personaje: Pateando", ERROR_LEVEL_INFO);
+//                        character2->setHit("KICK");
+//                        c2previousKey = pressedButton;
+//                        character2->setIsHiting(true);
+//                        hitTimerChar2 = SDL_GetTicks();
+//                    }
+                	EventController::lowKick(character2, character);
                 }
+                if (pressedButton == c2kick) {
+                	EventController::highKick(character2, character);
+                }
+
                 if (pressedButton == c2punch) {
-                    if (c2previousAxis == 0 && c2previousValue < -1000) {
-                        character2->setHit("PUNCHJUMPLEFT");
-                        character2->setJump(true);
-                        Mylog->Log("movimiento del personaje: Golpe de puño con salto hacia la izquierda.",
-                                   ERROR_LEVEL_INFO);
-                        character2->setIsHiting(true);
-                        hitTimerChar2 = SDL_GetTicks();
-                    }
-                    else if (c2previousAxis == 0 && c2previousValue > 1000) {
-                        character2->setHit("PUNCHJUMPRIGHT");
-                        character2->setJump(true);
-                        Mylog->Log("movimiento del personaje: Golpe de puño con salto hacia la derecha.",
-                                   ERROR_LEVEL_INFO);
-                        character2->setIsHiting(true);
-                        hitTimerChar2 = SDL_GetTicks();
-                    }
-                    else if (c2previousAxis == 1 && c2previousValue < -1000) {
-                        character2->setHit("PUNCHUP");
-                        Mylog->Log("movimiento del personaje: Golpe de puño ascendente.", ERROR_LEVEL_INFO);
-                        character2->setIsHiting(true);
-                        hitTimerChar2 = SDL_GetTicks();
-                    }
-                    else {
-                        Mylog->Log("movimiento del personaje: Golpe de puño.", ERROR_LEVEL_INFO);
-                        character2->setHit("PUNCH");
-                        c2previousKey = pressedButton;
-                        character2->setIsHiting(true);
-                        hitTimerChar2 = SDL_GetTicks();
-                    }
+//                    if (c2previousAxis == 0 && c2previousValue < -1000) {
+//                        character2->setHit("PUNCHJUMPLEFT");
+//                        character2->setJump(true);
+//                        Mylog->Log("movimiento del personaje: Golpe de puño con salto hacia la izquierda.",
+//                                   ERROR_LEVEL_INFO);
+//                        character2->setIsHiting(true);
+//                        hitTimerChar2 = SDL_GetTicks();
+//                    }
+//                    else if (c2previousAxis == 0 && c2previousValue > 1000) {
+//                        character2->setHit("PUNCHJUMPRIGHT");
+//                        character2->setJump(true);
+//                        Mylog->Log("movimiento del personaje: Golpe de puño con salto hacia la derecha.",
+//                                   ERROR_LEVEL_INFO);
+//                        character2->setIsHiting(true);
+//                        hitTimerChar2 = SDL_GetTicks();
+//                    }
+//                    else if (c2previousAxis == 1 && c2previousValue < -1000) {
+//                        character2->setHit("PUNCHUP");
+//                        Mylog->Log("movimiento del personaje: Golpe de puño ascendente.", ERROR_LEVEL_INFO);
+//                        character2->setIsHiting(true);
+//                        hitTimerChar2 = SDL_GetTicks();
+//                    }
+//                    else {
+//                        Mylog->Log("movimiento del personaje: Golpe de puño.", ERROR_LEVEL_INFO);
+//                        character2->setHit("PUNCH");
+//                        c2previousKey = pressedButton;
+//                        character2->setIsHiting(true);
+//                        hitTimerChar2 = SDL_GetTicks();
+//                    }
+                	EventController::lowPunch(character2, character);
+                }
+                if (pressedButton == c2punchUp) {
+                	EventController::highPunch(character2, character);
                 }
                 if (pressedButton == c2shoot) {
-                    Mylog->Log("movimiento del personaje: Disparando.", ERROR_LEVEL_INFO);
-                    character2->setHit("SHOOT");
-                    c2previousKey = pressedButton;
-                    hitTimerChar2 = SDL_GetTicks();
+//                    Mylog->Log("movimiento del personaje: Disparando.", ERROR_LEVEL_INFO);
+//                    character2->setHit("SHOOT");
+//                    c2previousKey = pressedButton;
+//                    hitTimerChar2 = SDL_GetTicks();
+                	EventController::shoot(character2, character);
                 }
                 if (pressedButton == c2block) {
-                    Mylog->Log("movimiento del personaje: Defensa.", ERROR_LEVEL_INFO);
-                    character2->setHit("DEFENSE");
-                    c2previousKey = pressedButton;
-                    hitTimerChar2 = SDL_GetTicks();
+//                    Mylog->Log("movimiento del personaje: Defensa.", ERROR_LEVEL_INFO);
+//                    character2->setHit("DEFENSE");
+//                    c2previousKey = pressedButton;
+//                    hitTimerChar2 = SDL_GetTicks();
+                	EventController::block(character2, character);
                 }
 
                 c2previousKey = pressedButton;
