@@ -1,7 +1,7 @@
 #ifndef MORTALKOMBAT_TALLER1C2015_CHARACTERSTATE_H
 #define MORTALKOMBAT_TALLER1C2015_CHARACTERSTATE_H
 
-#include "MKCharacter.h"
+#include "../MKCharacter.h"
 #include "../constantes.h"
 #include <map>
 class MKCharacter;

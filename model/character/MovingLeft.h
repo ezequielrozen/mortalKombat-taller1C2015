@@ -1,7 +1,7 @@
 #ifndef MORTALKOMBAT_TALLER1C2015_MOVINGLEFT_H
 #define MORTALKOMBAT_TALLER1C2015_MOVINGLEFT_H
 
-#include "MKCharacter.h"
+#include "../MKCharacter.h"
 #include "CharacterState.h"
 
 class MovingLeft : public CharacterState {
