@@ -60,6 +60,7 @@ void CharacterStance::update(Character* character, Events aEvent) {
             break;
         default:
             //si no recibe ninguno de los otros eventos, en principio no hay que hacer nada, porque no afectan a este estado
+
             break;
 
     }

@@ -102,7 +102,7 @@ void KeyboardController::update(MKCharacter* character, MKCharacter* character2,
 //							previousKey = mainEvent->key.keysym.sym;
 //							timer = SDL_GetTicks();
 							EventController::moveDown(character, character2);
-							break;
+
 //				case SDLK_l:
 //							//character2->setLife(character2->getLife()-10);
 //							//character->setLife(character->getLife()-10);

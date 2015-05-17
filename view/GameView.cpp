@@ -460,8 +460,10 @@ void GameView::runCharacter() {
     int currentFrame=-1;
     int currentFrame2=-1;
 
-/* REFACTOR QUE DEBERIAMOS/PODRIAMOS HACER ahora que tenemos estados:
-
+/* ASI SE USA EL STATE:
+ *
+ * EL STATE PODRIA EN VEZ DE TENER UN ENUMERADO: DEVLOVER EL SPRITE Y NOS AHORRAMOS TODOS ESTOS IF. SIMPLEMENTE HACEMOS sprite = state.getSprite();
+ * Una solucion es usar un map con el enumerado que devuelve el estado. ejemplo : sprite = map.at(state.getStateEnum). lo que se mas facil
     switch (character->getStateEnum) {
         case MovingRight:
             sprite = scorpionWalk;
@@ -788,7 +790,7 @@ void GameView::runCharacter() {
             sprite->vibrate();
         else
         	//GameController::setVibrating(false);
-			InputController::setVibrating(true);
+			InputController::setVibrating(false);
     else
         sprite->resetFinished();
 
@@ -802,7 +804,7 @@ void GameView::runCharacter() {
            sprite2->vibrate();
         else
         	//GameController::setVibrating(false);
-			InputController::setVibrating(true);
+			InputController::setVibrating(false);
     else
         sprite2->resetFinished();
 
