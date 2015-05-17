@@ -1,14 +1,14 @@
 #ifndef MORTALKOMBAT_TALLER1C2015_RECEVINGHIT_H
 #define MORTALKOMBAT_TALLER1C2015_RECEVINGHIT_H
 
-#include "Character.h"
+#include "../MKCharacter.h"
 
 class RecevingHit : public CharacterState {
 
 public:
     RecevingHit();
     ~RecevingHit();
-    void update(Character* character, Events aEvent );
+    void update(MKCharacter* character, Events aEvent );
 
 private:
     int timer;

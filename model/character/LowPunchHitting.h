@@ -8,7 +8,7 @@ class LowPunchHitting : public CharacterState {
 public:
     LowPunchHitting();
     ~LowPunchHitting();
-    void update(Character* character, Events aEvent );
+    void update(MKCharacter* character, Events aEvent );
 
 private:
     int timer;

@@ -1,4 +1,5 @@
 #include "Blocking.h"
+#include "../MKCharacter.h"
 
 Blocking::Blocking() {
 
@@ -8,6 +9,6 @@ Blocking::~Blocking() {
 
 }
 
-void Blocking::update(Character *character, Events aEvent) {
+void Blocking::update(MKCharacter *character, Events aEvent) {
 
 }

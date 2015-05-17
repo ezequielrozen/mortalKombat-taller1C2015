@@ -7,6 +7,7 @@
 #include "SDL2/SDL.h"
 #include "constantes.h"
 #include "logger.h"
+#include "character/CharacterState.h"
 
 using namespace std;
 
@@ -15,6 +16,10 @@ class MKCharacter
 public:
     MKCharacter(float initialPosX, float ancho, float alto, int z_index, int pCharacterNumber, string name);
     ~MKCharacter(void);
+
+    // State
+    void setState(CharacterState* state);
+    void update(Events aEvent);
 
     void moveRight();
 
@@ -95,6 +100,10 @@ public:
     bool isAscending();
 
 private:
+
+    // State
+    CharacterState* state;
+
     void RestartJump();
     string movement;
     string jumpMovement;
@@ -129,6 +138,7 @@ private:
 
     //uso esta variable para controlar que no se vaya de la pantalla por arriba cuando ponen valores raros: "alto-px": 300; "alto": 300; y-piso: 50
 	float limiteSuperior;
+
 
 	int life;
 	int characterNumber;

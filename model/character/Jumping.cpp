@@ -11,7 +11,7 @@ Jumping::Jumping() {
 Jumping::~Jumping() {
 }
 
-void Jumping::update(Character* character, Events aEvent) {
+void Jumping::update(MKCharacter * character, Events aEvent) {
     // me estoy moviendo para la izquierda y aprieto para la derecha. tengo que cambiar de estado a movingRight
     //delete character->state;
     //character->state = new MovingRight();

@@ -1,4 +1,5 @@
 #include "LowKickHitting.h"
+#include "../MKCharacter.h"
 
 LowKickHitting::LowKickHitting() {
 
@@ -8,6 +9,6 @@ LowKickHitting::~LowKickHitting() {
 
 }
 
-void LowKickHitting::update(Character *character, Events aEvent) {
+void LowKickHitting::update(MKCharacter* character, Events aEvent) {
 
 }

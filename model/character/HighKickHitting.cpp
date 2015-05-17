@@ -1,5 +1,5 @@
 #include "HighKickHitting.h"
-#include "Character.h"
+#include "../MKCharacter.h"
 
 HighKickHitting::HighKickHitting() {
 
@@ -9,6 +9,6 @@ HighKickHitting::~HighKickHitting() {
 
 }
 
-void HighKickHitting::update(Character *character, Events aEvent) {
+void HighKickHitting::update(MKCharacter *character, Events aEvent) {
 
 }

@@ -1,19 +1,21 @@
-#include "Character.h"
+/*
+#include "MKCharacter.h"
 #include "CharacterStance.h"
 
-Character::Character() {
+MKCharacter::MKCharacter() {
     this->state = new CharacterStance();
 }
 
-Character::~Character() {
+MKCharacter::~MKCharacter() {
     delete this->state;
 }
 
-void Character::setState(CharacterState *state) {
+void MKCharacter::setState(CharacterState *state) {
     delete this->state;
     this->state = state;
 }
 
-void Character::update(Events aEvent) {
+void MKCharacter::update(Events aEvent) {
     this->state->update(this, aEvent);
 }
+*/

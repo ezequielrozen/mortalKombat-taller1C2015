@@ -1,8 +1,11 @@
 #include "MKCharacter.h"
 //#include "../controller/GameController.h"
 #include "../controller/InputController.h"
+#include "character/CharacterStance.h"
 
 MKCharacter::MKCharacter(float initialPosX, float ancho, float alto, int z_index, int pCharacterNumber, string name) {
+
+	this->state = new CharacterStance();
 
 	this->z_index = z_index;
 	posX = initialPosX;
@@ -39,6 +42,7 @@ MKCharacter::MKCharacter(float initialPosX, float ancho, float alto, int z_index
 }
 
 MKCharacter::~MKCharacter(void) {
+	delete this->state;
 }
 
 void MKCharacter::move() {
@@ -358,4 +362,13 @@ bool MKCharacter::isAscending() {
 void MKCharacter::setInitialPosition(double d) {
 	posX = d;
 	auxPosX = d;
+}
+
+void MKCharacter::setState(CharacterState *state) {
+	delete this->state;
+	this->state = state;
+}
+
+void MKCharacter::update(Events aEvent) {
+	this->state->update(this, aEvent);
 }

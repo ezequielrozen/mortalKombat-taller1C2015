@@ -1,7 +1,7 @@
-#include "Character.h"
+#include "MKCharacter.h"
 
 int main2(int argc, char* argv[]) {
-    Character* character = new Character();
+//    MKCharacter * character = new MKCharacter();
     //character->update(MoveLeft);
     //character->update(new MoveRight());
 

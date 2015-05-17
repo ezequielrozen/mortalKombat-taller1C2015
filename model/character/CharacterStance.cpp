@@ -20,7 +20,7 @@ CharacterStance::~CharacterStance() {
 
 }
 
-void CharacterStance::update(Character* character, Events aEvent) {
+void CharacterStance::update(MKCharacter * character, Events aEvent) {
 
     std::cout << "Update desde StanceState." << std::endl;
 

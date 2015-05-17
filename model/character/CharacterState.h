@@ -1,18 +1,18 @@
 #ifndef MORTALKOMBAT_TALLER1C2015_CHARACTERSTATE_H
 #define MORTALKOMBAT_TALLER1C2015_CHARACTERSTATE_H
 
-#include "Character.h"
+#include "MKCharacter.h"
 #include "../constantes.h"
 #include <map>
-class Character;
+class MKCharacter;
 
 class CharacterState {
 
 public:
-    virtual void update(Character* character, Events aEvent );
+    virtual void update(MKCharacter * character, Events aEvent );
 
 protected:
-    void setState(Character* character, CharacterState* aState);
+    void setState(MKCharacter * character, CharacterState* aState);
     map<Events, CharacterState>* eventMap;
 
 };

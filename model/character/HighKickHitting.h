@@ -1,14 +1,14 @@
 #ifndef MORTALKOMBAT_TALLER1C2015_HIGHKICKHITTING_H
 #define MORTALKOMBAT_TALLER1C2015_HIGHKICKHITTING_H
 
-#include "Character.h"
+#include "../MKCharacter.h"
 
 class HighKickHitting : public CharacterState {
 
 public:
     HighKickHitting();
     ~HighKickHitting();
-    void update(Character* character, Events aEvent );
+    void update(MKCharacter* character, Events aEvent );
 
 private:
     int timer;

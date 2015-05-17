@@ -7,7 +7,7 @@ MovingRight::MovingRight() {
 MovingRight::~MovingRight() {
 }
 
-void MovingRight::update(Character* character, Events aEvent) {
+void MovingRight::update(MKCharacter * character, Events aEvent) {
 //    delete character->state; no estoy seguro si está bien, pero la idea es que como se cambia de estado, liberamos la memoria del anterior. no es costoso hacer estos news.
 /*
     character->setState(new MovingRight());

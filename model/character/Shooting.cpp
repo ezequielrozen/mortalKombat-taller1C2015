@@ -1,4 +1,5 @@
 #include "Shooting.h"
+#include "../MKCharacter.h"
 
 Shooting::Shooting() {
 
@@ -8,6 +9,6 @@ Shooting::~Shooting() {
 
 }
 
-void Shooting::update(Character *character, Events aEvent) {
+void Shooting::update(MKCharacter* character, Events aEvent) {
 
 }

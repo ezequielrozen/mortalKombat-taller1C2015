@@ -2,14 +2,14 @@
 #define MORTALKOMBAT_TALLER1C2015_LOWKICKHITTING_H
 
 
-#include "Character.h"
+#include "../MKCharacter.h"
 
 class LowKickHitting : public CharacterState {
 
 public:
     LowKickHitting();
     ~LowKickHitting();
-    void update(Character* character, Events aEvent );
+    void update(MKCharacter* character, Events aEvent );
 
 private:
     int timer;

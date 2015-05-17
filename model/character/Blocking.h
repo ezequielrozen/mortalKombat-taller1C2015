@@ -2,14 +2,14 @@
 #define MORTALKOMBAT_TALLER1C2015_BLOCKING_H
 
 
-#include "Character.h"
+#include "../MKCharacter.h"
 
 class Blocking : public CharacterState {
 
 public:
     Blocking();
     ~Blocking();
-    void update(Character* character, Events aEvent );
+    void update(MKCharacter * character, Events aEvent );
 
 private:
     int timer;

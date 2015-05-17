@@ -8,6 +8,6 @@ HittingPunch::~HittingPunch() {
 
 }
 
-void HittingPunch::update(Character *character, Events aEvent) {
+void HittingPunch::update(MKCharacter *character, Events aEvent) {
 
 }

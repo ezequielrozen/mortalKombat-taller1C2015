@@ -1,9 +1,9 @@
 #include "CharacterState.h"
-
-void CharacterState::update(Character *character, Events anEvent) {
+#include "../MKCharacter.h"
+void CharacterState::update(MKCharacter *character, Events anEvent) {
 
 }
 
-void CharacterState::setState(Character *character, CharacterState *state) {
+void CharacterState::setState(MKCharacter *character, CharacterState *state) {
     character->setState(state);
 }

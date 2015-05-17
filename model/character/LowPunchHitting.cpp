@@ -8,6 +8,6 @@ LowPunchHitting::~LowPunchHitting() {
 
 }
 
-void LowPunchHitting::update(Character *character, Events aEvent) {
+void LowPunchHitting::update(MKCharacter *character, Events aEvent) {
 
 }

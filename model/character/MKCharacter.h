@@ -1,3 +1,4 @@
+/*
 #ifndef MORTALKOMBAT_TALLER1C2015_CHARACTER_H
 #define MORTALKOMBAT_TALLER1C2015_CHARACTER_H
 
@@ -7,11 +8,11 @@
 
 class CharacterState;
 
-class Character {
+class MKCharacter {
 
 public:
-    Character();
-    ~Character();
+    MKCharacter();
+    ~MKCharacter();
     void setState(CharacterState* state);
     void update(Events aEvent);
 
@@ -22,3 +23,4 @@ private:
 
 
 #endif //MORTALKOMBAT_TALLER1C2015_CHARACTER_H
+*/
