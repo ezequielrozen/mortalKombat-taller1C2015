@@ -457,6 +457,21 @@ void GameView::runCharacter() {
     int currentFrame=-1;
     int currentFrame2=-1;
 
+
+/* REFACTOR QUE DEBERIAMOS/PODRIAMOS HACER ahora que tenemos estados:
+
+    switch (character->getStateEnum) {
+        case MovingRight:
+            sprite = scorpionWalk;
+            sprite->Play(300, scorpion->getWidth());
+            break;
+        case MovingLeft:
+            sprite = scorpionWalk;
+            sprite->Play(300, scorpion->getWidth());
+            break;
+    }*/
+
+
     if (scorpion->isJumping() && scorpion->getJumpMovement() == "NONE" && scorpion->getHit() == "NONE") {
         sprite = scorpionJump;
         sprite->Play(300, scorpion->getWidth());

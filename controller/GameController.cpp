@@ -90,6 +90,7 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
 							previousKey = mainEvent->key.keysym.sym;
 							setCharacterSide(character, character2);
 							timer = SDL_GetTicks();
+							// character->update(MoveRight);
 							break;
 				case SDLK_LEFT:
 							Mylog->Log("movimiento del personaje: hacia la izquierda", ERROR_LEVEL_INFO);
