@@ -5,12 +5,12 @@
 #include "Jumping.h"
 #include "Ducking.h"
 #include "HittingPunch.h"
-#include "LowPunch.h"
-#include "HighKick.h"
+#include "LowPunchHitting.h"
+#include "HighKickHitting.h"
 #include "Blocking.h"
 #include "Shooting.h"
 #include "RecevingHit.h"
-#include "LowKick.h"
+#include "LowKickHitting.h"
 
 CharacterStance::CharacterStance() {
 //    this->timer = -1
@@ -41,13 +41,13 @@ void CharacterStance::update(Character* character, Events aEvent) {
             character->setState(new HittingPunch());
             break;
         case LowPunch:
-//            character->setState(new LowPunch());
+            character->setState(new LowPunchHitting());
             break;
         case HighKick:
-//            character->setState(new HighKick());
+            character->setState(new HighKickHitting());
             break;
         case LowKick:
-//            character->setState(new LowKick());
+            character->setState(new LowKickHitting());
             break;
         case Block:
             character->setState(new Blocking());
