@@ -16,6 +16,46 @@ void CharacterStance::update(Character* character, Events aEvent) {
 /*
     character->setState(new MovingRight());
 */    std::cout << "Update desde StanceState." << std::endl;
+
+    switch (aEvent) {
+        case MoveRight:
+            //cambiar a estaro movingRight
+            break;
+        case MoveLeft:
+            //cambiar a estado a movingLeft
+            break;
+        case Jump:
+            //cambiar a estado jumping
+            break;
+        case Duck:
+            //cambiar a estado a ducking
+            break;
+        case HighPunch:
+            //cambiar a estado a highPunching
+            break;
+        case LowPunch:
+            //cambiar a estado a lowPunching
+            break;
+        case HighKick:
+            //cambiar a estado a highKicking
+            break;
+        case LowKick:
+            //cambiar a estado a lowKicking
+            break;
+        case Block:
+            //cambiar a estado a blocking
+            break;
+        case Shoot:
+            //cambiar a estado a shooting
+            break;
+        case ReceiveHit:
+            //cambiar a estado a beingHit
+            break;
+        default:
+            //si no recibe ninguno de los otros eventos, en principio no hay que hacer nada porque esto es el estado stance. es decir, sigo en stance.
+            break;
+
+    }
 }
 
 void CharacterStance::getState() {
