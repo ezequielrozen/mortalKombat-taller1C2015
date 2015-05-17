@@ -12,7 +12,26 @@ void MovingRight::update(Character* character, Events aEvent) {
 /*
     character->setState(new MovingRight());
 */    std::cout << "Update desde MovingRight." << std::endl;
+    switch (aEvent) {
+        case Jump:
+            //cambiar a estado jumpingRight (bolita)
+            break;
+        case LowPunch:
+            //cambiar a estado a lowPunchingJumpig
+            break;
+        case LowKick:
+            //cambiar a estado a lowKicking
+            break;
+        case ReceiveHit:
+            //cambiar a estado a beingHit
+            break;
+        case MoveRightRelease:
+            // cambiar a estado stance
+        default:
+            //si no recibe ninguno de los otros eventos, en principio no hay que hacer nada, porque no afectan a este estado
+            break;
 
+    }
 }
 
 void MovingRight::getState() {

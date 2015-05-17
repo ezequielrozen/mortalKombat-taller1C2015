@@ -52,7 +52,7 @@ void CharacterStance::update(Character* character, Events aEvent) {
             //cambiar a estado a beingHit
             break;
         default:
-            //si no recibe ninguno de los otros eventos, en principio no hay que hacer nada porque esto es el estado stance. es decir, sigo en stance.
+            //si no recibe ninguno de los otros eventos, en principio no hay que hacer nada, porque no afectan a este estado
             break;
 
     }

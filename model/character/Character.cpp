@@ -6,7 +6,7 @@ Character::Character() {
 }
 
 Character::~Character() {
-
+    delete this->state;
 }
 
 void Character::setState(CharacterState *state) {
