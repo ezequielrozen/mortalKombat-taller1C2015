@@ -10,7 +10,6 @@ public:
     ~CharacterStance();
 
     void update(Character* character, Events aEvent);
-    void getState();
 
 private:
     int timer;

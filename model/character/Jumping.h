@@ -1,7 +1,3 @@
-//
-// Created by mauri on 17/05/15.
-//
-
 #ifndef MORTALKOMBAT_TALLER1C2015_JUMPING_H
 #define MORTALKOMBAT_TALLER1C2015_JUMPING_H
 

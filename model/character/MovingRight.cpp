@@ -33,7 +33,3 @@ void MovingRight::update(Character* character, Events aEvent) {
 
     }
 }
-
-void MovingRight::getState() {
-    std::cout << "Moving right state." << endl;
-}

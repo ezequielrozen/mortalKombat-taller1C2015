@@ -10,7 +10,6 @@ class CharacterState {
 
 public:
     virtual void update(Character* character, Events aEvent );
-    virtual void getState();
 
 protected:
     void setState(Character* character, CharacterState* aState);

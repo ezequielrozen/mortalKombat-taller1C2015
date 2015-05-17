@@ -10,7 +10,6 @@
 
 class Ducking : public CharacterState {
 
-
 public:
     Ducking();
     ~Ducking();

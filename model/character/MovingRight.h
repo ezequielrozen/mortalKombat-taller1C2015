@@ -10,7 +10,6 @@ public:
     MovingRight();
     ~MovingRight();
     void update(Character* character, Events aEvent);
-    void getState();
 
 private:
     int timer;

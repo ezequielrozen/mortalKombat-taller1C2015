@@ -2,6 +2,15 @@
 #include "CharacterStance.h"
 #include "MovingRight.h"
 #include "MovingLeft.h"
+#include "Jumping.h"
+#include "Ducking.h"
+#include "HittingPunch.h"
+#include "LowPunch.h"
+#include "HighKick.h"
+#include "Blocking.h"
+#include "Shooting.h"
+#include "RecevingHit.h"
+#include "LowKick.h"
 
 CharacterStance::CharacterStance() {
 //    this->timer = -1
@@ -12,52 +21,46 @@ CharacterStance::~CharacterStance() {
 }
 
 void CharacterStance::update(Character* character, Events aEvent) {
-//    delete character->state; no estoy seguro si está bien, pero la idea es que como se cambia de estado, liberamos la memoria del anterior. no es costoso hacer estos news.
-/*
-    character->setState(new MovingRight());
-*/    std::cout << "Update desde StanceState." << std::endl;
+
+    std::cout << "Update desde StanceState." << std::endl;
 
     switch (aEvent) {
         case MoveRight:
-            //cambiar a estaro movingRight
+            character->setState(new MovingRight());
             break;
         case MoveLeft:
-            //cambiar a estado a movingLeft
+            character->setState(new MovingLeft());
             break;
         case Jump:
-            //cambiar a estado jumping
+            character->setState(new Jumping());
             break;
         case Duck:
-            //cambiar a estado a ducking
+            character->setState(new Ducking());
             break;
         case HighPunch:
-            //cambiar a estado a highPunching
+            character->setState(new HittingPunch());
             break;
         case LowPunch:
-            //cambiar a estado a lowPunching
+//            character->setState(new LowPunch());
             break;
         case HighKick:
-            //cambiar a estado a highKicking
+//            character->setState(new HighKick());
             break;
         case LowKick:
-            //cambiar a estado a lowKicking
+//            character->setState(new LowKick());
             break;
         case Block:
-            //cambiar a estado a blocking
+            character->setState(new Blocking());
             break;
         case Shoot:
-            //cambiar a estado a shooting
+            character->setState(new Shooting());
             break;
         case ReceiveHit:
-            //cambiar a estado a beingHit
+            character->setState(new RecevingHit());
             break;
         default:
             //si no recibe ninguno de los otros eventos, en principio no hay que hacer nada, porque no afectan a este estado
             break;
 
     }
-}
-
-void CharacterStance::getState() {
-    std::cout << "Stance State." << endl;
 }
