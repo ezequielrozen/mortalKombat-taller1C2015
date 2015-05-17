@@ -1,5 +1,6 @@
 #include "MKCharacter.h"
-#include "../controller/GameController.h"
+//#include "../controller/GameController.h"
+#include "../controller/InputController.h"
 
 MKCharacter::MKCharacter(float initialPosX, float ancho, float alto, int z_index, int pCharacterNumber, string name) {
 
@@ -272,7 +273,8 @@ void MKCharacter::receiveBlow(int force, char direction) {
 	this->life -= force;
 	if (force >= 15) {
 		this->setHitReception("FALLING");
-		GameController::setVibrating(true);
+//		GameController::setVibrating(true);
+		InputController::setVibrating(true);
 		if (direction != 0)
 		{
 			cout << direction << endl;

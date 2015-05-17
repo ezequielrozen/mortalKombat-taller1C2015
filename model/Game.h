@@ -4,7 +4,8 @@
 #include "MKCharacter.h"
 #include "constantes.h"
 #include "../view/GameView.h"
-#include "../controller/GameController.h"
+//#include "../controller/GameController.h" //TODO: ESTO CUANDO SE PASE A INPUT CONTROLLER HAY Q BORRARLO
+#include "../controller/InputController.h"
 #include "../controller/CameraController.h"
 #include "../controller/Collider.h"
 #include "SDL2/SDL.h"
@@ -32,7 +33,8 @@ private:
     int ScreenWidth;
     int ScreenHeight;
     GameView* gameView;
-    GameController* gameController;
+//    GameController* gameController;//TODO: ESTO CUANDO SE PASE A INPUT CONTROLLER HAY Q BORRARLO
+    InputController* inputController;
     CameraController* cameraController;
     Collider* collider;
     string oponentSide;

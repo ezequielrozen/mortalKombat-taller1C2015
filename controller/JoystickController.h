@@ -13,15 +13,15 @@ using namespace std;
 class JoystickController
 {
 public:
-    JoystickController(SDL_Event* event);
+    JoystickController();
     ~JoystickController(void);
 
-    void update(MKCharacter* character, MKCharacter* character2);
+    void update(MKCharacter* character, MKCharacter* character2, SDL_Event* joystickEvent);
     SDL_Event* getEvent();
 private:
     SDL_Joystick* joystickOne;
     SDL_Joystick* joystickTwo;
-    SDL_Event* joystickEvent;
+//    SDL_Event* joystickEvent;
 
     int timer;
     int timerChar2;

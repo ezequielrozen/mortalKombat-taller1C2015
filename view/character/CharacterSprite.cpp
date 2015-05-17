@@ -1,6 +1,7 @@
 #include "CharacterSprite.h"
 #include "Painter.h"
-#include "../../controller/GameController.h"
+//#include "../../controller/GameController.h"
+#include "../../controller/InputController.h"
 
 CharacterSprite::CharacterSprite(SDL_Renderer* pRenderer, char* path, float x, float y, float w, float h,
 								 int frames, string OponentSide, bool repearLastSp, bool colorAltered, Painter* painter)

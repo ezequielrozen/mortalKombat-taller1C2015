@@ -26,8 +26,10 @@ void Game::initGame(char* filePath) {
     this->raiden->setStageFloor(this->stage->getFloor());
 
     this->gameView = new GameView(ScreenWidth, ScreenHeight, scorpion, raiden, stage, oponentSide, this->gameLoader->getPainter());
-    this->gameController = new GameController();
-    GameController::setVibrating(false);
+//    this->gameController = new GameController();
+//    GameController::setVibrating(false);
+    this->inputController = new InputController();
+    InputController::setVibrating(false);
     this->cameraController = new CameraController();
     this->collider = new Collider();
 }
@@ -35,33 +37,65 @@ void Game::initGame(char* filePath) {
 Game::~Game() {
     delete gameLoader;
     delete gameView;
-    delete gameController;
+//    delete gameController;
+    delete inputController;
     delete cameraController;
     delete collider;
 }
+
+//bool Game::GameLoop() {
+//
+//    bool cameraMoved;
+//
+//    while (gameController->getEvent()->type != SDL_QUIT) {
+//        gameController->checkEvent();
+//        gameView->startRender();
+//        gameView->Render();
+//        if ( scorpion->isAlive() && raiden->isAlive() )
+//            gameController->update(scorpion, raiden);
+//        else // fin de juego. loguearlo (1 sola vez)
+//            gameController->victory(scorpion, raiden);
+//        cameraMoved = cameraController->update(scorpion, raiden, stage->getLayers());
+//        collider->update(scorpion, raiden, cameraMoved);
+//        gameView->endRender();
+//        SDL_Delay(15);
+//
+//        if (peviousKey == SDLK_r && gameController->getEvent()->key.keysym.sym == SDLK_e) {
+//            return true;
+//        }
+//        else {
+//        	peviousKey = gameController->getEvent()->key.keysym.sym;
+//        }
+//
+//    }
+//    return false;
+//}
+
 
 bool Game::GameLoop() {
 
     bool cameraMoved;
 
-    while (gameController->getEvent()->type != SDL_QUIT) {
-        gameController->checkEvent();
+    while (inputController->getEvent()->type != SDL_QUIT) {
+    	inputController->checkEvent();
         gameView->startRender();
         gameView->Render();
         if ( scorpion->isAlive() && raiden->isAlive() )
-            gameController->update(scorpion, raiden);
-        else // fin de juego. loguearlo (1 sola vez)
-            gameController->victory(scorpion, raiden);
+        	inputController->update(scorpion, raiden);
+
+//        TODO: VER ESTO, EL INPUTCONTROLLER NO VA A PODER HACER EL VICTORY.
+//        else // fin de juego. loguearlo (1 sola vez)
+//        	InputController->victory(scorpion, raiden);
         cameraMoved = cameraController->update(scorpion, raiden, stage->getLayers());
         collider->update(scorpion, raiden, cameraMoved);
         gameView->endRender();
         SDL_Delay(15);
 
-        if (peviousKey == SDLK_r && gameController->getEvent()->key.keysym.sym == SDLK_e) {
+        if (peviousKey == SDLK_r && inputController->getEvent()->key.keysym.sym == SDLK_e) {
             return true;
         }
         else {
-        	peviousKey = gameController->getEvent()->key.keysym.sym;
+        	peviousKey = inputController->getEvent()->key.keysym.sym;
         }
 
     }

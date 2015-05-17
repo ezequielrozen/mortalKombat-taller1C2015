@@ -1,7 +1,8 @@
 #include "LayerSprite.h"
 #include "../../model/MKCharacter.h"
 #include "../../model/util/Util.h"
-#include "../../controller/GameController.h"
+//#include "../../controller/GameController.h"
+#include "../../controller/InputController.h"
 
 LayerSprite::LayerSprite(SDL_Renderer *pRenderer, string path, float screenWidth, float screenHeight, float layerWidth) {
     this->renderer = pRenderer;

@@ -1,13 +1,9 @@
-#include "GameController.h"
-#include "../model/logger.h"
+#include "KeyboardController.h"
 #include "InputController.h"
+#include "../model/logger.h"
 
-bool GameController::vibrating = false;
-
-GameController::GameController()
+KeyboardController::KeyboardController()
 {
-    mainEvent = new SDL_Event();
-//    this->joystickController = new JoystickController(mainEvent);
     previousKey = 0;
 
     timer = SDL_GetTicks();
@@ -20,21 +16,20 @@ GameController::GameController()
 }
 
 
-GameController::~GameController(void)
+KeyboardController::~KeyboardController(void)
 {
-    delete joystickController;
-    delete mainEvent;
+
 }
 
-SDL_Event* GameController::getEvent() {
-    return mainEvent;
-}
+//SDL_Event* GameControllKeyboardgetEvent() {
+//    return mainEvent;
+//}
+//
+//void KeyboardController::checkEvent() {
+//    SDL_PollEvent(mainEvent);
+//}
 
-void GameController::checkEvent() {
-    SDL_PollEvent(mainEvent);
-}
-
-void GameController::testElapsedTime(MKCharacter* character, MKCharacter* character2) {
+void KeyboardController::testElapsedTime(MKCharacter* character, MKCharacter* character2) {
 	if (timer + COMMANDDELAY < SDL_GetTicks()) {
 		character->setMovement("NONE");
 		timer = SDL_GetTicks();
@@ -66,21 +61,10 @@ void GameController::testElapsedTime(MKCharacter* character, MKCharacter* charac
 	}
 }
 
-//void setCharacterSide(MKCharacter* character, MKCharacter* character2)
-//{
-//    if(character->getX() <= character2->getX()){
-//    	character->setCharacterSide('l');
-//    	character2->setCharacterSide('r');
-//    }else{
-//    	character->setCharacterSide('r');
-//    	character2->setCharacterSide('l');
-//    }
-//}
 
-void GameController::update(MKCharacter* character, MKCharacter* character2) {
+
+void KeyboardController::update(MKCharacter* character, MKCharacter* character2, SDL_Event* mainEvent) {
     extern logger* Mylog;
-//    this->joystickController->update(character,character2);
-
 
     switch (mainEvent->type){
     	case SDL_KEYDOWN:
@@ -91,7 +75,6 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
 							previousKey = mainEvent->key.keysym.sym;
 							setCharacterSide(character, character2);
 							timer = SDL_GetTicks();
-							// character->update(MoveRight);
 							break;
 				case SDLK_LEFT:
 							Mylog->Log("movimiento del personaje: hacia la izquierda", ERROR_LEVEL_INFO);
@@ -117,7 +100,7 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
 				case SDLK_l:
 							//character2->setLife(character2->getLife()-10);
 							//character->setLife(character->getLife()-10);
-							GameController::setVibrating(true);
+							//InputController::setVibrating(true);
 							previousKey = mainEvent->key.keysym.sym;
 							previousKeyChar2 = mainEvent->key.keysym.sym;
 							break;
@@ -411,31 +394,6 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
     }
 }
 
-void GameController::victory(MKCharacter* character, MKCharacter* character2 ) {
-	if (character->isAlive() && !character2->isAlive()) { // Ganó el 1. Loguear
-		character->setHit("WINNER");
-		character2->setHit("DIZZY");
-		//Esto deberia estar aca sino en el MKCharacter setHit. Lo arreglo rapido para la entrega.
-		if (character->getName() == "raiden")
-			character->setHitWidth(character->getWidth()*1.5);
-
-	} else if (!character->isAlive() && character2->isAlive()) { // Ganó el 2. Loguear.
-		character->setHit("DIZZY");
-		character2->setHit("WINNER");
-
-		//Esto deberia estar aca sino en el MKCharacter setHit. Lo arreglo rapido para la entrega.
-		if (character2->getName() == "raiden")
-			character2->setHitWidth(character2->getWidth()*1.5);
-	}
-}
-
-void GameController::setVibrating(bool vibratingFlag) {
-	vibrating = vibratingFlag;
-}
-
-bool GameController::isVibrating() {
-	return vibrating;
-}
 
 
 

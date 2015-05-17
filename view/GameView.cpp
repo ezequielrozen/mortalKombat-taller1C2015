@@ -1,6 +1,7 @@
 #include <bits/algorithmfwd.h>
 #include "GameView.h"
-#include "../controller/GameController.h"
+//#include "../controller/GameController.h"
+#include "../controller/InputController.h"
 #include "Text.h"
 
 GameView::GameView(float ScreenWidth, float ScreenHeight, MKCharacter* character, MKCharacter* character2, Stage* pStage, string OponentSide, Painter* painter) {
@@ -145,11 +146,13 @@ void GameView::Render() {
             layerSprites[i]->update((*it)->getLeft_border());
             layerSprites[i]->Draw();
         }
-        if(GameController::isVibrating())
+        //if(GameController::isVibrating())
+        if(InputController::isVibrating())
             if (!layerSprites[i]->vibrationFinished())
                 layerSprites[i]->vibrate();
             else
-                GameController::setVibrating(false);
+                //GameController::setVibrating(false);
+            	InputController::setVibrating(true);
         else
             layerSprites[i]->resetFinished();
         i++;
@@ -457,7 +460,6 @@ void GameView::runCharacter() {
     int currentFrame=-1;
     int currentFrame2=-1;
 
-
 /* REFACTOR QUE DEBERIAMOS/PODRIAMOS HACER ahora que tenemos estados:
 
     switch (character->getStateEnum) {
@@ -470,7 +472,6 @@ void GameView::runCharacter() {
             sprite->Play(300, scorpion->getWidth());
             break;
     }*/
-
 
     if (scorpion->isJumping() && scorpion->getJumpMovement() == "NONE" && scorpion->getHit() == "NONE") {
         sprite = scorpionJump;
@@ -781,11 +782,13 @@ void GameView::runCharacter() {
 	sprite->setX(scorpion->getX());
     sprite->setY(scorpion->getY());
 
-    if (GameController::isVibrating())
+    //if (GameController::isVibrating())
+    if(InputController::isVibrating())
         if(!sprite->vibrationFinished())
             sprite->vibrate();
         else
-            GameController::setVibrating(false);
+        	//GameController::setVibrating(false);
+			InputController::setVibrating(true);
     else
         sprite->resetFinished();
 
@@ -793,11 +796,13 @@ void GameView::runCharacter() {
     sprite2->setX(raiden->getX());
     sprite2->setY(raiden->getY());
 
-    if (GameController::isVibrating())
+    //if (GameController::isVibrating())
+	if(InputController::isVibrating())
         if(!sprite2->vibrationFinished())
            sprite2->vibrate();
         else
-            GameController::setVibrating(false);
+        	//GameController::setVibrating(false);
+			InputController::setVibrating(true);
     else
         sprite2->resetFinished();
 
