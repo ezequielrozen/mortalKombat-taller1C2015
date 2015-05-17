@@ -788,7 +788,7 @@ void GameView::runCharacter() {
             sprite->vibrate();
         else
         	//GameController::setVibrating(false);
-			InputController::setVibrating(true);
+			InputController::setVibrating(false);
     else
         sprite->resetFinished();
 
@@ -802,7 +802,7 @@ void GameView::runCharacter() {
            sprite2->vibrate();
         else
         	//GameController::setVibrating(false);
-			InputController::setVibrating(true);
+			InputController::setVibrating(false);
     else
         sprite2->resetFinished();
 

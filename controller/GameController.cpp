@@ -117,7 +117,7 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
 				case SDLK_l:
 							//character2->setLife(character2->getLife()-10);
 							//character->setLife(character->getLife()-10);
-							GameController::setVibrating(true);
+							InputController::setVibrating(true);
 							previousKey = mainEvent->key.keysym.sym;
 							previousKeyChar2 = mainEvent->key.keysym.sym;
 							break;
