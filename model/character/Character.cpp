@@ -1,4 +1,3 @@
-
 #include "Character.h"
 #include "CharacterStance.h"
 
@@ -10,11 +9,10 @@ Character::~Character() {
 
 }
 
-void Character::update(MKEvent* aEvent) {
-    this->state->update(this, aEvent);
-}
-
 void Character::setState(CharacterState *state) {
     this->state = state;
 }
 
+void Character::update(Events aEvent) {
+    this->state->update(this, aEvent);
+}

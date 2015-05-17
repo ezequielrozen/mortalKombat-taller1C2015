@@ -3,7 +3,7 @@
 
 #include <stddef.h>
 #include "CharacterState.h"
-#include "../MKEvents/MKEvent.h"
+#include "../constantes.h"
 
 class CharacterState;
 
@@ -13,7 +13,7 @@ public:
     Character();
     ~Character();
     void setState(CharacterState* state);
-    void update(MKEvent* aEvent);
+    void update(Events aEvent);
 
 private:
     CharacterState* state;

@@ -126,4 +126,6 @@ const double DEFAULT_OFFSET                 = 30;
 //joystick
 const unsigned char DEFAULT_KEY[20] = "adwscezqxokljmnbypb";
 
+//
+enum Events { MoveRight, MoveLeft, Jump, Duck};
 #endif /* CONSTANTES_H_ */

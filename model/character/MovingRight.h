@@ -1,7 +1,3 @@
-//
-// Created by mauri on 14/05/15.
-//
-
 #ifndef MORTALKOMBAT_TALLER1C2015_MOVINGRIGHT_H
 #define MORTALKOMBAT_TALLER1C2015_MOVINGRIGHT_H
 
@@ -9,11 +5,15 @@
 #include "CharacterState.h"
 
 class MovingRight : public CharacterState {
-    public:
-        MovingRight();
-        ~MovingRight();
-        void update(Character* character, MKEvent* aEvent);
-        void getState();
+
+public:
+    MovingRight();
+    ~MovingRight();
+    void update(Character* character, Events aEvent);
+    void getState();
+
+private:
+    int timer;
 };
 
 

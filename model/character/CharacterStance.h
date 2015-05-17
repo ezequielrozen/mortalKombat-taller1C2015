@@ -9,10 +9,11 @@ public:
     CharacterStance();
     ~CharacterStance();
 
-    void update(Character* character, MKEvent* aEvent);
+    void update(Character* character, Events aEvent);
     void getState();
-    bool operator <(CharacterState rhs);
 
+private:
+    int timer;
 };
 
 

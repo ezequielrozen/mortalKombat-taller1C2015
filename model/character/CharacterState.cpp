@@ -1,6 +1,6 @@
 #include "CharacterState.h"
 
-void CharacterState::update(Character *character, MKEvent* anEvent) {
+void CharacterState::update(Character *character, Events anEvent) {
 
 }
 
@@ -9,8 +9,3 @@ void CharacterState::setState(Character *character, CharacterState *state) {
 }
 
 void CharacterState::getState() { }
-
-bool CharacterState::operator <(const CharacterState& rhs) const
-{
-    return true;
-}
