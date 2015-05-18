@@ -4,7 +4,7 @@
 
 #include "../MKCharacter.h"
 
-class ReceivingHighPunch : CharacterState {
+class ReceivingHighPunch :public CharacterState {
 
 public:
     ReceivingHighPunch();
