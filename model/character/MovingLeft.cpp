@@ -11,7 +11,7 @@ void MovingLeft::update(MKCharacter * character, Events aEvent) {
     // me estoy moviendo para la izquierda y aprieto para la derecha. tengo que cambiar de estado a movingRight
     //delete character->state;
     //character->state = new MovingRight();
-    std::cout << "MovingLeft." << std::endl;
+//    std::cout << "MovingLeft." << std::endl;
     switch (aEvent) {
         case Jump:
             //cambiar a estado jumpingLeft (bolita)

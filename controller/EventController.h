@@ -32,6 +32,13 @@ public:
 	static void lowPunch(MKCharacter*, MKCharacter*);
 	static void shoot(MKCharacter*, MKCharacter*);
 	static void block(MKCharacter*, MKCharacter*);
+
+	static void moveLeftRelease(MKCharacter*, MKCharacter*);
+	static void moveRightRelease(MKCharacter*, MKCharacter*);
+	static void moveDownRelease(MKCharacter*, MKCharacter*);
+	static void blockRelease(MKCharacter*, MKCharacter*);
+
+
 	static void dizzy(MKCharacter*, MKCharacter*);
 	static void beingHit(MKCharacter*, MKCharacter*);
 	static void winner(MKCharacter*, MKCharacter*);

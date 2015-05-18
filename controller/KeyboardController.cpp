@@ -5,15 +5,15 @@
 
 KeyboardController::KeyboardController()
 {
-    previousKey = 0;
-
-    timer = SDL_GetTicks();
-
-    hitTimerRaidenShootCheck = SDL_GetTicks();
-    raidenShootTimeOutCompleted = true;
-
-    hitTimerScorpionShootCheck = SDL_GetTicks();
-    scorpionShootTimeOutCompleted = true;
+//    previousKey = 0;
+//
+//    timer = SDL_GetTicks();
+//
+//    hitTimerRaidenShootCheck = SDL_GetTicks();
+//    raidenShootTimeOutCompleted = true;
+//
+//    hitTimerScorpionShootCheck = SDL_GetTicks();
+//    scorpionShootTimeOutCompleted = true;
 }
 
 
@@ -31,35 +31,35 @@ KeyboardController::~KeyboardController(void)
 //}
 
 void KeyboardController::testElapsedTime(MKCharacter* character, MKCharacter* character2) {
-	if (timer + COMMANDDELAY < SDL_GetTicks()) {
-		character->setMovement("NONE");
-		timer = SDL_GetTicks();
-	}
-	if (hitTimer + COMMANDDELAYKIT < SDL_GetTicks()) {
-		character->setHit("NONE");
-		character->setIsHiting(false);
-		hitTimer = SDL_GetTicks();
-	}
-	if (timerChar2 + COMMANDDELAY < SDL_GetTicks()) {
-		character2->setMovement("NONE");
-		timerChar2 = SDL_GetTicks();
-	}
-
-	//raiden necesita mas tiempo para disparar q para todos los demas Hits
-	if (character2->getHit() == "SHOOT"){
-		if (hitTimerChar2 + COMMANDDELAYKIT + 500 < SDL_GetTicks()) {
-			character2->setHit("NONE");
-			character2->setIsHiting(false);
-			hitTimerChar2 = SDL_GetTicks();
-		}
-	}else
-	{
-		if (hitTimerChar2 + COMMANDDELAYKIT < SDL_GetTicks()) {
-			character2->setHit("NONE");
-			character2->setIsHiting(false);
-			hitTimerChar2 = SDL_GetTicks();
-		}
-	}
+//	if (timer + COMMANDDELAY < SDL_GetTicks()) {
+//		character->setMovement("NONE");
+//		timer = SDL_GetTicks();
+//	}
+//	if (hitTimer + COMMANDDELAYKIT < SDL_GetTicks()) {
+//		character->setHit("NONE");
+//		character->setIsHiting(false);
+//		hitTimer = SDL_GetTicks();
+//	}
+//	if (timerChar2 + COMMANDDELAY < SDL_GetTicks()) {
+//		character2->setMovement("NONE");
+//		timerChar2 = SDL_GetTicks();
+//	}
+//
+//	//raiden necesita mas tiempo para disparar q para todos los demas Hits
+//	if (character2->getHit() == "SHOOT"){
+//		if (hitTimerChar2 + COMMANDDELAYKIT + 500 < SDL_GetTicks()) {
+//			character2->setHit("NONE");
+//			character2->setIsHiting(false);
+//			hitTimerChar2 = SDL_GetTicks();
+//		}
+//	}else
+//	{
+//		if (hitTimerChar2 + COMMANDDELAYKIT < SDL_GetTicks()) {
+//			character2->setHit("NONE");
+//			character2->setIsHiting(false);
+//			hitTimerChar2 = SDL_GetTicks();
+//		}
+//	}
 }
 
 
@@ -385,49 +385,42 @@ void KeyboardController::update(MKCharacter* character, MKCharacter* character2,
 			}
 		break;
 
-//		case SDL_KEYUP:
-//			switch(mainEvent->key.keysym.sym){
-//				case SDLK_DOWN:
-//					previousKey = SDLK_0;
-//					break;
-//				case SDLK_UP:
-//					previousKey = SDLK_0;
-//					break;
-//				case SDLK_RIGHT:
-//					previousKey = SDLK_0;
-//					break;
-//				case SDLK_LEFT:
-//					previousKey = SDLK_0;
-//					break;
-//
-//				case SDLK_s:
-//					previousKeyChar2 = SDLK_0;
-//					break;
-//				case SDLK_w:
-//					previousKeyChar2 = SDLK_0;
-//					break;
-//				case SDLK_g:
-//					previousKeyChar2 = SDLK_0;
-//					break;
-//				case SDLK_a:
-//					previousKeyChar2 = SDLK_0;
-//					break;
-//				case SDLK_t:
-//					//Uso este evento para q no vuelva a disparar hasta q no suelte la tecla
-//					raidenShootTimeOutCompleted = true;
-//					break;
-//				case SDLK_o:
-//					//Uso este evento para q no vuelva a disparar hasta q no suelte la tecla
-//					scorpionShootTimeOutCompleted = true;
-//					break;
-//
-//				default:
-//					break;
-//			}
+		case SDL_KEYUP:
+			switch(mainEvent->key.keysym.sym){
+				case SDLK_DOWN:
+					EventController::moveDownRelease(character, character2);
+					break;
+				case SDLK_RIGHT:
+					EventController::moveRightRelease(character, character2);
+					break;
+				case SDLK_LEFT:
+					EventController::moveLeftRelease(character, character2);
+					break;
+				case SDLK_b:
+					EventController::blockRelease(character, character2);
+					break;
+
+
+				case SDLK_z:
+					EventController::moveDownRelease(character2, character);
+					break;
+				case SDLK_d:
+					EventController::moveRightRelease(character2, character);
+					break;
+				case SDLK_a:
+					EventController::moveLeftRelease(character2, character);
+					break;
+				case SDLK_x:
+					EventController::blockRelease(character2, character);
+					break;
+
+				default:
+					break;
+			}
 //			testElapsedTime(character, character2);
-//			break;
+			break;
     	default:
-    		testElapsedTime(character, character2);
+//    		testElapsedTime(character, character2);
     		break;
     }
 }

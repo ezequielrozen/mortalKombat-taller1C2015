@@ -304,11 +304,12 @@ void JoystickController::update(MKCharacter *character, MKCharacter *character2,
     char mensaje[100];
     SDL_PollEvent(mainEvent);
 
+    unsigned char pressedJoystick = mainEvent->jbutton.which;
+    unsigned char pressedButton = mainEvent->jbutton.button;
+    unsigned  char pressedAxis = mainEvent->jaxis.axis;
+    int pressedValue = mainEvent->jaxis.value;
+
     if (mainEvent->type == SDL_JOYBUTTONDOWN || mainEvent->type == SDL_JOYAXISMOTION) {
-        unsigned char pressedJoystick = mainEvent->jbutton.which;
-        unsigned char pressedButton = mainEvent->jbutton.button;
-        unsigned  char pressedAxis = mainEvent->jaxis.axis;
-        int pressedValue = mainEvent->jaxis.value;
         cout << "Joystick number: " << (int) pressedJoystick << "Pressed button: " << (int) pressedButton << "Pressed axis: " << (int) pressedAxis << "Pressed value: "<< pressedValue << endl;
         sprintf(mensaje, "JOYSTICK %d BUTTON PRESSED: %d", (int) pressedJoystick, (int) pressedButton);
         Mylog->Log(mensaje, ERROR_LEVEL_INFO);
@@ -316,115 +317,165 @@ void JoystickController::update(MKCharacter *character, MKCharacter *character2,
         // HACER SWTICH DE NUMERO DE JOYSTICK Y LUEGO DE CADA KEY PRESIONADA
         switch (pressedJoystick) {
             case 0:
-                if (pressedAxis == 0 && pressedValue > 1000) {
-//                    Mylog->Log("movimiento del personaje: hacia la derecha", ERROR_LEVEL_INFO);
-//                    character->setMovement("RIGHT");
-//                    c1previousAxis = pressedAxis;
-//                    c1previousKey = pressedValue;
-//                    setCharacterSide(character, character2);
-//                    timer = SDL_GetTicks();
-                	  EventController::moveRight(character, character2);
-                }
-                if (pressedAxis == 0 && pressedValue < -1000) {
-//                    Mylog->Log("movimiento del personaje: hacia la izquierda", ERROR_LEVEL_INFO);
-//                    character->setMovement("LEFT");
-//                    c1previousAxis = pressedAxis;
-//                    c1previousKey = pressedValue;
-//                    setCharacterSide(character, character2);
-//                    timer = SDL_GetTicks();
-                	  EventController::moveLeft(character, character2);
-                }
-                if (pressedAxis == 1 && pressedValue > 1000) {
-//                    //if (c1previ) {
-//                        Mylog->Log("movimiento del personaje: hacia arriba", ERROR_LEVEL_INFO);
-//                        character->setJump(true);
-//                        setCharacterSide(character, character2);
-//                    //}
-//                    c1previousAxis = pressedAxis;
-//                    c1previousKey = pressedValue;
-                	  EventController::moveUp(character, character2);
-                }
-                if (pressedAxis == 1 && pressedValue < -1000) {
-//                    Mylog->Log("movimiento del personaje: agachandose", ERROR_LEVEL_INFO);
-//                    character->setMovement("DUCK");
-//                    c1previousAxis = pressedAxis;
-//                    c1previousKey = pressedValue;
-//                    timer = SDL_GetTicks();
-                	EventController::moveDown(character, character2);
-                }
-                if (pressedButton == c1kick) {
-//                    if (c1previousAxis == 1 && c1previousValue < -1000) {
-//                        Mylog->Log("movimiento del personaje: Patada baja", ERROR_LEVEL_INFO);
-//                        character->setHit("KICKDOWN");
-//                        c1previousKey = this->c1duck;
-//                        character->setIsHiting(true);
-//                        hitTimer = SDL_GetTicks();
-//                    }
-//                    else {
-//                        Mylog->Log("movimiento del personaje: Pateando", ERROR_LEVEL_INFO);
-//                        character->setHit("KICK");
-//                        c1previousKey = pressedButton;
-//                        character->setIsHiting(true);
-//                        hitTimer = SDL_GetTicks();
-//                    }
-                	EventController::highKick(character, character2);
-                }
-                if (pressedButton == c1kickDown) {
-                	EventController::lowKick(character, character2);
-                }
+            	//Este if lo tengo q hacer para el joystick2 tambien
+            	//Primero chequeo si es la misma tecla q en el ciclo anterior y comparo los valores para ver si es un KeyUp (para las flechas)
+            	if ((pressedAxis == c1previousAxis) && (mainEvent->type == SDL_JOYAXISMOTION))
+            	{
+            		//RIGHT
+            		if (pressedAxis == 0 && (pressedValue > 0) && (c1previousValue > 0) && (c1previousValue - pressedValue >0))
+            		{
+            			cout << "KeyUp: Boton derecha"	<< endl;
+            		}
 
-                if (pressedButton == c1punch) {
-//                    if (c1previousAxis == 0 && c1previousValue < -1000) {
-//                        character->setHit("PUNCHJUMPLEFT");
-//                        character->setJump(true);
-//                        Mylog->Log("movimiento del personaje: Golpe de puño con salto hacia la izquierda.", ERROR_LEVEL_INFO);
-//                        character->setIsHiting(true);
-//                        hitTimer = SDL_GetTicks();
-//                    }
-//                    else if (c1previousAxis == 0 && c1previousValue > 1000) {
-//                        character->setHit("PUNCHJUMPRIGHT");
-//                        character->setJump(true);
-//                        Mylog->Log("movimiento del personaje: Golpe de puño con salto hacia la derecha.",
-//                                   ERROR_LEVEL_INFO);
-//                        character->setIsHiting(true);
-//                        hitTimer = SDL_GetTicks();
-//                    }
-//                    if (c1previousAxis == 1 && c1previousValue < -1000) {
-//                        character->setHit("PUNCHUP");
-//                        Mylog->Log("movimiento del personaje: Golpe de puño ascendente.", ERROR_LEVEL_INFO);
-//                        character->setIsHiting(true);
-//                        hitTimer = SDL_GetTicks();
-//                    }
-//                    else {
-//                        Mylog->Log("movimiento del personaje: Golpe de puño.", ERROR_LEVEL_INFO);
-//                        character->setHit("PUNCH");
-//                        c1previousKey = pressedButton;
-//                        character->setIsHiting(true);
-//                        hitTimer = SDL_GetTicks();
-//                    }
-                	EventController::lowPunch(character, character2);
-                }
+            		if (pressedAxis == 0 && (pressedValue < 0) && (c1previousValue < 0) && (c1previousValue - pressedValue < 0))
+            		{
+            			cout << "KeyUp: Boton izquierda"	<< endl;
+            		}
 
-                if (pressedButton == c1punchUp) {
-                	EventController::highPunch(character, character2);
-                }
+            		//Este no va pero lo dejo para el test
+            		if (pressedAxis == 1 && (pressedValue > 0) && (c1previousValue > 0) && (c1previousValue - pressedValue > 0))
+					{
+						cout << "KeyUp: Boton arriba"	<< endl;
+					}
 
-                if (pressedButton == c1shoot) {
-//                    Mylog->Log("movimiento del personaje: Disparando.", ERROR_LEVEL_INFO);
-//                    character->setHit("SHOOT");
-//                    c1previousKey = pressedButton;
-//                    character->setIsHiting(true);
-//                    hitTimer = SDL_GetTicks();
-                	EventController::shoot(character, character2);
-                }
-                if (pressedButton == c1block) {
-//                    Mylog->Log("movimiento del personaje: Defensa.", ERROR_LEVEL_INFO);
-//                    character->setHit("DEFENSE");
-//                    c1previousKey = pressedButton;
-//                    hitTimer = SDL_GetTicks();
-                	EventController::block(character, character2);
-                }
-                c1previousKey = pressedButton;
+            		if (pressedAxis == 1 && (pressedValue < 0) && (c1previousValue < 0) && (c1previousValue - pressedValue < 0))
+					{
+						cout << "KeyUp: Boton abajo"	<< endl;
+					}
+            	}
+            	else
+            	{
+					if (pressedAxis == 0 && pressedValue > 1000) {
+	//                    Mylog->Log("movimiento del personaje: hacia la derecha", ERROR_LEVEL_INFO);
+	//                    character->setMovement("RIGHT");
+	//                	  c1previousAxis = pressedAxis;
+	//                    c1previousKey = pressedValue;
+	//                    setCharacterSide(character, character2);
+	//                    timer = SDL_GetTicks();
+
+						//Guardo el valor anterior para simular el KeyUp
+						c1previousAxis = pressedAxis;
+						c1previousValue = pressedValue;
+						cout << "KeyDown: Boton derecha"	<< endl;
+						EventController::moveRight(character, character2);
+					}
+					if (pressedAxis == 0 && pressedValue < -1000) {
+	//                    Mylog->Log("movimiento del personaje: hacia la izquierda", ERROR_LEVEL_INFO);
+	//                    character->setMovement("LEFT");
+	//                    c1previousAxis = pressedAxis;
+	//                    c1previousKey = pressedValue;
+	//                    setCharacterSide(character, character2);
+	//                    timer = SDL_GetTicks();
+
+						//Guardo el valor anterior para simular el KeyUp
+						c1previousAxis = pressedAxis;
+						c1previousValue = pressedValue;
+						cout << "KeyDown: Boton izquierda"	<< endl;
+						EventController::moveLeft(character, character2);
+					}
+					if (pressedAxis == 1 && pressedValue > 1000) {
+	//                    //if (c1previ) {
+	//                        Mylog->Log("movimiento del personaje: hacia arriba", ERROR_LEVEL_INFO);
+	//                        character->setJump(true);
+	//                        setCharacterSide(character, character2);
+	//                    //}
+	//                    c1previousAxis = pressedAxis;
+	//                    c1previousKey = pressedValue;
+						cout << "KeyUp: Boton arriba"	<< endl;
+						EventController::moveUp(character, character2);
+					}
+					if (pressedAxis == 1 && pressedValue < -1000) {
+	//                    Mylog->Log("movimiento del personaje: agachandose", ERROR_LEVEL_INFO);
+	//                    character->setMovement("DUCK");
+	//                    c1previousAxis = pressedAxis;
+	//                    c1previousKey = pressedValue;
+	//                    timer = SDL_GetTicks();
+
+						//Guardo el valor anterior para simular el KeyUp
+						c1previousAxis = pressedAxis;
+						c1previousValue = pressedValue;
+						cout << "KeyDown: Boton abajo"	<< endl;
+						EventController::moveDown(character, character2);
+					}
+					if (pressedButton == c1kick) {
+	//                    if (c1previousAxis == 1 && c1previousValue < -1000) {
+	//                        Mylog->Log("movimiento del personaje: Patada baja", ERROR_LEVEL_INFO);
+	//                        character->setHit("KICKDOWN");
+	//                        c1previousKey = this->c1duck;
+	//                        character->setIsHiting(true);
+	//                        hitTimer = SDL_GetTicks();
+	//                    }
+	//                    else {
+	//                        Mylog->Log("movimiento del personaje: Pateando", ERROR_LEVEL_INFO);
+	//                        character->setHit("KICK");
+	//                        c1previousKey = pressedButton;
+	//                        character->setIsHiting(true);
+	//                        hitTimer = SDL_GetTicks();
+	//                    }
+						EventController::highKick(character, character2);
+					}
+
+					if (pressedButton == c1kickDown) {
+						EventController::lowKick(character, character2);
+					}
+
+					if (pressedButton == c1punch) {
+	//                    if (c1previousAxis == 0 && c1previousValue < -1000) {
+	//                        character->setHit("PUNCHJUMPLEFT");
+	//                        character->setJump(true);
+	//                        Mylog->Log("movimiento del personaje: Golpe de puño con salto hacia la izquierda.", ERROR_LEVEL_INFO);
+	//                        character->setIsHiting(true);
+	//                        hitTimer = SDL_GetTicks();
+	//                    }
+	//                    else if (c1previousAxis == 0 && c1previousValue > 1000) {
+	//                        character->setHit("PUNCHJUMPRIGHT");
+	//                        character->setJump(true);
+	//                        Mylog->Log("movimiento del personaje: Golpe de puño con salto hacia la derecha.",
+	//                                   ERROR_LEVEL_INFO);
+	//                        character->setIsHiting(true);
+	//                        hitTimer = SDL_GetTicks();
+	//                    }
+	//                    if (c1previousAxis == 1 && c1previousValue < -1000) {
+	//                        character->setHit("PUNCHUP");
+	//                        Mylog->Log("movimiento del personaje: Golpe de puño ascendente.", ERROR_LEVEL_INFO);
+	//                        character->setIsHiting(true);
+	//                        hitTimer = SDL_GetTicks();
+	//                    }
+	//                    else {
+	//                        Mylog->Log("movimiento del personaje: Golpe de puño.", ERROR_LEVEL_INFO);
+	//                        character->setHit("PUNCH");
+	//                        c1previousKey = pressedButton;
+	//                        character->setIsHiting(true);
+	//                        hitTimer = SDL_GetTicks();
+	//                    }
+						EventController::lowPunch(character, character2);
+					}
+
+					if (pressedButton == c1punchUp) {
+						EventController::highPunch(character, character2);
+					}
+
+					if (pressedButton == c1shoot) {
+	//                    Mylog->Log("movimiento del personaje: Disparando.", ERROR_LEVEL_INFO);
+	//                    character->setHit("SHOOT");
+	//                    c1previousKey = pressedButton;
+	//                    character->setIsHiting(true);
+	//                    hitTimer = SDL_GetTicks();
+						EventController::shoot(character, character2);
+					}
+					if (pressedButton == c1block) {
+	//                    Mylog->Log("movimiento del personaje: Defensa.", ERROR_LEVEL_INFO);
+	//                    character->setHit("DEFENSE");
+	//                    c1previousKey = pressedButton;
+	//                    hitTimer = SDL_GetTicks();
+
+						//Guardo el valor anterior para simular el KeyUp
+						c1previousAxis = pressedAxis;
+						c1previousValue = pressedValue;
+						EventController::block(character, character2);
+					}
+					c1previousKey = pressedButton;
+            	}
                 break;
 
   /*****************************************************************************************/
@@ -435,6 +486,10 @@ void JoystickController::update(MKCharacter *character, MKCharacter *character2,
 //                    c2previousKey = pressedButton;
 //                    setCharacterSide(character, character2);
 //                    timerChar2 = SDL_GetTicks();
+
+                	//Guardo el valor anterior para simular el KeyUp
+                	c2previousAxis = pressedAxis;
+                	c2previousValue = pressedValue;
                 	EventController::moveRight(character2, character);
                 }
                 if (pressedAxis == 0 && pressedValue < -1000) {
@@ -443,6 +498,10 @@ void JoystickController::update(MKCharacter *character, MKCharacter *character2,
 //                    c2previousKey = pressedButton;
 //                    setCharacterSide(character, character2);
 //                    timerChar2 = SDL_GetTicks();
+
+                	//Guardo el valor anterior para simular el KeyUp
+                	c2previousAxis = pressedAxis;
+                	c2previousValue = pressedValue;
                 	EventController::moveLeft(character2, character);
                 }
                 if (pressedAxis == 1 && pressedValue > 1000) {
@@ -459,6 +518,10 @@ void JoystickController::update(MKCharacter *character, MKCharacter *character2,
 //                    character2->setMovement("DUCK");
 //                    c2previousKey = pressedButton;;
 //                    timerChar2 = SDL_GetTicks();
+
+                	//Guardo el valor anterior para simular el KeyUp
+                	c2previousAxis = pressedAxis;
+                	c2previousValue = pressedValue;
                 	EventController::moveDown(character2, character);
                 }
 
@@ -530,33 +593,50 @@ void JoystickController::update(MKCharacter *character, MKCharacter *character2,
 //                    character2->setHit("DEFENSE");
 //                    c2previousKey = pressedButton;
 //                    hitTimerChar2 = SDL_GetTicks();
+
+                	//Guardo el valor anterior para simular el KeyUp
+					c2previousAxis = pressedAxis;
+					c2previousValue = pressedValue;
                 	EventController::block(character2, character);
                 }
-
-                c2previousKey = pressedButton;
+//                c2previousKey = pressedButton;
         }
-
-    }
+    }else if (mainEvent->type == SDL_JOYBUTTONUP) {
+    	switch(pressedJoystick){
+    	case 0:
+			if (pressedButton == c1block){
+				cout << "KeyUp: BlockRelease"	<< endl;
+				EventController::blockRelease(character, character2);
+			}
+			break;
+		case 1:
+			if (pressedButton == c2block){
+				cout << "KeyUp: BlockRelease2"	<< endl;
+				EventController::blockRelease(character2, character);
+			}
+			break;
+    	}
+	}
 }
 
 
 void JoystickController::testElapsedTime(MKCharacter* character, MKCharacter* character2) {
-    if (timer + COMMANDDELAY < SDL_GetTicks()) {
-        character->setMovement("NONE");
-        timer = SDL_GetTicks();
-    }
-    if (hitTimer + COMMANDDELAYKIT < SDL_GetTicks()) {
-        character->setHit("NONE");
-        character->setIsHiting(false);
-        hitTimer = SDL_GetTicks();
-    }
-    if (timerChar2 + COMMANDDELAY < SDL_GetTicks()) {
-        character2->setMovement("NONE");
-        timerChar2 = SDL_GetTicks();
-    }
-    if (hitTimerChar2 + COMMANDDELAYKIT < SDL_GetTicks()) {
-        character2->setHit("NONE");
-        character2->setIsHiting(false);
-        hitTimerChar2 = SDL_GetTicks();
-    }
+//    if (timer + COMMANDDELAY < SDL_GetTicks()) {
+//        character->setMovement("NONE");
+//        timer = SDL_GetTicks();
+//    }
+//    if (hitTimer + COMMANDDELAYKIT < SDL_GetTicks()) {
+//        character->setHit("NONE");
+//        character->setIsHiting(false);
+//        hitTimer = SDL_GetTicks();
+//    }
+//    if (timerChar2 + COMMANDDELAY < SDL_GetTicks()) {
+//        character2->setMovement("NONE");
+//        timerChar2 = SDL_GetTicks();
+//    }
+//    if (hitTimerChar2 + COMMANDDELAYKIT < SDL_GetTicks()) {
+//        character2->setHit("NONE");
+//        character2->setIsHiting(false);
+//        hitTimerChar2 = SDL_GetTicks();
+//    }
 }

@@ -22,7 +22,7 @@ CharacterStance::~CharacterStance() {
 
 void CharacterStance::update(MKCharacter * character, Events aEvent) {
 
-    std::cout << "Update desde StanceState." << std::endl;
+//    std::cout << "Update desde StanceState." << std::endl;
 
     switch (aEvent) {
         case MoveRight:
