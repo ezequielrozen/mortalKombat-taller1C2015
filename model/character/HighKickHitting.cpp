@@ -1,7 +1,8 @@
 #include "HighKickHitting.h"
-#include "../MKCharacter.h"
 #include "CharacterStance.h"
-#include "ReceivingHighPunch.h"
+#include "ReceivingHit.h"
+#include "ReceivingDuckingKick.h"
+#include "KickLeftJumpingHitting.h"
 
 HighKickHitting::HighKickHitting() {
     this->timer = 10;
@@ -19,8 +20,17 @@ void HighKickHitting::update(MKCharacter *character, Events aEvent) {
         this->timer = 10;
     } else {
         switch(aEvent) {
-            case HighPunch:
-                character->setState(new ReceivingHighPunch());
+            case DuckingKick:
+                character->setState(new ReceivingDuckingKick());
+                break;
+            case LowKick:
+                character->setState(new ReceivingHit());
+                break;
+            case JumpingKickLeft:
+                character->setState(new ReceivingHit());
+                break;
+            case JumpingKickRight:
+                character->setState(new ReceivingHit());
                 break;
             default:
                 break;

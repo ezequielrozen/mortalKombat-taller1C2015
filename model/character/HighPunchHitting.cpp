@@ -1,31 +1,30 @@
-#include "LowKickHitting.h"
-#include "../MKCharacter.h"
+#include "HighPunchHitting.h"
 #include "CharacterStance.h"
-#include "ReceivingDuckingKick.h"
 #include "ReceivingHit.h"
+#include "ReceivingDuckingKick.h"
 
-LowKickHitting::LowKickHitting() {
+HighPunchHitting::HighPunchHitting() {
     this->timer = 10;
 }
 
-LowKickHitting::~LowKickHitting() {
+HighPunchHitting::~HighPunchHitting() {
 
 }
 
-void LowKickHitting::update(MKCharacter* character, Events aEvent) {
+void HighPunchHitting::update(MKCharacter *character, Events aEvent) {
     this->timer -= 1;
     if (this->timer == 0) {
         character->setState(new CharacterStance());
         this->timer = 10;
     } else {
         switch (aEvent) {
+            case LowKick:
+                character->setState(new ReceivingHit());
+                break;
             case DuckingKick:
                 character->setState(new ReceivingDuckingKick());
                 break;
-            case JumpingKickLeft:
-                character->setState(new ReceivingHit());
-                break;
-            case JumpingKickRight:
+            case HighKick:
                 character->setState(new ReceivingHit());
                 break;
             default:
@@ -34,10 +33,10 @@ void LowKickHitting::update(MKCharacter* character, Events aEvent) {
     }
 }
 
-float LowKickHitting::getWidth() {
+float HighPunchHitting::getWidth() {
     return 0;
 }
 
-string LowKickHitting::getName() {
-	return "LowKickHitting";
+string HighPunchHitting::getName() {
+	return "HighPunchHitting";
 }

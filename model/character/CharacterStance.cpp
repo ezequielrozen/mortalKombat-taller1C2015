@@ -4,7 +4,7 @@
 #include "MovingLeft.h"
 #include "Jumping.h"
 #include "Ducking.h"
-#include "HittingPunch.h"
+#include "HighPunchHitting.h"
 #include "LowPunchHitting.h"
 #include "HighKickHitting.h"
 #include "Blocking.h"
