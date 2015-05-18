@@ -127,5 +127,7 @@ const double DEFAULT_OFFSET                 = 30;
 const unsigned char DEFAULT_KEY[20] = "adwscezqxokljmnbypb";
 
 //
-enum Events { MoveRight, MoveLeft, Jump, Duck, HighPunch, LowPunch, HighKick, LowKick, Block, Shoot, ReceiveHit, MoveRightRelease, MoveLeftRelease, DuckRelease, BlockRelease, animationFinished, JumpFinished};
+
+enum Events { MoveRight, MoveLeft, Jump, Duck, HighPunch, LowPunch, HighKick, LowKick, Block, Shoot, ReceiveHit, MoveRightRelease, MoveLeftRelease, DuckRelease, BlockRelease, ShootingReceived, JumpFinished};
+
 #endif /* CONSTANTES_H_ */

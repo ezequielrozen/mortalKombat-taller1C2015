@@ -11,3 +11,7 @@ LowPunchHitting::~LowPunchHitting() {
 void LowPunchHitting::update(MKCharacter *character, Events aEvent) {
 
 }
+
+float LowPunchHitting::getWidth() {
+    return 0;
+}

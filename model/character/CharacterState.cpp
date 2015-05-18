@@ -19,3 +19,7 @@ bool CharacterState::isMovingRight() {
 bool CharacterState::isJumping() {
 	return false;
 }
+
+float CharacterState::getWidth() {
+	return 0;
+}

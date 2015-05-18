@@ -177,8 +177,8 @@ void Collider::update(MKCharacter* character1, MKCharacter* character2, bool cam
 			this->checkHits(character1, character2);
 		}
 	}
-	character1->update();
-	character2->update();
+	character1->characterUpdate();
+	character2->characterUpdate();
 
 }
 /*

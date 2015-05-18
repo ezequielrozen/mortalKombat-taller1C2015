@@ -11,3 +11,7 @@ HittingPunch::~HittingPunch() {
 void HittingPunch::update(MKCharacter *character, Events aEvent) {
 
 }
+
+float HittingPunch::getWidth() {
+    return 0;
+}

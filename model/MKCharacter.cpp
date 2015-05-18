@@ -53,8 +53,10 @@ void MKCharacter::move() {
 	}
 }
 
-void MKCharacter::update() {
-	if (this->isJumping()) /*this->state->isJumping()*/ {
+void MKCharacter::characterUpdate() {
+
+	if (this->isJumping() /*this->state->isJumping()*/) {
+
 		this->moveUp();
 	}
 
@@ -371,11 +373,6 @@ void MKCharacter::setState(CharacterState *state) {
 
 void MKCharacter::update(Events aEvent) {
 	this->state->update(this, aEvent);
-}
-
-string MKCharacter::getState() {
-	//return state.name;
-	return "asd";
 }
 
 bool MKCharacter::isMovingLeft() {
