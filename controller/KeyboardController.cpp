@@ -129,7 +129,8 @@ void KeyboardController::update(MKCharacter* character, MKCharacter* character2,
 
 						break;
 			case SDLK_l:
-							EventController::lowKick(character, character2);
+				//InputController::setVibrating(true);
+						EventController::lowKick(character, character2);
 						break;
 			case SDLK_p:
 //							if (previousKey == SDLK_LEFT){

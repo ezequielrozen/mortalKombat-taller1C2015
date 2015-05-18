@@ -1,4 +1,5 @@
 #include "MovingRight.h"
+#include "CharacterStance.h"
 
 MovingRight::MovingRight() {
 //    this->timer =
@@ -26,6 +27,7 @@ void MovingRight::update(MKCharacter * character, Events aEvent) {
             //cambiar a estado a beingHit
             break;
         case MoveRightRelease:
+            character->setState(new CharacterStance());
             // cambiar a estado stance
         default:
             //si no recibe ninguno de los otros eventos, en principio no hay que hacer nada, porque no afectan a este estado
