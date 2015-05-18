@@ -14,6 +14,7 @@ public:
     virtual bool isMovingRight();
     virtual bool isJumping();
     virtual float getWidth();
+    virtual string getName();
 
 protected:
     void setState(MKCharacter * character, CharacterState* aState);

@@ -10,6 +10,8 @@ public:
     PunchLeftJumping();
     ~PunchLeftJumping();
     void update(MKCharacter* character, Events event);
+    
+    string getName();
     float getWidth();
 };
 

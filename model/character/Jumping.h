@@ -13,6 +13,9 @@ class Jumping : public CharacterState {
         void update(MKCharacter * character, Events aEvent );
     	bool isJumping();
 
+    	string getName();
+    	float getWidth();
+
     private:
         int timer;
     };

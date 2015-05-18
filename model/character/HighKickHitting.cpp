@@ -31,3 +31,7 @@ void HighKickHitting::update(MKCharacter *character, Events aEvent) {
 float HighKickHitting::getWidth() {
     return 0;
 }
+
+string HighKickHitting::getName() {
+    return "HighKickHitting";
+}

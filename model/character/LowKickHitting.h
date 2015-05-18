@@ -10,6 +10,8 @@ public:
     LowKickHitting();
     ~LowKickHitting();
     void update(MKCharacter* character, Events aEvent );
+    
+    string getName();
     float getWidth();
 
 private:

@@ -45,7 +45,7 @@ void EventController::moveRight(MKCharacter* characterToMove, MKCharacter* chara
 	setCharacterSide(characterToMove, character2);
 	timer = SDL_GetTicks();
 
-//	characterToMove->update(MoveRight);
+	characterToMove->update(MoveRight);
 }
 
 void EventController::moveLeft(MKCharacter* characterToMove, MKCharacter* character2)
@@ -56,7 +56,7 @@ void EventController::moveLeft(MKCharacter* characterToMove, MKCharacter* charac
 	setCharacterSide(characterToMove, character2);
 	timer = SDL_GetTicks();
 
-//	characterToMove->update(MoveLeft);
+	characterToMove->update(MoveLeft);
 
 }
 
@@ -69,7 +69,7 @@ void EventController::moveUp(MKCharacter* characterToMove, MKCharacter* characte
 	}
 	previousKey = "UP";
 
-//	characterToMove->update(Jump);
+	characterToMove->update(Jump);
 }
 
 void EventController::moveDown(MKCharacter* character, MKCharacter* character2)

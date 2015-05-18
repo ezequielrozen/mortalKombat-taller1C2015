@@ -105,6 +105,8 @@ public:
 
     bool isAscending();
 
+    string getState();
+
 private:
 
     // State

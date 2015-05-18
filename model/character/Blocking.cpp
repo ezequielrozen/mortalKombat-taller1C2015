@@ -19,3 +19,11 @@ void Blocking::update(MKCharacter *character, Events aEvent) {
             break;
     }
 }
+
+string Blocking::getName() {
+	return "Blocking";
+}
+
+float Blocking::getWidth() {
+	return 0;
+}

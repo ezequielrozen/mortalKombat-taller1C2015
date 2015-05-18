@@ -230,7 +230,7 @@ void GameView::LoadSprites(string name1, string name2) {
                              raidenBlock,raidenHead,false);
     }
 
-    scorpionSprites = {{"STANCE", scorpionStance},{"RIGHT", scorpionWalk},{"LEFT", scorpionWalk},{"JUMP", scorpionJump},{"JUMPRIGHT", scorpionSideJump},
+    scorpionSprites = {{"Stance", scorpionStance},{"MovingRight", scorpionWalk},{"MovingLeft", scorpionWalk},{"Jumping", scorpionJump},{"JUMPRIGHT", scorpionSideJump},
     {"JUMPLEFT", scorpionSideJump},{"DUCK", scorpionDuck},{"KICK", scorpionKick},{"KICKDOWN", scorpionKickDown},{"PUNCHJUMPLEFT", scorpionPunchJump},
     {"PUNCHJUMPLEFT", scorpionPunchJump},{"PUNCH", scorpionPunch},{"WINNER", scorpionWinner},{"PUNCHUP", scorpionPunchUp},
     {"FINISHER", scorpionFinisher},{"DEFENSE", scorpionBlock},{"SHOOT", scorpionShoot},{"DIZZY", scorpionDizzy},{"FALLING", scorpionFall},
@@ -475,29 +475,24 @@ void GameView::runCharacter() {
             break;
     }*/
 
-    /*
-    ESTA SERIA LA LOGICA QUE INCORPORA EL USO DE STATES A LA GAMEVIEW
-    *****************************************************************        
+         
     bool aux = (scorpion->getX() < raiden->getX());
 
-    if (scorpion->getState()->getName() != "SHOOT" && scorpion->getState()->getName() != "RIGHT" && scorpion->getState()->getName() != "LEFT") {
-        sprite = scorpionSprites.at(scorpion->getState()->getName());
-        sprite->Play(scorpion->getState()->getDelay(), scorpion->getState()->getWidth());
+    if (scorpion->getState() != "Shooting" && scorpion->getState() != "MovingRight" && scorpion->getState() != "MovingLeft") {
+        sprite = scorpionSprites.at(scorpion->getState());
+        sprite->Play(100, scorpion->getWidth());
     }
-    else if ((scorpion->getState()->getName() == "RIGHT" && aux) || (scorpion->getState()->getName() == "LEFT" && !aux)) {
-        sprite = scorpionSprites.at(scorpion->getState()->getName());
-        sprite->Play(scorpion->getState()->getDelay(), scorpion->getState()->getWidth());
+    else if ((scorpion->getState() == "MovingRight" && aux) || (scorpion->getState() == "MovingLeft" && !aux)) {
+        sprite = scorpionSprites.at(scorpion->getState());
+        sprite->Play(100, scorpion->getWidth());
     }
-    else if ((scorpion->getState()->getName() == "RIGHT" && !aux) || (scorpion->getState()->getName() == "LEFT" && aux)) {
-        sprite = scorpionSprites.at(scorpion->getState()->getName());
-        sprite->PlayBack(scorpion->getState()->getDelay(), scorpion->getState()->getWidth());
+    else if ((scorpion->getState() == "MovingRight" && !aux) || (scorpion->getState() == "MovingLeft" && aux)) {
+        sprite = scorpionSprites.at(scorpion->getState());
+        sprite->PlayBack(100);
     }
-    else {
-        //ACA IRIA LA LOGICA DEL SHOOT, Q NO TENGO IDEA COMO SE ARMA.
-    }
-    */
+    
 
-
+    /*
     if (scorpion->isJumping() && scorpion->getJumpMovement() == "NONE" && scorpion->getHit() == "NONE") {
         sprite = scorpionJump;
         sprite->Play(300, scorpion->getWidth());

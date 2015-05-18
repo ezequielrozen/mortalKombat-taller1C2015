@@ -12,7 +12,7 @@ void MovingRight::update(MKCharacter * character, Events aEvent) {
 //    delete character->state; no estoy seguro si está bien, pero la idea es que como se cambia de estado, liberamos la memoria del anterior. no es costoso hacer estos news.
 /*
     character->setState(new MovingRight());
-*/    std::cout << "Update desde MovingRight." << std::endl;
+*/    std::cout << "MovingRight." << std::endl;
     switch (aEvent) {
         case Jump:
             //cambiar a estado jumpingRight (bolita)
@@ -26,6 +26,9 @@ void MovingRight::update(MKCharacter * character, Events aEvent) {
         case ReceiveHit:
             //cambiar a estado a beingHit
             break;
+        case MoveLeft:
+            character->setState(new MovingLeft());
+            break;    
         case MoveRightRelease:
             character->setState(new CharacterStance());
             // cambiar a estado stance
@@ -38,4 +41,12 @@ void MovingRight::update(MKCharacter * character, Events aEvent) {
 
 bool MovingRight::isMovingRight() {
     return true;
+}
+
+string MovingRight::getName() {
+    return "MovingRight";
+}
+
+float MovingRight::getWidth() {
+    return 0;
 }

@@ -15,3 +15,7 @@ void KickLeftJumping::update(MKCharacter *character, Events aEvent) {
 float KickLeftJumping::getWidth() {
     return 0;
 }
+
+string KickLeftJumping::getName() {
+	return "KickLeftJumping";
+}

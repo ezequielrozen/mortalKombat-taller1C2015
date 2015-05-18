@@ -3,6 +3,7 @@
 
 #include "../MKCharacter.h"
 #include "CharacterState.h"
+#include "MovingLeft.h"
 
 class MovingRight : public CharacterState {
 
@@ -11,6 +12,9 @@ public:
     ~MovingRight();
     void update(MKCharacter * character, Events aEvent);
     bool isMovingRight();
+
+    string getName();
+    float getWidth();
 
 private:
     int timer;

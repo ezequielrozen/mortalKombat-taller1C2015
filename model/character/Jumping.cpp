@@ -33,3 +33,11 @@ void Jumping::update(MKCharacter * character, Events aEvent) {
 bool Jumping::isJumping() {
     return true;
 }
+
+string Jumping::getName() {
+    return "Jumping";
+}
+
+float Jumping::getWidth() {
+    return 0;
+}

@@ -221,10 +221,11 @@ void MKCharacter::setHit(string newHit) {
 string MKCharacter::getHit() {
 	return this->hitMovement;
 }
-
+/*
 bool MKCharacter::isJumping() {
 	return this->jumping;
 }
+*/
 
 bool MKCharacter::getIsHiting() {
 	return this->isHiting;
@@ -383,8 +384,11 @@ bool MKCharacter::isMovingRight() {
 	this->state->isMovingRight();
 }
 
-/*
+
 bool MKCharacter::isJumping() {
 	this->state->isJumping();
 }
-*/
+
+string MKCharacter::getState() {
+	return this->state->getName();
+}

@@ -9,6 +9,8 @@ public:
     HighKickHitting();
     ~HighKickHitting();
     void update(MKCharacter* character, Events aEvent );
+    
+    string getName();
     float getWidth();
 
 private:

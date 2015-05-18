@@ -15,6 +15,9 @@ public:
     ~Ducking();
     void update(MKCharacter * character, Events aEvent );
 
+    string getName();
+    float getWidth();
+
 private:
     int timer;
 };

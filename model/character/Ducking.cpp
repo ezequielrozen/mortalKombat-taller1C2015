@@ -32,3 +32,10 @@ void Ducking::update(MKCharacter * character, Events aEvent) {
     }
 }
 
+string Ducking::getName() {
+    return "Ducking";
+}
+
+float Ducking::getWidth() {
+    return 0;
+}

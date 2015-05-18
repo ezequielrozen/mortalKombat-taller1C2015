@@ -15,3 +15,7 @@ void PunchRightJumping::update(MKCharacter *character, Events aEvent) {
 float PunchRightJumping::getWidth() {
     return 0;
 }
+
+string PunchRightJumping::getName() {
+	return "PunchRightJumping";
+}

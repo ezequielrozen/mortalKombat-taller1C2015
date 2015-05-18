@@ -23,3 +23,7 @@ bool CharacterState::isJumping() {
 float CharacterState::getWidth() {
 	return 0;
 }
+
+string CharacterState::getName() {
+	return "asd";
+}
