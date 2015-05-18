@@ -2,7 +2,7 @@
 #include "../MKCharacter.h"
 
 HighKickHitting::HighKickHitting() {
-
+    this->timer = 10;
 }
 
 HighKickHitting::~HighKickHitting() {

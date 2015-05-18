@@ -1,7 +1,3 @@
-//
-// Created by mauri on 17/05/15.
-//
-
 #include "Jumping.h"
 
 Jumping::Jumping() {
