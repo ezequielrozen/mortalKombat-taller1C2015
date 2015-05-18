@@ -35,3 +35,7 @@ void MovingRight::update(MKCharacter * character, Events aEvent) {
 
     }
 }
+
+bool MovingRight::isMovingRight() {
+    return true;
+}

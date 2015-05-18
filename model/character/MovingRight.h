@@ -10,6 +10,7 @@ public:
     MovingRight();
     ~MovingRight();
     void update(MKCharacter * character, Events aEvent);
+    bool isMovingRight();
 
 private:
     int timer;

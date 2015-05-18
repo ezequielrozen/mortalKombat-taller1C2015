@@ -38,3 +38,7 @@ void MovingLeft::update(MKCharacter * character, Events aEvent) {
 
     }
 }
+
+bool MovingLeft::isMovingLeft() {
+    return true;
+}
