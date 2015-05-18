@@ -1,8 +1,8 @@
-//
-// Created by mauri on 17/05/15.
-//
-
 #include "Ducking.h"
+#include "CharacterStance.h"
+#include "LowPunchHitting.h"
+#include "LowKickHitting.h"
+#include "RecevingHit.h"
 
 Ducking::Ducking() {
     this->timer = 10;
@@ -12,24 +12,19 @@ Ducking::~Ducking() {
 }
 
 void Ducking::update(MKCharacter * character, Events aEvent) {
-    // me estoy moviendo para la izquierda y aprieto para la derecha. tengo que cambiar de estado a movingRight
-    //delete character->state;
-    //character->state = new MovingRight();
+
     switch (aEvent) {
-        case Jump:
-            //cambiar a estado jumping
-            break;
         case LowPunch:
-            //cambiar a estado a lowPunching
+            character->setState(new LowPunchHitting());
             break;
         case LowKick:
-            //cambiar a estado a lowKicking
+            character->setState(new LowKickHitting());
             break;
         case ReceiveHit:
-            //cambiar a estado a beingHit
+            character->setState(new RecevingHit());
             break;
         case DuckRelease:
-            // cambiar a estado stance
+            character->setState(new CharacterStance());
         default:
             //si no recibe ninguno de los otros eventos, en principio no hay que hacer nada, porque no afectan a este estado
             break;

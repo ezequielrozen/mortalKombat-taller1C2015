@@ -10,3 +10,7 @@ PunchLeftJumping::~PunchLeftJumping() {
 
 void PunchLeftJumping::update(MKCharacter *character, Events event) {
 }
+
+float PunchLeftJumping::getWidth() {
+    return 0;
+}
