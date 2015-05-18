@@ -38,7 +38,7 @@ void CharacterStance::update(MKCharacter * character, Events aEvent) {
             character->setState(new Ducking());
             break;
         case HighPunch:
-            character->setState(new HittingPunch());
+            character->setState(new HighPunchHitting());
             break;
         case LowPunch:
             character->setState(new LowPunchHitting());
