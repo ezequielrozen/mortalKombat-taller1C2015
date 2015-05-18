@@ -30,8 +30,9 @@ void MovingRight::update(MKCharacter * character, Events aEvent) {
             character->setState(new MovingLeft());
             break;    
         case MoveRightRelease:
+//        	cout << "stance por Release" << endl;
             character->setState(new CharacterStance());
-            // cambiar a estado stance
+            break;
         default:
             //si no recibe ninguno de los otros eventos, en principio no hay que hacer nada, porque no afectan a este estado
             break;

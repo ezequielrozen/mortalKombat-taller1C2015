@@ -25,6 +25,7 @@ void Ducking::update(MKCharacter * character, Events aEvent) {
             break;
         case DuckRelease:
             character->setState(new CharacterStance());
+            break;
         default:
             //si no recibe ninguno de los otros eventos, en principio no hay que hacer nada, porque no afectan a este estado
             break;

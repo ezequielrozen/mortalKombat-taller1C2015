@@ -1,4 +1,5 @@
 #include "MovingLeft.h"
+#include "CharacterStance.h"
 
 MovingLeft::MovingLeft() {
     this->timer = 10;
@@ -36,6 +37,8 @@ void MovingLeft::update(MKCharacter * character, Events aEvent) {
             break;
         case MoveLeftRelease:
             // cambiar a estado stance
+        	character->setState(new CharacterStance());
+        	break;
         default:
             //si no recibe ninguno de los otros eventos, en principio no hay que hacer nada, porque no afectan a este estado
             break;

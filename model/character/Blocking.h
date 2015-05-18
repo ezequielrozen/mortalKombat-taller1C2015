@@ -8,7 +8,7 @@ class Blocking : public CharacterState {
 
 public:
     Blocking();
-    ~Blocking();
+    virtual ~Blocking();
     void update(MKCharacter * character, Events aEvent );
 
     string getName();

@@ -37,7 +37,6 @@ EventController::~EventController() {
 }
 
 void EventController::moveRight(MKCharacter* characterToMove, MKCharacter* character2){
-//	Mylog->Log("movimiento del personaje: hacia la derecha", ERROR_LEVEL_INFO);
 //	characterToMove->setMovement("RIGHT");
 //	vibrating = false;
 //	previousKey = "RIGHT";
@@ -45,6 +44,7 @@ void EventController::moveRight(MKCharacter* characterToMove, MKCharacter* chara
 //	timer = SDL_GetTicks();
 
 //	cout << "moveRight" << endl;
+	Mylog->Log("movimiento del personaje: hacia la derecha", ERROR_LEVEL_INFO);
 	characterToMove->update(MoveRight);
 }
 
@@ -61,6 +61,7 @@ void EventController::moveLeft(MKCharacter* characterToMove, MKCharacter* charac
 //	timer = SDL_GetTicks();
 
 //	cout << "moveLeft" << endl;
+	Mylog->Log("movimiento del personaje: hacia la Izquierda", ERROR_LEVEL_INFO);
 	characterToMove->update(MoveLeft);
 }
 
@@ -77,6 +78,7 @@ void EventController::moveUp(MKCharacter* characterToMove, MKCharacter* characte
 //	}
 //	previousKey = "UP";
 
+	Mylog->Log("movimiento del personaje: hacia arriba", ERROR_LEVEL_INFO);
 	characterToMove->update(Jump);
 }
 
@@ -87,6 +89,7 @@ void EventController::moveDown(MKCharacter* character, MKCharacter* character2){
 //	timer = SDL_GetTicks();
 
 //	cout << "moveDown" << endl;
+	Mylog->Log("movimiento del personaje: agachandose", ERROR_LEVEL_INFO);
 	character->update(Duck);
 }
 
@@ -104,6 +107,7 @@ void EventController::highKick(MKCharacter* character, MKCharacter* character2)
 //	character->setIsHiting(true);
 //	hitTimer = SDL_GetTicks();
 
+	Mylog->Log("movimiento del personaje: Patada alta", ERROR_LEVEL_INFO);
 	character->update(HighKick);
 }
 
@@ -114,6 +118,7 @@ void EventController::lowKick(MKCharacter* character, MKCharacter* character2){
 //	character->setIsHiting(true);
 //	hitTimer = SDL_GetTicks();
 
+	Mylog->Log("movimiento del personaje: Patada baja", ERROR_LEVEL_INFO);
 	character->update(LowKick);
 }
 
@@ -135,6 +140,7 @@ void EventController::lowPunch(MKCharacter* character, MKCharacter* character2){
 //	hitTimer = SDL_GetTicks();
 
 //	cout << "lowPunch" << endl;
+	Mylog->Log("movimiento del personaje: Golpe de puño bajo.", ERROR_LEVEL_INFO);
 	character->update(LowPunch);
 }
 
@@ -153,6 +159,7 @@ void EventController::shoot(MKCharacter* character, MKCharacter* character2){
 //		hitTimerScorpionShootCheck = 0;
 //	}
 
+	Mylog->Log("movimiento del personaje: Disparando.", ERROR_LEVEL_INFO);
 	character->update(Shoot);
 }
 
@@ -163,6 +170,7 @@ void EventController::block(MKCharacter* character, MKCharacter* character2){
 //	hitTimer = SDL_GetTicks();
 
 //	cout << "block" << endl;
+	Mylog->Log("movimiento del personaje: Defensa.", ERROR_LEVEL_INFO);
 	character->update(Block);
 }
 
