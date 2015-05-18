@@ -10,6 +10,9 @@ class CharacterState {
 
 public:
     virtual void update(MKCharacter * character, Events aEvent );
+    virtual bool isMovingLeft();
+    virtual bool isMovingRight();
+    virtual bool isJumping();
 
 protected:
     void setState(MKCharacter * character, CharacterState* aState);

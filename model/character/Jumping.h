@@ -11,6 +11,7 @@ class Jumping : public CharacterState {
         Jumping();
         ~Jumping();
         void update(MKCharacter * character, Events aEvent );
+    	bool isJumping();
 
     private:
         int timer;

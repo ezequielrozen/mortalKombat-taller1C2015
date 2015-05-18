@@ -12,6 +12,17 @@ CameraController::CameraController()
 CameraController::~CameraController(void)
 {
 }
+/*
+bool CameraController::cameraMoveLeft(MKCharacter* character1, MKCharacter* character2) {
+    return ((character1->getX() < Util::getInstance()->getLogicalWindowWidth()/10) && (character1->isMovingLeft())
+        && !(character2->getX() > Util::getInstance()->getLogicalWindowWidth() - Util::getInstance()->getLogicalWindowWidth()/10 - character2->getWidth()));
+}
+
+bool CameraController::cameraMoveRight(MKCharacter* character1, MKCharacter* character2) {
+    return ((character1->getX() > Util::getInstance()->getLogicalWindowWidth() - Util::getInstance()->getLogicalWindowWidth()/10 - character1->getWidth()) &&
+        (character1->isMovingRight() && !(character2->getX() < Util::getInstance()->getLogicalWindowWidth()/10));
+}
+*/
 
 bool CameraController::cameraMoveLeft(MKCharacter* character1, MKCharacter* character2) {
     return ((character1->getX() < Util::getInstance()->getLogicalWindowWidth()/10) && (character1->getMovement() == "LEFT")

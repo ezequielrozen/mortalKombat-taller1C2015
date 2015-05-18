@@ -36,3 +36,4 @@ void Ducking::update(MKCharacter * character, Events aEvent) {
 
     }
 }
+

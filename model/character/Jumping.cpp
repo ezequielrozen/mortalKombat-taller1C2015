@@ -33,3 +33,7 @@ void Jumping::update(MKCharacter * character, Events aEvent) {
     }
 
 }
+
+bool Jumping::isJumping() {
+    return true;
+}

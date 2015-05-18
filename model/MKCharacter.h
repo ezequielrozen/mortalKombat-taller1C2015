@@ -22,6 +22,11 @@ public:
     // State
     void setState(CharacterState* state);
     void update(Events aEvent);
+    string getState();
+
+    bool isMovingLeft();
+    bool isMovingRight();
+    //bool isJumping();
 
     void moveRight();
 

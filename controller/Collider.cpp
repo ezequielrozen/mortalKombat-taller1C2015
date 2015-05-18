@@ -181,3 +181,70 @@ void Collider::update(MKCharacter* character1, MKCharacter* character2, bool cam
 	character2->update();
 
 }
+/*
+void Collider::update(MKCharacter* character1, MKCharacter* character2, bool cameraMoved) {
+
+	if (!cameraMoved) {
+		if (!(this->superpositionLeft(character1, character2) && this->superpositionUp(character1, character2) &&
+																 character1->isMovingRight() ||
+			  this->superpositionRight(character1, character2) && this->superpositionUp(character1, character2) &&
+			  character1->isMovingLeft()) {
+			character1->move();
+		};
+		if (!(this->superpositionLeft(character2, character1) && this->superpositionUp(character2, character1) &&
+																 character2->isMovingRight() ||
+			  this->superpositionRight(character2, character1) && this->superpositionUp(character2, character1) &&
+			  character2->isMovingLeft()) {
+			character2->move();
+		};
+
+		if ((this->superpositionLeft(character1, character2) && this->superpositionUp(character1, character2) &&
+																character1->isMovingRight() ||
+			 this->superpositionRight(character1, character2) && this->superpositionUp(character1, character2) &&
+			 character1->isMovingLeft() &&
+			character1->isJumping()) {
+			if (character1->getX() + character1->getWidth() <= character2->getX() + (character2->getWidth() / 2)) {
+				character1->moveLeft();
+				character1->moveLeft();
+			}
+			else {
+				character1->moveRight();
+				character1->moveRight();
+			}
+		}
+
+		if ((this->superpositionLeft(character2, character1) && this->superpositionUp(character2, character1) &&
+																character2->isMovingRight() ||
+			 this->superpositionRight(character2, character1) && this->superpositionUp(character2, character1) &&
+			 character2->isMovingLeft() &&
+			character2->isJumping()) {
+			if (character2->getX() + character2->getWidth() <= character1->getX() + (character1->getWidth() / 2)) {
+				character2->moveLeft();
+				character2->moveLeft();
+			}
+			else {
+				character2->moveRight();
+				character2->moveRight();
+			}
+		}
+	}
+
+	//En caso de que los dos golpeen al mismo tiempo, se decide aleatoriamente quien pega primero.
+	//En caso de que no golpeen al mismo tiempo, no tiene importancia.
+	if (character1->isAlive() && character2->isAlive()) {
+		int randomizer = rand() % 2;
+
+		if (randomizer == 0) {
+			this->checkHits(character1, character2);
+			this->checkHits(character2, character1);
+		}
+		else {
+			this->checkHits(character2, character1);
+			this->checkHits(character1, character2);
+		}
+	}
+	character1->update();
+	character2->update();
+
+}
+*/

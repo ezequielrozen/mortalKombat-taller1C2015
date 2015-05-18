@@ -9,7 +9,7 @@ public:
     RecevingHit();
     ~RecevingHit();
     void update(MKCharacter* character, Events aEvent );
-
+    
 private:
     int timer;
 };

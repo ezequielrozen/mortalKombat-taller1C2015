@@ -372,3 +372,22 @@ void MKCharacter::setState(CharacterState *state) {
 void MKCharacter::update(Events aEvent) {
 	this->state->update(this, aEvent);
 }
+
+string MKCharacter::getState() {
+	//return state.name;
+	return "asd";
+}
+
+bool MKCharacter::isMovingLeft() {
+	this->state->isMovingLeft();
+}
+
+bool MKCharacter::isMovingRight() {
+	this->state->isMovingRight();
+}
+
+/*
+bool MKCharacter::isJumping() {
+	this->state->isJumping();
+}
+*/
