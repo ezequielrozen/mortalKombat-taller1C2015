@@ -13,6 +13,7 @@ public:
     virtual bool isMovingLeft();
     virtual bool isMovingRight();
     virtual bool isJumping();
+    virtual float getWidth();
 
 protected:
     void setState(MKCharacter * character, CharacterState* aState);

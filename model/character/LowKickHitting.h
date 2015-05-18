@@ -10,6 +10,7 @@ public:
     LowKickHitting();
     ~LowKickHitting();
     void update(MKCharacter* character, Events aEvent );
+    float getWidth();
 
 private:
     int timer;

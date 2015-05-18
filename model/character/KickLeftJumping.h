@@ -10,6 +10,7 @@ public:
     KickLeftJumping();
     ~KickLeftJumping();
     void update(MKCharacter* character, Events aEvent);
+    float getWidth();
 };
 
 
