@@ -54,8 +54,7 @@ void MKCharacter::move() {
 }
 
 void MKCharacter::update() {
-
-	if (this->isJumping()) {
+	if (this->isJumping()) /*this->state->isJumping()*/ {
 		this->moveUp();
 	}
 
@@ -104,9 +103,10 @@ void MKCharacter::moveUp() {
 	
 	if (posY > stageFloor) {
 		this->setJump(false);
+		//update(JumpFinished);
+
 		posY = stageFloor;
 		jumpTime = 0;
-		//cout << "yMax: " << yMax << endl;
 	}
 }
 
