@@ -36,7 +36,7 @@ public:
 
     void move();
 
-    void update();
+    void characterUpdate();
 
     float getWidth();
 

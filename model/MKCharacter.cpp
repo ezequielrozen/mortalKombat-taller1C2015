@@ -53,7 +53,7 @@ void MKCharacter::move() {
 	}
 }
 
-void MKCharacter::update() {
+void MKCharacter::characterUpdate() {
 
 	if (this->isJumping()) {
 		this->moveUp();
