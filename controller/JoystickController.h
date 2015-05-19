@@ -21,15 +21,11 @@ public:
 private:
     SDL_Joystick* joystickOne;
     SDL_Joystick* joystickTwo;
-//    SDL_Event* joystickEvent;
 
     int timer;
     int timerChar2;
     int hitTimer;
     int hitTimerChar2;
-
-    void testElapsedTime(MKCharacter* character, MKCharacter* character2);
-
 
         //botones
     unsigned char c1jump;
@@ -54,11 +50,17 @@ private:
     unsigned char c2shoot;
 
     int c1previousAxis;
-    int c1previousValue;
+    int c1previousAxisValue;
     int c2previousAxis;
-    int c2previousValue;
+    int c2previousAxisValue;
 
-    unsigned char c1previousKey;
-    unsigned char c2previousKey;
+	bool c1blockReleased;
+	bool c2blockReleased;
+
+
+	bool EjeXPositivo(unsigned char pressedAxis, int pressedAxisValue, SDL_Event* mainEvent);
+	bool EjeXNegativo(unsigned char pressedAxis, int pressedAxisValue, SDL_Event* mainEvent);
+	bool EjeYPositivo(unsigned char pressedAxis, int pressedAxisValue, SDL_Event* mainEvent);
+	bool EjeYNegativo(unsigned char pressedAxis, int pressedAxisValue, SDL_Event* mainEvent);
 };
 #endif //MORTALKOMBAT_TALLER1C2015_JOYSTICKCONTROLLER_H
