@@ -31,11 +31,12 @@ bool Collider::superpositionUp(MKCharacter* character1, MKCharacter* character2)
 }
 
 void Collider::checkHits(MKCharacter* character1, MKCharacter* character2) {
-	if ((superpositionRight(character1,character2) || superpositionLeft(character1, character2)) &&
-		(character1->isHitting())) {
+	if ((superpositionRight(character1,character2) || superpositionLeft(character1, character2)) && (character1->isHitting())) {
 
 		if (character1->impacts()) {
-			character2->receiveBlow(DAMAGE.at(character1->getState()),0);
+			if (character1->getState() == "DuckingKickHitting" || (!character2->isBlocking() && !character2->isDucking())) {
+				character2->receiveBlow(DAMAGE.at(character1->getState()),0);
+			}
 		}
 	}
 }

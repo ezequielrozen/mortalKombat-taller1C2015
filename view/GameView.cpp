@@ -231,15 +231,15 @@ void GameView::LoadSprites(string name1, string name2) {
     }
 
     scorpionSprites = {{"Stance", scorpionStance},{"MovingRight", scorpionWalk},{"MovingLeft", scorpionWalk},{"Jumping", scorpionJump},{"JumpingRight", scorpionSideJump},
-    {"JumpingLeft", scorpionSideJump},{"Ducking", scorpionDuck},{"HighKickHitting", scorpionKick},{"KICKDOWN", scorpionKickDown},{"PunchLeftJumping", scorpionPunchJump},
-    {"PunchRightJumping", scorpionPunchJump},{"HighPunchHitting", scorpionPunch},{"WINNER", scorpionWinner},{"PUNCHUP", scorpionPunchUp},
+    {"JumpingLeft", scorpionSideJump},{"Ducking", scorpionDuck},{"HighKickHitting", scorpionKick},{"DuckingKickHitting", scorpionKickDown},{"PunchLeftJumping", scorpionPunchJump},
+    {"PunchRightJumping", scorpionPunchJump},{"HighPunchHitting", scorpionPunch},{"WINNER", scorpionWinner},{"LowPunchHitting", scorpionPunchUp},
     {"FINISHER", scorpionFinisher},{"Blocking", scorpionBlock},{"Shooting", scorpionShoot},{"Dizzy", scorpionDizzy},{"Falling", scorpionFall},
     {"RecevingHit", scorpionBeingHit},{"BEINGHITDOWN", scorpionBeingHitDown},{"BLOCKDOWN", scorpionBlockDown}};
 
-    raidenSprites = {{"Stance", raidenStance},{"RIGHT", raidenWalk},{"LEFT", raidenWalk},{"JUMP", raidenJump},{"JUMPRIGHT", raidenSideJump},
-    {"JUMPLEFT", raidenSideJump},{"DUCK", raidenDuck},{"KICK", raidenKick},{"KICKDOWN", raidenKickDown},{"PUNCHJUMPLEFT", raidenPunchJump},
-    {"PUNCHJUMPLEFT", raidenPunchJump},{"PUNCH", raidenPunch},{"WINNER", raidenWinner},{"PUNCHUP", raidenPunchUp},
-    {"FINISHER", raidenFinisher},{"DEFENSE", raidenBlock},{"SHOOT", raidenShoot},{"DIZZY", raidenDizzy},{"FALLING", raidenFall},
+    raidenSprites = {{"Stance", raidenStance},{"MovingRight", raidenWalk},{"MovingLeft", raidenWalk},{"Jumping", raidenJump},{"JumpingRight", raidenSideJump},
+    {"JumpingLeft", raidenSideJump},{"Ducking", raidenDuck},{"HighKickHitting", raidenKick},{"DuckingKickHitting", raidenKickDown},{"PunchLeftJumping", raidenPunchJump},
+    {"PunchRightJumping", raidenPunchJump},{"HighPunchHitting", raidenPunch},{"WINNER", raidenWinner},{"LowPunchHitting", raidenPunchUp},
+    {"FINISHER", raidenFinisher},{"Blocking", raidenBlock},{"SHOOT", raidenShoot},{"Dizzy", raidenDizzy},{"FALLING", raidenFall},
     {"RecevingHit", raidenBeingHit},{"BEINGHITDOWN", raidenBeingHitDown},{"BLOCKDOWN", raidenBlockDown}};
 
 }
@@ -493,70 +493,6 @@ void GameView::runCharacter() {
     }
 
     /*
-
-    CharacterSprite* sprite2;
-
-    if (raiden->isJumping() && raiden->getJumpMovement() == "NONE" && raiden->getHit() == "NONE") {
-        sprite2 = raidenJump;
-        sprite2->Play(700, raiden->getWidth());
-    }
-    //HA: Aca hay q preguntar de q lado esta el oponente para ver si gira para un lado o el otro
-    else if (raiden->isJumping() && raiden->getJumpMovement() == "RIGHT" && raiden->getHit() == "NONE") {
-        sprite2 = raidenSideJump;
-        sprite2->Play(50, raiden->getWidth());
-    }
-    else if (raiden->isJumping() && raiden->getJumpMovement() == "LEFT" && raiden->getHit() == "NONE") {
-        sprite2 = raidenSideJump;
-        sprite2->PlayBack(50);
-    }
-    else if (raiden->getHitReception() == "BEINGHIT") {
-            sprite2 = raidenBeingHit;
-            sprite2->Play(100, raiden->getWidth());
-    } else if (raiden->getHitReception() == "BEINGHITDOWN") {
-            sprite2 = raidenBeingHitDown;
-            sprite2->Play(100, raiden->getHitWidth());
-    }
-    else if (raiden->getHitReception() == "FALLING") {
-            sprite2 = raidenFall;
-            sprite2->Play(50, raiden->getWidth());
-    }
-    else if (raiden->getMovement() == "NONE" && raiden->getHit() == "NONE") {
-        sprite2 = raidenStance;
-        RestartAllRaidenSprites();
-        sprite2->Play(75, raiden->getWidth());
-    }
-    else if (raiden->getMovement() == "RIGHT" && raiden->getHit() == "NONE") {
-		sprite2 = raidenWalk;
-		if(scorpion->getX() > raiden->getX()){
-			sprite2->Play(100, raiden->getWidth());
-		}else{
-			sprite2->PlayBack(100);
-		}
-    }
-    else if (raiden->getMovement() == "LEFT" && raiden->getHit() == "NONE") {
-		sprite2 = raidenWalk;
-		if(scorpion->getX() < raiden->getX()){
-			sprite2->Play(100, raiden->getWidth());
-		}else{
-			sprite2->PlayBack(100);
-		}
-    }
-    else if (raiden->getMovement() == "DUCK") {
-        sprite2 = raidenDuck;
-        sprite2->Play(20, raiden->getWidth());
-    }
-    else if (raiden->getHit() == "KICK") {
-		sprite2 = raidenKick;
-		sprite2->Play(100, raiden->getHitWidth());
-	}
-    else if (raiden->getHit() == "KICKDOWN") {
-    		sprite2 = raidenKickDown;
-    		sprite2->Play(100, raiden->getHitWidth());
-    }
-    else if (raiden->getHit() == "PUNCH") {
-    		sprite2 = raidenPunch;
-    		sprite2->Play(100, raiden->getHitWidth());
-    }
     else if (raiden->getHit() == "SHOOT") {
     		sprite2 = raidenShoot;
 
@@ -625,38 +561,7 @@ void GameView::runCharacter() {
 				}
 			}
     }
-    else if (raiden->getHit() == "DEFENSE") {
-    		sprite2 = raidenBlock;
-    		sprite2->Play(100, raiden->getHitWidth());
-    } else if (raiden->getHit() == "DEFENSEDOWN") {
-    		sprite2 = raidenBlockDown;
-    		sprite2->Play(100, raiden->getHitWidth());
-    }
-    else if (raiden->getHit() == "DIZZY") {
-    		sprite2 = raidenDizzy;
-    		sprite2->Play(150, raiden->getWidth());
-    }
-    else if ((raiden->getHit() == "PUNCHJUMPLEFT" || raiden->getHit() == "PUNCHJUMPRIGHT")) {
-    	if (raiden->isJumping() )
-    	{
-			sprite2 = raidenPunchJump;
-			sprite2->Play(400, raiden->getHitWidth());
-    	}
-    	else
-    	{
-            sprite2 = raidenStance;
-            RestartAllRaidenSprites();
-            sprite2->Play(75, raiden->getWidth());
-    	}
-	}
-    else if (raiden->getHit() == "WINNER") {
-    		sprite2 = raidenWinner;
-    		sprite2->Play(150, raiden->getHitWidth());
-    }
-    else if (raiden->getHit() == "PUNCHUP") {
-		sprite2 = raidenPunchUp;
-		sprite2->Play(150, raiden->getHitWidth());
-	};
+   
     */
 
     if(scorpion->getX() < raiden->getX()){
