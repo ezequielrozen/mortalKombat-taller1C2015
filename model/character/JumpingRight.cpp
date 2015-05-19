@@ -37,7 +37,6 @@ string JumpingRight::getName() {
 }
 
 bool JumpingRight::isMovingRight() {
-    cout << "MOVING RIGHT" << endl;
     return true;
 }
 
