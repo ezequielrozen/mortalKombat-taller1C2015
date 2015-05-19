@@ -10,7 +10,7 @@
 
 #include "SDL2/SDL.h"
 #include "KeyboardController.h"
-#include "JoystickController.h"
+#include "JoysticksControllerManager.h"
 #include "../model/constantes.h"
 #include "SDL2/SDL_image.h"
 #include <string>
@@ -32,7 +32,7 @@ public:
 	static void setVibrating(bool vibratingFlag);
 	static bool isVibrating();
 private:
-	JoystickController* joystickController;
+	JoysticksControllerManager* joystickControllerManager;
 	KeyboardController* keyboardController;
     SDL_Event* mainEvent;
     bool joystickConnected;

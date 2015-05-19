@@ -15,7 +15,7 @@ InputController::InputController() {
 	SDL_Init(SDL_INIT_JOYSTICK);
 	joystickConnected = false;
 	if (SDL_NumJoysticks() > 0)	{
-		this->joystickController = new JoystickController();
+		this->joystickControllerManager = new JoysticksControllerManager();
 		joystickConnected = true;
 	}
 
@@ -23,8 +23,9 @@ InputController::InputController() {
 
 InputController::~InputController() {
     if (joystickConnected)
-    	delete joystickController;
+    	delete joystickControllerManager;
     delete mainEvent;
+    delete this->keyboardController;
 }
 
 SDL_Event* InputController::getEvent() {
@@ -78,7 +79,7 @@ void InputController::update(MKCharacter* character, MKCharacter* character2) {
 
 	if(joystickConnected)
 	{
-		this->joystickController->update(character, character2, this->getEvent());
+		this->joystickControllerManager->update(character, character2, this->getEvent());
 	}
 }
 
