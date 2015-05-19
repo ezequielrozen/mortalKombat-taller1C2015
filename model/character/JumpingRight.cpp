@@ -33,7 +33,7 @@ bool JumpingRight::isJumping() {
 }
 
 string JumpingRight::getName() {
-    return "JUMPRIGHT";
+    return "JumpingRight";
 }
 
 bool JumpingRight::isMovingRight() {

@@ -230,10 +230,10 @@ void GameView::LoadSprites(string name1, string name2) {
                              raidenBlock,raidenHead,false);
     }
 
-    scorpionSprites = {{"Stance", scorpionStance},{"MovingRight", scorpionWalk},{"MovingLeft", scorpionWalk},{"Jumping", scorpionJump},{"JUMPRIGHT", scorpionSideJump},
-    {"JUMPLEFT", scorpionSideJump},{"DUCK", scorpionDuck},{"KICK", scorpionKick},{"KICKDOWN", scorpionKickDown},{"PUNCHJUMPLEFT", scorpionPunchJump},
+    scorpionSprites = {{"Stance", scorpionStance},{"MovingRight", scorpionWalk},{"MovingLeft", scorpionWalk},{"Jumping", scorpionJump},{"JumpingRight", scorpionSideJump},
+    {"JumpingLeft", scorpionSideJump},{"Ducking", scorpionDuck},{"KICK", scorpionKick},{"KICKDOWN", scorpionKickDown},{"PUNCHJUMPLEFT", scorpionPunchJump},
     {"PUNCHJUMPLEFT", scorpionPunchJump},{"PUNCH", scorpionPunch},{"WINNER", scorpionWinner},{"PUNCHUP", scorpionPunchUp},
-    {"FINISHER", scorpionFinisher},{"DEFENSE", scorpionBlock},{"SHOOT", scorpionShoot},{"DIZZY", scorpionDizzy},{"FALLING", scorpionFall},
+    {"FINISHER", scorpionFinisher},{"Blocing", scorpionBlock},{"Shooting", scorpionShoot},{"Dizzy", scorpionDizzy},{"Falling", scorpionFall},
     {"BEINGHIT", scorpionBeingHit},{"BEINGHITDOWN", scorpionBeingHitDown},{"BLOCKDOWN", scorpionBlockDown}};
 
     raidenSprites = {{"STANCE", raidenStance},{"RIGHT", raidenWalk},{"LEFT", raidenWalk},{"JUMP", raidenJump},{"JUMPRIGHT", raidenSideJump},
