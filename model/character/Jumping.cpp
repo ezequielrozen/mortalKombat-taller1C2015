@@ -1,4 +1,6 @@
 #include "Jumping.h"
+#include "CharacterStance.h"
+#include "ReceivingDuckingPunch.h"
 
 Jumping::Jumping() {
     this->timer = 10;
@@ -13,15 +15,12 @@ void Jumping::update(MKCharacter * character, Events aEvent) {
     //character->state = new MovingRight();
 
     switch (aEvent) {
-        case LowPunch:
-            //cambiar a estado a lowPunchingJumping
-            break;
-        case LowKick:
-            //cambiar a estado a lowKickingJumping
-            break;
         case ReceiveHit:
             //cambiar a estado a beingHitJumping
+            character->setState(new ReceivingDuckingPunch());
             break;
+        case JumpFinished:
+            character->setState(new CharacterStance());
         default:
             //si no recibe ninguno de los otros eventos, en principio no hay que hacer nada, porque no afectan a este estado
             break;

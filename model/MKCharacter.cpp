@@ -55,7 +55,7 @@ void MKCharacter::move() {
 
 void MKCharacter::characterUpdate() {
 
-	if (this->isJumping() /*this->state->isJumping()*/) {
+	if (this->state->isJumping()) {
 
 		this->moveUp();
 	}
@@ -104,8 +104,8 @@ void MKCharacter::moveUp() {
 	}
 	
 	if (posY > stageFloor) {
-		this->setJump(false);
-		//update(JumpFinished);
+		//this->setJump(false);
+		update(JumpFinished);
 
 		posY = stageFloor;
 		jumpTime = 0;
