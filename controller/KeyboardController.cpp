@@ -31,6 +31,7 @@ void KeyboardController::update(MKCharacter* character, MKCharacter* character2,
 						break;
 			case SDLK_DOWN:
 						EventController::moveDown(character, character2);
+						break;
 			case SDLK_k:
 						EventController::highKick(character, character2);
 						break;

@@ -14,7 +14,6 @@ class Jumping : public CharacterState {
     	bool isJumping();
 
     	string getName();
-    	float getWidth();
     };
 
 

@@ -1,6 +1,7 @@
 #include "JumpingLeft.h"
 #include "CharacterStance.h"
 #include "ReceivingDuckingPunch.h"
+#include "PunchLeftJumping.h"
 
 JumpingLeft::JumpingLeft() {
 }
@@ -14,6 +15,12 @@ void JumpingLeft::update(MKCharacter * character, Events aEvent) {
     //character->state = new MovingLeft();
 
     switch (aEvent) {
+        case HighPunch:
+            character->setState(new PunchLeftJumping());
+            break;
+        case LowPunch:
+            character->setState(new PunchLeftJumping());
+            break;
         case ReceiveHit:
             //cambiar a estado a beingHitJumpingLeft
             character->setState(new ReceivingDuckingPunch());
@@ -38,9 +45,4 @@ string JumpingLeft::getName() {
 
 bool JumpingLeft::isMovingLeft() {
     return true;
-}
-
-
-float JumpingLeft::getWidth() {
-    return 0;
 }

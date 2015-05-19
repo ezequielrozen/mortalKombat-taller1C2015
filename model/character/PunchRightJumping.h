@@ -3,8 +3,10 @@
 
 
 #include "CharacterState.h"
+#include "CharacterStance.h"
+#include "ReceivingDuckingPunch.h"
 
-class PunchRightJumping : CharacterState {
+class PunchRightJumping : public CharacterState {
 
 public:
     PunchRightJumping();
@@ -13,6 +15,9 @@ public:
     
     string getName();
     float getWidth();
+    bool isJumping();
+    bool isMovingRight();
+    bool isHitting();
 };
 
 

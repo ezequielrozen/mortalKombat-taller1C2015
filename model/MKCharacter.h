@@ -25,6 +25,9 @@ public:
 
     bool isMovingLeft();
     bool isMovingRight();
+    bool isHitting();
+    bool isDucking();
+    bool isBlocking();
     //bool isJumping();
 
     void moveRight();
@@ -106,6 +109,10 @@ public:
     bool isAscending();
 
     string getState();
+
+    float getStateWidth();
+
+    bool impacts();
 
 private:
 

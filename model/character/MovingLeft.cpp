@@ -55,6 +55,3 @@ string MovingLeft::getName() {
     return "MovingLeft";
 }
 
-float MovingLeft::getWidth() {
-    return 0;
-}

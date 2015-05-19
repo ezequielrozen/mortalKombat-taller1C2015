@@ -89,7 +89,7 @@ bool Game::GameLoop() {
         cameraMoved = cameraController->update(scorpion, raiden, stage->getLayers());
         collider->update(scorpion, raiden, cameraMoved);
         gameView->endRender();
-        SDL_Delay(10);
+        SDL_Delay(15);
 
         if (peviousKey == SDLK_r && inputController->getEvent()->key.keysym.sym == SDLK_e) {
             return true;

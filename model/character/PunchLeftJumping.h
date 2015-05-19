@@ -3,16 +3,21 @@
 
 
 #include "CharacterState.h"
+#include "CharacterStance.h"
+#include "ReceivingDuckingPunch.h"
 
-class PunchLeftJumping : CharacterState {
+class PunchLeftJumping : public CharacterState {
 
 public:
     PunchLeftJumping();
     ~PunchLeftJumping();
-    void update(MKCharacter* character, Events event);
+    void update(MKCharacter* character, Events aEvent);
     
     string getName();
     float getWidth();
+    bool isJumping();
+    bool isMovingLeft();
+    bool isHitting();
 };
 
 

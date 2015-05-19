@@ -48,7 +48,3 @@ bool MovingRight::isMovingRight() {
 string MovingRight::getName() {
     return "MovingRight";
 }
-
-float MovingRight::getWidth() {
-    return 0;
-}

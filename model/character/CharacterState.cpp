@@ -20,10 +20,30 @@ bool CharacterState::isJumping() {
 	return false;
 }
 
+bool CharacterState::isHitting() {
+	return false;
+}
+
+bool CharacterState::isBlocking() {
+	return false;
+}
+
+bool CharacterState::isDucking() {
+	return false;
+}
+
 float CharacterState::getWidth() {
-	return 0;
+	return 1;
 }
 
 string CharacterState::getName() {
 	return "asd";
+}
+
+void CharacterState::refreshTimer(MKCharacter* character) {
+	
+}
+
+bool CharacterState::impact() {
+	return false;
 }

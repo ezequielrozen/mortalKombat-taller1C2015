@@ -24,6 +24,6 @@ string Blocking::getName() {
 	return "Blocking";
 }
 
-float Blocking::getWidth() {
-	return 0;
+bool Blocking::isBlocking() {
+	return true;
 }

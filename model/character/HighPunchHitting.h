@@ -12,6 +12,10 @@ public:
     
     string getName();
     float getWidth();
+    void refreshTimer(MKCharacter* character);
+    bool isHitting();
+    //ESTO ES UNA PORONGA. HAY QUE BUSCARLE UNA ALTERNATIVA.
+    bool impact();
     
 private:
     int timer;

@@ -13,8 +13,14 @@ public:
     virtual bool isMovingLeft();
     virtual bool isMovingRight();
     virtual bool isJumping();
+    virtual bool isHitting();
+    virtual bool isBlocking();
+    virtual bool isDucking();
     virtual float getWidth();
     virtual string getName();
+    virtual void refreshTimer(MKCharacter* character);
+
+    virtual bool impact();
 
 protected:
     void setState(MKCharacter * character, CharacterState* aState);

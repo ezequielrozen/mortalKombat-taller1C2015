@@ -231,16 +231,16 @@ void GameView::LoadSprites(string name1, string name2) {
     }
 
     scorpionSprites = {{"Stance", scorpionStance},{"MovingRight", scorpionWalk},{"MovingLeft", scorpionWalk},{"Jumping", scorpionJump},{"JumpingRight", scorpionSideJump},
-    {"JumpingLeft", scorpionSideJump},{"Ducking", scorpionDuck},{"KICK", scorpionKick},{"KICKDOWN", scorpionKickDown},{"PUNCHJUMPLEFT", scorpionPunchJump},
-    {"PUNCHJUMPLEFT", scorpionPunchJump},{"PUNCH", scorpionPunch},{"WINNER", scorpionWinner},{"PUNCHUP", scorpionPunchUp},
-    {"FINISHER", scorpionFinisher},{"Blocing", scorpionBlock},{"Shooting", scorpionShoot},{"Dizzy", scorpionDizzy},{"Falling", scorpionFall},
-    {"BEINGHIT", scorpionBeingHit},{"BEINGHITDOWN", scorpionBeingHitDown},{"BLOCKDOWN", scorpionBlockDown}};
+    {"JumpingLeft", scorpionSideJump},{"Ducking", scorpionDuck},{"HighKickHitting", scorpionKick},{"KICKDOWN", scorpionKickDown},{"PunchLeftJumping", scorpionPunchJump},
+    {"PunchRightJumping", scorpionPunchJump},{"HighPunchHitting", scorpionPunch},{"WINNER", scorpionWinner},{"PUNCHUP", scorpionPunchUp},
+    {"FINISHER", scorpionFinisher},{"Blocking", scorpionBlock},{"Shooting", scorpionShoot},{"Dizzy", scorpionDizzy},{"Falling", scorpionFall},
+    {"RecevingHit", scorpionBeingHit},{"BEINGHITDOWN", scorpionBeingHitDown},{"BLOCKDOWN", scorpionBlockDown}};
 
-    raidenSprites = {{"STANCE", raidenStance},{"RIGHT", raidenWalk},{"LEFT", raidenWalk},{"JUMP", raidenJump},{"JUMPRIGHT", raidenSideJump},
+    raidenSprites = {{"Stance", raidenStance},{"RIGHT", raidenWalk},{"LEFT", raidenWalk},{"JUMP", raidenJump},{"JUMPRIGHT", raidenSideJump},
     {"JUMPLEFT", raidenSideJump},{"DUCK", raidenDuck},{"KICK", raidenKick},{"KICKDOWN", raidenKickDown},{"PUNCHJUMPLEFT", raidenPunchJump},
     {"PUNCHJUMPLEFT", raidenPunchJump},{"PUNCH", raidenPunch},{"WINNER", raidenWinner},{"PUNCHUP", raidenPunchUp},
     {"FINISHER", raidenFinisher},{"DEFENSE", raidenBlock},{"SHOOT", raidenShoot},{"DIZZY", raidenDizzy},{"FALLING", raidenFall},
-    {"BEINGHIT", raidenBeingHit},{"BEINGHITDOWN", raidenBeingHitDown},{"BLOCKDOWN", raidenBlockDown}};
+    {"RecevingHit", raidenBeingHit},{"BEINGHITDOWN", raidenBeingHitDown},{"BLOCKDOWN", raidenBlockDown}};
 
 }
 
@@ -455,153 +455,44 @@ double GameView::shootWidthCalculatedDistanceRaiden() {
 }
 void GameView::runCharacter() {
     CharacterSprite* sprite = NULL;
+    CharacterSprite* sprite2 = NULL;
     CharacterSprite* shootChar1 = NULL;
     CharacterSprite* shootChar2 = NULL;
     int currentFrame=-1;
     int currentFrame2=-1;
-
-/* ASI SE USA EL STATE:
- *
- * EL STATE PODRIA EN VEZ DE TENER UN ENUMERADO: DEVLOVER EL SPRITE Y NOS AHORRAMOS TODOS ESTOS IF. SIMPLEMENTE HACEMOS sprite = state.getSprite();
- * Una solucion es usar un map con el enumerado que devuelve el estado. ejemplo : sprite = map.at(state.getStateEnum). lo que se mas facil
-    switch (character->getStateEnum) {
-        case MovingRight:
-            sprite = scorpionWalk;
-            sprite->Play(300, scorpion->getWidth());
-            break;
-        case MovingLeft:
-            sprite = scorpionWalk;
-            sprite->Play(300, scorpion->getWidth());
-            break;
-    }*/
 
          
     bool aux = (scorpion->getX() < raiden->getX());
 
     if (scorpion->getState() != "Shooting" && scorpion->getState() != "MovingRight" && scorpion->getState() != "MovingLeft") {
         sprite = scorpionSprites.at(scorpion->getState());
-        sprite->Play(100, scorpion->getWidth());
+        sprite->Play(100, scorpion->getStateWidth());
     }
     else if ((scorpion->getState() == "MovingRight" && aux) || (scorpion->getState() == "MovingLeft" && !aux)) {
         sprite = scorpionSprites.at(scorpion->getState());
-        sprite->Play(100, scorpion->getWidth());
+        sprite->Play(100, scorpion->getStateWidth());
     }
     else if ((scorpion->getState() == "MovingRight" && !aux) || (scorpion->getState() == "MovingLeft" && aux)) {
         sprite = scorpionSprites.at(scorpion->getState());
         sprite->PlayBack(100);
     }
     
+    aux = (raiden->getX() < scorpion->getX());
+
+    if (raiden->getState() != "Shooting" && raiden->getState() != "MovingRight" && raiden->getState() != "MovingLeft") {
+        sprite2 = raidenSprites.at(raiden->getState());
+        sprite2->Play(100, raiden->getStateWidth());
+    }
+    else if ((raiden->getState() == "MovingRight" && aux) || (raiden->getState() == "MovingLeft" && !aux)) {
+        sprite2 = raidenSprites.at(raiden->getState());
+        sprite2->Play(100, raiden->getStateWidth());
+    }
+    else if ((raiden->getState() == "MovingRight" && !aux) || (raiden->getState() == "MovingLeft" && aux)) {
+        sprite2 = raidenSprites.at(raiden->getState());
+        sprite2->PlayBack(100);
+    }
 
     /*
-    if (scorpion->isJumping() && scorpion->getJumpMovement() == "NONE" && scorpion->getHit() == "NONE") {
-        sprite = scorpionJump;
-        sprite->Play(300, scorpion->getWidth());
-    }
-    //HA: Aca hay q preguntar de q lado esta el oponente para ver si gira para un lado o el otro
-    else if (scorpion->isJumping() && scorpion->getJumpMovement() == "RIGHT" && scorpion->getHit() == "NONE") {
-        sprite = scorpionSideJump;
-        sprite->Play(50, scorpion->getWidth());
-    }
-    else if (scorpion->isJumping() && scorpion->getJumpMovement() == "LEFT" && scorpion->getHit() == "NONE") {
-        sprite = scorpionSideJump;
-        sprite->PlayBack(50);
-    }
-    else if (scorpion->getHitReception() == "BEINGHIT") {
-            sprite = scorpionBeingHit;
-//            cout << "BEINGHIT" << endl;
-            sprite->Play(150, scorpion->getWidth());
-    } else if (scorpion->getHitReception() == "BEINGHITDOWN") {
-            sprite = scorpionBeingHitDown;
-//            cout << "BEINGHITDOWN" << endl;
-            sprite->Play(150, scorpion->getHitWidth());
-    }
-    else if (scorpion->getHitReception() == "FALLING") {
-            sprite = scorpionFall;
-            sprite->Play(200, scorpion->getWidth());
-    }
-    else if (scorpion->getMovement() == "NONE" && scorpion->getHit() == "NONE") {
-        sprite = scorpionStance;
-        RestartAllScorpionSprites();
-        sprite->Play(75, scorpion->getWidth());
-    }
-    else if (scorpion->getMovement() == "RIGHT" && scorpion->getHit() == "NONE") {
-    	sprite = scorpionWalk;
-    	if(scorpion->getX() < raiden->getX()){
-    		sprite->Play(100, scorpion->getWidth());
-		}else{
-			sprite->PlayBack(100);
-		}
-    }
-    else if (scorpion->getMovement() == "LEFT" && scorpion->getHit() == "NONE") {
-    	sprite = scorpionWalk;
-    	if(scorpion->getX() > raiden->getX()){
-			sprite->Play(100, scorpion->getWidth());
-		}else{
-			sprite->PlayBack(100);
-		}
-    }
-    else if (scorpion->getMovement() == "DUCK") {
-        sprite = scorpionDuck;
-        sprite->Play(20, scorpion->getWidth());
-    }
-    else if (scorpion->getHit() == "KICK") {
-		sprite = scorpionKick;
-		sprite->Play(100, scorpion->getHitWidth());
-	}
-    else if (scorpion->getHit() == "KICKDOWN") {
-    		sprite = scorpionKickDown;
-    		sprite->Play(100, scorpion->getHitWidth());
-    }
-    else if (scorpion->getHit() == "PUNCH") {
-    		sprite = scorpionPunch;
-    		sprite->Play(100, scorpion->getHitWidth());
-    }
-    else if (scorpion->getHit() == "SHOOT") {
-    		sprite = scorpionShootOne;
-
-    		currentFrame = sprite->PlayShoot(90, scorpion->getHitWidth());
-    		if (currentFrame >= 3 && currentFrame <=6)
-    		{
-    			shootChar1 = scorpionShootTwo;
-    			shootChar1->PlayShoot2(150, shootWidthCalculatedDistance());
-    		}
-    		else
-    			shootChar1 = NULL;
-    }
-    else if (scorpion->getHit() == "DEFENSE") {
-            sprite = scorpionBlock;
-            sprite->Play(100, scorpion->getHitWidth());
-    } else if (scorpion->getHit() == "DEFENSEDOWN") {
-            sprite = scorpionBlockDown;
-            sprite->Play(100, scorpion->getWidth());
-    }
-    else if (scorpion->getHit() == "DIZZY") {
-    		sprite = scorpionDizzy;
-    		sprite->Play(150, scorpion->getWidth());
-    }
-    else if ((scorpion->getHit() == "PUNCHJUMPLEFT" || scorpion->getHit() == "PUNCHJUMPRIGHT")) {
-    	if (scorpion->isJumping() )
-    	{
-			sprite = scorpionPunchJump;
-			sprite->Play(400, scorpion->getHitWidth());
-    	}
-    	else
-    	{
-            sprite = scorpionStance;
-            RestartAllScorpionSprites();
-            sprite->Play(75, scorpion->getWidth());
-    	}
-	}
-    else if (scorpion->getHit() == "WINNER") {
-    		sprite = scorpionWinner;
-    		sprite->Play(150, scorpion->getHitWidth());
-    }
-    else if (scorpion->getHit() == "PUNCHUP") {
-        		sprite = scorpionPunchUp;
-        		sprite->Play(100, scorpion->getHitWidth());
-	};
-
-    /****************************************************************************************************/
 
     CharacterSprite* sprite2;
 
@@ -766,6 +657,7 @@ void GameView::runCharacter() {
 		sprite2 = raidenPunchUp;
 		sprite2->Play(150, raiden->getHitWidth());
 	};
+    */
 
     if(scorpion->getX() < raiden->getX()){
         sprite->switchSide('r');

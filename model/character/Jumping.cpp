@@ -35,7 +35,3 @@ bool Jumping::isJumping() {
 string Jumping::getName() {
     return "Jumping";
 }
-
-float Jumping::getWidth() {
-    return 0;
-}

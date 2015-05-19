@@ -69,7 +69,3 @@ void CharacterStance::update(MKCharacter * character, Events aEvent) {
 string CharacterStance::getName() {
     return "Stance";
 }
-
-float CharacterStance::getWidth() {
-    return 0;
-}

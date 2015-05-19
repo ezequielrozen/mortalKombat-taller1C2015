@@ -14,7 +14,6 @@ public:
     bool isMovingLeft();
 
     string getName();
-    float getWidth();
 
 private:
     int timer;

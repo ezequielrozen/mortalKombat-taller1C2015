@@ -14,7 +14,6 @@ public:
     bool isJumping();
     bool isMovingLeft();
     string getName();
-    float getWidth();
 
 private:
 };

@@ -1,8 +1,9 @@
 #include "RecevingHit.h"
 #include "../MKCharacter.h"
+#include "CharacterStance.h"
 
 RecevingHit::RecevingHit() {
-
+	this->timer = 27;
 }
 
 RecevingHit::~RecevingHit() {
@@ -18,5 +19,15 @@ string RecevingHit::getName() {
 }
 
 float RecevingHit::getWidth() {
-	return 0;
+	return 1.37;
 }
+
+void RecevingHit::refreshTimer(MKCharacter* character) {
+	if (this->timer == 0) {
+        character->setState(new CharacterStance());
+        this->timer = 27;
+    }
+
+    this->timer -= 1;
+}
+

@@ -10,7 +10,9 @@ public:
     DuckingKickHitting();
     ~DuckingKickHitting();
     void update(MKCharacter* character, Events aEvent);
-    float getWidth();
+    
+    bool isDucking();
+    bool isHitting();
 
 private:
     int timer;

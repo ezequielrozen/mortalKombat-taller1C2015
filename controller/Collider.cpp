@@ -32,12 +32,14 @@ bool Collider::superpositionUp(MKCharacter* character1, MKCharacter* character2)
 
 void Collider::checkHits(MKCharacter* character1, MKCharacter* character2) {
 	if ((superpositionRight(character1,character2) || superpositionLeft(character1, character2)) &&
-		(character1->getHit() != "NONE") &&
-		(character1->getHit() != "BEINGHIT") &&
-		(character1->getHit() != "SHOOT") &&
-		(character1->getHit() != "DEFENSE") &&
-		(character2->getHit() != "SHOOT")) {
+		(character1->isHitting())) {
 
+		if (character1->impacts()) {
+			character2->receiveBlow(DAMAGE.at(character1->getState()),0);
+		}
+	}
+}
+/*
 			if (timer + 100 < SDL_GetTicks()) {
 				if (character1->getHitDelay() == 0 && (!(character2->getHit() == "DEFENSE") || character1->getHit() == "KICKDOWN")) {
 					if (!((character1->getHit() == "PUNCH" || character1->getHit() == "KICK" || character1->getHit() == "PUNCHUP") &&
@@ -49,9 +51,11 @@ void Collider::checkHits(MKCharacter* character1, MKCharacter* character2) {
 				character1->setHitDelay(character1->getHitDelay()-1);
 				timer = SDL_GetTicks();
 			}
-		};
-
-
+		}
+	};
+*/
+	//ACA VA EL SHOOT
+	/*
 	//Como los shoot de los personajes son distintos necesito identificarlos.
 	MKCharacter* scorpion;
 	MKCharacter* raiden;
@@ -114,7 +118,8 @@ void Collider::checkHits(MKCharacter* character1, MKCharacter* character2) {
 			}
 		}
 	}
-}
+	
+}*/
 /*
 void Collider::update(MKCharacter* character1, MKCharacter* character2, bool cameraMoved) {
 
@@ -202,8 +207,8 @@ void Collider::update(MKCharacter* character1, MKCharacter* character2, bool cam
 		if ((this->superpositionLeft(character1, character2) && this->superpositionUp(character1, character2) &&
 																character1->isMovingRight() ||
 			 this->superpositionRight(character1, character2) && this->superpositionUp(character1, character2) &&
-			 character1->isMovingLeft() &&
-			character1->isJumping())) {
+			 character1->isMovingLeft()) &&
+			character1->isJumping()) {
 			if (character1->getX() + character1->getWidth() <= character2->getX() + (character2->getWidth() / 2)) {
 				character1->moveLeft();
 				character1->moveLeft();
@@ -217,8 +222,8 @@ void Collider::update(MKCharacter* character1, MKCharacter* character2, bool cam
 		if ((this->superpositionLeft(character2, character1) && this->superpositionUp(character2, character1) &&
 																character2->isMovingRight() ||
 			 this->superpositionRight(character2, character1) && this->superpositionUp(character2, character1) &&
-			 character2->isMovingLeft() &&
-			character2->isJumping())) {
+			 character2->isMovingLeft()) &&
+			character2->isJumping()) {
 			if (character2->getX() + character2->getWidth() <= character1->getX() + (character1->getWidth() / 2)) {
 				character2->moveLeft();
 				character2->moveLeft();

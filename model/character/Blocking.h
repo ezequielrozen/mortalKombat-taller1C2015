@@ -12,7 +12,7 @@ public:
     void update(MKCharacter * character, Events aEvent );
 
     string getName();
-    float getWidth();
+    bool isBlocking();
 
 private:
     int timer;

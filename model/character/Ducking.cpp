@@ -37,6 +37,6 @@ string Ducking::getName() {
     return "Ducking";
 }
 
-float Ducking::getWidth() {
-    return 0;
+bool Ducking::isDucking() {
+    return true;
 }

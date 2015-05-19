@@ -67,6 +67,8 @@ void MKCharacter::characterUpdate() {
 	if (this->hitReception != "NONE") {
 		this->hitReceptionDelay = this->hitReceptionDelay - 1;
 	}
+
+	this->state->refreshTimer(this);
 }
 
 void MKCharacter::moveRight() {
@@ -279,7 +281,6 @@ void MKCharacter::receiveBlow(int force, char direction) {
 	extern logger* Mylog;
 	this->life -= force;
 	if (force >= 15) {
-		this->setHitReception("FALLING");
 //		GameController::setVibrating(true);
 		InputController::setVibrating(true);
 		if (direction != 0)
@@ -289,9 +290,10 @@ void MKCharacter::receiveBlow(int force, char direction) {
 		}
 	}
 	else if (this->movement == "DUCK") {
-		this->setHitReception("BEINGHITDOWN");
+		//this->setHitReception("BEINGHITDOWN");
 	} else {
-		this->setHitReception("BEINGHIT");
+		//this->setHitReception("BEINGHIT");
+		this->update(ReceiveHit);
 	}
 	Mylog->Log("Personaje (PONERLE NOMBRE) recibe golpe", ERROR_LEVEL_INFO); //FALTA: nombre, vida restada, vida restante.
 	if (this->life <= 0) {
@@ -391,4 +393,24 @@ bool MKCharacter::isJumping() {
 
 string MKCharacter::getState() {
 	return this->state->getName();
+}
+
+float MKCharacter::getStateWidth() {
+	return (this->ancho)*(this->state->getWidth());
+}
+
+bool MKCharacter::isHitting() {
+	return this->state->isHitting();
+}
+
+bool MKCharacter::isDucking() {
+	return this->state->isDucking();
+}
+
+bool MKCharacter::isBlocking() {
+	return this->state->isBlocking();
+}
+
+bool MKCharacter::impacts() {
+	return this->state->impact();
 }

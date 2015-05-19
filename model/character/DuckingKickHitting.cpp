@@ -21,6 +21,10 @@ void DuckingKickHitting::update(MKCharacter *character, Events aEvent) {
     }
 }
 
-float DuckingKickHitting::getWidth() {
-    return 0;
+bool DuckingKickHitting::isDucking() {
+    return true;
+}
+
+bool DuckingKickHitting::isHitting() {
+    return true;
 }

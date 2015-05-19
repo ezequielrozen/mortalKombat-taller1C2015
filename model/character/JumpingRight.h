@@ -3,6 +3,7 @@
 
 #include "../MKCharacter.h"
 #include "CharacterState.h"
+#include "PunchRightJumping.h"
 
 class JumpingRight : public CharacterState {
 
@@ -14,7 +15,6 @@ public:
     bool isJumping();
     bool isMovingRight();
     string getName();
-    float getWidth();
 
 private:
 };
