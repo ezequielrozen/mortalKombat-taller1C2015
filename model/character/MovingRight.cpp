@@ -1,5 +1,6 @@
 #include "MovingRight.h"
 #include "CharacterStance.h"
+#include "JumpingRight.h"
 
 MovingRight::MovingRight() {
 //    this->timer =
@@ -15,7 +16,7 @@ void MovingRight::update(MKCharacter * character, Events aEvent) {
 */    //std::cout << "MovingRight." << std::endl;
     switch (aEvent) {
         case Jump:
-            //cambiar a estado jumpingRight (bolita)
+            character->setState(new JumpingRight());
             break;
         case LowPunch:
             //cambiar a estado a lowPunchingJumpig

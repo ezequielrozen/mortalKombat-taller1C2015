@@ -1,5 +1,6 @@
 #include "MovingLeft.h"
 #include "CharacterStance.h"
+#include "JumpingLeft.h"
 
 MovingLeft::MovingLeft() {
     this->timer = 10;
@@ -15,7 +16,7 @@ void MovingLeft::update(MKCharacter * character, Events aEvent) {
 //    std::cout << "MovingLeft." << std::endl;
     switch (aEvent) {
         case Jump:
-            //cambiar a estado jumpingLeft (bolita)
+            character->setState(new JumpingLeft());
             break;
         case LowPunch:
             //cambiar a estado a lowPunching

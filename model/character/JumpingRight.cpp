@@ -1,21 +1,21 @@
-#include "Jumping.h"
+#include "JumpingRight.h"
 #include "CharacterStance.h"
 #include "ReceivingDuckingPunch.h"
 
-Jumping::Jumping() {
+JumpingRight::JumpingRight() {
 }
 
-Jumping::~Jumping() {
+JumpingRight::~JumpingRight() {
 }
 
-void Jumping::update(MKCharacter * character, Events aEvent) {
+void JumpingRight::update(MKCharacter * character, Events aEvent) {
     // me estoy moviendo para la izquierda y aprieto para la derecha. tengo que cambiar de estado a movingRight
     //delete character->state;
     //character->state = new MovingRight();
 
     switch (aEvent) {
         case ReceiveHit:
-            //cambiar a estado a beingHitJumping
+            //cambiar a estado a beingHitJumpingRight
             character->setState(new ReceivingDuckingPunch());
             break;
         case JumpFinished:
@@ -28,14 +28,20 @@ void Jumping::update(MKCharacter * character, Events aEvent) {
 
 }
 
-bool Jumping::isJumping() {
+bool JumpingRight::isJumping() {
     return true;
 }
 
-string Jumping::getName() {
-    return "Jumping";
+string JumpingRight::getName() {
+    return "JUMPRIGHT";
 }
 
-float Jumping::getWidth() {
+bool JumpingRight::isMovingRight() {
+    cout << "MOVING RIGHT" << endl;
+    return true;
+}
+
+
+float JumpingRight::getWidth() {
     return 0;
 }
