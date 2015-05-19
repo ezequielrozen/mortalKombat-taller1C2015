@@ -39,12 +39,6 @@ public:
 	static void blockRelease(MKCharacter*, MKCharacter*);
 
 
-	static void dizzy(MKCharacter*, MKCharacter*);
-	static void beingHit(MKCharacter*, MKCharacter*);
-	static void winner(MKCharacter*, MKCharacter*);
-
-	static void setVibrating(bool);
-
 private:
 
 

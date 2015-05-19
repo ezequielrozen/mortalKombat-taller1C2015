@@ -56,11 +56,22 @@ private:
 
 	bool c1blockReleased;
 	bool c2blockReleased;
-
+	bool ducked;
+	bool walkingLeft;
+	bool walkingRight;
 
 	bool EjeXPositivo(unsigned char pressedAxis, int pressedAxisValue, SDL_Event* mainEvent);
 	bool EjeXNegativo(unsigned char pressedAxis, int pressedAxisValue, SDL_Event* mainEvent);
 	bool EjeYPositivo(unsigned char pressedAxis, int pressedAxisValue, SDL_Event* mainEvent);
 	bool EjeYNegativo(unsigned char pressedAxis, int pressedAxisValue, SDL_Event* mainEvent);
+	void setDucked(bool value);
+	void setWalkingLeft(bool value);
+	void setWalkingRight(bool value);
+	void KeyUP_Right(unsigned char pressedAxis, int pressedAxisValue,
+			bool printCout, MKCharacter* character, MKCharacter* character2);
+	void KeyUP_Down(unsigned char pressedAxis, int pressedAxisValue,
+			bool printCout, MKCharacter* character, MKCharacter* character2);
+	void KeyUP_Left(unsigned char pressedAxis, int pressedAxisValue,
+			bool printCout, MKCharacter* character, MKCharacter* character2);
 };
 #endif //MORTALKOMBAT_TALLER1C2015_JOYSTICKCONTROLLER_H

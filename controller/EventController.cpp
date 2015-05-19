@@ -90,24 +90,3 @@ void EventController::blockRelease(MKCharacter* character, MKCharacter* characte
 }
 
 
-
-
-
-
-void EventController::dizzy(MKCharacter* character, MKCharacter* character2){
-//	character->update(MoveRight);
-}
-void EventController::beingHit(MKCharacter* character, MKCharacter* character2){
-//	character->update(MoveRight);
-}
-void EventController::winner(MKCharacter* character, MKCharacter* character2)
-{
-//	character->update(MoveRight);
-}
-
-
-
-void EventController::setVibrating(bool vibratingFlag) {
-	vibrating = vibratingFlag;
-}
-
