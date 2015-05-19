@@ -282,6 +282,7 @@ void MKCharacter::receiveBlow(int force, char direction) {
 	this->life -= force;
 	if (force >= 15) {
 //		GameController::setVibrating(true);
+		this->update(ReceiveHit);
 		InputController::setVibrating(true);
 		if (direction != 0)
 		{
@@ -289,10 +290,7 @@ void MKCharacter::receiveBlow(int force, char direction) {
 			(direction == 'l') ? this->setMovement("LEFT") : this->setMovement("RIGHT");
 		}
 	}
-	else if (this->movement == "DUCK") {
-		//this->setHitReception("BEINGHITDOWN");
-	} else {
-		//this->setHitReception("BEINGHIT");
+	else {
 		this->update(ReceiveHit);
 	}
 	Mylog->Log("Personaje (PONERLE NOMBRE) recibe golpe", ERROR_LEVEL_INFO); //FALTA: nombre, vida restada, vida restante.

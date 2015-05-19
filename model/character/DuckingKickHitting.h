@@ -11,8 +11,14 @@ public:
     ~DuckingKickHitting();
     void update(MKCharacter* character, Events aEvent);
     
+    string getName();
+    float getWidth();
+
     bool isDucking();
     bool isHitting();
+
+    void refreshTimer(MKCharacter* character);
+    bool impact();
 
 private:
     int timer;

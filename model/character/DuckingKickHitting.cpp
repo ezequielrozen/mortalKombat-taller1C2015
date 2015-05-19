@@ -2,23 +2,23 @@
 #include "CharacterStance.h"
 
 DuckingKickHitting::DuckingKickHitting() {
-    this->timer = 10;
+    this->timer = 27;
 }
 
 DuckingKickHitting::~DuckingKickHitting() {
 
 }
 
-void DuckingKickHitting::update(MKCharacter *character, Events aEvent) {
-    this->timer -= 1;
-    if (this->timer == 0) {
-        character->setState(new CharacterStance());
-    } else {
-        switch (aEvent) {
-            default:
-                break;
-        }
-    }
+void DuckingKickHitting::update(MKCharacter *character, Events aEvent) {   
+        
+}
+
+string DuckingKickHitting::getName() {
+    return "DuckingKickHitting";
+}
+
+float DuckingKickHitting::getWidth() {
+    return 1.79;
 }
 
 bool DuckingKickHitting::isDucking() {
@@ -27,4 +27,18 @@ bool DuckingKickHitting::isDucking() {
 
 bool DuckingKickHitting::isHitting() {
     return true;
+}
+
+void DuckingKickHitting::refreshTimer(MKCharacter* character) {
+
+    if (this->timer == 0) {
+        character->setState(new CharacterStance());
+        this->timer = 27;
+    }
+
+    this->timer -= 1;
+}
+
+bool DuckingKickHitting::impact() {
+    return (this->timer == 20);
 }
