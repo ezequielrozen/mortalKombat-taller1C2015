@@ -476,6 +476,7 @@ void GameView::runCharacter() {
     CharacterSprite* sprite2 = NULL;
     CharacterSprite* shootChar1 = NULL;
     CharacterSprite* shootChar2 = NULL;
+
     int currentFrame=-1;
     int currentFrame2=-1;
          
@@ -494,7 +495,13 @@ void GameView::runCharacter() {
         sprite->PlayBack(100);
     }
     else if (scorpion->getState() == "WeaponHitting"){
+        sprite = scorpionSprites.at("Stance");
+        sprite->Play(100, scorpion->getWidth());
+//    	shootChar1 = scorpionSprites.at(scorpion->getState());
+//    	shootChar1->Play(100, scorpion->getStateWidth());
 
+        shootChar1 = scorpionSprites.at("WeaponHitting");
+		shootChar1->PlayShoot2(100, 20);
     }
     
     aux = (raiden->getX() < scorpion->getX());
@@ -512,81 +519,82 @@ void GameView::runCharacter() {
         sprite2->PlayBack(100);
     }
 
+
     if(scorpion->getX() < raiden->getX()){
-        sprite->switchSide('r');
-        sprite2->switchSide('l');
+            sprite->switchSide('r');
+            sprite2->switchSide('l');
+
+            if (shootChar1 != NULL) {
+            	shootChar1->switchSide('r');
+            	shootChar1->setX(scorpion->getX() + scorpion->getWeapon()->getPositionX());
+    			shootChar1->setY(scorpion->getY()+20);
+            }
+            if (shootChar2 != NULL) {
+    			shootChar2->switchSide('l');
+    			shootChar2->setY(raiden->getY()+20);
+    			RaidenShootSetPosX(currentFrame2, shootChar2);
+
+    		}
+        }else{
+            sprite->switchSide('l');
+            sprite2->switchSide('r');
+
+            if (shootChar1 != NULL) {
+            	shootChar1->switchSide('l');
+            	shootChar1->setX(scorpion->getX() - scorpion->getWeapon()->getPositionX());
+    			shootChar1->setY(scorpion->getY()+20);
+            }
+
+            if (shootChar2 != NULL) {
+    			shootChar2->switchSide('r');
+    			shootChar2->setY(raiden->getY()+20);
+    			RaidenShootSetPosX(currentFrame2, shootChar2);
+    		}
+        }
+
+    	sprite->setX(scorpion->getX());
+        sprite->setY(scorpion->getY());
+
+        //if (GameController::isVibrating())
+        if(InputController::isVibrating())
+            if(!sprite->vibrationFinished())
+                sprite->vibrate();
+            else
+            	//GameController::setVibrating(false);
+    			InputController::setVibrating(false);
+        else
+            sprite->resetFinished();
+
+
+        sprite2->setX(raiden->getX());
+        sprite2->setY(raiden->getY());
+
+        //if (GameController::isVibrating())
+    	if(InputController::isVibrating())
+            if(!sprite2->vibrationFinished())
+               sprite2->vibrate();
+            else
+            	//GameController::setVibrating(false);
+    			InputController::setVibrating(false);
+        else
+            sprite2->resetFinished();
+
+        if (raiden->isHitting()) {
+            sprite->Draw();
+            sprite2->Draw();
+        }
+        else {
+            sprite2->Draw();
+            sprite->Draw();
+        }
 
         if (shootChar1 != NULL) {
-        	shootChar1->switchSide('r');
-			shootChar1->setX(scorpion->getX() + scorpion->getHitWidth()-15);
-			shootChar1->setY(scorpion->getY()+20);
-        }
-        if (shootChar2 != NULL) {
-			shootChar2->switchSide('l');
-			shootChar2->setY(raiden->getY()+20);
-			RaidenShootSetPosX(currentFrame2, shootChar2);
-
-		}
-    }else{
-        sprite->switchSide('l');
-        sprite2->switchSide('r');
-
-        if (shootChar1 != NULL) {
-        	shootChar1->switchSide('l');
-        	shootChar1->setX(scorpion->getX() - (shootWidthCalculatedDistance())+15);
-			shootChar1->setY(scorpion->getY()+20);
+        	shootChar1->Draw();
         }
 
         if (shootChar2 != NULL) {
-			shootChar2->switchSide('r');
-			shootChar2->setY(raiden->getY()+20);
-			RaidenShootSetPosX(currentFrame2, shootChar2);
-		}
-    }
-
-	sprite->setX(scorpion->getX());
-    sprite->setY(scorpion->getY());
-
-    //if (GameController::isVibrating())
-    if(InputController::isVibrating())
-        if(!sprite->vibrationFinished())
-            sprite->vibrate();
-        else
-        	//GameController::setVibrating(false);
-			InputController::setVibrating(false);
-    else
-        sprite->resetFinished();
-
-
-    sprite2->setX(raiden->getX());
-    sprite2->setY(raiden->getY());
-
-    //if (GameController::isVibrating())
-	if(InputController::isVibrating())
-        if(!sprite2->vibrationFinished())
-           sprite2->vibrate();
-        else
-        	//GameController::setVibrating(false);
-			InputController::setVibrating(false);
-    else
-        sprite2->resetFinished();
-
-    if (raiden->isHitting()) {
-        sprite->Draw();
-        sprite2->Draw();
-    }
-    else {
-        sprite2->Draw();
-        sprite->Draw();
-    }
-
-    if (shootChar1 != NULL) {
-    	shootChar1->Draw();
-    }
-
-    if (shootChar2 != NULL) {
-    	shootChar2->Draw();
-    }
+        	shootChar2->Draw();
+        }
 
 }
 

@@ -4,6 +4,7 @@ Weapon::Weapon(float width, float height) {
     this->active = false;
     this->width = width;
     this->height = height;
+    this->speed = 3;
 }
 
 
@@ -26,7 +27,9 @@ void Weapon::throwWeapon(float initialX, float initialY, char direction) {
 }
 
 void Weapon::stepForward() {
-    if (this->direction == 'r')
+	cout << positionX << endl;
+
+	if (this->direction == 'r')
         this->positionX -= speed;
     else if (this->direction == 'l')
         this->positionX += speed;

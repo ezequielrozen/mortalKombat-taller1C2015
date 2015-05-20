@@ -71,6 +71,11 @@ void MKCharacter::characterUpdate() {
 		throwWeapon();
 		cout << "ARROJO EL ARMA" << endl;
 	}
+
+	if (this->weapon->isActive())
+	{
+		this->weapon->update();
+	}
 }
 
 void MKCharacter::moveRight() {
@@ -275,6 +280,7 @@ char* MKCharacter::getFileMovement(const char* moveName){
 }
 
 bool MKCharacter::isAlive() {
+
 	return this->life > 0;
 //	return true;
 
@@ -432,5 +438,7 @@ Weapon *MKCharacter::getWeapon() {
 }
 
 void MKCharacter::throwWeapon() {
-	this->weapon->throwWeapon(this->posX,this->posY +  this->getHeight() * 0.2 /* AL 80% DE LA ALTURA DEL PERSONAJE, USAR CTE*/, this->getCharacterSide());
+
+//	this->weapon->throwWeapon(this->posX + this->getWidth(),this->posY +  this->getHeight() * 0.2 /* AL 80% DE LA ALTURA DEL PERSONAJE, USAR CTE*/, this->getCharacterSide());
+	this->weapon->throwWeapon(this->posX + this->getWidth(),this->posY +  this->getHeight() * 0.2 /* AL 80% DE LA ALTURA DEL PERSONAJE, USAR CTE*/, 'l');
 }
