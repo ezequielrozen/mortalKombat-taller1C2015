@@ -31,10 +31,6 @@ public:
     bool isBlocking();
     //bool isJumping();
 
-    // Weapon
-    Weapon* weapon;
-    void throwWeapon();
-
     double getYMax();
     double getVelY();
     double getAccY();
@@ -123,6 +119,10 @@ public:
 
     bool impacts();
 
+    Weapon* getWeapon();
+
+    void throwWeapon();
+
 private:
 
     // State
@@ -169,6 +169,9 @@ private:
 	char characterSide;
 
     string name;
+
+    // Weapon
+    Weapon* weapon;
 };
 
 #endif /* MKCHARACTER_H_ */

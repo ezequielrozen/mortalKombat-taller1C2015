@@ -5,6 +5,10 @@ WeaponHitting::WeaponHitting() {
 	this->timer = 10;
 }
 
+void WeaponHitting::refreshTimer(MKCharacter *character) {
+
+}
+
 WeaponHitting::~WeaponHitting() {
 
 }

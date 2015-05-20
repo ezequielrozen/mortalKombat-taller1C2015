@@ -3,6 +3,7 @@
 #include "ReceivingDuckingKick.h"
 #include "KickLeftJumpingHitting.h"
 #include "RecevingHit.h"
+#include "ReceivingDuckingPunch.h"
 
 HighKickHitting::HighKickHitting() {
     this->timer = 40;
@@ -16,6 +17,12 @@ void HighKickHitting::update(MKCharacter *character, Events aEvent) {
     switch(aEvent) {
         case ReceiveDuckingKick:
             character->setState(new ReceivingDuckingKick());
+            break;
+        case ReceiveDuckingPunch:
+            character->setState(new ReceivingDuckingPunch());
+            break;
+        case ReceiveWeapon:
+            character->setState(new ReceivingDuckingPunch());
             break;
         case ReceiveHit:
             character->setState(new RecevingHit());

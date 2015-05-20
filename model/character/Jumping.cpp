@@ -1,6 +1,7 @@
 #include "Jumping.h"
 #include "CharacterStance.h"
 #include "ReceivingDuckingPunch.h"
+#include "WeaponHItting.h"
 
 Jumping::Jumping() {
 }
@@ -15,8 +16,18 @@ void Jumping::update(MKCharacter * character, Events aEvent) {
             break;
         case ReceiveDuckingPunch:
             character->setState(new ReceivingDuckingPunch());
+            break;
         case JumpFinished:
             character->setState(new CharacterStance());
+            break;
+        case ReceiveWeapon:
+            character->setState(new ReceivingDuckingPunch());
+            break;
+        case WeaponHit:
+            if (!character->getWeapon()->isActive()) {
+                character->setState(new WeaponHitting());
+            }
+            break;
         default:
             break;
     }

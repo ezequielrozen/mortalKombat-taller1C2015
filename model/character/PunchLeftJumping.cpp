@@ -16,8 +16,12 @@ void PunchLeftJumping::update(MKCharacter *character, Events aEvent) {
         case ReceiveDuckingPunch:
             character->setState(new ReceivingDuckingPunch());
             break;
+        case ReceiveWeapon:
+            character->setState(new ReceivingDuckingPunch());
+            break;
         case JumpFinished:
             character->setState(new CharacterStance());
+            break;
         default:
             break;
 

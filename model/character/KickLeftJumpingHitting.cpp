@@ -1,5 +1,6 @@
 #include "KickLeftJumpingHitting.h"
 #include "CharacterStance.h"
+#include "ReceivingDuckingPunch.h"
 
 KickLeftJumpingHitting::KickLeftJumpingHitting() {
 
@@ -13,6 +14,10 @@ void KickLeftJumpingHitting::update(MKCharacter *character, Events aEvent) {
     switch (aEvent) {
         case JumpFinished:
             character->setState(new CharacterStance());
+            break;
+        case ReceiveWeapon:
+            character->setState(new ReceivingDuckingPunch());
+            break;
         default:
             break;
     }

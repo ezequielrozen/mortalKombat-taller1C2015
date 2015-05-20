@@ -15,6 +15,8 @@ public:
 
 private:
     int timer;
+public:
+    virtual void refreshTimer(MKCharacter *character);
 };
 
 

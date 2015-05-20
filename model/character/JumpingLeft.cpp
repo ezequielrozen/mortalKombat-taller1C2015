@@ -2,6 +2,8 @@
 #include "CharacterStance.h"
 #include "ReceivingDuckingPunch.h"
 #include "PunchLeftJumping.h"
+#include "WeaponHItting.h"
+#include "MovingLeft.h"
 
 JumpingLeft::JumpingLeft() {
 }
@@ -16,8 +18,18 @@ void JumpingLeft::update(MKCharacter * character, Events aEvent) {
             break;
         case ReceiveDuckingPunch:
             character->setState(new ReceivingDuckingPunch());
+            break;
         case JumpFinished:
-            character->setState(new CharacterStance());
+            character->setState(new MovingLeft());
+            break;
+        case ReceiveWeapon:
+            character->setState(new ReceivingDuckingPunch());
+            break;
+        case WeaponHit:
+            if (!character->getWeapon()->isActive()) {
+                character->setState(new WeaponHitting());
+            }
+            break;
         default:
             break;
     }

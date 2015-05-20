@@ -23,6 +23,9 @@ void HighPunchHitting::update(MKCharacter *character, Events aEvent) {
         case ReceiveDuckingPunch:
             character->setState(new ReceivingDuckingPunch());
             break;
+        case ReceiveWeapon:
+            character->setState(new ReceivingDuckingPunch());
+            break;
         default:
             break;
     }

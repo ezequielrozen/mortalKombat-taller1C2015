@@ -1,6 +1,14 @@
 #include "MovingRight.h"
 #include "CharacterStance.h"
 #include "JumpingRight.h"
+#include "LowPunchHitting.h"
+#include "LowKickHitting.h"
+#include "RecevingHit.h"
+#include "ReceivingDuckingKick.h"
+#include "HighKickHitting.h"
+#include "HighPunchHitting.h"
+#include "WeaponHItting.h"
+#include "Ducking.h"
 
 MovingRight::MovingRight() {
 //    this->timer =
@@ -10,34 +18,50 @@ MovingRight::~MovingRight() {
 }
 
 void MovingRight::update(MKCharacter * character, Events aEvent) {
-//    delete character->state; no estoy seguro si está bien, pero la idea es que como se cambia de estado, liberamos la memoria del anterior. no es costoso hacer estos news.
-/*
-    character->setState(new MovingRight());
-*/    //std::cout << "MovingRight." << std::endl;
     switch (aEvent) {
         case Jump:
             character->setState(new JumpingRight());
             break;
+        case Duck:
+            character->setState(new Ducking());
+            break;
+        case HighKick:
+            character->setState(new HighKickHitting());
+            break;
+        case HighPunch:
+            character->setState(new HighPunchHitting());
+            break;
         case LowPunch:
-            //cambiar a estado a lowPunchingJumpig
+            character->setState(new LowPunchHitting());
             break;
         case LowKick:
-            //cambiar a estado a lowKicking
+            character->setState(new LowKickHitting());
+            break;
+        case WeaponHit:
+            if (!character->getWeapon()->isActive()) {
+                character->setState(new WeaponHitting());
+            }
             break;
         case ReceiveHit:
-            //cambiar a estado a beingHit
+            character->setState(new RecevingHit());
+            break;
+        case ReceiveDuckingKick:
+            character->setState(new ReceivingDuckingKick());
+            break;
+        case ReceiveDuckingPunch:
+            character->setState(new ReceivingDuckingPunch());
+            break;
+        case ReceiveWeapon:
+            character->setState(new ReceivingDuckingPunch());
             break;
         case MoveLeft:
             character->setState(new MovingLeft());
-            break;    
+            break;
         case MoveRightRelease:
-//        	cout << "stance por Release" << endl;
             character->setState(new CharacterStance());
             break;
         default:
-            //si no recibe ninguno de los otros eventos, en principio no hay que hacer nada, porque no afectan a este estado
             break;
-
     }
 }
 

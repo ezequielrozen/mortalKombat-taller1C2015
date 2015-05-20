@@ -67,7 +67,7 @@ void EventController::highKick(MKCharacter* character, MKCharacter* character2){
 void EventController::lowKick(MKCharacter* character, MKCharacter* character2){
 //	cout << "lowKick : " << character->getName() << endl;
 	Mylog->Log("movimiento del personaje: Patada baja", ERROR_LEVEL_INFO);
-//	character->update(LowKick);
+	character->update(LowKick);
 }
 
 void EventController::highPunch(MKCharacter* character, MKCharacter* character2){
@@ -79,7 +79,7 @@ void EventController::highPunch(MKCharacter* character, MKCharacter* character2)
 void EventController::lowPunch(MKCharacter* character, MKCharacter* character2){
 //	cout << "lowPunch : " << character->getName() << endl;
 	Mylog->Log("movimiento del personaje: Golpe de puño bajo.", ERROR_LEVEL_INFO);
-//	character->update(LowPunch);
+	character->update(LowPunch);
 }
 
 void EventController::shoot(MKCharacter* character, MKCharacter* character2){
