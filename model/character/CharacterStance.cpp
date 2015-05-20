@@ -8,7 +8,7 @@
 #include "LowPunchHitting.h"
 #include "HighKickHitting.h"
 #include "Blocking.h"
-#include "Shooting.h"
+#include "WeaponHItting.h"
 #include "RecevingHit.h"
 #include "LowKickHitting.h"
 #include "ReceivingDuckingPunch.h"

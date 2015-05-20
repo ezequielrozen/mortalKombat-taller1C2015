@@ -3,11 +3,11 @@
 
 #include "../MKCharacter.h"
 
-class Shooting : public CharacterState {
+class WeaponHitting : public CharacterState {
 
 public:
-    Shooting();
-    ~Shooting();
+    WeaponHitting();
+    ~WeaponHitting();
     void update(MKCharacter * character, Events aEvent );
 
     string getName();

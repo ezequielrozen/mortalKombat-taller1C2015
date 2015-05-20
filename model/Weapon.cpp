@@ -1,11 +1,7 @@
-//
-// Created by mauri on 20/05/15.
-//
-
 #include "Weapon.h"
 
 Weapon::Weapon(float width, float height) {
-    active = false;
+    this->active = false;
     this->width = width;
     this->height = height;
 }
@@ -21,9 +17,11 @@ void Weapon::update() {
 }
 
 void Weapon::throwWeapon(float initialX, string direction) {
-    this->active = true;
-    this->positionX = initialX;
-    this->direction = direction;
+    if (!this->active) {
+        this->active = true;
+        this->positionX = initialX;
+        this->direction = direction;
+    }
 }
 
 void Weapon::stepForward() {
@@ -42,5 +40,5 @@ float Weapon::getPositionX() {
 }
 
 void Weapon::destroy() {
-    active = false;
+    this->active = false;
 }

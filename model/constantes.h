@@ -114,7 +114,7 @@ const Map DAMAGE = {{"HighKickHitting", 10},{"HighPunchHitting", 5}, {"DuckingKi
 //Fija el delay que tiene el personaje para cambiar de direccion. (A mayor, mas tarda en cambiar de direccion. Osea, a mayor, patina mas)
 const int COMMANDDELAY                      =  300;
 const int COMMANDDELAYKIT                   =  600;
-const int GAMEDELAY                         =   15;
+const int GAMEDELAY                         =   3;
 ////Velocidad inicial del salto del personaje.
 //const float SPEED                             =  0.04285*ANCHOVENTANAL;
 ////Aceleracion aplicada al salto del personaje.
@@ -133,6 +133,6 @@ const unsigned char DEFAULT_KEY[20] = "adwscezqxokljmnbypb";
 
 //
 
-enum Events { MoveRight, MoveLeft, Jump, Duck, HighPunch, LowPunch, HighKick, LowKick, Block, Shoot, ReceiveHit, ReceiveDuckingPunch, ReceiveDuckingKick, ReceiveShoot, MoveRightRelease, MoveLeftRelease, DuckRelease, BlockRelease, DuckingKick, JumpingKickRight, JumpingKickLeft, ShootingReceived, JumpFinished};
+enum Events { MoveRight, MoveLeft, Jump, Duck, WeaponHit, HighPunch, LowPunch, HighKick, LowKick, Block, Shoot, ReceiveHit, ReceiveDuckingPunch, ReceiveDuckingKick, ReceiveShoot, MoveRightRelease, MoveLeftRelease, DuckRelease, BlockRelease, DuckingKick, JumpingKickRight, JumpingKickLeft, ShootingReceived, JumpFinished};
 
 #endif /* CONSTANTES_H_ */
