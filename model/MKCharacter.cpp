@@ -67,6 +67,10 @@ void MKCharacter::characterUpdate() {
 	}
 
 	this->state->refreshTimer(this);
+	if (this->state->startThrowing() && !this->weapon->isActive()) {
+		throwWeapon();
+		cout << "ARROJO EL ARMA" << endl;
+	}
 }
 
 void MKCharacter::moveRight() {

@@ -4,7 +4,7 @@
 
 #include "CharacterState.h"
 
-class KickLeftJumpingHitting : CharacterState {
+class KickLeftJumpingHitting : public CharacterState {
 
 public:
     KickLeftJumpingHitting();

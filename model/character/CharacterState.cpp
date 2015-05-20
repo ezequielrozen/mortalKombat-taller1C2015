@@ -51,3 +51,7 @@ void CharacterState::refreshTimer(MKCharacter* character) {
 bool CharacterState::impact() {
 	return false;
 }
+
+bool CharacterState::startThrowing() {
+	return false;
+}

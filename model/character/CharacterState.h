@@ -20,6 +20,7 @@ public:
     virtual string getName();
     virtual float getJumpLevel();
     virtual void refreshTimer(MKCharacter* character);
+    virtual bool startThrowing();
 
     virtual bool impact();
 

@@ -4,6 +4,7 @@
 #include "PunchLeftJumping.h"
 #include "WeaponHItting.h"
 #include "MovingLeft.h"
+#include "KickLeftJumpingHitting.h"
 
 JumpingLeft::JumpingLeft() {
 }
@@ -13,6 +14,18 @@ JumpingLeft::~JumpingLeft() {
 
 void JumpingLeft::update(MKCharacter * character, Events aEvent) {
     switch (aEvent) {
+        case HighPunch:
+            character->setState(new PunchLeftJumping());
+            break;
+        case LowPunch:
+            character->setState(new PunchLeftJumping());
+            break;
+        case HighKick:
+            character->setState(new KickLeftJumpingHitting());
+            break;
+        case LowKick:
+            character->setState(new KickLeftJumpingHitting());
+            break;
         case ReceiveHit:
             character->setState(new ReceivingDuckingPunch());
             break;
