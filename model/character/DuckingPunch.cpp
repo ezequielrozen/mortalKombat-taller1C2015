@@ -51,11 +51,11 @@ bool DuckingPunch::isDucking() {
 }
 
 float DuckingPunch::getWidth() {
-    return CharacterState::getWidth();
+    return 1.51;
 }
 
 string DuckingPunch::getName() {
-    return CharacterState::getName();
+    return "DuckingPunch";
 }
 
 float DuckingPunch::getJumpLevel() {

@@ -114,6 +114,7 @@ const Map DAMAGE = {{"HighKickHitting", 10},{"HighPunchHitting", 5}, {"DuckingKi
 //Fija el delay que tiene el personaje para cambiar de direccion. (A mayor, mas tarda en cambiar de direccion. Osea, a mayor, patina mas)
 const int COMMANDDELAY                      =  300;
 const int COMMANDDELAYKIT                   =  600;
+const int GAMEDELAY                         =   15;
 ////Velocidad inicial del salto del personaje.
 //const float SPEED                             =  0.04285*ANCHOVENTANAL;
 ////Aceleracion aplicada al salto del personaje.
