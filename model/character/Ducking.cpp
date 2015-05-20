@@ -4,6 +4,7 @@
 #include "DuckingKickHitting.h"
 #include "RecevingHit.h"
 #include "ReceivingDuckingKick.h"
+#include "DuckingPunch.h"
 
 Ducking::Ducking() {
     this->timer = 10;
@@ -16,7 +17,7 @@ void Ducking::update(MKCharacter * character, Events aEvent) {
 
     switch (aEvent) {
         case LowPunch:
-            character->setState(new LowPunchHitting());
+            character->setState(new DuckingPunch());
             break;
         case HighKick:
             character->setState(new DuckingKickHitting());
