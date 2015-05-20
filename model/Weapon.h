@@ -1,0 +1,14 @@
+//
+// Created by mauri on 20/05/15.
+//
+
+#ifndef MORTALKOMBAT_TALLER1C2015_WEAPON_H
+#define MORTALKOMBAT_TALLER1C2015_WEAPON_H
+
+
+class Weapon {
+
+};
+
+
+#endif //MORTALKOMBAT_TALLER1C2015_WEAPON_H
