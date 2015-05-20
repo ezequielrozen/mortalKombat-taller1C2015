@@ -14,6 +14,8 @@ public:
     string getName();
     float getWidth();
     bool isHitting();
+    bool isJumping();
+    bool isMovingRight();
     bool impact();
 
 };
