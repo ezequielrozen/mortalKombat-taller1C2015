@@ -8,7 +8,7 @@
 #include "LowPunchHitting.h"
 #include "HighKickHitting.h"
 #include "Blocking.h"
-#include "Shooting.h"
+#include "WeaponHItting.h"
 #include "RecevingHit.h"
 #include "LowKickHitting.h"
 #include "ReceivingDuckingPunch.h"
@@ -54,7 +54,7 @@ void CharacterStance::update(MKCharacter * character, Events aEvent) {
             character->setState(new Blocking());
             break;
         case Shoot:
-            character->setState(new Shooting());
+            character->setState(new WeaponHitting());
             break;
         case ReceiveHit:
             character->setState(new RecevingHit());
