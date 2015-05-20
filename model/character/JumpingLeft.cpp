@@ -10,29 +10,17 @@ JumpingLeft::~JumpingLeft() {
 }
 
 void JumpingLeft::update(MKCharacter * character, Events aEvent) {
-    // me estoy moviendo para la izquierda y aprieto para la derecha. tengo que cambiar de estado a movingLeft
-    //delete character->state;
-    //character->state = new MovingLeft();
-
     switch (aEvent) {
-        case HighPunch:
-            character->setState(new PunchLeftJumping());
-            break;
-        case LowPunch:
-            character->setState(new PunchLeftJumping());
-            break;
         case ReceiveHit:
-            //cambiar a estado a beingHitJumpingLeft
             character->setState(new ReceivingDuckingPunch());
             break;
+        case ReceiveDuckingPunch:
+            character->setState(new ReceivingDuckingPunch());
         case JumpFinished:
             character->setState(new CharacterStance());
         default:
-            //si no recibe ninguno de los otros eventos, en principio no hay que hacer nada, porque no afectan a este estado
             break;
-
     }
-
 }
 
 bool JumpingLeft::isJumping() {

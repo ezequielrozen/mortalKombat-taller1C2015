@@ -132,6 +132,6 @@ const unsigned char DEFAULT_KEY[20] = "adwscezqxokljmnbypb";
 
 //
 
-enum Events { MoveRight, MoveLeft, Jump, Duck, HighPunch, LowPunch, HighKick, LowKick, Block, Shoot, ReceiveHit, MoveRightRelease, MoveLeftRelease, DuckRelease, BlockRelease, DuckingKick, JumpingKickRight, JumpingKickLeft, ShootingReceived, JumpFinished};
+enum Events { MoveRight, MoveLeft, Jump, Duck, HighPunch, LowPunch, HighKick, LowKick, Block, Shoot, ReceiveHit, ReceiveDuckingPunch, ReceiveDuckingKick, ReceiveShoot, MoveRightRelease, MoveLeftRelease, DuckRelease, BlockRelease, DuckingKick, JumpingKickRight, JumpingKickLeft, ShootingReceived, JumpFinished};
 
 #endif /* CONSTANTES_H_ */

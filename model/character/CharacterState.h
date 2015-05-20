@@ -24,7 +24,7 @@ public:
     virtual bool impact();
 
 protected:
-    void setState(MKCharacter * character, CharacterState* aState);
+    virtual void setState(MKCharacter * character, CharacterState* aState);
     map<Events, CharacterState>* eventMap;
 
 };

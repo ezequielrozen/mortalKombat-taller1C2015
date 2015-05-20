@@ -2,10 +2,10 @@
 #include "../MKCharacter.h"
 #include "CharacterStance.h"
 #include "ReceivingDuckingKick.h"
-#include "ReceivingHit.h"
+#include "RecevingHit.h"
 
 LowKickHitting::LowKickHitting() {
-    this->timer = 10;
+    this->timer = 40;
 }
 
 LowKickHitting::~LowKickHitting() {
@@ -13,31 +13,36 @@ LowKickHitting::~LowKickHitting() {
 }
 
 void LowKickHitting::update(MKCharacter* character, Events aEvent) {
-    this->timer -= 1;
-    if (this->timer == 0) {
-        character->setState(new CharacterStance());
-        this->timer = 10;
-    } else {
-        switch (aEvent) {
-            case DuckingKick:
-                character->setState(new ReceivingDuckingKick());
-                break;
-            case JumpingKickLeft:
-                character->setState(new ReceivingHit());
-                break;
-            case JumpingKickRight:
-                character->setState(new ReceivingHit());
-                break;
-            default:
-                break;
-        }
+    switch (aEvent) {
+        case DuckingKick:
+            character->setState(new ReceivingDuckingKick());
+            break;
+        case ReceiveHit:
+            character->setState(new RecevingHit());
+            break;
+        default:
+            break;
     }
 }
 
 float LowKickHitting::getWidth() {
-    return 0;
+    return 1.88;
+}
+
+void LowKickHitting::refreshTimer(MKCharacter* character) {
+
+    if (this->timer == 0) {
+        character->setState(new CharacterStance());
+        this->timer = 40;
+    }
+
+    this->timer -= 1;
 }
 
 string LowKickHitting::getName() {
 	return "LowKickHitting";
+}
+
+bool LowKickHitting::impact() {
+    return (this->timer == 14);
 }

@@ -13,6 +13,8 @@ public:
     
     string getName();
     float getWidth();
+    void refreshTimer(MKCharacter* character);
+    bool impact();
 
 private:
     int timer;

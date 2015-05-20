@@ -9,17 +9,17 @@ PunchRightJumping::~PunchRightJumping() {
 }
 
 void PunchRightJumping::update(MKCharacter *character, Events aEvent) {
-	switch (aEvent) {
+    switch (aEvent) {
         case ReceiveHit:
-            //cambiar a estado a beingHitJumpingLeft
+            character->setState(new ReceivingDuckingPunch());
+            break;
+        case ReceiveDuckingPunch:
             character->setState(new ReceivingDuckingPunch());
             break;
         case JumpFinished:
             character->setState(new CharacterStance());
         default:
-            //si no recibe ninguno de los otros eventos, en principio no hay que hacer nada, porque no afectan a este estado
             break;
-
     }
 }
 

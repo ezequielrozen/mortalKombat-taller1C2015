@@ -1,5 +1,6 @@
 #include "DuckingKickHitting.h"
 #include "CharacterStance.h"
+#include "RecevingHit.h"
 
 DuckingKickHitting::DuckingKickHitting() {
     this->timer = 27;
@@ -10,7 +11,13 @@ DuckingKickHitting::~DuckingKickHitting() {
 }
 
 void DuckingKickHitting::update(MKCharacter *character, Events aEvent) {   
-        
+    switch(aEvent) {
+        case ReceiveHit:
+            character->setState(new RecevingHit());
+            break;
+        default:
+            break;
+    }
 }
 
 string DuckingKickHitting::getName() {
