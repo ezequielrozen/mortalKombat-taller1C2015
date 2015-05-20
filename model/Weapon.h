@@ -11,13 +11,21 @@ using namespace std;
 
 class Weapon {
 public:
-    Weapon();
+    Weapon(float width, float height);
     ~Weapon();
+    void update();
+    bool isActive();
+    void destroy();
+    float getPositionX();
+    void throwWeapon(float initialPositionX, string direction);
 private:
     float speed;
+    float positionX;
     float height;
     float width;
+    bool active;
     string direction;
+    void stepForward();
 };
 
 

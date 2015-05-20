@@ -5,8 +5,9 @@
 
 MKCharacter::MKCharacter(float initialPosX, float ancho, float alto, int z_index, int pCharacterNumber, string name) {
 
-	this->state = new CharacterStance();
+	this->weapon = new Weapon(alto / 4, alto / 4);
 
+	this->state = new CharacterStance();
 	this->z_index = z_index;
 	posX = initialPosX;
 	auxPosX = initialPosX;

@@ -8,6 +8,7 @@
 #include "constantes.h"
 #include "logger.h"
 #include "character/CharacterState.h"
+#include "Weapon.h"
 
 using namespace std;
 
@@ -29,6 +30,9 @@ public:
     bool isDucking();
     bool isBlocking();
     //bool isJumping();
+
+    // Weapon
+    Weapon* weapon;
 
     double getYMax();
     double getVelY();
