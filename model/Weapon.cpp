@@ -21,9 +21,11 @@ void Weapon::update() {
 }
 
 void Weapon::throwWeapon(float initialX, string direction) {
-    this->active = true;
-    this->positionX = initialX;
-    this->direction = direction;
+    if (!this->isActive()) {
+        this->active = true;
+        this->positionX = initialX;
+        this->direction = direction;
+    }
 }
 
 void Weapon::stepForward() {
