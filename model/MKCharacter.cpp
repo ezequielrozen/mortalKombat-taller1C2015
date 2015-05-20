@@ -40,6 +40,7 @@ MKCharacter::MKCharacter(float initialPosX, float ancho, float alto, int z_index
 
 MKCharacter::~MKCharacter(void) {
 	delete this->state;
+	delete this->weapon;
 }
 
 void MKCharacter::move() {
