@@ -9,7 +9,6 @@ public:
     Dizzy();
     ~Dizzy();
     void update(MKCharacter* character, Events aEvent);
-
     string getName();
 };
 

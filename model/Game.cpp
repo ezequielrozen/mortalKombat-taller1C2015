@@ -1,5 +1,7 @@
 #include "Game.h"
 #include "../controller/JoystickController.h"
+#include "character/Dizzy.h"
+#include "character/Victory.h"
 
 Game::Game(GameLoader* aGameLoader, char* filePath) {
     this->gameLoader = aGameLoader;
@@ -80,12 +82,8 @@ bool Game::GameLoop() {
     	inputController->checkEvent();
         gameView->startRender();
         gameView->Render();
-        if ( scorpion->isAlive() && raiden->isAlive() )
-        	inputController->update(scorpion, raiden);
-
-//        TODO: VER ESTO, EL INPUTCONTROLLER NO VA A PODER HACER EL VICTORY.
-//        else // fin de juego. loguearlo (1 sola vez)
-//        	InputController->victory(scorpion, raiden);
+        inputController->update(scorpion, raiden);
+        updateGameState();
         cameraMoved = cameraController->update(scorpion, raiden, stage->getLayers());
         collider->update(scorpion, raiden, cameraMoved);
         gameView->endRender();
@@ -100,4 +98,14 @@ bool Game::GameLoop() {
 
     }
     return false;
+}
+
+void Game::updateGameState() {
+    if (!scorpion->isAlive()) {
+        scorpion->setState(new Dizzy());
+        raiden->setState(new Victory());
+    } else if (!raiden->isAlive()) {
+        raiden->setState(new Dizzy());
+        scorpion->setState(new Victory());
+    }
 }

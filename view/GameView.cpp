@@ -232,13 +232,13 @@ void GameView::LoadSprites(string name1, string name2) {
 
     scorpionSprites = {{"Stance", scorpionStance},{"MovingRight", scorpionWalk},{"MovingLeft", scorpionWalk},{"Jumping", scorpionJump},{"JumpingRight", scorpionSideJump},
     {"JumpingLeft", scorpionSideJump},{"Ducking", scorpionDuck},{"HighKickHitting", scorpionKick},{"DuckingKickHitting", scorpionKickDown},{"PunchLeftJumping", scorpionPunchJump},
-    {"PunchRightJumping", scorpionPunchJump},{"HighPunchHitting", scorpionPunch},{"WINNER", scorpionWinner},{"LowPunchHitting", scorpionPunchUp},
+    {"PunchRightJumping", scorpionPunchJump},{"HighPunchHitting", scorpionPunch},{"Victory", scorpionWinner},{"LowPunchHitting", scorpionPunchUp},
     {"FINISHER", scorpionFinisher},{"Blocking", scorpionBlock},{"Shooting", scorpionShoot},{"Dizzy", scorpionDizzy},{"ReceivingDuckingPunch", scorpionFall},
     {"RecevingHit", scorpionBeingHit},{"BEINGHITDOWN", scorpionBeingHitDown},{"BLOCKDOWN", scorpionBlockDown}};
 
     raidenSprites = {{"Stance", raidenStance},{"MovingRight", raidenWalk},{"MovingLeft", raidenWalk},{"Jumping", raidenJump},{"JumpingRight", raidenSideJump},
     {"JumpingLeft", raidenSideJump},{"Ducking", raidenDuck},{"HighKickHitting", raidenKick},{"DuckingKickHitting", raidenKickDown},{"PunchLeftJumping", raidenPunchJump},
-    {"PunchRightJumping", raidenPunchJump},{"HighPunchHitting", raidenPunch},{"WINNER", raidenWinner},{"LowPunchHitting", raidenPunchUp},
+    {"PunchRightJumping", raidenPunchJump},{"HighPunchHitting", raidenPunch},{"Victory", raidenWinner},{"LowPunchHitting", raidenPunchUp},
     {"FINISHER", raidenFinisher},{"Blocking", raidenBlock},{"SHOOT", raidenShoot},{"Dizzy", raidenDizzy},{"FALLING", raidenFall},
     {"RecevingHit", raidenBeingHit},{"BEINGHITDOWN", raidenBeingHitDown},{"BLOCKDOWN", raidenBlockDown}};
 

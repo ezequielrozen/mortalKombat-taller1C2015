@@ -26,7 +26,7 @@ public:
     void initGame(char*);
 
 private:
-
+    void updateGameState();
     MKCharacter* scorpion;
     MKCharacter* raiden;
     Stage* stage;
@@ -40,6 +40,7 @@ private:
     string oponentSide;
 
     GameLoader *gameLoader;
+
 
     int peviousKey;
 };
