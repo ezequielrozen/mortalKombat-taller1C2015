@@ -49,7 +49,7 @@
         
         "bodyParts": "data/scorpionBodyParts.png",
         "finisher": "data/scorpionFinisher.png",
-        "shoot": "data/scorpionShooting.png",
+        "shoot": "data/scorpionShoot.gif",
         "shootZero": "data/scorpionShootingOne.png",
         "shootOne": "data/scorpionShootingOne.png",
         "shootTwo": "data/scorpionShootingTwo.png",

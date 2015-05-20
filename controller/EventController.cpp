@@ -85,7 +85,7 @@ void EventController::lowPunch(MKCharacter* character, MKCharacter* character2){
 void EventController::shoot(MKCharacter* character, MKCharacter* character2){
 //	cout << "shoot : " << character->getName() << endl;
 	Mylog->Log("movimiento del personaje: Disparando.", ERROR_LEVEL_INFO);
-//	character->update(Shoot);
+	character->update(WeaponHit);
 }
 
 void EventController::block(MKCharacter* character, MKCharacter* character2){

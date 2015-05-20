@@ -237,7 +237,7 @@ void GameView::LoadSprites(string name1, string name2) {
     scorpionSprites = {{"Stance", scorpionStance},{"MovingRight", scorpionWalk},{"MovingLeft", scorpionWalk},{"Jumping", scorpionJump},{"JumpingRight", scorpionSideJump},
     {"JumpingLeft", scorpionSideJump},{"Ducking", scorpionDuck},{"HighKickHitting", scorpionHighKick},{"DuckingKickHitting", scorpionDuckKick},{"PunchLeftJumping", scorpionPunchJump},
     {"PunchRightJumping", scorpionPunchJump},{"HighPunchHitting", scorpionHighPunch},{"Victory", scorpionWinner},{"LowPunchHitting", scorpionDuckPunch},
-    {"FINISHER", scorpionFinisher},{"Blocking", scorpionBlock},{"Shooting", scorpionShoot},{"Dizzy", scorpionDizzy},{"ReceivingDuckingPunch", scorpionFall},
+    {"FINISHER", scorpionFinisher},{"Blocking", scorpionBlock},{"WeaponHitting", scorpionShoot},{"Dizzy", scorpionDizzy},{"ReceivingDuckingPunch", scorpionFall},
     {"RecevingHit", scorpionBeingHit},{"BEINGHITDOWN", scorpionBeingHitDown},{"BLOCKDOWN", scorpionBlockDown}, {"LowKickHitting",scorpionLowKick},
     {"JumpKickHitting",scorpionJumpKick},{"LowPunchHitting",scorpionLowPunch}, {"LowKickHitting", scorpionLowKick}};
 
@@ -478,11 +478,10 @@ void GameView::runCharacter() {
     CharacterSprite* shootChar2 = NULL;
     int currentFrame=-1;
     int currentFrame2=-1;
-
          
     bool aux = (scorpion->getX() < raiden->getX());
 
-    if (scorpion->getState() != "Shooting" && scorpion->getState() != "MovingRight" && scorpion->getState() != "MovingLeft") {
+    if (scorpion->getState() != "WeaponHitting" && scorpion->getState() != "MovingRight" && scorpion->getState() != "MovingLeft") {
         sprite = scorpionSprites.at(scorpion->getState());
         sprite->Play(100, scorpion->getStateWidth());
     }
@@ -493,11 +492,18 @@ void GameView::runCharacter() {
     else if ((scorpion->getState() == "MovingRight" && !aux) || (scorpion->getState() == "MovingLeft" && aux)) {
         sprite = scorpionSprites.at(scorpion->getState());
         sprite->PlayBack(100);
+    }else if (scorpion->getState() == "WeaponHitting"){
+    	sprite = scorpionSprites.at("Stance");
+		sprite->Play(100, scorpion->getStateWidth());
+
+    	shootChar1 = scorpionSprites.at(scorpion->getState());
+    	shootChar1->Play(100, scorpion->getStateWidth());
+    	cout << "shoot" << endl;
     }
     
     aux = (raiden->getX() < scorpion->getX());
 
-    if (raiden->getState() != "Shooting" && raiden->getState() != "MovingRight" && raiden->getState() != "MovingLeft") {
+    if (raiden->getState() != "WeaponHitting" && raiden->getState() != "MovingRight" && raiden->getState() != "MovingLeft") {
         sprite2 = raidenSprites.at(raiden->getState());
         sprite2->Play(100, raiden->getStateWidth());
     }
