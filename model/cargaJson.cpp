@@ -315,8 +315,7 @@ void cargaPersonaje(Json::Value personaje, std::list<MKCharacter*>* characters, 
             filenamePunch = strdup(DEFAULT_HIGH_PUNCH);
             filenameLowPunch = strdup(DEFAULT_LOW_PUNCH);
             filenameWinner = strdup(DEFAULT_WINNER);
-            filenameBodyParts = strdup(DEFAULT_BODYPARTS);
-            filenameFinisher = strdup(DEFAULT_FINISHER);
+
             filenameShoot = strdup(DEFAULT_SHOOT);
             filenameShootZero = strdup(DEFAULT_SHOOT_ZERO);
             filenameShootOne = strdup(DEFAULT_SHOOT_ONE);
@@ -337,7 +336,10 @@ void cargaPersonaje(Json::Value personaje, std::list<MKCharacter*>* characters, 
             filenameBeingHitDown = strdup(DEFAULT_BEINGHIT_DOWN);
             filenameBlock = strdup(DEFAULT_BLOCK);
             filenameBlockDown = strdup(DEFAULT_BLOCKDOWN);
+            filenameBodyParts = strdup(DEFAULT_BODYPARTS);
+            filenameFinisher = strdup(DEFAULT_FINISHER);
             filenameHead = strdup(DEFAULT_HEAD);
+
         }else{
             filenameWalk = strdup(sprites[MOVE_NAME_WALK].asString().c_str());
             filenameStance = strdup(sprites[MOVE_NAME_STANCE].asString().c_str());
@@ -353,8 +355,6 @@ void cargaPersonaje(Json::Value personaje, std::list<MKCharacter*>* characters, 
             filenamePunch  = strdup(sprites[MOVE_NAME_HIGH_PUNCH].asString().c_str());
             filenameLowPunch  = strdup(sprites[MOVE_NAME_LOW_PUNCH].asString().c_str());
             filenameWinner  = strdup(sprites[MOVE_NAME_WINNER].asString().c_str());
-            filenameBodyParts  = strdup(sprites[MOVE_NAME_BODYPARTS].asString().c_str());
-            filenameFinisher  = strdup(sprites[MOVE_NAME_FINISHER].asString().c_str());
             filenameShoot  = strdup(sprites[MOVE_NAME_SHOOT].asString().c_str());
 
 //            filenameShootZero  = strdup(sprites[MOVE_NAME_SHOOT_ZERO].asString().c_str());
@@ -388,8 +388,16 @@ void cargaPersonaje(Json::Value personaje, std::list<MKCharacter*>* characters, 
             filenameBeingHit  = strdup(sprites[MOVE_NAME_BEINGHIT].asString().c_str());
             filenameBeingHitDown  = strdup(sprites[MOVE_NAME_BEINGHIT_DOWN].asString().c_str());
             filenameBlock  = strdup(sprites[MOVE_NAME_BLOCK].asString().c_str());
-            filenameBlockDown  = strdup(sprites[MOVE_NAME_BLOCKDOWN].asString().c_str());
-            filenameHead  = strdup(sprites[MOVE_NAME_HEAD].asString().c_str());
+
+//            filenameBodyParts  = strdup(sprites[MOVE_NAME_BODYPARTS].asString().c_str());
+//			filenameFinisher  = strdup(sprites[MOVE_NAME_FINISHER].asString().c_str());
+//            filenameBlockDown  = strdup(sprites[MOVE_NAME_BLOCKDOWN].asString().c_str());
+//            filenameHead  = strdup(sprites[MOVE_NAME_HEAD].asString().c_str());
+
+            filenameBlockDown = strdup(DEFAULT_BLOCKDOWN);
+			filenameBodyParts = strdup(DEFAULT_BODYPARTS);
+			filenameFinisher = strdup(DEFAULT_FINISHER);
+			filenameHead = strdup(DEFAULT_HEAD);
         }
     }
 
