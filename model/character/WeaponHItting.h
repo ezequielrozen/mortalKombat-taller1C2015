@@ -12,11 +12,12 @@ public:
 
     string getName();
     float getWidth();
+    bool startThrowing();
 
 private:
     int timer;
 public:
-    virtual void refreshTimer(MKCharacter *character);
+    void refreshTimer(MKCharacter *character);
 };
 
 
