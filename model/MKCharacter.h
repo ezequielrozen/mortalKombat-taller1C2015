@@ -33,6 +33,7 @@ public:
 
     // Weapon
     Weapon* weapon;
+    void throwWeapon();
 
     double getYMax();
     double getVelY();

@@ -17,14 +17,15 @@ public:
     bool isActive();
     void destroy();
     float getPositionX();
-    void throwWeapon(float initialPositionX, string direction);
+    void throwWeapon(float initialPositionX, float initialPositionY, char direction);
 private:
     float speed;
     float positionX;
+    float positionY;
     float height;
     float width;
     bool active;
-    string direction;
+    char direction;
     void stepForward();
 };
 

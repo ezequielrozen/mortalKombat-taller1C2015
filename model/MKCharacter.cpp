@@ -422,3 +422,7 @@ double MKCharacter::getVelY() {
 double MKCharacter::getAccY() {
 	return (-2*(this->getYMax()-stageFloor+this->getVelY()*0.5))/(pow(0.5,2));
 }
+
+void MKCharacter::throwWeapon() {
+	this->weapon->throwWeapon(this->posX,this->posY * 0.8 /* AL 80% DE LA ALTURA DEL PERSONAJE, USAR CTE*/, this->getCharacterSide());
+}

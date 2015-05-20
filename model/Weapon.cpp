@@ -16,19 +16,20 @@ void Weapon::update() {
     }
 }
 
-void Weapon::throwWeapon(float initialX, string direction) {
+void Weapon::throwWeapon(float initialX, float initialY, char direction) {
     if (!this->isActive()) {
         this->active = true;
         this->positionX = initialX;
+        this->positionY = initialY;
         this->direction = direction;
     }
 }
 
 void Weapon::stepForward() {
-    if (this->direction == "Left")
-        this->positionX += speed;
-    else if (this->direction == "Right")
+    if (this->direction == 'r')
         this->positionX -= speed;
+    else if (this->direction == 'l')
+        this->positionX += speed;
 }
 
 bool Weapon::isActive() {
