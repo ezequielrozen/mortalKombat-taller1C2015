@@ -24,7 +24,7 @@ void PunchRightJumping::update(MKCharacter *character, Events aEvent) {
 }
 
 float PunchRightJumping::getWidth() {
-    return 1.2;
+    return 1.4;
 }
 
 bool PunchRightJumping::isJumping() {
@@ -36,6 +36,10 @@ bool PunchRightJumping::isMovingRight() {
 }
 
 bool PunchRightJumping::isHitting() {
+    return true;
+}
+
+bool PunchRightJumping::impact() {
     return true;
 }
 

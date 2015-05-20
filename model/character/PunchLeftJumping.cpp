@@ -29,7 +29,7 @@ string PunchLeftJumping::getName() {
 }
 
 float PunchLeftJumping::getWidth() {
-    return 1.2;
+    return 1.4;
 }
 
 bool PunchLeftJumping::isJumping() {
@@ -41,5 +41,9 @@ bool PunchLeftJumping::isMovingLeft() {
 }
 
 bool PunchLeftJumping::isHitting() {
+    return true;
+}
+
+bool PunchLeftJumping::impact() {
     return true;
 }

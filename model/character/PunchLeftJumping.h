@@ -18,6 +18,7 @@ public:
     bool isJumping();
     bool isMovingLeft();
     bool isHitting();
+    bool impact();
 };
 
 
