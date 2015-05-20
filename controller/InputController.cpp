@@ -62,7 +62,7 @@ bool InputController::isVibrating() {
 	return vibrating;
 }
 
-void setCharacterSide(MKCharacter* character, MKCharacter* character2)
+void InputController::setCharacterSide(MKCharacter* character, MKCharacter* character2)
 {
     if(character->getX() <= character2->getX()){
     	character->setCharacterSide('l');
@@ -74,6 +74,8 @@ void setCharacterSide(MKCharacter* character, MKCharacter* character2)
 }
 
 void InputController::update(MKCharacter* character, MKCharacter* character2) {
+
+	this->setCharacterSide(character, character2);
 
 	this->keyboardController->update(character, character2, this->getEvent());
 

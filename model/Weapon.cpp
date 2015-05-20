@@ -1,10 +1,11 @@
 #include "Weapon.h"
+#include "util/Util.h"
 
 Weapon::Weapon(float width, float height) {
     this->active = false;
     this->width = width;
     this->height = height;
-    this->speed = 3;
+    this->speed = 2;
 }
 
 
@@ -14,11 +15,17 @@ Weapon::~Weapon() {
 void Weapon::update() {
     if (this->isActive()) {
         this->stepForward();
+        if (this->traveledDistance > Util::getInstance()->getLogicalWindowWidth()) {
+            this->destroy();
+        } else {
+            this->traveledDistance+= this->speed;
+        }
     }
 }
 
 void Weapon::throwWeapon(float initialX, float initialY, char direction) {
     if (!this->isActive()) {
+        this->traveledDistance = 0;
         this->active = true;
         this->positionX = initialX;
         this->positionY = initialY;
@@ -27,7 +34,7 @@ void Weapon::throwWeapon(float initialX, float initialY, char direction) {
 }
 
 void Weapon::stepForward() {
-	cout << positionX << endl;
+	cout << traveledDistance << endl;
 
 	if (this->direction == 'r')
         this->positionX -= speed;
@@ -45,4 +52,12 @@ float Weapon::getPositionX() {
 
 void Weapon::destroy() {
     this->active = false;
+}
+
+float Weapon::getWidth() {
+    return this->width;
+}
+
+float Weapon::getHeight() {
+    return this->height;
 }

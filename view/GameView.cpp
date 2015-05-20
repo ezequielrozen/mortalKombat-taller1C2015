@@ -244,7 +244,7 @@ void GameView::LoadSprites(string name1, string name2) {
     raidenSprites = {{"Stance", raidenStance},{"MovingRight", raidenWalk},{"MovingLeft", raidenWalk},{"Jumping", raidenJump},{"JumpingRight", raidenSideJump},
 	{"JumpingLeft", raidenSideJump},{"Ducking", raidenDuck},{"HighKickHitting", raidenHighKick},{"DuckingKickHitting", raidenDuckKick},{"PunchLeftJumping", raidenPunchJump},
 	{"PunchRightJumping", raidenPunchJump},{"HighPunchHitting", raidenPunch},{"Victory", raidenWinner},{"DuckPunchHitting", raidenDuckPunch},
-	{"FINISHER", raidenFinisher},{"Blocking", raidenBlock},{"SHOOT", raidenShoot},{"Dizzy", raidenDizzy},{"FALLING", raidenFall},
+	{"FINISHER", raidenFinisher},{"Blocking", raidenBlock},{"WeaponHitting", raidenShoot},{"Dizzy", raidenDizzy},{"FALLING", raidenFall},
 	{"RecevingHit", raidenBeingHit},{"BEINGHITDOWN", raidenBeingHitDown},{"BLOCKDOWN", raidenBlockDown},{"LowKickHitting",raidenLowKick},
     {"KickLeftJumpingHitting",raidenJumpKick},{"KickRightJumpingHitting",raidenJumpKick},{"LowPunchHitting",raidenLowPunch},{"LowKickHitting", raidenLowKick}};
 
@@ -273,7 +273,7 @@ void GameView::loadAsScorpion(CharacterSprite*& walk, CharacterSprite*& stance, 
     winner = new CharacterSprite(this->renderer, scorpion->getFileMovement(MOVE_NAME_WINNER), scorpion->getX(), scorpion->getY(), scorpion->getWidth(), scorpion->getHeight(), 4, oponentSide, false, colorAltered, this->painter);
     bodyParts = new CharacterSprite(this->renderer, scorpion->getFileMovement(MOVE_NAME_BODYPARTS), scorpion->getX(), scorpion->getY(), scorpion->getWidth(), scorpion->getHeight(), 8, oponentSide, false, colorAltered, this->painter);
     finisher = new CharacterSprite(this->renderer, scorpion->getFileMovement(MOVE_NAME_FINISHER), scorpion->getX(), scorpion->getY(), scorpion->getWidth(), scorpion->getHeight(), 26, oponentSide, false, colorAltered, this->painter);
-    shoot = new CharacterSprite(this->renderer, scorpion->getFileMovement(MOVE_NAME_SHOOT), scorpion->getX(), scorpion->getY(), scorpion->getWidth(), scorpion->getHeight(), 1, oponentSide, true, colorAltered, this->painter);
+    shoot = new CharacterSprite(this->renderer, scorpion->getFileMovement(MOVE_NAME_SHOOT), scorpion->getX(), scorpion->getY(), scorpion->getWeapon()->getWidth(), scorpion->getWeapon()->getHeight(), 1, oponentSide, true, colorAltered, this->painter);
     shootOne = new CharacterSprite(this->renderer, scorpion->getFileMovement(MOVE_NAME_SHOOT_ONE), scorpion->getX(), scorpion->getY(), scorpion->getWidth(), scorpion->getHeight(), 7, oponentSide, false, colorAltered, this->painter);
     shootTwo = new CharacterSprite(this->renderer, scorpion->getFileMovement(MOVE_NAME_SHOOT_TWO), scorpion->getX(), scorpion->getY(), scorpion->getWidth(), scorpion->getHeight(), 4, oponentSide, true, colorAltered, this->painter);
     dizzy = new CharacterSprite(this->renderer, scorpion->getFileMovement(MOVE_NAME_DIZZY), scorpion->getX(), scorpion->getY(), scorpion->getWidth(), scorpion->getHeight(), 7, oponentSide, false, colorAltered, this->painter);
@@ -311,7 +311,7 @@ void GameView::loadAsRaiden(CharacterSprite*& walk, CharacterSprite*& stance, Ch
     winner = new CharacterSprite(this->renderer, raiden->getFileMovement(MOVE_NAME_WINNER), raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 14, oponentSide, false, colorAltered, this->painter);
     bodyParts = new CharacterSprite(this->renderer, raiden->getFileMovement(MOVE_NAME_BODYPARTS), raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 8, oponentSide, false, colorAltered, this->painter);
     finisher = new CharacterSprite(this->renderer, raiden->getFileMovement(MOVE_NAME_FINISHER), raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 26, oponentSide, false, colorAltered, this->painter);
-    shoot = new CharacterSprite(this->renderer, raiden->getFileMovement(MOVE_NAME_SHOOT), raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 4, oponentSide, true, colorAltered, this->painter);
+    shoot = new CharacterSprite(this->renderer, raiden->getFileMovement(MOVE_NAME_SHOOT), raiden->getX(), raiden->getY(), raiden->getWeapon()->getWidth(), raiden->getWeapon()->getHeight(), 1, oponentSide, true, colorAltered, this->painter);
     shootZero = new CharacterSprite(this->renderer, raiden->getFileMovement(MOVE_NAME_SHOOT_ZERO), raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 1, oponentSide, false, colorAltered, this->painter);
     shootOne = new CharacterSprite(this->renderer, raiden->getFileMovement(MOVE_NAME_SHOOT_ONE), raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 1, oponentSide, false, colorAltered, this->painter);
     shootTwo = new CharacterSprite(this->renderer, raiden->getFileMovement(MOVE_NAME_SHOOT_TWO), raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 1, oponentSide, false, colorAltered, this->painter);
@@ -496,12 +496,12 @@ void GameView::runCharacter() {
     }
     else if (scorpion->getState() == "WeaponHitting"){
         sprite = scorpionSprites.at("Stance");
-        sprite->Play(100, scorpion->getWidth());
+        sprite->Play(100, scorpion->getStateWidth());
 //    	shootChar1 = scorpionSprites.at(scorpion->getState());
 //    	shootChar1->Play(100, scorpion->getStateWidth());
 
         shootChar1 = scorpionSprites.at("WeaponHitting");
-		shootChar1->PlayShoot2(100, 20);
+		shootChar1->PlayShoot2(100, scorpion->getWeapon()->getWidth(), scorpion->getWeapon()->getHeight());
     }
     
     aux = (raiden->getX() < scorpion->getX());
@@ -518,6 +518,15 @@ void GameView::runCharacter() {
         sprite2 = raidenSprites.at(raiden->getState());
         sprite2->PlayBack(100);
     }
+    else if (raiden->getState() == "WeaponHitting"){
+        sprite2 = raidenSprites.at("Stance");
+        sprite2->Play(100, raiden->getStateWidth());
+//    	shootChar1 = scorpionSprites.at(scorpion->getState());
+//    	shootChar1->Play(100, scorpion->getStateWidth());
+
+        shootChar2 = raidenSprites.at("WeaponHitting");
+        shootChar2->PlayShoot2(100, raiden->getWeapon()->getWidth(), raiden->getWeapon()->getHeight());
+    }
 
 
     if(scorpion->getX() < raiden->getX()){
@@ -526,13 +535,14 @@ void GameView::runCharacter() {
 
             if (shootChar1 != NULL) {
             	shootChar1->switchSide('r');
-            	shootChar1->setX(scorpion->getX() + scorpion->getWeapon()->getPositionX());
+            	shootChar1->setX(scorpion->getWeapon()->getPositionX());
     			shootChar1->setY(scorpion->getY()+20);
             }
             if (shootChar2 != NULL) {
     			shootChar2->switchSide('l');
     			shootChar2->setY(raiden->getY()+20);
-    			RaidenShootSetPosX(currentFrame2, shootChar2);
+                shootChar2->setX(raiden->getWeapon()->getPositionX());
+    			//RaidenShootSetPosX(currentFrame2, shootChar2);
 
     		}
         }else{
@@ -541,14 +551,15 @@ void GameView::runCharacter() {
 
             if (shootChar1 != NULL) {
             	shootChar1->switchSide('l');
-            	shootChar1->setX(scorpion->getX() - scorpion->getWeapon()->getPositionX());
+            	shootChar1->setX(scorpion->getWeapon()->getPositionX());
     			shootChar1->setY(scorpion->getY()+20);
             }
 
             if (shootChar2 != NULL) {
     			shootChar2->switchSide('r');
     			shootChar2->setY(raiden->getY()+20);
-    			RaidenShootSetPosX(currentFrame2, shootChar2);
+                shootChar2->setX(raiden->getWeapon()->getPositionX());
+    			//RaidenShootSetPosX(currentFrame2, shootChar2);
     		}
         }
 

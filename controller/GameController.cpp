@@ -80,7 +80,7 @@ void GameController::testElapsedTime(MKCharacter* character, MKCharacter* charac
 void GameController::update(MKCharacter* character, MKCharacter* character2) {
     extern logger* Mylog;
 //    this->joystickController->update(character,character2);
-
+/*
 
     switch (mainEvent->type){
     	case SDL_KEYDOWN:
@@ -224,7 +224,7 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
 							hitTimer = SDL_GetTicks();
 							break;
 
-				/****************************************************************************************************/
+
 
 				case SDLK_g:
 							Mylog->Log("movimiento del personaje: hacia la derecha", ERROR_LEVEL_INFO);
@@ -409,6 +409,7 @@ void GameController::update(MKCharacter* character, MKCharacter* character2) {
     		testElapsedTime(character, character2);
     		break;
     }
+    */
 }
 
 void GameController::victory(MKCharacter* character, MKCharacter* character2 ) {

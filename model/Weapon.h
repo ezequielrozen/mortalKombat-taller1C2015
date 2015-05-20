@@ -18,6 +18,8 @@ public:
     void destroy();
     float getPositionX();
     void throwWeapon(float initialPositionX, float initialPositionY, char direction);
+    float getWidth();
+    float getHeight();
 private:
     float speed;
     float positionX;
@@ -27,6 +29,7 @@ private:
     bool active;
     char direction;
     void stepForward();
+    float traveledDistance;
 };
 
 

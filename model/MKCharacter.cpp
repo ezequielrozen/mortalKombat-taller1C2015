@@ -5,8 +5,7 @@
 
 MKCharacter::MKCharacter(float initialPosX, float ancho, float alto, int z_index, int pCharacterNumber, string name) {
 
-	this->weapon = new Weapon(alto / 4, alto / 4);
-
+	this->weapon = new Weapon(ancho*0.97, alto*0.36);
 	this->state = new CharacterStance();
 	this->z_index = z_index;
 	posX = initialPosX;
@@ -72,10 +71,8 @@ void MKCharacter::characterUpdate() {
 		cout << "ARROJO EL ARMA" << endl;
 	}
 
-	if (this->weapon->isActive())
-	{
-		this->weapon->update();
-	}
+	this->weapon->update();
+
 }
 
 void MKCharacter::moveRight() {
@@ -440,5 +437,14 @@ Weapon *MKCharacter::getWeapon() {
 void MKCharacter::throwWeapon() {
 
 //	this->weapon->throwWeapon(this->posX + this->getWidth(),this->posY +  this->getHeight() * 0.2 /* AL 80% DE LA ALTURA DEL PERSONAJE, USAR CTE*/, this->getCharacterSide());
-	this->weapon->throwWeapon(this->posX + this->getWidth(),this->posY +  this->getHeight() * 0.2 /* AL 80% DE LA ALTURA DEL PERSONAJE, USAR CTE*/, 'l');
+	if (this->getCharacterSide() == 'l') {
+		this->weapon->throwWeapon(this->posX + this->getWidth(),
+								  this->posY + this->getHeight() * 0.2,
+								  this->getCharacterSide());
+	}
+	else {
+		this->weapon->throwWeapon(this->posX - this->weapon->getWidth(),
+								this->posY + this->getHeight()*0.2,
+								this->getCharacterSide());
+	}
 }

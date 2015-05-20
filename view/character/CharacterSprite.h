@@ -28,7 +28,7 @@ public:
 	bool getRepeatLastSprite();
 	void setRepeatLastSprite(bool repeat);
 	int PlayShoot(float, float);
-	void PlayShoot2(float, float);
+	void PlayShoot2(float, float, float);
 	void PlayFall(float);
 	void vibrate();
 	bool vibrationFinished();

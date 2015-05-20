@@ -31,10 +31,6 @@ void WeaponHitting::update(MKCharacter* character, Events aEvent) {
 string WeaponHitting::getName() {
 	return "WeaponHitting";
 }
-   
-float WeaponHitting::getWidth() {
-	return 0;
-}
 
 void WeaponHitting::refreshTimer(MKCharacter* character) {
 
@@ -48,5 +44,5 @@ void WeaponHitting::refreshTimer(MKCharacter* character) {
 }
 
 bool WeaponHitting::startThrowing() {
-	return this->timer == 85;
+	return true;
 }

@@ -37,6 +37,7 @@ private:
     SDL_Event* mainEvent;
     bool joystickConnected;
     static bool vibrating;
-};
 	void setCharacterSide(MKCharacter* character, MKCharacter* character2);
+};
+
 #endif

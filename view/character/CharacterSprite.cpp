@@ -120,19 +120,22 @@ int CharacterSprite::PlayShoot(float Speed, float characterWidth) {
     return CurrentFrame;
 }
 
-void CharacterSprite::PlayShoot2(float Speed, float width)
+void CharacterSprite::PlayShoot2(float Speed, float width, float height)
 {
     if (animationDelay+Speed < SDL_GetTicks())
     {
-        if ((this->framesX) <= CurrentFrame)
+        /*if ((this->framesX) <= CurrentFrame)
         {
 			CurrentFrame = 0;
         }
         else
-            CurrentFrame++;
+            CurrentFrame = 0;
+    */
+
+        CurrentFrame = 0;
 
         draw.w = width*Util::getInstance()->getScalingConstant();
-        draw.h= 30;
+        draw.h= height*Util::getInstance()->getScalingConstant();
 
         crop.x = CurrentFrame * (img_width/framesX);
         crop.y = 0;
