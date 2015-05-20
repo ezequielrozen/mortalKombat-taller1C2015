@@ -53,8 +53,11 @@ void CharacterStance::update(MKCharacter * character, Events aEvent) {
         case Block:
             character->setState(new Blocking());
             break;
-        case Shoot:
+        case WeaponHit:
             character->setState(new WeaponHitting());
+            break;
+        case ReceiveWeapon:
+            character->setState(new ReceivingDuckingPunch());
             break;
         case ReceiveHit:
             character->setState(new RecevingHit());
