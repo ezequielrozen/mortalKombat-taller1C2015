@@ -19,7 +19,7 @@ void JumpingRight::update(MKCharacter * character, Events aEvent) {
             character->setState(new ReceivingDuckingPunch());
             break;
         case JumpFinished:
-            character->setState(new MovingRight());
+            character->setState(new CharacterStance());
             break;
         case ReceiveWeapon:
             character->setState(new ReceivingDuckingPunch());
