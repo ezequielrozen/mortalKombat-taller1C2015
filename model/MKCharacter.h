@@ -30,6 +30,10 @@ public:
     bool isBlocking();
     //bool isJumping();
 
+    double getYMax();
+    double getVelY();
+    double getAccY();
+
     void moveRight();
 
     void moveLeft();

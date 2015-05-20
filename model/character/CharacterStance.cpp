@@ -11,6 +11,7 @@
 #include "Shooting.h"
 #include "RecevingHit.h"
 #include "LowKickHitting.h"
+#include "ReceivingDuckingPunch.h"
 
 CharacterStance::CharacterStance() {
 //    this->timer = -1

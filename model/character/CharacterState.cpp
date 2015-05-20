@@ -36,6 +36,10 @@ float CharacterState::getWidth() {
 	return 1;
 }
 
+float CharacterState::getJumpLevel() {
+	return 1;
+}
+
 string CharacterState::getName() {
 	return "asd";
 }

@@ -18,6 +18,7 @@ public:
     virtual bool isDucking();
     virtual float getWidth();
     virtual string getName();
+    virtual float getJumpLevel();
     virtual void refreshTimer(MKCharacter* character);
 
     virtual bool impact();

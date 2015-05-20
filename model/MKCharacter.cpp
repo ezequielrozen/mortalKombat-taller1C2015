@@ -20,12 +20,8 @@ MKCharacter::MKCharacter(float initialPosX, float ancho, float alto, int z_index
 	step = 0.042 * this->ancho;
 
 	jumpTime = 0;
-	//El 1.20 esta para que el personaje salte al otro personaje y 0.2 mas, para tener un margen.
-	yMax = stageFloor - (this->alto)*1.20;
-	//Se dedujo empiricamente
-	velY = 6.4 * (this->alto);
 	//Parte de la ecuacion de tiro vertical. El 0.5 sale de que el salto total dura 1seg, por lo cual al punto maximo del salto llega en 0.5seg
-	accY = (-2*(yMax-stageFloor+velY*0.5))/(pow(0.5,2));
+	//accY = (-2*(yMax-stageFloor+velY*0.5))/(pow(0.5,2));
 	//Si el salto esta en etapa ascendente o descendente.
 	ascending = false;
 
@@ -87,11 +83,11 @@ void MKCharacter::moveLeft() {
 
 void MKCharacter::moveUp() {
 
-	double lastPosY = stageFloor - velY*jumpTime - (accY*pow(jumpTime,2))/2;
+	double lastPosY = stageFloor - this->getVelY()*jumpTime - (this->getAccY()*pow(jumpTime,2))/2;
 
 	jumpTime = jumpTime + 0.015;
 
-	posY = stageFloor - velY*jumpTime - (accY*pow(jumpTime,2))/2;
+	posY = stageFloor - this->getVelY()*jumpTime - (this->getAccY()*pow(jumpTime,2))/2;
 
 	ascending = lastPosY > posY;
 	
@@ -99,8 +95,8 @@ void MKCharacter::moveUp() {
 		double time1;
 		double time2;
 
-		time1 = (velY + sqrt(pow(velY,2)-4*(-accY/2)*stageFloor))/(-accY);
-		time2 = (velY - sqrt(pow(velY,2)-4*(-accY/2)*stageFloor))/(-accY);
+		time1 = (this->getVelY() + sqrt(pow(this->getVelY(),2)-4*(-this->getAccY()/2)*stageFloor))/(-this->getAccY());
+		time2 = (this->getVelY() - sqrt(pow(this->getVelY(),2)-4*(-this->getAccY()/2)*stageFloor))/(-this->getAccY());
 
 		jumpTime = fmax(time1, time2);
 	}
@@ -411,4 +407,16 @@ bool MKCharacter::isBlocking() {
 
 bool MKCharacter::impacts() {
 	return this->state->impact();
+}
+
+double MKCharacter::getYMax() {
+	return (stageFloor - (this->alto)*1.20)/(this->state->getJumpLevel());
+}
+
+double MKCharacter::getVelY() {
+	return (6.4 * (this->alto))*(this->state->getJumpLevel());
+}
+
+double MKCharacter::getAccY() {
+	return (-2*(this->getYMax()-stageFloor+this->getVelY()*0.5))/(pow(0.5,2));
 }

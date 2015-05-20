@@ -11,7 +11,10 @@ public:
     ~ReceivingDuckingPunch();
     void update(MKCharacter* character, Events aEvent);
     string getName();
+    float getJumpLevel();
     float getWidth();
+
+    bool isJumping();
 };
 
 
