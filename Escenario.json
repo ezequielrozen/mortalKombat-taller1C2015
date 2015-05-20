@@ -40,7 +40,7 @@
         
         "highKick": "data/scorpionHighKick.png",
         "lowKick": "data/scorpionLowKick.png",
-        "kickDown": "data/scorpionKickingDown.png",
+        "kickDown": "data/scorpionDuckingKick.png",
         "punchJump": "data/scorpionPunchingJump.png",
         "duckPunch": "data/scorpionDuckPunch.png",
         "highPunch": "data/scorpionHighPunch.png",

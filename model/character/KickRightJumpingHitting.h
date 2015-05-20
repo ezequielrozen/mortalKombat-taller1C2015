@@ -13,6 +13,8 @@ public:
     
     string getName();
     float getWidth();
+    bool isHitting();
+    bool impact();
 
 };
 
