@@ -18,12 +18,14 @@ JoystickController::JoystickController(char number)
 		this->c0duck = Util::getInstance()->getMapaDeCaracteres(1);
 		this->c0left = Util::getInstance()->getMapaDeCaracteres(2);
 		this->c0right = Util::getInstance()->getMapaDeCaracteres(3);
-		this->c0punch = Util::getInstance()->getMapaDeCaracteres(4);
-		this->c0punchUp = Util::getInstance()->getMapaDeCaracteres(5);
-		this->c0kick = Util::getInstance()->getMapaDeCaracteres(6);
-		this->c0kickDown = Util::getInstance()->getMapaDeCaracteres(7);
+		this->c0LowPunch = Util::getInstance()->getMapaDeCaracteres(4);
+		this->c0HighPunch = Util::getInstance()->getMapaDeCaracteres(5);
+		this->c0HighKick = Util::getInstance()->getMapaDeCaracteres(6);
+		this->c0LowKick = Util::getInstance()->getMapaDeCaracteres(7);
+		cout << (int)this->c0LowKick << endl;
 		this->c0block = Util::getInstance()->getMapaDeCaracteres(8);
 		this->c0shoot = Util::getInstance()->getMapaDeCaracteres(9);
+		this->c0duckPunch = Util::getInstance()->getMapaDeCaracteres(20);
     }
     else
     {
@@ -31,12 +33,14 @@ JoystickController::JoystickController(char number)
 		this->c0duck = Util::getInstance()->getMapaDeCaracteres(11);
 		this->c0left = Util::getInstance()->getMapaDeCaracteres(12);
 		this->c0right = Util::getInstance()->getMapaDeCaracteres(13);
-		this->c0punch = Util::getInstance()->getMapaDeCaracteres(14);
-		this->c0punchUp = Util::getInstance()->getMapaDeCaracteres(15);
-		this->c0kick = Util::getInstance()->getMapaDeCaracteres(16);
-		this->c0kickDown = Util::getInstance()->getMapaDeCaracteres(17);
+		this->c0LowPunch = Util::getInstance()->getMapaDeCaracteres(14);
+		this->c0HighPunch = Util::getInstance()->getMapaDeCaracteres(15);
+		this->c0HighKick = Util::getInstance()->getMapaDeCaracteres(16);
+		this->c0LowKick = Util::getInstance()->getMapaDeCaracteres(17);
+		cout << (int)this->c0LowKick << "-----------------" << endl;
 		this->c0block = Util::getInstance()->getMapaDeCaracteres(18);
 		this->c0shoot = Util::getInstance()->getMapaDeCaracteres(19);
+		this->c0duckPunch = Util::getInstance()->getMapaDeCaracteres(21);
 
     }
 
@@ -119,7 +123,7 @@ void JoystickController::update(MKCharacter *character, MKCharacter *character2,
 
 	}
 
-//    cout << "Joystick number: " << (int) pressedJoystick << " PressedButton: " << (int) pressedButton << " PressedAxis: " << (int) pressedAxis << " PressedAxisvalue: " << pressedAxisValue << " previousAxis: " <<  c0previousAxis << " previousAxisvalue: " << c0previousAxisValue << " type: " << mainEvent->type << endl;
+//    cout << "Joystick number: " << (int) this->joystickNumber << " PressedButton: " << (int) pressedButton << " PressedAxis: " << (int) pressedAxis << " PressedAxisvalue: " << pressedAxisValue << " previousAxis: " <<  c0previousAxis << " previousAxisvalue: " << c0previousAxisValue << " type: " << mainEvent->type << endl;
 
 
 	//Simulo los KEYUP de las flechas
@@ -181,24 +185,29 @@ void JoystickController::update(MKCharacter *character, MKCharacter *character2,
 		printCout ? cout << "KeyDown: Boton arriba"	<< endl: "";
 		EventController::moveUp(character, character2);
 	}
-	if (mainEvent->type == SDL_JOYBUTTONDOWN && pressedButton == c0kick) {
-		printCout ? cout << "KeyDown: Boton c0kick"	<< endl : "";
+	if (mainEvent->type == SDL_JOYBUTTONDOWN && pressedButton == c0HighKick) {
+		printCout ? cout << "KeyDown: Boton c0HighKick"	<< endl : "";
 		EventController::highKick(character, character2);
 	}
 
-	if (mainEvent->type == SDL_JOYBUTTONDOWN && pressedButton == c0kickDown) {
-		printCout ? cout << "KeyDown: Boton c0kickDown"	<< endl : "";
+	if (mainEvent->type == SDL_JOYBUTTONDOWN && pressedButton == c0LowKick) {
+		printCout ? cout << "KeyDown: Boton c0LowKick"	<< endl : "";
 		EventController::lowKick(character, character2);
 	}
 
-	if (mainEvent->type == SDL_JOYBUTTONDOWN && pressedButton == c0punch) {
-		printCout ? cout << "KeyDown: Boton c0punch"	<< endl: "";
-		EventController::lowPunch(character, character2);
+	if (mainEvent->type == SDL_JOYBUTTONDOWN && pressedButton == c0duckPunch) {
+		printCout ? cout << "KeyDown: Boton c0duckPunch"	<< endl: "";
+		EventController::duckPunch(character, character2);
 	}
 
-	if (mainEvent->type == SDL_JOYBUTTONDOWN && pressedButton == c0punchUp) {
-		printCout ? cout << "KeyDown: Boton c0punchUp"	<< endl: "";
-		EventController::highPunch(character, character2);
+	if (mainEvent->type == SDL_JOYBUTTONDOWN && pressedButton == c0HighPunch) {
+			printCout ? cout << "KeyDown: Boton c0HighPunch"	<< endl: "";
+			EventController::highPunch(character, character2);
+	}
+
+	if (mainEvent->type == SDL_JOYBUTTONDOWN && pressedButton == c0LowPunch) {
+			printCout ? cout << "KeyDown: Boton c0LowPunch"	<< endl: "";
+			EventController::lowPunch(character, character2);
 	}
 
 	if (mainEvent->type == SDL_JOYBUTTONDOWN && pressedButton == c0shoot) {

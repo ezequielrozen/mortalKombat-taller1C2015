@@ -19,6 +19,8 @@
 using namespace std;
 
 class EventController {
+
+
 public:
 	EventController();
 	virtual ~EventController();
@@ -32,6 +34,7 @@ public:
 	static void lowPunch(MKCharacter*, MKCharacter*);
 	static void shoot(MKCharacter*, MKCharacter*);
 	static void block(MKCharacter*, MKCharacter*);
+	static void duckPunch(MKCharacter*, MKCharacter*);
 
 	static void moveLeftRelease(MKCharacter*, MKCharacter*);
 	static void moveRightRelease(MKCharacter*, MKCharacter*);
@@ -40,7 +43,7 @@ public:
 
 
 private:
-
+	static void Void();
 
 
 };

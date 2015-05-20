@@ -26,12 +26,13 @@ private:
     unsigned char c0duck;
     unsigned char c0left;
     unsigned char c0right;
-    unsigned char c0punch;
-    unsigned char c0punchUp;
-    unsigned char c0kick;
-    unsigned char c0kickDown;
+    unsigned char c0LowPunch;
+    unsigned char c0HighPunch;
+    unsigned char c0HighKick;
+    unsigned char c0LowKick;
     unsigned char c0block;
     unsigned char c0shoot;
+    unsigned char c0duckPunch;
 
     int c0previousAxis;
     int c0previousAxisValue;

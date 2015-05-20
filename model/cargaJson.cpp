@@ -250,10 +250,12 @@ void cargaPersonaje(Json::Value personaje, std::list<MKCharacter*>* characters, 
     char* filenameSideJump = new char[200];
     char* filenameDuck = new char[200];
     char* filenameKick = new char[200];
+    char* filenameLowKick = new char[200];
     char* filenameKickDown = new char[200];
     char* filenamePunchJump = new char[200];
     char* filenamePunchUp = new char[200];
     char* filenamePunch = new char[200];
+    char* filenameLowPunch = new char[200];
     char* filenameWinner = new char[200];
     char* filenameBodyParts = new char[200];
     char* filenameFinisher = new char[200];
@@ -303,11 +305,13 @@ void cargaPersonaje(Json::Value personaje, std::list<MKCharacter*>* characters, 
             filenameJump = strdup(DEFAULT_JUMP);
             filenameSideJump = strdup(DEFAULT_SIDEJUMP);
             filenameDuck = strdup(DEFAULT_DUCK);
-            filenameKick = strdup(DEFAULT_KICK);
-            filenameKickDown = strdup(DEFAULT_KICKDOWN);
+            filenameKick = strdup(DEFAULT_HIGH_KICK);
+            filenameLowKick = strdup(DEFAULT_LOW_KICK);
+            filenameKickDown = strdup(DEFAULT_DUCKING_KICK);
             filenamePunchJump = strdup(DEFAULT_PUNCHJUMP);
-            filenamePunchUp = strdup(DEFAULT_PUNCHUP);
-            filenamePunch = strdup(DEFAULT_PUNCH);
+            filenamePunchUp = strdup(DEFAULT_DUCK_PUNCH);
+            filenamePunch = strdup(DEFAULT_HIGH_PUNCH);
+            filenameLowPunch = strdup(DEFAULT_LOW_PUNCH);
             filenameWinner = strdup(DEFAULT_WINNER);
             filenameBodyParts = strdup(DEFAULT_BODYPARTS);
             filenameFinisher = strdup(DEFAULT_FINISHER);
@@ -339,11 +343,13 @@ void cargaPersonaje(Json::Value personaje, std::list<MKCharacter*>* characters, 
             filenameJump = strdup(sprites[MOVE_NAME_JUMP].asString().c_str());
             filenameSideJump = strdup(sprites[MOVE_NAME_SIDEJUMP].asString().c_str());
             filenameDuck  = strdup(sprites[MOVE_NAME_DUCK].asString().c_str());
-            filenameKick  = strdup(sprites[MOVE_NAME_KICK].asString().c_str());
-            filenameKickDown  = strdup(sprites[MOVE_NAME_KICKDOWN].asString().c_str());
+            filenameKick  = strdup(sprites[MOVE_NAME_HIGH_KICK].asString().c_str());
+            filenameLowKick  = strdup(sprites[MOVE_NAME_LOW_KICK].asString().c_str());
+            filenameKickDown  = strdup(sprites[MOVE_NAME_DUCKING_KICK].asString().c_str());
             filenamePunchJump  = strdup(sprites[MOVE_NAME_PUNCHJUMP].asString().c_str());
-            filenamePunchUp  = strdup(sprites[MOVE_NAME_PUNCHUP].asString().c_str());
-            filenamePunch  = strdup(sprites[MOVE_NAME_PUNCH].asString().c_str());
+            filenamePunchUp  = strdup(sprites[MOVE_NAME_DUCK_PUNCH].asString().c_str());
+            filenamePunch  = strdup(sprites[MOVE_NAME_HIGH_PUNCH].asString().c_str());
+            filenameLowPunch  = strdup(sprites[MOVE_NAME_LOW_PUNCH].asString().c_str());
             filenameWinner  = strdup(sprites[MOVE_NAME_WINNER].asString().c_str());
             filenameBodyParts  = strdup(sprites[MOVE_NAME_BODYPARTS].asString().c_str());
             filenameFinisher  = strdup(sprites[MOVE_NAME_FINISHER].asString().c_str());
@@ -378,11 +384,13 @@ void cargaPersonaje(Json::Value personaje, std::list<MKCharacter*>* characters, 
     validarExistenciaArchivo(DEFAULT_JUMP, filenameJump);
     validarExistenciaArchivo(DEFAULT_SIDEJUMP, filenameSideJump);
     validarExistenciaArchivo(DEFAULT_DUCK, filenameDuck);
-    validarExistenciaArchivo(DEFAULT_KICK, filenameKick);
-    validarExistenciaArchivo(DEFAULT_KICKDOWN, filenameKickDown);
+    validarExistenciaArchivo(DEFAULT_HIGH_KICK, filenameKick);
+    validarExistenciaArchivo(DEFAULT_HIGH_KICK, filenameLowKick);
+    validarExistenciaArchivo(DEFAULT_DUCKING_KICK, filenameKickDown);
     validarExistenciaArchivo(DEFAULT_PUNCHJUMP, filenamePunchJump);
-    validarExistenciaArchivo(DEFAULT_PUNCHUP, filenamePunchUp);
-    validarExistenciaArchivo(DEFAULT_PUNCH, filenamePunch);
+    validarExistenciaArchivo(DEFAULT_DUCK_PUNCH, filenamePunchUp);
+    validarExistenciaArchivo(DEFAULT_HIGH_PUNCH, filenamePunch);
+    validarExistenciaArchivo(DEFAULT_LOW_PUNCH, filenameLowPunch);
     validarExistenciaArchivo(DEFAULT_WINNER, filenameWinner);
     validarExistenciaArchivo(DEFAULT_BODYPARTS, filenameBodyParts);
     validarExistenciaArchivo(DEFAULT_FINISHER, filenameFinisher);
@@ -414,11 +422,13 @@ void cargaPersonaje(Json::Value personaje, std::list<MKCharacter*>* characters, 
     Util::getInstance()->addMovement(MOVE_NAME_JUMP, filenameJump);
     Util::getInstance()->addMovement(MOVE_NAME_SIDEJUMP, filenameSideJump);
     Util::getInstance()->addMovement(MOVE_NAME_DUCK, filenameDuck);
-    Util::getInstance()->addMovement(MOVE_NAME_KICK, filenameKick);
-    Util::getInstance()->addMovement(MOVE_NAME_KICKDOWN, filenameKickDown);
+    Util::getInstance()->addMovement(MOVE_NAME_HIGH_KICK, filenameKick);
+    Util::getInstance()->addMovement(MOVE_NAME_LOW_KICK, filenameLowKick);
+    Util::getInstance()->addMovement(MOVE_NAME_DUCKING_KICK, filenameKickDown);
     Util::getInstance()->addMovement(MOVE_NAME_PUNCHJUMP, filenamePunchJump);
-    Util::getInstance()->addMovement(MOVE_NAME_PUNCHUP, filenamePunchUp);
-    Util::getInstance()->addMovement(MOVE_NAME_PUNCH, filenamePunch);
+    Util::getInstance()->addMovement(MOVE_NAME_DUCK_PUNCH, filenamePunchUp);
+    Util::getInstance()->addMovement(MOVE_NAME_HIGH_PUNCH, filenamePunch);
+    Util::getInstance()->addMovement(MOVE_NAME_LOW_PUNCH, filenameLowPunch);
     Util::getInstance()->addMovement(MOVE_NAME_WINNER, filenameWinner);
     Util::getInstance()->addMovement(MOVE_NAME_BODYPARTS, filenameBodyParts);
     Util::getInstance()->addMovement(MOVE_NAME_FINISHER, filenameFinisher);
@@ -617,25 +627,25 @@ void cargaMapbotones(Json::Value botones, int default_){
         Mylog->Log(mensaje, ERROR_LEVEL_INFO);
         Util::getInstance()->setMapaDeCaracteres(botones["c1right"].asUInt(), 3);
     }
-    if(botones.isMember("c1punch") && botones["c1punch"].isUInt()){
-        sprintf(mensaje, "Mapeando boton c1punch: %d", botones["c1punch"].asUInt());
+    if(botones.isMember("c1LowPunch") && botones["c1LowPunch"].isUInt()){
+        sprintf(mensaje, "Mapeando boton c1LowPunch: %d", botones["c1LowPunch"].asUInt());
         Mylog->Log(mensaje, ERROR_LEVEL_INFO);
-        Util::getInstance()->setMapaDeCaracteres(botones["c1punch"].asUInt(), 4);
+        Util::getInstance()->setMapaDeCaracteres(botones["c1LowPunch"].asUInt(), 4);
     }
-    if(botones.isMember("c1punchUp") && botones["c1punchUp"].isUInt()){
-        sprintf(mensaje, "Mapeando boton c1punchUp: %d", botones["c1punchUp"].asUInt());
+    if(botones.isMember("c1HighPunch") && botones["c1HighPunch"].isUInt()){
+        sprintf(mensaje, "Mapeando boton c1HighPunch: %d", botones["c1HighPunch"].asUInt());
         Mylog->Log(mensaje, ERROR_LEVEL_INFO);
-        Util::getInstance()->setMapaDeCaracteres(botones["c1punchUp"].asUInt(), 5);
+        Util::getInstance()->setMapaDeCaracteres(botones["c1HighPunch"].asUInt(), 5);
     }
-    if(botones.isMember("c1kick") && botones["c1kick"].isUInt()){
-        sprintf(mensaje, "Mapeando boton c1kick: %d", botones["c1kick"].asUInt());
+    if(botones.isMember("c1HighKick") && botones["c1HighKick"].isUInt()){
+        sprintf(mensaje, "Mapeando boton c1HighKick: %d", botones["c1HighKick"].asUInt());
         Mylog->Log(mensaje, ERROR_LEVEL_INFO);
-        Util::getInstance()->setMapaDeCaracteres(botones["c1kick"].asUInt(), 6);
+        Util::getInstance()->setMapaDeCaracteres(botones["c1HighKick"].asUInt(), 6);
     }
-    if(botones.isMember("c1kickDown") && botones["c1kickDown"].isUInt()){
-        sprintf(mensaje, "Mapeando boton c1kickDown: %d", botones["c1kickDown"].asUInt());
+    if(botones.isMember("c1Lowkick") && botones["c1Lowkick"].isUInt()){
+        sprintf(mensaje, "Mapeando boton c1LowKick: %d", botones["c1Lowkick"].asUInt());
         Mylog->Log(mensaje, ERROR_LEVEL_INFO);
-        Util::getInstance()->setMapaDeCaracteres(botones["c1kickDown"].asUInt(), 7);
+        Util::getInstance()->setMapaDeCaracteres(botones["c1Lowkick"].asUInt(), 7);
     }
     if(botones.isMember("c1block") && botones["c1block"].isUInt()){
         sprintf(mensaje, "Mapeando boton c1block: %d", botones["c1block"].asUInt());
@@ -668,25 +678,25 @@ void cargaMapbotones(Json::Value botones, int default_){
         Mylog->Log(mensaje, ERROR_LEVEL_INFO);
         Util::getInstance()->setMapaDeCaracteres(botones["c2right"].asUInt(), 13);
     }
-    if(botones.isMember("c2punch") && botones["c2punch"].isUInt()){
-        sprintf(mensaje, "Mapeando boton c2punch: %d", botones["c2punch"].asUInt());
+    if(botones.isMember("c2LowPunch") && botones["c2LowPunch"].isUInt()){
+        sprintf(mensaje, "Mapeando boton c2LowPunch: %d", botones["c2LowPunch"].asUInt());
         Mylog->Log(mensaje, ERROR_LEVEL_INFO);
-        Util::getInstance()->setMapaDeCaracteres(botones["c2punch"].asUInt(), 14);
+        Util::getInstance()->setMapaDeCaracteres(botones["c2LowPunch"].asUInt(), 14);
     }
-    if(botones.isMember("c2punchUp") && botones["c2punchUp"].isUInt()){
-        sprintf(mensaje, "Mapeando boton c2punchUp: %d", botones["c2punchUp"].asUInt());
+    if(botones.isMember("c2HighPunch") && botones["c2HighPunch"].isUInt()){
+        sprintf(mensaje, "Mapeando boton c2HighPunch: %d", botones["c2HighPunch"].asUInt());
         Mylog->Log(mensaje, ERROR_LEVEL_INFO);
-        Util::getInstance()->setMapaDeCaracteres(botones["c2punchUp"].asUInt(), 15);
+        Util::getInstance()->setMapaDeCaracteres(botones["c2HighPunch"].asUInt(), 15);
     }
-    if(botones.isMember("c2kick") && botones["c2kick"].isUInt()){
-        sprintf(mensaje, "Mapeando boton c2kick: %d", botones["c2kick"].asUInt());
+    if(botones.isMember("c2HighKick") && botones["c2HighKick"].isUInt()){
+        sprintf(mensaje, "Mapeando boton c2HighKick: %d", botones["c2HighKick"].asUInt());
         Mylog->Log(mensaje, ERROR_LEVEL_INFO);
-        Util::getInstance()->setMapaDeCaracteres(botones["c2kick"].asUInt(), 16);
+        Util::getInstance()->setMapaDeCaracteres(botones["c2HighKick"].asUInt(), 16);
     }
-    if(botones.isMember("c2kickDown") && botones["c2kickDown"].isUInt()){
-        sprintf(mensaje, "Mapeando boton c2kickDown: %d", botones["c2kickDown"].asUInt());
+    if(botones.isMember("c2Lowkick") && botones["c2Lowkick"].isUInt()){
+        sprintf(mensaje, "Mapeando boton c2Lowkick: %d", botones["c2Lowkick"].asUInt());
         Mylog->Log(mensaje, ERROR_LEVEL_INFO);
-        Util::getInstance()->setMapaDeCaracteres(botones["c2kickDown"].asUInt(), 17);
+        Util::getInstance()->setMapaDeCaracteres(botones["c2Lowkick"].asUInt(), 17);
     }
     if(botones.isMember("c2block") && botones["c2block"].isUInt()){
         sprintf(mensaje, "Mapeando boton c2block: %d", botones["c2block"].asUInt());
@@ -697,5 +707,15 @@ void cargaMapbotones(Json::Value botones, int default_){
         sprintf(mensaje, "Mapeando boton c2shoot: %d", botones["c2shoot"].asUInt());
         Mylog->Log(mensaje, ERROR_LEVEL_INFO);
         Util::getInstance()->setMapaDeCaracteres(botones["c2shoot"].asUInt(), 19);
+    }
+    if(botones.isMember("c1duckPunch") && botones["c1duckPunch"].isUInt()){
+            sprintf(mensaje, "Mapeando boton c1duckPunch: %d", botones["c1duckPunch"].asUInt());
+            Mylog->Log(mensaje, ERROR_LEVEL_INFO);
+            Util::getInstance()->setMapaDeCaracteres(botones["c1duckPunch"].asUInt(), 20);
+    }
+    if(botones.isMember("c2duckPunch") && botones["c2duckPunch"].isUInt()){
+        sprintf(mensaje, "Mapeando boton c2duckPunch: %d", botones["c2duckPunch"].asUInt());
+        Mylog->Log(mensaje, ERROR_LEVEL_INFO);
+        Util::getInstance()->setMapaDeCaracteres(botones["c2duckPunch"].asUInt(), 21);
     }
 }
