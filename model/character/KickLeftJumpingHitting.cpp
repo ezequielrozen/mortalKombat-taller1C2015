@@ -28,7 +28,7 @@ float KickLeftJumpingHitting::getWidth() {
 }
 
 string KickLeftJumpingHitting::getName() {
-	return "KickLeftJumping";
+	return "KickLeftJumpingHitting";
 }
 
 bool KickLeftJumpingHitting::isHitting() {
