@@ -565,6 +565,10 @@ void GameView::runCharacter() {
 
     	sprite->setX(scorpion->getX());
         sprite->setY(scorpion->getY());
+        //si esta pegando desde la derecha muevo el sprite un poco a la izqueierda para que impacte
+        if(scorpion->getX()> raiden->getX() && scorpion->isHitting()){
+        	sprite->setX(scorpion->getX() - (scorpion->getWidth()/2));
+        }
 
         //if (GameController::isVibrating())
         if(InputController::isVibrating())
@@ -579,6 +583,10 @@ void GameView::runCharacter() {
 
         sprite2->setX(raiden->getX());
         sprite2->setY(raiden->getY());
+        //si esta pegando desde la derecha muevo el sprite un poco a la izqueierda para que impacte
+        if(raiden->getX()> scorpion->getX() && raiden->isHitting()){
+        	sprite2->setX(raiden->getX() - (raiden->getWidth()/2));
+        }
 
         //if (GameController::isVibrating())
     	if(InputController::isVibrating())
