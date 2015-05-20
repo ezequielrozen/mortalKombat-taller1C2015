@@ -29,14 +29,14 @@ public:
     void LoadSprites(string name1, string name2);
 
     void loadAsScorpion(CharacterSprite*& walk, CharacterSprite*& stance, CharacterSprite*& jump, CharacterSprite*& duck, CharacterSprite*& sideJump,
-                                  CharacterSprite*& highKick,CharacterSprite*& lowKick, CharacterSprite*& dukKick, CharacterSprite*& punchJump, CharacterSprite*& duckPunch,
+                                  CharacterSprite*& highKick,CharacterSprite*& lowKick, CharacterSprite*& dukKick,CharacterSprite*& jumpKick, CharacterSprite*& punchJump, CharacterSprite*& duckPunch,
                                   CharacterSprite*& highPunch,CharacterSprite*& lowPunch, CharacterSprite*& winner, CharacterSprite*& bodyParts, CharacterSprite*& finisher,
                                   CharacterSprite*& shoot, CharacterSprite*& shootOne, CharacterSprite*& shootTwo, CharacterSprite*& dizzy,
                                   CharacterSprite*& fall, CharacterSprite*& beingHit, CharacterSprite*& beingHitDown, CharacterSprite*& blockDown,
                                   CharacterSprite*& block, CharacterSprite*& head, bool colorAltered);
     void loadAsRaiden(CharacterSprite*& walk, CharacterSprite*& stance, CharacterSprite*& jump, CharacterSprite*& sideJump,
 								CharacterSprite*& duck, CharacterSprite*& highKick, CharacterSprite*& lowKick, CharacterSprite*& dukKick, CharacterSprite*& punchJump,
-								CharacterSprite*& duckPunch, CharacterSprite*& highPunch,CharacterSprite*& lowPunch, CharacterSprite*& winner, CharacterSprite*& bodyParts,
+								CharacterSprite*& duckPunch,CharacterSprite*& jumpKick, CharacterSprite*& highPunch,CharacterSprite*& lowPunch, CharacterSprite*& winner, CharacterSprite*& bodyParts,
 								CharacterSprite*& finisher, CharacterSprite*& shoot, CharacterSprite*& shootZero, CharacterSprite*& shootOne,
 								CharacterSprite*& shootTwo, CharacterSprite*& sootThree, CharacterSprite*& shootFour, CharacterSprite*& shootFive,
 								CharacterSprite*& shootSix, CharacterSprite*& shootSeven, CharacterSprite*& shootEight, CharacterSprite*& shootNine,
@@ -69,6 +69,7 @@ private:
     CharacterSprite* scorpionHighKick;
     CharacterSprite* scorpionLowKick;
     CharacterSprite* scorpionDuckKick;
+    CharacterSprite* scorpionJumpKick;
     CharacterSprite* scorpionPunchJump;
     CharacterSprite* scorpionDuckPunch;
     CharacterSprite* scorpionHighPunch;
@@ -105,9 +106,10 @@ private:
     CharacterSprite* raidenSideJump;
     CharacterSprite* raidenHighKick;
     CharacterSprite* raidenLowKick;
-    CharacterSprite* raidenKickDown;
+    CharacterSprite* raidenDuckKick;
+    CharacterSprite* raidenJumpKick;
 	CharacterSprite* raidenPunchJump;
-	CharacterSprite* raidenPunchUp;
+	CharacterSprite* raidenDuckPunch;
 	CharacterSprite* raidenPunch;
 	CharacterSprite* raidenLowPunch;
 	CharacterSprite* raidenWinner;

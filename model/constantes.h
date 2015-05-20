@@ -33,7 +33,8 @@ const char* const DEFAULT_DUCK          	= "data/scorpionDuck.png";
 const char* const DEFAULT_HIGH_KICK         = "data/scorpionHighKick.png";
 const char* const DEFAULT_LOW_KICK         	= "data/scorpionLowKick.png";
 const char* const DEFAULT_DUCKING_KICK		= "data/scorpionDuckingKick.png";
-const char* const DEFAULT_PUNCHJUMP			= "data/scorpionPunchingJump.png";
+const char* const DEFAULT_JUMPING_KICK		= "data/scorpionJumpingKick.png";
+const char* const DEFAULT_JUMPING_PUNCH		= "data/scorpionJumpingPunch.png";
 const char* const DEFAULT_DUCK_PUNCH		= "data/scorpionDuckPunch.png";
 const char* const DEFAULT_HIGH_PUNCH		= "data/scorpionHighPunch.png";
 const char* const DEFAULT_LOW_PUNCH			= "data/scorpionLowPunch.png";
@@ -69,6 +70,7 @@ const char* const MOVE_NAME_DUCK         	= "duck";
 const char* const MOVE_NAME_HIGH_KICK       = "highKick";
 const char* const MOVE_NAME_LOW_KICK		= "lowKick";
 const char* const MOVE_NAME_DUCKING_KICK	= "duckingKick";
+const char* const MOVE_NAME_JUMPING_KICK	= "duckingKick";
 const char* const MOVE_NAME_PUNCHJUMP		= "punchJump";
 const char* const MOVE_NAME_DUCK_PUNCH		= "duckPunch";
 const char* const MOVE_NAME_HIGH_PUNCH		= "highPunch";
@@ -114,7 +116,7 @@ const Map DAMAGE = {{"HighKickHitting", 10},{"HighPunchHitting", 5}, {"DuckingKi
 //Fija el delay que tiene el personaje para cambiar de direccion. (A mayor, mas tarda en cambiar de direccion. Osea, a mayor, patina mas)
 const int COMMANDDELAY                      =  300;
 const int COMMANDDELAYKIT                   =  600;
-const int GAMEDELAY                         =   3;
+const int GAMEDELAY                         =   15;
 ////Velocidad inicial del salto del personaje.
 //const float SPEED                             =  0.04285*ANCHOVENTANAL;
 ////Aceleracion aplicada al salto del personaje.

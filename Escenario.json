@@ -40,8 +40,9 @@
         
         "highKick": "data/scorpionHighKick.png",
         "lowKick": "data/scorpionLowKick.png",
-        "kickDown": "data/scorpionDuckingKick.png",
-        "punchJump": "data/scorpionPunchingJump.png",
+        "duckingKick": "data/scorpionDuckingKick.png",
+        "kickJump": "data/scorpionJumpingKick.png",
+        "punchJump": "data/scorpionJumpingPunch.png",
         "duckPunch": "data/scorpionDuckPunch.png",
         "highPunch": "data/scorpionHighPunch.png",
         "lowPunch": "data/scorpionLowPunch.png",
@@ -49,10 +50,12 @@
         "bodyParts": "data/scorpionBodyParts.png",
         "finisher": "data/scorpionFinisher.png",
         "shoot": "data/scorpionShooting.png",
+        "shootZero": "data/scorpionShootingOne.png",
         "shootOne": "data/scorpionShootingOne.png",
         "shootTwo": "data/scorpionShootingTwo.png",
         "block": "data/scorpionBlocking.png",
         "beingHit": "data/scorpionBeingHit.png",
+        "beingHitDown": "data/scorpionBeingHitDown.png",
         "dizzy": "data/scorpionDizzy.png",
         "fall": "data/scorpionFalling.png",
         "winner": "data/scorpionWinner.png",
@@ -76,8 +79,9 @@
         
 		"highKick": "data/raidenHighKick.png",
 		"lowKick": "data/raidenLowKick.png",
-		"kickDown": "data/raidenDuckingKick.png",
-		"punchJump": "data/raidenPunchingJump.png",
+		"duckingKick": "data/raidenDuckingKick.png",
+		"kickJump": "data/raidenJumpingKick.png",
+		"punchJump": "data/raidenJumpingPunch.png",
 		"duckPunch": "data/raidenDuckPunch.png",
 		"highPunch": "data/raidenHighPunch.png",
 		"lowPunch": "data/raidenLowPunch.png",
@@ -91,7 +95,9 @@
         "shootZero": "data/raidenShooting100.png",
         "shootOne": "data/raidenShooting101.png",
         "shootTwo": "data/raidenShooting102.png",
-        "shootThree": "data/raidenShooting103.png"
+        "shootThree": "data/raidenShooting103.png",
+        "beingHitDown": "data/raidenBeingHitDown.png"
+        
       }
     }
   ],

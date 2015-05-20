@@ -252,6 +252,7 @@ void cargaPersonaje(Json::Value personaje, std::list<MKCharacter*>* characters, 
     char* filenameKick = new char[200];
     char* filenameLowKick = new char[200];
     char* filenameKickDown = new char[200];
+    char* filenameJumpKick = new char[200];
     char* filenamePunchJump = new char[200];
     char* filenamePunchUp = new char[200];
     char* filenamePunch = new char[200];
@@ -308,7 +309,8 @@ void cargaPersonaje(Json::Value personaje, std::list<MKCharacter*>* characters, 
             filenameKick = strdup(DEFAULT_HIGH_KICK);
             filenameLowKick = strdup(DEFAULT_LOW_KICK);
             filenameKickDown = strdup(DEFAULT_DUCKING_KICK);
-            filenamePunchJump = strdup(DEFAULT_PUNCHJUMP);
+            filenameJumpKick = strdup(DEFAULT_JUMPING_KICK);
+            filenamePunchJump = strdup(DEFAULT_JUMPING_PUNCH);
             filenamePunchUp = strdup(DEFAULT_DUCK_PUNCH);
             filenamePunch = strdup(DEFAULT_HIGH_PUNCH);
             filenameLowPunch = strdup(DEFAULT_LOW_PUNCH);
@@ -319,7 +321,6 @@ void cargaPersonaje(Json::Value personaje, std::list<MKCharacter*>* characters, 
             filenameShootZero = strdup(DEFAULT_SHOOT_ZERO);
             filenameShootOne = strdup(DEFAULT_SHOOT_ONE);
             filenameShootTwo = strdup(DEFAULT_SHOOT_TWO);
-
             filenameShootThree = strdup(DEFAULT_SHOOT_THREE);
             filenameShootFour = strdup(DEFAULT_SHOOT_FOUR);
             filenameShootFive = strdup(DEFAULT_SHOOT_FIVE);
@@ -346,6 +347,7 @@ void cargaPersonaje(Json::Value personaje, std::list<MKCharacter*>* characters, 
             filenameKick  = strdup(sprites[MOVE_NAME_HIGH_KICK].asString().c_str());
             filenameLowKick  = strdup(sprites[MOVE_NAME_LOW_KICK].asString().c_str());
             filenameKickDown  = strdup(sprites[MOVE_NAME_DUCKING_KICK].asString().c_str());
+            filenameJumpKick  = strdup(sprites[MOVE_NAME_JUMPING_KICK].asString().c_str());
             filenamePunchJump  = strdup(sprites[MOVE_NAME_PUNCHJUMP].asString().c_str());
             filenamePunchUp  = strdup(sprites[MOVE_NAME_DUCK_PUNCH].asString().c_str());
             filenamePunch  = strdup(sprites[MOVE_NAME_HIGH_PUNCH].asString().c_str());
@@ -354,19 +356,32 @@ void cargaPersonaje(Json::Value personaje, std::list<MKCharacter*>* characters, 
             filenameBodyParts  = strdup(sprites[MOVE_NAME_BODYPARTS].asString().c_str());
             filenameFinisher  = strdup(sprites[MOVE_NAME_FINISHER].asString().c_str());
             filenameShoot  = strdup(sprites[MOVE_NAME_SHOOT].asString().c_str());
-            filenameShootZero  = strdup(sprites[MOVE_NAME_SHOOT_ZERO].asString().c_str());
-            filenameShootOne  = strdup(sprites[MOVE_NAME_SHOOT_ONE].asString().c_str());
-            filenameShootTwo  = strdup(sprites[MOVE_NAME_SHOOT_TWO].asString().c_str());
 
-            filenameShootThree  = strdup(sprites[DEFAULT_SHOOT_THREE].asString().c_str());
-			filenameShootFour  = strdup(sprites[DEFAULT_SHOOT_FOUR].asString().c_str());
-			filenameShootFive  = strdup(sprites[DEFAULT_SHOOT_FIVE].asString().c_str());
-			filenameShootSix  = strdup(sprites[DEFAULT_SHOOT_SIX].asString().c_str());
-			filenameShootSeven  = strdup(sprites[DEFAULT_SHOOT_SEVEN].asString().c_str());
-			filenameShootEight  = strdup(sprites[DEFAULT_SHOOT_EIGHT].asString().c_str());
-			filenameShootNine  = strdup(sprites[DEFAULT_SHOOT_NINE].asString().c_str());
-			filenameShootTen  = strdup(sprites[DEFAULT_SHOOT_TEN].asString().c_str());
-			filenameShootEleven  = strdup(sprites[DEFAULT_SHOOT_ELEVEN].asString().c_str());
+//            filenameShootZero  = strdup(sprites[MOVE_NAME_SHOOT_ZERO].asString().c_str());
+//            filenameShootOne  = strdup(sprites[MOVE_NAME_SHOOT_ONE].asString().c_str());
+//            filenameShootTwo  = strdup(sprites[MOVE_NAME_SHOOT_TWO].asString().c_str());
+//            filenameShootThree  = strdup(sprites[DEFAULT_SHOOT_THREE].asString().c_str());
+//			filenameShootFour  = strdup(sprites[DEFAULT_SHOOT_FOUR].asString().c_str());
+//			filenameShootFive  = strdup(sprites[DEFAULT_SHOOT_FIVE].asString().c_str());
+//			filenameShootSix  = strdup(sprites[DEFAULT_SHOOT_SIX].asString().c_str());
+//			filenameShootSeven  = strdup(sprites[DEFAULT_SHOOT_SEVEN].asString().c_str());
+//			filenameShootEight  = strdup(sprites[DEFAULT_SHOOT_EIGHT].asString().c_str());
+//			filenameShootNine  = strdup(sprites[DEFAULT_SHOOT_NINE].asString().c_str());
+//			filenameShootTen  = strdup(sprites[DEFAULT_SHOOT_TEN].asString().c_str());
+//			filenameShootEleven  = strdup(sprites[DEFAULT_SHOOT_ELEVEN].asString().c_str());
+
+            filenameShootZero = strdup(DEFAULT_SHOOT_ZERO);
+			filenameShootOne = strdup(DEFAULT_SHOOT_ONE);
+			filenameShootTwo = strdup(DEFAULT_SHOOT_TWO);
+			filenameShootThree = strdup(DEFAULT_SHOOT_THREE);
+			filenameShootFour = strdup(DEFAULT_SHOOT_FOUR);
+			filenameShootFive = strdup(DEFAULT_SHOOT_FIVE);
+			filenameShootSix = strdup(DEFAULT_SHOOT_SIX);
+			filenameShootSeven = strdup(DEFAULT_SHOOT_SEVEN);
+			filenameShootEight = strdup(DEFAULT_SHOOT_EIGHT);
+			filenameShootNine = strdup(DEFAULT_SHOOT_NINE);
+			filenameShootTen = strdup(DEFAULT_SHOOT_TEN);
+			filenameShootEleven = strdup(DEFAULT_SHOOT_ELEVEN);
 
             filenameDizzy  = strdup(sprites[MOVE_NAME_DIZZY].asString().c_str());
             filenameFall  = strdup(sprites[MOVE_NAME_FALL].asString().c_str());
@@ -387,7 +402,8 @@ void cargaPersonaje(Json::Value personaje, std::list<MKCharacter*>* characters, 
     validarExistenciaArchivo(DEFAULT_HIGH_KICK, filenameKick);
     validarExistenciaArchivo(DEFAULT_HIGH_KICK, filenameLowKick);
     validarExistenciaArchivo(DEFAULT_DUCKING_KICK, filenameKickDown);
-    validarExistenciaArchivo(DEFAULT_PUNCHJUMP, filenamePunchJump);
+    validarExistenciaArchivo(DEFAULT_JUMPING_KICK, filenameJumpKick);
+    validarExistenciaArchivo(DEFAULT_JUMPING_PUNCH, filenamePunchJump);
     validarExistenciaArchivo(DEFAULT_DUCK_PUNCH, filenamePunchUp);
     validarExistenciaArchivo(DEFAULT_HIGH_PUNCH, filenamePunch);
     validarExistenciaArchivo(DEFAULT_LOW_PUNCH, filenameLowPunch);
@@ -425,6 +441,7 @@ void cargaPersonaje(Json::Value personaje, std::list<MKCharacter*>* characters, 
     Util::getInstance()->addMovement(MOVE_NAME_HIGH_KICK, filenameKick);
     Util::getInstance()->addMovement(MOVE_NAME_LOW_KICK, filenameLowKick);
     Util::getInstance()->addMovement(MOVE_NAME_DUCKING_KICK, filenameKickDown);
+    Util::getInstance()->addMovement(MOVE_NAME_JUMPING_KICK, filenameJumpKick);
     Util::getInstance()->addMovement(MOVE_NAME_PUNCHJUMP, filenamePunchJump);
     Util::getInstance()->addMovement(MOVE_NAME_DUCK_PUNCH, filenamePunchUp);
     Util::getInstance()->addMovement(MOVE_NAME_HIGH_PUNCH, filenamePunch);
@@ -500,7 +517,7 @@ void validarExistenciaArchivo(const char* defaultFile,char* fileNameToValidate)
 	extern logger* Mylog;
 	char mensaje[200];
 	if(!std::ifstream(fileNameToValidate)){
-			sprintf(mensaje, "No existe el archivo %s. Usando archivo por defecto", fileNameToValidate);
+			sprintf(mensaje, "No existe el archivo %s. Usando archivo por defecto: %s", fileNameToValidate, defaultFile);
 			Mylog->Log(mensaje, ERROR_LEVEL_ERROR);
 			strcpy(fileNameToValidate, defaultFile);
 	}
