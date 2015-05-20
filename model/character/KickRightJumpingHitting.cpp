@@ -38,3 +38,11 @@ bool KickRightJumpingHitting::isHitting() {
 bool KickRightJumpingHitting::impact() {
 	return true;
 }
+
+bool KickRightJumpingHitting::isJumping() {
+    return true;
+}
+
+bool KickRightJumpingHitting::isMovingRight() {
+    return true;
+}
