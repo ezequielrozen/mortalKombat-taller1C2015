@@ -285,19 +285,19 @@ bool MKCharacter::isAlive() {
 void MKCharacter::receiveBlow(int force, char direction) {
 	extern logger* Mylog;
 	this->life -= force;
-	if (force >= 15) {
-//		GameController::setVibrating(true);
+
+	if (force <= 10) {
 		this->update(ReceiveHit);
+	}
+	else if (force > 10 && force <= 15) {
+		this->update(ReceiveDuckingPunch);
 		InputController::setVibrating(true);
-		if (direction != 0)
-		{
-			cout << direction << endl;
-			(direction == 'l') ? this->setMovement("LEFT") : this->setMovement("RIGHT");
-		}
 	}
 	else {
-		this->update(ReceiveHit);
+		this->update(ReceiveDuckingPunch);
+		InputController::setVibrating(true);
 	}
+
 	Mylog->Log("Personaje (PONERLE NOMBRE) recibe golpe", ERROR_LEVEL_INFO); //FALTA: nombre, vida restada, vida restante.
 	if (this->life <= 0) {
 		this->life = 0;//marcar fin de juego. Preferentemente donde se invoca esta función (control de colisión y golpe)
@@ -395,6 +395,9 @@ bool MKCharacter::isJumping() {
 }
 
 string MKCharacter::getState() {
+	if (this->weapon->isActive()) {
+		return "WeaponHitting";
+	}
 	return this->state->getName();
 }
 
@@ -415,7 +418,12 @@ bool MKCharacter::isBlocking() {
 }
 
 bool MKCharacter::impacts() {
-	return this->state->impact();
+	if (this->state->isHitting()) {
+		return this->state->impact();
+	}
+	else {
+		this->getWeapon()->isImpact();
+	}
 }
 
 double MKCharacter::getYMax() {
@@ -435,8 +443,7 @@ Weapon *MKCharacter::getWeapon() {
 }
 
 void MKCharacter::throwWeapon() {
-
-//	this->weapon->throwWeapon(this->posX + this->getWidth(),this->posY +  this->getHeight() * 0.2 /* AL 80% DE LA ALTURA DEL PERSONAJE, USAR CTE*/, this->getCharacterSide());
+	//	this->weapon->throwWeapon(this->posX + this->getWidth(),this->posY +  this->getHeight() * 0.2 /* AL 80% DE LA ALTURA DEL PERSONAJE, USAR CTE*/, this->getCharacterSide());
 	if (this->getCharacterSide() == 'l') {
 		this->weapon->throwWeapon(this->posX + this->getWidth(),
 								  this->posY + this->getHeight() * 0.2,
@@ -447,4 +454,8 @@ void MKCharacter::throwWeapon() {
 								this->posY + this->getHeight()*0.2,
 								this->getCharacterSide());
 	}
+}
+
+float MKCharacter::getStateHeight() {
+	return (this->alto)*(this->state->getHeight());
 }

@@ -55,3 +55,7 @@ bool CharacterState::impact() {
 bool CharacterState::startThrowing() {
 	return false;
 }
+
+float CharacterState::getHeight() {
+	return 1;
+}

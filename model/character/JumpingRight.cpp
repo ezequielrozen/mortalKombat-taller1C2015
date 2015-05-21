@@ -59,3 +59,7 @@ string JumpingRight::getName() {
 bool JumpingRight::isMovingRight() {
     return true;
 }
+
+float JumpingRight::getHeight() {
+    return 0.5;
+}

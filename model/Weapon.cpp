@@ -5,7 +5,8 @@ Weapon::Weapon(float width, float height) {
     this->active = false;
     this->width = width;
     this->height = height;
-    this->speed = 2;
+    this->speed = 5;
+    this->impact = true;
 }
 
 
@@ -60,4 +61,16 @@ float Weapon::getWidth() {
 
 float Weapon::getHeight() {
     return this->height;
+}
+
+float Weapon::getPositionY() {
+    return this->positionY;
+}
+
+bool Weapon::isImpact() {
+    return this->impact;
+}
+
+void Weapon::setImpact(bool imp) {
+    this->impact = imp;
 }

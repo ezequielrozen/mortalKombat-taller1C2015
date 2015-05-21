@@ -28,6 +28,10 @@ float DuckingKickHitting::getWidth() {
     return 1.79;
 }
 
+float DuckingKickHitting::getHeight() {
+    return 0.3;
+}
+
 bool DuckingKickHitting::isDucking() {
     return true;
 }

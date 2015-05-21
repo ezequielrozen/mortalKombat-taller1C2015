@@ -12,6 +12,12 @@ public:
     void update(MKCharacter* character, Events aEvent);
     string getName();
     float getWidth();
+
+    void refreshTimer(MKCharacter *character);
+
+private:
+
+    int timer;
 };
 
 

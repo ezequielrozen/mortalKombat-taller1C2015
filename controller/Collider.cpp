@@ -27,15 +27,35 @@ bool Collider::superpositionUp(MKCharacter* character1, MKCharacter* character2)
 	else {
 		return (character1->getY()+character1->getHeight() >= character2->getY());
 	}
+}
 
+bool Collider::superpositionDown(MKCharacter* character1, MKCharacter* character2) {
+	return (character1->getY()+(character1->getHeight()-character1->getStateHeight()) < character2->getY()+character2->getHeight());
+}
+
+bool Collider::superpositionDown(Weapon* weapon, MKCharacter* character2) {
+	return (weapon->getPositionY() < character2->getY()+character2->getHeight());
+}
+
+bool Collider::superpositionLeft(Weapon* weapon, MKCharacter* character2) {
+	return (weapon->getPositionX()+weapon->getWidth() >= character2->getX() && weapon->getPositionX() < character2->getX());
+}
+
+bool Collider::superpositionRight(Weapon* weapon, MKCharacter* character2) {
+	return (weapon->getPositionX() <= character2->getX()+character2->getWidth() && weapon->getPositionX() > character2->getX());
 }
 
 void Collider::checkHits(MKCharacter* character1, MKCharacter* character2) {
-	if ((superpositionRight(character1,character2) || superpositionLeft(character1, character2)) && (character1->isHitting())) {
 
+	if (((superpositionRight(character1,character2) || superpositionLeft(character1, character2)) && (character1->isHitting()) && superpositionDown(character1, character2))
+	|| ((superpositionRight(character1->getWeapon(), character2) || superpositionLeft(character1->getWeapon(), character2)) && character1->getWeapon()->isActive() && superpositionDown(character1->getWeapon(), character2))){
 		if (character1->impacts()) {
 			if (character1->getState() == "DuckingKickHitting" || (!character2->isBlocking() && !character2->isDucking())) {
 				character2->receiveBlow(DAMAGE.at(character1->getState()),0);
+				if (character1->getWeapon()->isActive()) {
+					character1->getWeapon()->destroy();
+					character1->getWeapon()->setImpact(false);
+				}
 			}
 		}
 	}

@@ -17,6 +17,7 @@ public:
     virtual bool isBlocking();
     virtual bool isDucking();
     virtual float getWidth();
+    virtual float getHeight();
     virtual string getName();
     virtual float getJumpLevel();
     virtual void refreshTimer(MKCharacter* character);

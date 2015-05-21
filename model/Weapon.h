@@ -17,9 +17,13 @@ public:
     bool isActive();
     void destroy();
     float getPositionX();
+    float getPositionY();
     void throwWeapon(float initialPositionX, float initialPositionY, char direction);
     float getWidth();
     float getHeight();
+    bool isImpact();
+    void setImpact(bool imp);
+
 private:
     float speed;
     float positionX;
@@ -30,6 +34,8 @@ private:
     char direction;
     void stepForward();
     float traveledDistance;
+    bool impact;
+
 };
 
 

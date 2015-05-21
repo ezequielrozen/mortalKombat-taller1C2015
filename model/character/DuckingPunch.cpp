@@ -2,9 +2,10 @@
 #include "ReceivingDuckingKick.h"
 #include "RecevingHit.h"
 #include "ReceivingDuckingPunch.h"
+#include "CharacterStance.h"
 
 DuckingPunch::DuckingPunch() {
-    this->timer = 10;
+    this->timer = 30;
 }
 
 DuckingPunch::~DuckingPunch() {
@@ -39,7 +40,7 @@ bool DuckingPunch::isJumping() {
 }
 
 bool DuckingPunch::isHitting() {
-    return CharacterState::isHitting();
+    return true;
 }
 
 bool DuckingPunch::isBlocking() {
@@ -47,7 +48,7 @@ bool DuckingPunch::isBlocking() {
 }
 
 bool DuckingPunch::isDucking() {
-    return CharacterState::isDucking();
+    return true;
 }
 
 float DuckingPunch::getWidth() {
@@ -59,14 +60,19 @@ string DuckingPunch::getName() {
 }
 
 float DuckingPunch::getJumpLevel() {
-    return CharacterState::getJumpLevel();
+    return 0.6;
 }
 
 void DuckingPunch::refreshTimer(MKCharacter *character) {
-    CharacterState::refreshTimer(character);
+    if (this->timer == 0) {
+        character->setState(new CharacterStance());
+        this->timer = 30;
+    }
+
+    this->timer -= 1;
 }
 
 bool DuckingPunch::impact() {
-    return CharacterState::impact();
+    return this->timer == 15;
 }
 

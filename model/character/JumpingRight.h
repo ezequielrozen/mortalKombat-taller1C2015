@@ -17,6 +17,7 @@ public:
     string getName();
 
 private:
+    float getHeight();
 };
 
 

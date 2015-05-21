@@ -104,7 +104,7 @@ const char* const NAME_CHARACTER_2          = "raiden";
 const int         FULL_LIFE                 = 100;
 
 typedef std::map<std::string, int> Map;
-const Map DAMAGE = {{"HighKickHitting", 10}, {"LowKickHitting", 10},{"HighPunchHitting", 5}, {"DuckingKickHitting", 20} ,{"PUNCHUP", 20},{"SHOOT", 20}, {"DEFENSE", 0}, {"PUNCHJUMPLEFT", 20}, {"PUNCHJUMPRIGHT", 20}};
+const Map DAMAGE = {{"HighKickHitting", 10}, {"LowKickHitting", 10},{"HighPunchHitting", 5}, {"DuckingKickHitting", 15} ,{"DuckingPunch", 20},{"SHOOT", 10}, {"PunchLeftJumping", 15}, {"KickRightJumpingHitting", 15}, {"KickLeftJumpingHitting", 15}, {"PunchRightJumping", 15},{"LowPunchHitting", 5}, {"WeaponHitting", 20}};
 //
 //const int OPONENTLEFT                       =    1;
 //const int OPONENTRIGHT                      =    2;
@@ -116,7 +116,7 @@ const Map DAMAGE = {{"HighKickHitting", 10}, {"LowKickHitting", 10},{"HighPunchH
 //Fija el delay que tiene el personaje para cambiar de direccion. (A mayor, mas tarda en cambiar de direccion. Osea, a mayor, patina mas)
 const int COMMANDDELAY                      =  300;
 const int COMMANDDELAYKIT                   =  600;
-const int GAMEDELAY                         =   3;
+const int GAMEDELAY                         =   5;
 ////Velocidad inicial del salto del personaje.
 //const float SPEED                             =  0.04285*ANCHOVENTANAL;
 ////Aceleracion aplicada al salto del personaje.

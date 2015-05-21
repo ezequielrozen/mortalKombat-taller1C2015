@@ -12,6 +12,7 @@
 #include "RecevingHit.h"
 #include "LowKickHitting.h"
 #include "ReceivingDuckingPunch.h"
+#include "ReceivingDuckingKick.h"
 
 CharacterStance::CharacterStance() {
 //    this->timer = -1
@@ -55,6 +56,12 @@ void CharacterStance::update(MKCharacter * character, Events aEvent) {
             break;
         case WeaponHit:
             character->setState(new WeaponHitting());
+            break;
+        case ReceiveDuckingPunch:
+            character->setState(new ReceivingDuckingPunch());
+            break;
+        case ReceiveDuckingKick:
+            character->setState(new ReceivingDuckingKick());
             break;
         case ReceiveWeapon:
             character->setState(new ReceivingDuckingPunch());

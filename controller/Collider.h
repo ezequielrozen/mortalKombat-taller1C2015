@@ -21,7 +21,15 @@ private:
 
     bool superpositionUp(MKCharacter* character1, MKCharacter* character2);
 
+    bool superpositionDown(MKCharacter* character1, MKCharacter* character2);
+
     void checkHits(MKCharacter* character1, MKCharacter* character2);
+
+    bool superpositionDown(Weapon* weapon, MKCharacter* character2);
+
+    bool superpositionLeft(Weapon* weapon, MKCharacter* character2);
+
+    bool superpositionRight(Weapon* weapon, MKCharacter* character2);
 
     int timer;
 

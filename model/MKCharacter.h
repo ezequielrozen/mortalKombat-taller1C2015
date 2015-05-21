@@ -123,6 +123,8 @@ public:
 
     void throwWeapon();
 
+    float getStateHeight();
+
 private:
 
     // State

@@ -13,6 +13,7 @@ public:
     
     string getName();
     float getWidth();
+    float getHeight();
 
     bool isDucking();
     bool isHitting();

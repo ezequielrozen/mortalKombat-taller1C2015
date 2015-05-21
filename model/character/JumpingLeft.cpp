@@ -59,3 +59,7 @@ string JumpingLeft::getName() {
 bool JumpingLeft::isMovingLeft() {
     return true;
 }
+
+float JumpingLeft::getHeight() {
+    return 0.5;
+}
