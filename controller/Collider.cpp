@@ -75,72 +75,7 @@ void Collider::checkHits(MKCharacter* character1, MKCharacter* character2) {
 		}
 	};
 */
-	//ACA VA EL SHOOT
-	/*
-	//Como los shoot de los personajes son distintos necesito identificarlos.
-	MKCharacter* scorpion;
-	MKCharacter* raiden;
-
-	if (character1->getName() == "scorpion"){
-		scorpion =character1;
-		raiden = character2;
-	}else if (character1->getName() == "raiden"){
-		scorpion =character2;
-		raiden = character1;
-	}
-
-
-	//Esto trabaja igual q la funcion double GameView::shootWidthCalculate(). Si se modifica aca se debe modificar tb alla.
-	//Veo si llego a hacer contacto con la soga teniendo en cuenta q la estiro y la contraigo segun la distancia entre los personajes.
-	double distancia;
-	double distanciaMaxima = scorpion->getHitWidth() * 2;
-	if (scorpion->getHit() == "SHOOT")
-	{
-		if (scorpion->getX() < raiden->getX()){
-			distancia = raiden->getX() - (scorpion->getX() + scorpion->getHitWidth()-15);
-		}
-		else{
-			distancia = scorpion->getX() - (raiden->getX() + raiden->getHitWidth()-15);
-		}
-
-		if (distancia <= distanciaMaxima)
-		{
-			if (timer + 100 < SDL_GetTicks()) {
-				if (scorpion->getHitDelay() == 0) {
-					raiden->receiveBlow(DAMAGE.at(scorpion->getHit()), 0);
-				}
-				scorpion->setHitDelay(scorpion->getHitDelay()-1);
-				timer = SDL_GetTicks();
-			}
-		}
-	}
-
-
-	//Esto trabaja igual q la funcion double GameView::shootWidthCalculate(). Si se modifica aca se debe modificar tb alla.
-	//Veo si llego a hacer contacto con la soga teniendo en cuenta q la estiro y la contraigo segun la distancia entre los personajes.
-	distancia;
-	distanciaMaxima = scorpion->getHitWidth() * 5;
-	if (raiden->getHit() == "SHOOT")
-	{
-		if (scorpion->getX() < raiden->getX()){
-			distancia = raiden->getX() - (scorpion->getX() + scorpion->getHitWidth());
-		}
-		else{
-			distancia = scorpion->getX() - (raiden->getX() + raiden->getHitWidth());
-		}
-		if (distancia <= distanciaMaxima)
-		{
-			if (timer + 200 < SDL_GetTicks()) {
-				if (raiden->getHitDelay() == 0) {
-					scorpion->receiveBlow(DAMAGE.at(raiden->getHit()), (scorpion->getX() < raiden->getX()) ? 'l' :'r');
-				}
-				raiden->setHitDelay(raiden->getHitDelay()-1);
-				timer = SDL_GetTicks();
-			}
-		}
-	}
 	
-}*/
 /*
 void Collider::update(MKCharacter* character1, MKCharacter* character2, bool cameraMoved) {
 
@@ -213,46 +148,40 @@ void Collider::update(MKCharacter* character1, MKCharacter* character2, bool cam
 
 	if (!cameraMoved) {
 		if (!(this->superpositionLeft(character1, character2) && this->superpositionUp(character1, character2) &&
-																 character1->isMovingRight() ||
-			  this->superpositionRight(character1, character2) && this->superpositionUp(character1, character2) &&
-			  character1->isMovingLeft())) {
-			character1->move();
+			character1->isMovingRight() || this->superpositionRight(character1, character2) &&
+			this->superpositionUp(character1, character2) &&  character1->isMovingLeft())) {
+				character1->move();
 		};
 		if (!(this->superpositionLeft(character2, character1) && this->superpositionUp(character2, character1) &&
-																 character2->isMovingRight() ||
-			  this->superpositionRight(character2, character1) && this->superpositionUp(character2, character1) &&
-			  character2->isMovingLeft())) {
-			character2->move();
+			 character2->isMovingRight() || this->superpositionRight(character2, character1) &&
+			 this->superpositionUp(character2, character1) && character2->isMovingLeft())) {
+				character2->move();
 		};
 
 		if ((this->superpositionLeft(character1, character2) && this->superpositionUp(character1, character2) &&
-																character1->isMovingRight() ||
-			 this->superpositionRight(character1, character2) && this->superpositionUp(character1, character2) &&
-			 character1->isMovingLeft()) &&
-			character1->isJumping()) {
-			if (character1->getX() + character1->getWidth() <= character2->getX() + (character2->getWidth() / 2)) {
-				character1->moveLeft();
-				character1->moveLeft();
-			}
-			else {
-				character1->moveRight();
-				character1->moveRight();
-			}
+				character1->isMovingRight() || this->superpositionRight(character1, character2) &&
+				this->superpositionUp(character1, character2) && character1->isMovingLeft()) &&	character1->isJumping()) {
+				if (character1->getX() + character1->getWidth() <= character2->getX() + (character2->getWidth() / 2)) {
+					character1->moveLeft();
+					character1->moveLeft();
+				}
+				else {
+					character1->moveRight();
+					character1->moveRight();
+				}
 		}
 
 		if ((this->superpositionLeft(character2, character1) && this->superpositionUp(character2, character1) &&
-																character2->isMovingRight() ||
-			 this->superpositionRight(character2, character1) && this->superpositionUp(character2, character1) &&
-			 character2->isMovingLeft()) &&
-			character2->isJumping()) {
-			if (character2->getX() + character2->getWidth() <= character1->getX() + (character1->getWidth() / 2)) {
-				character2->moveLeft();
-				character2->moveLeft();
-			}
-			else {
-				character2->moveRight();
-				character2->moveRight();
-			}
+				character2->isMovingRight() || this->superpositionRight(character2, character1) &&
+				this->superpositionUp(character2, character1) && character2->isMovingLeft()) &&	character2->isJumping()) {
+				if (character2->getX() + character2->getWidth() <= character1->getX() + (character1->getWidth() / 2)) {
+					character2->moveLeft();
+					character2->moveLeft();
+				}
+				else {
+					character2->moveRight();
+					character2->moveRight();
+				}
 		}
 	}
 

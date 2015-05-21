@@ -261,18 +261,6 @@ void cargaPersonaje(Json::Value personaje, std::list<MKCharacter*>* characters, 
     char* filenameBodyParts = new char[200];
     char* filenameFinisher = new char[200];
     char* filenameShoot = new char[200];
-    char* filenameShootZero = new char[200];
-    char* filenameShootOne = new char[200];
-    char* filenameShootTwo = new char[200];
-    char* filenameShootThree = new char[200];
-    char* filenameShootFour = new char[200];
-    char* filenameShootFive = new char[200];
-    char* filenameShootSix = new char[200];
-    char* filenameShootSeven = new char[200];
-    char* filenameShootEight = new char[200];
-    char* filenameShootNine = new char[200];
-    char* filenameShootTen = new char[200];
-    char* filenameShootEleven = new char[200];
     char* filenameDizzy = new char[200];
     char* filenameFall = new char[200];
     char* filenameBeingHit = new char[200];
@@ -315,21 +303,7 @@ void cargaPersonaje(Json::Value personaje, std::list<MKCharacter*>* characters, 
             filenamePunch = strdup(DEFAULT_HIGH_PUNCH);
             filenameLowPunch = strdup(DEFAULT_LOW_PUNCH);
             filenameWinner = strdup(DEFAULT_WINNER);
-
             filenameShoot = strdup(DEFAULT_SHOOT);
-            filenameShootZero = strdup(DEFAULT_SHOOT_ZERO);
-            filenameShootOne = strdup(DEFAULT_SHOOT_ONE);
-            filenameShootTwo = strdup(DEFAULT_SHOOT_TWO);
-            filenameShootThree = strdup(DEFAULT_SHOOT_THREE);
-            filenameShootFour = strdup(DEFAULT_SHOOT_FOUR);
-            filenameShootFive = strdup(DEFAULT_SHOOT_FIVE);
-            filenameShootSix = strdup(DEFAULT_SHOOT_SIX);
-            filenameShootSeven = strdup(DEFAULT_SHOOT_SEVEN);
-            filenameShootEight = strdup(DEFAULT_SHOOT_EIGHT);
-            filenameShootNine = strdup(DEFAULT_SHOOT_NINE);
-            filenameShootTen = strdup(DEFAULT_SHOOT_TEN);
-            filenameShootEleven = strdup(DEFAULT_SHOOT_ELEVEN);
-
             filenameDizzy = strdup(DEFAULT_DIZZY);
             filenameFall = strdup(DEFAULT_FALL);
             filenameBeingHit = strdup(DEFAULT_BEINGHIT);
@@ -356,33 +330,6 @@ void cargaPersonaje(Json::Value personaje, std::list<MKCharacter*>* characters, 
             filenameLowPunch  = strdup(sprites[MOVE_NAME_LOW_PUNCH].asString().c_str());
             filenameWinner  = strdup(sprites[MOVE_NAME_WINNER].asString().c_str());
             filenameShoot  = strdup(sprites[MOVE_NAME_SHOOT].asString().c_str());
-
-//            filenameShootZero  = strdup(sprites[MOVE_NAME_SHOOT_ZERO].asString().c_str());
-//            filenameShootOne  = strdup(sprites[MOVE_NAME_SHOOT_ONE].asString().c_str());
-//            filenameShootTwo  = strdup(sprites[MOVE_NAME_SHOOT_TWO].asString().c_str());
-//            filenameShootThree  = strdup(sprites[DEFAULT_SHOOT_THREE].asString().c_str());
-//			filenameShootFour  = strdup(sprites[DEFAULT_SHOOT_FOUR].asString().c_str());
-//			filenameShootFive  = strdup(sprites[DEFAULT_SHOOT_FIVE].asString().c_str());
-//			filenameShootSix  = strdup(sprites[DEFAULT_SHOOT_SIX].asString().c_str());
-//			filenameShootSeven  = strdup(sprites[DEFAULT_SHOOT_SEVEN].asString().c_str());
-//			filenameShootEight  = strdup(sprites[DEFAULT_SHOOT_EIGHT].asString().c_str());
-//			filenameShootNine  = strdup(sprites[DEFAULT_SHOOT_NINE].asString().c_str());
-//			filenameShootTen  = strdup(sprites[DEFAULT_SHOOT_TEN].asString().c_str());
-//			filenameShootEleven  = strdup(sprites[DEFAULT_SHOOT_ELEVEN].asString().c_str());
-
-            filenameShootZero = strdup(DEFAULT_SHOOT_ZERO);
-			filenameShootOne = strdup(DEFAULT_SHOOT_ONE);
-			filenameShootTwo = strdup(DEFAULT_SHOOT_TWO);
-			filenameShootThree = strdup(DEFAULT_SHOOT_THREE);
-			filenameShootFour = strdup(DEFAULT_SHOOT_FOUR);
-			filenameShootFive = strdup(DEFAULT_SHOOT_FIVE);
-			filenameShootSix = strdup(DEFAULT_SHOOT_SIX);
-			filenameShootSeven = strdup(DEFAULT_SHOOT_SEVEN);
-			filenameShootEight = strdup(DEFAULT_SHOOT_EIGHT);
-			filenameShootNine = strdup(DEFAULT_SHOOT_NINE);
-			filenameShootTen = strdup(DEFAULT_SHOOT_TEN);
-			filenameShootEleven = strdup(DEFAULT_SHOOT_ELEVEN);
-
             filenameDizzy  = strdup(sprites[MOVE_NAME_DIZZY].asString().c_str());
             filenameFall  = strdup(sprites[MOVE_NAME_FALL].asString().c_str());
             filenameBeingHit  = strdup(sprites[MOVE_NAME_BEINGHIT].asString().c_str());
@@ -419,18 +366,6 @@ void cargaPersonaje(Json::Value personaje, std::list<MKCharacter*>* characters, 
     validarExistenciaArchivo(DEFAULT_BODYPARTS, filenameBodyParts);
     validarExistenciaArchivo(DEFAULT_FINISHER, filenameFinisher);
     validarExistenciaArchivo(DEFAULT_SHOOT, filenameShoot);
-    validarExistenciaArchivo(DEFAULT_SHOOT_ZERO, filenameShootZero);
-    validarExistenciaArchivo(DEFAULT_SHOOT_ONE, filenameShootOne);
-    validarExistenciaArchivo(DEFAULT_SHOOT_TWO, filenameShootTwo);
-	validarExistenciaArchivo(DEFAULT_SHOOT_THREE, filenameShootThree);
-	validarExistenciaArchivo(DEFAULT_SHOOT_FOUR, filenameShootFour);
-	validarExistenciaArchivo(DEFAULT_SHOOT_FIVE, filenameShootFive);
-	validarExistenciaArchivo(DEFAULT_SHOOT_SIX, filenameShootSix);
-	validarExistenciaArchivo(DEFAULT_SHOOT_SEVEN, filenameShootSeven);
-	validarExistenciaArchivo(DEFAULT_SHOOT_EIGHT, filenameShootEight);
-	validarExistenciaArchivo(DEFAULT_SHOOT_NINE, filenameShootNine);
-	validarExistenciaArchivo(DEFAULT_SHOOT_TEN, filenameShootTen);
-	validarExistenciaArchivo(DEFAULT_SHOOT_ELEVEN, filenameShootEleven);
     validarExistenciaArchivo(DEFAULT_DIZZY, filenameDizzy);
     validarExistenciaArchivo(DEFAULT_FALL, filenameFall);
     validarExistenciaArchivo(DEFAULT_BEINGHIT, filenameBeingHit);
@@ -458,18 +393,6 @@ void cargaPersonaje(Json::Value personaje, std::list<MKCharacter*>* characters, 
     Util::getInstance()->addMovement(MOVE_NAME_BODYPARTS, filenameBodyParts);
     Util::getInstance()->addMovement(MOVE_NAME_FINISHER, filenameFinisher);
     Util::getInstance()->addMovement(MOVE_NAME_SHOOT, filenameShoot);
-    Util::getInstance()->addMovement(MOVE_NAME_SHOOT_ZERO, filenameShootZero);
-    Util::getInstance()->addMovement(MOVE_NAME_SHOOT_ONE, filenameShootOne);
-    Util::getInstance()->addMovement(MOVE_NAME_SHOOT_TWO, filenameShootTwo);
-    Util::getInstance()->addMovement(MOVE_NAME_SHOOT_THREE, filenameShootThree);
-	Util::getInstance()->addMovement(MOVE_NAME_SHOOT_FOUR, filenameShootFour);
-	Util::getInstance()->addMovement(MOVE_NAME_SHOOT_FIVE, filenameShootFive);
-	Util::getInstance()->addMovement(MOVE_NAME_SHOOT_SIX, filenameShootSix);
-	Util::getInstance()->addMovement(MOVE_NAME_SHOOT_SEVEN, filenameShootSeven);
-	Util::getInstance()->addMovement(MOVE_NAME_SHOOT_EIGHT, filenameShootEight);
-	Util::getInstance()->addMovement(MOVE_NAME_SHOOT_NINE, filenameShootNine);
-	Util::getInstance()->addMovement(MOVE_NAME_SHOOT_TEN, filenameShootTen);
-	Util::getInstance()->addMovement(MOVE_NAME_SHOOT_ELEVEN, filenameShootEleven);
     Util::getInstance()->addMovement(MOVE_NAME_DIZZY, filenameDizzy);
     Util::getInstance()->addMovement(MOVE_NAME_DIZZY, filenameDizzy);
     Util::getInstance()->addMovement(MOVE_NAME_FALL, filenameFall);
@@ -513,9 +436,9 @@ void cargaPersonaje(Json::Value personaje, std::list<MKCharacter*>* characters, 
     }
 
     //log
-    sprintf(mensaje, "Ancho: %1.2f, Alto: %1.2f, z-index: %i,\n Jump: %s, Walk: %s, Side jump: %s, Stance: %s, Duck: %s, Kick: %s,\n KickDown: %s, PunchJump: %s, PunchUp: %s, Punch: %s,\n Winner: %s, BodyParts: %s, Finisher: %s, Shoot: %s, ShootOne: %s, ShootTwo: %s, Dizzy: %s, Fall: %s, BeingHit: %s, BeingHitDown: %s, Block: %s, BlockDown: %s, Head: %s, ",
+    sprintf(mensaje, "Ancho: %1.2f, Alto: %1.2f, z-index: %i,\n Jump: %s, Walk: %s, Side jump: %s, Stance: %s, Duck: %s, Kick: %s,\n KickDown: %s, PunchJump: %s, PunchUp: %s, Punch: %s,\n Winner: %s, BodyParts: %s, Finisher: %s, Shoot: %s, Dizzy: %s, Fall: %s, BeingHit: %s, BeingHitDown: %s, Block: %s, BlockDown: %s, Head: %s, ",
                     charAncho, charAlto, z_index,
-                    filenameJump, filenameWalk, filenameSideJump, filenameStance, filenameDuck, filenameKick, filenameKickDown, filenamePunchJump, filenamePunchUp, filenamePunch, filenameWinner, filenameBodyParts, filenameFinisher, filenameShoot, filenameShootOne, filenameShootTwo, filenameDizzy, filenameFall, filenameBeingHit, filenameBeingHitDown, filenameBlock, filenameBlockDown,filenameHead);
+                    filenameJump, filenameWalk, filenameSideJump, filenameStance, filenameDuck, filenameKick, filenameKickDown, filenamePunchJump, filenamePunchUp, filenamePunch, filenameWinner, filenameBodyParts, filenameFinisher, filenameShoot,  filenameDizzy, filenameFall, filenameBeingHit, filenameBeingHitDown, filenameBlock, filenameBlockDown,filenameHead);
 
     Mylog->Log(mensaje, ERROR_LEVEL_INFO);
 }

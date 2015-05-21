@@ -7,7 +7,6 @@ bool GameController::vibrating = false;
 GameController::GameController()
 {
     mainEvent = new SDL_Event();
-//    this->joystickController = new JoystickController(mainEvent);
     previousKey = 0;
 
     timer = SDL_GetTicks();
