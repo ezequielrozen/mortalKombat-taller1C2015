@@ -36,24 +36,6 @@ void InputController::checkEvent() {
     SDL_PollEvent(mainEvent);
 }
 
-void InputController::victory(MKCharacter* character, MKCharacter* character2 ) {
-	if (character->isAlive() && !character2->isAlive()) { // Ganó el 1. Loguear
-		character->setHit("WINNER");
-		character2->setHit("DIZZY");
-		//Esto deberia estar aca sino en el MKCharacter setHit. Lo arreglo rapido para la entrega.
-		if (character->getName() == "raiden")
-			character->setHitWidth(character->getWidth()*1.5);
-
-	} else if (!character->isAlive() && character2->isAlive()) { // Ganó el 2. Loguear.
-		character->setHit("DIZZY");
-		character2->setHit("WINNER");
-
-		//Esto deberia estar aca sino en el MKCharacter setHit. Lo arreglo rapido para la entrega.
-		if (character2->getName() == "raiden")
-			character2->setHitWidth(character2->getWidth()*1.5);
-	}
-}
-
 void InputController::setVibrating(bool vibratingFlag) {
 	vibrating = vibratingFlag;
 }

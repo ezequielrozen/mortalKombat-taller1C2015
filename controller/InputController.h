@@ -28,7 +28,6 @@ public:
 	void checkEvent();
 	SDL_Event* getEvent();
 
-	void victory(MKCharacter* character, MKCharacter* character2);
 	static void setVibrating(bool vibratingFlag);
 	static bool isVibrating();
 private:

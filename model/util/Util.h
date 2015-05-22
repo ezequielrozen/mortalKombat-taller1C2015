@@ -61,7 +61,7 @@ private:
 	std::list<charactersFile*>* characterMovements;
 
 
-    unsigned char mapaDeCaracteres[20];
+    unsigned char mapaDeCaracteres[25];
 };
 
 

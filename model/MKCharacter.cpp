@@ -14,22 +14,11 @@ MKCharacter::MKCharacter(float initialPosX, float ancho, float alto, int z_index
 	this->alto = alto;
 	this->ancho = ancho;
 
-	this->hitWidth = ancho;
-	this->hitDelay = 0;
-
 	step = 0.042 * this->ancho;
 
 	jumpTime = 0;
-	//Parte de la ecuacion de tiro vertical. El 0.5 sale de que el salto total dura 1seg, por lo cual al punto maximo del salto llega en 0.5seg
-	//accY = (-2*(yMax-stageFloor+velY*0.5))/(pow(0.5,2));
-	//Si el salto esta en etapa ascendente o descendente.
 	ascending = false;
 
-	movement = "NONE";
-	jumpMovement = "NONE";
-	hitMovement = "NONE";
-	this->hitReception = "NONE";
-	jumping = false;
 
 	this->life = FULL_LIFE;
 
@@ -55,14 +44,6 @@ void MKCharacter::characterUpdate() {
 	if (this->state->isJumping()) {
 
 		this->moveUp();
-	}
-
-	if (this->hitReceptionDelay == 0) {
-		this->setHitReception("NONE");
-	}
-
-	if (this->hitReception != "NONE") {
-		this->hitReceptionDelay = this->hitReceptionDelay - 1;
 	}
 
 	this->state->refreshTimer(this);
@@ -132,121 +113,6 @@ double MKCharacter::getX() {
 
 double MKCharacter::getY() {
 	return posY;
-}
-
-string MKCharacter::getMovement() {
-	return movement;
-}
-
-void MKCharacter::setMovement(string newMovement) {
-	if (!this->isJumping()) {
-		this->movement = newMovement;
-	}
-}
-
-void MKCharacter::setJump(bool jump) {
-	this->jumping = jump;
-
-	this->setJumpMovement(this->movement);
-}
-
-void MKCharacter::setHit(string newHit) {
-
-	double stanceWidth = (this->name == "scorpion") ? 76 : 73;
-
-	double spriteWidth = 0;
-	int delay = 0;
-
-	this->hitMovement = newHit;
-
-	if (newHit == "NONE" || newHit =="WINNER") {
-		this->setHitWidth(this->getWidth());
-
-		if ((this->getCharacterSide() == 'r') && (this->getIsHiting())) {
-			this->posX = this->auxPosX;
-		}
-	}
-	else
-	{
-		if (newHit == "BEINGHIT") {
-			if (this->getHitDelay() <= 0) {
-				this->setHitDelay(3);
-			}
-		}
-		else
-		{
-			if (newHit == "KICK") {
-				spriteWidth = (this->name == "scorpion") ? 143 : 142;
-				delay = 4;
-			}
-
-			if (newHit == "KICKDOWN") {
-				spriteWidth = (this->name == "scorpion") ? 136 : 146;
-				delay = 4;
-			}
-
-			if (newHit == "PUNCH") {
-				spriteWidth = (this->name == "scorpion") ? 118 : 124;
-				delay = 2;
-			}
-
-			if (newHit == "PUNCHUP") {
-				spriteWidth = (this->name == "scorpion") ? 115 : 105;
-				delay = 3;
-			}
-
-			if (newHit == "SHOOT") {
-				spriteWidth = (this->name == "scorpion") ? 120 : 81;
-				delay = 3;
-			}
-
-			if (newHit == "PUNCHJUMPLEFT" || newHit == "PUNCHJUMPRIGHT") {
-				spriteWidth = stanceWidth;
-				delay = 0;
-			}
-
-			if ((newHit == "KICK") || (newHit == "KICKDOWN")  || (newHit == "PUNCH")  || (newHit == "PUNCHUP") || (newHit == "SHOOT") ||
-				(newHit == "PUNCHJUMPLEFT") || (newHit == "PUNCHJUMPRIGHT")){
-
-				if (this->getHitDelay() <= 0) {
-					this->setHitDelay(delay);
-				}
-
-				if ((this->getCharacterSide() == 'r') && (!this->getIsHiting())) {
-					this->auxPosX = this->posX;
-
-					this->posX = this->posX - ((this->getWidth()*(spriteWidth/stanceWidth)) - this->getWidth());
-				}
-
-				this->setHitWidth(this->getWidth()*spriteWidth/stanceWidth);
-			}
-		}
-	}
-}
-
-string MKCharacter::getHit() {
-	return this->hitMovement;
-}
-/*
-bool MKCharacter::isJumping() {
-	return this->jumping;
-}
-*/
-
-bool MKCharacter::getIsHiting() {
-	return this->isHiting;
-}
-
-void MKCharacter::setIsHiting(bool state) {
-	this->isHiting = state;
-}
-
-string MKCharacter::getJumpMovement() {
-	return this->jumpMovement;
-}
-
-void MKCharacter::setJumpMovement(string jumpMove) {
-	this->jumpMovement = jumpMove;
 }
 
 int MKCharacter::getZ_index() {
@@ -321,22 +187,6 @@ void MKCharacter::setPosY(double d) {
 	this->posY = d;
 }
 
-void MKCharacter::setHitWidth(float width) {
-	this->hitWidth = width;
-}
-
-float MKCharacter::getHitWidth() {
-	return this->hitWidth;
-}
-
-void MKCharacter::setHitDelay(int delay) {
-	this->hitDelay = delay;
-}
-
-int MKCharacter::getHitDelay() {
-	return this->hitDelay;
-}
-
 void MKCharacter::setCharacterSide(char side) {
 	this->characterSide = side;
 }
@@ -344,25 +194,7 @@ void MKCharacter::setCharacterSide(char side) {
 char MKCharacter::getCharacterSide() {
 	return this->characterSide;
 }
-string MKCharacter::getHitReception() {
-	return this->hitReception;
-}
 
-void MKCharacter::setHitReception(string reception) {
-	this->hitReception = reception;
-
-	//PERDON POR HARDCODEAR ESTOS NUMEROS. ESTOY BUSCANDO UNA ALTERNATIVA. ATTE: GONZALO
-
-	if (reception == "BEINGHIT" || reception == "BEINGHITDOWN") {
-		this->hitReceptionDelay = 20;
-	}
-	else if (reception == "FALLING") {
-		this->hitReceptionDelay = 80;
-	}
-	else if (reception == "NONE") {
-		this->hitReceptionDelay = 0;
-	}
-}
 bool MKCharacter::isAscending() {
 	return this->ascending;
 }
