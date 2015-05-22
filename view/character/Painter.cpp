@@ -157,32 +157,30 @@ rgb Painter::convertToRGB(hsv hsv_param) {
 }
 
 void Painter::paint(SDL_Surface *surface) {
-    if (this->offset % 360 != 0 && this->offset != 0) {
-        for (int x = 0; x < surface->w; x++) {
-            for (int y = 0; y < surface->h; y++) {
-                Uint8 alpha;
-                Uint32 px = this->getpixel(surface, x, y);
-                rgb aRGB;
-                SDL_GetRGBA(px, surface->format, &aRGB.r, &aRGB.g, &aRGB.b, &alpha);
-                if (alpha == 0) {
-                    continue;
-                }
-                hsv hsvConverted = this->convertToHSV(aRGB);
-                if (this->initialH <= hsvConverted.h && hsvConverted.h <= this->finalH) {
-                    int i = 1;
-                    double aux = this->offset;
-                    if (this->offset > 360.0) {
-                        aux = this->offset-360.0;
-                        while (aux > 360) {
-                            i++;
-                            aux = this->offset-(i*360.0);
-                        }
-                    }
-                    hsvConverted.h += aux;
-                }
-                aRGB = this->convertToRGB(hsvConverted);
-                this->putpixel(surface, x, y, SDL_MapRGB(surface->format, aRGB.r, aRGB.g, aRGB.b));
+    for (int x = 0; x < surface->w; x++) {
+        for (int y = 0; y < surface->h; y++) {
+            Uint8 alpha;
+            Uint32 px = this->getpixel(surface, x, y);
+            rgb aRGB;
+            SDL_GetRGBA(px, surface->format, &aRGB.r, &aRGB.g, &aRGB.b, &alpha);
+            if (alpha == 0) {
+                continue;
             }
+            hsv hsvConverted = this->convertToHSV(aRGB);
+            if (this->initialH <= hsvConverted.h && hsvConverted.h <= this->finalH) {
+                int i = 1;
+                double aux = this->offset;
+                if (this->offset >= 360.0) {
+                    aux = this->offset-360.0;
+                    while (aux > 360) {
+                        i++;
+                        aux = this->offset-(i*360.0);
+                    }
+                }
+                hsvConverted.h += aux;
+            }
+            aRGB = this->convertToRGB(hsvConverted);
+            this->putpixel(surface, x, y, SDL_MapRGB(surface->format, aRGB.r, aRGB.g, aRGB.b));
         }
     }
 }
