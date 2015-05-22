@@ -22,6 +22,7 @@ void DuckingPunch::update(MKCharacter *character, Events aEvent) {
             break;
         case ReceiveDuckingPunch:
             character->setState(new ReceivingDuckingPunch());
+            break;
         default:
             break;
     }

@@ -258,8 +258,6 @@ void cargaPersonaje(Json::Value personaje, std::list<MKCharacter*>* characters, 
     char* filenamePunch = new char[200];
     char* filenameLowPunch = new char[200];
     char* filenameWinner = new char[200];
-    char* filenameBodyParts = new char[200];
-    char* filenameFinisher = new char[200];
     char* filenameShoot = new char[200];
     char* filenameDizzy = new char[200];
     char* filenameFall = new char[200];
@@ -267,7 +265,6 @@ void cargaPersonaje(Json::Value personaje, std::list<MKCharacter*>* characters, 
     char* filenameBeingHitDown = new char[200];
     char* filenameBlock = new char[200];
     char* filenameBlockDown = new char[200];
-    char* filenameHead = new char[200];
 
     string name = (personaje.isMember("name") && personaje["name"].isString()) ? personaje["name"].asString() : "";
     std::transform(name.begin(), name.end(), name.begin(), ::tolower);
@@ -310,9 +307,7 @@ void cargaPersonaje(Json::Value personaje, std::list<MKCharacter*>* characters, 
             filenameBeingHitDown = strdup(DEFAULT_BEINGHIT_DOWN);
             filenameBlock = strdup(DEFAULT_BLOCK);
             filenameBlockDown = strdup(DEFAULT_BLOCKDOWN);
-            filenameBodyParts = strdup(DEFAULT_BODYPARTS);
-            filenameFinisher = strdup(DEFAULT_FINISHER);
-            filenameHead = strdup(DEFAULT_HEAD);
+
 
         }else{
             filenameWalk = strdup(sprites[MOVE_NAME_WALK].asString().c_str());
@@ -335,16 +330,7 @@ void cargaPersonaje(Json::Value personaje, std::list<MKCharacter*>* characters, 
             filenameBeingHit  = strdup(sprites[MOVE_NAME_BEINGHIT].asString().c_str());
             filenameBeingHitDown  = strdup(sprites[MOVE_NAME_BEINGHIT_DOWN].asString().c_str());
             filenameBlock  = strdup(sprites[MOVE_NAME_BLOCK].asString().c_str());
-
-//            filenameBodyParts  = strdup(sprites[MOVE_NAME_BODYPARTS].asString().c_str());
-//			filenameFinisher  = strdup(sprites[MOVE_NAME_FINISHER].asString().c_str());
-//            filenameBlockDown  = strdup(sprites[MOVE_NAME_BLOCKDOWN].asString().c_str());
-//            filenameHead  = strdup(sprites[MOVE_NAME_HEAD].asString().c_str());
-
-            filenameBlockDown = strdup(DEFAULT_BLOCKDOWN);
-			filenameBodyParts = strdup(DEFAULT_BODYPARTS);
-			filenameFinisher = strdup(DEFAULT_FINISHER);
-			filenameHead = strdup(DEFAULT_HEAD);
+            filenameBlockDown  = strdup(sprites[MOVE_NAME_BLOCKDOWN].asString().c_str());
         }
     }
 
@@ -363,8 +349,6 @@ void cargaPersonaje(Json::Value personaje, std::list<MKCharacter*>* characters, 
     validarExistenciaArchivo(DEFAULT_HIGH_PUNCH, filenamePunch);
     validarExistenciaArchivo(DEFAULT_LOW_PUNCH, filenameLowPunch);
     validarExistenciaArchivo(DEFAULT_WINNER, filenameWinner);
-    validarExistenciaArchivo(DEFAULT_BODYPARTS, filenameBodyParts);
-    validarExistenciaArchivo(DEFAULT_FINISHER, filenameFinisher);
     validarExistenciaArchivo(DEFAULT_SHOOT, filenameShoot);
     validarExistenciaArchivo(DEFAULT_DIZZY, filenameDizzy);
     validarExistenciaArchivo(DEFAULT_FALL, filenameFall);
@@ -372,7 +356,6 @@ void cargaPersonaje(Json::Value personaje, std::list<MKCharacter*>* characters, 
     validarExistenciaArchivo(DEFAULT_BEINGHIT_DOWN, filenameBeingHitDown);
     validarExistenciaArchivo(DEFAULT_BLOCK, filenameBlock);
     validarExistenciaArchivo(DEFAULT_BLOCKDOWN, filenameBlockDown);
-    validarExistenciaArchivo(DEFAULT_HEAD, filenameHead);
 
     Util::getInstance()->setCantidadPersonajes();
 
@@ -390,8 +373,6 @@ void cargaPersonaje(Json::Value personaje, std::list<MKCharacter*>* characters, 
     Util::getInstance()->addMovement(MOVE_NAME_HIGH_PUNCH, filenamePunch);
     Util::getInstance()->addMovement(MOVE_NAME_LOW_PUNCH, filenameLowPunch);
     Util::getInstance()->addMovement(MOVE_NAME_WINNER, filenameWinner);
-    Util::getInstance()->addMovement(MOVE_NAME_BODYPARTS, filenameBodyParts);
-    Util::getInstance()->addMovement(MOVE_NAME_FINISHER, filenameFinisher);
     Util::getInstance()->addMovement(MOVE_NAME_SHOOT, filenameShoot);
     Util::getInstance()->addMovement(MOVE_NAME_DIZZY, filenameDizzy);
     Util::getInstance()->addMovement(MOVE_NAME_DIZZY, filenameDizzy);
@@ -400,7 +381,7 @@ void cargaPersonaje(Json::Value personaje, std::list<MKCharacter*>* characters, 
     Util::getInstance()->addMovement(MOVE_NAME_BEINGHIT_DOWN, filenameBeingHitDown);
     Util::getInstance()->addMovement(MOVE_NAME_BLOCK, filenameBlock);
     Util::getInstance()->addMovement(MOVE_NAME_BLOCKDOWN, filenameBlockDown);
-    Util::getInstance()->addMovement(MOVE_NAME_HEAD, filenameHead);
+
 
 
     if(charAlto == 0.0){
@@ -436,9 +417,9 @@ void cargaPersonaje(Json::Value personaje, std::list<MKCharacter*>* characters, 
     }
 
     //log
-    sprintf(mensaje, "Ancho: %1.2f, Alto: %1.2f, z-index: %i,\n Jump: %s, Walk: %s, Side jump: %s, Stance: %s, Duck: %s, Kick: %s,\n KickDown: %s, PunchJump: %s, PunchUp: %s, Punch: %s,\n Winner: %s, BodyParts: %s, Finisher: %s, Shoot: %s, Dizzy: %s, Fall: %s, BeingHit: %s, BeingHitDown: %s, Block: %s, BlockDown: %s, Head: %s, ",
+    sprintf(mensaje, "Ancho: %1.2f, Alto: %1.2f, z-index: %i,\n Jump: %s, Walk: %s, Side jump: %s, Stance: %s, Duck: %s, Kick: %s,\n KickDown: %s, PunchJump: %s, PunchUp: %s, Punch: %s,\n Winner: %s, Shoot: %s, Dizzy: %s, Fall: %s, BeingHit: %s, BeingHitDown: %s, Block: %s, BlockDown: %s ",
                     charAncho, charAlto, z_index,
-                    filenameJump, filenameWalk, filenameSideJump, filenameStance, filenameDuck, filenameKick, filenameKickDown, filenamePunchJump, filenamePunchUp, filenamePunch, filenameWinner, filenameBodyParts, filenameFinisher, filenameShoot,  filenameDizzy, filenameFall, filenameBeingHit, filenameBeingHitDown, filenameBlock, filenameBlockDown,filenameHead);
+                    filenameJump, filenameWalk, filenameSideJump, filenameStance, filenameDuck, filenameKick, filenameKickDown, filenamePunchJump, filenamePunchUp, filenamePunch, filenameWinner, filenameShoot,  filenameDizzy, filenameFall, filenameBeingHit, filenameBeingHitDown, filenameBlock, filenameBlockDown);
 
     Mylog->Log(mensaje, ERROR_LEVEL_INFO);
 }
