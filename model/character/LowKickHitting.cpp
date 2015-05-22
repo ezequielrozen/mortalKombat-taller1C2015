@@ -46,6 +46,10 @@ void LowKickHitting::refreshTimer(MKCharacter* character) {
     this->timer -= 1;
 }
 
+bool LowKickHitting::isHitting() {
+    return true;
+}
+
 string LowKickHitting::getName() {
 	return "LowKickHitting";
 }

@@ -1,5 +1,4 @@
 #include "MKCharacter.h"
-//#include "../controller/GameController.h"
 #include "../controller/InputController.h"
 #include "character/CharacterStance.h"
 
@@ -292,6 +291,3 @@ float MKCharacter::getStateHeight() {
 	return (this->alto)*(this->state->getHeight());
 }
 
-int MKCharacter::getCharacterNumber() {
-	return this->characterNumber;
-}

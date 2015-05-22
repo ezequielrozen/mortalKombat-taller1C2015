@@ -89,8 +89,6 @@ public:
 
     float getStateHeight();
 
-    int getCharacterNumber();
-
 private:
 
     // State

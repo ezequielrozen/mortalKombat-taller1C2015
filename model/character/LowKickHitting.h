@@ -15,6 +15,7 @@ public:
     float getWidth();
     void refreshTimer(MKCharacter* character);
     bool impact();
+    bool isHitting();
 
 private:
     int timer;

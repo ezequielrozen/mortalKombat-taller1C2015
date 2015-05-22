@@ -295,6 +295,7 @@ void GameView::loadAsRaiden(CharacterSprite*& walk, CharacterSprite*& stance, Ch
     blockDown = new CharacterSprite(this->renderer, raiden->getFileMovement(MOVE_NAME_BLOCKDOWN), raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 2, oponentSide, true, colorAltered, this->painter);
     block = new CharacterSprite(this->renderer, raiden->getFileMovement(MOVE_NAME_BLOCK), raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 3, oponentSide, true, colorAltered, this->painter);
 }
+
 void GameView::RestartAllScorpionSprites()
 {
 	scorpionFall->reset();
@@ -316,7 +317,6 @@ void GameView::RestartAllScorpionSprites()
 	scorpionBlockDown->reset();
 	scorpionBlock->reset();
 }
-
 
 void GameView::RestartAllRaidenSprites()
 {
@@ -396,6 +396,7 @@ void GameView::runCharacter(MKCharacter* character1, MKCharacter* character2, Sp
 
     sprite->setX(character1->getX());
     sprite->setY(character1->getY());
+
     //si esta pegando desde la derecha muevo el sprite un poco a la izqueierda para que impacte
     if(character1->getX() > character2->getX() && character1->isHitting()){
         sprite->setX(character1->getX() - (character1->getWidth()/2));
