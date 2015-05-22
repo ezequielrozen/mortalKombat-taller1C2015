@@ -16,7 +16,7 @@ typedef struct {
 class Painter {
 
 public:
-    Painter(double initH, double finalH, double offset);
+    Painter(double initH, double finalH, int offset);
     ~Painter();
     void paint(SDL_Surface* surface);
 

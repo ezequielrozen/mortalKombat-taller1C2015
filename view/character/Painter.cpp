@@ -5,10 +5,18 @@
 #include "Painter.h"
 #include "../../model/util/Util.h"
 
-Painter::Painter(double initH, double finalHparam, double offsetParam) {
+Painter::Painter(double initH, double finalHparam, int offsetParam) {
     this->initialH = initH;
     this->finalH = finalHparam;
-    this->offset = offsetParam;
+    int i = 1;
+    int aux = offsetParam;
+    if (aux >= 360.0) {
+        while (aux >= 360) {
+            aux = offsetParam-(i*360);
+            i++;
+        }
+    }
+    this->offset = aux;
 }
 
 Painter::~Painter() {
@@ -168,16 +176,7 @@ void Painter::paint(SDL_Surface *surface) {
             }
             hsv hsvConverted = this->convertToHSV(aRGB);
             if (this->initialH <= hsvConverted.h && hsvConverted.h <= this->finalH) {
-                int i = 1;
-                double aux = this->offset;
-                if (this->offset >= 360.0) {
-                    aux = this->offset-360.0;
-                    while (aux > 360) {
-                        i++;
-                        aux = this->offset-(i*360.0);
-                    }
-                }
-                hsvConverted.h += aux;
+                hsvConverted.h += this->offset;
             }
             aRGB = this->convertToRGB(hsvConverted);
             this->putpixel(surface, x, y, SDL_MapRGB(surface->format, aRGB.r, aRGB.g, aRGB.b));

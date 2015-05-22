@@ -105,9 +105,9 @@
     "side": "right"
   },
   "color-alternativo": {
-    "h-inicial": 40,
-    "h-final": 45,
-    "desplazamiento": 30
+    "h-inicial": 30,
+    "h-final": 70,
+    "desplazamiento": 180
   },
 
   "botones":{
@@ -138,7 +138,7 @@
 
 
   "j1elige": 0,
-  "j2elige": 1
+  "j2elige": 0
 
 
 }
