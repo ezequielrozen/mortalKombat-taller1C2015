@@ -291,3 +291,7 @@ void MKCharacter::throwWeapon() {
 float MKCharacter::getStateHeight() {
 	return (this->alto)*(this->state->getHeight());
 }
+
+int MKCharacter::getCharacterNumber() {
+	return this->characterNumber;
+}

@@ -119,7 +119,17 @@ void GameView::Render() {
     std::list<Layer*>::iterator it = this->stage->getLayers()->begin();
     for(it; it != this->stage->getLayers()->end(); it++) {
         if (scorpion->getZ_index() == i+1) {
-            this->runCharacter();
+            
+            if (this->raiden->isHitting()) {
+                this->runCharacter(this->scorpion, this->raiden, this->scorpionSprites);
+                this->runCharacter(this->raiden, this->scorpion, this->raidenSprites);
+            }
+            else {
+                this->runCharacter(this->raiden, this->scorpion, this->raidenSprites);
+                this->runCharacter(this->scorpion, this->raiden, this->scorpionSprites);
+            }
+
+            //this->runCharacter();
             layerSprites[i]->update((*it)->getLeft_border());
             layerSprites[i]->Draw();
             painted = true;
@@ -144,7 +154,15 @@ void GameView::Render() {
     characterName->Draw();
     characterTwoName->Draw();
     if (!painted) {
-        this->runCharacter();
+        if (this->raiden->isHitting()) {
+            this->runCharacter(this->scorpion, this->raiden, this->scorpionSprites);
+            this->runCharacter(this->raiden, this->scorpion, this->raidenSprites);
+        }
+        else {
+            this->runCharacter(this->raiden, this->scorpion, this->raidenSprites);
+            this->runCharacter(this->scorpion, this->raiden, this->scorpionSprites);
+        }
+        //this->runCharacter();
     }
 }
 
@@ -340,145 +358,76 @@ void GameView::endRender() {
     SDL_RenderPresent(renderer);
 }
 
-
-void GameView::runCharacter() {
+void GameView::runCharacter(MKCharacter* character1, MKCharacter* character2, SpriteMap characterSprites) {
     CharacterSprite* sprite = NULL;
-    CharacterSprite* sprite2 = NULL;
-    CharacterSprite* shootChar1 = NULL;
-    CharacterSprite* shootChar2 = NULL;
+    CharacterSprite* shootChar = NULL;
 
-    int currentFrame=-1;
-    int currentFrame2=-1;
-         
-    bool aux = (scorpion->getX() < raiden->getX());
+    bool aux = (character1->getX() < character2->getX());
 
-    if (scorpion->getState() != "WeaponHitting" && scorpion->getState() != "MovingRight" && scorpion->getState() != "MovingLeft") {
-        sprite = scorpionSprites.at(scorpion->getState());
-        sprite->Play(100, scorpion->getStateWidth());
+    if (character1->getState() != "WeaponHitting" && character1->getState() != "MovingRight" && character1->getState() != "MovingLeft") {
+        sprite = characterSprites.at(character1->getState());
+        sprite->Play(100, character1->getStateWidth());
     }
-    else if ((scorpion->getState() == "MovingRight" && aux) || (scorpion->getState() == "MovingLeft" && !aux)) {
-        sprite = scorpionSprites.at(scorpion->getState());
-        sprite->Play(100, scorpion->getStateWidth());
+    else if ((character1->getState() == "MovingRight" && aux) || (character1->getState() == "MovingLeft" && !aux)) {
+        sprite = characterSprites.at(character1->getState());
+        sprite->Play(100, character1->getStateWidth());
     }
-    else if ((scorpion->getState() == "MovingRight" && !aux) || (scorpion->getState() == "MovingLeft" && aux)) {
-        sprite = scorpionSprites.at(scorpion->getState());
+    else if ((character1->getState() == "MovingRight" && !aux) || (character1->getState() == "MovingLeft" && aux)) {
+        sprite = characterSprites.at(character1->getState());
         sprite->PlayBack(100);
     }
-    else if (scorpion->getState() == "WeaponHitting"){
-        sprite = scorpionSprites.at("Stance");
-        sprite->Play(100, scorpion->getStateWidth());
+    else if (character1->getState() == "WeaponHitting"){
+        sprite = characterSprites.at("Stance");
+        sprite->Play(100, character1->getStateWidth());
 
-        shootChar1 = scorpionSprites.at("WeaponHitting");
-		shootChar1->PlayShoot2(100, scorpion->getWeapon()->getWidth(), scorpion->getWeapon()->getHeight());
-    }
-    
-    aux = (raiden->getX() < scorpion->getX());
-
-    if (raiden->getState() != "WeaponHitting" && raiden->getState() != "MovingRight" && raiden->getState() != "MovingLeft") {
-        sprite2 = raidenSprites.at(raiden->getState());
-        sprite2->Play(100, raiden->getStateWidth());
-    }
-    else if ((raiden->getState() == "MovingRight" && aux) || (raiden->getState() == "MovingLeft" && !aux)) {
-        sprite2 = raidenSprites.at(raiden->getState());
-        sprite2->Play(100, raiden->getStateWidth());
-    }
-    else if ((raiden->getState() == "MovingRight" && !aux) || (raiden->getState() == "MovingLeft" && aux)) {
-        sprite2 = raidenSprites.at(raiden->getState());
-        sprite2->PlayBack(100);
-    }
-    else if (raiden->getState() == "WeaponHitting"){
-        sprite2 = raidenSprites.at("Stance");
-        sprite2->Play(100, raiden->getStateWidth());
-
-        shootChar2 = raidenSprites.at("WeaponHitting");
-        shootChar2->PlayShoot2(100, raiden->getWeapon()->getWidth(), raiden->getWeapon()->getHeight());
+        shootChar = characterSprites.at("WeaponHitting");
+        shootChar->PlayShoot2(100, character1->getWeapon()->getWidth(), character1->getWeapon()->getHeight());
     }
 
-    if (!scorpion->getWeapon()->isActive()) {
-        shootChar1 = NULL;
-    }
-    if (!raiden->getWeapon()->isActive()) {
-        shootChar2 = NULL;
+    if (!character1->getWeapon()->isActive()) {
+        shootChar = NULL;
     }
 
-    if(scorpion->getX() < raiden->getX()){
-            sprite->switchSide('r');
-            sprite2->switchSide('l');
+    if(character1->getX() < character2->getX()) {
+        sprite->switchSide('r');
 
-            if (shootChar1 != NULL) {
-            	shootChar1->switchSide('r');
-            	shootChar1->setX(scorpion->getWeapon()->getPositionX());
-    			shootChar1->setY(scorpion->getWeapon()->getPositionY());
-            }
-            if (shootChar2 != NULL) {
-    			shootChar2->switchSide('l');
-    			shootChar2->setY(raiden->getWeapon()->getPositionY());
-                shootChar2->setX(raiden->getWeapon()->getPositionX());
-    		}
-        }else{
-            sprite->switchSide('l');
-            sprite2->switchSide('r');
-
-            if (shootChar1 != NULL) {
-            	shootChar1->switchSide('l');
-            	shootChar1->setX(scorpion->getWeapon()->getPositionX());
-    			shootChar1->setY(scorpion->getY()+20);
-            }
-
-            if (shootChar2 != NULL) {
-    			shootChar2->switchSide('r');
-    			shootChar2->setY(raiden->getY()+20);
-                shootChar2->setX(raiden->getWeapon()->getPositionX());
-    		}
+        if (shootChar != NULL) {
+            shootChar->switchSide('r');
+            shootChar->setX(character1->getWeapon()->getPositionX());
+            shootChar->setY(character1->getWeapon()->getPositionY());
         }
+    } 
+    else {
+        sprite->switchSide('l');
 
-    	sprite->setX(scorpion->getX());
-        sprite->setY(scorpion->getY());
-        //si esta pegando desde la derecha muevo el sprite un poco a la izqueierda para que impacte
-        if(scorpion->getX()> raiden->getX() && scorpion->isHitting()){
-        	sprite->setX(scorpion->getX() - (scorpion->getWidth()/2));
+        if (shootChar != NULL) {
+            shootChar->switchSide('l');
+            shootChar->setX(character1->getWeapon()->getPositionX());
+            shootChar->setY(character1->getWeapon()->getPositionY());
         }
+    }
 
-        if(InputController::isVibrating())
-            if(!sprite->vibrationFinished())
-                sprite->vibrate();
-            else
-    			InputController::setVibrating(false);
+    sprite->setX(character1->getX());
+    sprite->setY(character1->getY());
+    //si esta pegando desde la derecha muevo el sprite un poco a la izqueierda para que impacte
+    if(character1->getX() > character2->getX() && character1->isHitting()){
+        sprite->setX(character1->getX() - (character1->getWidth()/2));
+    }
+
+    if(InputController::isVibrating())
+        if(!sprite->vibrationFinished())
+            sprite->vibrate();
+        else
+            InputController::setVibrating(false);
         else
             sprite->resetFinished();
 
+    sprite->Draw();
 
-        sprite2->setX(raiden->getX());
-        sprite2->setY(raiden->getY());
-        //si esta pegando desde la derecha muevo el sprite un poco a la izqueierda para que impacte
-        if(raiden->getX()> scorpion->getX() && raiden->isHitting()){
-        	sprite2->setX(raiden->getX() - (raiden->getWidth()/2));
-        }
+    if (shootChar != NULL) {
+        shootChar->Draw();
+    }
 
-    	if(InputController::isVibrating())
-            if(!sprite2->vibrationFinished())
-               sprite2->vibrate();
-            else
-    			InputController::setVibrating(false);
-        else
-            sprite2->resetFinished();
-
-        if (raiden->isHitting()) {
-            sprite->Draw();
-            sprite2->Draw();
-        }
-        else {
-            sprite2->Draw();
-            sprite->Draw();
-        }
-
-        if (shootChar1 != NULL) {
-        	shootChar1->Draw();
-        }
-
-        if (shootChar2 != NULL) {
-        	shootChar2->Draw();
-        }
 }
 
 void GameView::initializeCharactersSprites() {

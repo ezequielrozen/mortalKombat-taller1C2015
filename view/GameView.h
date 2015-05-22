@@ -119,7 +119,7 @@ private:
     float screenHeight;
     string oponentSide;
 
-    void runCharacter();
+    void runCharacter(MKCharacter* character1, MKCharacter* character2, SpriteMap characterSprites);
 	void RestartAllScorpionSprites();
 	void RestartAllRaidenSprites();
     Painter* painter;
