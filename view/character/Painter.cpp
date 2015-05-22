@@ -8,15 +8,12 @@
 Painter::Painter(double initH, double finalHparam, int offsetParam) {
     this->initialH = initH;
     this->finalH = finalHparam;
-    int i = 1;
-    int aux = offsetParam;
-    if (aux >= 360.0) {
-        while (aux >= 360) {
-            aux = offsetParam-(i*360);
-            i++;
+    if (offsetParam >= 360) {
+        while (offsetParam >= 360) {
+            offsetParam -= 360;
         }
     }
-    this->offset = aux;
+    this->offset = offsetParam;
 }
 
 Painter::~Painter() {
