@@ -210,15 +210,15 @@ bool cargaArchivoJSON(char* filename, float &stageWidth, float &stageHeight, flo
 void errorPainterController(double& initialH, double& finalH, double& offset) {
     extern logger* Mylog;
     char message[200];
-    if (initialH == 0) {
+    if (initialH == -1) {
         initialH = DEFAULT_INITIAL_H;
         Mylog->Log("valor h-inicial invalido: usando default", ERROR_LEVEL_WARNING);
     }
-    if (finalH == 0) {
+    if (finalH == -1) {
         finalH = DEFAULT_FINAL_H;
         Mylog->Log("valor h-final invalido: usando default", ERROR_LEVEL_WARNING);
     }
-    if (offset == 0) {
+    if (offset == -1) {
         offset = DEFAULT_OFFSET;
         Mylog->Log("valor offset invalido: usando default", ERROR_LEVEL_WARNING);
     }
@@ -234,11 +234,11 @@ void loadDefautPainter(double& initialH, double& finalH, double& offset) {
 
 void loadPainter(Json::Value painterOptions, double& initialH, double& finalH, double& offset) {
     initialH = painterOptions.isMember("h-inicial") && painterOptions["h-inicial"].isNumeric() &&
-            painterOptions["h-inicial"].asDouble() > 0 ? painterOptions["h-inicial"].asDouble() : 0;
+            painterOptions["h-inicial"].asDouble() > 0 ? painterOptions["h-inicial"].asDouble() : -1;
     finalH = painterOptions.isMember("h-final") && painterOptions["h-final"].isNumeric() &&
-                      painterOptions["h-final"].asDouble() > 0 ? painterOptions["h-final"].asDouble() : 0;
+                      painterOptions["h-final"].asDouble() > 0 ? painterOptions["h-final"].asDouble() : -1;
     offset = painterOptions.isMember("desplazamiento") && painterOptions["desplazamiento"].isNumeric() &&
-                      painterOptions["desplazamiento"].asDouble() > 0 ? painterOptions["desplazamiento"].asDouble() : 0;
+                      painterOptions["desplazamiento"].asInt() >= 0 ? painterOptions["desplazamiento"].asInt() : -1;
 }
 
 void cargaPersonaje(Json::Value personaje, std::list<MKCharacter*>* characters, int characterNumber) {

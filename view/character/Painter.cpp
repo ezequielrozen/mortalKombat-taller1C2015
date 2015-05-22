@@ -78,38 +78,41 @@ void Painter::putpixel(SDL_Surface *surface, int x, int y, Uint32 pixel)
 
 hsv Painter::convertToHSV(rgb rgb_param) {
     hsv newHSV;
-    uint8_t min, max, delta;
+    float min, max, chroma;
+    float r,g,b;
+    r = (rgb_param.r)/255.0;
+    g = (rgb_param.g)/255.0;
+    b = (rgb_param.b)/255.0;
 
-    min = rgb_param.r < rgb_param.g ? rgb_param.r : rgb_param.g;
-    min = min  < rgb_param.b ? min  : rgb_param.b;
+    min = r < g ? r : g;
+    min = min  < b ? min : b;
 
-    max = rgb_param.r > rgb_param.g ? rgb_param.r : rgb_param.g;
-    max = max  > rgb_param.b ? max  : rgb_param.b;
+    max = r > g ? r : g;
+    max = max  > b ? max : b;
 
-    newHSV.v = max;                                // v
-    delta = max - min;
-    if( max > 0.0 ) { // NOTE: if Max is == 0, this divide would cause a crash
-        newHSV.s = (delta*1.0 / max);                  // s
-    } else {
-        // if max is 0, then r = g = b = 0
-        // s = 0, v is undefined
+    chroma = max - min;
+
+    newHSV.v = max;
+    if (max == 0) {
         newHSV.s = 0;
-        newHSV.h = NAN;                            // its now undefined
-        return newHSV;
+    } else {
+        newHSV.s = chroma / max;
     }
-    if (delta > 0) {
-        if( rgb_param.r >= max )                           // > is bogus, just keeps compilor happy
-            newHSV.h = ( rgb_param.g - rgb_param.b ) / delta*1.0;        // between yellow & magenta
-        else if( rgb_param.g >= max )
-                newHSV.h = 2.0 + ( rgb_param.b - rgb_param.r ) / delta*1.0;  // between cyan & yellow
-        else
-            newHSV.h = 4.0 + ( rgb_param.r - rgb_param.g ) / delta*1.0;  // between magenta & cyan
+    if(chroma != 0) {
+        if(r == max) {
+            newHSV.h = fmod(((g - b) / chroma),60);
+            if(newHSV.h < 0.0) {
+                newHSV.h += 6.0;
+            }
+        } else if(g == max) {
+            newHSV.h = ((b - r) / chroma) + 2.0;
+        } else {
+            newHSV.h = ((r - g) / chroma) + 4.0;
+        }
+        newHSV.h *= 60;
+    } else {
+        newHSV.h = 0;
     }
-
-    newHSV.h *= 60.0;                              // degrees
-
-    if( newHSV.h < 0.0 )
-        newHSV.h += 360.0;
 
     return newHSV;
 
@@ -117,76 +120,69 @@ hsv Painter::convertToHSV(rgb rgb_param) {
 
 rgb Painter::convertToRGB(hsv hsv_param) {
     rgb newRGB;
-    double hh, p, q, t, ff;
-    long i;
-
-    if(hsv_param.s <= 0.0) {       // < is bogus, just shuts up warnings
-        newRGB.r = hsv_param.v;
-        newRGB.g = hsv_param.v;
-        newRGB.b = hsv_param.v;
-        return newRGB;
+    double chroma, Hdash, min, x;
+    chroma = (hsv_param.s) * (hsv_param.v);
+    Hdash = hsv_param.h / 60.0;
+    x = chroma * (1.0 - fabs(fmod(Hdash,2.0) - 1));
+    if (Hdash < 1.0) {
+        newRGB.r = chroma*255;
+        newRGB.g = x*255;
+        newRGB.b = 0;
+    } else if (Hdash < 2.0) {
+        newRGB.r = x*255;
+        newRGB.g = chroma*255;
+        newRGB.b = 0;
+    } else if (Hdash < 3.0) {
+        newRGB.r = 0;
+        newRGB.g = chroma*255;
+        newRGB.b = x*255;
+    } else if (Hdash < 4.0) {
+        newRGB.r = 0;
+        newRGB.g = x*255;
+        newRGB.b = chroma*255;
+    } else if(Hdash < 5.0) {
+        newRGB.r = x*255;
+        newRGB.g = 0;
+        newRGB.b = chroma*255;
+    } else if (Hdash <= 6.0) {
+        newRGB.r = chroma*255;
+        newRGB.g = 0;
+        newRGB.b = x*255;
     }
-    hh = hsv_param.h;
-    if(hh >= 360.0) hh = 0.0;
-    hh /= 60.0;
-    i = (long)hh;
-    ff = hh - i;
-    p = hsv_param.v * (1.0 - hsv_param.s);
-    q = hsv_param.v * (1.0 - (hsv_param.s * ff));
-    t = hsv_param.v * (1.0 - (hsv_param.s * (1.0 - ff)));
-
-    switch(i) {
-        case 0:
-            newRGB.r = hsv_param.v;
-            newRGB.g = t;
-            newRGB.b = p;
-            break;
-        case 1:
-            newRGB.r = q;
-            newRGB.g = hsv_param.v;
-            newRGB.b = p;
-            break;
-        case 2:
-            newRGB.r = p;
-            newRGB.g = hsv_param.v;
-            newRGB.b = t;
-            break;
-
-        case 3:
-            newRGB.r = p;
-            newRGB.g = q;
-            newRGB.b = hsv_param.v;
-            break;
-        case 4:
-            newRGB.r = t;
-            newRGB.g = p;
-            newRGB.b = hsv_param.v;
-            break;
-        default:
-            newRGB.r = hsv_param.v;
-            newRGB.g = p;
-            newRGB.b = q;
-            break;
-    }
+    min = (hsv_param.v - chroma)*255;
+    newRGB.r += min;
+    newRGB.g += min;
+    newRGB.b += min;
     return newRGB;
 }
 
 void Painter::paint(SDL_Surface *surface) {
-    for (int x = 0; x < surface->w; x++) {
-        for (int y = 0; y < surface->h; y++) {
-            Uint8 alpha;
-            Uint32 px = this->getpixel(surface, x, y);
-            rgb aRGB;
-            SDL_GetRGBA(px, surface->format,&aRGB.r,&aRGB.g,&aRGB.b,&alpha);
-            if (alpha == 0) {
-                continue;
+    if (this->offset % 360 != 0 && this->offset != 0) {
+        for (int x = 0; x < surface->w; x++) {
+            for (int y = 0; y < surface->h; y++) {
+                Uint8 alpha;
+                Uint32 px = this->getpixel(surface, x, y);
+                rgb aRGB;
+                SDL_GetRGBA(px, surface->format, &aRGB.r, &aRGB.g, &aRGB.b, &alpha);
+                if (alpha == 0) {
+                    continue;
+                }
+                hsv hsvConverted = this->convertToHSV(aRGB);
+                if (this->initialH <= hsvConverted.h && hsvConverted.h <= this->finalH) {
+                    int i = 1;
+                    double aux = this->offset;
+                    if (this->offset > 360.0) {
+                        aux = this->offset-360.0;
+                        while (aux > 360) {
+                            i++;
+                            aux = this->offset-(i*360.0);
+                        }
+                    }
+                    hsvConverted.h += aux;
+                }
+                aRGB = this->convertToRGB(hsvConverted);
+                this->putpixel(surface, x, y, SDL_MapRGB(surface->format, aRGB.r, aRGB.g, aRGB.b));
             }
-            hsv hsvConverted = this->convertToHSV(aRGB);
-            if (this->initialH <= hsvConverted.h && hsvConverted.h <= this->finalH) {
-                hsvConverted.h += this->offset;
-            }
-            aRGB = this->convertToRGB(hsvConverted);
-            this->putpixel(surface,x,y,SDL_MapRGB(surface->format,aRGB.r,aRGB.g,aRGB.b));
         }
     }
 }
