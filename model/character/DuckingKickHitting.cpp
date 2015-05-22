@@ -3,7 +3,7 @@
 #include "RecevingHit.h"
 
 DuckingKickHitting::DuckingKickHitting() {
-    this->timer = 27;
+    this->timer = 33;
 }
 
 DuckingKickHitting::~DuckingKickHitting() {
@@ -44,12 +44,12 @@ void DuckingKickHitting::refreshTimer(MKCharacter* character) {
 
     if (this->timer == 0) {
         character->setState(new CharacterStance());
-        this->timer = 27;
+        this->timer = 33;
     }
 
     this->timer -= 1;
 }
 
 bool DuckingKickHitting::impact() {
-    return (this->timer == 20);
+    return (this->timer == 7);
 }

@@ -366,22 +366,22 @@ void GameView::runCharacter(MKCharacter* character1, MKCharacter* character2, Sp
 
     if (character1->getState() != "WeaponHitting" && character1->getState() != "MovingRight" && character1->getState() != "MovingLeft") {
         sprite = characterSprites.at(character1->getState());
-        sprite->Play(100, character1->getStateWidth());
+        sprite->Play(6.66*GAMEDELAY, character1->getStateWidth());
     }
     else if ((character1->getState() == "MovingRight" && aux) || (character1->getState() == "MovingLeft" && !aux)) {
         sprite = characterSprites.at(character1->getState());
-        sprite->Play(100, character1->getStateWidth());
+        sprite->Play(6.66*GAMEDELAY, character1->getStateWidth());
     }
     else if ((character1->getState() == "MovingRight" && !aux) || (character1->getState() == "MovingLeft" && aux)) {
         sprite = characterSprites.at(character1->getState());
-        sprite->PlayBack(100);
+        sprite->PlayBack(6.66*GAMEDELAY);
     }
     else if (character1->getState() == "WeaponHitting"){
         sprite = characterSprites.at("Stance");
-        sprite->Play(100, character1->getStateWidth());
+        sprite->Play(6.66*GAMEDELAY, character1->getStateWidth());
 
         shootChar = characterSprites.at("WeaponHitting");
-        shootChar->PlayShoot2(100, character1->getWeapon()->getWidth(), character1->getWeapon()->getHeight());
+        shootChar->PlayShoot2(6.66*GAMEDELAY, character1->getWeapon()->getWidth(), character1->getWeapon()->getHeight());
     }
 
     if (!character1->getWeapon()->isActive()) {

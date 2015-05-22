@@ -53,5 +53,5 @@ bool LowPunchHitting::isHitting() {
 }
 
 bool LowPunchHitting::impact() {
-    return (this->timer == 27);
+    return (this->timer == 20);
 }

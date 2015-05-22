@@ -3,7 +3,7 @@
 #include "CharacterStance.h"
 
 RecevingHit::RecevingHit() {
-	this->timer = 27;
+	this->timer = 23;
 }
 
 RecevingHit::~RecevingHit() {
@@ -25,7 +25,7 @@ float RecevingHit::getWidth() {
 void RecevingHit::refreshTimer(MKCharacter* character) {
 	if (this->timer == 0) {
         character->setState(new CharacterStance());
-        this->timer = 27;
+        this->timer = 23;
     }
 
     this->timer -= 1;

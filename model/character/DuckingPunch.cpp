@@ -5,7 +5,7 @@
 #include "CharacterStance.h"
 
 DuckingPunch::DuckingPunch() {
-    this->timer = 30;
+    this->timer = 33;
 }
 
 DuckingPunch::~DuckingPunch() {
@@ -66,13 +66,13 @@ float DuckingPunch::getJumpLevel() {
 void DuckingPunch::refreshTimer(MKCharacter *character) {
     if (this->timer == 0) {
         character->setState(new CharacterStance());
-        this->timer = 30;
+        this->timer = 33;
     }
 
     this->timer -= 1;
 }
 
 bool DuckingPunch::impact() {
-    return this->timer == 15;
+    return this->timer == 7;
 }
 

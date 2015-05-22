@@ -51,5 +51,5 @@ string LowKickHitting::getName() {
 }
 
 bool LowKickHitting::impact() {
-    return (this->timer == 14);
+    return (this->timer == 7);
 }
