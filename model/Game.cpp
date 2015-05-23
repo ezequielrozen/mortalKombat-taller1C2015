@@ -103,9 +103,14 @@ bool Game::GameLoop() {
 void Game::updateGameState() {
     if (!scorpion->isAlive()) {
         scorpion->setState(new Dizzy());
+        scorpion->setPosY(this->stage->getFloor());
         raiden->setState(new Victory());
+        raiden->setPosY(this->stage->getFloor());
+
     } else if (!raiden->isAlive()) {
         raiden->setState(new Dizzy());
+        raiden->setPosY(this->stage->getFloor());
         scorpion->setState(new Victory());
+        scorpion->setPosY(this->stage->getFloor());
     }
 }

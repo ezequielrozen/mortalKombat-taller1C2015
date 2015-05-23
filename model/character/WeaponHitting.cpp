@@ -5,7 +5,7 @@
 #include "RecevingHit.h"
 
 WeaponHitting::WeaponHitting() {
-	this->timer = 10;
+	this->timer = 1;
 }
 
 WeaponHitting::~WeaponHitting() {
@@ -37,7 +37,7 @@ void WeaponHitting::refreshTimer(MKCharacter* character) {
 	if (this->timer == 0) {
 		character->setState(new CharacterStance());
 		cout << "stance " << endl;
-		this->timer = 10;
+		this->timer = 1;
 	}
 
 	this->timer -= 1;
