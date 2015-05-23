@@ -38,12 +38,12 @@ void JumpingRight::update(MKCharacter * character, Events aEvent) {
         case ReceiveWeapon:
             character->setState(new ReceivingDuckingPunch());
             break;
-        case WeaponHit:
+        /*case WeaponHit:
             if (!character->getWeapon()->isActive()) {
                 character->setState(new WeaponHitting());
             }
             break;
-        default:
+        */default:
             break;
     }
 }

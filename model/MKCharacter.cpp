@@ -281,7 +281,7 @@ void MKCharacter::throwWeapon() {
 								  this->getCharacterSide());
 	}
 	else {
-		this->weapon->throwWeapon(this->posX - this->weapon->getWidth(),
+		this->weapon->throwWeapon(this->posX,
 								this->posY + this->getHeight()*0.2,
 								this->getCharacterSide());
 	}

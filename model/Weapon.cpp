@@ -6,7 +6,6 @@ Weapon::Weapon(float width, float height) {
     this->width = width;
     this->height = height;
     this->speed = 5;
-    this->impact = true;
 }
 
 
@@ -31,6 +30,7 @@ void Weapon::throwWeapon(float initialX, float initialY, char direction) {
         this->positionX = initialX;
         this->positionY = initialY;
         this->direction = direction;
+        this->impact = true;
     }
 }
 
