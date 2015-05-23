@@ -35,7 +35,6 @@ void Weapon::throwWeapon(float initialX, float initialY, char direction) {
 }
 
 void Weapon::stepForward() {
-	cout << traveledDistance << endl;
 
 	if (this->direction == 'r')
         this->positionX -= speed;
@@ -53,6 +52,7 @@ float Weapon::getPositionX() {
 
 void Weapon::destroy() {
     this->active = false;
+    this->impact = false;
 }
 
 float Weapon::getWidth() {
@@ -71,6 +71,3 @@ bool Weapon::isImpact() {
     return this->impact;
 }
 
-void Weapon::setImpact(bool imp) {
-    this->impact = imp;
-}

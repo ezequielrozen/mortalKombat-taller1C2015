@@ -5,6 +5,7 @@
 #include "RecevingHit.h"
 #include "ReceivingDuckingKick.h"
 #include "DuckingPunch.h"
+#include "ReceivingDuckingPunch.h"
 
 Ducking::Ducking() {
     this->timer = 10;
@@ -23,10 +24,13 @@ void Ducking::update(MKCharacter * character, Events aEvent) {
             character->setState(new DuckingKickHitting());
             break;
         case ReceiveHit:
-            character->setState(new ReceivingDuckingKick());
+            character->setState(new ReceivingDuckingPunch());
             break;
         case DuckRelease:
             character->setState(new CharacterStance());
+            break;
+        case ReceiveDuckingKick:
+            character->setState(new ReceivingDuckingPunch());
             break;
         default:
             //si no recibe ninguno de los otros eventos, en principio no hay que hacer nada, porque no afectan a este estado

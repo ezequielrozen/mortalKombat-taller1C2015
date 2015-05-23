@@ -22,7 +22,6 @@ public:
     float getWidth();
     float getHeight();
     bool isImpact();
-    void setImpact(bool imp);
 
 private:
     float speed;

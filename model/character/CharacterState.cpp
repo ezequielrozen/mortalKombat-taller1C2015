@@ -59,3 +59,7 @@ bool CharacterState::startThrowing() {
 float CharacterState::getHeight() {
 	return 1;
 }
+
+void CharacterState::disableImpact(MKCharacter* character) {
+	
+}

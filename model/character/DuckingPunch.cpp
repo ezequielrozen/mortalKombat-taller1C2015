@@ -76,4 +76,3 @@ void DuckingPunch::refreshTimer(MKCharacter *character) {
 bool DuckingPunch::impact() {
     return this->timer == 7;
 }
-

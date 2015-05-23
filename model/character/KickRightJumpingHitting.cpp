@@ -1,6 +1,7 @@
 #include "KickRightJumpingHitting.h"
 #include "CharacterStance.h"
 #include "ReceivingDuckingPunch.h"
+#include "JumpingRight.h"
 
 KickRightJumpingHitting::KickRightJumpingHitting() {
 
@@ -45,4 +46,8 @@ bool KickRightJumpingHitting::isJumping() {
 
 bool KickRightJumpingHitting::isMovingRight() {
     return true;
+}
+
+void KickRightJumpingHitting::disableImpact(MKCharacter* character) {
+    character->setState(new JumpingRight());
 }

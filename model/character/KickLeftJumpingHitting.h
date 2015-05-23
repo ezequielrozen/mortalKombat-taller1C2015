@@ -17,6 +17,7 @@ public:
     bool isJumping();
     bool isMovingLeft();
     bool impact();
+    void disableImpact(MKCharacter* character);
 };
 
 
