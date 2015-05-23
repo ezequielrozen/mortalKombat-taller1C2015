@@ -1,4 +1,5 @@
 #include "PunchLeftJumping.h"
+#include "JumpingLeft.h"
 
 PunchLeftJumping::PunchLeftJumping() {
 
@@ -50,4 +51,8 @@ bool PunchLeftJumping::isHitting() {
 
 bool PunchLeftJumping::impact() {
     return true;
+}
+
+void PunchLeftJumping::disableImpact(MKCharacter* character) {
+    character->setState(new JumpingLeft());
 }

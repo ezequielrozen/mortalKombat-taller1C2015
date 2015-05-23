@@ -89,6 +89,8 @@ public:
 
     float getStateHeight();
 
+    void disableImpact();
+
 private:
 
     // State

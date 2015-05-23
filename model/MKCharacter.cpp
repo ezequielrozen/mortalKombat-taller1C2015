@@ -226,9 +226,6 @@ bool MKCharacter::isJumping() {
 }
 
 string MKCharacter::getState() {
-	if (this->weapon->isActive()) {
-		return "WeaponHitting";
-	}
 	return this->state->getName();
 }
 
@@ -276,12 +273,12 @@ Weapon *MKCharacter::getWeapon() {
 void MKCharacter::throwWeapon() {
 	//	this->weapon->throwWeapon(this->posX + this->getWidth(),this->posY +  this->getHeight() * 0.2 /* AL 80% DE LA ALTURA DEL PERSONAJE, USAR CTE*/, this->getCharacterSide());
 	if (this->getCharacterSide() == 'l') {
-		this->weapon->throwWeapon(this->posX + this->getWidth(),
+		this->weapon->throwWeapon(this->posX,
 								  this->posY + this->getHeight() * 0.2,
 								  this->getCharacterSide());
 	}
 	else {
-		this->weapon->throwWeapon(this->posX - this->weapon->getWidth(),
+		this->weapon->throwWeapon(this->posX,
 								this->posY + this->getHeight()*0.2,
 								this->getCharacterSide());
 	}
@@ -291,3 +288,6 @@ float MKCharacter::getStateHeight() {
 	return (this->alto)*(this->state->getHeight());
 }
 
+void MKCharacter::disableImpact() {
+	this->state->disableImpact(this);
+}

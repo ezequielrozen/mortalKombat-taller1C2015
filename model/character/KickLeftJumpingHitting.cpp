@@ -1,6 +1,7 @@
 #include "KickLeftJumpingHitting.h"
 #include "CharacterStance.h"
 #include "ReceivingDuckingPunch.h"
+#include "JumpingLeft.h"
 
 KickLeftJumpingHitting::KickLeftJumpingHitting() {
 
@@ -46,3 +47,8 @@ bool KickLeftJumpingHitting::isJumping() {
 bool KickLeftJumpingHitting::isMovingLeft() {
     return true;
 }
+
+void KickLeftJumpingHitting::disableImpact(MKCharacter* character) {
+    character->setState(new JumpingLeft());
+}
+

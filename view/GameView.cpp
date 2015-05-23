@@ -366,12 +366,13 @@ void GameView::runCharacter(MKCharacter* character1, MKCharacter* character2, Sp
     else if (character1->getState() == "WeaponHitting"){
         sprite = characterSprites.at("Stance");
         sprite->Play(6.66*GAMEDELAY, character1->getStateWidth());
+    }
 
+    if (character1->getWeapon()->isActive()) {
         shootChar = characterSprites.at("WeaponHitting");
         shootChar->PlayShoot2(6.66*GAMEDELAY, character1->getWeapon()->getWidth(), character1->getWeapon()->getHeight());
     }
-
-    if (!character1->getWeapon()->isActive()) {
+    else {
         shootChar = NULL;
     }
 
@@ -410,11 +411,11 @@ void GameView::runCharacter(MKCharacter* character1, MKCharacter* character2, Sp
         else
             sprite->resetFinished();
 
-    sprite->Draw();
-
     if (shootChar != NULL) {
         shootChar->Draw();
     }
+
+    sprite->Draw();
 
 }
 

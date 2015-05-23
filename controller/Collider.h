@@ -14,7 +14,6 @@ public:
 
 private:
 
-//    bool superpositionX(MKCharacter *character1, MKCharacter *character2);
     bool superpositionLeft(MKCharacter* character1, MKCharacter* character2);
 
     bool superpositionRight(MKCharacter *character1, MKCharacter *character2);
@@ -31,9 +30,6 @@ private:
 
     bool superpositionRight(Weapon* weapon, MKCharacter* character2);
 
-    int timer;
-
-    int beingHitTimer;
 };
 
 

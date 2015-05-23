@@ -19,6 +19,7 @@ public:
     bool isMovingLeft();
     bool isHitting();
     bool impact();
+    void disableImpact(MKCharacter* character);
 };
 
 

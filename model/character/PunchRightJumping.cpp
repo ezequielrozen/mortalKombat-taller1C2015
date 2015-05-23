@@ -1,4 +1,5 @@
 #include "PunchRightJumping.h"
+#include "JumpingRight.h"
 
 PunchRightJumping::PunchRightJumping() {
 
@@ -49,4 +50,8 @@ bool PunchRightJumping::impact() {
 
 string PunchRightJumping::getName() {
 	return "PunchRightJumping";
+}
+
+void PunchRightJumping::disableImpact(MKCharacter* character) {
+    character->setState(new JumpingRight());
 }
