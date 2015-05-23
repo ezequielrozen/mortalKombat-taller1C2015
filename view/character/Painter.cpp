@@ -172,6 +172,9 @@ void Painter::paint(SDL_Surface *surface) {
             hsv hsvConverted = this->convertToHSV(aRGB);
             if (this->initialH <= hsvConverted.h && hsvConverted.h <= this->finalH) {
                 hsvConverted.h += this->offset;
+                while (hsvConverted.h >= 360) {
+                    hsvConverted.h -= 360;
+                }
             }
             aRGB = this->convertToRGB(hsvConverted);
             this->putpixel(surface, x, y, SDL_MapRGB(surface->format, aRGB.r, aRGB.g, aRGB.b));
