@@ -45,6 +45,11 @@ void MKCharacter::characterUpdate() {
 		this->moveUp();
 	}
 
+	if (this->isBeingOverPassedRight())
+		this->moveRightFaster();
+	else if (this->isBeingOverPassedLeft())
+		this->moveLeftFaster();
+
 	this->state->refreshTimer(this);
 	if (this->state->startThrowing() && !this->weapon->isActive()) {
 		throwWeapon();
@@ -59,6 +64,20 @@ void MKCharacter::moveRight() {
 	//Verifico que no se vaya de la pantalla por derecha
 	if ((posX + step + getWidth() < Util::getInstance()->getLogicalWindowWidth())) {
 		posX = posX + step;
+	}
+}
+
+void MKCharacter::moveRightFaster() {
+	//Verifico que no se vaya de la pantalla por derecha
+	if ((posX + step + getWidth() < Util::getInstance()->getLogicalWindowWidth())) {
+		posX = posX + step * 8;
+	}
+}
+
+void MKCharacter::moveLeftFaster() {
+	//Verifico que no se vaya de la pantalla por izquierda
+	if ((posX - step + getWidth() > getWidth())) {
+		posX = posX - step * 8;
 	}
 }
 
@@ -186,6 +205,11 @@ void MKCharacter::setPosY(double d) {
 	this->posY = d;
 }
 
+void MKCharacter::moveForced(double x) {
+	//if ((x + this->getStateWidth() < Util::getInstance()->getLogicalStageWidth() * 0.4) && x > this->getWidth())
+				posX = x;
+}
+
 void MKCharacter::setCharacterSide(char side) {
 	this->characterSide = side;
 }
@@ -223,6 +247,14 @@ bool MKCharacter::isMovingRight() {
 
 bool MKCharacter::isJumping() {
 	this->state->isJumping();
+}
+
+bool MKCharacter::isBeingOverPassedRight() {
+	return this->state->isBeingOverPassedRight();
+}
+
+bool MKCharacter::isBeingOverPassedLeft() {
+	return this->state->isBeingOverPassedLeft();
 }
 
 string MKCharacter::getState() {

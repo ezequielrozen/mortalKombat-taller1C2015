@@ -30,6 +30,8 @@ public:
     bool isDucking();
     bool isBlocking();
     bool isJumping();
+    bool isBeingOverPassedRight();
+    bool isBeingOverPassedLeft();
 
     double getYMax();
     double getVelY();
@@ -91,6 +93,12 @@ public:
 
     void disableImpact();
 
+    void moveForced(double x);
+
+    void moveRightFaster();
+
+    void moveLeftFaster();
+
 private:
 
     // State
@@ -118,6 +126,7 @@ private:
 
     // Weapon
     Weapon* weapon;
+
 };
 
 #endif /* MKCHARACTER_H_ */

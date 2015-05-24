@@ -86,6 +86,7 @@ bool Game::GameLoop() {
         updateGameState();
         cameraMoved = cameraController->update(scorpion, raiden, stage->getLayers());
         collider->update(scorpion, raiden, cameraMoved);
+
         gameView->endRender();
         SDL_Delay(GAMEDELAY);
 

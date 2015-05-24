@@ -27,7 +27,7 @@
   "personaje": [
     {
       "name": "scorpion",
-      "ancho": 68,
+      "ancho": 62,
       "alto": 125,
       "z-index": 3,
       "sprites":
@@ -57,7 +57,7 @@
     },
     {
       "name": "raiden",
-      "ancho": 62,
+      "ancho": 5,
       "alto": 125,
       "z-index": 3,
       "sprites":

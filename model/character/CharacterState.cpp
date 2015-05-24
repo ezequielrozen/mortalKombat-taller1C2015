@@ -52,12 +52,21 @@ bool CharacterState::impact() {
 	return false;
 }
 
+
 bool CharacterState::startThrowing() {
 	return false;
 }
 
 float CharacterState::getHeight() {
 	return 1;
+}
+
+bool CharacterState::isBeingOverPassedRight() {
+	return false;
+}
+
+bool CharacterState::isBeingOverPassedLeft() {
+	return false;
 }
 
 void CharacterState::disableImpact(MKCharacter* character) {

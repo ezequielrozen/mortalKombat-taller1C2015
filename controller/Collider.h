@@ -30,6 +30,11 @@ private:
 
     bool superpositionRight(Weapon* weapon, MKCharacter* character2);
 
+    void checkOverPassing(MKCharacter* character1, MKCharacter* character2);
+
+    bool overPassedRight;
+
+    double initialX;
 };
 
 

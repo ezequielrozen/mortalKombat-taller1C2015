@@ -1,8 +1,10 @@
 #include "Collider.h"
+#include "../model/character/BeingOverPassedRight.h"
+#include "../model/character/BeingOverPassedLeft.h"
 
 
 Collider::Collider() {
-
+	overPassedRight = false;
 }
 
 Collider::~Collider() {
@@ -45,18 +47,24 @@ bool Collider::superpositionRight(Weapon* weapon, MKCharacter* character2) {
 
 void Collider::checkHits(MKCharacter* character1, MKCharacter* character2) {
 
-	if (((superpositionRight(character1,character2) || superpositionLeft(character1, character2)) && (character1->isHitting()) && superpositionDown(character1, character2))
+	checkOverPassing(character1, character2);
+
+	if ( character2->isBeingOverPassedRight() || character2->isBeingOverPassedLeft() || ((superpositionRight(character1,character2) || superpositionLeft(character1, character2)) && (character1->isHitting()) && superpositionDown(character1, character2))
 	|| ((superpositionRight(character1->getWeapon(), character2) || superpositionLeft(character1->getWeapon(), character2)) && character1->getWeapon()->isActive() && superpositionDown(character1->getWeapon(), character2))){
-	
+
+		//checkOverPassing(character2, character1);
+
+
 		if (character1->impacts()) {
 			if (character1->getState() == "DuckingKickHitting" || (!character2->isBlocking() && !character2->isDucking()) ||
 				(character1->getWeapon()->isActive() && !character2->isDucking())) {
+					//overPassedRight = false;
 				if (character1->getWeapon()->isActive()) {
 					character2->receiveBlow(DAMAGE.at("WeaponHitting"),0);
 					character1->getWeapon()->destroy();
 				} else {
 					character2->receiveBlow(DAMAGE.at(character1->getState()),0);
-					if (character1->isJumping()) {	
+					if (character1->isJumping()) {
 						character1->disableImpact();
 					}
 				}
@@ -121,8 +129,19 @@ void Collider::update(MKCharacter* character1, MKCharacter* character2, bool cam
 			this->checkHits(character1, character2);
 		}
 	}
+
 	character1->characterUpdate();
 	character2->characterUpdate();
 
 }
 
+void Collider::checkOverPassing(MKCharacter* character1, MKCharacter* character2) {
+	//cout << "Character 1 X: " << character1->getX() << "Character 2 X: " << character2->getX() << endl;
+	//cout << "Character Right Border: " << character1->getX() + character1->getStateWidth() << "Character 2 Right Border: " << character2->getX() + character2->getStateWidth() << endl;
+
+	if (character2->getX() + character2->getStateWidth() <= character1->getX() + character1->getStateWidth() && character1->getCharacterSide() == 'l' && character1->isHitting() && !character2->isBeingOverPassedRight())
+			character2->setState(new BeingOverPassedRight());
+	else if (character2->getX() >= character1->getX() - (character1->getStateWidth() - character1->getWidth()) && character1->getCharacterSide() == 'r' && character1->isHitting() && !character1->isBeingOverPassedRight())
+			character2->setState(new BeingOverPassedLeft());
+
+}

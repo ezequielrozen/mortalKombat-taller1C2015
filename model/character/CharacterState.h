@@ -12,6 +12,8 @@ public:
     virtual void update(MKCharacter * character, Events aEvent );
     virtual bool isMovingLeft();
     virtual bool isMovingRight();
+    virtual bool isBeingOverPassedRight();
+    virtual bool isBeingOverPassedLeft();
     virtual bool isJumping();
     virtual bool isHitting();
     virtual bool isBlocking();
