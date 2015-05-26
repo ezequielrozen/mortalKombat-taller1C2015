@@ -57,7 +57,7 @@
     },
     {
       "name": "raiden",
-      "ancho": 5,
+      "ancho": 62,
       "alto": 125,
       "z-index": 3,
       "sprites":
@@ -92,7 +92,7 @@
   "color-alternativo": {
     "h-inicial": 30,
     "h-final": 70,
-    "desplazamiento": 180
+    "desplazamiento": 0
   },
 
   "botones":{

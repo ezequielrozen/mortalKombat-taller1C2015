@@ -90,7 +90,7 @@ bool Game::GameLoop() {
         gameView->endRender();
         SDL_Delay(GAMEDELAY);
 
-        if (peviousKey == SDLK_r && inputController->getEvent()->key.keysym.sym == SDLK_e) {
+        if (peviousKey == SDLK_r && inputController->getEvent()->key.keysym.sym == SDLK_r) {
             return true;
         }
         else {

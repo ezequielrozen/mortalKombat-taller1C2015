@@ -47,6 +47,7 @@ JoystickController::JoystickController(char number)
     this->c0previousAxis = 0;
     this->c0previousAxisValue = 0;
 	this->c0blockReleased = false;
+	this->c0shootReleased = true; //la uso para saber si ya hizo keyUp de la tecla shoot xq por cada keyDown dispara n veces y mata al oponente sino.
 	this->c0ducked = false;
 	this->c0walkingLeft = false;
 	this->c0walkingRight = false;
@@ -120,7 +121,9 @@ void JoystickController::update(MKCharacter *character, MKCharacter *character2,
 			printCout ? cout << "KeyUp: BlockRelease"	<< endl : "";
 			EventController::blockRelease(character, character2);
 		}
-
+		if (pressedButton == c0shoot){
+			this->c0shootReleased = true;
+		}
 	}
 
 //    cout << "Joystick number: " << (int) this->joystickNumber << " PressedButton: " << (int) pressedButton << " PressedAxis: " << (int) pressedAxis << " PressedAxisvalue: " << pressedAxisValue << " previousAxis: " <<  c0previousAxis << " previousAxisvalue: " << c0previousAxisValue << " type: " << mainEvent->type << endl;
@@ -210,7 +213,8 @@ void JoystickController::update(MKCharacter *character, MKCharacter *character2,
 			EventController::lowPunch(character, character2);
 	}
 
-	if (mainEvent->type == SDL_JOYBUTTONDOWN && pressedButton == c0shoot) {
+	if (mainEvent->type == SDL_JOYBUTTONDOWN && pressedButton == c0shoot && (this->c0shootReleased)) {
+		this->c0shootReleased = false;
 		printCout ? cout << "KeyDown: Boton c0shoot"	<< endl : "";
 		EventController::shoot(character, character2);
 	}

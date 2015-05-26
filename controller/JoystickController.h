@@ -40,7 +40,7 @@ private:
 	bool c0ducked;
 	bool c0walkingLeft;
 	bool c0walkingRight;
-
+	bool c0shootReleased;
 
 	void setDucked(bool value);
 	void setWalkingLeft(bool value);
