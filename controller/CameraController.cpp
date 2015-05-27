@@ -14,13 +14,13 @@ CameraController::~CameraController(void)
 }
 
 bool CameraController::cameraMoveLeft(MKCharacter* character1, MKCharacter* character2) {
-    return ((character1->getX() < Util::getInstance()->getLogicalWindowWidth()/10) && (character1->isMovingLeft())
-        && !(character2->getX() > Util::getInstance()->getLogicalWindowWidth() - Util::getInstance()->getLogicalWindowWidth()/10 - character2->getWidth()));
+    return ((character1->getX() < 4) && (character1->isMovingLeft())
+        && !(character2->getX() > Util::getInstance()->getLogicalWindowWidth() - 4 - character2->getWidth()));
 }
 
 bool CameraController::cameraMoveRight(MKCharacter* character1, MKCharacter* character2) {
-    return ((character1->getX() > Util::getInstance()->getLogicalWindowWidth() - Util::getInstance()->getLogicalWindowWidth()/10 - character1->getWidth()) &&
-        (character1->isMovingRight() && !(character2->getX() < Util::getInstance()->getLogicalWindowWidth()/10)));
+    return ((character1->getX() > Util::getInstance()->getLogicalWindowWidth() - 4 - character1->getWidth()) &&
+        (character1->isMovingRight() && !(character2->getX() < 4)));
 }
 
 /*
@@ -63,22 +63,50 @@ bool CameraController::update(MKCharacter* character1, MKCharacter* character2, 
     else if (this->cameraMoveLeft(character1, character2)) {
         this->cameraMovement = "LEFT";
         cameraMoved = true;
-        character2->moveRight();
+        if (character1->getStagePosX() > 0) {
+            character2->moveRight();
+            character1->decreaseStagePosX();
+            character2->decreaseStagePosX();
+        }
+        else {
+            cameraMoved = false;
+        }
     }
     else if (this->cameraMoveLeft(character2, character1)) {
         this->cameraMovement = "LEFT";
         cameraMoved = true;
-        character1->moveRight();
+        if (character2->getStagePosX() > 0) {
+            character1->moveRight();
+            character2->decreaseStagePosX();
+            character1->decreaseStagePosX();
+        }
+        else {
+            cameraMoved = false;
+        }
     }
     else if (this->cameraMoveRight(character1, character2)) {
         this->cameraMovement = "RIGHT";
         cameraMoved = true;
-        character2->moveLeft();
+        if (character1->getStagePosX() < (Util::getInstance()->getLogicalStageWidth()-character1->getWidth())) {
+            character2->moveLeft();
+            character1->increaseStagePosX();
+            character2->increaseStagePosX();
+        }
+        else {
+            cameraMoved = false;
+        }
     }
     else if (this->cameraMoveRight(character2, character1)) {
         this->cameraMovement = "RIGHT";
         cameraMoved = true;
-        character1->moveLeft();
+        if (character2->getStagePosX() < (Util::getInstance()->getLogicalStageWidth()-character2->getWidth())) {
+            character1->moveLeft();
+            character2->increaseStagePosX();
+            character1->increaseStagePosX();
+        }
+        else {
+            cameraMoved = false;
+        }
     }
 
     list<Layer*>::iterator it = layers->begin();

@@ -49,6 +49,12 @@ public:
 
     double getX();
 
+    double getStagePosX();
+
+    void increaseStagePosX();
+
+    void decreaseStagePosX();
+
     void setInitialPosition(double);
 
     double getY();
@@ -107,6 +113,7 @@ private:
     double auxPosX;
     double posX;
     double posY;
+    double stagePosX;
 
     int z_index;
     float ancho;

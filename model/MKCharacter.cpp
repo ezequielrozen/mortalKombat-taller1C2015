@@ -13,7 +13,9 @@ MKCharacter::MKCharacter(float initialPosX, float ancho, float alto, int z_index
 	this->alto = alto;
 	this->ancho = ancho;
 
-	step = 0.042 * this->ancho;
+	this->stagePosX = ((Util::getInstance()->getLogicalStageWidth()-Util::getInstance()->getLogicalWindowWidth())/2) + initialPosX;
+
+	step = 0.00651 * Util::getInstance()->getLogicalWindowWidth();
 
 	jumpTime = 0;
 	ascending = false;
@@ -57,26 +59,31 @@ void MKCharacter::characterUpdate() {
 
 	this->weapon->update();
 
+	//cout << this->getStagePosX() << endl;
+	
 }
 
 void MKCharacter::moveRight() {
 	//Verifico que no se vaya de la pantalla por derecha
 	if ((posX + step + getWidth() < Util::getInstance()->getLogicalWindowWidth())) {
 		posX = posX + step;
+		stagePosX = stagePosX + step;
 	}
 }
 
 void MKCharacter::moveRightFaster() {
 	//Verifico que no se vaya de la pantalla por derecha
 	if ((posX + step + getWidth() < Util::getInstance()->getLogicalWindowWidth())) {
-		posX = posX + step * 8;
+		posX = posX + step;
+		stagePosX = stagePosX + step;
 	}
 }
 
 void MKCharacter::moveLeftFaster() {
 	//Verifico que no se vaya de la pantalla por izquierda
 	if ((posX - step + getWidth() > getWidth())) {
-		posX = posX - step * 8;
+		posX = posX - step;
+		stagePosX = stagePosX - step;
 	}
 }
 
@@ -84,6 +91,7 @@ void MKCharacter::moveLeft() {
 	//Verifico que no se vaya de la pantalla por izquierda
 	if ((posX - step + getWidth() > getWidth())) {
 		posX = posX - step;
+		stagePosX = stagePosX - step;
 	}
 }
 
@@ -126,6 +134,18 @@ float MKCharacter::getHeight() {
 
 double MKCharacter::getX() {
 	return posX;
+}
+
+double MKCharacter::getStagePosX() {
+	return stagePosX;
+}
+
+void MKCharacter::increaseStagePosX() {
+	this->stagePosX = this->stagePosX + step;
+}
+
+void MKCharacter::decreaseStagePosX() {
+	this->stagePosX = this->stagePosX - step;
 }
 
 double MKCharacter::getY() {
