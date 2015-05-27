@@ -36,6 +36,8 @@ private:
 
     SDL_Keycode previousKey;
     SDL_Keycode previousKeyChar2;
+    bool key_u_Released; //La uso para q no pueda volver a hacer el shoot sin soltar la tecla xq sino cdo esta cerca lo mata de una.
+    bool key_e_Released; //La uso para q no pueda volver a hacer el shoot sin soltar la tecla xq sino cdo esta cerca lo mata de una.
 
 	void testElapsedTime(MKCharacter* character, MKCharacter* character2);
 

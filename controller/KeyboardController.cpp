@@ -4,6 +4,8 @@
 
 KeyboardController::KeyboardController()
 {
+	key_u_Released = true;
+	key_e_Released = true;
 }
 
 KeyboardController::~KeyboardController(void)
@@ -48,7 +50,11 @@ void KeyboardController::update(MKCharacter* character, MKCharacter* character2,
 						EventController::block(character, character2);
 						break;
 			case SDLK_u:
-						EventController::shoot(character, character2);
+						if (key_u_Released)
+						{
+							key_u_Released = false;
+							EventController::shoot(character, character2);
+						}
 						break;
 			/****************************************************************************************************/
 
@@ -83,7 +89,11 @@ void KeyboardController::update(MKCharacter* character, MKCharacter* character2,
 						break;
 
 			case SDLK_e:
-						EventController::shoot(character2, character);
+						if (key_e_Released)
+						{
+							key_e_Released = false;
+							EventController::shoot(character2, character);
+						}
 						break;
 			default:
 				previousKey = mainEvent->key.keysym.sym;
@@ -105,6 +115,9 @@ void KeyboardController::update(MKCharacter* character, MKCharacter* character2,
 				case SDLK_b:
 					EventController::blockRelease(character, character2);
 					break;
+				case SDLK_u:
+					key_u_Released = true;
+					break;
 
 
 				case SDLK_z:
@@ -118,6 +131,9 @@ void KeyboardController::update(MKCharacter* character, MKCharacter* character2,
 					break;
 				case SDLK_x:
 					EventController::blockRelease(character2, character);
+					break;
+				case SDLK_e:
+					key_e_Released = true;
 					break;
 
 				default:
