@@ -63,7 +63,7 @@ void MovingRight::update(MKCharacter * character, Events aEvent) {
             character->setState(new CharacterStance());
             break;
         case OverPassed:
-            if (character->getCharacterSide() == (char) "l") {
+            if (character->getCharacterSide() == 'l') {
                 character->setState(new BeingOverPassedLeft());
             } else {
                 character->setState(new BeingOverPassedRight());
