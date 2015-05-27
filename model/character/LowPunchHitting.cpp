@@ -3,6 +3,8 @@
 #include "RecevingHit.h"
 #include "ReceivingDuckingKick.h"
 #include "ReceivingDuckingPunch.h"
+#include "BeingOverPassedLeft.h"
+#include "BeingOverPassedRight.h"
 
 LowPunchHitting::LowPunchHitting() {
     this->timer = 40;
@@ -25,6 +27,13 @@ void LowPunchHitting::update(MKCharacter *character, Events aEvent) {
             break;
         case ReceiveWeapon:
             character->setState(new ReceivingDuckingPunch());
+            break;
+        case OverPassed:
+            if (character->getCharacterSide() == (char) "l") {
+                character->setState(new BeingOverPassedLeft());
+            } else {
+                character->setState(new BeingOverPassedRight());
+            };
             break;
         default:
             break;

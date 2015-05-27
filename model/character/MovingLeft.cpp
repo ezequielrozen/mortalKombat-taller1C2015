@@ -10,6 +10,8 @@
 #include "Ducking.h"
 #include "RecevingHit.h"
 #include "ReceivingDuckingKick.h"
+#include "BeingOverPassedLeft.h"
+#include "BeingOverPassedRight.h"
 
 MovingLeft::MovingLeft() {
     this->timer = 10;
@@ -61,6 +63,13 @@ void MovingLeft::update(MKCharacter * character, Events aEvent) {
         case MoveLeftRelease:
         	character->setState(new CharacterStance());
         	break;
+        case OverPassed:
+            if (character->getCharacterSide() == (char) "l") {
+                character->setState(new BeingOverPassedLeft());
+            } else {
+                character->setState(new BeingOverPassedRight());
+            };
+            break;
         default:
             break;
     }

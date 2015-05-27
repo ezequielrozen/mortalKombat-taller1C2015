@@ -9,6 +9,8 @@
 #include "HighPunchHitting.h"
 #include "WeaponHItting.h"
 #include "Ducking.h"
+#include "BeingOverPassedRight.h"
+#include "BeingOverPassedLeft.h"
 
 MovingRight::MovingRight() {
 //    this->timer =
@@ -59,6 +61,13 @@ void MovingRight::update(MKCharacter * character, Events aEvent) {
             break;
         case MoveRightRelease:
             character->setState(new CharacterStance());
+            break;
+        case OverPassed:
+            if (character->getCharacterSide() == (char) "l") {
+                character->setState(new BeingOverPassedLeft());
+            } else {
+                character->setState(new BeingOverPassedRight());
+            };
             break;
         default:
             break;

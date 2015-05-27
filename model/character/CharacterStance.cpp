@@ -13,6 +13,8 @@
 #include "LowKickHitting.h"
 #include "ReceivingDuckingPunch.h"
 #include "ReceivingDuckingKick.h"
+#include "BeingOverPassedLeft.h"
+#include "BeingOverPassedRight.h"
 
 CharacterStance::CharacterStance() {
 //    this->timer = -1
@@ -68,6 +70,13 @@ void CharacterStance::update(MKCharacter * character, Events aEvent) {
             break;
         case ReceiveHit:
             character->setState(new RecevingHit());
+            break;
+        case OverPassed:
+            if (character->getCharacterSide() == (char) "l") {
+                character->setState(new BeingOverPassedLeft());
+            } else {
+                character->setState(new BeingOverPassedRight());
+            };
             break;
         default:
             //si no recibe ninguno de los otros eventos, en principio no hay que hacer nada, porque no afectan a este estado

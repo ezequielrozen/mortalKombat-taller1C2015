@@ -6,6 +6,8 @@
 #include "ReceivingDuckingKick.h"
 #include "DuckingPunch.h"
 #include "ReceivingDuckingPunch.h"
+#include "BeingOverPassedRight.h"
+#include "BeingOverPassedLeft.h"
 
 Ducking::Ducking() {
     this->timer = 10;
@@ -31,6 +33,13 @@ void Ducking::update(MKCharacter * character, Events aEvent) {
             break;
         case ReceiveDuckingKick:
             character->setState(new ReceivingDuckingPunch());
+            break;
+        case OverPassed:
+            if (character->getCharacterSide() == (char) "l") {
+                character->setState(new BeingOverPassedLeft());
+            } else {
+                character->setState(new BeingOverPassedRight());
+            };
             break;
         default:
             //si no recibe ninguno de los otros eventos, en principio no hay que hacer nada, porque no afectan a este estado

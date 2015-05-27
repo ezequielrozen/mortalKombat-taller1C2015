@@ -1,6 +1,8 @@
 #include "DuckingKickHitting.h"
 #include "CharacterStance.h"
 #include "RecevingHit.h"
+#include "BeingOverPassedRight.h"
+#include "BeingOverPassedLeft.h"
 
 DuckingKickHitting::DuckingKickHitting() {
     this->timer = 33;
@@ -14,6 +16,13 @@ void DuckingKickHitting::update(MKCharacter *character, Events aEvent) {
     switch(aEvent) {
         case ReceiveHit:
             character->setState(new RecevingHit());
+            break;
+        case OverPassed:
+            if (character->getCharacterSide() == (char) "l") {
+                character->setState(new BeingOverPassedLeft());
+            } else {
+                character->setState(new BeingOverPassedRight());
+            };
             break;
         default:
             break;

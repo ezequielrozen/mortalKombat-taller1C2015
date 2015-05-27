@@ -140,8 +140,10 @@ void Collider::checkOverPassing(MKCharacter* character1, MKCharacter* character2
 	//cout << "Character Right Border: " << character1->getX() + character1->getStateWidth() << "Character 2 Right Border: " << character2->getX() + character2->getStateWidth() << endl;
 
 	if (character2->getX() + character2->getStateWidth() <= character1->getX() + character1->getStateWidth() && character1->getCharacterSide() == 'l' && character1->isHitting() && !character2->isBeingOverPassedRight())
-			character2->setState(new BeingOverPassedRight());
+//			character2->setState(new BeingOverPassedRight());
+		character2->update(OverPassed);
 	else if (character2->getX() >= character1->getX() - (character1->getStateWidth() - character1->getWidth()) && character1->getCharacterSide() == 'r' && character1->isHitting() && !character1->isBeingOverPassedRight())
-			character2->setState(new BeingOverPassedLeft());
+//			character2->setState(new BeingOverPassedLeft());
+		character2->update(OverPassed);
 
 }
