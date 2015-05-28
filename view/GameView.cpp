@@ -8,7 +8,6 @@ GameView::GameView(float ScreenWidth, float ScreenHeight, MKCharacter* character
 	oponentSide = OponentSide;
 	this->window = NULL;
     this->window = SDL_CreateWindow("Mortal Kombat", 0, 0, (int) ScreenWidth, (int) ScreenHeight, SDL_WINDOW_SHOWN);
-
     if (this->window == NULL) {
 
         std::cout << "Window couldn't be created" << std::endl;
@@ -50,6 +49,12 @@ GameView::GameView(float ScreenWidth, float ScreenHeight, MKCharacter* character
     string charTwoName = character2->getName();
     transform(charTwoName.begin(), charTwoName.end(), charTwoName.begin(), ::toupper);
     characterTwoName = new Text(charTwoName.c_str(), this->renderer, "right");
+
+    stageBackgroundMusic = NULL;
+
+    // Here we initialize SDL_mixer and then load each sound and music
+    loadMusicAndSounds();
+    Mix_PlayMusic(stageBackgroundMusic, -1);
 }
 
 GameView::~GameView() {
@@ -101,6 +106,11 @@ GameView::~GameView() {
         delete layerSprites[i];
     }
     delete layerSprites;
+
+    //Free the music
+    if (stageBackgroundMusic != NULL)
+        Mix_FreeMusic( stageBackgroundMusic );
+    stageBackgroundMusic = NULL;
 
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
@@ -462,3 +472,24 @@ void GameView::initializeCharactersSprites() {
     raidenBlock=NULL;
 }
 
+void GameView::loadMusicAndSounds() {
+    //Initialize SDL_mixer
+    stageBackgroundMusic = NULL;
+//Initialize SDL
+    if( SDL_Init(SDL_INIT_AUDIO ) < 0 )
+    {
+        printf( "SDL could not initialize! SDL Error: %s\n", SDL_GetError() );
+    }
+    if( Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 )
+    {
+        printf( "SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError() );
+        // Loggear
+    } else {
+        stageBackgroundMusic = Mix_LoadMUS( "data/Sounds/mkw_umk3_sounds/longmusiccues/mk3-00056.mp3");
+        if( stageBackgroundMusic == NULL ) {
+            printf( "Failed to load beat music! SDL_mixer Error: %s\n", Mix_GetError() );
+            // Cargar sonido "vacio" por default?
+        }
+    }
+
+}

@@ -2,6 +2,7 @@
 #include "../controller/JoystickController.h"
 #include "character/Dizzy.h"
 #include "character/Victory.h"
+#include <SDL2/SDL_mixer.h>
 
 Game::Game(GameLoader* aGameLoader, char* filePath) {
     this->gameLoader = aGameLoader;

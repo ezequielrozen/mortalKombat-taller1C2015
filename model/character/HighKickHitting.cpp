@@ -56,7 +56,9 @@ void HighKickHitting::refreshTimer(MKCharacter* character) {
         character->setState(new CharacterStance());
         this->timer = 40;
     }
-
+    if (this->timer == 7) {
+        cout << "IMPACT" << endl;
+    }
     this->timer -= 1;
 }
 
