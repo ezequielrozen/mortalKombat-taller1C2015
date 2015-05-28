@@ -57,7 +57,7 @@
     },
     {
       "name": "raiden",
-      "ancho": 62,
+      "ancho": 8,
       "alto": 125,
       "z-index": 3,
       "sprites":
