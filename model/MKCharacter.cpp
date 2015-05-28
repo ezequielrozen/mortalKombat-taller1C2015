@@ -43,14 +43,10 @@ void MKCharacter::move() {
 void MKCharacter::characterUpdate() {
 
 	if (this->state->isJumping()) {
-
 		this->moveUp();
 	}
 
-	if (this->isBeingOverPassedRight())
-		this->moveRightFaster();
-	else if (this->isBeingOverPassedLeft())
-		this->moveLeftFaster();
+	this->updateOverPassing();
 
 	this->state->refreshTimer(this);
 	if (this->state->startThrowing() && !this->weapon->isActive()) {
@@ -61,6 +57,21 @@ void MKCharacter::characterUpdate() {
 
 	//cout << this->getStagePosX() << endl;
 	
+}
+
+void MKCharacter::updateOverPassing() {
+	if (this->isBeingOverPassedRight()) {
+		if (this->getX() <= stopX)
+			this->moveRightFaster();
+		else
+			this->update(OverPassedFinished);
+	}
+	else if (this->isBeingOverPassedLeft()) {
+		if (this->getX() >= stopX)
+			this->moveLeftFaster();
+		else
+			this->update(OverPassedFinished);
+	}
 }
 
 void MKCharacter::moveRight() {
@@ -341,4 +352,8 @@ float MKCharacter::getStateHeight() {
 
 void MKCharacter::disableImpact() {
 	this->state->disableImpact(this);
+}
+
+void MKCharacter::setStopX(float x) {
+	this->stopX = x;
 }

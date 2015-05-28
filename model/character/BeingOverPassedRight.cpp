@@ -26,7 +26,9 @@ void BeingOverPassedRight::update(MKCharacter * character, Events aEvent) {
         case ReceiveDuckingPunch:
             character->setState(new ReceivingDuckingPunch());
             break;
-
+        case OverPassedFinished:
+            character->setState(new CharacterStance());
+            break;
         default:
             break;
     }

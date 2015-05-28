@@ -105,11 +105,12 @@ public:
 
     void moveLeftFaster();
 
+    void setStopX(float x);
+
 private:
 
     // State
     CharacterState* state;
-
     double auxPosX;
     double posX;
     double posY;
@@ -131,6 +132,8 @@ private:
 
     string name;
 
+    float stopX;
+    void updateOverPassing();
     // Weapon
     Weapon* weapon;
 
