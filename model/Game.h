@@ -14,6 +14,7 @@
 #include "GameLoader.h"
 #include <math.h>
 #include <iostream>
+#include <SDL2/SDL_mixer.h>
 
 using namespace std;
 

@@ -14,6 +14,7 @@
 #include <string>
 #include <math.h>
 #include <map>
+#include <SDL2/SDL_mixer.h>
 
 using namespace std;
 
@@ -119,8 +120,10 @@ private:
 	void RestartAllRaidenSprites();
     Painter* painter;
 
+    Mix_Music* stageBackgroundMusic;
 
-    void loadAsRaiden();
+   // void loadAsRaiden();
+    void loadMusicAndSounds();
 };
 
 #endif /* GAMEVIEW_H_ */
