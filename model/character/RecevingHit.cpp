@@ -31,3 +31,6 @@ void RecevingHit::refreshTimer(MKCharacter* character) {
     this->timer -= 1;
 }
 
+bool RecevingHit::isReceivingHit() {
+	return true;
+}

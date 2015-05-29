@@ -4,20 +4,13 @@
 #include "../controller/InputController.h"
 #include "Text.h"
 
-GameView::GameView(float ScreenWidth, float ScreenHeight, MKCharacter* character, MKCharacter* character2, Stage* pStage, string OponentSide, Painter* painter) {
+GameView::GameView(SDL_Renderer* aRenderer, MKCharacter* character, MKCharacter* character2, Stage* pStage, string OponentSide, Painter* painter) {
 	oponentSide = OponentSide;
-	this->window = NULL;
-    this->window = SDL_CreateWindow("Mortal Kombat", 0, 0, (int) ScreenWidth, (int) ScreenHeight, SDL_WINDOW_SHOWN);
-    if (this->window == NULL) {
 
-        std::cout << "Window couldn't be created" << std::endl;
-    }
+    this->renderer = aRenderer;
 
-    this->renderer = NULL;
-    this->renderer = SDL_CreateRenderer(this->window, -1, SDL_RENDERER_TARGETTEXTURE);
-
-    this->screenWidth = ScreenWidth;
-    this->screenHeight = ScreenHeight;
+    this->screenWidth = Util::getInstance()->getWindowWidth();
+    this->screenHeight = Util::getInstance()->getWindowHeight();
     this->painter = painter;
     this->stage = pStage;
     this->scorpion = character;
@@ -112,8 +105,6 @@ GameView::~GameView() {
         Mix_FreeMusic( stageBackgroundMusic );
     stageBackgroundMusic = NULL;
 
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
 }
 
 void GameView::Render() {

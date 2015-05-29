@@ -21,10 +21,10 @@ using namespace std;
 class Game
 {
 public:
-    Game(GameLoader* aGameLoader, char* filePath);
+    Game(GameLoader* aGameLoader, SDL_Renderer* renderer);
     ~Game();
     bool GameLoop();
-    void initGame(char*);
+    void initGame(SDL_Renderer* renderer);
 
 private:
     void updateGameState();

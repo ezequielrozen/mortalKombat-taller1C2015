@@ -15,6 +15,7 @@ public:
     float getWidth();
 
     bool isJumping();
+    bool isReceivingHit();
 };
 
 

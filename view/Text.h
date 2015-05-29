@@ -7,6 +7,7 @@
 using namespace std;
 
 #include <SDL2/SDL_render.h>
+#include <string>
 
 class Text {
     public:

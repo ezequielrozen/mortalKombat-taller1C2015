@@ -14,6 +14,7 @@ public:
     float getWidth();
 
     void refreshTimer(MKCharacter *character);
+    bool isReceivingHit();
 
 private:
 

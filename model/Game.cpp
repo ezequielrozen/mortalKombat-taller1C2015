@@ -4,15 +4,15 @@
 #include "character/Victory.h"
 #include <SDL2/SDL_mixer.h>
 
-Game::Game(GameLoader* aGameLoader, char* filePath) {
+Game::Game(GameLoader* aGameLoader, SDL_Renderer* renderer) {
     this->gameLoader = aGameLoader;
-    this->initGame(filePath);
+    this->initGame(renderer);
 }
 
-void Game::initGame(char* filePath) {
-    this->gameLoader->loadJSON(filePath);
-    this->ScreenWidth = Util::getInstance()->getWindowWidth();
-    this->ScreenHeight = Util::getInstance()->getWindowHeight();
+void Game::initGame(SDL_Renderer* renderer) {
+    //this->gameLoader->loadJSON(filePath);
+    //this->ScreenWidth = Util::getInstance()->getWindowWidth();
+    //this->ScreenHeight = Util::getInstance()->getWindowHeight();
     this->stage = this->gameLoader->getStage();
     this->oponentSide = this->gameLoader->getOponentSide();
 
@@ -28,7 +28,7 @@ void Game::initGame(char* filePath) {
     this->raiden->setPosY(this->stage->getFloor());
     this->raiden->setStageFloor(this->stage->getFloor());
 
-    this->gameView = new GameView(ScreenWidth, ScreenHeight, scorpion, raiden, stage, oponentSide, this->gameLoader->getPainter());
+    this->gameView = new GameView(renderer, scorpion, raiden, stage, oponentSide, this->gameLoader->getPainter());
 //    this->gameController = new GameController();
 //    GameController::setVibrating(false);
     this->inputController = new InputController();
@@ -38,7 +38,6 @@ void Game::initGame(char* filePath) {
 }
 
 Game::~Game() {
-    delete gameLoader;
     delete gameView;
 //    delete gameController;
     delete inputController;

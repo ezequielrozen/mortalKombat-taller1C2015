@@ -18,6 +18,7 @@ public:
     virtual bool isHitting();
     virtual bool isBlocking();
     virtual bool isDucking();
+    virtual bool isReceivingHit();
     virtual float getWidth();
     virtual float getHeight();
     virtual string getName();

@@ -29,3 +29,7 @@ void ReceivingDuckingKick::refreshTimer(MKCharacter* character) {
 
     this->timer -= 1;
 }
+
+bool ReceivingDuckingKick::isReceivingHit() {
+	return true;
+}

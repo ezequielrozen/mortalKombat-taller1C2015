@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Game.h"
+#include "StageManager.h"
 
 using namespace std;
 
@@ -17,13 +17,11 @@ int main(int argc, char* argv[]) {
 
     while (restart) {
 
-        GameLoader* gameLoader = new GameLoader();
+        StageManager* stageManager = new StageManager(argv[1]);
 
-        Game* game = new Game(gameLoader, argv[1]);
+	    restart = stageManager->mainLoop();
 
-	    restart = game->GameLoop();
-
-	    delete game;
+	    delete stageManager;
 
     };
 

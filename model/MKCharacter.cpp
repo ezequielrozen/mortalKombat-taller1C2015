@@ -279,6 +279,10 @@ bool MKCharacter::isJumping() {
 	this->state->isJumping();
 }
 
+bool MKCharacter::isReceivingHit() {
+	this->state->isReceivingHit();
+}
+
 bool MKCharacter::isBeingOverPassedRight() {
 	return this->state->isBeingOverPassedRight();
 }

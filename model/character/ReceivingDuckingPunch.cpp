@@ -39,3 +39,7 @@ float ReceivingDuckingPunch::getJumpLevel() {
 float ReceivingDuckingPunch::getWidth() {
 	return 1.83;
 }
+
+bool ReceivingDuckingPunch::isReceivingHit() {
+    return true;
+}

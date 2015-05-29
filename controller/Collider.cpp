@@ -52,13 +52,14 @@ void Collider::checkHits(MKCharacter* character1, MKCharacter* character2) {
 	|| ((superpositionRight(character1->getWeapon(), character2) || superpositionLeft(character1->getWeapon(), character2)) && character1->getWeapon()->isActive() && superpositionDown(character1->getWeapon(), character2))){
 
 		if (character1->impacts()) {
-			if (character1->getState() == "DuckingKickHitting" || (!character2->isBlocking() && !character2->isDucking()) ||
+			if (character1->getState() == "DuckingKickHitting" || (!character2->isBlocking() && !character2->isDucking() && !character2->isReceivingHit()) ||
 				(character1->getWeapon()->isActive() && !character2->isDucking())) {
 				if (character1->getWeapon()->isActive()) {
 					character2->receiveBlow(DAMAGE.at("WeaponHitting"),0);
 					character1->getWeapon()->destroy();
 				} else {
 					character2->receiveBlow(DAMAGE.at(character1->getState()),0);
+					cout << "IMPACT" << endl;
 					if (character1->isJumping()) {
 						character1->disableImpact();
 					}

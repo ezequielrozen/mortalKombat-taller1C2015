@@ -32,6 +32,10 @@ bool CharacterState::isDucking() {
 	return false;
 }
 
+bool CharacterState::isReceivingHit() {
+	return false;
+}
+
 float CharacterState::getWidth() {
 	return 1;
 }

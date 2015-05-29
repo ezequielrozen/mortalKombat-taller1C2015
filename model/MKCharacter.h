@@ -30,6 +30,7 @@ public:
     bool isDucking();
     bool isBlocking();
     bool isJumping();
+    bool isReceivingHit();
     bool isBeingOverPassedRight();
     bool isBeingOverPassedLeft();
 

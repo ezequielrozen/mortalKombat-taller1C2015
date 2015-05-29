@@ -23,7 +23,7 @@ typedef std::map<std::string, CharacterSprite*> SpriteMap;
 class GameView
 {
 public:
-    GameView(float ScreenWidth, float ScreenHeight, MKCharacter* character, MKCharacter* character2,
+    GameView(SDL_Renderer* aRenderer, MKCharacter* character, MKCharacter* character2,
              Stage* stage, string OponentSide, Painter* painter);
     ~GameView();
     void Render();
@@ -109,7 +109,6 @@ private:
     LayerSprite** layerSprites;
     int layerCount;
 
-    SDL_Window* window;
     SDL_Renderer* renderer;
     float screenWidth;
     float screenHeight;
