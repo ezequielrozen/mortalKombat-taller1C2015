@@ -122,6 +122,7 @@ private:
 
     Mix_Music* stageBackgroundMusic;
 
+
    // void loadAsRaiden();
     void loadMusicAndSounds();
 };

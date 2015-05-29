@@ -101,7 +101,7 @@ void JoystickController::KeyUP_Left(unsigned char pressedAxis, int pressedAxisVa
 void JoystickController::update(MKCharacter *character, MKCharacter *character2, SDL_Event* mainEvent) {
     extern logger *Mylog;
     char mensaje[100];
-    SDL_PollEvent(mainEvent);
+//    SDL_PollEvent(mainEvent);
 
     unsigned char pressedButton = mainEvent->jbutton.button;
     unsigned  char pressedAxis = mainEvent->jaxis.axis;

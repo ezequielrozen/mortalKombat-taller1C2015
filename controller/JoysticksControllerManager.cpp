@@ -62,7 +62,7 @@ JoysticksControllerManager::~JoysticksControllerManager() {
 void JoysticksControllerManager::update(MKCharacter *character, MKCharacter *character2, SDL_Event* mainEvent) {
     extern logger *Mylog;
     char mensaje[100];
-    SDL_PollEvent(mainEvent);
+//    SDL_PollEvent(mainEvent);
 
     unsigned char pressedJoystick = mainEvent->jbutton.which;
     unsigned char pressedButton = mainEvent->jbutton.button;

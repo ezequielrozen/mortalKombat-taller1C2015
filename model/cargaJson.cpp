@@ -238,7 +238,7 @@ void loadPainter(Json::Value painterOptions, double& initialH, double& finalH, d
     finalH = painterOptions.isMember("h-final") && painterOptions["h-final"].isNumeric() &&
                       painterOptions["h-final"].asDouble() > 0 ? painterOptions["h-final"].asDouble() : -1;
     offset = painterOptions.isMember("desplazamiento") && painterOptions["desplazamiento"].isNumeric() &&
-                      painterOptions["desplazamiento"].asInt() >= 0 ? painterOptions["desplazamiento"].asInt() : -1;
+                      painterOptions["desplazamiento"].asInt() >= 0 ? painterOptions["desplazamiento"].asInt() : painterOptions["desplazamiento"].asInt();
 }
 
 void cargaPersonaje(Json::Value personaje, std::list<MKCharacter*>* characters, int characterNumber) {
