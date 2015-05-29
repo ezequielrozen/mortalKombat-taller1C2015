@@ -25,21 +25,21 @@ public:
 private:
 
 
-    int timer;
-    int timerChar2;
-    int hitTimer;
-    int hitTimerChar2;
-    int hitTimerRaidenShootCheck;
-    bool raidenShootTimeOutCompleted;
-    int hitTimerScorpionShootCheck;
-    bool scorpionShootTimeOutCompleted;
+//    int timer;
+//    int timerChar2;
+//    int hitTimer;
+//    int hitTimerChar2;
+//    int hitTimerRaidenShootCheck;
+//    bool raidenShootTimeOutCompleted;
+//    int hitTimerScorpionShootCheck;
+//    bool scorpionShootTimeOutCompleted;
 
-    SDL_Keycode previousKey;
-    SDL_Keycode previousKeyChar2;
+//    SDL_Keycode previousKey;
+//    SDL_Keycode previousKeyChar2;
     bool key_u_Released; //La uso para q no pueda volver a hacer el shoot sin soltar la tecla xq sino cdo esta cerca lo mata de una.
     bool key_e_Released; //La uso para q no pueda volver a hacer el shoot sin soltar la tecla xq sino cdo esta cerca lo mata de una.
 
-	void testElapsedTime(MKCharacter* character, MKCharacter* character2);
+//	void testElapsedTime(MKCharacter* character, MKCharacter* character2);
 
 };
 

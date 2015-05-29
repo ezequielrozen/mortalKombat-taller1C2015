@@ -13,8 +13,8 @@ KeyboardController::~KeyboardController(void)
 }
 
 
-void KeyboardController::testElapsedTime(MKCharacter* character, MKCharacter* character2) {
-}
+//void KeyboardController::testElapsedTime(MKCharacter* character, MKCharacter* character2) {
+//}
 
 
 void KeyboardController::update(MKCharacter* character, MKCharacter* character2, SDL_Event* mainEvent) {
@@ -96,7 +96,7 @@ void KeyboardController::update(MKCharacter* character, MKCharacter* character2,
 						}
 						break;
 			default:
-				previousKey = mainEvent->key.keysym.sym;
+//				previousKey = mainEvent->key.keysym.sym;
 				break;
 			}
 		break;

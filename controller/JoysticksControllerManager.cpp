@@ -84,9 +84,6 @@ void JoysticksControllerManager::update(MKCharacter *character, MKCharacter *cha
 		this->joystick1->update(character2, character, mainEvent);
 		break;
 	}
-
-
-
 }
 
 
