@@ -19,6 +19,7 @@
 #include "../model/MKCharacter.h"
 #include "../model/stage/Layer.h"
 #include "MKStageController.h"
+#include "AIController.h"
 
 class KeyboardController;
 class InputController {
@@ -33,6 +34,8 @@ public:
 	static bool isVibrating();
 	void setStageController(MKStageController* stageController);
 	void setCharacters(MKCharacter* character, MKCharacter* character2);
+	void enableAI();
+
 private:
 	JoysticksControllerManager* joystickControllerManager;
 	KeyboardController* keyboardController;
@@ -43,6 +46,8 @@ private:
 	MKStageController* stageController;
 	MKCharacter* character;
 	MKCharacter* character2;
+	AIController* aiController;
+	bool iaIsActive;
 };
 
 #endif

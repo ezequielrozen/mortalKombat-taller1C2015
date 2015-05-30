@@ -16,11 +16,12 @@ class ModeSelection
 public:
 	ModeSelection(SDL_Renderer* renderer, InputController* inputController);
 	~ModeSelection();
-	void loop();
+	GameModes loop();
 
 private:
 	ModeSelectionView* view;
 	InputController* inputController;
+	int peviousKey;
 };
 
 #endif // MODESELECTION_H

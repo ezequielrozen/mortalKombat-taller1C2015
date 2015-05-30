@@ -11,8 +11,10 @@ bool InputController::vibrating = false;
 InputController::InputController(MKStageController* stageController) {
 	this->mainEvent = new SDL_Event();
 	this->stageController = stageController;
+	this->iaIsActive = false;
 
 	this->keyboardController = new KeyboardController(stageController);
+	this->aiController = new AIController(stageController);
 	SDL_Init(SDL_INIT_JOYSTICK);
 	joystickConnected = false;
 	if (SDL_NumJoysticks() > 0)	{
@@ -27,6 +29,7 @@ InputController::~InputController() {
     	delete joystickControllerManager;
     delete mainEvent;
     delete this->keyboardController;
+	delete this->aiController;
 }
 
 SDL_Event* InputController::getEvent() {
@@ -59,12 +62,16 @@ void InputController::setCharacterSide()
 void InputController::update() {
 
 	this->setCharacterSide();
+	if (!this->iaIsActive) {
+		this->keyboardController->update(character, character2, this->getEvent());
+	}
 
-	this->keyboardController->update(character, character2, this->getEvent());
-
-	if(joystickConnected)
-	{
+	if (joystickConnected && !this->iaIsActive) {
 		this->joystickControllerManager->update(character, character2, this->getEvent());
+	}
+
+	if (this->iaIsActive) {
+		this->aiController->update(character, character2, this->getEvent());
 	}
 }
 
@@ -75,4 +82,8 @@ void InputController::setStageController(MKStageController *stageController) {
 void InputController::setCharacters(MKCharacter *character, MKCharacter *character2) {
 	this->character = character;
 	this->character2 = character2;
+}
+
+void InputController::enableAI() {
+	this->iaIsActive = true;
 }

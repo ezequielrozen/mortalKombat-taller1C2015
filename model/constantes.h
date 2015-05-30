@@ -115,4 +115,6 @@ enum Events { MoveRight, MoveLeft, Jump, Duck, WeaponHit, HighPunch, LowPunch, H
 	ReceiveDuckingPunch, ReceiveDuckingKick, ReceiveWeapon, MoveRightRelease, MoveLeftRelease, DuckRelease, BlockRelease,
 	JumpFinished, OverPassed, OverPassedFinished, FatalityHit, FatalityFire, ReceiveFire};
 
+enum GameModes { OneVsTwo, OneVsAI, Practice};
+
 #endif /* CONSTANTES_H_ */

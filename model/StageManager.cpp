@@ -40,7 +40,10 @@ StageManager::~StageManager() {
 
 bool StageManager::mainLoop() {
 
-	this->modeSelection->loop();
+	GameModes mode = this->modeSelection->loop();
+	if (mode == OneVsAI) {
+		this->inputController->enableAI();
+	}
 
 	setStageController(new CharacterSelectionController());
 	this->characterSelection->loop();

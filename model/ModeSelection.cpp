@@ -10,12 +10,22 @@ ModeSelection::~ModeSelection() {
 	delete view;
 }
 
-void ModeSelection::loop() {
+GameModes ModeSelection::loop() {
 
-	while (!(inputController->getEvent()->type == SDL_KEYDOWN && inputController->getEvent()->key.keysym.sym == SDLK_m) && inputController->getEvent()->type != SDL_QUIT) {
+	while ( inputController->getEvent()->type != SDL_QUIT) {
 		inputController->checkEvent();
 		inputController->update();
 		view->render();
+		//	Esto es temporal hasta que tengamos hecha la pantalla de seleccion de juego.
+		if (peviousKey == SDLK_a && inputController->getEvent()->key.keysym.sym == SDLK_a) {
+			return OneVsAI;
+		} else if (peviousKey == SDLK_s && inputController->getEvent()->key.keysym.sym == SDLK_a) {
+			return OneVsTwo;
+		} else if (peviousKey == SDLK_d && inputController->getEvent()->key.keysym.sym == SDLK_a) {
+			return Practice;
+		} else {
+			peviousKey = inputController->getEvent()->key.keysym.sym;
+		}
 	}
 
 }
