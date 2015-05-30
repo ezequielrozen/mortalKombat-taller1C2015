@@ -6,9 +6,9 @@
 #define MORTALKOMBAT_TALLER1C2015_MODESELECTIONCONTROLLER_H
 
 
-#include "MKStagaController.h"
+#include "MKStageController.h"
 
-class ModeSelectionController : public MKStagaController {
+class ModeSelectionController : public MKStageController {
 public:
     ModeSelectionController();
     ~ModeSelectionController();

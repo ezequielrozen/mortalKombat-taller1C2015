@@ -2,7 +2,7 @@
 
 ModeSelection::ModeSelection(SDL_Renderer* renderer) {
 	this->view = new ModeSelectionView(renderer);
-	this->inputController = new InputController();
+	this->inputController = new InputController(new EventController());
 }
 
 ModeSelection::~ModeSelection() {

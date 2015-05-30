@@ -1,16 +1,14 @@
 #include "KeyboardController.h"
 #include "InputController.h"
-#include "EventController.h"
 
-KeyboardController::KeyboardController()  {
+KeyboardController::KeyboardController(MKStageController* stageController)  {
 	key_u_Released = true;
 	key_e_Released = true;
-	this->eventController = new EventController();
+	this->stageController = stageController;
 
 }
 
 KeyboardController::~KeyboardController(void) {
-	delete this->eventController;
 }
 
 
@@ -24,78 +22,96 @@ void KeyboardController::update(MKCharacter* character, MKCharacter* character2,
     	case SDL_KEYDOWN:
 			switch(mainEvent->key.keysym.sym) {
 			case SDLK_RIGHT:
-						this->eventController->moveRight(character, character2);
-						break;
+				this->stageController->setCharacterToMove(character);
+				this->stageController->moveRight();
+				break;
 			case SDLK_LEFT:
-						this->eventController->moveLeft(character, character2);
-						break;
+				this->stageController->setCharacterToMove(character);
+				this->stageController->moveLeft();
+				break;
 			case SDLK_UP:
-						this->eventController->moveUp(character, character2);
-						break;
+				this->stageController->setCharacterToMove(character);
+				this->stageController->moveUp();
+				break;
 			case SDLK_DOWN:
-						this->eventController->moveDown(character, character2);
-						break;
+				this->stageController->setCharacterToMove(character);
+				this->stageController->moveDown();
+				break;
 			case SDLK_k:
-						this->eventController->highKick(character, character2);
-						break;
+				this->stageController->setCharacterToMove(character);
+				this->stageController->highKick();
+				break;
 			case SDLK_l:
-						this->eventController->lowKick(character, character2);
-						break;
+				this->stageController->setCharacterToMove(character);
+				this->stageController->lowKick();
+				break;
 			case SDLK_p:
-						this->eventController->highPunch(character, character2);
-						break;
+				this->stageController->setCharacterToMove(character);
+				this->stageController->highPunch();
+				break;
 			case SDLK_i:
-						this->eventController->lowPunch(character, character2);
-						break;
+				this->stageController->setCharacterToMove(character);
+				this->stageController->lowPunch();
+				break;
 			case SDLK_b:
-						this->eventController->block(character, character2);
-						break;
+				this->stageController->setCharacterToMove(character);
+				this->stageController->block();
+				break;
 			case SDLK_u:
-						if (key_u_Released)
-						{
-							key_u_Released = false;
-							this->eventController->shoot(character, character2);
-						}
-						break;
+				if (key_u_Released) {
+					key_u_Released = false;
+					this->stageController->setCharacterToMove(character);
+					this->stageController->shoot();
+				}
+				break;
 			/****************************************************************************************************/
 
 			case SDLK_d:
-						this->eventController->moveRight(character2, character);
-						break;
+				this->stageController->setCharacterToMove(character2);
+				this->stageController->moveRight();
+				break;
 
 			case SDLK_a:
-						this->eventController->moveLeft(character2, character);
-						break;
+				this->stageController->setCharacterToMove(character2);
+				this->stageController->moveLeft();
+				break;
 			case SDLK_w:
-						this->eventController->moveUp(character2, character);
-						break;
+				this->stageController->setCharacterToMove(character2);
+				this->stageController->moveUp();
+				break;
 			case SDLK_z:
-						this->eventController->moveDown(character2, character);
-						break;
+				this->stageController->setCharacterToMove(character2);
+				this->stageController->moveDown();
+				break;
 
 			case SDLK_f:
-						this->eventController->highKick(character2, character);
-						break;
+				this->stageController->setCharacterToMove(character2);
+				this->stageController->highKick();
+				break;
 			case SDLK_g:
-						this->eventController->lowKick(character2, character);
-						break;
+				this->stageController->setCharacterToMove(character2);
+				this->stageController->lowKick();
+				break;
 			case SDLK_c:
-						this->eventController->highPunch(character2, character);
-						break;
+				this->stageController->setCharacterToMove(character2);
+				this->stageController->highPunch();
+				break;
 			case SDLK_v:
-						this->eventController->lowPunch(character2, character);
-						break;
+				this->stageController->setCharacterToMove(character2);
+				this->stageController->lowPunch();
+				break;
 			case SDLK_x:
-						this->eventController->block(character2, character);
-						break;
+				this->stageController->setCharacterToMove(character2);
+				this->stageController->block();
+				break;
 
 			case SDLK_e:
-						if (key_e_Released)
-						{
-							key_e_Released = false;
-							this->eventController->shoot(character2, character);
-						}
-						break;
+				if (key_e_Released) {
+					key_e_Released = false;
+					this->stageController->setCharacterToMove(character2);
+					this->stageController->shoot();
+				}
+				break;
 			default:
 //				previousKey = mainEvent->key.keysym.sym;
 				break;
@@ -105,16 +121,20 @@ void KeyboardController::update(MKCharacter* character, MKCharacter* character2,
 		case SDL_KEYUP:
 			switch(mainEvent->key.keysym.sym){
 				case SDLK_DOWN:
-					this->eventController->moveDownRelease(character, character2);
+					this->stageController->setCharacterToMove(character);
+					this->stageController->moveDownRelease();
 					break;
 				case SDLK_RIGHT:
-					this->eventController->moveRightRelease(character, character2);
+					this->stageController->setCharacterToMove(character);
+					this->stageController->moveRightRelease();
 					break;
 				case SDLK_LEFT:
-					this->eventController->moveLeftRelease(character, character2);
+					this->stageController->setCharacterToMove(character);
+					this->stageController->moveLeftRelease();
 					break;
 				case SDLK_b:
-					this->eventController->blockRelease(character, character2);
+					this->stageController->setCharacterToMove(character);
+					this->stageController->blockRelease();
 					break;
 				case SDLK_u:
 					key_u_Released = true;
@@ -122,16 +142,17 @@ void KeyboardController::update(MKCharacter* character, MKCharacter* character2,
 
 
 				case SDLK_z:
-					this->eventController->moveDownRelease(character2, character);
+					this->stageController->setCharacterToMove(character2);
+					this->stageController->moveDownRelease();
 					break;
 				case SDLK_d:
-					this->eventController->moveRightRelease(character2, character);
+					this->stageController->moveRightRelease();
 					break;
 				case SDLK_a:
-					this->eventController->moveLeftRelease(character2, character);
+					this->stageController->moveLeftRelease();
 					break;
 				case SDLK_x:
-					this->eventController->blockRelease(character2, character);
+					this->stageController->blockRelease();
 					break;
 				case SDLK_e:
 					key_e_Released = true;

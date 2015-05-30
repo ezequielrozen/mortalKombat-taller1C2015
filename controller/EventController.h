@@ -15,35 +15,37 @@
 #include <bits/stl_list.h>
 #include "../model/MKCharacter.h"
 #include "../model/stage/Layer.h"
+#include "MKStageController.h"
 
 using namespace std;
 
-class EventController {
+class EventController : public MKStageController {
 
 
 public:
 	EventController();
 	virtual ~EventController();
-	void moveRight(MKCharacter*, MKCharacter*);
-	void moveLeft(MKCharacter*, MKCharacter*);
-	void moveUp(MKCharacter*, MKCharacter*);
-	void moveDown(MKCharacter*, MKCharacter*);
-	void highKick(MKCharacter*, MKCharacter*);
-	void lowKick(MKCharacter*, MKCharacter*);
-	void highPunch(MKCharacter*, MKCharacter*);
-	void lowPunch(MKCharacter*, MKCharacter*);
-	void shoot(MKCharacter*, MKCharacter*);
-	void block(MKCharacter*, MKCharacter*);
-	void duckPunch(MKCharacter*, MKCharacter*);
+	void moveRight();
+	void moveLeft();
+	void moveUp();
+	void moveDown();
+	void highKick();
+	void lowKick();
+	void highPunch();
+	void lowPunch();
+	void shoot();
+	void block();
+	void duckPunch();
 
-	void moveLeftRelease(MKCharacter*, MKCharacter*);
-	void moveRightRelease(MKCharacter*, MKCharacter*);
-	void moveDownRelease(MKCharacter*, MKCharacter*);
-	void blockRelease(MKCharacter*, MKCharacter*);
+	void moveLeftRelease();
+	void moveRightRelease();
+	void moveDownRelease();
+	void blockRelease();
 
-
+	void setCharacterToMove(MKCharacter* character);
 private:
 	static void Void();
+	MKCharacter* characterToMove;
 
 
 };

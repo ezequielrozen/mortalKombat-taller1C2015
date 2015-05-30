@@ -10,7 +10,7 @@
 #include "InputController.h"
 #include "EventController.h"
 
-JoysticksControllerManager::JoysticksControllerManager() {
+JoysticksControllerManager::JoysticksControllerManager(MKStageController* stageController) {
 	joystickOne = NULL;
 	joystickTwo = NULL;
 	extern logger* Mylog;
@@ -18,13 +18,14 @@ JoysticksControllerManager::JoysticksControllerManager() {
 	char mensaje[100];
 	sprintf(mensaje, "Joysticks conectados: %d", SDL_NumJoysticks());
 	Mylog->Log(mensaje, ERROR_LEVEL_INFO);
+    this->stageController = stageController;
 
     switch (SDL_NumJoysticks()) {
         case 1:
             this->joystickOne = SDL_JoystickOpen(0);
             Mylog->Log(SDL_JoystickName(joystickOne), ERROR_LEVEL_INFO);
             cout << SDL_JoystickName(joystickOne) << endl;
-            joystick0 = new JoystickController(0);
+            joystick0 = new JoystickController(0, stageController);
             joystickCount = 1;
             SDL_JoystickEventState(SDL_ENABLE);
             break;
@@ -36,8 +37,8 @@ JoysticksControllerManager::JoysticksControllerManager() {
             cout << SDL_JoystickName(joystickOne) << endl;
             cout << SDL_JoystickName(joystickTwo) << endl;
 
-            joystick0 = new JoystickController(0);
-            joystick1 = new JoystickController(1);
+            joystick0 = new JoystickController(0, stageController);
+            joystick1 = new JoystickController(1, stageController);
             joystickCount = 2;
             SDL_JoystickEventState(SDL_ENABLE);
             break;
@@ -78,9 +79,11 @@ void JoysticksControllerManager::update(MKCharacter *character, MKCharacter *cha
 
 	switch(pressedJoystick){
 	case 0:
-		this->joystick0->update(character, character2, mainEvent);
+		this->stageController->setCharacterToMove(character);
+        this->joystick0->update(character, character2, mainEvent);
 		break;
 	case 1:
+        this->stageController->setCharacterToMove(character2);
 		this->joystick1->update(character2, character, mainEvent);
 		break;
 	}

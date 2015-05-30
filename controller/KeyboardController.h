@@ -17,7 +17,7 @@ using namespace std;
 class KeyboardController
 {
 public:
-    KeyboardController();
+    KeyboardController(MKStageController* stageController);
 
     ~KeyboardController(void);
 
@@ -41,7 +41,7 @@ private:
     bool key_e_Released; //La uso para q no pueda volver a hacer el shoot sin soltar la tecla xq sino cdo esta cerca lo mata de una.
 
 //	void testElapsedTime(MKCharacter* character, MKCharacter* character2);
-    EventController* eventController;
+    MKStageController* stageController;
 
 };
 

@@ -18,11 +18,12 @@
 #include <bits/stl_list.h>
 #include "../model/MKCharacter.h"
 #include "../model/stage/Layer.h"
+#include "MKStageController.h"
 
 class KeyboardController;
 class InputController {
 public:
-	InputController();
+	InputController(MKStageController* stageController);
 	virtual ~InputController();
 	void update(MKCharacter* character, MKCharacter* character2);
 	void checkEvent();
@@ -30,6 +31,7 @@ public:
 
 	static void setVibrating(bool vibratingFlag);
 	static bool isVibrating();
+	void setStageController(MKStageController* stageController);
 private:
 	JoysticksControllerManager* joystickControllerManager;
 	KeyboardController* keyboardController;
@@ -37,6 +39,7 @@ private:
     bool joystickConnected;
     static bool vibrating;
 	void setCharacterSide(MKCharacter* character, MKCharacter* character2);
+	MKStageController* stageController;
 };
 
 #endif

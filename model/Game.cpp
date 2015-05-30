@@ -4,12 +4,12 @@
 #include "character/Victory.h"
 #include <SDL2/SDL_mixer.h>
 
-Game::Game(GameLoader* aGameLoader, SDL_Renderer* renderer) {
+Game::Game(GameLoader* aGameLoader, SDL_Renderer* renderer, InputController* inputController) {
     this->gameLoader = aGameLoader;
-    this->initGame(renderer);
+    this->initGame(renderer, inputController);
 }
 
-void Game::initGame(SDL_Renderer* renderer) {
+void Game::initGame(SDL_Renderer* renderer, InputController* inputController) {
     //this->gameLoader->loadJSON(filePath);
     //this->ScreenWidth = Util::getInstance()->getWindowWidth();
     //this->ScreenHeight = Util::getInstance()->getWindowHeight();
@@ -29,9 +29,7 @@ void Game::initGame(SDL_Renderer* renderer) {
     this->raiden->setStageFloor(this->stage->getFloor());
 
     this->gameView = new GameView(renderer, scorpion, raiden, stage, oponentSide, this->gameLoader->getPainter());
-//    this->gameController = new GameController();
-//    GameController::setVibrating(false);
-    this->inputController = new InputController();
+    this->inputController = inputController;
     InputController::setVibrating(false);
     this->cameraController = new CameraController();
     this->collider = new Collider();
@@ -39,8 +37,6 @@ void Game::initGame(SDL_Renderer* renderer) {
 
 Game::~Game() {
     delete gameView;
-//    delete gameController;
-    delete inputController;
     delete cameraController;
     delete collider;
 }

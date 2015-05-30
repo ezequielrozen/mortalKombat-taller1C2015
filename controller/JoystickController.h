@@ -14,7 +14,7 @@ using namespace std;
 class JoystickController
 {
 public:
-    JoystickController(char);
+    JoystickController(char, MKStageController* stageController);
     ~JoystickController(void);
 
     void update(MKCharacter* character, MKCharacter* character2, SDL_Event* joystickEvent);
@@ -51,6 +51,7 @@ private:
 	void KeyUP_Down(unsigned char pressedAxis, int pressedAxisValue,bool printCout, MKCharacter* character, MKCharacter* character2);
 	void KeyUP_Left(unsigned char pressedAxis, int pressedAxisValue,bool printCout, MKCharacter* character, MKCharacter* character2);
 
-    EventController* eventController;
+    MKStageController* stageController;
+    MKCharacter* characterToMove;
 };
 #endif //MORTALKOMBAT_TALLER1C2015_JOYSTICKCONTROLLER_H

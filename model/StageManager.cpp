@@ -14,10 +14,11 @@ StageManager::StageManager(char* filePath) {
 
     this->renderer = NULL;
     this->renderer = SDL_CreateRenderer(this->window, -1, SDL_RENDERER_TARGETTEXTURE);
-
 	this->modeSelection = new ModeSelection(this->renderer);
     this->characterSelection = new CharacterSelection(this->renderer);
-    this->game = new Game(this->gameLoader, this->renderer);
+	this->stageController = new EventController(); // ACÁ DEBERÍA IR EL CONTROLLER CORRESPONDIENTE A LA PRIMERA PANTALLA, ES DECIR, EL MKStageController
+	this->inputController = new InputController(stageController);
+	this->game = new Game(this->gameLoader, this->renderer, this->inputController);
 
 }
 
@@ -29,6 +30,9 @@ StageManager::~StageManager() {
 
     SDL_DestroyWindow(this->window);
     SDL_DestroyRenderer(this->renderer);
+
+	delete this->stageController;
+	delete this->inputController;
 }
 
 bool StageManager::mainLoop() {

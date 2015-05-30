@@ -8,14 +8,15 @@
 #include "InputController.h"
 bool InputController::vibrating = false;
 
-InputController::InputController() {
+InputController::InputController(MKStageController* stageController) {
 	this->mainEvent = new SDL_Event();
-	this->keyboardController = new KeyboardController();
+	this->stageController = stageController;
 
+	this->keyboardController = new KeyboardController(stageController);
 	SDL_Init(SDL_INIT_JOYSTICK);
 	joystickConnected = false;
 	if (SDL_NumJoysticks() > 0)	{
-		this->joystickControllerManager = new JoysticksControllerManager();
+		this->joystickControllerManager = new JoysticksControllerManager(stageController);
 		joystickConnected = true;
 	}
 
@@ -67,3 +68,6 @@ void InputController::update(MKCharacter* character, MKCharacter* character2) {
 	}
 }
 
+void InputController::setStageController(MKStageController *stageController) {
+	this->stageController = stageController;
+}

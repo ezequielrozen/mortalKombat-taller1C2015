@@ -18,88 +18,92 @@ EventController::~EventController() {
 }
 void EventController::Void(){}
 
-void EventController::moveRight(MKCharacter* characterToMove, MKCharacter* character2){
-//	cout << "moveRight : " << characterToMove->getName() << endl;
+void EventController::setCharacterToMove(MKCharacter* character) {
+	this->characterToMove = character;
+}
+
+void EventController::moveRight(){
+//	cout << "moveRight : " << this->characterToMove->getName() << endl;
 	Mylog->Log("movimiento del personaje: hacia la derecha", ERROR_LEVEL_INFO);
-	characterToMove->update(MoveRight);
+	this->characterToMove->update(MoveRight);
 }
 
-void EventController::moveRightRelease(MKCharacter* characterToMove, MKCharacter* character2){
-//	cout << "moveRightRelease : " << characterToMove->getName() << endl;
-	characterToMove->update(MoveRightRelease);
+void EventController::moveRightRelease(){
+//	cout << "moveRightRelease : " << this->characterToMove->getName() << endl;
+	this->characterToMove->update(MoveRightRelease);
 }
 
-void EventController::moveLeft(MKCharacter* characterToMove, MKCharacter* character2){
-//	cout << "moveLeft : " << characterToMove->getName() << endl;
+void EventController::moveLeft(){
+//	cout << "moveLeft : " << this->characterToMove->getName() << endl;
 	Mylog->Log("movimiento del personaje: hacia la Izquierda", ERROR_LEVEL_INFO);
-	characterToMove->update(MoveLeft);
+	this->characterToMove->update(MoveLeft);
 }
 
-void EventController::moveLeftRelease(MKCharacter* characterToMove, MKCharacter* character2){
-//	cout << "moveLeftRelease : " << characterToMove->getName() << endl;
-	characterToMove->update(MoveLeftRelease);
+void EventController::moveLeftRelease(){
+//	cout << "moveLeftRelease : " << this->characterToMove->getName() << endl;
+	this->characterToMove->update(MoveLeftRelease);
 }
 
-void EventController::moveUp(MKCharacter* characterToMove, MKCharacter* character2){
-//	cout << "moveUp : " << characterToMove->getName() << endl;
+void EventController::moveUp(){
+//	cout << "moveUp : " << this->characterToMove->getName() << endl;
 	Mylog->Log("movimiento del personaje: hacia arriba", ERROR_LEVEL_INFO);
-	characterToMove->update(Jump);
+	this->characterToMove->update(Jump);
 }
 
-void EventController::moveDown(MKCharacter* character, MKCharacter* character2){
-//	cout << "moveDown : " << character->getName() << endl;
+void EventController::moveDown(){
+//	cout << "moveDown : " << this->characterToMovegetName() << endl;
 	Mylog->Log("movimiento del personaje: agachandose", ERROR_LEVEL_INFO);
-	character->update(Duck);
+	this->characterToMove->update(Duck);
 }
 
-void EventController::moveDownRelease(MKCharacter* characterToMove, MKCharacter* character2){
-//	cout << "moveDownRelease : " << characterToMove->getName() << endl;
+void EventController::moveDownRelease(){
+//	cout << "moveDownRelease : " << this->this->characterToMoveToMove->getName() << endl;
 	Mylog->Log("movimiento del personaje: Levantandose", ERROR_LEVEL_INFO);
-	characterToMove->update(DuckRelease);
+	this->characterToMove->update(DuckRelease);
 }
 
-void EventController::highKick(MKCharacter* character, MKCharacter* character2){
-//	cout << "highKick : " << character->getName() << endl;
+void EventController::highKick(){
+//	cout << "highKick : " << this->characterToMove->getName() << endl;
 	Mylog->Log("movimiento del personaje: Patada alta", ERROR_LEVEL_INFO);
-	character->update(HighKick);
+	this->characterToMove->update(HighKick);
 }
 
-void EventController::lowKick(MKCharacter* character, MKCharacter* character2){
-//	cout << "lowKick : " << character->getName() << endl;
+void EventController::lowKick(){
+//	cout << "lowKick : " << this->characterToMove->getName() << endl;
 	Mylog->Log("movimiento del personaje: Patada baja", ERROR_LEVEL_INFO);
-	character->update(LowKick);
+	this->characterToMove->update(LowKick);
 }
 
-void EventController::highPunch(MKCharacter* character, MKCharacter* character2){
-//	cout << "highPunch : " << character->getName() << endl;
+void EventController::highPunch(){
+//	cout << "highPunch : " << this->characterToMovegetName() << endl;
 	Mylog->Log("movimiento del personaje: Golpe de puño alto.", ERROR_LEVEL_INFO);
-	character->update(HighPunch);
+	this->characterToMove->update(HighPunch);
 }
 
-void EventController::lowPunch(MKCharacter* character, MKCharacter* character2){
+void EventController::lowPunch(){
 //	cout << "lowPunch : " << character->getName() << endl;
 	Mylog->Log("movimiento del personaje: Golpe de puño bajo.", ERROR_LEVEL_INFO);
-	character->update(LowPunch);
+	this->characterToMove->update(LowPunch);
 }
 
-void EventController::shoot(MKCharacter* character, MKCharacter* character2){
-//	cout << "shoot : " << character->getName() << endl;
+void EventController::shoot(){
+//	cout << "shoot : " << this->characterToMove->getName() << endl;
 	Mylog->Log("movimiento del personaje: Disparando.", ERROR_LEVEL_INFO);
-	character->update(WeaponHit);
+	this->characterToMove->update(WeaponHit);
 }
 
-void EventController::block(MKCharacter* character, MKCharacter* character2){
-//	cout << "block : " << character->getName() << endl;
+void EventController::block(){
+//	cout << "block : " << this->characterToMove->getName() << endl;
 	Mylog->Log("movimiento del personaje: Defensa.", ERROR_LEVEL_INFO);
-	character->update(Block);
+	this->characterToMove->update(Block);
 }
 
-void EventController::blockRelease(MKCharacter* character, MKCharacter* character2){
-//	cout << "blockRelease : " << character->getName() << endl;
-	character->update(BlockRelease);
+void EventController::blockRelease(){
+//	cout << "blockRelease : " << this->characterToMove->getName() << endl;
+	this->characterToMove->update(BlockRelease);
 }
 
-void EventController::duckPunch(MKCharacter* character, MKCharacter* character2){
-//	cout << "duckPunch : " << character->getName() << endl;
-//	character->update(DuckPunch);
+void EventController::duckPunch(){
+//	cout << "duckPunch : " << this->characterToMove->getName() << endl;
+//	this->characterToMove->update(DuckPunch);
 }

@@ -16,7 +16,7 @@ using namespace std;
 
 class JoysticksControllerManager {
 public:
-	JoysticksControllerManager();
+	JoysticksControllerManager(MKStageController* stageController);
 	virtual ~JoysticksControllerManager();
 	void update(MKCharacter* character, MKCharacter* character2, SDL_Event* joystickEvent);
 	SDL_Event* getEvent();
@@ -27,5 +27,6 @@ private:
 	JoystickController* joystick0;
 	JoystickController* joystick1;
 	int joystickCount;
+	MKStageController* stageController;
 };
 #endif

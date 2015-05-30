@@ -29,6 +29,8 @@ private:
     GameLoader* gameLoader;
     ModeSelection* modeSelection;
     CharacterSelection* characterSelection;
+    InputController* inputController;
+    MKStageController* stageController;
 };
 
 #endif // STAGEMANAGER_H
