@@ -19,9 +19,9 @@ GameModes ModeSelection::loop() {
 		//	Esto es temporal hasta que tengamos hecha la pantalla de seleccion de juego.
 		if (peviousKey == SDLK_a && inputController->getEvent()->key.keysym.sym == SDLK_a) {
 			return OneVsAI;
-		} else if (peviousKey == SDLK_s && inputController->getEvent()->key.keysym.sym == SDLK_a) {
+		} else if (peviousKey == SDLK_s && inputController->getEvent()->key.keysym.sym == SDLK_s) {
 			return OneVsTwo;
-		} else if (peviousKey == SDLK_d && inputController->getEvent()->key.keysym.sym == SDLK_a) {
+		} else if (peviousKey == SDLK_d && inputController->getEvent()->key.keysym.sym == SDLK_d) {
 			return Practice;
 		} else {
 			peviousKey = inputController->getEvent()->key.keysym.sym;
