@@ -5,6 +5,7 @@
 MKCharacter::MKCharacter(float initialPosX, float ancho, float alto, int z_index, int pCharacterNumber, string name) {
 
 	this->weapon = new Weapon(ancho*0.97, alto*0.36);
+	this->weaponFire = new Weapon(ancho*0.97, alto*0.36);
 	this->state = new CharacterStance();
 	this->z_index = z_index;
 	posX = initialPosX;
@@ -30,6 +31,7 @@ MKCharacter::MKCharacter(float initialPosX, float ancho, float alto, int z_index
 MKCharacter::~MKCharacter(void) {
 	delete this->state;
 	delete this->weapon;
+	delete this->weaponFire;
 }
 
 void MKCharacter::move() {
@@ -49,13 +51,19 @@ void MKCharacter::characterUpdate() {
 	this->updateOverPassing();
 
 	this->state->refreshTimer(this);
+
 	if (this->state->startThrowing() && !this->weapon->isActive()) {
 		throwWeapon();
 	}
-
 	this->weapon->update();
 
-	//cout << this->getStagePosX() << endl;
+
+//	if (this->state->startThrowingFire() && !this->weaponFire->isActive()) {
+//		throwWeaponFire();
+//	}
+//	this->weaponFire->updateFire();
+
+//	cout << this->getStagePosX() << endl;
 	
 }
 
@@ -353,7 +361,22 @@ void MKCharacter::throwWeapon() {
 	}
 }
 
+Weapon *MKCharacter::getWeaponFire() {
+	return this->weaponFire;
+}
 
+void MKCharacter::throwWeaponFire() {
+	if (this->getCharacterSide() == 'l') {
+		this->weaponFire->throwWeapon(this->posX,
+								  this->posY + this->getHeight() * 0.2,
+								  this->getCharacterSide());
+	}
+	else {
+		this->weaponFire->throwWeapon(this->posX,
+								this->posY + this->getHeight()*0.2,
+								this->getCharacterSide());
+	}
+}
 
 void MKCharacter::disableImpact() {
 	this->state->disableImpact(this);

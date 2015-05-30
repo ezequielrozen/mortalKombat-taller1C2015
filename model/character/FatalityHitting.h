@@ -16,11 +16,12 @@ public:
 	virtual ~FatalityHitting();
 	string getName();
 	void refreshTimer(MKCharacter* character);
-	bool startThrowing();
+	bool startThrowingFire();
 	float getWidth();
 	float getHeight();
 private:
 	int timer;
+	bool startThrow;
 };
 
 #endif /* FATALITYHITTING_H_ */

@@ -10,6 +10,7 @@
 
 FatalityHitting::FatalityHitting() {
 	this->timer = 60;
+	startThrow = false;
 
 }
 
@@ -22,17 +23,15 @@ string FatalityHitting::getName() {
 
 void FatalityHitting::refreshTimer(MKCharacter* character) {
 
-//	if (this->timer == 0) {
-//		character->setState(new CharacterStance());
-////		cout << "stance " << endl;
-//		this->timer = 60;
-//	}
-//
-//	this->timer -= 1;
+	if (this->timer == 0) {
+		startThrow = true;
+	}
+
+	this->timer -= 1;
 }
 
-bool FatalityHitting::startThrowing() {
-	return false;
+bool FatalityHitting::startThrowingFire() {
+	return startThrow;
 }
 
 float FatalityHitting::getWidth() {

@@ -25,6 +25,7 @@ public:
     virtual float getJumpLevel();
     virtual void refreshTimer(MKCharacter* character);
     virtual bool startThrowing();
+    virtual bool startThrowingFire();
     virtual void disableImpact(MKCharacter* character);
 
     virtual bool impact();

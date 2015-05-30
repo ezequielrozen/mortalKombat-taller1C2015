@@ -398,9 +398,16 @@ void GameView::runCharacter(MKCharacter* character1, MKCharacter* character2, Sp
         shootChar = characterSprites.at("WeaponHitting");
         shootChar->PlayShoot2(6.66*GAMEDELAY, character1->getWeapon()->getWidth(), character1->getWeapon()->getHeight());
     }
-    else {
-        shootChar = NULL;
+    else if (character1->getWeaponFire()->isActive()) {
+		shootChar = characterSprites.at("FireHitting");
+		shootChar->PlayShootFire(6.66*GAMEDELAY, character1->getWeaponFire()->getWidth(), character1->getWeaponFire()->getHeight());
     }
+	else {
+		shootChar = NULL;
+	}
+
+
+
 
     if(character1->getX() < character2->getX()) {
         sprite->switchSide('r');

@@ -14,6 +14,7 @@ public:
     Weapon(float width, float height);
     ~Weapon();
     void update();
+    void updateFire();
     bool isActive();
     void destroy();
     float getPositionX();

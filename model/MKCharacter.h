@@ -96,6 +96,10 @@ public:
 
     void throwWeapon();
 
+    Weapon* getWeaponFire();
+
+    void throwWeaponFire();
+
     float getStateHeight();
 
     void disableImpact();
@@ -137,6 +141,7 @@ private:
     void updateOverPassing();
     // Weapon
     Weapon* weapon;
+    Weapon* weaponFire;
 
 };
 

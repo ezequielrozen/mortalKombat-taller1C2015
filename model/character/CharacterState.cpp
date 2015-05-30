@@ -61,6 +61,10 @@ bool CharacterState::startThrowing() {
 	return false;
 }
 
+bool CharacterState::startThrowingFire() {
+	return false;
+}
+
 float CharacterState::getHeight() {
 	return 1;
 }
