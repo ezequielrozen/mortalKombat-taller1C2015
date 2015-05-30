@@ -1,10 +1,3 @@
-/*
- * EventController.cpp
- *
- *  Created on: 16/05/2015
- *      Author: her
- */
-
 #include "EventController.h"
 #include "InputController.h" //Esto esta solamanete por el metodo setCharacterSide que se deberia qitar de aca
 extern logger* Mylog;

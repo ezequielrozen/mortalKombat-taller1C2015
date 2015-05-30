@@ -34,13 +34,15 @@ public:
                                   CharacterSprite*& highPunch,CharacterSprite*& lowPunch, CharacterSprite*& winner,
                                   CharacterSprite*& shoot, CharacterSprite*& dizzy,  CharacterSprite*& fall, CharacterSprite*& beingHit,
                                   CharacterSprite*& beingHitDown, CharacterSprite*& blockDown,
-                                  CharacterSprite*& block, bool colorAltered);
+                                  CharacterSprite*& block,CharacterSprite*& fatalityHit, CharacterSprite*& fatalityFire, CharacterSprite*& onFire,
+                                  bool colorAltered);
     void loadAsRaiden(CharacterSprite*& walk, CharacterSprite*& stance, CharacterSprite*& jump, CharacterSprite*& sideJump,
 								CharacterSprite*& duck, CharacterSprite*& highKick, CharacterSprite*& lowKick, CharacterSprite*& dukKick,
 								CharacterSprite*& punchJump, CharacterSprite*& duckPunch,CharacterSprite*& jumpKick, CharacterSprite*& highPunch,
 								CharacterSprite*& lowPunch, CharacterSprite*& winner,
 								CharacterSprite*& shoot,  CharacterSprite*& dizzy, CharacterSprite*& fall,
 								CharacterSprite*& beingHit, CharacterSprite*& beingHitDown, CharacterSprite*& blockDown, CharacterSprite*& block,
+								CharacterSprite*& fatalityHit, CharacterSprite*& fatalityFire, CharacterSprite*& onFire,
 								bool colorAltered);
     void startRender();
     void endRender();
@@ -82,6 +84,9 @@ private:
     CharacterSprite* scorpionBlockDown;
     CharacterSprite* scorpionBlock;
 
+    CharacterSprite* scorpionFatalityHit;
+    CharacterSprite* scorpionFatalityFire;
+    CharacterSprite* scorpionOnFire;
 
     CharacterSprite* raidenWalk;
     CharacterSprite* raidenStance;
@@ -104,7 +109,9 @@ private:
     CharacterSprite* raidenBeingHitDown;
     CharacterSprite* raidenBlockDown;
     CharacterSprite* raidenBlock;
-
+    CharacterSprite* raidenFatalityHit;
+    CharacterSprite* raidenFatalityFire;
+    CharacterSprite* raidenOnFire;
 
     LayerSprite** layerSprites;
     int layerCount;

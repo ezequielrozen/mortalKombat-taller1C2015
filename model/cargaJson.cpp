@@ -151,12 +151,6 @@ bool cargaArchivoJSON(char* filename, float &stageWidth, float &stageHeight, flo
 //                index2++;
             }
         }
-//        for ( unsigned int index = 0; index < personaje.size(); index++ ){
-//            if(index != j1elige && index != j2elige){
-//                cargaPersonaje(personaje[index], characters, index2);
-//                index2++;
-//            }
-//        }
     }else{
         //CARGAR POR DEFAULT
         cargaPersonaje(root, characters, 0); //root tiene escenario, capas, personaje, etc.
@@ -265,6 +259,9 @@ void cargaPersonaje(Json::Value personaje, std::list<MKCharacter*>* characters, 
     char* filenameBeingHitDown = new char[200];
     char* filenameBlock = new char[200];
     char* filenameBlockDown = new char[200];
+    char* filenameFatalityHit = new char[200];
+    char* filenameFatalityFire = new char[200];
+    char* filenameOnFire = new char[200];
 
     string name = (personaje.isMember("name") && personaje["name"].isString()) ? personaje["name"].asString() : "";
     std::transform(name.begin(), name.end(), name.begin(), ::tolower);
@@ -307,7 +304,9 @@ void cargaPersonaje(Json::Value personaje, std::list<MKCharacter*>* characters, 
             filenameBeingHitDown = strdup(DEFAULT_BEINGHIT_DOWN);
             filenameBlock = strdup(DEFAULT_BLOCK);
             filenameBlockDown = strdup(DEFAULT_BLOCKDOWN);
-
+            filenameFatalityHit = strdup(DEFAULT_FATALITY_HIT);
+            filenameFatalityFire = strdup(DEFAULT_FALTALITY_FIRE);
+            filenameOnFire = strdup(DEFAULT_ON_FIRE);
 
         }else{
             filenameWalk = strdup(sprites[MOVE_NAME_WALK].asString().c_str());
@@ -331,6 +330,9 @@ void cargaPersonaje(Json::Value personaje, std::list<MKCharacter*>* characters, 
             filenameBeingHitDown  = strdup(sprites[MOVE_NAME_BEINGHIT_DOWN].asString().c_str());
             filenameBlock  = strdup(sprites[MOVE_NAME_BLOCK].asString().c_str());
             filenameBlockDown  = strdup(sprites[MOVE_NAME_BLOCKDOWN].asString().c_str());
+            filenameFatalityHit  = strdup(sprites[MOVE_NAME_FATALITY_HIT].asString().c_str());
+            filenameFatalityFire  = strdup(sprites[MOVE_NAME_FALTALITY_FIRE].asString().c_str());
+            filenameOnFire  = strdup(sprites[MOVE_NAME_ON_FIRE].asString().c_str());
         }
     }
 
@@ -356,6 +358,9 @@ void cargaPersonaje(Json::Value personaje, std::list<MKCharacter*>* characters, 
     validarExistenciaArchivo(DEFAULT_BEINGHIT_DOWN, filenameBeingHitDown);
     validarExistenciaArchivo(DEFAULT_BLOCK, filenameBlock);
     validarExistenciaArchivo(DEFAULT_BLOCKDOWN, filenameBlockDown);
+    validarExistenciaArchivo(DEFAULT_FATALITY_HIT, filenameFatalityHit);
+    validarExistenciaArchivo(DEFAULT_FALTALITY_FIRE, filenameFatalityFire);
+    validarExistenciaArchivo(DEFAULT_ON_FIRE, filenameOnFire);
 
     Util::getInstance()->setCantidadPersonajes();
 
@@ -381,7 +386,9 @@ void cargaPersonaje(Json::Value personaje, std::list<MKCharacter*>* characters, 
     Util::getInstance()->addMovement(MOVE_NAME_BEINGHIT_DOWN, filenameBeingHitDown);
     Util::getInstance()->addMovement(MOVE_NAME_BLOCK, filenameBlock);
     Util::getInstance()->addMovement(MOVE_NAME_BLOCKDOWN, filenameBlockDown);
-
+    Util::getInstance()->addMovement(MOVE_NAME_FATALITY_HIT, filenameFatalityHit);
+    Util::getInstance()->addMovement(MOVE_NAME_FALTALITY_FIRE, filenameFatalityFire);
+    Util::getInstance()->addMovement(MOVE_NAME_ON_FIRE, filenameOnFire);
 
 
     if(charAlto == 0.0){

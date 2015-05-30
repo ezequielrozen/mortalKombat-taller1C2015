@@ -36,7 +36,7 @@ void WeaponHitting::refreshTimer(MKCharacter* character) {
 
 	if (this->timer == 0) {
 		character->setState(new CharacterStance());
-		cout << "stance " << endl;
+//		cout << "stance " << endl;
 		this->timer = 1;
 	}
 

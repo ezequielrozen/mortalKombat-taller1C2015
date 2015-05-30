@@ -46,7 +46,9 @@ const char* const DEFAULT_BEINGHIT			= "data/scorpion/scorpionBeingHit.png";
 const char* const DEFAULT_BEINGHIT_DOWN		= "data/scorpion/scorpionBeingHitDown.png";
 const char* const DEFAULT_BLOCK				= "data/scorpion/scorpionBlocking.png";
 const char* const DEFAULT_BLOCKDOWN			= "data/scorpion/scorpionBlockingDown.png";
-
+const char* const DEFAULT_FATALITY_HIT		= "data/scorpion/scorpionFatalityHit.png";
+const char* const DEFAULT_FALTALITY_FIRE	= "data/scorpion/scorpionFatalityFire.png";
+const char* const DEFAULT_ON_FIRE			= "data/characterOnFire.png";
 
 const char* const MOVE_NAME_WALK          	= "walk";
 const char* const MOVE_NAME_STANCE         	= "stance";
@@ -69,6 +71,9 @@ const char* const MOVE_NAME_BEINGHIT		= "beingHit";
 const char* const MOVE_NAME_BEINGHIT_DOWN	= "beingHitDown";
 const char* const MOVE_NAME_BLOCK			= "block";
 const char* const MOVE_NAME_BLOCKDOWN		= "blockDown";
+const char* const MOVE_NAME_FATALITY_HIT	= "fatalityHit";
+const char* const MOVE_NAME_FALTALITY_FIRE	= "fatalityFire";
+const char* const MOVE_NAME_ON_FIRE			= "onFire";
 
 const char* const NAME_CHARACTER_1          = "scorpion";
 const char* const NAME_CHARACTER_2          = "raiden";

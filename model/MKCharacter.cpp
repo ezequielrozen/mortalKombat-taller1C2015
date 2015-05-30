@@ -337,7 +337,6 @@ Weapon *MKCharacter::getWeapon() {
 }
 
 void MKCharacter::throwWeapon() {
-	//	this->weapon->throwWeapon(this->posX + this->getWidth(),this->posY +  this->getHeight() * 0.2 /* AL 80% DE LA ALTURA DEL PERSONAJE, USAR CTE*/, this->getCharacterSide());
 	if (this->getCharacterSide() == 'l') {
 		this->weapon->throwWeapon(this->posX,
 								  this->posY + this->getHeight() * 0.2,

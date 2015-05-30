@@ -52,7 +52,10 @@
 	      	"fall": "data/scorpion/scorpionFalling.png",
 	      	"beingHitDown": "data/scorpion/scorpionBeingHitDown.png",
 	      	"winner": "data/scorpion/scorpionWinner.png",
-	      	"shoot": "data/scorpion/scorpionShooting.png"     
+	      	"shoot": "data/scorpion/scorpionShooting.png",
+			"fatalityHit": "data/scorpion/scorpionFatalityHit.png",
+			"fatalityFire": "data/scorpion/scorpionFatalityFire.png",
+			"onFire": "data/characterOnFire.png"   	      	     
       }
     },
     {
@@ -82,7 +85,10 @@
         "beingHitDown": "data/raiden/raidenBeingHitDown.png",
      	"winner": "data/raiden/raidenWinner.png",
         "shoot": "data/raiden/raidenShooting.png",
-        "fall": "data/raiden/raidenFalling.png"      
+        "fall": "data/raiden/raidenFalling.png",
+		"fatalityHit": "data/scorpion/scorpionFatalityHit.png",
+		"fatalityFire": "data/scorpion/scorpionFatalityFire.png",
+        "onFire": "data/characterOnFire.png"      
       }
     }
   ],
