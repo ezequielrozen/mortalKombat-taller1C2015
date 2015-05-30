@@ -9,6 +9,7 @@
 #include <bits/stl_list.h>
 #include "../model/MKCharacter.h"
 #include "../model/stage/Layer.h"
+#include "EventController.h"
 
 
 using namespace std;
@@ -40,6 +41,7 @@ private:
     bool key_e_Released; //La uso para q no pueda volver a hacer el shoot sin soltar la tecla xq sino cdo esta cerca lo mata de una.
 
 //	void testElapsedTime(MKCharacter* character, MKCharacter* character2);
+    EventController* eventController;
 
 };
 

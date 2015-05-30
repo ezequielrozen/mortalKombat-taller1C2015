@@ -24,22 +24,22 @@ class EventController {
 public:
 	EventController();
 	virtual ~EventController();
-	static void moveRight(MKCharacter*, MKCharacter*);
-	static void moveLeft(MKCharacter*, MKCharacter*);
-	static void moveUp(MKCharacter*, MKCharacter*);
-	static void moveDown(MKCharacter*, MKCharacter*);
-	static void highKick(MKCharacter*, MKCharacter*);
-	static void lowKick(MKCharacter*, MKCharacter*);
-	static void highPunch(MKCharacter*, MKCharacter*);
-	static void lowPunch(MKCharacter*, MKCharacter*);
-	static void shoot(MKCharacter*, MKCharacter*);
-	static void block(MKCharacter*, MKCharacter*);
-	static void duckPunch(MKCharacter*, MKCharacter*);
+	void moveRight(MKCharacter*, MKCharacter*);
+	void moveLeft(MKCharacter*, MKCharacter*);
+	void moveUp(MKCharacter*, MKCharacter*);
+	void moveDown(MKCharacter*, MKCharacter*);
+	void highKick(MKCharacter*, MKCharacter*);
+	void lowKick(MKCharacter*, MKCharacter*);
+	void highPunch(MKCharacter*, MKCharacter*);
+	void lowPunch(MKCharacter*, MKCharacter*);
+	void shoot(MKCharacter*, MKCharacter*);
+	void block(MKCharacter*, MKCharacter*);
+	void duckPunch(MKCharacter*, MKCharacter*);
 
-	static void moveLeftRelease(MKCharacter*, MKCharacter*);
-	static void moveRightRelease(MKCharacter*, MKCharacter*);
-	static void moveDownRelease(MKCharacter*, MKCharacter*);
-	static void blockRelease(MKCharacter*, MKCharacter*);
+	void moveLeftRelease(MKCharacter*, MKCharacter*);
+	void moveRightRelease(MKCharacter*, MKCharacter*);
+	void moveDownRelease(MKCharacter*, MKCharacter*);
+	void blockRelease(MKCharacter*, MKCharacter*);
 
 
 private:

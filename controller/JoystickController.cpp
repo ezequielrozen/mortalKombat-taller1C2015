@@ -51,11 +51,12 @@ JoystickController::JoystickController(char number)
 	this->c0ducked = false;
 	this->c0walkingLeft = false;
 	this->c0walkingRight = false;
+
+	this->eventController = new EventController();
 }
 
-JoystickController::~JoystickController(void)
-{
-
+JoystickController::~JoystickController(void) {
+	delete this->eventController;
 }
 
 void JoystickController::setDucked(bool value) {
@@ -77,7 +78,7 @@ void JoystickController::KeyUP_Right(unsigned char pressedAxis,	int pressedAxisV
 	c0previousAxisValue = pressedAxisValue;
 	printCout ? cout << "KeyUp: Boton derecha" << endl : "";
 	setWalkingRight(false);
-	EventController::moveRightRelease(character, character2);
+	this->eventController->moveRightRelease(character, character2);
 }
 
 void JoystickController::KeyUP_Down(unsigned char pressedAxis, int pressedAxisValue, bool printCout, MKCharacter* character,
@@ -86,7 +87,7 @@ void JoystickController::KeyUP_Down(unsigned char pressedAxis, int pressedAxisVa
 	c0previousAxisValue = pressedAxisValue;
 	printCout ? cout << "KeyUp: Boton abajo" << endl : "";
 	setDucked(false);
-	EventController::moveDownRelease(character, character2);
+	this->eventController->moveDownRelease(character, character2);
 }
 
 void JoystickController::KeyUP_Left(unsigned char pressedAxis, int pressedAxisValue, bool printCout, MKCharacter* character,
@@ -95,7 +96,7 @@ void JoystickController::KeyUP_Left(unsigned char pressedAxis, int pressedAxisVa
 	c0previousAxisValue = pressedAxisValue;
 	printCout ? cout << "KeyUp: Boton izquierda" << endl : "";
 	setWalkingLeft(false);
-	EventController::moveLeftRelease(character, character2);
+	this->eventController->moveLeftRelease(character, character2);
 }
 
 void JoystickController::update(MKCharacter *character, MKCharacter *character2, SDL_Event* mainEvent) {
@@ -119,7 +120,7 @@ void JoystickController::update(MKCharacter *character, MKCharacter *character2,
 		if (pressedButton == c0block && !c0blockReleased){
 			c0blockReleased = true;
 			printCout ? cout << "KeyUp: BlockRelease"	<< endl : "";
-			EventController::blockRelease(character, character2);
+			this->eventController->blockRelease(character, character2);
 		}
 		if (pressedButton == c0shoot){
 			this->c0shootReleased = true;
@@ -163,7 +164,7 @@ void JoystickController::update(MKCharacter *character, MKCharacter *character2,
 		c0ducked ? KeyUP_Down(pressedAxis, pressedAxisValue, printCout, character, character2) : setDucked(false);
 		//Tengo q guardar esto porq si apreto RIGHT y muevo (analogico) a DOWN, no hace el KEYUP_RIGHT xq no coinciden pressedAxis con previousAxis
 		setWalkingRight(true);
-		EventController::moveRight(character, character2);
+		this->eventController->moveRight(character, character2);
 	}
 	if (mainEvent->type == SDL_JOYAXISMOTION && pressedAxis == 0 && pressedAxisValue < -30080) {
 		c0previousAxis = pressedAxis;
@@ -172,7 +173,7 @@ void JoystickController::update(MKCharacter *character, MKCharacter *character2,
 		//Si estaba agachado hago el DownRelease
 		c0ducked ? KeyUP_Down(pressedAxis, pressedAxisValue, printCout, character, character2) : setDucked(false);
 		setWalkingLeft(true);
-		EventController::moveLeft(character, character2);
+		this->eventController->moveLeft(character, character2);
 	}
 	if (mainEvent->type == SDL_JOYAXISMOTION && pressedAxis == 1 && pressedAxisValue > 30080) {
 		c0previousAxis = pressedAxis;
@@ -182,46 +183,46 @@ void JoystickController::update(MKCharacter *character, MKCharacter *character2,
 		(c0walkingLeft) ?	KeyUP_Left(pressedAxis, pressedAxisValue, printCout, character,	character2) : setWalkingLeft(false);
 		(c0walkingRight) ? KeyUP_Right(pressedAxis, pressedAxisValue, printCout, character, character2) : setWalkingRight(false);
 		setDucked(true);
-		EventController::moveDown(character, character2);
+		this->eventController->moveDown(character, character2);
 	}
 	if (mainEvent->type == SDL_JOYAXISMOTION && pressedAxis == 1 && pressedAxisValue < -1000) {
 		printCout ? cout << "KeyDown: Boton arriba"	<< endl: "";
-		EventController::moveUp(character, character2);
+		this->eventController->moveUp(character, character2);
 	}
 	if (mainEvent->type == SDL_JOYBUTTONDOWN && pressedButton == c0HighKick) {
 		printCout ? cout << "KeyDown: Boton c0HighKick"	<< endl : "";
-		EventController::highKick(character, character2);
+		this->eventController->highKick(character, character2);
 	}
 
 	if (mainEvent->type == SDL_JOYBUTTONDOWN && pressedButton == c0LowKick) {
 		printCout ? cout << "KeyDown: Boton c0LowKick"	<< endl : "";
-		EventController::lowKick(character, character2);
+		this->eventController->lowKick(character, character2);
 	}
 
 	if (mainEvent->type == SDL_JOYBUTTONDOWN && pressedButton == c0duckPunch) {
 		printCout ? cout << "KeyDown: Boton c0duckPunch"	<< endl: "";
-		EventController::duckPunch(character, character2);
+		this->eventController->duckPunch(character, character2);
 	}
 
 	if (mainEvent->type == SDL_JOYBUTTONDOWN && pressedButton == c0HighPunch) {
 			printCout ? cout << "KeyDown: Boton c0HighPunch"	<< endl: "";
-			EventController::highPunch(character, character2);
+			this->eventController->highPunch(character, character2);
 	}
 
 	if (mainEvent->type == SDL_JOYBUTTONDOWN && pressedButton == c0LowPunch) {
 			printCout ? cout << "KeyDown: Boton c0LowPunch"	<< endl: "";
-			EventController::lowPunch(character, character2);
+			this->eventController->lowPunch(character, character2);
 	}
 
 	if (mainEvent->type == SDL_JOYBUTTONDOWN && pressedButton == c0shoot && (this->c0shootReleased)) {
 		this->c0shootReleased = false;
 		printCout ? cout << "KeyDown: Boton c0shoot"	<< endl : "";
-		EventController::shoot(character, character2);
+		this->eventController->shoot(character, character2);
 	}
 	if (mainEvent->type == SDL_JOYBUTTONDOWN && pressedButton == c0block) {
 		c0blockReleased = false;
 		printCout ? cout << "KeyDown: Boton c0block"	<< endl : "";
-		EventController::block(character, character2);
+		this->eventController->block(character, character2);
 	}
 
 }

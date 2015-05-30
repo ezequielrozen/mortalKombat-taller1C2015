@@ -7,6 +7,7 @@
 #include <iostream>
 #include "../model/MKCharacter.h"
 #include "../model/util/Util.h"
+#include "EventController.h"
 
 using namespace std;
 
@@ -21,7 +22,7 @@ public:
 private:
     char joystickNumber;
 
-        //botones
+    //botones
     unsigned char c0jump;
     unsigned char c0duck;
     unsigned char c0left;
@@ -49,5 +50,7 @@ private:
 	void KeyUP_Right(unsigned char pressedAxis, int pressedAxisValue,bool printCout, MKCharacter* character, MKCharacter* character2);
 	void KeyUP_Down(unsigned char pressedAxis, int pressedAxisValue,bool printCout, MKCharacter* character, MKCharacter* character2);
 	void KeyUP_Left(unsigned char pressedAxis, int pressedAxisValue,bool printCout, MKCharacter* character, MKCharacter* character2);
+
+    EventController* eventController;
 };
 #endif //MORTALKOMBAT_TALLER1C2015_JOYSTICKCONTROLLER_H
