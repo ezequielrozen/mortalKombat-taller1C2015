@@ -299,6 +299,10 @@ float MKCharacter::getStateWidth() {
 	return (this->ancho)*(this->state->getWidth());
 }
 
+float MKCharacter::getStateHeight() {
+	return (this->alto)*(this->state->getHeight());
+}
+
 bool MKCharacter::isHitting() {
 	return this->state->isHitting();
 }
@@ -349,9 +353,7 @@ void MKCharacter::throwWeapon() {
 	}
 }
 
-float MKCharacter::getStateHeight() {
-	return (this->alto)*(this->state->getHeight());
-}
+
 
 void MKCharacter::disableImpact() {
 	this->state->disableImpact(this);

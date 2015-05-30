@@ -6,17 +6,39 @@
  */
 
 #include "FatalityHitting.h"
+#include "CharacterStance.h"
 
 FatalityHitting::FatalityHitting() {
-	// TODO Auto-generated constructor stub
+	this->timer = 60;
 
 }
 
 FatalityHitting::~FatalityHitting() {
-	// TODO Auto-generated destructor stub
 }
 
 string FatalityHitting::getName() {
     return "FatalityHitting";
 }
 
+void FatalityHitting::refreshTimer(MKCharacter* character) {
+
+//	if (this->timer == 0) {
+//		character->setState(new CharacterStance());
+////		cout << "stance " << endl;
+//		this->timer = 60;
+//	}
+//
+//	this->timer -= 1;
+}
+
+bool FatalityHitting::startThrowing() {
+	return false;
+}
+
+float FatalityHitting::getWidth() {
+    return 1.6;
+}
+
+float FatalityHitting::getHeight() {
+    return 1.2;
+}

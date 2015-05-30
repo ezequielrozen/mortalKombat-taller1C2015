@@ -15,6 +15,12 @@ public:
 	FatalityHitting();
 	virtual ~FatalityHitting();
 	string getName();
+	void refreshTimer(MKCharacter* character);
+	bool startThrowing();
+	float getWidth();
+	float getHeight();
+private:
+	int timer;
 };
 
 #endif /* FATALITYHITTING_H_ */

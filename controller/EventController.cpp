@@ -93,10 +93,12 @@ void EventController::block(){
 
 void EventController::blockRelease(){
 //	cout << "blockRelease : " << this->characterToMove->getName() << endl;
+
 	this->characterToMove->update(BlockRelease);
 }
 
 void EventController::duckPunch(){
 //	cout << "duckPunch : " << this->characterToMove->getName() << endl;
 //	this->characterToMove->update(DuckPunch);
+	this->characterToMove->update(FatalityHit);
 }

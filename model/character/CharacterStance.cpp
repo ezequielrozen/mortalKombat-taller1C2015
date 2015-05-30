@@ -1,8 +1,8 @@
+#include "Jumping.h"
 #include <iostream>
 #include "CharacterStance.h"
 #include "MovingRight.h"
 #include "MovingLeft.h"
-#include "Jumping.h"
 #include "Ducking.h"
 #include "HighPunchHitting.h"
 #include "LowPunchHitting.h"
@@ -15,6 +15,8 @@
 #include "ReceivingDuckingKick.h"
 #include "BeingOverPassedLeft.h"
 #include "BeingOverPassedRight.h"
+#include "FatalityHitting.h"
+#include "ReceivingFire.h"
 
 CharacterStance::CharacterStance() {
 //    this->timer = -1
@@ -70,6 +72,9 @@ void CharacterStance::update(MKCharacter * character, Events aEvent) {
             break;
         case ReceiveHit:
             character->setState(new RecevingHit());
+            break;
+        case FatalityHit:
+            character->setState(new FatalityHitting());
             break;
         case OverPassed:
             if (character->getCharacterSide() == 'l') {

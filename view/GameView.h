@@ -86,7 +86,7 @@ private:
 
     CharacterSprite* scorpionFatalityHit;
     CharacterSprite* scorpionFatalityFire;
-    CharacterSprite* scorpionOnFire;
+    CharacterSprite* scorpionReceivingFire;
 
     CharacterSprite* raidenWalk;
     CharacterSprite* raidenStance;
@@ -111,7 +111,7 @@ private:
     CharacterSprite* raidenBlock;
     CharacterSprite* raidenFatalityHit;
     CharacterSprite* raidenFatalityFire;
-    CharacterSprite* raidenOnFire;
+    CharacterSprite* raidenReceivingFire;
 
     LayerSprite** layerSprites;
     int layerCount;

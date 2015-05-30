@@ -64,6 +64,10 @@ void KeyboardController::update(MKCharacter* character, MKCharacter* character2,
 					this->stageController->shoot();
 				}
 				break;
+			case SDLK_o:
+				this->stageController->setCharacterToMove(character);
+				this->stageController->duckPunch();
+				break;
 			/****************************************************************************************************/
 
 			case SDLK_d:
