@@ -30,6 +30,7 @@ void Game::initGame(SDL_Renderer* renderer, InputController* inputController) {
 
     this->gameView = new GameView(renderer, scorpion, raiden, stage, oponentSide, this->gameLoader->getPainter());
     this->inputController = inputController;
+    this->inputController->setCharacters(scorpion, raiden);
     InputController::setVibrating(false);
     this->cameraController = new CameraController();
     this->collider = new Collider();
@@ -78,7 +79,7 @@ bool Game::GameLoop() {
     	inputController->checkEvent();
         gameView->startRender();
         gameView->Render();
-        inputController->update(scorpion, raiden);
+        inputController->update();
         updateGameState();
         cameraMoved = cameraController->update(scorpion, raiden, stage->getLayers());
         collider->update(scorpion, raiden, cameraMoved);

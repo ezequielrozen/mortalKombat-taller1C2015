@@ -31,6 +31,8 @@ private:
     CharacterSelection* characterSelection;
     InputController* inputController;
     MKStageController* stageController;
+
+    void setStageController(MKStageController *stageController);
 };
 
 #endif // STAGEMANAGER_H

@@ -25,21 +25,24 @@ class InputController {
 public:
 	InputController(MKStageController* stageController);
 	virtual ~InputController();
-	void update(MKCharacter* character, MKCharacter* character2);
+	void update();
 	void checkEvent();
 	SDL_Event* getEvent();
 
 	static void setVibrating(bool vibratingFlag);
 	static bool isVibrating();
 	void setStageController(MKStageController* stageController);
+	void setCharacters(MKCharacter* character, MKCharacter* character2);
 private:
 	JoysticksControllerManager* joystickControllerManager;
 	KeyboardController* keyboardController;
     SDL_Event* mainEvent;
     bool joystickConnected;
     static bool vibrating;
-	void setCharacterSide(MKCharacter* character, MKCharacter* character2);
+	void setCharacterSide();
 	MKStageController* stageController;
+	MKCharacter* character;
+	MKCharacter* character2;
 };
 
 #endif

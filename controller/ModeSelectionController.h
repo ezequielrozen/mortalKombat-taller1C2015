@@ -13,6 +13,7 @@ public:
     ModeSelectionController();
     ~ModeSelectionController();
     void update();
+    void moveRight();
 };
 
 

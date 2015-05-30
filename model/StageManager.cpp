@@ -1,4 +1,6 @@
 #include "StageManager.h"
+#include "../controller/ModeSelectionController.h"
+#include "../controller/CharacterSelectionController.h"
 
 StageManager::StageManager(char* filePath) {
 
@@ -11,13 +13,14 @@ StageManager::StageManager(char* filePath) {
 
         std::cout << "Window couldn't be created" << std::endl;
     }
+	this->stageController = NULL;
+	this->setStageController(new ModeSelectionController()); // Acá deberíamos pasarle al ModeSelectionController el ModeSelection (modelo) para que lo actualice
 
     this->renderer = NULL;
     this->renderer = SDL_CreateRenderer(this->window, -1, SDL_RENDERER_TARGETTEXTURE);
-	this->modeSelection = new ModeSelection(this->renderer);
+	this->modeSelection = new ModeSelection(this->renderer, this->inputController);
     this->characterSelection = new CharacterSelection(this->renderer);
-	this->stageController = new EventController(); // ACÁ DEBERÍA IR EL CONTROLLER CORRESPONDIENTE A LA PRIMERA PANTALLA, ES DECIR, EL MKStageController
-	this->inputController = new InputController(stageController);
+
 	this->game = new Game(this->gameLoader, this->renderer, this->inputController);
 
 }
@@ -36,12 +39,23 @@ StageManager::~StageManager() {
 }
 
 bool StageManager::mainLoop() {
-	
+
 	this->modeSelection->loop();
 
+	setStageController(new CharacterSelectionController());
 	this->characterSelection->loop();
 
+	setStageController(new EventController());
 	bool restart = this->game->GameLoop();
 
 	return restart;
+}
+
+void StageManager::setStageController(MKStageController* stageController) {
+	if (this->stageController != NULL)
+		delete this->stageController;
+	else
+		this->inputController = new InputController(stageController);
+	this->stageController = stageController;
+	this->inputController->setStageController(this->stageController);
 }

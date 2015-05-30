@@ -14,7 +14,7 @@ using namespace std;
 class ModeSelection 
 {
 public:
-	ModeSelection(SDL_Renderer* renderer);
+	ModeSelection(SDL_Renderer* renderer, InputController* inputController);
 	~ModeSelection();
 	void loop();
 

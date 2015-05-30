@@ -5,7 +5,7 @@
 #include "ModeSelectionController.h"
 
 ModeSelectionController::ModeSelectionController() {
-
+    // acá debería recibir el ModeSelection (modelo) para actualizarlo
 }
 
 ModeSelectionController::~ModeSelectionController() {
@@ -14,4 +14,8 @@ ModeSelectionController::~ModeSelectionController() {
 
 void ModeSelectionController::update() {
 
+}
+
+void ModeSelectionController::moveRight() {
+    cout << "Se apretó la flecha -> en ModeSelection" << endl;
 }

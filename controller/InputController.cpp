@@ -45,7 +45,7 @@ bool InputController::isVibrating() {
 	return vibrating;
 }
 
-void InputController::setCharacterSide(MKCharacter* character, MKCharacter* character2)
+void InputController::setCharacterSide()
 {
     if(character->getX() <= character2->getX()){
     	character->setCharacterSide('l');
@@ -56,9 +56,9 @@ void InputController::setCharacterSide(MKCharacter* character, MKCharacter* char
     }
 }
 
-void InputController::update(MKCharacter* character, MKCharacter* character2) {
+void InputController::update() {
 
-	this->setCharacterSide(character, character2);
+	this->setCharacterSide();
 
 	this->keyboardController->update(character, character2, this->getEvent());
 
@@ -70,4 +70,9 @@ void InputController::update(MKCharacter* character, MKCharacter* character2) {
 
 void InputController::setStageController(MKStageController *stageController) {
 	this->stageController = stageController;
+}
+
+void InputController::setCharacters(MKCharacter *character, MKCharacter *character2) {
+	this->character = character;
+	this->character2 = character2;
 }
