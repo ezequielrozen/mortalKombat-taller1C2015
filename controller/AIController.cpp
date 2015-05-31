@@ -49,11 +49,11 @@ void AIController::update(MKCharacter* character1, MKCharacter* character2, SDL_
                     this->stageController->block();
                     break;
                 case SDLK_u:
-                    if (key_u_Released) {
+//                    if (key_u_Released) {
                         key_u_Released = false;
                         this->stageController->setCharacterToMove(character1);
                         this->stageController->shoot();
-                    }
+//                    }
                     break;
                 case SDLK_o:
                     this->stageController->setCharacterToMove(character1);
@@ -83,8 +83,8 @@ void AIController::update(MKCharacter* character1, MKCharacter* character2, SDL_
                     this->stageController->setCharacterToMove(character1);
                     this->stageController->blockRelease();
                     break;
-                case SDLK_u:
-                    key_u_Released = true;
+//                case SDLK_u:
+//                    key_u_Released = true;
                     break;
                 default:
                     break;

@@ -24,11 +24,11 @@ private:
 
     void checkHits(MKCharacter* character1, MKCharacter* character2);
 
-    bool superpositionDown(Weapon* weapon, MKCharacter* character2);
+    bool superpositionWeaponDown(Throwable* weapon, MKCharacter* character2);
 
-    bool superpositionLeft(Weapon* weapon, MKCharacter* character2);
+    bool superpositionWeaponLeft(Throwable* weapon, MKCharacter* character2);
 
-    bool superpositionRight(Weapon* weapon, MKCharacter* character2);
+    bool superpositionWeaponRight(Throwable* weapon, MKCharacter* character2);
 
     void checkOverPassing(MKCharacter* character1, MKCharacter* character2);
 

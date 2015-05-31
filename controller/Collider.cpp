@@ -32,38 +32,54 @@ bool Collider::superpositionDown(MKCharacter* character1, MKCharacter* character
 	return (character1->getY()+(character1->getHeight()-character1->getStateHeight()) < character2->getY()+character2->getHeight());
 }
 
-bool Collider::superpositionDown(Weapon* weapon, MKCharacter* character2) {
+bool Collider::superpositionWeaponDown(Throwable* weapon, MKCharacter* character2) {
 	return (weapon->getPositionY() < character2->getY()+character2->getStateHeight());
 }
 
-bool Collider::superpositionLeft(Weapon* weapon, MKCharacter* character2) {
+bool Collider::superpositionWeaponLeft(Throwable* weapon, MKCharacter* character2) {
 	return (weapon->getPositionX()+weapon->getWidth() >= character2->getX() && weapon->getPositionX() < character2->getX());
 }
 
-bool Collider::superpositionRight(Weapon* weapon, MKCharacter* character2) {
+bool Collider::superpositionWeaponRight(Throwable* weapon, MKCharacter* character2) {
 	return (weapon->getPositionX() <= character2->getX()+character2->getWidth() && weapon->getPositionX() > character2->getX());
 }
+
+
 
 void Collider::checkHits(MKCharacter* character1, MKCharacter* character2) {
 
 	checkOverPassing(character1, character2);
 
-	if ( character2->isBeingOverPassedRight() || character2->isBeingOverPassedLeft() || ((superpositionRight(character1,character2) || superpositionLeft(character1, character2)) && (character1->isHitting()) && superpositionDown(character1, character2))
-	|| ((superpositionRight(character1->getWeapon(), character2) || superpositionLeft(character1->getWeapon(), character2)) && character1->getWeapon()->isActive() && superpositionDown(character1->getWeapon(), character2))){
+	if (character2->isBeingOverPassedRight() ||	character2->isBeingOverPassedLeft() ||
+		((superpositionRight(character1,character2) || superpositionLeft(character1, character2)) &&
+				(character1->isHitting()) && superpositionDown(character1, character2))	||
+		((superpositionWeaponRight(character1->getWeapon(), character2) || superpositionWeaponLeft(character1->getWeapon(), character2)) &&
+				character1->getWeapon()->isActive() && superpositionWeaponDown(character1->getWeapon(), character2))||
+		((superpositionWeaponRight(character1->getWeaponFire(), character2) ||
+				superpositionWeaponLeft(character1->getWeaponFire(), character2)) && character1->getWeaponFire()->isActive())){
 
 		if (character1->impacts()) {
-			if (character1->getState() == "DuckingKickHitting" || (!character2->isBlocking() && !character2->isDucking() && !character2->isReceivingHit()) ||
-				(character1->getWeapon()->isActive() && !character2->isDucking())) {
-				if (character1->getWeapon()->isActive()) {
-					character2->receiveBlow(DAMAGE.at("WeaponHitting"),0);
-					character1->getWeapon()->destroy();
-				} else {
-					character2->receiveBlow(DAMAGE.at(character1->getState()),0);
-					cout << "IMPACT" << endl;
-					if (character1->isJumping()) {
-						character1->disableImpact();
+			if (character1->getState() == "DuckingKickHitting" ||
+				(!character2->isBlocking() && !character2->isDucking() && !character2->isReceivingHit()) ||
+				(character1->getWeapon()->isActive() && !character2->isDucking()) ||
+				(character1->getWeaponFire()->isActive())) {
+
+				if (character2->isAlive()){
+					if (character1->getWeapon()->isActive()) {
+						character2->receiveBlow(DAMAGE.at("WeaponHitting"),0);
+						character1->getWeapon()->destroy();
+					} else {
+						character2->receiveBlow(DAMAGE.at(character1->getState()),0);
+						cout << "IMPACT" << endl;
+						if (character1->isJumping()) {
+							character1->disableImpact();
+						}
 					}
+				}else if (character1->getWeaponFire()->isActive()) {
+					character2->receiveBlow(0,0);
+					character1->getWeaponFire()->destroy();
 				}
+
 			}
 		}
 	}
@@ -113,17 +129,19 @@ void Collider::update(MKCharacter* character1, MKCharacter* character2, bool cam
 
 	//En caso de que los dos golpeen al mismo tiempo, se decide aleatoriamente quien pega primero.
 	//En caso de que no golpeen al mismo tiempo, no tiene importancia.
-	if (character1->isAlive() && character2->isAlive()) {
-		int randomizer = rand() % 2;
+	if ((character1->isAlive() && character2->isAlive()) ||
+		(character1->isAlive() && character2->getState() == "Dizzy") ||
+		(character2->isAlive() && character1->getState() == "Dizzy")){
+			int randomizer = rand() % 2;
 
-		if (randomizer == 0) {
-			this->checkHits(character1, character2);
-			this->checkHits(character2, character1);
-		}
-		else {
-			this->checkHits(character2, character1);
-			this->checkHits(character1, character2);
-		}
+			if (randomizer == 0) {
+				this->checkHits(character1, character2);
+				this->checkHits(character2, character1);
+			}
+			else {
+				this->checkHits(character2, character1);
+				this->checkHits(character1, character2);
+			}
 	}
 
 	character1->characterUpdate();
@@ -138,7 +156,7 @@ void Collider::checkOverPassing(MKCharacter* character1, MKCharacter* character2
 	if (character2->getX() + character2->getStateWidth() <= character1->getX() + character1->getStateWidth() && character1->getCharacterSide() == 'l' && character1->isHitting() && !character2->isBeingOverPassedRight()) {
 		character2->setStopX(character1->getX() + character1->getStateWidth() - character2->getWidth() * 0.5);
 		character2->update(OverPassed);
-		cout << "OVERPASSED" << endl;
+//		cout << "OVERPASSED" << endl;
 	}
 	else if (character2->getX() >= character1->getX() - (character1->getStateWidth() - character1->getWidth()) && character1->getCharacterSide() == 'r' && character1->isHitting() && !character1->isBeingOverPassedRight()) {
 		character2->setStopX(character1->getX() - (character1->getStateWidth() - character1->getWidth()) + character2->getStateWidth() * 0.5);

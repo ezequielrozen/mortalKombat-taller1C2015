@@ -42,35 +42,6 @@ Game::~Game() {
     delete collider;
 }
 
-//bool Game::GameLoop() {
-//
-//    bool cameraMoved;
-//
-//    while (gameController->getEvent()->type != SDL_QUIT) {
-//        gameController->checkEvent();
-//        gameView->startRender();
-//        gameView->Render();
-//        if ( scorpion->isAlive() && raiden->isAlive() )
-//            gameController->update(scorpion, raiden);
-//        else // fin de juego. loguearlo (1 sola vez)
-//            gameController->victory(scorpion, raiden);
-//        cameraMoved = cameraController->update(scorpion, raiden, stage->getLayers());
-//        collider->update(scorpion, raiden, cameraMoved);
-//        gameView->endRender();
-//        SDL_Delay(15);
-//
-//        if (peviousKey == SDLK_r && gameController->getEvent()->key.keysym.sym == SDLK_e) {
-//            return true;
-//        }
-//        else {
-//        	peviousKey = gameController->getEvent()->key.keysym.sym;
-//        }
-//
-//    }
-//    return false;
-//}
-
-
 bool Game::GameLoop() {
 
     bool cameraMoved;
@@ -100,15 +71,19 @@ bool Game::GameLoop() {
 
 void Game::updateGameState() {
     if (!scorpion->isAlive()) {
-        scorpion->setState(new Dizzy());
-        scorpion->setPosY(this->stage->getFloor());
-        raiden->setState(new Victory());
-        raiden->setPosY(this->stage->getFloor());
+    	if (scorpion->getState() != "ReceivingFire"){
+			scorpion->setState(new Dizzy());
+			scorpion->setPosY(this->stage->getFloor());
+	//        raiden->setState(new Victory());
+			raiden->setPosY(this->stage->getFloor());
+    	}
 
     } else if (!raiden->isAlive()) {
-        raiden->setState(new Dizzy());
-        raiden->setPosY(this->stage->getFloor());
-        scorpion->setState(new Victory());
-        scorpion->setPosY(this->stage->getFloor());
+    	if (raiden->getState() != "ReceivingFire"){
+			raiden->setState(new Dizzy());
+			raiden->setPosY(this->stage->getFloor());
+	//        scorpion->setState(new Victory());
+			scorpion->setPosY(this->stage->getFloor());
+    	}
     }
 }

@@ -1,19 +1,20 @@
-//
-// Created by mauri on 20/05/15.
-//
+/*
+ * Fire.h
+ *
+ *  Created on: 30/05/2015
+ *      Author: her
+ */
 
-#ifndef MORTALKOMBAT_TALLER1C2015_WEAPON_H
-#define MORTALKOMBAT_TALLER1C2015_WEAPON_H
+#ifndef FIRE_H_
+#define FIRE_H_
 
-#include <iostream>
 #include "Throwable.h"
+#include <iostream>
 
-using namespace std;
-
-class Weapon : public Throwable {
+class Fire: public Throwable {
 public:
-    Weapon(float width, float height);
-    ~Weapon();
+    Fire(float width, float height);
+    ~Fire();
     void update();
     bool isActive();
     void destroy();
@@ -35,8 +36,6 @@ private:
     void stepForward();
     float traveledDistance;
     bool impact;
-
 };
 
-
-#endif //MORTALKOMBAT_TALLER1C2015_WEAPON_H
+#endif /* FIRE_H_ */

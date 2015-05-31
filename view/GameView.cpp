@@ -273,9 +273,9 @@ void GameView::loadAsScorpion(CharacterSprite*& walk, CharacterSprite*& stance, 
     blockDown = new CharacterSprite(this->renderer, scorpion->getFileMovement(MOVE_NAME_BLOCKDOWN), scorpion->getX(), scorpion->getY(), scorpion->getWidth(), scorpion->getHeight(), 2, oponentSide, true, colorAltered, this->painter);
     block = new CharacterSprite(this->renderer, scorpion->getFileMovement(MOVE_NAME_BLOCK), scorpion->getX(), scorpion->getY(), scorpion->getWidth(), scorpion->getHeight(), 3, oponentSide, true, colorAltered, this->painter);
 
-    fatalityHit = new CharacterSprite(this->renderer, scorpion->getFileMovement(MOVE_NAME_FATALITY_HIT), scorpion->getX(), scorpion->getY(), scorpion->getWidth(), scorpion->getHeight(), 10, oponentSide, true, colorAltered, this->painter);
+    fatalityHit = new CharacterSprite(this->renderer, scorpion->getFileMovement(MOVE_NAME_FATALITY_HIT), scorpion->getX(), scorpion->getY(), scorpion->getWidth(), scorpion->getHeight(), 17, oponentSide, true, colorAltered, this->painter);
     fatalityFire = new CharacterSprite(this->renderer, scorpion->getFileMovement(MOVE_NAME_FALTALITY_FIRE), scorpion->getX(), scorpion->getY(), scorpion->getWidth(), scorpion->getHeight(), 4, oponentSide, false, colorAltered, this->painter);
-    onFire = new CharacterSprite(this->renderer, scorpion->getFileMovement(MOVE_NAME_ON_FIRE), scorpion->getX(), scorpion->getY(), scorpion->getWidth(), scorpion->getHeight(), 11, oponentSide, false, colorAltered, this->painter);
+    onFire = new CharacterSprite(this->renderer, scorpion->getFileMovement(MOVE_NAME_ON_FIRE), scorpion->getX(), scorpion->getY(), scorpion->getWidth(), scorpion->getHeight(), 14, oponentSide, true, colorAltered, this->painter);
 }
 
 void GameView::loadAsRaiden(CharacterSprite*& walk, CharacterSprite*& stance, CharacterSprite*& jump, CharacterSprite*& sideJump,
@@ -308,9 +308,9 @@ void GameView::loadAsRaiden(CharacterSprite*& walk, CharacterSprite*& stance, Ch
     blockDown = new CharacterSprite(this->renderer, raiden->getFileMovement(MOVE_NAME_BLOCKDOWN), raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 2, oponentSide, true, colorAltered, this->painter);
     block = new CharacterSprite(this->renderer, raiden->getFileMovement(MOVE_NAME_BLOCK), raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 3, oponentSide, true, colorAltered, this->painter);
 
-    fatalityHit = new CharacterSprite(this->renderer, raiden->getFileMovement(MOVE_NAME_FATALITY_HIT), raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 10, oponentSide, true, colorAltered, this->painter);
+    fatalityHit = new CharacterSprite(this->renderer, raiden->getFileMovement(MOVE_NAME_FATALITY_HIT), raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 17, oponentSide, true, colorAltered, this->painter);
 	fatalityFire = new CharacterSprite(this->renderer, raiden->getFileMovement(MOVE_NAME_FALTALITY_FIRE), raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 4, oponentSide, false, colorAltered, this->painter);
-	onFire = new CharacterSprite(this->renderer, raiden->getFileMovement(MOVE_NAME_ON_FIRE), raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 11, oponentSide, false, colorAltered, this->painter);
+	onFire = new CharacterSprite(this->renderer, raiden->getFileMovement(MOVE_NAME_ON_FIRE), raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 14, oponentSide, true, colorAltered, this->painter);
 }
 
 void GameView::RestartAllScorpionSprites()
@@ -377,7 +377,7 @@ void GameView::runCharacter(MKCharacter* character1, MKCharacter* character2, Sp
 
     bool aux = (character1->getX() < character2->getX());
 
-    if (character1->getState() != "WeaponHitting" && character1->getState() != "MovingRight" && character1->getState() != "MovingLeft") {
+    if (character1->getState() != "WeaponHitting" && character1->getState() != "FireHitting" && character1->getState() != "MovingRight" && character1->getState() != "MovingLeft") {
         sprite = characterSprites.at(character1->getState());
         sprite->Play(6.66*GAMEDELAY, character1->getStateWidth());
     }
@@ -400,7 +400,7 @@ void GameView::runCharacter(MKCharacter* character1, MKCharacter* character2, Sp
     }
     else if (character1->getWeaponFire()->isActive()) {
 		shootChar = characterSprites.at("FireHitting");
-		shootChar->PlayShootFire(6.66*GAMEDELAY, character1->getWeaponFire()->getWidth(), character1->getWeaponFire()->getHeight());
+		shootChar->PlayShootFire(9*GAMEDELAY, character1->getWeaponFire()->getWidth(), character1->getWeaponFire()->getHeight());
     }
 	else {
 		shootChar = NULL;
@@ -414,8 +414,13 @@ void GameView::runCharacter(MKCharacter* character1, MKCharacter* character2, Sp
 
         if (shootChar != NULL) {
             shootChar->switchSide('r');
-            shootChar->setX(character1->getWeapon()->getPositionX());
-            shootChar->setY(character1->getWeapon()->getPositionY());
+            if (character1->getWeapon()->isActive()){
+				shootChar->setX(character1->getWeapon()->getPositionX());
+				shootChar->setY(character1->getWeapon()->getPositionY());
+            }else if (character1->getWeaponFire()->isActive()) {
+				shootChar->setX(character1->getWeaponFire()->getPositionX());
+				shootChar->setY(character1->getWeaponFire()->getPositionY());
+            }
         }
     } 
     else {
@@ -423,8 +428,13 @@ void GameView::runCharacter(MKCharacter* character1, MKCharacter* character2, Sp
 
         if (shootChar != NULL) {
             shootChar->switchSide('l');
-            shootChar->setX(character1->getWeapon()->getPositionX());
-            shootChar->setY(character1->getWeapon()->getPositionY());
+            if (character1->getWeapon()->isActive()){
+            	shootChar->setX(character1->getWeapon()->getPositionX());
+            	shootChar->setY(character1->getWeapon()->getPositionY());
+            }else if (character1->getWeaponFire()->isActive()) {
+				shootChar->setX(character1->getWeaponFire()->getPositionX());
+				shootChar->setY(character1->getWeaponFire()->getPositionY());
+            }
         }
     }
 

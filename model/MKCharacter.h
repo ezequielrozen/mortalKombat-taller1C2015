@@ -8,7 +8,9 @@
 #include "constantes.h"
 #include "logger.h"
 #include "character/CharacterState.h"
+#include "Throwable.h"
 #include "Weapon.h"
+#include "Fire.h"
 
 using namespace std;
 
@@ -92,11 +94,11 @@ public:
 
     bool impacts();
 
-    Weapon* getWeapon();
+    Throwable* getWeapon();
 
     void throwWeapon();
 
-    Weapon* getWeaponFire();
+    Throwable* getWeaponFire();
 
     void throwWeaponFire();
 
@@ -140,9 +142,9 @@ private:
     float stopX;
     void updateOverPassing();
     // Weapon
-    Weapon* weapon;
-    Weapon* weaponFire;
-
+    Throwable* weapon;
+    Throwable* weaponFire;
+    bool weaponFireUsed;
 };
 
 #endif /* MKCHARACTER_H_ */

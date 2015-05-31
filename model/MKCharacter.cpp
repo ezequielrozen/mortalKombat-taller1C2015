@@ -5,7 +5,7 @@
 MKCharacter::MKCharacter(float initialPosX, float ancho, float alto, int z_index, int pCharacterNumber, string name) {
 
 	this->weapon = new Weapon(ancho*0.97, alto*0.36);
-	this->weaponFire = new Weapon(ancho*0.97, alto*0.36);
+	this->weaponFire = new Fire(ancho*0.97, alto*0.36);
 	this->state = new CharacterStance();
 	this->z_index = z_index;
 	posX = initialPosX;
@@ -25,6 +25,8 @@ MKCharacter::MKCharacter(float initialPosX, float ancho, float alto, int z_index
 	this->life = FULL_LIFE;
 
 	this->characterNumber = pCharacterNumber;
+
+	weaponFireUsed = false;
 
 }
 
@@ -58,13 +60,38 @@ void MKCharacter::characterUpdate() {
 	this->weapon->update();
 
 
-//	if (this->state->startThrowingFire() && !this->weaponFire->isActive()) {
-//		throwWeaponFire();
-//	}
-//	this->weaponFire->updateFire();
+	if (this->state->startThrowingFire() && !this->weaponFire->isActive()) {
+		throwWeaponFire();
+	}
+	this->weaponFire->update();
 
 //	cout << this->getStagePosX() << endl;
 	
+}
+
+
+Throwable *MKCharacter::getWeapon() {
+	return this->weapon;
+}
+
+void MKCharacter::throwWeapon() {
+		this->weapon->throwWeapon(this->posX, this->posY + this->getHeight() * 0.2,this->getCharacterSide());
+}
+
+Throwable *MKCharacter::getWeaponFire() {
+	return this->weaponFire;
+}
+
+void MKCharacter::throwWeaponFire() {
+	if (!weaponFireUsed){
+		if (this->getCharacterSide() == 'l') {
+			this->weaponFire->throwWeapon(this->posX + (this->getWidth() * 1.3),this->posY+(this->alto*0.35) ,this->getCharacterSide());
+		}else
+		{
+			this->weaponFire->throwWeapon(this->posX - (this->getWidth()*0.7),this->posY+(this->alto*0.45) ,this->getCharacterSide());
+		}
+		weaponFireUsed = true;
+	}
 }
 
 void MKCharacter::updateOverPassing() {
@@ -175,7 +202,6 @@ int MKCharacter::getZ_index() {
 	return this->z_index;
 }
 
-
 int MKCharacter::getLife() {
 	return this->life;
 }
@@ -206,23 +232,29 @@ bool MKCharacter::isAlive() {
 }
 void MKCharacter::receiveBlow(int force, char direction) {
 	extern logger* Mylog;
-	this->life -= force;
 
-	if (force <= 10) {
-		this->update(ReceiveHit);
-	}
-	else if (force > 10 && force <= 15) {
-		this->update(ReceiveDuckingPunch);
-		InputController::setVibrating(true);
-	}
-	else {
-		this->update(ReceiveDuckingPunch);
-		InputController::setVibrating(true);
-	}
+	if (this->state->getName() == "Dizzy"){
+		this->update(ReceiveFire);
+	}else
+	{
+		this->life -= force;
 
-	Mylog->Log("Personaje (PONERLE NOMBRE) recibe golpe", ERROR_LEVEL_INFO); //FALTA: nombre, vida restada, vida restante.
-	if (this->life <= 0) {
-		this->life = 0;//marcar fin de juego. Preferentemente donde se invoca esta función (control de colisión y golpe)
+		if (force <= 10) {
+			this->update(ReceiveHit);
+		}
+		else if (force > 10 && force <= 15) {
+			this->update(ReceiveDuckingPunch);
+			InputController::setVibrating(true);
+		}
+		else {
+			this->update(ReceiveDuckingPunch);
+			InputController::setVibrating(true);
+		}
+
+		Mylog->Log("Personaje (PONERLE NOMBRE) recibe golpe", ERROR_LEVEL_INFO); //FALTA: nombre, vida restada, vida restante.
+		if (this->life <= 0) {
+			this->life = 0;//marcar fin de juego. Preferentemente donde se invoca esta función (control de colisión y golpe)
+		}
 	}
 }
 
@@ -328,7 +360,7 @@ bool MKCharacter::impacts() {
 		return this->state->impact();
 	}
 	else {
-		this->getWeapon()->isImpact();
+		return (this->getWeapon()->isImpact() || this->getWeaponFire()->isImpact());
 	}
 }
 
@@ -344,39 +376,6 @@ double MKCharacter::getAccY() {
 	return (-2*(this->getYMax()-stageFloor+this->getVelY()*0.5))/(pow(0.5,2));
 }
 
-Weapon *MKCharacter::getWeapon() {
-	return this->weapon;
-}
-
-void MKCharacter::throwWeapon() {
-	if (this->getCharacterSide() == 'l') {
-		this->weapon->throwWeapon(this->posX,
-								  this->posY + this->getHeight() * 0.2,
-								  this->getCharacterSide());
-	}
-	else {
-		this->weapon->throwWeapon(this->posX,
-								this->posY + this->getHeight()*0.2,
-								this->getCharacterSide());
-	}
-}
-
-Weapon *MKCharacter::getWeaponFire() {
-	return this->weaponFire;
-}
-
-void MKCharacter::throwWeaponFire() {
-	if (this->getCharacterSide() == 'l') {
-		this->weaponFire->throwWeapon(this->posX,
-								  this->posY + this->getHeight() * 0.2,
-								  this->getCharacterSide());
-	}
-	else {
-		this->weaponFire->throwWeapon(this->posX,
-								this->posY + this->getHeight()*0.2,
-								this->getCharacterSide());
-	}
-}
 
 void MKCharacter::disableImpact() {
 	this->state->disableImpact(this);

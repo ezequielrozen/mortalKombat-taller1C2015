@@ -14,6 +14,10 @@ class ReceivingFire: public CharacterState {
 public:
 	ReceivingFire();
 	virtual ~ReceivingFire();
+	string getName();
+	float getWidth();
+private:
+	int timer;
 };
 
 #endif /* RECEIVINGFIRE_H_ */

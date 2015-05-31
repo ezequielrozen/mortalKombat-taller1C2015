@@ -1,18 +1,19 @@
-/*
- * ReceivingFire.cpp
- *
- *  Created on: 30/05/2015
- *      Author: her
- */
-
 #include "ReceivingFire.h"
 
 ReceivingFire::ReceivingFire() {
-	// TODO Auto-generated constructor stub
+	this->timer = 99999999;
 
 }
 
 ReceivingFire::~ReceivingFire() {
-	// TODO Auto-generated destructor stub
 }
+
+string ReceivingFire::getName() {
+	return "ReceivingFire";
+}
+
+float ReceivingFire::getWidth() {
+	return 1.37;
+}
+
 

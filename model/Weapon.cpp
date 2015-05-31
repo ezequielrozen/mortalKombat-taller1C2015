@@ -23,16 +23,6 @@ void Weapon::update() {
     }
 }
 
-void Weapon::updateFire() {
-    if (this->isActive()) {
-        this->stepForward();
-        if (this->traveledDistance > Util::getInstance()->getLogicalWindowWidth()) {
-            this->destroy();
-        } else {
-            this->traveledDistance+= this->speed;
-        }
-    }
-}
 
 void Weapon::throwWeapon(float initialX, float initialY, char direction) {
     if (!this->isActive()) {

@@ -2,7 +2,7 @@
 #define MORTALKOMBAT_TALLER1C2015_AICONTROLLER_H
 
 
-#include <SDL_events.h>
+#include "SDL2/SDL_events.h"
 #include "../model/MKCharacter.h"
 #include "MKStageController.h"
 
