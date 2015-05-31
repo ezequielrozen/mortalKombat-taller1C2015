@@ -3,7 +3,6 @@
 ButtonSprite::ButtonSprite(SDL_Renderer* aRenderer, Button* aButton, int x, int y, int w, int h) {
 
 	this->button = aButton;
-
 	string pathSelected = "data/buttons/"+button->getName()+"Selected.png";
 	string pathNotSelected = "data/buttons/"+button->getName()+"NotSelected.png";
 

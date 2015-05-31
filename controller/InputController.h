@@ -20,8 +20,10 @@
 #include "../model/stage/Layer.h"
 #include "MKStageController.h"
 #include "AIController.h"
+#include "../model/ModeSelection.h"
 
-class KeyboardController;
+//class KeyboardController;
+class ModeSelection;
 class InputController {
 public:
 	InputController(MKStageController* stageController);
@@ -34,6 +36,7 @@ public:
 	static bool isVibrating();
 	void setStageController(MKStageController* stageController);
 	void setCharacters(MKCharacter* character, MKCharacter* character2);
+	void setModeSelection(ModeSelection* modeSelection);
 	void enableAI();
 
 private:

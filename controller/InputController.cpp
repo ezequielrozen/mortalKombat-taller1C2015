@@ -87,3 +87,7 @@ void InputController::setCharacters(MKCharacter *character, MKCharacter *charact
 void InputController::enableAI() {
 	this->iaIsActive = true;
 }
+
+void InputController::setModeSelection(ModeSelection *modeSelection) {
+	this->stageController->setModeSelection(modeSelection);
+}

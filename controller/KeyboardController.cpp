@@ -136,6 +136,9 @@ void KeyboardController::update(MKCharacter* character, MKCharacter* character2,
 					this->stageController->setCharacterToMove(character);
 					this->stageController->moveLeftRelease();
 					break;
+				case SDLK_UP:
+					this->stageController->moveUpRelease();
+					break;
 				case SDLK_b:
 					this->stageController->setCharacterToMove(character);
 					this->stageController->blockRelease();

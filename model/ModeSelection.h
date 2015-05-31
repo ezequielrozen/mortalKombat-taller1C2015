@@ -13,18 +13,25 @@
 
 using namespace std;
 
+class InputController;
+
 class ModeSelection 
 {
 public:
 	ModeSelection(SDL_Renderer* renderer, InputController* inputController);
 	~ModeSelection();
 	GameModes loop();
+	void moveUp();
+	void moveDown();
+	void select();
 
 private:
 	ModeSelectionView* view;
 	InputController* inputController;
 	std::vector<Button*> buttons;
 	int peviousKey;
+	int index;
+	bool selectionMade;
 };
 
 #endif // MODESELECTION_H

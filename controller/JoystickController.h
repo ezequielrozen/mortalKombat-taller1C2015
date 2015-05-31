@@ -7,15 +7,15 @@
 #include <iostream>
 #include "../model/MKCharacter.h"
 #include "../model/util/Util.h"
-#include "EventController.h"
+#include "MKStageController.h"
 
 using namespace std;
 
 class JoystickController
 {
 public:
-    JoystickController(char, MKStageController* stageController);
-    ~JoystickController(void);
+    JoystickController(char a, MKStageController* stageController);
+    ~JoystickController();
 
     void update(MKCharacter* character, MKCharacter* character2, SDL_Event* joystickEvent);
     SDL_Event* getEvent();

@@ -7,13 +7,23 @@
 
 
 #include "MKStageController.h"
+#include "../model/ModeSelection.h"
 
 class ModeSelectionController : public MKStageController {
 public:
     ModeSelectionController();
     ~ModeSelectionController();
+    void setModeSelection(ModeSelection* modeSelection);
     void update();
-    void moveRight();
+    void moveUp();
+    void moveDown();
+    void moveUpRelease();
+    void moveDownRelease();
+    void lowKick();
+private:
+        ModeSelection* modeSelection;
+        bool movingUp;
+        bool movingDown;
 };
 
 

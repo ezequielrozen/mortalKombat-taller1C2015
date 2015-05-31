@@ -4,9 +4,9 @@
 
 #ifndef MORTALKOMBAT_TALLER1C2015_MKSTAGECONTROLLER_H
 #define MORTALKOMBAT_TALLER1C2015_MKSTAGECONTROLLER_H
-
-
 #include "../model/MKCharacter.h"
+
+class ModeSelection;
 
 class MKStageController {
 public:
@@ -26,9 +26,11 @@ public:
     virtual void moveLeftRelease() {};
     virtual void moveRightRelease() {};
     virtual void moveDownRelease() {};
+    virtual void moveUpRelease() {};
     virtual void blockRelease() {};
 
     virtual void setCharacterToMove(MKCharacter* character) {};
+    virtual void setModeSelection(ModeSelection* modeSelection) {};
 };
 
 
