@@ -4,11 +4,15 @@
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
 #include "../model/constantes.h"
+#include "stage/LayerSprite.h"
+#include "stage/ImageSprite.h"
+#include "stage/ButtonSprite.h"
+#include "../model/util/Button.h"
 #include "Text.h"
 #include <iostream>
 #include <string>
 #include <math.h>
-#include <map>
+#include <vector>
 #include <SDL2/SDL_mixer.h>
 
 using namespace std;
@@ -16,19 +20,23 @@ using namespace std;
 class ModeSelectionView 
 {
 public:
-	ModeSelectionView(SDL_Renderer* aRenderer);
+	ModeSelectionView(SDL_Renderer* aRenderer, std::vector<Button*> buttons);
 	~ModeSelectionView();
 	void render();
 
 private:
 	SDL_Renderer* renderer;
-	SDL_Texture* texture;
 
-	int img_width;
-	int img_height;
+	LayerSprite* background;
 
-	SDL_Rect draw;
-	SDL_Rect crop;
+	ImageSprite* logo;
+
+	ButtonSprite* button1;
+
+	ButtonSprite* button2;
+
+	ButtonSprite* button3;
+
 };
 
 #endif // MODESELECTION_H

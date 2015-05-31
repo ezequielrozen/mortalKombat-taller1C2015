@@ -1,12 +1,23 @@
 #include "ModeSelection.h"
 
 ModeSelection::ModeSelection(SDL_Renderer* renderer, InputController* inputController) {
-	this->view = new ModeSelectionView(renderer);
+	
 	this->inputController = inputController; // ESTO DEBERÍA VOLAR, EL CONTROLLER CONOCE Y ACTUALICA EL MODELO, PERO EL MODELO NO (Creo)
 	//this->inputController = new InputController(new EventController());
+	
+	this->buttons.push_back(new Button("1v1",true));
+	this->buttons.push_back(new Button("1vPC",false));
+	this->buttons.push_back(new Button("practice",false));
+
+	this->view = new ModeSelectionView(renderer, this->buttons);
+
 }
 
 ModeSelection::~ModeSelection() {
+	for(int i = 0; i < 3; i++) {
+        delete buttons.at(i);
+    }
+
 	delete view;
 }
 
