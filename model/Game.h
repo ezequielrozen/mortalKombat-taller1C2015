@@ -37,8 +37,8 @@ private:
     CameraController* cameraController;
     Collider* collider;
     string oponentSide;
-
     GameLoader *gameLoader;
+    int diedTimeElapsed;
 
 
     int peviousKey;

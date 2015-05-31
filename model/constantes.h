@@ -93,6 +93,7 @@ const Map DAMAGE = {{"HighKickHitting", 10}, {"LowKickHitting", 10},{"HighPunchH
 const int COMMANDDELAY                      =  300;
 const int COMMANDDELAYKIT                   =  600;
 const int GAMEDELAY                         =   10;
+const int TIME_FOR_DOING_FATALITY   		= 2000;
 ////Velocidad inicial del salto del personaje.
 //const float SPEED                             =  0.04285*ANCHOVENTANAL;
 ////Aceleracion aplicada al salto del personaje.
@@ -105,6 +106,7 @@ const int GAMEDELAY                         =   10;
 const double DEFAULT_INITIAL_H              = 40;
 const double DEFAULT_FINAL_H                = 45;
 const double DEFAULT_OFFSET                 = 30;
+
 
 //joystick
 const unsigned char DEFAULT_KEY[20] = "adwscezqxokljmnbypb";

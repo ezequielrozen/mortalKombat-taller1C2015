@@ -114,6 +114,9 @@ public:
 
     void setStopX(float x);
 
+    void setFatalityEnable(bool);
+    bool getFatalityEnable();
+
 private:
 
     // State
@@ -145,6 +148,7 @@ private:
     Throwable* weapon;
     Throwable* weaponFire;
     bool weaponFireUsed;
+    bool fatalityEnable;
 };
 
 #endif /* MKCHARACTER_H_ */

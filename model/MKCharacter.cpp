@@ -27,6 +27,7 @@ MKCharacter::MKCharacter(float initialPosX, float ancho, float alto, int z_index
 	this->characterNumber = pCharacterNumber;
 
 	weaponFireUsed = false;
+	fatalityEnable = false;
 
 }
 
@@ -83,7 +84,7 @@ Throwable *MKCharacter::getWeaponFire() {
 }
 
 void MKCharacter::throwWeaponFire() {
-	if (!weaponFireUsed){
+	if (!weaponFireUsed && fatalityEnable){
 		if (this->getCharacterSide() == 'l') {
 			this->weaponFire->throwWeapon(this->posX + (this->getWidth() * 1.3),this->posY+(this->alto*0.35) ,this->getCharacterSide());
 		}else
@@ -92,6 +93,14 @@ void MKCharacter::throwWeaponFire() {
 		}
 		weaponFireUsed = true;
 	}
+}
+
+void MKCharacter::setFatalityEnable(bool state){
+	fatalityEnable = state;
+}
+
+bool MKCharacter::getFatalityEnable(){
+	return fatalityEnable;
 }
 
 void MKCharacter::updateOverPassing() {

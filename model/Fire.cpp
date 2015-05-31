@@ -25,7 +25,7 @@ void Fire::update() {
 if (this->isActive()) {
 	this->stepForward();
 	int posHit = 330;
-	cout << this->positionY << endl;
+
 	if (this->positionY > posHit && this->positionY < posHit+3) {
 		this->impact = true;
 	}

@@ -7,6 +7,7 @@
 Game::Game(GameLoader* aGameLoader, SDL_Renderer* renderer, InputController* inputController) {
     this->gameLoader = aGameLoader;
     this->initGame(renderer, inputController);
+    diedTimeElapsed = 0;
 }
 
 void Game::initGame(SDL_Renderer* renderer, InputController* inputController) {
@@ -82,7 +83,9 @@ void Game::updateGameState() {
     	if (raiden->getState() != "ReceivingFire"){
 			raiden->setState(new Dizzy());
 			raiden->setPosY(this->stage->getFloor());
-	//        scorpion->setState(new Victory());
+			if (diedTimeElapsed == 0) diedTimeElapsed = SDL_GetTicks();
+			if ((SDL_GetTicks() - diedTimeElapsed>=  TIME_FOR_DOING_FATALITY) && scorpion->getState() == "Stance")
+				scorpion->setState(new Victory());
 			scorpion->setPosY(this->stage->getFloor());
     	}
     }

@@ -59,7 +59,7 @@ void CharacterStance::update(MKCharacter * character, Events aEvent) {
             character->setState(new Blocking());
             break;
         case WeaponHit:
-            character->setState(new WeaponHitting());
+			character->setState(new WeaponHitting());
             break;
         case ReceiveDuckingPunch:
             character->setState(new ReceivingDuckingPunch());
@@ -74,7 +74,8 @@ void CharacterStance::update(MKCharacter * character, Events aEvent) {
             character->setState(new RecevingHit());
             break;
         case FatalityHit:
-            character->setState(new FatalityHitting());
+        	if (character->getFatalityEnable())
+        		character->setState(new FatalityHitting());
             break;
         case OverPassed:
             if (character->getCharacterSide() == 'l') {
