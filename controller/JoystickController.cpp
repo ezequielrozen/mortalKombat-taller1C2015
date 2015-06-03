@@ -58,6 +58,9 @@ JoystickController::JoystickController(char number, MKStageController* stageCont
 JoystickController::~JoystickController(void) {
 }
 
+void JoystickController::setStageController(MKStageController* stageController) {
+	this->stageController = stageController;
+}
 
 void JoystickController::setDucked(bool value) {
 	c0ducked = value;

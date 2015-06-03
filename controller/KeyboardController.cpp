@@ -14,6 +14,9 @@ KeyboardController::~KeyboardController(void) {
 
 //void KeyboardController::testElapsedTime(MKCharacter* character, MKCharacter* character2) {
 //}
+void KeyboardController::setStageController(MKStageController* stageController) {
+	this->stageController = stageController;
+}
 
 
 void KeyboardController::update(MKCharacter* character, MKCharacter* character2, SDL_Event* mainEvent) {

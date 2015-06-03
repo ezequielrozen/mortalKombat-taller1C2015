@@ -77,6 +77,11 @@ void InputController::update() {
 
 void InputController::setStageController(MKStageController *stageController) {
 	this->stageController = stageController;
+	this->keyboardController->setStageController(stageController);
+	this->aiController->setStageController(stageController);
+	if (joystickConnected) {
+		this->joystickControllerManager->setStageController(stageController);
+	}
 }
 
 void InputController::setCharacters(MKCharacter *character, MKCharacter *character2) {
@@ -90,4 +95,8 @@ void InputController::enableAI() {
 
 void InputController::setModeSelection(ModeSelection *modeSelection) {
 	this->stageController->setModeSelection(modeSelection);
+}
+
+void InputController::setCharacterSelection(CharacterSelection* characterSelection) {
+	this->stageController->setCharacterSelection(characterSelection);	
 }

@@ -9,6 +9,9 @@
 #include <math.h>
 #include <map>
 #include <SDL2/SDL_mixer.h>
+#include "character/CharacterSprite.h"
+#include "stage/ImageSprite.h"
+#include "stage/LayerSprite.h"
 
 using namespace std;
 
@@ -20,6 +23,14 @@ public:
 	void render();
 private:
 	SDL_Renderer* renderer;
+
+	LayerSprite* background;
+
+	ImageSprite* title;
+
+	ImageSprite* characters;
+
+	CharacterSprite* character1;
 };
 
 #endif // CHARACTERSELECTIONVIEW_H

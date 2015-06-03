@@ -19,6 +19,7 @@ public:
 	JoysticksControllerManager(MKStageController* stageController);
 	virtual ~JoysticksControllerManager();
 	void update(MKCharacter* character, MKCharacter* character2, SDL_Event* joystickEvent);
+	void setStageController(MKStageController* stageController);
 	SDL_Event* getEvent();
 private:
 	SDL_Joystick* joystickOne;

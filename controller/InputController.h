@@ -21,9 +21,12 @@
 #include "MKStageController.h"
 #include "AIController.h"
 #include "../model/ModeSelection.h"
+#include "../model/CharacterSelection.h"
 
 //class KeyboardController;
 class ModeSelection;
+class CharacterSelection;
+
 class InputController {
 public:
 	InputController(MKStageController* stageController);
@@ -37,6 +40,7 @@ public:
 	void setStageController(MKStageController* stageController);
 	void setCharacters(MKCharacter* character, MKCharacter* character2);
 	void setModeSelection(ModeSelection* modeSelection);
+	void setCharacterSelection(CharacterSelection* characterSelection);
 	void enableAI();
 
 private:

@@ -60,6 +60,12 @@ JoysticksControllerManager::~JoysticksControllerManager() {
 	}
 }
 
+void JoysticksControllerManager::setStageController(MKStageController* stageController) {
+    this->stageController = stageController;
+    this->joystick0->setStageController(stageController);
+    this->joystick1->setStageController(stageController);    
+}
+
 void JoysticksControllerManager::update(MKCharacter *character, MKCharacter *character2, SDL_Event* mainEvent) {
     extern logger *Mylog;
     char mensaje[100];

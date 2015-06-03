@@ -7,6 +7,8 @@
 #include "../model/MKCharacter.h"
 
 class ModeSelection;
+class CharacterSelection;
+class InputController;
 
 class MKStageController {
 public:
@@ -31,6 +33,7 @@ public:
 
     virtual void setCharacterToMove(MKCharacter* character) {};
     virtual void setModeSelection(ModeSelection* modeSelection) {};
+    virtual void setCharacterSelection(CharacterSelection* characterSelection) {};
 };
 
 

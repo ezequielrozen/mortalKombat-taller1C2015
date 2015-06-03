@@ -12,6 +12,7 @@ public:
     AIController(MKStageController* stageController);
     ~AIController();
     void update(MKCharacter* character1, MKCharacter* character2, SDL_Event* mainEvent);
+    void setStageController(MKStageController* stageController);
 
     MKStageController *stageController;
     bool key_u_Released;

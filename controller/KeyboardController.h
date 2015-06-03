@@ -23,6 +23,8 @@ public:
 
     void update(MKCharacter* character, MKCharacter* character2, SDL_Event* mainEvent);
 
+    void setStageController(MKStageController* stageController);
+
 private:
 
 

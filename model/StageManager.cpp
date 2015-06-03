@@ -19,7 +19,7 @@ StageManager::StageManager(char* filePath) {
     this->renderer = NULL;
     this->renderer = SDL_CreateRenderer(this->window, -1, SDL_RENDERER_TARGETTEXTURE);
 	this->modeSelection = new ModeSelection(this->renderer, this->inputController);
-    this->characterSelection = new CharacterSelection(this->renderer);
+    this->characterSelection = new CharacterSelection(this->renderer, this->inputController);
 
 	this->game = new Game(this->gameLoader, this->renderer, this->inputController);
 
@@ -46,6 +46,7 @@ bool StageManager::mainLoop() {
 	}
 
 	setStageController(new CharacterSelectionController());
+	this->characterSelection->linkInputController();
 	this->characterSelection->loop();
 
 	setStageController(new EventController());
@@ -55,10 +56,12 @@ bool StageManager::mainLoop() {
 }
 
 void StageManager::setStageController(MKStageController* stageController) {
-	if (this->stageController != NULL)
+	if (this->stageController != NULL) {
 		delete this->stageController;
-	else
+	}
+	else {
 		this->inputController = new InputController(stageController);
+	}
 	this->stageController = stageController;
 	this->inputController->setStageController(this->stageController);
 }

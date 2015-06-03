@@ -8,6 +8,10 @@ AIController::~AIController() {
 
 }
 
+void AIController::setStageController(MKStageController* stageController) {
+    this->stageController = stageController;
+}
+
 void AIController::update(MKCharacter* character1, MKCharacter* character2, SDL_Event* mainEvent) {
     switch (mainEvent->type){
         case SDL_KEYDOWN:
