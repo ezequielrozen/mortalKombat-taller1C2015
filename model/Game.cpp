@@ -36,7 +36,7 @@ void Game::initGame(SDL_Renderer* renderer, InputController* inputController) {
     this->cameraController = new CameraController();
     this->collider = new Collider();
 
-    this->comboManager = new ComboManager();
+    //this->comboManager = new ComboManager();
 }
 
 Game::~Game() {

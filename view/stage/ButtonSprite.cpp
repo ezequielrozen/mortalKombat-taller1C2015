@@ -24,3 +24,7 @@ void ButtonSprite::Draw() {
 		this->notSelectedSprite->Draw();
 	}
 }
+
+bool ButtonSprite::isSelected() {
+	return this->button->isSelected();
+}

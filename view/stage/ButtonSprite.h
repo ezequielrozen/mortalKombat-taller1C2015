@@ -15,6 +15,7 @@ public:
 	ButtonSprite(SDL_Renderer* aRenderer, Button* aButton, int x, int y, int w, int h);
 	~ButtonSprite();
 	void Draw();
+	bool isSelected();
 private:
 	SDL_Renderer* renderer;
 	Button* button;

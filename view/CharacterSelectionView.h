@@ -7,18 +7,20 @@
 #include <iostream>
 #include <string>
 #include <math.h>
-#include <map>
+#include <vector>
 #include <SDL2/SDL_mixer.h>
 #include "character/CharacterSprite.h"
 #include "stage/ImageSprite.h"
 #include "stage/LayerSprite.h"
+#include "stage/ButtonSprite.h"
+#include "../model/util/Button.h"
 
 using namespace std;
 
 class CharacterSelectionView 
 {
 public:
-	CharacterSelectionView(SDL_Renderer* aRenderer);
+	CharacterSelectionView(SDL_Renderer* aRenderer, std::vector<Button*> buttons);
 	~CharacterSelectionView();
 	void render();
 private:
@@ -30,7 +32,9 @@ private:
 
 	ImageSprite* characters;
 
-	CharacterSprite* character1;
-};
+	std::vector<ButtonSprite*> buttonSprites;
 
+	std::vector<CharacterSprite*> characterSprites;
+
+};
 #endif // CHARACTERSELECTIONVIEW_H

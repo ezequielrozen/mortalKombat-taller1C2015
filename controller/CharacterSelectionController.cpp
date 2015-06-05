@@ -64,5 +64,5 @@ void CharacterSelectionController::moveDownRelease() {
 }
 
 void CharacterSelectionController::lowKick() {
-
+    this->characterSelection->select();
 }

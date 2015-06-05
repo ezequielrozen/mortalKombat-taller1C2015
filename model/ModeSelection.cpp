@@ -5,9 +5,9 @@ ModeSelection::ModeSelection(SDL_Renderer* renderer, InputController* inputContr
 	this->inputController = inputController; // ESTO DEBERÍA VOLAR, EL CONTROLLER CONOCE Y ACTUALICA EL MODELO, PERO EL MODELO NO (Creo)
 	//this->inputController = new InputController(new EventController());
 	
-	this->buttons.push_back(new Button("1v1",true));
-	this->buttons.push_back(new Button("1vPC",false));
-	this->buttons.push_back(new Button("practice",false));
+	this->buttons.push_back(new Button("1v1", true));
+	this->buttons.push_back(new Button("1vPC", false));
+	this->buttons.push_back(new Button("practice", false));
 	this->view = new ModeSelectionView(renderer, this->buttons);
 	this->index = 0;
 	this->selectionMade = false;
