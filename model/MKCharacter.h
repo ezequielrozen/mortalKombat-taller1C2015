@@ -52,6 +52,8 @@ public:
 
     double getX();
 
+    void setX(double X);
+
     double getStagePosX();
 
     void increaseStagePosX();
@@ -116,6 +118,8 @@ public:
 
     void setFatalityEnable(bool);
     bool getFatalityEnable();
+
+    void setFinalPosX(float oponentPosX, float oponentWidth);
 
 private:
 

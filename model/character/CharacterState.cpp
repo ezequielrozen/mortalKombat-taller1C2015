@@ -80,3 +80,12 @@ bool CharacterState::isBeingOverPassedLeft() {
 void CharacterState::disableImpact(MKCharacter* character) {
 	
 }
+
+void CharacterState::setFinalPosX(float finalX)
+{
+}
+
+float CharacterState::getFinalPosX()
+{
+	return 0;
+}

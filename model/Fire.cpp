@@ -22,26 +22,21 @@ Fire::~Fire() {
 
 
 void Fire::update() {
-if (this->isActive()) {
-	this->stepForward();
-	int posHit = 330;
+	if (this->isActive()) {
+		this->stepForward();
+		int posHit = 330; //ACa tiene q ir la posY del piso donde impacta el fuego con raiden
 
-	if (this->positionY > posHit && this->positionY < posHit+3) {
-		this->impact = true;
-	}
-	if (this->positionY >= posHit+3){
-		this->destroy();
-	}
-//        } else {
-//            this->traveledDistance+= this->speed;
+		if (this->positionY > posHit && this->positionY < posHit+3) {
+			this->impact = true;
+		}
+		if (this->positionY >= posHit+3){
+			this->destroy();
+		}
 	}
 }
 
-
-
 void Fire::throwWeapon(float initialX, float initialY, char direction) {
     if (!this->isActive()) {
-//        this->traveledDistance = 0;
         this->active = true;
         this->positionX = initialX;
         this->positionY = initialY;

@@ -191,6 +191,10 @@ double MKCharacter::getX() {
 	return posX;
 }
 
+void MKCharacter::setX(double X) {
+	posX = X;
+}
+
 double MKCharacter::getStagePosX() {
 	return stagePosX;
 }
@@ -392,4 +396,30 @@ void MKCharacter::disableImpact() {
 
 void MKCharacter::setStopX(float x) {
 	this->stopX = x;
+}
+
+void MKCharacter::setFinalPosX(float oponentPosX, float oponentWidth) {
+	float pos = 0;
+	if (this->state->getFinalPosX() == 0){
+
+		if (this->getCharacterSide() == 'l') {
+
+			pos = oponentPosX + (oponentWidth*1.08);
+
+			cout << this->posX << " - " << pos<< " - " << pos + getWidth()<< " - " <<Util::getInstance()->getLogicalWindowWidth() << endl;
+
+			//Verifico que no se vaya de la pantalla por derecha
+			if ((pos + getWidth() < Util::getInstance()->getLogicalWindowWidth())) {
+				this->state->setFinalPosX(pos);
+			}
+			else
+			{
+				this->setState(new CharacterStance());
+			}
+
+		}else
+		{
+
+		}
+	}
 }

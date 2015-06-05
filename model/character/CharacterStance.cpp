@@ -17,6 +17,7 @@
 #include "BeingOverPassedRight.h"
 #include "FatalityHitting.h"
 #include "ReceivingFire.h"
+#include "TeleportationDoing.h"
 
 CharacterStance::CharacterStance() {
 //    this->timer = -1
@@ -76,6 +77,9 @@ void CharacterStance::update(MKCharacter * character, Events aEvent) {
         case FatalityHit:
         	if (character->getFatalityEnable())
         		character->setState(new FatalityHitting());
+            break;
+        case Teleportation:
+        		character->setState(new TeleportationDoing());
             break;
         case OverPassed:
             if (character->getCharacterSide() == 'l') {

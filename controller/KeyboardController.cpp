@@ -11,9 +11,6 @@ KeyboardController::KeyboardController(MKStageController* stageController)  {
 KeyboardController::~KeyboardController(void) {
 }
 
-
-//void KeyboardController::testElapsedTime(MKCharacter* character, MKCharacter* character2) {
-//}
 void KeyboardController::setStageController(MKStageController* stageController) {
 	this->stageController = stageController;
 }

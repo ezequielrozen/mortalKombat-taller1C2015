@@ -29,6 +29,8 @@ public:
     virtual void disableImpact(MKCharacter* character);
 
     virtual bool impact();
+    virtual void setFinalPosX(float finalX);
+    virtual float getFinalPosX();
 
 protected:
     virtual void setState(MKCharacter * character, CharacterState* aState);

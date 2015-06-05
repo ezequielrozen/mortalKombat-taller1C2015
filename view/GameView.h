@@ -35,6 +35,7 @@ public:
                                   CharacterSprite*& shoot, CharacterSprite*& dizzy,  CharacterSprite*& fall, CharacterSprite*& beingHit,
                                   CharacterSprite*& beingHitDown, CharacterSprite*& blockDown,
                                   CharacterSprite*& block,CharacterSprite*& fatalityHit, CharacterSprite*& fatalityFire, CharacterSprite*& onFire,
+                                  CharacterSprite*& teleportation,
                                   bool colorAltered);
     void loadAsRaiden(CharacterSprite*& walk, CharacterSprite*& stance, CharacterSprite*& jump, CharacterSprite*& sideJump,
 								CharacterSprite*& duck, CharacterSprite*& highKick, CharacterSprite*& lowKick, CharacterSprite*& dukKick,
@@ -42,7 +43,7 @@ public:
 								CharacterSprite*& lowPunch, CharacterSprite*& winner,
 								CharacterSprite*& shoot,  CharacterSprite*& dizzy, CharacterSprite*& fall,
 								CharacterSprite*& beingHit, CharacterSprite*& beingHitDown, CharacterSprite*& blockDown, CharacterSprite*& block,
-								CharacterSprite*& fatalityHit, CharacterSprite*& fatalityFire, CharacterSprite*& onFire,
+								CharacterSprite*& fatalityHit, CharacterSprite*& fatalityFire, CharacterSprite*& onFire, CharacterSprite*& teleportation,
 								bool colorAltered);
     void startRender();
     void endRender();
@@ -83,10 +84,10 @@ private:
     CharacterSprite* scorpionBeingHitDown;
     CharacterSprite* scorpionBlockDown;
     CharacterSprite* scorpionBlock;
-
     CharacterSprite* scorpionFatalityHit;
     CharacterSprite* scorpionFatalityFire;
     CharacterSprite* scorpionReceivingFire;
+    CharacterSprite* scorpionTeleportation;
 
     CharacterSprite* raidenWalk;
     CharacterSprite* raidenStance;
@@ -112,6 +113,7 @@ private:
     CharacterSprite* raidenFatalityHit;
     CharacterSprite* raidenFatalityFire;
     CharacterSprite* raidenReceivingFire;
+    CharacterSprite* raidenTeleportation;
 
     LayerSprite** layerSprites;
     int layerCount;

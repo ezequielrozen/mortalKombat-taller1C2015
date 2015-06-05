@@ -116,7 +116,7 @@ const int COMBO_TOLERANCE = 1;
 
 enum Events { MoveRight, MoveLeft, Jump, Duck, WeaponHit, HighPunch, LowPunch, HighKick, LowKick, Block, ReceiveHit,
 	ReceiveDuckingPunch, ReceiveDuckingKick, ReceiveWeapon, MoveRightRelease, MoveLeftRelease, DuckRelease, BlockRelease,
-	JumpFinished, OverPassed, OverPassedFinished, FatalityHit, ReceiveFire};
+	JumpFinished, OverPassed, OverPassedFinished, FatalityHit, ReceiveFire, Teleportation};
 
 enum GameModes { OneVsTwo, OneVsAI, Practice};
 
