@@ -1,10 +1,10 @@
 #include "CargaJson.h"
-#include <algorithm>
 
 using namespace std;
 
 bool cargaArchivoJSON(char* filename, float &stageWidth, float &stageHeight, float &floor, std::string &oponentSide,
-						std::list<Layer*>* layers, std::list<MKCharacter*>* characters, double& initialH, double& finalH, double& offset) {
+						std::list<Layer*>* layers, std::list<MKCharacter*>* characters, double& initialH, double& finalH,
+                        double& offset, std::list<Events>* combo1, std::list<Events>* combo2) {
 
     extern logger* Mylog;
     char mensaje[200];
@@ -104,7 +104,7 @@ bool cargaArchivoJSON(char* filename, float &stageWidth, float &stageHeight, flo
 
 	}
 
-    if(layers->empty()){//no hay capas en el archivo
+    if (layers->empty()) {//no hay capas en el archivo
         Mylog->Log("sin capas validas: usando default", ERROR_LEVEL_WARNING);
 
         Mylog->Log("Capa 1: imagen_fondo: data/stage2.jpg, ancho: 1280", ERROR_LEVEL_WARNING);
@@ -192,13 +192,96 @@ bool cargaArchivoJSON(char* filename, float &stageWidth, float &stageHeight, flo
     Mylog->Log("----------Botones----------", ERROR_LEVEL_INFO);
     if(root.isMember("botones")){
         cargaMapbotones(root["botones"], 0);
-    }else{
+    } else {
         Mylog->Log("Cargando botones por default por no estar presente seccion en JSON", ERROR_LEVEL_INFO);
         cargaMapbotones(root, 1);
     }
 
+    Mylog->Log("----------Combos-----------", ERROR_LEVEL_INFO);
+    if (root.isMember("combos")) {
+        cargarCombos(root["combos"], combo1, combo2);
+    } else {
+        Mylog->Log("Cargando combos por default por no estar presente seccion en JSON", ERROR_LEVEL_INFO);
+        cargarCombosDefaults(combo1, combo2);
+    }
+
     Mylog->Log("Parseo completo", ERROR_LEVEL_INFO);
     return true;
+}
+
+void cargarCombos(Json::Value combos, list<Events>* combo1, list<Events>* combo2) {
+    string builderCombo1 = combos.isMember("combo1") && combos["combo1"].isString() && combos["combo1"].asString().find(",",0) != -1
+                            && combos["combo1"].asString().size() > 0 ? combos["combo1"].asString() : "";
+    string builderCombo2 = combos.isMember("combo2") && combos["combo2"].isString() && combos["combo2"].asString().find(",",0) != -1
+                           && combos["combo2"].asString().size() > 0 ? combos["combo2"].asString() : "";
+    procesarComboBuilders(builderCombo1, builderCombo2, combo1, combo2);
+}
+
+void procesarComboBuilders(string builderCombo1, string buildercombo2, list<Events>* combo1, list<Events>* combo2) {
+    if (builderCombo1.length() == 0 || buildercombo2.size() == 0) {
+        cargarCombosDefaults(combo1, combo2);
+    } else {
+        buildCombo(builderCombo1, combo1);
+        buildCombo(buildercombo2, combo2);
+    }
+    if(combo1->size() == 0 || combo2->size() == 0 || sonPrefijos(combo1,combo2)) {
+        cargarCombosDefaults(combo1,combo2);
+    }
+}
+
+void buildCombo(string builderCombo, list<Events>* combo) {
+    vector<string> internal;
+    stringstream ss(builderCombo); // Turn the string into a stream.
+    string tok;
+
+    while(getline(ss, tok, ',')) {
+        internal.push_back(tok);
+    }
+    int i=0;
+    while (i < internal.size()) {
+        map<std::string,Events>::const_iterator it = eventMapper.find(internal[i]);
+        if(it == eventMapper.end()) {
+            break;
+        }
+        combo->push_back((*it).second);
+        i++;
+    }
+    if(combo->size() < internal.size()) {
+        combo->clear();
+    }
+}
+
+void cargarCombosDefaults(list<Events>* combo1, list<Events>* combo2) {
+    for(int i = 0; i < DEFAULT_COMBO1.size(); i++) {
+        combo1->push_back(DEFAULT_COMBO1[i]);
+    }
+    for(int j = 0; j < DEFAULT_COMBO2.size(); j++) {
+        combo2->push_back(DEFAULT_COMBO2[j]);
+    }
+}
+
+bool sonPrefijos(list<Events>* combo1, list<Events>* combo2) {
+    bool esPrefijo = true;
+    list<Events>::iterator it = combo1->begin();
+    list<Events>::iterator iter = combo2->begin();
+    if (combo1->size() < combo2->size()) {
+        while (it != combo1->end() && esPrefijo) {
+            if((*it) != (*iter)) {
+                esPrefijo = false;
+            }
+            it++;
+            iter++;
+        }
+    } else {
+        while (iter != combo2->end() && esPrefijo) {
+            if((*iter) != (*it)) {
+                esPrefijo = false;
+            }
+            it++;
+            iter++;
+        }
+    }
+    return esPrefijo;
 }
 
 void errorPainterController(double& initialH, double& finalH, double& offset) {

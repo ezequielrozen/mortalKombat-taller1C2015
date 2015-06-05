@@ -3,6 +3,7 @@
 
 #include "util/Util.h"
 #include <map>
+#include <vector>
 
 ////ventana
 const int ANCHOVENTANAPX                    =  700;
@@ -111,14 +112,19 @@ const double DEFAULT_OFFSET                 = 30;
 //joystick
 const unsigned char DEFAULT_KEY[20] = "adwscezqxokljmnbypb";
 
-//
-
 const int COMBO_TOLERANCE = 1;
 
 enum Events { MoveRight, MoveLeft, Jump, Duck, WeaponHit, HighPunch, LowPunch, HighKick, LowKick, Block, ReceiveHit,
 	ReceiveDuckingPunch, ReceiveDuckingKick, ReceiveWeapon, MoveRightRelease, MoveLeftRelease, DuckRelease, BlockRelease,
-	JumpFinished, OverPassed, OverPassedFinished, FatalityHit, FatalityFire, ReceiveFire};
+	JumpFinished, OverPassed, OverPassedFinished, FatalityHit, ReceiveFire};
 
 enum GameModes { OneVsTwo, OneVsAI, Practice};
+
+const std::vector<Events> DEFAULT_COMBO1 = {MoveRight, MoveLeft, Duck, LowKick};
+const std::vector<Events> DEFAULT_COMBO2 = {MoveRight, Duck, MoveRight, HighPunch, LowPunch, LowKick};
+
+typedef std::map<std::string, Events> MapEvent;
+const MapEvent eventMapper = {{"derecha", MoveRight}, {"izquierda", MoveLeft}, {"arriba", Jump}, {"abajo", Duck}, {"puñoAlto", HighPunch},
+							  {"puñoBajo", LowPunch}, {"patadaAlta", HighKick}, {"patadaBaja", LowKick}, {"defensa", Block}, {"arrojarArma", WeaponHit}};
 
 #endif /* CONSTANTES_H_ */

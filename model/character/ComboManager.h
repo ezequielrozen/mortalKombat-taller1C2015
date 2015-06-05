@@ -1,6 +1,3 @@
-//
-// Created by mauri on 03/06/15.
-//
 using namespace std;
 
 #ifndef MORTALKOMBAT_TALLER1C2015_COMBOMANAGER_H

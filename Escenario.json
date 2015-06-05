@@ -127,6 +127,11 @@
     "c2duckPunch":8
   },
 
+  "combos": {
+    "combo1": "abajo,izquierda,derecha,patadaBaja",
+    "combo2": "abajo,patadaAlta,izquierda,derecha,puñoAlto,derecha,patadaBaja"
+  },
+
 
   "j1elige": 0,
   "j2elige": 1

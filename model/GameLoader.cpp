@@ -4,6 +4,8 @@
 GameLoader::GameLoader() {
     this->layers = new list<Layer*>();
     this->characters = new list<MKCharacter*>();
+    this->combo1 = new list<Events>();
+    this->combo2 = new list<Events>();
 }
 
 void GameLoader::loadJSON(char* passed_path) {
@@ -14,12 +16,14 @@ void GameLoader::loadJSON(char* passed_path) {
         file = passed_path;
     }
     double initialH, finalH, offset;
-    bool respuesta = cargaArchivoJSON(file, stageWidth, stageHeight, floor, oponentSide, layers, this->characters, initialH, finalH, offset);
+    bool respuesta = cargaArchivoJSON(file, stageWidth, stageHeight, floor, oponentSide, layers, this->characters,
+                                      initialH, finalH, offset, this->combo1, this->combo2);
 
     if (!respuesta)
     {
 
-    	cargaArchivoJSON("Escenario.json", stageWidth, stageHeight, floor, oponentSide, layers, this->characters, initialH, finalH, offset);
+    	cargaArchivoJSON("Escenario.json", stageWidth, stageHeight, floor, oponentSide, layers, this->characters,
+                         initialH, finalH, offset, this->combo1, this->combo2);
 
     	Mylog->Log("Cargando Escenario default por JSON mal formado. ", ERROR_LEVEL_WARNING);
     }
@@ -54,4 +58,12 @@ list<MKCharacter *>* GameLoader::getCharacters() {
 
 Painter *GameLoader::getPainter() {
     return this->painter;
+}
+
+list<Events>* GameLoader::getCombo1() {
+    return this->combo1;
+}
+
+list<Events>* GameLoader::getCombo2() {
+    return this->combo1;
 }
