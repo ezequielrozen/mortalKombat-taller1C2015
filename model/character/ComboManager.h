@@ -16,7 +16,11 @@ private:
 
     int errorCounter;
     int comboProgress;
+    int combo2Progress;
 
+    bool bufferMatchesCombo(list<Events>* combo);
+
+    void cleanBuffer();
     list<Events>* combo1;
     list<Events>* combo2;
     list<Events>* buffer;
