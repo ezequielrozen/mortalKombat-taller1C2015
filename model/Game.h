@@ -11,6 +11,7 @@
 #include "SDL2/SDL_image.h"
 #include "stage/Stage.h"
 #include "GameLoader.h"
+#include "character/ComboManager.h"
 #include <math.h>
 #include <iostream>
 #include <SDL2/SDL_mixer.h>
@@ -40,7 +41,7 @@ private:
     GameLoader *gameLoader;
     int diedTimeElapsed;
 
-
+    ComboManager* comboManager;
     int peviousKey;
 };
 
