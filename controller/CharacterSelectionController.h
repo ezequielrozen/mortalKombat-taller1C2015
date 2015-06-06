@@ -15,21 +15,25 @@ public:
     ~CharacterSelectionController();
     void update();
     void setCharacterSelection(CharacterSelection* characterSelection);
-    void moveUp();
-    void moveDown();
-    void moveRight();
-    void moveLeft();
-    void moveRightRelease();
-    void moveLeftRelease();
-    void moveUpRelease();
-    void moveDownRelease();
-    void lowKick();
+    void moveUp(int n);
+    void moveDown(int n);
+    void moveRight(int n);
+    void moveLeft(int n);
+    void moveRightRelease(int n);
+    void moveLeftRelease(int n);
+    void moveUpRelease(int n);
+    void moveDownRelease(int n);
+    void lowKick(int n);
 private:
 	CharacterSelection* characterSelection;
-	bool movingUp;
-	bool movingDown;
-	bool movingRight;
-	bool movingLeft;
+	bool movingUpOne;
+	bool movingDownOne;
+	bool movingRightOne;
+	bool movingLeftOne;
+    bool movingUpTwo;
+    bool movingDownTwo;
+    bool movingRightTwo;
+    bool movingLeftTwo;
 };
 
 

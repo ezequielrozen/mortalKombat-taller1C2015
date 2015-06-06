@@ -25,21 +25,21 @@ class EventController : public MKStageController {
 public:
 	EventController();
 	virtual ~EventController();
-	void moveRight();
-	void moveLeft();
-	void moveUp();
-	void moveDown();
+	void moveRight(int n);
+	void moveLeft(int n);
+	void moveUp(int n);
+	void moveDown(int n);
 	void highKick();
-	void lowKick();
+	void lowKick(int n);
 	void highPunch();
 	void lowPunch();
 	void shoot();
 	void block();
 	void duckPunch();
 
-	void moveLeftRelease();
-	void moveRightRelease();
-	void moveDownRelease();
+	void moveLeftRelease(int n);
+	void moveRightRelease(int n);
+	void moveDownRelease(int n);
 	void blockRelease();
 
 	void setCharacterToMove(MKCharacter* character);

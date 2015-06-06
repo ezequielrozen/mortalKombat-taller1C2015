@@ -12,6 +12,12 @@
 #include <string>
 #include <SDL2/SDL_mixer.h>
 
+struct ButtonInfo {
+  int actualButton;
+  int lastButton;
+  bool buttonPressed;
+};
+
 class InputController;
 
 class CharacterSelection 
@@ -21,21 +27,21 @@ public:
 	~CharacterSelection();
 	void loop();
 	void linkInputController();
-	void moveUp();
-	void moveDown();
-	void moveRight();
-	void moveLeft();
-	void select();
+	void moveUp(int n);
+	void moveDown(int n);
+	void moveRight(int n);
+	void moveLeft(int n);
+	void select(int n);
+
 
 private:
 	CharacterSelectionView* view;
 	InputController* inputController;
-	std::vector<Button*> buttons;
+	std::vector<Button*> buttons1;
+	std::vector<Button*> buttons2;
 
-	int actualButton;
-	int lastButton;
+	std::vector<ButtonInfo> buttonInfo;
 
-	bool buttonPressed;
 };
 
 #endif // CHARACTERSELECTION_H

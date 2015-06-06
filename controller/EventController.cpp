@@ -15,41 +15,41 @@ void EventController::setCharacterToMove(MKCharacter* character) {
 	this->characterToMove = character;
 }
 
-void EventController::moveRight(){
+void EventController::moveRight(int n){
 //	cout << "moveRight : " << this->characterToMove->getName() << endl;
 	Mylog->Log("movimiento del personaje: hacia la derecha", ERROR_LEVEL_INFO);
 	this->characterToMove->update(MoveRight);
 }
 
-void EventController::moveRightRelease(){
+void EventController::moveRightRelease(int n){
 //	cout << "moveRightRelease : " << this->characterToMove->getName() << endl;
 	this->characterToMove->update(MoveRightRelease);
 }
 
-void EventController::moveLeft(){
+void EventController::moveLeft(int n){
 //	cout << "moveLeft : " << this->characterToMove->getName() << endl;
 	Mylog->Log("movimiento del personaje: hacia la Izquierda", ERROR_LEVEL_INFO);
 	this->characterToMove->update(MoveLeft);
 }
 
-void EventController::moveLeftRelease(){
+void EventController::moveLeftRelease(int n){
 //	cout << "moveLeftRelease : " << this->characterToMove->getName() << endl;
 	this->characterToMove->update(MoveLeftRelease);
 }
 
-void EventController::moveUp(){
+void EventController::moveUp(int n){
 //	cout << "moveUp : " << this->characterToMove->getName() << endl;
 	Mylog->Log("movimiento del personaje: hacia arriba", ERROR_LEVEL_INFO);
 	this->characterToMove->update(Jump);
 }
 
-void EventController::moveDown(){
+void EventController::moveDown(int n){
 //	cout << "moveDown : " << this->characterToMovegetName() << endl;
 	Mylog->Log("movimiento del personaje: agachandose", ERROR_LEVEL_INFO);
 	this->characterToMove->update(Duck);
 }
 
-void EventController::moveDownRelease(){
+void EventController::moveDownRelease(int n){
 //	cout << "moveDownRelease : " << this->this->characterToMoveToMove->getName() << endl;
 	Mylog->Log("movimiento del personaje: Levantandose", ERROR_LEVEL_INFO);
 	this->characterToMove->update(DuckRelease);
@@ -61,7 +61,7 @@ void EventController::highKick(){
 	this->characterToMove->update(HighKick);
 }
 
-void EventController::lowKick(){
+void EventController::lowKick(int n){
 //	cout << "lowKick : " << this->characterToMove->getName() << endl;
 	Mylog->Log("movimiento del personaje: Patada baja", ERROR_LEVEL_INFO);
 	this->characterToMove->update(LowKick);

@@ -13,22 +13,22 @@ class InputController;
 class MKStageController {
 public:
     virtual void update() {};
-    virtual void moveRight() {};
-    virtual void moveLeft() {};
-    virtual void moveUp() {};
-    virtual void moveDown() {};
+    virtual void moveRight(int n) {};
+    virtual void moveLeft(int n) {};
+    virtual void moveUp(int n) {};
+    virtual void moveDown(int n) {};
     virtual void highKick() {};
-    virtual void lowKick() {};
+    virtual void lowKick(int n) {};
     virtual void highPunch() {};
     virtual void lowPunch() {};
     virtual void shoot() {};
     virtual void block() {};
     virtual void duckPunch() {};
 
-    virtual void moveLeftRelease() {};
-    virtual void moveRightRelease() {};
-    virtual void moveDownRelease() {};
-    virtual void moveUpRelease() {};
+    virtual void moveLeftRelease(int n) {};
+    virtual void moveRightRelease(int n) {};
+    virtual void moveDownRelease(int n) {};
+    virtual void moveUpRelease(int n) {};
     virtual void blockRelease() {};
 
     virtual void setCharacterToMove(MKCharacter* character) {};

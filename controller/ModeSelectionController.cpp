@@ -18,15 +18,15 @@ void ModeSelectionController::update() {
 
 }
 
-void ModeSelectionController::moveUp() {
-    if (!movingUp) {
+void ModeSelectionController::moveUp(int n) {
+    if (!movingUp && n == 0) {
         this->modeSelection->moveUp();
         this->movingUp = true;
     }
 }
 
-void ModeSelectionController::moveDown() {
-    if (!movingDown) {
+void ModeSelectionController::moveDown(int n) {
+    if (!movingDown && n == 0) {
         this->modeSelection->moveDown();
         this->movingDown = true;
     }
@@ -37,14 +37,20 @@ void ModeSelectionController::setModeSelection(ModeSelection* modeSelection) {
     this->modeSelection = modeSelection;
 }
 
-void ModeSelectionController::lowKick() {
-    this->modeSelection->select();
+void ModeSelectionController::lowKick(int n) {
+    if (n == 0) {
+        this->modeSelection->select();
+    }
 }
 
-void ModeSelectionController::moveUpRelease() {
-    this->movingUp = false;
+void ModeSelectionController::moveUpRelease(int n) {
+    if (n == 0) {
+        this->movingUp = false;
+    }
 }
 
-void ModeSelectionController::moveDownRelease() {
-    this->movingDown = false;
+void ModeSelectionController::moveDownRelease(int n) {
+    if (n == 0) {
+        this->movingDown = false;
+    }
 }

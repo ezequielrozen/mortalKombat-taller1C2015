@@ -15,11 +15,11 @@ public:
     ~ModeSelectionController();
     void setModeSelection(ModeSelection* modeSelection);
     void update();
-    void moveUp();
-    void moveDown();
-    void moveUpRelease();
-    void moveDownRelease();
-    void lowKick();
+    void moveUp(int n);
+    void moveDown(int n);
+    void moveUpRelease(int n);
+    void moveDownRelease(int n);
+    void lowKick(int n);
 private:
         ModeSelection* modeSelection;
         bool movingUp;

@@ -5,7 +5,7 @@ struct character {
   int frames;
 };
 
-CharacterSelectionView::CharacterSelectionView(SDL_Renderer* aRenderer, std::vector<Button*> buttons) {
+CharacterSelectionView::CharacterSelectionView(SDL_Renderer* aRenderer, std::vector<Button*> buttons1, std::vector<Button*> buttons2) {
 	this->renderer = aRenderer;
 
 	int scWidth = Util::getInstance()->getWindowWidth();
@@ -24,7 +24,8 @@ CharacterSelectionView::CharacterSelectionView(SDL_Renderer* aRenderer, std::vec
 
 	while (i < 3) {
 		while (j < 4) {
-			this->buttonSprites.push_back(new ButtonSprite(this->renderer, buttons.at((4*i)+j), (0.189+(displaceX*j))*scWidth, (0.148+(displaceY*i))*scHeight, 0.1488*scWidth, 0.202*scHeight));
+			this->buttonSprites1.push_back(new ButtonSprite(this->renderer, buttons1.at((4*i)+j), (0.189+(displaceX*j))*scWidth, (0.148+(displaceY*i))*scHeight, 0.1488*scWidth, 0.202*scHeight));
+			this->buttonSprites2.push_back(new ButtonSprite(this->renderer, buttons2.at((4*i)+j), (0.189+(displaceX*j))*scWidth, (0.148+(displaceY*i))*scHeight, 0.1488*scWidth, 0.202*scHeight));
 			j++;
 		}
 		i++;
@@ -39,14 +40,17 @@ CharacterSelectionView::CharacterSelectionView(SDL_Renderer* aRenderer, std::vec
 
 	for(int k = 0; k < 12; k++) {
 		name = "data/CharacterSelection/"+ch[k].name+"Stance.png";
-		this->characterSprites.push_back(new CharacterSprite(this->renderer, (char*)name.c_str(), 0.025*scaledScWidth,0.615*scaledScHeight, 0.17*scaledScWidth,0.345*scaledScHeight, ch[k].frames, "RIGHT", false, false, NULL));
+		this->characterSprites1.push_back(new CharacterSprite(this->renderer, (char*)name.c_str(), 0.025*scaledScWidth,0.615*scaledScHeight, 0.17*scaledScWidth,0.345*scaledScHeight, ch[k].frames, "RIGHT", false, false, NULL));
+    	this->characterSprites2.push_back(new CharacterSprite(this->renderer, (char*)name.c_str(), 0.825*scaledScWidth,0.615*scaledScHeight, 0.17*scaledScWidth,0.345*scaledScHeight, ch[k].frames, "LEFT", false, false, NULL));	
     }
 }
 
 CharacterSelectionView::~CharacterSelectionView() {
 	for(int i = 0; i < 12; i++) {
-        delete characterSprites.at(i);
-        delete buttonSprites.at(i);
+        delete characterSprites1.at(i);
+        delete characterSprites2.at(i);
+        delete buttonSprites1.at(i);
+        delete buttonSprites2.at(i);
     }
 	delete characters;
 	delete title;
@@ -63,10 +67,16 @@ void CharacterSelectionView::render() {
    
     int i = 0;
     while (i < 12) {
-    	this->buttonSprites.at(i)->Draw();
-    	if (this->buttonSprites.at(i)->isSelected()) {
-    		this->characterSprites.at(i)->Draw();
-    		this->characterSprites.at(i)->Play(6.66*GAMEDELAY, 0.17*scaledScWidth);
+    	this->buttonSprites1.at(i)->Draw();
+    	this->buttonSprites2.at(i)->Draw();
+   
+    	if (this->buttonSprites1.at(i)->isSelected()) {
+    		this->characterSprites1.at(i)->Draw();
+    		this->characterSprites1.at(i)->Play(6.66*GAMEDELAY, 0.17*scaledScWidth);
+    	}
+    	if (this->buttonSprites2.at(i)->isSelected()) {
+    		this->characterSprites2.at(i)->Draw();
+    		this->characterSprites2.at(i)->Play(6.66*GAMEDELAY, 0.17*scaledScWidth);
     	}
     	i++;
     }

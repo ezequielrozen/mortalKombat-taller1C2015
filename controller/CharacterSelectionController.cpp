@@ -5,10 +5,14 @@
 #include "CharacterSelectionController.h"
 
 CharacterSelectionController::CharacterSelectionController() {
-	this->movingDown = false;
-    this->movingUp = false;
-    this->movingRight = false;
-    this->movingLeft = false;
+	this->movingDownOne = false;
+    this->movingUpOne = false;
+    this->movingRightOne = false;
+    this->movingLeftOne = false;
+    this->movingDownTwo = false;
+    this->movingUpTwo = false;
+    this->movingRightTwo = false;
+    this->movingLeftTwo = false;
 }
 
 CharacterSelectionController::~CharacterSelectionController() {
@@ -22,47 +26,104 @@ void CharacterSelectionController::setCharacterSelection(CharacterSelection* cha
 	this->characterSelection = characterSelection;
 }
 
-void CharacterSelectionController::moveUp() {
-	if (!movingUp) {
-        this->characterSelection->moveUp();
-        this->movingUp = true;
+void CharacterSelectionController::moveUp(int n) {
+	if (n == 0) {
+        if (!movingUpOne) {
+            this->characterSelection->moveUp(n);
+            this->movingUpOne = true;
+        } 
+    }
+    else {
+        if (!movingUpTwo) {
+            this->characterSelection->moveUp(n);
+            this->movingUpTwo = true;
+        }
     }
 }
 
-void CharacterSelectionController::moveDown() {
-	if (!movingDown) {
-        this->characterSelection->moveDown();
-        this->movingDown = true;
+void CharacterSelectionController::moveDown(int n) {
+	if (n == 0) {
+        if (!movingDownOne) {
+            this->characterSelection->moveDown(n);
+            this->movingDownOne = true;
+        } 
+    }
+    else {
+        if (!movingDownTwo) {
+            this->characterSelection->moveDown(n);
+            this->movingDownTwo = true;
+        }
     }
 }
-void CharacterSelectionController::moveRight() {
-	if (!movingRight) {
-        this->characterSelection->moveRight();
-        this->movingRight = true;
+void CharacterSelectionController::moveRight(int n) {
+	if (n == 0) {
+        if (!movingRightOne) {
+            this->characterSelection->moveRight(n);
+            this->movingRightOne = true;
+        } 
+    }
+    else {
+        if (!movingRightTwo) {
+            this->characterSelection->moveRight(n);
+            this->movingRightTwo = true;
+        }
     }
 }
-void CharacterSelectionController::moveLeft() {
-	if (!movingLeft) {
-        this->characterSelection->moveLeft();
-        this->movingLeft = true;
+void CharacterSelectionController::moveLeft(int n) {
+	if (n == 0) {
+        if (!movingLeftOne) {
+            this->characterSelection->moveLeft(n);
+            this->movingLeftOne = true;
+        } 
+    }
+    else {
+        if (!movingLeftTwo) {
+            this->characterSelection->moveLeft(n);
+            this->movingLeftTwo = true;
+        }
     }
 }
-void CharacterSelectionController::moveRightRelease() {
-	this->movingRight = false;
+void CharacterSelectionController::moveRightRelease(int n) {
+	if (n == 0) {
+        this->movingRightOne = false;
+    }
+    else {
+        this->movingRightTwo = false;
+    }
 }
 
-void CharacterSelectionController::moveLeftRelease() {
-	this->movingLeft = false;
+void CharacterSelectionController::moveLeftRelease(int n) {
+	if (n == 0) {
+        this->movingLeftOne = false;
+    }
+    else {
+        this->movingLeftTwo = false;
+    }
 }
 
-void CharacterSelectionController::moveUpRelease() {
-	this->movingUp = false;
+void CharacterSelectionController::moveUpRelease(int n) {
+	if (n == 0) {
+        this->movingUpOne = false;
+    }
+    else {
+        this->movingUpTwo = false;
+    }
 }
 
-void CharacterSelectionController::moveDownRelease() {
-	this->movingDown = false;
+void CharacterSelectionController::moveDownRelease(int n) {
+    if (n == 0) {
+        this->movingDownOne = false;
+    }
+    else {
+        this->movingDownTwo = false;
+    }
 }
 
-void CharacterSelectionController::lowKick() {
-    this->characterSelection->select();
+void CharacterSelectionController::lowKick(int n) {
+    if (n == 0) {
+        this->characterSelection->select(n);
+    }
+    else {
+        this->characterSelection->select(n);
+    }
 }

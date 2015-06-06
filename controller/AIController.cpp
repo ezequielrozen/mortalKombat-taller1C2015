@@ -18,19 +18,19 @@ void AIController::update(MKCharacter* character1, MKCharacter* character2, SDL_
             switch(mainEvent->key.keysym.sym) {
                 case SDLK_RIGHT:
                     this->stageController->setCharacterToMove(character1);
-                    this->stageController->moveRight();
+                    this->stageController->moveRight(1);
                     break;
                 case SDLK_LEFT:
                     this->stageController->setCharacterToMove(character1);
-                    this->stageController->moveLeft();
+                    this->stageController->moveLeft(1);
                     break;
                 case SDLK_UP:
                     this->stageController->setCharacterToMove(character1);
-                    this->stageController->moveUp();
+                    this->stageController->moveUp(1);
                     break;
                 case SDLK_DOWN:
                     this->stageController->setCharacterToMove(character1);
-                    this->stageController->moveDown();
+                    this->stageController->moveDown(1);
                     break;
                 case SDLK_k:
                     this->stageController->setCharacterToMove(character1);
@@ -38,7 +38,7 @@ void AIController::update(MKCharacter* character1, MKCharacter* character2, SDL_
                     break;
                 case SDLK_l:
                     this->stageController->setCharacterToMove(character1);
-                    this->stageController->lowKick();
+                    this->stageController->lowKick(1);
                     break;
                 case SDLK_p:
                     this->stageController->setCharacterToMove(character1);
@@ -73,15 +73,15 @@ void AIController::update(MKCharacter* character1, MKCharacter* character2, SDL_
             switch(mainEvent->key.keysym.sym){
                 case SDLK_DOWN:
                     this->stageController->setCharacterToMove(character1);
-                    this->stageController->moveDownRelease();
+                    this->stageController->moveDownRelease(1);
                     break;
                 case SDLK_RIGHT:
                     this->stageController->setCharacterToMove(character1);
-                    this->stageController->moveRightRelease();
+                    this->stageController->moveRightRelease(1);
                     break;
                 case SDLK_LEFT:
                     this->stageController->setCharacterToMove(character1);
-                    this->stageController->moveLeftRelease();
+                    this->stageController->moveLeftRelease(1);
                     break;
                 case SDLK_b:
                     this->stageController->setCharacterToMove(character1);
