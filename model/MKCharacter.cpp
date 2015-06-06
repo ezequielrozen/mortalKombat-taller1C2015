@@ -409,7 +409,7 @@ void MKCharacter::setFinalPosX(float oponentPosX, float oponentWidth) {
 			cout << this->posX << " - " << pos<< " - " << pos + getWidth()<< " - " <<Util::getInstance()->getLogicalWindowWidth() << endl;
 
 			//Verifico que no se vaya de la pantalla por derecha
-			if ((pos + getWidth() < Util::getInstance()->getLogicalWindowWidth())) {
+			if ((pos + getWidth() <= Util::getInstance()->getLogicalWindowWidth())) {
 				this->state->setFinalPosX(pos);
 			}
 			else
@@ -419,6 +419,18 @@ void MKCharacter::setFinalPosX(float oponentPosX, float oponentWidth) {
 
 		}else
 		{
+			pos = oponentPosX - (getWidth() *1.08);
+
+			cout << this->posX << " - " << pos<< " - " << pos + getWidth()<< " - " <<Util::getInstance()->getLogicalWindowWidth() << endl;
+
+			//Verifico que no se vaya de la pantalla por izquierda
+			if (pos >= 0) {
+				this->state->setFinalPosX(pos);
+			}
+			else
+			{
+				this->setState(new CharacterStance());
+			}
 
 		}
 	}
