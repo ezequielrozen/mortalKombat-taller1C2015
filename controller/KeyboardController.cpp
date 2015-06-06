@@ -80,7 +80,7 @@ void KeyboardController::update(MKCharacter* character, MKCharacter* character2,
 				}
 				break;
 			case SDLK_o:
-				this->stageController->setCharacterToMove(character);
+				this->stageController->setCharacterToMove(character2);
 				this->stageController->duckPunch();
 				break;
 			/****************************************************************************************************/

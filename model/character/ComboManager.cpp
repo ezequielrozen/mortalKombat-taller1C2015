@@ -1,5 +1,5 @@
-#include <SDL_events.h>
-#include <SDL_timer.h>
+#include "SDL2/SDL_events.h"
+#include <SDL2/SDL_timer.h>
 #include "ComboManager.h"
 
 Events ComboManager::checkCombo(Events originalEvent) {

@@ -136,6 +136,10 @@ void Collider::update(MKCharacter* character1, MKCharacter* character2, bool cam
 	{
 		character1->setFinalPosX(character2->getX(), character2->getWidth());
 	}
+	if (character2->getState() == "TeleportationDoing")
+	{
+		character2->setFinalPosX(character1->getX(), character1->getWidth());
+	}
 
 	//En caso de que los dos golpeen al mismo tiempo, se decide aleatoriamente quien pega primero.
 	//En caso de que no golpeen al mismo tiempo, no tiene importancia.
