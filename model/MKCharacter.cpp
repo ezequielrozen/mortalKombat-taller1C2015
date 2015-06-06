@@ -29,6 +29,8 @@ MKCharacter::MKCharacter(float initialPosX, float ancho, float alto, int z_index
 	weaponFireUsed = false;
 	fatalityEnable = false;
 
+
+
 }
 
 MKCharacter::~MKCharacter(void) {
@@ -434,4 +436,8 @@ void MKCharacter::setFinalPosX(float oponentPosX, float oponentWidth) {
 
 		}
 	}
+}
+
+int MKCharacter::getCharacterNumber() {
+	return this->characterNumber;
 }

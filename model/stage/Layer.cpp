@@ -11,16 +11,7 @@ Layer::Layer(float width) {
 Layer::Layer(float width, string path) {
     this->width = width;
     this->path = path;
-    //Here depending on the width, the speed is set. Now depends of the z-index
-    this->left_border = (this->width - Util::getInstance()->getLogicalWindowWidth()) /2;
-
-    this->speed =  ((this->getWidth() - Util::getInstance()->getLogicalWindowWidth()) / Util::getInstance()->getLogicalStageWidth()) * 5;
-    if (this->width <= Util::getInstance()->getLogicalWindowWidth()) {
-        this->left_border = (Util::getInstance()->getLogicalWindowWidth() - this->width) / 2;
-        this->speed =  ((Util::getInstance()->getLogicalWindowWidth() - this->getWidth()) / Util::getInstance()->getLogicalStageWidth()) * 5;
-
-    }
-
+    this->init();
 }
 
 Layer::~Layer() {
@@ -96,4 +87,15 @@ void Layer::update() {
 
 void Layer::setMovement(string move) {
     movement = move;
+}
+
+void Layer::init() {
+    this->left_border = (this->width - Util::getInstance()->getLogicalWindowWidth()) /2;
+
+    this->speed =  ((this->getWidth() - Util::getInstance()->getLogicalWindowWidth()) / Util::getInstance()->getLogicalStageWidth()) * 5;
+    if (this->width <= Util::getInstance()->getLogicalWindowWidth()) {
+        this->left_border = (Util::getInstance()->getLogicalWindowWidth() - this->width) / 2;
+        this->speed =  ((Util::getInstance()->getLogicalWindowWidth() - this->getWidth()) / Util::getInstance()->getLogicalStageWidth()) * 5;
+
+    }
 }

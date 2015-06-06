@@ -120,6 +120,7 @@ public:
     bool getFatalityEnable();
 
     void setFinalPosX(float oponentPosX, float oponentWidth);
+    int getCharacterNumber();
 
 private:
 

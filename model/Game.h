@@ -27,7 +27,7 @@ public:
     void initGame(SDL_Renderer* renderer, InputController* stageController);
 
 private:
-    void updateGameState();
+    void updateGameState(int &roundCount);
     MKCharacter* scorpion;
     MKCharacter* raiden;
     Stage* stage;
@@ -40,9 +40,16 @@ private:
     string oponentSide;
     GameLoader *gameLoader;
     int diedTimeElapsed;
+    int timeToResetRound;
+    int timeFightStart;
 
     ComboManager* comboManager;
     int peviousKey;
+    bool isRoundEnd;
+
+    void restartRound();
+    bool endFightTime();
+    bool endOfRound();
 };
 
 #endif // GAME_H

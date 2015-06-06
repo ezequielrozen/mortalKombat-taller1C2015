@@ -14,6 +14,7 @@ public:
     float getWidth();
     float getHeight();
     float getFloor();
+    void resetLayers();
 
 private:
     float width;

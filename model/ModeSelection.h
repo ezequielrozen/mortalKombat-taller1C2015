@@ -24,6 +24,7 @@ public:
 	void moveUp();
 	void moveDown();
 	void select();
+	void linkInputController();
 
 private:
 	ModeSelectionView* view;
