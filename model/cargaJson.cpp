@@ -4,7 +4,7 @@ using namespace std;
 
 bool cargaArchivoJSON(char* filename, float &stageWidth, float &stageHeight, float &floor, std::string &oponentSide,
 						std::list<Layer*>* layers, std::list<MKCharacter*>* characters, double& initialH, double& finalH,
-                        double& offset, std::list<Events>* combo1, std::list<Events>* combo2) {
+                        double& offset, std::vector<Events>* combo1, std::vector<Events>* combo2) {
 
     extern logger* Mylog;
     char mensaje[200];
@@ -209,7 +209,7 @@ bool cargaArchivoJSON(char* filename, float &stageWidth, float &stageHeight, flo
     return true;
 }
 
-void cargarCombos(Json::Value combos, list<Events>* combo1, list<Events>* combo2) {
+void cargarCombos(Json::Value combos, vector<Events>* combo1, vector<Events>* combo2) {
     string builderCombo1 = combos.isMember("combo1") && combos["combo1"].isString() && combos["combo1"].asString().find(",",0) != -1
                             && combos["combo1"].asString().size() > 0 ? combos["combo1"].asString() : "";
     string builderCombo2 = combos.isMember("combo2") && combos["combo2"].isString() && combos["combo2"].asString().find(",",0) != -1
@@ -217,7 +217,7 @@ void cargarCombos(Json::Value combos, list<Events>* combo1, list<Events>* combo2
     procesarComboBuilders(builderCombo1, builderCombo2, combo1, combo2);
 }
 
-void procesarComboBuilders(string builderCombo1, string buildercombo2, list<Events>* combo1, list<Events>* combo2) {
+void procesarComboBuilders(string builderCombo1, string buildercombo2, vector<Events>* combo1, vector<Events>* combo2) {
     if (builderCombo1.length() == 0 || buildercombo2.size() == 0) {
         cargarCombosDefaults(combo1, combo2);
     } else {
@@ -229,7 +229,7 @@ void procesarComboBuilders(string builderCombo1, string buildercombo2, list<Even
     }
 }
 
-void buildCombo(string builderCombo, list<Events>* combo) {
+void buildCombo(string builderCombo, vector<Events>* combo) {
     vector<string> internal;
     stringstream ss(builderCombo); // Turn the string into a stream.
     string tok;
@@ -251,7 +251,7 @@ void buildCombo(string builderCombo, list<Events>* combo) {
     }
 }
 
-void cargarCombosDefaults(list<Events>* combo1, list<Events>* combo2) {
+void cargarCombosDefaults(vector<Events>* combo1, vector<Events>* combo2) {
     for(int i = 0; i < DEFAULT_COMBO1.size(); i++) {
         combo1->push_back(DEFAULT_COMBO1[i]);
     }
@@ -260,21 +260,21 @@ void cargarCombosDefaults(list<Events>* combo1, list<Events>* combo2) {
     }
 }
 
-bool sonPrefijos(list<Events>* combo1, list<Events>* combo2) {
+bool sonPrefijos(vector<Events>* combo1, vector<Events>* combo2) {
     bool esPrefijo = true;
-    list<Events>::iterator it = combo1->begin();
-    list<Events>::iterator iter = combo2->begin();
+    unsigned it = 0;
+    unsigned iter = 0;
     if (combo1->size() < combo2->size()) {
-        while (it != combo1->end() && esPrefijo) {
-            if((*it) != (*iter)) {
+        while (it < combo1->size() && esPrefijo) {
+            if(combo1->at(it) != combo2->at(iter)) {
                 esPrefijo = false;
             }
             it++;
             iter++;
         }
     } else {
-        while (iter != combo2->end() && esPrefijo) {
-            if((*iter) != (*it)) {
+        while (iter < combo2->size() && esPrefijo) {
+            if(combo2->at(iter) != combo1->at(it)) {
                 esPrefijo = false;
             }
             it++;

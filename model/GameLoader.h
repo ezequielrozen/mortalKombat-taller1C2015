@@ -16,8 +16,8 @@ public:
     Stage* getStage();
     list<MKCharacter*>* getCharacters();
     Painter* getPainter();
-    list<Events> *getCombo1();
-    list<Events> *getCombo2();
+    vector<Events> *getCombo1();
+    vector<Events> *getCombo2();
 
 private:
     float stageWidth;
@@ -28,8 +28,8 @@ private:
     list<Layer*>* layers;
     list<MKCharacter*>* characters;
     Stage* stage;
-    list<Events>* combo1;
-    list<Events>* combo2;
+    vector<Events>* combo1;
+    vector<Events>* combo2;
 };
 
 

@@ -15,6 +15,7 @@ public:
 private:
 
     int combo2Progress;
+    int startTime;
 
     bool bufferMatchesCombo(std::vector<Events>* combo);
 
@@ -22,6 +23,7 @@ private:
     std::vector<Events>* combo1;
     std::vector<Events>* combo2;
     std::vector<Events>* buffer;
+    bool isTimeOut();
 };
 
 

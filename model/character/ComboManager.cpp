@@ -1,6 +1,14 @@
+#include <SDL_events.h>
+#include <SDL_timer.h>
 #include "ComboManager.h"
 
 Events ComboManager::checkCombo(Events originalEvent) {
+    if (this->startTime == 0) {
+        this->startTime = SDL_GetTicks();
+    }
+    if (this->isTimeOut()) {
+        this->cleanBuffer();
+    }
     this->buffer->push_back(originalEvent);
     if (bufferMatchesCombo(this->combo1))
         return originalEvent; // SE EJECTUA EL COMBO 1: RETURN COMBO1EVENT
@@ -15,13 +23,12 @@ void ComboManager::loadCombos(std::vector<Events>* combo1, std::vector<Events>* 
     this->combo2 = combo2;
 }
 
-
-
 ComboManager::ComboManager() {
     this->buffer = new std::vector<Events>();
     this->combo1 = new std::vector<Events>();
     this->combo1->push_back(MoveLeft);
     this->combo1->push_back(HighKick);
+    this->startTime = 0;
 }
 
 ComboManager::~ComboManager() {
@@ -56,4 +63,9 @@ bool ComboManager::bufferMatchesCombo(std::vector<Events>* combo) {
 void ComboManager::cleanBuffer() {
     delete this->buffer;
     this->buffer = new std::vector<Events>();
+    this->startTime = 0;
+}
+
+bool ComboManager::isTimeOut() {
+    return SDL_GetTicks() - this->startTime > COMBO_TIMER;
 }

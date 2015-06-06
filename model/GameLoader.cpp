@@ -4,8 +4,8 @@
 GameLoader::GameLoader() {
     this->layers = new list<Layer*>();
     this->characters = new list<MKCharacter*>();
-    this->combo1 = new list<Events>();
-    this->combo2 = new list<Events>();
+    this->combo1 = new vector<Events>();
+    this->combo2 = new vector<Events>();
 }
 
 void GameLoader::loadJSON(char* passed_path) {
@@ -60,10 +60,10 @@ Painter *GameLoader::getPainter() {
     return this->painter;
 }
 
-list<Events>* GameLoader::getCombo1() {
+vector<Events>* GameLoader::getCombo1() {
     return this->combo1;
 }
 
-list<Events>* GameLoader::getCombo2() {
+vector<Events>* GameLoader::getCombo2() {
     return this->combo1;
 }
