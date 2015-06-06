@@ -29,6 +29,7 @@ void ModeSelectionController::moveDown(int n) {
     if (!movingDown && n == 0) {
         this->modeSelection->moveDown();
         this->movingDown = true;
+        cout << "MOVE DOWN" << endl;
     }
 }
 

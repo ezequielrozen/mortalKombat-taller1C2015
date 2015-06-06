@@ -43,6 +43,7 @@ private:
 	bool c0walkingLeft;
 	bool c0walkingRight;
 	bool c0shootReleased;
+    bool c0Upped;
 
 	void setDucked(bool value);
 	void setWalkingLeft(bool value);
@@ -51,8 +52,10 @@ private:
 	void KeyUP_Right(unsigned char pressedAxis, int pressedAxisValue,bool printCout, MKCharacter* character, MKCharacter* character2);
 	void KeyUP_Down(unsigned char pressedAxis, int pressedAxisValue,bool printCout, MKCharacter* character, MKCharacter* character2);
 	void KeyUP_Left(unsigned char pressedAxis, int pressedAxisValue,bool printCout, MKCharacter* character, MKCharacter* character2);
-
+    void KeyUP_Up(unsigned char pressedAxis, int pressedAxisValue, bool printCout, MKCharacter *character, MKCharacter *character2);
     MKStageController* stageController;
     MKCharacter* characterToMove;
+
+
 };
 #endif //MORTALKOMBAT_TALLER1C2015_JOYSTICKCONTROLLER_H

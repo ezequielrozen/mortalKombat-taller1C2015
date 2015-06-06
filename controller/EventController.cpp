@@ -19,6 +19,7 @@ void EventController::moveRight(int n){
 //	cout << "moveRight : " << this->characterToMove->getName() << endl;
 	Mylog->Log("movimiento del personaje: hacia la derecha", ERROR_LEVEL_INFO);
 	this->characterToMove->update(MoveRight);
+	cout << "RIGHT PRESSED" << endl;
 }
 
 void EventController::moveRightRelease(int n){
@@ -30,6 +31,7 @@ void EventController::moveLeft(int n){
 //	cout << "moveLeft : " << this->characterToMove->getName() << endl;
 	Mylog->Log("movimiento del personaje: hacia la Izquierda", ERROR_LEVEL_INFO);
 	this->characterToMove->update(MoveLeft);
+	cout << "LEFT PRESSED" << endl;
 }
 
 void EventController::moveLeftRelease(int n){
@@ -41,12 +43,14 @@ void EventController::moveUp(int n){
 //	cout << "moveUp : " << this->characterToMove->getName() << endl;
 	Mylog->Log("movimiento del personaje: hacia arriba", ERROR_LEVEL_INFO);
 	this->characterToMove->update(Jump);
+	cout << "UP PRESSED" << endl;
 }
 
 void EventController::moveDown(int n){
 //	cout << "moveDown : " << this->characterToMovegetName() << endl;
 	Mylog->Log("movimiento del personaje: agachandose", ERROR_LEVEL_INFO);
 	this->characterToMove->update(Duck);
+	cout << "DOWN PRESSED" << endl;
 }
 
 void EventController::moveDownRelease(int n){

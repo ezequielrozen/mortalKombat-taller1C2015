@@ -42,6 +42,11 @@ private:
     bool key_u_Released; //La uso para q no pueda volver a hacer el shoot sin soltar la tecla xq sino cdo esta cerca lo mata de una.
     bool key_e_Released; //La uso para q no pueda volver a hacer el shoot sin soltar la tecla xq sino cdo esta cerca lo mata de una.
 
+    bool upPressed;
+    bool downPressed;
+    bool leftPressed;
+    bool rightPressed;
+
 //	void testElapsedTime(MKCharacter* character, MKCharacter* character2);
     MKStageController* stageController;
 

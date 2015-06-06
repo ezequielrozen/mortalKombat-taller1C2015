@@ -5,7 +5,10 @@ KeyboardController::KeyboardController(MKStageController* stageController)  {
 	key_u_Released = true;
 	key_e_Released = true;
 	this->stageController = stageController;
-
+	this->downPressed = false;
+	this->upPressed = false;
+	this->rightPressed = false;
+	this->leftPressed = false;
 }
 
 KeyboardController::~KeyboardController(void) {
@@ -22,20 +25,32 @@ void KeyboardController::update(MKCharacter* character, MKCharacter* character2,
     	case SDL_KEYDOWN:
 			switch(mainEvent->key.keysym.sym) {
 			case SDLK_RIGHT:
-				this->stageController->setCharacterToMove(character);
-				this->stageController->moveRight(0);
+				if (!rightPressed) {
+					this->stageController->setCharacterToMove(character);
+					this->stageController->moveRight(0);
+					this->rightPressed = true;
+				}
 				break;
 			case SDLK_LEFT:
-				this->stageController->setCharacterToMove(character);
-				this->stageController->moveLeft(0);
+				if (!leftPressed) {
+					this->stageController->setCharacterToMove(character);
+					this->stageController->moveLeft(0);
+					this->leftPressed = true;
+				}
 				break;
 			case SDLK_UP:
-				this->stageController->setCharacterToMove(character);
-				this->stageController->moveUp(0);
+				if (!upPressed) {
+					this->stageController->setCharacterToMove(character);
+					this->stageController->moveUp(0);
+					this->upPressed = true;
+				}
 				break;
 			case SDLK_DOWN:
-				this->stageController->setCharacterToMove(character);
-				this->stageController->moveDown(0);
+				if (!downPressed) {
+					this->stageController->setCharacterToMove(character);
+					this->stageController->moveDown(0);
+					this->downPressed = true;
+				}
 				break;
 			case SDLK_k:
 				this->stageController->setCharacterToMove(character);
@@ -127,17 +142,21 @@ void KeyboardController::update(MKCharacter* character, MKCharacter* character2,
 				case SDLK_DOWN:
 					this->stageController->setCharacterToMove(character);
 					this->stageController->moveDownRelease(0);
+					this->downPressed = false;
 					break;
 				case SDLK_RIGHT:
 					this->stageController->setCharacterToMove(character);
 					this->stageController->moveRightRelease(0);
+					this->rightPressed = false;
 					break;
 				case SDLK_LEFT:
 					this->stageController->setCharacterToMove(character);
 					this->stageController->moveLeftRelease(0);
+					this->leftPressed = false;
 					break;
 				case SDLK_UP:
 					this->stageController->moveUpRelease(0);
+					this->upPressed = false;
 					break;
 				case SDLK_b:
 					this->stageController->setCharacterToMove(character);
