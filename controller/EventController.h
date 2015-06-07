@@ -37,17 +37,33 @@ public:
 	void block();
 	void duckPunch();
 
-	void moveLeftRelease(int n);
-	void moveRightRelease(int n);
-	void moveDownRelease(int n);
-	void blockRelease();
+	virtual void moveLeftRelease(int n) ;
+	virtual void moveRightRelease(int n);
+	virtual void moveDownRelease(int n);
+	virtual void moveUpRelease(int n);
+	virtual void lowKickRelease(int n);
+	virtual void highKickRelease(int n);
+	virtual void lowPunchRelease(int n);
+	virtual void highPunchRelease(int n);
+	virtual void blockRelease();
+	virtual void weaponRelease();
 
 	void setCharacterToMove(MKCharacter* character);
 private:
 	static void Void();
 	MKCharacter* characterToMove;
 
+	bool upPressed;
+	bool downPressed;
+	bool leftPressed;
+	bool rightPressed;
 
+	bool highPunchPressed;
+	bool lowPunchPressed;
+	bool highKickPressed;
+	bool lowKickPressed;
+	bool blockPressed;
+	bool weaponThrowPressed;
 };
 
 #endif /* EVENTCONTROLLER_H_ */

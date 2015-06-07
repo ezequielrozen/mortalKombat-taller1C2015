@@ -29,7 +29,12 @@ public:
     virtual void moveRightRelease(int n) {};
     virtual void moveDownRelease(int n) {};
     virtual void moveUpRelease(int n) {};
+    virtual void lowKickRelease(int n) {};
+    virtual void highKickRelease(int n) {};
+    virtual void lowPunchRelease(int n) {};
+    virtual void highPunchRelease(int n) {};
     virtual void blockRelease() {};
+    virtual void weaponRelease() {};
 
     virtual void setCharacterToMove(MKCharacter* character) {};
     virtual void setModeSelection(ModeSelection* modeSelection) {};
