@@ -65,5 +65,5 @@ vector<Events>* GameLoader::getCombo1() {
 }
 
 vector<Events>* GameLoader::getCombo2() {
-    return this->combo1;
+    return this->combo2;
 }

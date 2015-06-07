@@ -24,7 +24,7 @@ class EventController : public MKStageController {
 
 
 public:
-	EventController();
+	EventController(std::vector<Events>* combo1, std::vector<Events>* combo2);
 	virtual ~EventController();
 	void moveRight(int n);
 	void moveLeft(int n);

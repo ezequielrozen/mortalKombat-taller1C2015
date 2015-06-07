@@ -54,7 +54,7 @@ bool StageManager::mainLoop() {
 		setStageController(new CharacterSelectionController());
 		this->characterSelection->linkInputController();
 		this->characterSelection->loop();
-		setStageController(new EventController());
+		setStageController(new EventController(this->gameLoader->getCombo1(), this->gameLoader->getCombo2()));
 		restart = this->game->GameLoop();
 	}
 

@@ -128,8 +128,8 @@
   },
 
   "combos": {
-    "combo1": "abajo,izquierda,derecha,patadaBaja",
-    "combo2": "abajo,patadaAlta,izquierda,derecha,puñoAlto,derecha,patadaBaja"
+    "combo1": "abajo,izquierda",
+    "combo2": "abajo,derecha"
   },
 
 

@@ -39,12 +39,6 @@ void Game::initGame(SDL_Renderer* renderer, InputController* inputController) {
     InputController::setVibrating(false);
     this->cameraController = new CameraController();
     this->collider = new Collider();
-
-    this->comboManager = new ComboManager();
-    Events combo = this->comboManager->checkCombo(MoveLeft);
-    combo = this->comboManager->checkCombo(MoveRight);
-    combo = this->comboManager->checkCombo(HighKick);
-
 }
 
 Game::~Game() {
