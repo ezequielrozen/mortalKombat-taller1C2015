@@ -67,7 +67,8 @@ void ComboManager::cleanBuffer() {
 }
 
 bool ComboManager::isTimeOut() {
-    return SDL_GetTicks() - this->startTime > COMBO_TIMER;
+    return SDL_GetTicks() - this->startTime > COMBO_TIMER*this->combo1->size()
+            || SDL_GetTicks() - this->startTime > COMBO_TIMER*this->combo2->size();
 }
 
 Events ComboManager::changeSideEvent(Events event, char side) {
