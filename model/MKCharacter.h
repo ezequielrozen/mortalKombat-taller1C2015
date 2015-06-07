@@ -11,6 +11,7 @@
 #include "Throwable.h"
 #include "Weapon.h"
 #include "Fire.h"
+#include "WeaponIce.h"
 
 using namespace std;
 
@@ -104,6 +105,10 @@ public:
 
     void throwWeaponFire();
 
+    Throwable* getWeaponIce();
+
+    void throwWeaponIce();
+
     float getStateHeight();
 
     void disableImpact();
@@ -120,6 +125,7 @@ public:
     bool getFatalityEnable();
 
     void setFinalPosX(float oponentPosX, float oponentWidth);
+    int getCharacterNumber();
 
 private:
 
@@ -151,6 +157,7 @@ private:
     // Weapon
     Throwable* weapon;
     Throwable* weaponFire;
+    Throwable* weaponIce;
     bool weaponFireUsed;
     bool fatalityEnable;
 };

@@ -12,6 +12,7 @@
 #include "stage/Stage.h"
 #include "GameLoader.h"
 #include "character/ComboManager.h"
+#include "util/RoundTimer.h"
 #include <math.h>
 #include <iostream>
 #include <SDL2/SDL_mixer.h>
@@ -27,7 +28,7 @@ public:
     void initGame(SDL_Renderer* renderer, InputController* stageController);
 
 private:
-    void updateGameState();
+    void updateGameState(int &roundCount);
     MKCharacter* scorpion;
     MKCharacter* raiden;
     Stage* stage;
@@ -40,9 +41,17 @@ private:
     string oponentSide;
     GameLoader *gameLoader;
     int diedTimeElapsed;
+    int timeToResetRound;
+    int timeFightStart;
 
     ComboManager* comboManager;
     int peviousKey;
+    bool isRoundEnd;
+
+    void restartRound();
+    bool endFightTime();
+    bool endOfRound();
+    RoundTimer* timer;
 };
 
 #endif // GAME_H

@@ -2,12 +2,16 @@
 #include "../controller/JoystickController.h"
 #include "character/Dizzy.h"
 #include "character/Victory.h"
+#include "character/CharacterStance.h"
 #include <SDL2/SDL_mixer.h>
 
 Game::Game(GameLoader* aGameLoader, SDL_Renderer* renderer, InputController* inputController) {
     this->gameLoader = aGameLoader;
+    this->timer = new RoundTimer();
     this->initGame(renderer, inputController);
-    diedTimeElapsed = 0;
+    this->diedTimeElapsed = 0;
+    this->timeToResetRound = 0;
+//    this->timeFightStart = 0;
 }
 
 void Game::initGame(SDL_Renderer* renderer, InputController* inputController) {
@@ -29,7 +33,7 @@ void Game::initGame(SDL_Renderer* renderer, InputController* inputController) {
     this->raiden->setPosY(this->stage->getFloor());
     this->raiden->setStageFloor(this->stage->getFloor());
 
-    this->gameView = new GameView(renderer, scorpion, raiden, stage, oponentSide, this->gameLoader->getPainter());
+    this->gameView = new GameView(renderer, scorpion, raiden, stage, oponentSide, this->gameLoader->getPainter(), this->timer);
     this->inputController = inputController;
     this->inputController->setCharacters(scorpion, raiden);
     InputController::setVibrating(false);
@@ -51,14 +55,17 @@ Game::~Game() {
 
 bool Game::GameLoop() {
 
+//    this->timeFightStart= SDL_GetTicks();
+    this->timer->run();
     bool cameraMoved;
+    int roundCount = 1;
 
-    while (inputController->getEvent()->type != SDL_QUIT) {
+    while (inputController->getEvent()->type != SDL_QUIT && roundCount <= ROUNDS_TO_FIGHT && !endFightTime()) {
     	inputController->checkEvent();
         gameView->startRender();
         gameView->Render();
         inputController->update();
-        updateGameState();
+        updateGameState(roundCount);
         cameraMoved = cameraController->update(scorpion, raiden, stage->getLayers());
         collider->update(scorpion, raiden, cameraMoved);
 
@@ -76,23 +83,66 @@ bool Game::GameLoop() {
     return false;
 }
 
-void Game::updateGameState() {
+void Game::updateGameState(int &roundCount) {
     if (!scorpion->isAlive()) {
-    	if (scorpion->getState() != "ReceivingFire"){
+    	if (scorpion->getState() != "ReceivingFire") {
 			scorpion->setState(new Dizzy());
 			scorpion->setPosY(this->stage->getFloor());
 	//        raiden->setState(new Victory());
 			raiden->setPosY(this->stage->getFloor());
+            if(roundCount == 1) {
+                roundCount++;
+            }
     	}
 
     } else if (!raiden->isAlive()) {
-    	if (raiden->getState() != "ReceivingFire"){
+    	if (raiden->getState() != "ReceivingFire") {
 			raiden->setState(new Dizzy());
-			raiden->setPosY(this->stage->getFloor());
-			if (diedTimeElapsed == 0) diedTimeElapsed = SDL_GetTicks();
-			if ((SDL_GetTicks() - diedTimeElapsed>=  TIME_FOR_DOING_FATALITY) && scorpion->getState() == "Stance")
-				scorpion->setState(new Victory());
+            raiden->setPosY(this->stage->getFloor());
+            if (diedTimeElapsed == 0) {
+                diedTimeElapsed = SDL_GetTicks();
+            }
+            if ((SDL_GetTicks() - diedTimeElapsed >=  TIME_FOR_DOING_FATALITY) && scorpion->getState() == "Stance") {
+                scorpion->setState(new Victory());
+            }
 			scorpion->setPosY(this->stage->getFloor());
+            if(this->timeToResetRound == 0) {
+                this->timeToResetRound = SDL_GetTicks();
+            } else if(endOfRound()) {
+                this->restartRound();
+                if(this->isRoundEnd) {
+                    roundCount++;
+                    this->isRoundEnd = false;
+                }
+            }
     	}
     }
+}
+
+void Game::restartRound() {
+    this->diedTimeElapsed = 0;
+    this->isRoundEnd = true;
+    this->timeToResetRound = 0;
+    this->timer->stop();
+    this->timer->run();
+    this->scorpion->setLife(FULL_LIFE);
+    this->raiden->setLife(FULL_LIFE);
+    if (this->scorpion->getCharacterNumber() == 0) {
+        this->scorpion->setInitialPosition(0.2*(Util::getInstance()->getLogicalWindowWidth()-this->scorpion->getWidth()));
+        this->raiden->setInitialPosition(0.8*(Util::getInstance()->getLogicalWindowWidth()-this->scorpion->getWidth()));
+    } else {
+        this->scorpion->setInitialPosition(0.8*(Util::getInstance()->getLogicalWindowWidth()-this->scorpion->getWidth()));
+        this->raiden->setInitialPosition(0.2*(Util::getInstance()->getLogicalWindowWidth()-this->scorpion->getWidth()));
+    }
+    this->stage->resetLayers();
+    this->scorpion->setState(new CharacterStance());
+    this->raiden->setState(new CharacterStance());
+}
+
+bool Game::endFightTime() {
+    return this->timer->getCurrentTime() >= TIME_TO_FIGHT_ENDING;
+}
+
+bool Game::endOfRound() {
+    return SDL_GetTicks() - this->timeToResetRound >= TIME_TO_RESTART_ROUND;
 }

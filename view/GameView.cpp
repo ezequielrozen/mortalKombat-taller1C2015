@@ -3,8 +3,10 @@
 //#include "../controller/GameController.h"
 #include "../controller/InputController.h"
 #include "Text.h"
+#include "SDL2/SDL.h"
 
-GameView::GameView(SDL_Renderer* aRenderer, MKCharacter* character, MKCharacter* character2, Stage* pStage, string OponentSide, Painter* painter) {
+GameView::GameView(SDL_Renderer* aRenderer, MKCharacter* character, MKCharacter* character2, Stage* pStage,
+                   string OponentSide, Painter* painter, RoundTimer* timer) {
 	oponentSide = OponentSide;
 
     this->renderer = aRenderer;
@@ -42,6 +44,10 @@ GameView::GameView(SDL_Renderer* aRenderer, MKCharacter* character, MKCharacter*
     string charTwoName = character2->getName();
     transform(charTwoName.begin(), charTwoName.end(), charTwoName.begin(), ::toupper);
     characterTwoName = new Text(charTwoName.c_str(), this->renderer, "right");
+
+    this->timer = timer;
+    int timeToShow = (TIME_TO_FIGHT_ENDING - this->timer->getCurrentTime()) / 1000;
+    this->timerText = new Text((std::to_string(timeToShow).c_str()), this->renderer,"center");
 
     stageBackgroundMusic = NULL;
 
@@ -100,6 +106,8 @@ GameView::~GameView() {
     if (raidenFatalityHit != NULL ) delete  raidenFatalityHit;
     if (raidenFatalityFire != NULL ) delete  raidenFatalityFire;
     if (raidenReceivingFire != NULL ) delete  raidenReceivingFire;
+    if (raidenWeaponIce != NULL ) delete  raidenWeaponIce;
+
 
     for (int i = 1 ; i < layerCount ; i++) {
         delete layerSprites[i];
@@ -154,6 +162,9 @@ void GameView::Render() {
 
     characterName->Draw();
     characterTwoName->Draw();
+    int timeToShow = (TIME_TO_FIGHT_ENDING - this->timer->getCurrentTime()) / 1000;
+    this->timerText->update((std::to_string(timeToShow).c_str()));
+    this->timerText->Draw();
     if (!painted) {
         if (this->raiden->isHitting()) {
             this->runCharacter(this->scorpion, this->raiden, this->scorpionSprites);
@@ -192,12 +203,12 @@ void GameView::LoadSprites(string name1, string name2) {
             					scorpionDuckKick,scorpionJumpKick, scorpionPunchJump,scorpionDuckPunch,scorpionHighPunch,scorpionLowPunch,
             					scorpionWinner, scorpionShoot,scorpionDizzy,scorpionFall,scorpionBeingHit,
                                 scorpionBeingHitDown,scorpionBlockDown,scorpionBlock,scorpionFatalityHit, scorpionFatalityFire,
-                                scorpionReceivingFire, scorpionTeleportation, false);
+                                scorpionReceivingFire, scorpionTeleportation,raidenShootIce,raidenWeaponIce, false);
 
             this->loadAsRaiden(raidenWalk,raidenStance,raidenJump,raidenSideJump,raidenDuck,raidenHighKick,raidenLowKick,
             		raidenDuckKick,raidenJumpKick,raidenPunchJump,raidenDuckPunch,raidenPunch,raidenLowPunch,raidenWinner,
                                 raidenShoot,raidenDizzy,raidenFall,raidenBeingHit, raidenBeingHitDown,raidenBlockDown,raidenBlock,
-                                raidenFatalityHit, raidenFatalityFire,raidenReceivingFire,raidenTeleportation,colorAltered);
+                                raidenFatalityHit, raidenFatalityFire,raidenReceivingFire,raidenTeleportation,raidenShootIce,raidenWeaponIce,colorAltered);
         }
     }
 
@@ -212,7 +223,7 @@ void GameView::LoadSprites(string name1, string name2) {
         					raidenDuckKick,raidenJumpKick,raidenPunchJump,raidenDuckPunch,raidenPunch,raidenLowPunch,raidenWinner,
                            raidenShoot,raidenDizzy,raidenFall,raidenBeingHit,
                            raidenBeingHitDown,raidenBlockDown,raidenBlock,raidenFatalityHit, raidenFatalityFire,raidenReceivingFire,
-                           raidenTeleportation, false);
+                           raidenTeleportation, raidenShootIce,raidenWeaponIce,false);
 
     } else if (name1 == "raiden" && name2 == "scorpion") {
 
@@ -220,7 +231,7 @@ void GameView::LoadSprites(string name1, string name2) {
         					scorpionDuckKick,scorpionJumpKick,scorpionPunchJump,scorpionDuckPunch,scorpionHighPunch,scorpionLowPunch,scorpionWinner,
         					scorpionShoot,scorpionDizzy,scorpionFall,scorpionBeingHit,
         					scorpionBeingHitDown,scorpionBlockDown,scorpionBlock,scorpionFatalityHit, scorpionFatalityFire,scorpionReceivingFire,
-        					scorpionTeleportation, false);
+        					scorpionTeleportation,raidenShootIce,raidenWeaponIce, false);
 
         this->loadAsScorpion(raidenWalk,raidenStance,raidenJump,raidenDuck,raidenSideJump,raidenHighKick,raidenLowKick,
         					raidenDuckKick,raidenJumpKick,raidenPunchJump,raidenDuckPunch,raidenPunch,raidenLowPunch,raidenWinner,
@@ -246,7 +257,7 @@ void GameView::LoadSprites(string name1, string name2) {
 	{"RecevingHit", raidenBeingHit},{"ReceivingDuckingKick", raidenFall},{"BLOCKDOWN", raidenBlockDown},{"LowKickHitting",raidenLowKick},
     {"KickLeftJumpingHitting",raidenJumpKick},{"KickRightJumpingHitting",raidenJumpKick},{"LowPunchHitting",raidenLowPunch},
     {"LowKickHitting", raidenLowKick},{"FatalityHitting", raidenFatalityHit},{"FireHitting", raidenFatalityFire},
-    {"ReceivingFire", raidenReceivingFire},{"TeleportationDoing", raidenTeleportation}};
+    {"ReceivingFire", raidenReceivingFire},{"TeleportationDoing", raidenTeleportation},{"WeaponHittingIce", raidenShootIce},{"WeaponIce", raidenWeaponIce}};
 
 }
 
@@ -294,6 +305,7 @@ void GameView::loadAsRaiden(CharacterSprite*& walk, CharacterSprite*& stance, Ch
                             CharacterSprite*& shoot, CharacterSprite*& dizzy, CharacterSprite*& fall, CharacterSprite*& beingHit,
                             CharacterSprite*& beingHitDown, CharacterSprite*& blockDown, CharacterSprite*& block,
                             CharacterSprite*& fatalityHit, CharacterSprite*& fatalityFire, CharacterSprite*& onFire,CharacterSprite*& teleportation,
+                            CharacterSprite*& shootIce,CharacterSprite*& weaponIce,
                             bool colorAltered) {
 
     walk = new CharacterSprite(this->renderer, raiden->getFileMovement(MOVE_NAME_WALK) , raiden->getX(),raiden->getY(), raiden->getWidth(),raiden->getHeight(), 9, oponentSide, false, colorAltered, this->painter);
@@ -321,7 +333,9 @@ void GameView::loadAsRaiden(CharacterSprite*& walk, CharacterSprite*& stance, Ch
     fatalityHit = new CharacterSprite(this->renderer, raiden->getFileMovement(MOVE_NAME_FATALITY_HIT), raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 17, oponentSide, true, colorAltered, this->painter);
 	fatalityFire = new CharacterSprite(this->renderer, raiden->getFileMovement(MOVE_NAME_FALTALITY_FIRE), raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 4, oponentSide, false, colorAltered, this->painter);
 	onFire = new CharacterSprite(this->renderer, raiden->getFileMovement(MOVE_NAME_ON_FIRE), raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 14, oponentSide, true, colorAltered, this->painter);
-	teleportation = new CharacterSprite(this->renderer, "data/characterTeleportation.png", scorpion->getX(), scorpion->getY(), scorpion->getWidth(), scorpion->getHeight(), 6, oponentSide, false, colorAltered, this->painter);
+	teleportation = new CharacterSprite(this->renderer, "data/characterTeleportation.png", raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 6, oponentSide, false, colorAltered, this->painter);
+	shootIce = new CharacterSprite(this->renderer, "data/raiden/raidenShootingIce.png", raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 4, oponentSide, true, colorAltered, this->painter);
+	weaponIce = new CharacterSprite(this->renderer, "data/raiden/raidenWeaponIce.png", raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 6, oponentSide, false, colorAltered, this->painter);
 }
 
 void GameView::RestartAllScorpionSprites()
@@ -348,6 +362,7 @@ void GameView::RestartAllScorpionSprites()
 	scorpionFatalityHit->reset();
 	scorpionFatalityFire->reset();
 	scorpionReceivingFire->reset();
+
 }
 
 void GameView::RestartAllRaidenSprites()
@@ -368,10 +383,11 @@ void GameView::RestartAllRaidenSprites()
 	raidenBlockDown->reset();
 	raidenBlock->reset();
 	raidenShoot->reset();
-
+	raidenShootIce->reset();
 	raidenFatalityHit->reset();
 	raidenFatalityFire->reset();
 	raidenReceivingFire->reset();
+	raidenWeaponIce->reset();
 }
 
 void GameView::startRender() {
@@ -388,7 +404,8 @@ void GameView::runCharacter(MKCharacter* character1, MKCharacter* character2, Sp
 
     bool aux = (character1->getX() < character2->getX());
 
-    if (character1->getState() != "WeaponHitting" && character1->getState() != "FireHitting" && character1->getState() != "MovingRight" && character1->getState() != "MovingLeft") {
+    if (character1->getState() != "WeaponHitting" && character1->getState() != "FireHitting" && character1->getState() != "WeaponHittingIce"
+    		&& character1->getState() != "MovingRight" && character1->getState() != "MovingLeft") {
         sprite = characterSprites.at(character1->getState());
         sprite->Play(6.66*GAMEDELAY, character1->getStateWidth());
     }
@@ -404,6 +421,10 @@ void GameView::runCharacter(MKCharacter* character1, MKCharacter* character2, Sp
         sprite = characterSprites.at("Stance");
         sprite->Play(6.66*GAMEDELAY, character1->getStateWidth());
     }
+    else if (character1->getState() == "WeaponHittingIce"){
+        sprite = characterSprites.at("WeaponHittingIce");
+        sprite->Play(6.66*GAMEDELAY, character1->getStateWidth());
+    }
 
     if (character1->getWeapon()->isActive()) {
         shootChar = characterSprites.at("WeaponHitting");
@@ -413,11 +434,13 @@ void GameView::runCharacter(MKCharacter* character1, MKCharacter* character2, Sp
 		shootChar = characterSprites.at("FireHitting");
 		shootChar->PlayShootFire(9*GAMEDELAY, character1->getWeaponFire()->getWidth(), character1->getWeaponFire()->getHeight());
     }
+    else if (character1->getWeaponIce()->isActive()) {
+		shootChar = characterSprites.at("WeaponIce");
+		shootChar->PlayShootFire(9*GAMEDELAY, character1->getWeaponIce()->getWidth(), character1->getWeaponIce()->getHeight());
+    }
 	else {
 		shootChar = NULL;
 	}
-
-
 
 
     if(character1->getX() < character2->getX()) {
@@ -431,6 +454,9 @@ void GameView::runCharacter(MKCharacter* character1, MKCharacter* character2, Sp
             }else if (character1->getWeaponFire()->isActive()) {
 				shootChar->setX(character1->getWeaponFire()->getPositionX());
 				shootChar->setY(character1->getWeaponFire()->getPositionY());
+            }else if (character1->getWeaponIce()->isActive()) {
+				shootChar->setX(character1->getWeaponIce()->getPositionX());
+				shootChar->setY(character1->getWeaponIce()->getPositionY());
             }
         }
     } 
@@ -445,6 +471,9 @@ void GameView::runCharacter(MKCharacter* character1, MKCharacter* character2, Sp
             }else if (character1->getWeaponFire()->isActive()) {
 				shootChar->setX(character1->getWeaponFire()->getPositionX());
 				shootChar->setY(character1->getWeaponFire()->getPositionY());
+            }else if (character1->getWeaponIce()->isActive()) {
+				shootChar->setX(character1->getWeaponIce()->getPositionX());
+				shootChar->setY(character1->getWeaponIce()->getPositionY());
             }
         }
     }
@@ -520,13 +549,15 @@ void GameView::initializeCharactersSprites() {
     raidenFatalityHit=NULL;
     raidenFatalityFire=NULL;
     raidenReceivingFire=NULL;
+    raidenShootIce = NULL;
+    raidenWeaponIce = NULL;
 }
 
 void GameView::loadMusicAndSounds() {
     //Initialize SDL_mixer
     stageBackgroundMusic = NULL;
 //Initialize SDL
-    if( SDL_Init(SDL_INIT_AUDIO ) < 0 )
+    if( SDL_Init((uint)SDL_INIT_AUDIO ) < 0 )
     {
         printf( "SDL could not initialize! SDL Error: %s\n", SDL_GetError() );
     }

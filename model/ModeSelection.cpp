@@ -11,7 +11,6 @@ ModeSelection::ModeSelection(SDL_Renderer* renderer, InputController* inputContr
 	this->view = new ModeSelectionView(renderer, this->buttons);
 	this->index = 0;
 	this->selectionMade = false;
-	this->inputController->setModeSelection(this);
 }
 
 ModeSelection::~ModeSelection() {
@@ -29,12 +28,16 @@ GameModes ModeSelection::loop() {
 		view->render();
 
 		if (selectionMade) {
-			if (buttons.at(index)->getName() == "1v1")
+			selectionMade = false;
+			if (buttons.at(index)->getName() == "1v1") {
 				return OneVsTwo;
-			if (buttons.at(index)->getName() == "1vPC")
+			}
+			if (buttons.at(index)->getName() == "1vPC") {
 				return OneVsAI;
-			if (buttons.at(index)->getName() == "practice")
+			}
+			if (buttons.at(index)->getName() == "practice") {
 				return Practice;
+			}
 		}
 		//	Esto es temporal hasta que tengamos hecha la pantalla de seleccion de juego.
 		/*if (peviousKey == SDLK_a && inputController->getEvent()->key.keysym.sym == SDLK_a) {
@@ -51,8 +54,11 @@ GameModes ModeSelection::loop() {
 
 }
 
+void ModeSelection::linkInputController() {
+	this->inputController->setModeSelection(this);
+}
+
 void ModeSelection::moveUp() {
-	cout << "Move Down" << endl;
 
 	if(this->index > 0) {
 		this->index--;
@@ -70,5 +76,6 @@ void ModeSelection::moveDown() {
 }
 
 void ModeSelection::select() {
+	cout << "SELECT" << endl;
 	this->selectionMade = true;
 }

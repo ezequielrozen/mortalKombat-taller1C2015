@@ -14,7 +14,8 @@ StageManager::StageManager(char* filePath) {
         std::cout << "Window couldn't be created" << std::endl;
     }
 	this->stageController = NULL;
-	this->setStageController(new ModeSelectionController()); // Acá deberíamos pasarle al ModeSelectionController el ModeSelection (modelo) para que lo actualice
+	this->inputController = new InputController(this->stageController);
+//	this->setStageController(new ModeSelectionController()); // Acá deberíamos pasarle al ModeSelectionController el ModeSelection (modelo) para que lo actualice
 
     this->renderer = NULL;
     this->renderer = SDL_CreateRenderer(this->window, -1, SDL_RENDERER_TARGETTEXTURE);
@@ -39,18 +40,23 @@ StageManager::~StageManager() {
 }
 
 bool StageManager::mainLoop() {
+	bool restart = false;
+	while(inputController->getEvent()->type != SDL_QUIT && !restart) {
+		
+		this->setStageController(new ModeSelectionController());
+		this->modeSelection->linkInputController();
+		GameModes mode = this->modeSelection->loop();
+		if (mode == OneVsAI) {
+			this->inputController->enableAI();
+		}
 
-	GameModes mode = this->modeSelection->loop();
-	if (mode == OneVsAI) {
-		this->inputController->enableAI();
+		setStageController(new CharacterSelectionController());
+		this->characterSelection->linkInputController();
+		this->characterSelection->loop();
+
+		setStageController(new EventController());
+		restart = this->game->GameLoop();
 	}
-
-	setStageController(new CharacterSelectionController());
-	this->characterSelection->linkInputController();
-	this->characterSelection->loop();
-
-	setStageController(new EventController());
-	bool restart = this->game->GameLoop();
 
 	return restart;
 }
@@ -58,9 +64,6 @@ bool StageManager::mainLoop() {
 void StageManager::setStageController(MKStageController* stageController) {
 	if (this->stageController != NULL) {
 		delete this->stageController;
-	}
-	else {
-		this->inputController = new InputController(stageController);
 	}
 	this->stageController = stageController;
 	this->inputController->setStageController(this->stageController);

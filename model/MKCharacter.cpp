@@ -6,6 +6,7 @@ MKCharacter::MKCharacter(float initialPosX, float ancho, float alto, int z_index
 
 	this->weapon = new Weapon(ancho*0.97, alto*0.36);
 	this->weaponFire = new Fire(ancho*0.97, alto*0.36);
+	this->weaponIce = new WeaponIce(ancho*0.97, alto*0.36);
 	this->state = new CharacterStance();
 	this->z_index = z_index;
 	posX = initialPosX;
@@ -35,6 +36,7 @@ MKCharacter::~MKCharacter(void) {
 	delete this->state;
 	delete this->weapon;
 	delete this->weaponFire;
+	delete this->weaponIce;
 }
 
 void MKCharacter::move() {
@@ -55,7 +57,7 @@ void MKCharacter::characterUpdate() {
 
 	this->state->refreshTimer(this);
 
-	if (this->state->startThrowing() && !this->weapon->isActive()) {
+	if (this->state->getName() == "WeaponHitting" && this->state->startThrowing() && !this->weapon->isActive()) {
 		throwWeapon();
 	}
 	this->weapon->update();
@@ -65,6 +67,11 @@ void MKCharacter::characterUpdate() {
 		throwWeaponFire();
 	}
 	this->weaponFire->update();
+
+	if (this->state->getName() == "WeaponHittingIce" && this->state->startThrowing() && !this->weaponIce->isActive()) {
+		throwWeaponIce();
+	}
+	this->weaponIce->update();
 
 //	cout << this->getStagePosX() << endl;
 	
@@ -93,6 +100,14 @@ void MKCharacter::throwWeaponFire() {
 		}
 		weaponFireUsed = true;
 	}
+}
+
+Throwable *MKCharacter::getWeaponIce() {
+	return this->weaponIce;
+}
+
+void MKCharacter::throwWeaponIce() {
+		this->weaponIce->throwWeapon(this->posX, this->posY,this->getCharacterSide());
 }
 
 void MKCharacter::setFatalityEnable(bool state){
@@ -406,7 +421,7 @@ void MKCharacter::setFinalPosX(float oponentPosX, float oponentWidth) {
 
 			pos = oponentPosX + (oponentWidth*1.08);
 
-			cout << this->posX << " - " << pos<< " - " << pos + getWidth()<< " - " <<Util::getInstance()->getLogicalWindowWidth() << endl;
+			//cout << this->posX << " - " << pos<< " - " << pos + getWidth()<< " - " <<Util::getInstance()->getLogicalWindowWidth() << endl;
 
 			//Verifico que no se vaya de la pantalla por derecha
 			if ((pos + getWidth() <= Util::getInstance()->getLogicalWindowWidth())) {
@@ -421,7 +436,7 @@ void MKCharacter::setFinalPosX(float oponentPosX, float oponentWidth) {
 		{
 			pos = oponentPosX - (getWidth() *1.08);
 
-			cout << this->posX << " - " << pos<< " - " << pos + getWidth()<< " - " <<Util::getInstance()->getLogicalWindowWidth() << endl;
+			//cout << this->posX << " - " << pos<< " - " << pos + getWidth()<< " - " <<Util::getInstance()->getLogicalWindowWidth() << endl;
 
 			//Verifico que no se vaya de la pantalla por izquierda
 			if (pos >= 0) {
@@ -434,4 +449,8 @@ void MKCharacter::setFinalPosX(float oponentPosX, float oponentWidth) {
 
 		}
 	}
+}
+
+int MKCharacter::getCharacterNumber() {
+	return this->characterNumber;
 }

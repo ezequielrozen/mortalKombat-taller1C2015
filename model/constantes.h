@@ -95,6 +95,9 @@ const int COMMANDDELAY                      =  300;
 const int COMMANDDELAYKIT                   =  600;
 const int GAMEDELAY                         =   10;
 const int TIME_FOR_DOING_FATALITY   		= 2000;
+const int TIME_TO_RESTART_ROUND				= 4000;
+const int TIME_TO_FIGHT_ENDING				= 90000;
+const int ROUNDS_TO_FIGHT					= 2;
 ////Velocidad inicial del salto del personaje.
 //const float SPEED                             =  0.04285*ANCHOVENTANAL;
 ////Aceleracion aplicada al salto del personaje.
@@ -117,7 +120,7 @@ const int COMBO_TIMER     = 5000;
 
 enum Events { MoveRight, MoveLeft, Jump, Duck, WeaponHit, HighPunch, LowPunch, HighKick, LowKick, Block, ReceiveHit,
 	ReceiveDuckingPunch, ReceiveDuckingKick, ReceiveWeapon, MoveRightRelease, MoveLeftRelease, DuckRelease, BlockRelease,
-	JumpFinished, OverPassed, OverPassedFinished, FatalityHit, ReceiveFire, Teleportation};
+	JumpFinished, OverPassed, OverPassedFinished, FatalityHit, ReceiveFire, Teleportation, WeaponHitIce};
 
 enum GameModes { OneVsTwo, OneVsAI, Practice};
 

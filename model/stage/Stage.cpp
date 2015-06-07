@@ -31,3 +31,10 @@ float Stage::getHeight() {
 float Stage::getFloor() {
     return this->floor;
 }
+
+void Stage::resetLayers() {
+    std::list<Layer*>::iterator it = this->layers->begin();
+    for(it; it != this->layers->end(); it++) {
+        (*it)->init();
+    }
+}

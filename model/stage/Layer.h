@@ -25,6 +25,7 @@ public:
     void update();
     void setMovement(string move);
     string getPath();
+    void init();
 
 private:
     float width;
@@ -33,7 +34,6 @@ private:
     //uint timeCheck;
     string movement;
     string path;
-
 };
 
 #endif //MORTALKOMBAT_TALLER1C2015_LAYER_H

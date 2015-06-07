@@ -18,6 +18,7 @@
 #include "FatalityHitting.h"
 #include "ReceivingFire.h"
 #include "TeleportationDoing.h"
+#include "WeaponHittingIce.h"
 
 CharacterStance::CharacterStance() {
 //    this->timer = -1
@@ -80,6 +81,9 @@ void CharacterStance::update(MKCharacter * character, Events aEvent) {
             break;
         case Teleportation:
         		character->setState(new TeleportationDoing());
+            break;
+        case WeaponHitIce:
+			character->setState(new WeaponHittingIce());;
             break;
         case OverPassed:
             if (character->getCharacterSide() == 'l') {

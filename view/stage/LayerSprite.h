@@ -25,7 +25,6 @@ private:
     SDL_Renderer* renderer;
     SDL_Texture* texture;
     SDL_Rect draw;
-
     SDL_Rect crop;
     int img_width;
     int img_height;

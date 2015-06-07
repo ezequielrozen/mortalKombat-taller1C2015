@@ -12,6 +12,11 @@ using namespace std;
 Text::Text(const char* text, SDL_Renderer *renderer, string position) {
 
     this->renderer = renderer;
+    this->text = text;
+    this->initText(position);
+}
+
+void Text::initText(string position) {
     if( TTF_Init() == -1 ) {
         printf( "SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError() );
     }
@@ -26,7 +31,7 @@ Text::Text(const char* text, SDL_Renderer *renderer, string position) {
     //returns, then load that surface into a texture
     SDL_Color colour = { 255, 255, 255 };
 
-    SDL_Surface *surface = TTF_RenderText_Blended(font, text, colour);
+    SDL_Surface *surface = TTF_RenderText_Blended(font, this->text, colour);
     if (surface == NULL){
         TTF_CloseFont(font);
     }
@@ -36,13 +41,19 @@ Text::Text(const char* text, SDL_Renderer *renderer, string position) {
     }
 
     this->textTexture = texture;
-    if (position == "left")
-        this->draw.x = 5;
-    else
-        this->draw.x = Util::getInstance()->getLogicalWindowWidth() * Util::getInstance()->getScalingConstant() - surface->w - 5;
     this->draw.y = 5;
     this->draw.w = surface->w;
     this->draw.h = surface->h;
+    if (position == "left")
+        this->draw.x = 5;
+    else if (position == "right")
+        this->draw.x = Util::getInstance()->getLogicalWindowWidth() * Util::getInstance()->getScalingConstant() - surface->w - 5;
+    else {
+        this->draw.x = Util::getInstance()->getLogicalWindowWidth() * Util::getInstance()->getScalingConstant()/2 - surface->w;
+        this->draw.h = surface->h*2;
+        this->draw.w = surface->w*2;
+        this->draw.y = 2;
+    }
     SDL_FreeSurface(surface);
     TTF_CloseFont(font);
 }
@@ -53,4 +64,9 @@ Text::~Text(){
 
 void Text::Draw() {
     SDL_RenderCopy(this->renderer, this->textTexture, NULL, &draw);
+}
+
+void Text::update(const char* text) {
+    this->text = text;
+    this->initText("center");
 }

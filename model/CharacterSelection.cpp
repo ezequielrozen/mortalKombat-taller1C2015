@@ -96,5 +96,7 @@ void CharacterSelection::loop() {
 		view->render();
 
 	}
+	this->buttonInfo.at(0).buttonPressed = false;
+	this->buttonInfo.at(1).buttonPressed = false;
 }
 
