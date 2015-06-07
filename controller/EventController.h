@@ -16,6 +16,7 @@
 #include "../model/MKCharacter.h"
 #include "../model/stage/Layer.h"
 #include "MKStageController.h"
+#include "../model/character/ComboManager.h"
 
 using namespace std;
 
@@ -64,6 +65,8 @@ private:
 	bool lowKickPressed;
 	bool blockPressed;
 	bool weaponThrowPressed;
+
+	ComboManager* comboManager;
 };
 
 #endif /* EVENTCONTROLLER_H_ */
