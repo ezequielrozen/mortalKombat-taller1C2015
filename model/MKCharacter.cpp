@@ -29,8 +29,6 @@ MKCharacter::MKCharacter(float initialPosX, float ancho, float alto, int z_index
 	weaponFireUsed = false;
 	fatalityEnable = false;
 
-
-
 }
 
 MKCharacter::~MKCharacter(void) {
@@ -408,7 +406,7 @@ void MKCharacter::setFinalPosX(float oponentPosX, float oponentWidth) {
 
 			pos = oponentPosX + (oponentWidth*1.08);
 
-			cout << this->posX << " - " << pos<< " - " << pos + getWidth()<< " - " <<Util::getInstance()->getLogicalWindowWidth() << endl;
+			//cout << this->posX << " - " << pos<< " - " << pos + getWidth()<< " - " <<Util::getInstance()->getLogicalWindowWidth() << endl;
 
 			//Verifico que no se vaya de la pantalla por derecha
 			if ((pos + getWidth() <= Util::getInstance()->getLogicalWindowWidth())) {
@@ -423,7 +421,7 @@ void MKCharacter::setFinalPosX(float oponentPosX, float oponentWidth) {
 		{
 			pos = oponentPosX - (getWidth() *1.08);
 
-			cout << this->posX << " - " << pos<< " - " << pos + getWidth()<< " - " <<Util::getInstance()->getLogicalWindowWidth() << endl;
+			//cout << this->posX << " - " << pos<< " - " << pos + getWidth()<< " - " <<Util::getInstance()->getLogicalWindowWidth() << endl;
 
 			//Verifico que no se vaya de la pantalla por izquierda
 			if (pos >= 0) {
