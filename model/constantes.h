@@ -116,7 +116,7 @@ const double DEFAULT_OFFSET                 = 30;
 const unsigned char DEFAULT_KEY[20] = "adwscezqxokljmnbypb";
 
 const int COMBO_TOLERANCE = 1;
-const int COMBO_TIMER     = 5000;
+const int COMBO_TIMER     = 500;
 
 enum Events { MoveRight, MoveLeft, Jump, Duck, WeaponHit, HighPunch, LowPunch, HighKick, LowKick, Block, ReceiveHit,
 	ReceiveDuckingPunch, ReceiveDuckingKick, ReceiveWeapon, MoveRightRelease, MoveLeftRelease, DuckRelease, BlockRelease,

@@ -2,7 +2,7 @@
 #include <SDL2/SDL_timer.h>
 #include "ComboManager.h"
 
-Events ComboManager::checkCombo(Events originalEvent) {
+Events ComboManager::checkCombo(Events originalEvent, char side) {
     if (this->startTime == 0) {
         this->startTime = SDL_GetTicks();
     }
@@ -10,9 +10,9 @@ Events ComboManager::checkCombo(Events originalEvent) {
         this->cleanBuffer();
     }
     this->buffer->push_back(originalEvent);
-    if (bufferMatchesCombo(this->combo1))
+    if (bufferMatchesCombo(this->combo1, side))
         return Teleportation; // SE EJECTUA EL COMBO 1: RETURN COMBO1EVENT
-    else if (bufferMatchesCombo(this->combo2))
+    else if (bufferMatchesCombo(this->combo2, side))
         return WeaponHitIce; // SE EJECTUA EL COMBO 2: RETURN COMBO2EVENT
 
     return originalEvent;
@@ -36,12 +36,12 @@ ComboManager::~ComboManager() {
     //delete this->combo1;
 }
 
-bool ComboManager::bufferMatchesCombo(std::vector<Events>* combo) {
+bool ComboManager::bufferMatchesCombo(std::vector<Events>* combo, char side) {
     unsigned int i = 0;
     int errorCounter = 0;
     unsigned int comboProgress = 0;
     while (i < this->buffer->size() && errorCounter <= COMBO_TOLERANCE) {
-        if (comboProgress < combo->size() && combo->at(comboProgress) == this->buffer->at(i))
+        if (comboProgress < combo->size() && combo->at(comboProgress) == this->changeSideEvent(this->buffer->at(i),side))
             comboProgress++;
         else if (comboProgress < combo->size()) {
             errorCounter++;
@@ -68,4 +68,18 @@ void ComboManager::cleanBuffer() {
 
 bool ComboManager::isTimeOut() {
     return SDL_GetTicks() - this->startTime > COMBO_TIMER;
+}
+
+Events ComboManager::changeSideEvent(Events event, char side) {
+    if (side == 'r') {
+        switch(event) {
+            case MoveRight:
+                return MoveLeft;
+            case MoveLeft:
+                return MoveRight;
+            default:
+                break;
+        }
+    }
+    return event;
 }
