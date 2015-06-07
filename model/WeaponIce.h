@@ -1,7 +1,5 @@
-
-
-#ifndef MORTALKOMBAT_TALLER1C2015_WEAPON_H
-#define MORTALKOMBAT_TALLER1C2015_WEAPON_H
+#ifndef MORTALKOMBAT_TALLER1C2015_WeaponIce_H
+#define MORTALKOMBAT_TALLER1C2015_WeaponIce_H
 
 #include <iostream>
 #include "Throwable.h"
@@ -37,4 +35,4 @@ private:
 };
 
 
-#endif //MORTALKOMBAT_TALLER1C2015_WEAPON_H
+#endif //MORTALKOMBAT_TALLER1C2015_WeaponIce_H

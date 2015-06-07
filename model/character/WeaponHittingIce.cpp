@@ -5,7 +5,7 @@
 #include "RecevingHit.h"
 
 WeaponHittingIce::WeaponHittingIce() {
-	this->timer = 1;
+	this->timer = 40;
 }
 
 WeaponHittingIce::~WeaponHittingIce() {

@@ -44,7 +44,7 @@ public:
 								CharacterSprite*& shoot,  CharacterSprite*& dizzy, CharacterSprite*& fall,
 								CharacterSprite*& beingHit, CharacterSprite*& beingHitDown, CharacterSprite*& blockDown, CharacterSprite*& block,
 								CharacterSprite*& fatalityHit, CharacterSprite*& fatalityFire, CharacterSprite*& onFire, CharacterSprite*& teleportation,
-								CharacterSprite*& shootIce, bool colorAltered);
+								CharacterSprite*& shootIce,CharacterSprite*& weaponIce, bool colorAltered);
     void startRender();
     void endRender();
     void initializeCharactersSprites();
@@ -115,6 +115,7 @@ private:
     CharacterSprite* raidenReceivingFire;
     CharacterSprite* raidenTeleportation;
     CharacterSprite* raidenShootIce;
+    CharacterSprite* raidenWeaponIce;
 
     LayerSprite** layerSprites;
     int layerCount;
