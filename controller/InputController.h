@@ -42,6 +42,7 @@ public:
 	void setModeSelection(ModeSelection* modeSelection);
 	void setCharacterSelection(CharacterSelection* characterSelection);
 	void enableAI();
+	void disableAI();
 
 private:
 	JoysticksControllerManager* joystickControllerManager;

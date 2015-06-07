@@ -100,3 +100,7 @@ void InputController::setModeSelection(ModeSelection *modeSelection) {
 void InputController::setCharacterSelection(CharacterSelection* characterSelection) {
 	this->stageController->setCharacterSelection(characterSelection);	
 }
+
+void InputController::disableAI() {
+	this->iaIsActive = false;
+}
