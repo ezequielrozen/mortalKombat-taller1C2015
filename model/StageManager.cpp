@@ -48,12 +48,12 @@ bool StageManager::mainLoop() {
 		GameModes mode = this->modeSelection->loop();
 		if (mode == OneVsAI) {
 			this->inputController->enableAI();
+		} else {
+			this->inputController->disableAI();
 		}
-
 		setStageController(new CharacterSelectionController());
 		this->characterSelection->linkInputController();
 		this->characterSelection->loop();
-
 		setStageController(new EventController());
 		restart = this->game->GameLoop();
 	}
