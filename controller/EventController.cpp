@@ -86,8 +86,8 @@ void EventController::lowPunch(){
 void EventController::shoot(){
 //	cout << "shoot : " << this->characterToMove->getName() << endl;
 	Mylog->Log("movimiento del personaje: Disparando.", ERROR_LEVEL_INFO);
-	//this->characterToMove->update(WeaponHit);
-	this->characterToMove->update(WeaponHitIce);
+	this->characterToMove->update(WeaponHit);
+//	this->characterToMove->update(WeaponHitIce);
 }
 
 void EventController::block(){
