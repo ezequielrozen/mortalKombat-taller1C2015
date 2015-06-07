@@ -41,15 +41,19 @@ void Text::initText(string position) {
     }
 
     this->textTexture = texture;
+    this->draw.y = 5;
+    this->draw.w = surface->w;
+    this->draw.h = surface->h;
     if (position == "left")
         this->draw.x = 5;
     else if (position == "right")
         this->draw.x = Util::getInstance()->getLogicalWindowWidth() * Util::getInstance()->getScalingConstant() - surface->w - 5;
-    else
-        this->draw.x = Util::getInstance()->getLogicalWindowWidth() * Util::getInstance()->getScalingConstant()/2 - surface->w/2;
-    this->draw.y = 5;
-    this->draw.w = surface->w;
-    this->draw.h = surface->h;
+    else {
+        this->draw.x = Util::getInstance()->getLogicalWindowWidth() * Util::getInstance()->getScalingConstant()/2 - surface->w;
+        this->draw.h = surface->h*2;
+        this->draw.w = surface->w*2;
+        this->draw.y = 2;
+    }
     SDL_FreeSurface(surface);
     TTF_CloseFont(font);
 }
