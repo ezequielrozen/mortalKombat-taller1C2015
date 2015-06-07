@@ -54,9 +54,9 @@ Game::~Game() {
 
 bool Game::GameLoop() {
 
-    if(this->timeFightStart == 0) {
+    //if(this->timeFightStart == 0) {
         this->timeFightStart= SDL_GetTicks();
-    }
+    //}
 
     bool cameraMoved;
     int roundCount = 1;

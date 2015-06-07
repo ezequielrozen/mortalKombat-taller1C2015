@@ -59,7 +59,6 @@ void ModeSelection::linkInputController() {
 }
 
 void ModeSelection::moveUp() {
-	cout << "Move Down" << endl;
 
 	if(this->index > 0) {
 		this->index--;
@@ -77,5 +76,6 @@ void ModeSelection::moveDown() {
 }
 
 void ModeSelection::select() {
+	cout << "SELECT" << endl;
 	this->selectionMade = true;
 }

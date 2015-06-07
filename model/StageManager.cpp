@@ -42,6 +42,7 @@ StageManager::~StageManager() {
 bool StageManager::mainLoop() {
 	bool restart = false;
 	while(inputController->getEvent()->type != SDL_QUIT && !restart) {
+		
 		this->setStageController(new ModeSelectionController());
 		this->modeSelection->linkInputController();
 		GameModes mode = this->modeSelection->loop();
