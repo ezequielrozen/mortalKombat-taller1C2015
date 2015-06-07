@@ -12,6 +12,7 @@
 #include "stage/Stage.h"
 #include "GameLoader.h"
 #include "character/ComboManager.h"
+#include "util/RoundTimer.h"
 #include <math.h>
 #include <iostream>
 #include <SDL2/SDL_mixer.h>
@@ -50,6 +51,7 @@ private:
     void restartRound();
     bool endFightTime();
     bool endOfRound();
+    RoundTimer* timer;
 };
 
 #endif // GAME_H

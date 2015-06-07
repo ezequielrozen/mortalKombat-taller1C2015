@@ -11,6 +11,7 @@
 #include "stage/LifeView.h"
 #include "character/Painter.h"
 #include "Text.h"
+#include "../model/util/RoundTimer.h"
 #include <string>
 #include <math.h>
 #include <map>
@@ -24,7 +25,7 @@ class GameView
 {
 public:
     GameView(SDL_Renderer* aRenderer, MKCharacter* character, MKCharacter* character2,
-             Stage* stage, string OponentSide, Painter* painter);
+             Stage* stage, string OponentSide, Painter* painter, RoundTimer* timer);
     ~GameView();
     void Render();
     void LoadSprites(string name1, string name2);
@@ -57,6 +58,8 @@ private:
 
     Text* characterName;
     Text *characterTwoName;
+    Text* timerText;
+    RoundTimer* timer;
 
     SpriteMap scorpionSprites;
     SpriteMap raidenSprites;

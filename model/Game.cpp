@@ -7,10 +7,11 @@
 
 Game::Game(GameLoader* aGameLoader, SDL_Renderer* renderer, InputController* inputController) {
     this->gameLoader = aGameLoader;
+    this->timer = new RoundTimer();
     this->initGame(renderer, inputController);
     this->diedTimeElapsed = 0;
     this->timeToResetRound = 0;
-    this->timeFightStart = 0;
+//    this->timeFightStart = 0;
 }
 
 void Game::initGame(SDL_Renderer* renderer, InputController* inputController) {
@@ -32,7 +33,7 @@ void Game::initGame(SDL_Renderer* renderer, InputController* inputController) {
     this->raiden->setPosY(this->stage->getFloor());
     this->raiden->setStageFloor(this->stage->getFloor());
 
-    this->gameView = new GameView(renderer, scorpion, raiden, stage, oponentSide, this->gameLoader->getPainter());
+    this->gameView = new GameView(renderer, scorpion, raiden, stage, oponentSide, this->gameLoader->getPainter(), this->timer);
     this->inputController = inputController;
     this->inputController->setCharacters(scorpion, raiden);
     InputController::setVibrating(false);
@@ -54,10 +55,8 @@ Game::~Game() {
 
 bool Game::GameLoop() {
 
-    //if(this->timeFightStart == 0) {
-        this->timeFightStart= SDL_GetTicks();
-    //}
-
+//    this->timeFightStart= SDL_GetTicks();
+    this->timer->run();
     bool cameraMoved;
     int roundCount = 1;
 
@@ -124,7 +123,8 @@ void Game::restartRound() {
     this->diedTimeElapsed = 0;
     this->isRoundEnd = true;
     this->timeToResetRound = 0;
-    this->timeFightStart = SDL_GetTicks();
+    this->timer->stop();
+    this->timer->run();
     this->scorpion->setLife(FULL_LIFE);
     this->raiden->setLife(FULL_LIFE);
     if (this->scorpion->getCharacterNumber() == 0) {
@@ -140,7 +140,7 @@ void Game::restartRound() {
 }
 
 bool Game::endFightTime() {
-    return SDL_GetTicks() - this->timeFightStart >= TIME_TO_FIGHT_ENDING;
+    return this->timer->getCurrentTime() >= TIME_TO_FIGHT_ENDING;
 }
 
 bool Game::endOfRound() {

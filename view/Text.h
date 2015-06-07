@@ -14,10 +14,14 @@ class Text {
         Text(const char* text, SDL_Renderer* renderer, string position);
         ~Text();
         void Draw();
+        void update(const char *text);
     private:
         SDL_Texture* textTexture;
         SDL_Renderer* renderer;
         SDL_Rect draw;
+        const char* text;
+
+    void initText(string position);
 };
 
 

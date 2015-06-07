@@ -5,7 +5,8 @@
 #include "Text.h"
 #include "SDL2/SDL.h"
 
-GameView::GameView(SDL_Renderer* aRenderer, MKCharacter* character, MKCharacter* character2, Stage* pStage, string OponentSide, Painter* painter) {
+GameView::GameView(SDL_Renderer* aRenderer, MKCharacter* character, MKCharacter* character2, Stage* pStage,
+                   string OponentSide, Painter* painter, RoundTimer* timer) {
 	oponentSide = OponentSide;
 
     this->renderer = aRenderer;
@@ -43,6 +44,10 @@ GameView::GameView(SDL_Renderer* aRenderer, MKCharacter* character, MKCharacter*
     string charTwoName = character2->getName();
     transform(charTwoName.begin(), charTwoName.end(), charTwoName.begin(), ::toupper);
     characterTwoName = new Text(charTwoName.c_str(), this->renderer, "right");
+
+    this->timer = timer;
+    int timeToShow = (TIME_TO_FIGHT_ENDING - this->timer->getCurrentTime()) / 1000;
+    this->timerText = new Text((std::to_string(timeToShow).c_str()), this->renderer,"center");
 
     stageBackgroundMusic = NULL;
 
@@ -157,6 +162,9 @@ void GameView::Render() {
 
     characterName->Draw();
     characterTwoName->Draw();
+    int timeToShow = (TIME_TO_FIGHT_ENDING - this->timer->getCurrentTime()) / 1000;
+    this->timerText->update((std::to_string(timeToShow).c_str()));
+    this->timerText->Draw();
     if (!painted) {
         if (this->raiden->isHitting()) {
             this->runCharacter(this->scorpion, this->raiden, this->scorpionSprites);
