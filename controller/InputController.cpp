@@ -17,7 +17,7 @@ InputController::InputController(MKStageController* stageController) {
 	this->aiController = new AIController(stageController);
 	SDL_Init(SDL_INIT_JOYSTICK);
 	joystickConnected = false;
-	if (SDL_NumJoysticks() > 0)	{
+	if (SDL_NumJoysticks() > 1)	{
 		this->joystickControllerManager = new JoysticksControllerManager(stageController);
 		joystickConnected = true;
 	}
@@ -91,7 +91,8 @@ void InputController::setCharacters(MKCharacter *character, MKCharacter *charact
 
 void InputController::enableAI() {
 	this->iaIsActive = true;
-	this->joystickControllerManager->enableAI();
+	if (joystickConnected)
+		this->joystickControllerManager->enableAI();
 }
 
 void InputController::setModeSelection(ModeSelection *modeSelection) {
