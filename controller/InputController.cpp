@@ -62,13 +62,13 @@ void InputController::setCharacterSide()
 void InputController::update() {
 
 	this->setCharacterSide();
-	if (!this->iaIsActive) {
+	//if (!this->iaIsActive) {
 		this->keyboardController->update(character, character2, this->getEvent());
-	}
+	//}
 
-	if (joystickConnected && !this->iaIsActive) {
+	//if (joystickConnected && !this->iaIsActive) {
 		this->joystickControllerManager->update(character, character2, this->getEvent());
-	}
+	//}
 
 	if (this->iaIsActive) {
 		this->aiController->update(character, character2, this->getEvent());
@@ -91,6 +91,7 @@ void InputController::setCharacters(MKCharacter *character, MKCharacter *charact
 
 void InputController::enableAI() {
 	this->iaIsActive = true;
+	this->joystickControllerManager->enableAI();
 }
 
 void InputController::setModeSelection(ModeSelection *modeSelection) {

@@ -41,6 +41,7 @@ void EventController::moveRightRelease(int n){
 //	cout << "moveRightRelease : " << this->characterToMove->getName() << endl;
 	this->characterToMove->update(MoveRightRelease);
 	rightPressed = false;
+	upPressed = false;
 }
 
 void EventController::moveLeft(int n){
@@ -57,6 +58,7 @@ void EventController::moveLeftRelease(int n){
 //	cout << "moveLeftRelease : " << this->characterToMove->getName() << endl;
 	this->characterToMove->update(MoveLeftRelease);
 	leftPressed = false;
+	upPressed = false;
 }
 
 void EventController::moveUp(int n){

@@ -13,6 +13,12 @@ void AIController::setStageController(MKStageController* stageController) {
 }
 
 void AIController::update(MKCharacter* character1, MKCharacter* character2, SDL_Event* mainEvent) {
+
+    if (character1->isHitting()) {
+        character2->update(Block);
+    } else if (character2->getState() == "Blocking")
+        character2->update(BlockRelease);
+/*
     switch (mainEvent->type){
         case SDL_KEYDOWN:
             switch(mainEvent->key.keysym.sym) {
@@ -96,5 +102,5 @@ void AIController::update(MKCharacter* character1, MKCharacter* character2, SDL_
             break;
         default:
             break;
-    }
+    }*/
 }

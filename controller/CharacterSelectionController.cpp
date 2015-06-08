@@ -126,4 +126,6 @@ void CharacterSelectionController::lowKick(int n) {
     else {
         this->characterSelection->select(n);
     }
+       // this->characterSelection->select(n);
+
 }

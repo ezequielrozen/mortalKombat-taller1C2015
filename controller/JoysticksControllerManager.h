@@ -21,6 +21,7 @@ public:
 	void update(MKCharacter* character, MKCharacter* character2, SDL_Event* joystickEvent);
 	void setStageController(MKStageController* stageController);
 	SDL_Event* getEvent();
+	void enableAI();
 private:
 	SDL_Joystick* joystickOne;
 	SDL_Joystick* joystickTwo;
@@ -29,5 +30,7 @@ private:
 	JoystickController* joystick1;
 	int joystickCount;
 	MKStageController* stageController;
+
+	bool aiEnabled;
 };
 #endif

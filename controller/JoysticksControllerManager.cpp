@@ -48,6 +48,8 @@ JoysticksControllerManager::JoysticksControllerManager(MKStageController* stageC
             break;
     }
 
+    this->aiEnabled = false;
+
 }
 
 JoysticksControllerManager::~JoysticksControllerManager() {
@@ -89,10 +91,15 @@ void JoysticksControllerManager::update(MKCharacter *character, MKCharacter *cha
         this->joystick0->update(character, character2, mainEvent);
 		break;
 	case 1:
-        this->stageController->setCharacterToMove(character2);
-		this->joystick1->update(character2, character, mainEvent);
-		break;
+        if (!aiEnabled) {
+            this->stageController->setCharacterToMove(character2);
+            this->joystick1->update(character2, character, mainEvent);
+        }
+        break;
 	}
 }
 
 
+void JoysticksControllerManager::enableAI() {
+    this->aiEnabled = true;
+}
