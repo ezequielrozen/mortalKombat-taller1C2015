@@ -34,46 +34,54 @@ void CharacterSelection::linkInputController() {
 }
 
 void CharacterSelection::moveUp(int n) {
-	this->buttonInfo.at(n).lastButton = this->buttonInfo.at(n).actualButton;
+	if (!this->buttonInfo.at(n).buttonPressed) {
+		this->buttonInfo.at(n).lastButton = this->buttonInfo.at(n).actualButton;
 
-	if (this->buttonInfo.at(n).actualButton > 3) {
-		this->buttonInfo.at(n).actualButton = this->buttonInfo.at(n).actualButton - 4;
-	}
-	else {
-		this->buttonInfo.at(n).actualButton = this->buttonInfo.at(n).actualButton + 8;
+		if (this->buttonInfo.at(n).actualButton > 3) {
+			this->buttonInfo.at(n).actualButton = this->buttonInfo.at(n).actualButton - 4;
+		}
+		else {
+			this->buttonInfo.at(n).actualButton = this->buttonInfo.at(n).actualButton + 8;
+		}
 	}
 }
 
 void CharacterSelection::moveDown(int n) {
-	this->buttonInfo.at(n).lastButton = this->buttonInfo.at(n).actualButton;
+	if (!this->buttonInfo.at(n).buttonPressed) {
+		this->buttonInfo.at(n).lastButton = this->buttonInfo.at(n).actualButton;
 	
-	if (this->buttonInfo.at(n).actualButton < 8) {
-		this->buttonInfo.at(n).actualButton = buttonInfo.at(n).actualButton + 4;
-	}
-	else {
-		this->buttonInfo.at(n).actualButton = buttonInfo.at(n).actualButton - 8;
+		if (this->buttonInfo.at(n).actualButton < 8) {
+			this->buttonInfo.at(n).actualButton = buttonInfo.at(n).actualButton + 4;
+		}
+		else {
+			this->buttonInfo.at(n).actualButton = buttonInfo.at(n).actualButton - 8;
+		}
 	}
 }
 
 void CharacterSelection::moveRight(int n) {
-	this->buttonInfo.at(n).lastButton = this->buttonInfo.at(n).actualButton;
+	if (!this->buttonInfo.at(n).buttonPressed) {
+		this->buttonInfo.at(n).lastButton = this->buttonInfo.at(n).actualButton;
 
-	if (this->buttonInfo.at(n).actualButton < 11) {
-		this->buttonInfo.at(n).actualButton++;
-	}
-	else {
-		this->buttonInfo.at(n).actualButton = 0;
+		if (this->buttonInfo.at(n).actualButton < 11) {
+			this->buttonInfo.at(n).actualButton++;
+		}
+		else {
+			this->buttonInfo.at(n).actualButton = 0;
+		}
 	}
 }
 
 void CharacterSelection::moveLeft(int n) {
-	this->buttonInfo.at(n).lastButton = this->buttonInfo.at(n).actualButton;
+	if (!this->buttonInfo.at(n).buttonPressed) {
+		this->buttonInfo.at(n).lastButton = this->buttonInfo.at(n).actualButton;
 
-	if (this->buttonInfo.at(n).actualButton > 0) {
-		this->buttonInfo.at(n).actualButton--;
-	}
-	else {
-		this->buttonInfo.at(n).actualButton = 11;
+		if (this->buttonInfo.at(n).actualButton > 0) {
+			this->buttonInfo.at(n).actualButton--;
+		}
+		else {
+			this->buttonInfo.at(n).actualButton = 11;
+		}
 	}
 }
 
