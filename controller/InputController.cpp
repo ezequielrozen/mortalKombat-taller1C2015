@@ -17,7 +17,7 @@ InputController::InputController(MKStageController* stageController) {
 	this->aiController = new AIController(stageController);
 	SDL_Init(SDL_INIT_JOYSTICK);
 	joystickConnected = false;
-	if (SDL_NumJoysticks() > 1)	{
+	if (SDL_NumJoysticks() > 0)	{
 		this->joystickControllerManager = new JoysticksControllerManager(stageController);
 		joystickConnected = true;
 	}

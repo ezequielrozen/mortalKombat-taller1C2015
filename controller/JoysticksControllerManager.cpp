@@ -64,8 +64,11 @@ JoysticksControllerManager::~JoysticksControllerManager() {
 
 void JoysticksControllerManager::setStageController(MKStageController* stageController) {
     this->stageController = stageController;
-    this->joystick0->setStageController(stageController);
-    this->joystick1->setStageController(stageController);    
+    if (joystickCount == 1)
+        this->joystick0->setStageController(stageController);
+    else if (joystickCount == 2)
+        this->joystick0->setStageController(stageController);
+        this->joystick1->setStageController(stageController);
 }
 
 void JoysticksControllerManager::update(MKCharacter *character, MKCharacter *character2, SDL_Event* mainEvent) {
