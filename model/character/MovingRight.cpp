@@ -11,6 +11,7 @@
 #include "Ducking.h"
 #include "BeingOverPassedRight.h"
 #include "BeingOverPassedLeft.h"
+#include "Blocking.h"
 
 MovingRight::MovingRight() {
 //    this->timer =
@@ -61,6 +62,9 @@ void MovingRight::update(MKCharacter * character, Events aEvent) {
             break;
         case MoveRightRelease:
             character->setState(new CharacterStance());
+            break;
+        case Block:
+            character->setState(new Blocking());
             break;
         case OverPassed:
             if (character->getCharacterSide() == 'l') {

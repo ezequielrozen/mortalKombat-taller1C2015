@@ -14,8 +14,12 @@ public:
     void update(MKCharacter* character1, MKCharacter* character2, SDL_Event* mainEvent);
     void setStageController(MKStageController* stageController);
 
-    MKStageController *stageController;
     bool key_u_Released;
+private:
+    MKStageController *stageController;
+    Events makeRandomGroundHit();
+    bool waiting;
+    bool weaponThrown;
 };
 
 
