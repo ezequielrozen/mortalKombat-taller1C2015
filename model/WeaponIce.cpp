@@ -6,6 +6,8 @@ WeaponIce::WeaponIce(float width, float height) {
     this->width = width;
     this->height = height;
     this->speed = 5;
+    this->currentUpdate = 0;
+    this->impactingWeaponIce = false;
 }
 
 
@@ -14,12 +16,23 @@ WeaponIce::~WeaponIce() {
 
 void WeaponIce::update() {
     if (this->isActive()) {
-        this->stepForward();
+
+    	this->stepForward();
+
+    	this->currentUpdate ++;
+
         if (this->traveledDistance > Util::getInstance()->getLogicalWindowWidth()) {
             this->destroy();
         } else {
             this->traveledDistance+= this->speed;
         }
+    }else
+    {
+    	if (this->currentUpdate > 30)
+    	{
+    		this->setImpactingWeaponIce(false);
+    	}
+    	this->currentUpdate ++;
     }
 }
 
@@ -32,6 +45,7 @@ void WeaponIce::throwWeapon(float initialX, float initialY, char direction) {
         this->positionY = initialY;
         this->direction = direction;
         this->impact = true;
+        this->impactingWeaponIce = false;
     }
 }
 
@@ -54,6 +68,15 @@ float WeaponIce::getPositionX() {
 void WeaponIce::destroy() {
     this->active = false;
     this->impact = false;
+    this->currentUpdate = 0;
+    cout << "destroy" << endl;
+}
+
+void WeaponIce::setImpactingWeaponIce(bool value){
+	this->impactingWeaponIce = value;
+}
+bool WeaponIce::getImpactingWeaponIce(){
+	return this->impactingWeaponIce;
 }
 
 float WeaponIce::getWidth() {
@@ -70,5 +93,10 @@ float WeaponIce::getPositionY() {
 
 bool WeaponIce::isImpact() {
     return this->impact;
+}
+
+bool WeaponIce::isStarting()
+{
+	return (this->currentUpdate <= 1);
 }
 

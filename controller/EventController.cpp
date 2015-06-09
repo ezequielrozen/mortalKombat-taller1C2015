@@ -2,7 +2,7 @@
 #include "InputController.h" //Esto esta solamanete por el metodo setCharacterSide que se deberia qitar de aca
 extern logger* Mylog;
 
-EventController::EventController(std::vector<Events>* combo1, std::vector<Events>* combo2) {
+EventController::EventController(std::vector<Events>* combo1, std::vector<Events>* combo2, std::vector<Events>* fatality) {
 	upPressed = false;
 	downPressed = false;
 	leftPressed = false;
@@ -14,7 +14,7 @@ EventController::EventController(std::vector<Events>* combo1, std::vector<Events
 	blockPressed = false;
 	weaponThrowPressed = false;
 	this->comboManager = new ComboManager();
-	this->comboManager->loadCombos(combo1, combo2);
+	this->comboManager->loadCombos(combo1, combo2, fatality);
 }
 
 EventController::~EventController() {
@@ -136,6 +136,8 @@ void EventController::shoot(){
 		this->characterToMove->update(this->comboManager->checkCombo(WeaponHit, this->characterToMove->getCharacterSide()));
 		weaponThrowPressed = true;
 	}
+
+//	this->characterToMove->update(WeaponHitIce);
 }
 
 void EventController::block(){

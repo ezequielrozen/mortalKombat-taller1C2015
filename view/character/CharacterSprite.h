@@ -29,6 +29,7 @@ public:
 	void setRepeatLastSprite(bool repeat);
 	int PlayShootFire(float Speed, float width, float height);
 	void PlayShoot2(float, float, float);
+	void PlayShootIce(float Speed, float width, float height, bool isStarting);
 	void PlayFall(float);
 	void vibrate();
 	bool vibrationFinished();

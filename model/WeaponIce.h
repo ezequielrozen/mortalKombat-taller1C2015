@@ -19,6 +19,9 @@ public:
     float getWidth();
     float getHeight();
     bool isImpact();
+    bool isStarting();
+    void setImpactingWeaponIce(bool);
+	bool getImpactingWeaponIce();
 
 private:
     float speed;
@@ -31,6 +34,8 @@ private:
     void stepForward();
     float traveledDistance;
     bool impact;
+    int currentUpdate;
+    bool impactingWeaponIce;
 
 };
 

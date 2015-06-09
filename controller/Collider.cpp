@@ -56,18 +56,28 @@ void Collider::checkHits(MKCharacter* character1, MKCharacter* character2) {
 		((superpositionWeaponRight(character1->getWeapon(), character2) || superpositionWeaponLeft(character1->getWeapon(), character2)) &&
 				character1->getWeapon()->isActive() && superpositionWeaponDown(character1->getWeapon(), character2))||
 		((superpositionWeaponRight(character1->getWeaponFire(), character2) ||
-				superpositionWeaponLeft(character1->getWeaponFire(), character2)) && character1->getWeaponFire()->isActive())){
+				superpositionWeaponLeft(character1->getWeaponFire(), character2)) && character1->getWeaponFire()->isActive()) ||
+		((superpositionWeaponRight(character1->getWeaponIce(), character2) ||
+						superpositionWeaponLeft(character1->getWeaponIce(), character2)) && character1->getWeaponIce()->isActive())){
+
+
 
 		if (character1->impacts()) {
 			if (character1->getState() == "DuckingKickHitting" ||
 				(!character2->isBlocking() && !character2->isDucking() && !character2->isReceivingHit()) ||
 				(character1->getWeapon()->isActive() && !character2->isDucking()) ||
-				(character1->getWeaponFire()->isActive())) {
+				(character1->getWeaponFire()->isActive()) ||
+				(character1->getWeaponIce()->isActive())) {
 
 				if (character2->isAlive()){
 					if (character1->getWeapon()->isActive()) {
 						character2->receiveBlow(DAMAGE.at("WeaponHitting"),0);
 						character1->getWeapon()->destroy();
+					} else if (character1->getWeaponIce()->isActive()) {
+						character2->receiveBlow(DAMAGE.at("WeaponHitting"),0);
+						character1->getWeaponIce()->setImpactingWeaponIce(true);
+						character1->getWeaponIce()->destroy();
+
 					} else
 					{
 						character2->receiveBlow(DAMAGE.at(character1->getState()),0);

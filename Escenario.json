@@ -129,7 +129,8 @@
 
   "combos": {
     "combo1": "abajo,izquierda",
-    "combo2": "abajo,derecha"
+    "combo2": "abajo,derecha",
+    "fatality": "derecha,abajo,abajo"
   },
 
 

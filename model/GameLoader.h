@@ -18,6 +18,7 @@ public:
     Painter* getPainter();
     vector<Events> *getCombo1();
     vector<Events> *getCombo2();
+    vector<Events> *getFatality();
 
 private:
     float stageWidth;
@@ -30,6 +31,7 @@ private:
     Stage* stage;
     vector<Events>* combo1;
     vector<Events>* combo2;
+    vector<Events> *fatality;
 };
 
 

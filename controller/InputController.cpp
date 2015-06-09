@@ -110,3 +110,7 @@ void InputController::enablePracticeAI() {
 	this->enableAI();
 	this->aiController->enablePracticeAI();
 }
+
+bool InputController::isAIEnabled() {
+	return this->iaIsActive;
+}

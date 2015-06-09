@@ -126,6 +126,7 @@ enum GameModes { OneVsTwo, OneVsAI, Practice};
 
 const std::vector<Events> DEFAULT_COMBO1 = {MoveRight, MoveLeft, Duck, LowKick};
 const std::vector<Events> DEFAULT_COMBO2 = {MoveRight, Duck, MoveRight, HighPunch, LowPunch, LowKick};
+const std::vector<Events> DEFAULT_FATALITY = {MoveLeft, MoveRight, MoveLeft, LowKick, LowPunch};
 
 const int BUTTONS_BUFFER_PRACTICE_MAX = 8;
 

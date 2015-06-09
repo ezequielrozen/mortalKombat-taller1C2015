@@ -10,11 +10,10 @@ public:
     ComboManager();
     ~ComboManager();
     Events checkCombo(Events originalEvent, char side);
-    void loadCombos(std::vector<Events>* combo1, std::vector<Events>* combo2);
+    void loadCombos(std::vector<Events>* combo1, std::vector<Events>* combo2, std::vector<Events>* fatality);
 
 private:
 
-    int combo2Progress;
     int startTime;
 
     bool bufferMatchesCombo(std::vector<Events>* combo, char side);
@@ -23,6 +22,7 @@ private:
     std::vector<Events>* combo1;
     std::vector<Events>* combo2;
     std::vector<Events>* buffer;
+    vector<Events> *fatality;
     bool isTimeOut();
 
     Events changeSideEvent(Events event, char side);
