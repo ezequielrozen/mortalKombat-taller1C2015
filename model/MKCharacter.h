@@ -127,6 +127,7 @@ public:
     void setFinalPosX(float oponentPosX, float oponentWidth);
     int getCharacterNumber();
 
+
 private:
 
     // State
@@ -160,6 +161,7 @@ private:
     Throwable* weaponIce;
     bool weaponFireUsed;
     bool fatalityEnable;
+
 };
 
 #endif /* MKCHARACTER_H_ */

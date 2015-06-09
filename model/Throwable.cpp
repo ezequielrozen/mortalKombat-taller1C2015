@@ -45,3 +45,13 @@ bool Throwable::isImpact() {
     return false;
 }
 
+bool Throwable::isStarting(){
+	return false;
+}
+
+void Throwable::setImpactingWeaponIce(bool value){
+
+}
+bool Throwable::getImpactingWeaponIce(){
+	return false;
+}

@@ -22,6 +22,9 @@ public:
 	virtual float getWidth();
 	virtual float getHeight();
 	virtual bool isImpact();
+	virtual bool isStarting();
+    virtual void setImpactingWeaponIce(bool);
+    virtual bool getImpactingWeaponIce();
 };
 
 #endif /* THROWABLE_H_ */

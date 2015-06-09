@@ -6,7 +6,7 @@ MKCharacter::MKCharacter(float initialPosX, float ancho, float alto, int z_index
 
 	this->weapon = new Weapon(ancho*0.97, alto*0.36);
 	this->weaponFire = new Fire(ancho*0.97, alto*0.36);
-	this->weaponIce = new WeaponIce(ancho*0.97, alto*0.36);
+	this->weaponIce = new WeaponIce(ancho*0.97, alto*0.2);
 	this->state = new CharacterStance();
 	this->z_index = z_index;
 	posX = initialPosX;
@@ -27,8 +27,8 @@ MKCharacter::MKCharacter(float initialPosX, float ancho, float alto, int z_index
 
 	this->characterNumber = pCharacterNumber;
 
-	weaponFireUsed = false;
-	fatalityEnable = false;
+	this->weaponFireUsed = false;
+	this->fatalityEnable = false;
 
 }
 
@@ -70,6 +70,7 @@ void MKCharacter::characterUpdate() {
 
 	if (this->state->getName() == "WeaponHittingIce" && this->state->startThrowing() && !this->weaponIce->isActive()) {
 		throwWeaponIce();
+		cout << "throwWeaponIce" << endl;
 	}
 	this->weaponIce->update();
 
@@ -107,7 +108,13 @@ Throwable *MKCharacter::getWeaponIce() {
 }
 
 void MKCharacter::throwWeaponIce() {
-		this->weaponIce->throwWeapon(this->posX, this->posY,this->getCharacterSide());
+
+	if (this->getCharacterSide() == 'l') {
+		this->weaponIce->throwWeapon(this->posX + (this->getWidth() * 0.85), this->posY,this->getCharacterSide());
+	}else
+	{
+		this->weaponIce->throwWeapon(this->posX-(this->getWidth()*0.67), this->posY,this->getCharacterSide());
+	}
 }
 
 void MKCharacter::setFatalityEnable(bool state){
@@ -388,7 +395,7 @@ bool MKCharacter::impacts() {
 		return this->state->impact();
 	}
 	else {
-		return (this->getWeapon()->isImpact() || this->getWeaponFire()->isImpact());
+		return (this->getWeapon()->isImpact() || this->getWeaponFire()->isImpact() || this->getWeaponIce()->isImpact());
 	}
 }
 

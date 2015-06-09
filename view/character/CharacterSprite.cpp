@@ -117,8 +117,40 @@ int CharacterSprite::PlayShootFire(float Speed, float width, float height){
         }
         animationDelay = SDL_GetTicks();
     }
-//    cout << "shoot1 " << CurrentFrame << endl;
+
     return CurrentFrame;
+}
+
+void CharacterSprite::PlayShootIce(float Speed, float width, float height, bool isStarting){
+
+    if (animationDelay+Speed < SDL_GetTicks())
+    {
+    	if (isStarting){
+    		CurrentFrame =0;
+    	}
+
+    	 cout << "currentFrame: " << CurrentFrame << endl;
+        if ((this->framesX ) <= CurrentFrame)
+        {
+        	if (this->getRepeatLastSprite()){
+        		CurrentFrame = this->framesX -1;
+        	}else{
+        		CurrentFrame = 0;
+        	}
+        }
+        else{
+			draw.w = width*Util::getInstance()->getScalingConstant();
+			draw.h= height*Util::getInstance()->getScalingConstant();
+
+			crop.x = CurrentFrame * (img_width/this->framesX);
+			crop.y = 0;
+			crop.w = img_width/framesX;
+			crop.h = img_height;
+
+            CurrentFrame++;
+        }
+        animationDelay = SDL_GetTicks();
+    }
 }
 
 void CharacterSprite::PlayShoot2(float Speed, float width, float height)
