@@ -79,15 +79,26 @@ bool Game::GameLoop() {
 
 void Game::updateGameState(int &roundCount) {
     if (!scorpion->isAlive()) {
-    	if (scorpion->getState() != "ReceivingFire") {
-			scorpion->setState(new Dizzy());
-			scorpion->setPosY(this->stage->getFloor());
-	//        raiden->setState(new Victory());
-			raiden->setPosY(this->stage->getFloor());
-            if(roundCount == 1) {
-                roundCount++;
+        if (scorpion->getState() != "ReceivingFire") {
+            scorpion->setState(new Dizzy());
+            scorpion->setPosY(this->stage->getFloor());
+            if (diedTimeElapsed == 0) {
+                diedTimeElapsed = SDL_GetTicks();
             }
-    	}
+            if ((SDL_GetTicks() - diedTimeElapsed >=  TIME_FOR_DOING_FATALITY) && raiden->getState() == "Stance") {
+                raiden->setState(new Victory());
+            }
+            raiden->setPosY(this->stage->getFloor());
+            if(this->timeToResetRound == 0) {
+                this->timeToResetRound = SDL_GetTicks();
+            } else if(endOfRound()) {
+                this->restartRound();
+                if(this->isRoundEnd) {
+                    roundCount++;
+                    this->isRoundEnd = false;
+                }
+            }
+        }
 
     } else if (!raiden->isAlive()) {
     	if (raiden->getState() != "ReceivingFire") {
