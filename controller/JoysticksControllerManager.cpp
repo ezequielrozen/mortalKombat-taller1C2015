@@ -51,7 +51,7 @@ JoysticksControllerManager::JoysticksControllerManager(MKStageController* stageC
     this->aiEnabled = false;
 
 }
-g
+
 JoysticksControllerManager::~JoysticksControllerManager() {
 	if (joystickCount == 1){
 		delete joystick0;
