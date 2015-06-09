@@ -99,7 +99,7 @@ void CharacterSelection::switchSelected() {
 }
 
 void CharacterSelection::randomSelection() {
-	if (this->inputController->isAIEnabled() && (rand() % 10) == 0) {
+	if (this->inputController->isAIEnabled() && (rand() % 10) == 0 && !this->buttonInfo.at(1).buttonPressed) {
 		this->buttonInfo.at(1).lastButton = this->buttonInfo.at(1).actualButton;
 
 		if (this->buttonInfo.at(1).actualButton < 11) {
