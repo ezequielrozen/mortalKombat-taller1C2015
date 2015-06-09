@@ -85,7 +85,7 @@ void Game::updateGameState(int &roundCount) {
             if (diedTimeElapsed == 0) {
                 diedTimeElapsed = SDL_GetTicks();
             }
-            if ((SDL_GetTicks() - diedTimeElapsed >=  TIME_FOR_DOING_FATALITY) && raiden->getState() == "Stance") {
+            if ((SDL_GetTicks() - diedTimeElapsed >=  TIME_FOR_DOING_FATALITY) && !raiden->isJumping()) {
                 raiden->setState(new Victory());
             }
             raiden->setPosY(this->stage->getFloor());
@@ -107,7 +107,7 @@ void Game::updateGameState(int &roundCount) {
             if (diedTimeElapsed == 0) {
                 diedTimeElapsed = SDL_GetTicks();
             }
-            if ((SDL_GetTicks() - diedTimeElapsed >=  TIME_FOR_DOING_FATALITY) && scorpion->getState() == "Stance") {
+            if ((SDL_GetTicks() - diedTimeElapsed >=  TIME_FOR_DOING_FATALITY) && !raiden->isJumping()) {
                 scorpion->setState(new Victory());
             }
 			scorpion->setPosY(this->stage->getFloor());
