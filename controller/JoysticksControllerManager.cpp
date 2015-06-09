@@ -51,7 +51,7 @@ JoysticksControllerManager::JoysticksControllerManager(MKStageController* stageC
     this->aiEnabled = false;
 
 }
-
+g
 JoysticksControllerManager::~JoysticksControllerManager() {
 	if (joystickCount == 1){
 		delete joystick0;
@@ -66,9 +66,10 @@ void JoysticksControllerManager::setStageController(MKStageController* stageCont
     this->stageController = stageController;
     if (joystickCount == 1)
         this->joystick0->setStageController(stageController);
-    else if (joystickCount == 2)
+    else if (joystickCount == 2) {
         this->joystick0->setStageController(stageController);
         this->joystick1->setStageController(stageController);
+    }
 }
 
 void JoysticksControllerManager::update(MKCharacter *character, MKCharacter *character2, SDL_Event* mainEvent) {

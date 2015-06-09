@@ -22,7 +22,6 @@ JoystickController::JoystickController(char number, MKStageController* stageCont
 		this->c0HighPunch = Util::getInstance()->getMapaDeCaracteres(5);
 		this->c0HighKick = Util::getInstance()->getMapaDeCaracteres(6);
 		this->c0LowKick = Util::getInstance()->getMapaDeCaracteres(7);
-		cout << (int)this->c0LowKick << endl;
 		this->c0block = Util::getInstance()->getMapaDeCaracteres(8);
 		this->c0shoot = Util::getInstance()->getMapaDeCaracteres(9);
 		this->c0duckPunch = Util::getInstance()->getMapaDeCaracteres(20);
@@ -37,7 +36,6 @@ JoystickController::JoystickController(char number, MKStageController* stageCont
 		this->c0HighPunch = Util::getInstance()->getMapaDeCaracteres(15);
 		this->c0HighKick = Util::getInstance()->getMapaDeCaracteres(16);
 		this->c0LowKick = Util::getInstance()->getMapaDeCaracteres(17);
-		cout << (int)this->c0LowKick << "-----------------" << endl;
 		this->c0block = Util::getInstance()->getMapaDeCaracteres(18);
 		this->c0shoot = Util::getInstance()->getMapaDeCaracteres(19);
 		this->c0duckPunch = Util::getInstance()->getMapaDeCaracteres(21);
