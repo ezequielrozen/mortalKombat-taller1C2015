@@ -107,7 +107,7 @@ void Game::updateGameState(int &roundCount) {
             if (diedTimeElapsed == 0) {
                 diedTimeElapsed = SDL_GetTicks();
             }
-            if ((SDL_GetTicks() - diedTimeElapsed >=  TIME_FOR_DOING_FATALITY) && !raiden->isJumping()) {
+            if ((SDL_GetTicks() - diedTimeElapsed >=  TIME_FOR_DOING_FATALITY) && !scorpion->isJumping()) {
                 scorpion->setState(new Victory());
             }
 			scorpion->setPosY(this->stage->getFloor());
