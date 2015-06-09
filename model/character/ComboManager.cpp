@@ -14,26 +14,25 @@ Events ComboManager::checkCombo(Events originalEvent, char side) {
         return Teleportation; // SE EJECTUA EL COMBO 1: RETURN COMBO1EVENT
     else if (bufferMatchesCombo(this->combo2, side))
         return WeaponHitIce; // SE EJECTUA EL COMBO 2: RETURN COMBO2EVENT
+    else if (bufferMatchesCombo(this->fatality, side))
+        return FatalityHit;
 
     return originalEvent;
 }
 
-void ComboManager::loadCombos(std::vector<Events>* combo1, std::vector<Events>* combo2) {
+void ComboManager::loadCombos(std::vector<Events>* combo1, std::vector<Events>* combo2, std::vector<Events>* fatality) {
     this->combo1 = combo1;
     this->combo2 = combo2;
+    this->fatality = fatality;
 }
 
 ComboManager::ComboManager() {
     this->buffer = new std::vector<Events>();
-    //this->combo1 = new std::vector<Events>();
-    //this->combo1->push_back(MoveLeft);
-    //this->combo1->push_back(HighKick);
     this->startTime = 0;
 }
 
 ComboManager::~ComboManager() {
     delete this->buffer;
-    //delete this->combo1;
 }
 
 bool ComboManager::bufferMatchesCombo(std::vector<Events>* combo, char side) {
