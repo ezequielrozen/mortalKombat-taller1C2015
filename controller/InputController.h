@@ -43,6 +43,7 @@ public:
 	void setCharacterSelection(CharacterSelection* characterSelection);
 	void enableAI();
 	void disableAI();
+	bool isAIEnabled();
 
 private:
 	JoysticksControllerManager* joystickControllerManager;

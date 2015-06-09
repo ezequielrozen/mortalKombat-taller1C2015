@@ -106,3 +106,7 @@ void InputController::setCharacterSelection(CharacterSelection* characterSelecti
 void InputController::disableAI() {
 	this->iaIsActive = false;
 }
+
+bool InputController::isAIEnabled() {
+	return this->iaIsActive;
+}

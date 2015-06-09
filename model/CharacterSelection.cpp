@@ -34,7 +34,7 @@ void CharacterSelection::linkInputController() {
 }
 
 void CharacterSelection::moveUp(int n) {
-	if (!this->buttonInfo.at(n).buttonPressed) {
+	if (!this->buttonInfo.at(n).buttonPressed && !(n == 1 && this->inputController->isAIEnabled())) {
 		this->buttonInfo.at(n).lastButton = this->buttonInfo.at(n).actualButton;
 
 		if (this->buttonInfo.at(n).actualButton > 3) {
@@ -47,7 +47,7 @@ void CharacterSelection::moveUp(int n) {
 }
 
 void CharacterSelection::moveDown(int n) {
-	if (!this->buttonInfo.at(n).buttonPressed) {
+	if (!this->buttonInfo.at(n).buttonPressed && !(n == 1 && this->inputController->isAIEnabled())) {
 		this->buttonInfo.at(n).lastButton = this->buttonInfo.at(n).actualButton;
 	
 		if (this->buttonInfo.at(n).actualButton < 8) {
@@ -60,7 +60,7 @@ void CharacterSelection::moveDown(int n) {
 }
 
 void CharacterSelection::moveRight(int n) {
-	if (!this->buttonInfo.at(n).buttonPressed) {
+	if (!this->buttonInfo.at(n).buttonPressed && !(n == 1 && this->inputController->isAIEnabled())) {
 		this->buttonInfo.at(n).lastButton = this->buttonInfo.at(n).actualButton;
 
 		if (this->buttonInfo.at(n).actualButton < 11) {
@@ -73,7 +73,7 @@ void CharacterSelection::moveRight(int n) {
 }
 
 void CharacterSelection::moveLeft(int n) {
-	if (!this->buttonInfo.at(n).buttonPressed) {
+	if (!this->buttonInfo.at(n).buttonPressed && !(n == 1 && this->inputController->isAIEnabled())) {
 		this->buttonInfo.at(n).lastButton = this->buttonInfo.at(n).actualButton;
 
 		if (this->buttonInfo.at(n).actualButton > 0) {
@@ -86,9 +86,47 @@ void CharacterSelection::moveLeft(int n) {
 }
 
 void CharacterSelection::select(int n) {
-	this->buttonInfo.at(n).buttonPressed = true;
+	if (!(n == 1 && this->inputController->isAIEnabled())) {
+		this->buttonInfo.at(n).buttonPressed = true;
+	}
 }
 
+void CharacterSelection::switchSelected() {
+	this->buttons1.at(this->buttonInfo.at(0).lastButton)->setSelected(false);
+	this->buttons1.at(this->buttonInfo.at(0).actualButton)->setSelected(true);
+	this->buttons2.at(this->buttonInfo.at(1).lastButton)->setSelected(false);
+	this->buttons2.at(this->buttonInfo.at(1).actualButton)->setSelected(true);
+}
+
+void CharacterSelection::randomSelection() {
+	if (this->inputController->isAIEnabled() && (rand() % 10) == 0) {
+		this->buttonInfo.at(1).lastButton = this->buttonInfo.at(1).actualButton;
+
+		if (this->buttonInfo.at(1).actualButton < 11) {
+			this->buttonInfo.at(1).actualButton++;
+		}
+		else {
+			this->buttonInfo.at(1).actualButton = 0;
+		}
+
+		if ((rand() % 10) == 0) {
+			this->buttonInfo.at(1).buttonPressed = true;
+		}
+	}
+}
+
+void CharacterSelection::reset() {
+
+	this->buttonInfo.at(0).lastButton = this->buttonInfo.at(0).actualButton;
+	this->buttonInfo.at(0).actualButton = 0;
+	this->buttonInfo.at(0).buttonPressed = false;
+	this->buttonInfo.at(1).lastButton = this->buttonInfo.at(1).actualButton;
+	this->buttonInfo.at(1).actualButton = 0;
+	this->buttonInfo.at(1).buttonPressed = false;	
+
+	this->switchSelected();
+
+}
 
 void CharacterSelection::loop() {
 	
@@ -96,15 +134,13 @@ void CharacterSelection::loop() {
 		inputController->checkEvent();
 		inputController->update();
 
-		this->buttons1.at(this->buttonInfo.at(0).lastButton)->setSelected(false);
-		this->buttons1.at(this->buttonInfo.at(0).actualButton)->setSelected(true);
-		this->buttons2.at(this->buttonInfo.at(1).lastButton)->setSelected(false);
-		this->buttons2.at(this->buttonInfo.at(1).actualButton)->setSelected(true);
+		this->randomSelection();
+
+		this->switchSelected();
 
 		view->render();
 
 	}
-	this->buttonInfo.at(0).buttonPressed = false;
-	this->buttonInfo.at(1).buttonPressed = false;
+	this->reset();
 }
 

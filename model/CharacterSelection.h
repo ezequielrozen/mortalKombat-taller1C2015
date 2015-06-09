@@ -32,6 +32,9 @@ public:
 	void moveRight(int n);
 	void moveLeft(int n);
 	void select(int n);
+	void switchSelected();
+	void randomSelection();
+	void reset();
 
 
 private:
