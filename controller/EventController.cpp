@@ -136,6 +136,8 @@ void EventController::shoot(){
 		this->characterToMove->update(this->comboManager->checkCombo(WeaponHit, this->characterToMove->getCharacterSide()));
 		weaponThrowPressed = true;
 	}
+
+//	this->characterToMove->update(WeaponHitIce);
 }
 
 void EventController::block(){

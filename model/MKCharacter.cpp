@@ -68,13 +68,10 @@ void MKCharacter::characterUpdate() {
 	}
 	this->weaponFire->update();
 
-	if (this->state->getName() == "WeaponHittingIce" && this->state->startThrowing() && !this->weaponIce->isActive()) {
+	if (this->state->getName() == "WeaponHittingIce" && this->state->startThrowing() && !this->weaponIce->isActive() && !this->weaponIce->getImpactingWeaponIce()) {
 		throwWeaponIce();
-		cout << "throwWeaponIce" << endl;
 	}
 	this->weaponIce->update();
-
-//	cout << this->getStagePosX() << endl;
 	
 }
 

@@ -129,7 +129,7 @@ void CharacterSprite::PlayShootIce(float Speed, float width, float height, bool 
     		CurrentFrame =0;
     	}
 
-    	 cout << "currentFrame: " << CurrentFrame << endl;
+//    	 cout << "currentFrame: " << CurrentFrame << endl;
         if ((this->framesX ) <= CurrentFrame)
         {
         	if (this->getRepeatLastSprite()){

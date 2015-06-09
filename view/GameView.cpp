@@ -465,7 +465,6 @@ void GameView::runCharacter(MKCharacter* character1, MKCharacter* character2, Sp
 				shootChar->setX(character1->getWeaponIce()->getPositionX());
 				shootChar->setY(character1->getWeaponIce()->getPositionY());
             }else if (character1->getWeaponIce()->getImpactingWeaponIce()){
-            	cout << character1->getWeaponIce()->getPositionX()-(character2->getWidth()*4) << endl;
             	shootChar->setX(character1->getWeaponIce()->getPositionX()+(character2->getWidth()*0.8));
 				shootChar->setY(character1->getWeaponIce()->getPositionY());
             }

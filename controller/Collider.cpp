@@ -74,7 +74,6 @@ void Collider::checkHits(MKCharacter* character1, MKCharacter* character2) {
 						character2->receiveBlow(DAMAGE.at("WeaponHitting"),0);
 						character1->getWeapon()->destroy();
 					} else if (character1->getWeaponIce()->isActive()) {
-						cout << "weaponIce: " << character1->getWeaponIce()->isActive() << endl;
 						character2->receiveBlow(DAMAGE.at("WeaponHitting"),0);
 						character1->getWeaponIce()->setImpactingWeaponIce(true);
 						character1->getWeaponIce()->destroy();
