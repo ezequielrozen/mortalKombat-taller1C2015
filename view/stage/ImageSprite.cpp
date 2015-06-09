@@ -31,3 +31,20 @@ ImageSprite::~ImageSprite() {
 void ImageSprite::Draw() {
 	SDL_RenderCopy(renderer,texture,&crop, &draw);
 }
+
+void ImageSprite::setPosition(int x, int y) {
+    this->draw.x = x;
+    this->draw.y = y;
+}
+
+int ImageSprite::getX() {
+    return this->draw.x;
+}
+
+int ImageSprite::getY() {
+    return this->draw.y;
+}
+
+int ImageSprite::getWidth() {
+    return this->draw.w;
+}

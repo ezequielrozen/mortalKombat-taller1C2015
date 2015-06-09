@@ -12,7 +12,6 @@ InputController::InputController(MKStageController* stageController) {
 	this->mainEvent = new SDL_Event();
 	this->stageController = stageController;
 	this->iaIsActive = false;
-
 	this->keyboardController = new KeyboardController(stageController);
 	this->aiController = new AIController(stageController);
 	SDL_Init(SDL_INIT_JOYSTICK);
@@ -105,4 +104,9 @@ void InputController::setCharacterSelection(CharacterSelection* characterSelecti
 
 void InputController::disableAI() {
 	this->iaIsActive = false;
+}
+
+void InputController::enablePracticeAI() {
+	this->enableAI();
+	this->aiController->enablePracticeAI();
 }

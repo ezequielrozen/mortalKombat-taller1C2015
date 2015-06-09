@@ -1,8 +1,11 @@
 #include "SDL2/SDL_events.h"
 #include <SDL2/SDL_timer.h>
 #include "ComboManager.h"
+#include "../../view/ComboButtonsView.h"
 
 Events ComboManager::checkCombo(Events originalEvent, char side) {
+    ComboButtonsView::getInstance()->addButton(originalEvent);
+
     if (this->startTime == 0) {
         this->startTime = SDL_GetTicks();
     }
@@ -10,10 +13,14 @@ Events ComboManager::checkCombo(Events originalEvent, char side) {
         this->cleanBuffer();
     }
     this->buffer->push_back(originalEvent);
+
+
+
     if (bufferMatchesCombo(this->combo1, side))
         return Teleportation; // SE EJECTUA EL COMBO 1: RETURN COMBO1EVENT
     else if (bufferMatchesCombo(this->combo2, side))
         return WeaponHitIce; // SE EJECTUA EL COMBO 2: RETURN COMBO2EVENT
+
 
     return originalEvent;
 }

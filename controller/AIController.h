@@ -13,13 +13,15 @@ public:
     ~AIController();
     void update(MKCharacter* character1, MKCharacter* character2, SDL_Event* mainEvent);
     void setStageController(MKStageController* stageController);
-
+    void enablePracticeAI();
     bool key_u_Released;
 private:
     MKStageController *stageController;
     Events makeRandomGroundHit();
     bool waiting;
     bool weaponThrown;
+    bool practiceMode;
+    void updateAIPlayer(MKCharacter* character1, MKCharacter* character2);
 };
 
 

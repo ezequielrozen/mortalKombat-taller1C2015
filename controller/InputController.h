@@ -44,6 +44,8 @@ public:
 	void enableAI();
 	void disableAI();
 
+	void enablePracticeAI();
+
 private:
 	JoysticksControllerManager* joystickControllerManager;
 	KeyboardController* keyboardController;

@@ -51,6 +51,9 @@ bool StageManager::mainLoop() {
 		this->characterSelection->loop();
 		if (mode == OneVsAI) {
 			this->inputController->enableAI();
+		} else if (mode == Practice) {
+			this->inputController->enablePracticeAI();
+			ComboButtonsView::getInstance()->activate();
 		} else {
 			this->inputController->disableAI();
 		}

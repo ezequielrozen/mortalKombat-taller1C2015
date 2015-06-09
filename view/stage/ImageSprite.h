@@ -13,6 +13,10 @@ public:
 	ImageSprite(SDL_Renderer* aRenderer, string path, int x, int y, int w, int h);
 	~ImageSprite();
 	void Draw();
+    void setPosition(int x, int y);
+    int getX();
+    int getY();
+    int getWidth();
 private:
 	SDL_Renderer* renderer;
     SDL_Texture* texture;

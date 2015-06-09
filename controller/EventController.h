@@ -49,6 +49,7 @@ public:
 	virtual void blockRelease();
 	virtual void weaponRelease();
 
+	ComboManager* getComboManager();
 	void setCharacterToMove(MKCharacter* character);
 private:
 	static void Void();

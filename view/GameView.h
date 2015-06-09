@@ -12,6 +12,7 @@
 #include "character/Painter.h"
 #include "Text.h"
 #include "../model/util/RoundTimer.h"
+#include "ComboButtonsView.h"
 #include <string>
 #include <math.h>
 #include <map>
@@ -60,6 +61,8 @@ private:
     Text *characterTwoName;
     Text* timerText;
     RoundTimer* timer;
+
+    ComboButtonsView* comboButtons;
 
     SpriteMap scorpionSprites;
     SpriteMap raidenSprites;

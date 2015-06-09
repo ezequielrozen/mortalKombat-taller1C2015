@@ -49,6 +49,11 @@ GameView::GameView(SDL_Renderer* aRenderer, MKCharacter* character, MKCharacter*
     int timeToShow = (TIME_TO_FIGHT_ENDING - this->timer->getCurrentTime()) / 1000;
     this->timerText = new Text((std::to_string(timeToShow).c_str()), this->renderer,"center");
 
+    this->comboButtons = ComboButtonsView::getInstance();
+    this->comboButtons->init(this->renderer);
+    //this->comboButtons->addButton("asd");
+    //this->comboButtons->addButton("asd");
+
     stageBackgroundMusic = NULL;
 
     // Here we initialize SDL_mixer and then load each sound and music
@@ -162,6 +167,9 @@ void GameView::Render() {
 
     characterName->Draw();
     characterTwoName->Draw();
+
+    comboButtons->draw();
+
     int timeToShow = (TIME_TO_FIGHT_ENDING - this->timer->getCurrentTime()) / 1000;
     this->timerText->update((std::to_string(timeToShow).c_str()));
     this->timerText->Draw();

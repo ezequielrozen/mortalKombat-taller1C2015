@@ -181,3 +181,7 @@ void EventController::lowPunchRelease(int n) {
 void EventController::highPunchRelease(int n) {
 	highPunchPressed = false;
 }
+
+ComboManager *EventController::getComboManager() {
+	return this->comboManager;
+}

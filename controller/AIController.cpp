@@ -5,18 +5,44 @@ AIController::AIController(MKStageController* stageController) {
     this->stageController = stageController;
     this->waiting = true;
     this->weaponThrown = false;
+    this->practiceMode = false;
 }
 
 AIController::~AIController() {
 
 }
 
+
+
 void AIController::setStageController(MKStageController* stageController) {
     this->stageController = stageController;
 }
 
 void AIController::update(MKCharacter* character1, MKCharacter* character2, SDL_Event* mainEvent) {
+    if (!this->practiceMode)
+        this->updateAIPlayer(character1, character2);
+}
 
+Events AIController::makeRandomGroundHit() {
+    srand (time(NULL));
+
+    switch (rand() % 4 + 1) {
+        case 1:
+            return LowKick;
+            break;
+        case 2:
+            return HighKick;
+            break;
+        case 3:
+            return LowPunch;
+            break;
+        case 4:
+            return HighPunch;
+            break;
+    }
+}
+
+void AIController::updateAIPlayer(MKCharacter *character1, MKCharacter *character2) {
     if (!this->waiting) {
         if (character1->isHitting()) {
             character2->update(Block);
@@ -64,109 +90,8 @@ void AIController::update(MKCharacter* character1, MKCharacter* character2, SDL_
         character2->update(WeaponHit);
         this->weaponThrown = true;
     }
-
-/*
-    switch (mainEvent->type){
-        case SDL_KEYDOWN:
-            switch(mainEvent->key.keysym.sym) {
-                case SDLK_RIGHT:
-                    this->stageController->setCharacterToMove(character1);
-                    this->stageController->moveRight(1);
-                    break;
-                case SDLK_LEFT:
-                    this->stageController->setCharacterToMove(character1);
-                    this->stageController->moveLeft(1);
-                    break;
-                case SDLK_UP:
-                    this->stageController->setCharacterToMove(character1);
-                    this->stageController->moveUp(1);
-                    break;
-                case SDLK_DOWN:
-                    this->stageController->setCharacterToMove(character1);
-                    this->stageController->moveDown(1);
-                    break;
-                case SDLK_k:
-                    this->stageController->setCharacterToMove(character1);
-                    this->stageController->highKick();
-                    break;
-                case SDLK_l:
-                    this->stageController->setCharacterToMove(character1);
-                    this->stageController->lowKick(1);
-                    break;
-                case SDLK_p:
-                    this->stageController->setCharacterToMove(character1);
-                    this->stageController->highPunch();
-                    break;
-                case SDLK_i:
-                    this->stageController->setCharacterToMove(character1);
-                    this->stageController->lowPunch();
-                    break;
-                case SDLK_b:
-                    this->stageController->setCharacterToMove(character1);
-                    this->stageController->block();
-                    break;
-                case SDLK_u:
-//                    if (key_u_Released) {
-                        key_u_Released = false;
-                        this->stageController->setCharacterToMove(character1);
-                        this->stageController->shoot();
-//                    }
-                    break;
-                case SDLK_o:
-                    this->stageController->setCharacterToMove(character1);
-                    this->stageController->duckPunch();
-                    break;
-                default:
-//				previousKey = mainEvent->key.keysym.sym;
-                    break;
-            }
-            break;
-
-        case SDL_KEYUP:
-            switch(mainEvent->key.keysym.sym){
-                case SDLK_DOWN:
-                    this->stageController->setCharacterToMove(character1);
-                    this->stageController->moveDownRelease(1);
-                    break;
-                case SDLK_RIGHT:
-                    this->stageController->setCharacterToMove(character1);
-                    this->stageController->moveRightRelease(1);
-                    break;
-                case SDLK_LEFT:
-                    this->stageController->setCharacterToMove(character1);
-                    this->stageController->moveLeftRelease(1);
-                    break;
-                case SDLK_b:
-                    this->stageController->setCharacterToMove(character1);
-                    this->stageController->blockRelease();
-                    break;
-//                case SDLK_u:
-//                    key_u_Released = true;
-                    break;
-                default:
-                    break;
-            }
-            break;
-        default:
-            break;
-    }*/
 }
 
-Events AIController::makeRandomGroundHit() {
-    srand (time(NULL));
-
-    switch (rand() % 4 + 1) {
-        case 1:
-            return LowKick;
-            break;
-        case 2:
-            return HighKick;
-            break;
-        case 3:
-            return LowPunch;
-            break;
-        case 4:
-            return HighPunch;
-            break;
-    }
+void AIController::enablePracticeAI() {
+    this->practiceMode = true;
 }

@@ -127,6 +127,8 @@ enum GameModes { OneVsTwo, OneVsAI, Practice};
 const std::vector<Events> DEFAULT_COMBO1 = {MoveRight, MoveLeft, Duck, LowKick};
 const std::vector<Events> DEFAULT_COMBO2 = {MoveRight, Duck, MoveRight, HighPunch, LowPunch, LowKick};
 
+const int BUTTONS_BUFFER_PRACTICE_MAX = 8;
+
 typedef std::map<std::string, Events> MapEvent;
 const MapEvent eventMapper = {{"derecha", MoveRight}, {"izquierda", MoveLeft}, {"arriba", Jump}, {"abajo", Duck}, {"puñoAlto", HighPunch},
 							  {"puñoBajo", LowPunch}, {"patadaAlta", HighKick}, {"patadaBaja", LowKick}, {"defensa", Block}, {"arrojarArma", WeaponHit}};
