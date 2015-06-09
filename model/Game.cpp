@@ -47,10 +47,12 @@ Game::~Game() {
     delete collider;
 }
 
-bool Game::GameLoop() {
+bool Game::GameLoop(GameModes mode) {
 
 //    this->timeFightStart= SDL_GetTicks();
-    this->timer->run();
+    if (mode != Practice) {
+        this->timer->run();
+    }
     bool cameraMoved;
     int roundCount = 1;
 

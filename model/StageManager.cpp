@@ -61,7 +61,7 @@ bool StageManager::mainLoop() {
 		this->characterSelection->loop();
 		
 		setStageController(new EventController(this->gameLoader->getCombo1(), this->gameLoader->getCombo2(), this->gameLoader->getFatality()));
-		restart = this->game->GameLoop();
+		restart = this->game->GameLoop(mode);
 	}
 
 	return restart;

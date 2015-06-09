@@ -24,7 +24,7 @@ class Game
 public:
     Game(GameLoader* aGameLoader, SDL_Renderer* renderer, InputController* inputController);
     ~Game();
-    bool GameLoop();
+    bool GameLoop(GameModes mode);
     void initGame(SDL_Renderer* renderer, InputController* stageController);
 
 private:
