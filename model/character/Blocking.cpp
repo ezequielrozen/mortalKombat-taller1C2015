@@ -2,6 +2,7 @@
 #include "../MKCharacter.h"
 #include "CharacterStance.h"
 #include "ReceivingDuckingPunch.h"
+#include "TeleportationDoing.h"
 
 Blocking::Blocking() {
 
@@ -21,6 +22,9 @@ void Blocking::update(MKCharacter *character, Events aEvent) {
             break;
         case BlockRelease:
             character->setState(new CharacterStance());
+            break;
+        case Teleportation:
+            character->setState(new TeleportationDoing());
             break;
         default:
             break;

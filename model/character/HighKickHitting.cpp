@@ -6,6 +6,7 @@
 #include "ReceivingDuckingPunch.h"
 #include "BeingOverPassedRight.h"
 #include "BeingOverPassedLeft.h"
+#include "TeleportationDoing.h"
 
 HighKickHitting::HighKickHitting() {
     this->timer = 40;
@@ -35,6 +36,9 @@ void HighKickHitting::update(MKCharacter *character, Events aEvent) {
             } else {
                 character->setState(new BeingOverPassedRight());
             };
+            break;
+        case Teleportation:
+            character->setState(new TeleportationDoing());
             break;
         default:
             break;

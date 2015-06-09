@@ -5,6 +5,7 @@
 #include "ReceivingDuckingPunch.h"
 #include "BeingOverPassedLeft.h"
 #include "BeingOverPassedRight.h"
+#include "TeleportationDoing.h"
 
 LowPunchHitting::LowPunchHitting() {
     this->timer = 40;
@@ -34,6 +35,9 @@ void LowPunchHitting::update(MKCharacter *character, Events aEvent) {
             } else {
                 character->setState(new BeingOverPassedRight());
             };
+            break;
+        case Teleportation:
+            character->setState(new TeleportationDoing());
             break;
         default:
             break;

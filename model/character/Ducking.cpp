@@ -8,6 +8,7 @@
 #include "ReceivingDuckingPunch.h"
 #include "BeingOverPassedRight.h"
 #include "BeingOverPassedLeft.h"
+#include "TeleportationDoing.h"
 
 Ducking::Ducking() {
     this->timer = 10;
@@ -40,6 +41,9 @@ void Ducking::update(MKCharacter * character, Events aEvent) {
             } else {
                 character->setState(new BeingOverPassedRight());
             };
+            break;
+        case Teleportation:
+            character->setState(new TeleportationDoing());
             break;
         default:
             //si no recibe ninguno de los otros eventos, en principio no hay que hacer nada, porque no afectan a este estado

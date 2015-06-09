@@ -5,6 +5,7 @@
 #include "CharacterStance.h"
 #include "BeingOverPassedLeft.h"
 #include "BeingOverPassedRight.h"
+#include "TeleportationDoing.h"
 
 DuckingPunch::DuckingPunch() {
     this->timer = 33;
@@ -31,6 +32,9 @@ void DuckingPunch::update(MKCharacter *character, Events aEvent) {
             } else {
                 character->setState(new BeingOverPassedRight());
             };
+            break;
+        case Teleportation:
+            character->setState(new TeleportationDoing());
             break;
         default:
             break;

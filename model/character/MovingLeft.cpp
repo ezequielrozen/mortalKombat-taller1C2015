@@ -13,6 +13,7 @@
 #include "BeingOverPassedLeft.h"
 #include "BeingOverPassedRight.h"
 #include "Blocking.h"
+#include "TeleportationDoing.h"
 
 MovingLeft::MovingLeft() {
     this->timer = 10;
@@ -73,6 +74,9 @@ void MovingLeft::update(MKCharacter * character, Events aEvent) {
             } else {
                 character->setState(new BeingOverPassedRight());
             };
+            break;
+        case Teleportation:
+            character->setState(new TeleportationDoing());
             break;
         default:
             break;
