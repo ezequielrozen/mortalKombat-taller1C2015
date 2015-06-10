@@ -7,6 +7,7 @@
 #include "stage/ImageSprite.h"
 #include "ComboButtonsView.h"
 #include "Position.h"
+#include "../model/util/Timer.h"
 
 typedef std::map<std::string, ImageSprite*> ButtonSpriteMap;
 
@@ -18,6 +19,7 @@ public:
     static ComboButtonsView* getInstance();
     void init(SDL_Renderer* renderer);
     void activate();
+    Timer* timer;
 
 private:
     ComboButtonsView();

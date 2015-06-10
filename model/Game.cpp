@@ -1,5 +1,4 @@
 #include "Game.h"
-#include "../controller/JoystickController.h"
 #include "character/Dizzy.h"
 #include "character/Victory.h"
 #include "character/CharacterStance.h"
@@ -7,7 +6,7 @@
 
 Game::Game(GameLoader* aGameLoader, SDL_Renderer* renderer, InputController* inputController) {
     this->gameLoader = aGameLoader;
-    this->timer = new RoundTimer();
+    this->timer = new Timer();
     this->initGame(renderer, inputController);
     this->diedTimeElapsed = 0;
     this->timeToResetRound = 0;

@@ -6,7 +6,7 @@
 #include "SDL2/SDL.h"
 
 GameView::GameView(SDL_Renderer* aRenderer, MKCharacter* character, MKCharacter* character2, Stage* pStage,
-                   string OponentSide, Painter* painter, RoundTimer* timer) {
+                   string OponentSide, Painter* painter, Timer* timer) {
 	oponentSide = OponentSide;
 
     this->renderer = aRenderer;

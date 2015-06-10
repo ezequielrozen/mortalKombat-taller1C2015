@@ -93,10 +93,11 @@ const Map DAMAGE = {{"HighKickHitting", 10}, {"LowKickHitting", 10},{"HighPunchH
 //Fija el delay que tiene el personaje para cambiar de direccion. (A mayor, mas tarda en cambiar de direccion. Osea, a mayor, patina mas)
 const int COMMANDDELAY                      =  300;
 const int COMMANDDELAYKIT                   =  600;
-const int GAMEDELAY                         =   10;
+const int GAMEDELAY                         =   4;
 const int TIME_FOR_DOING_FATALITY   		= 2000;
 const int TIME_TO_RESTART_ROUND				= 4000;
 const int TIME_TO_FIGHT_ENDING				= 90000;
+const int TIME_TO_SHOW_BUTTONS				= 5000;
 const int ROUNDS_TO_FIGHT					= 2;
 ////Velocidad inicial del salto del personaje.
 //const float SPEED                             =  0.04285*ANCHOVENTANAL;

@@ -8,6 +8,7 @@ ComboButtonsView* ComboButtonsView::instance = 0;
 
 ComboButtonsView::ComboButtonsView() {
     this->activated = false;
+    this->timer = new Timer();
 };
 
 ComboButtonsView::~ComboButtonsView() {
@@ -16,16 +17,25 @@ ComboButtonsView::~ComboButtonsView() {
 }
 
 void ComboButtonsView::draw() {
-    if (activated) {
-        for (int i; i < buffer.size(); i++) {
+    if (this->timer->getCurrentTime() >= TIME_TO_SHOW_BUTTONS) {
+        this->timer->stop();
+        this->buffer.clear();
+        this->positions.clear();
+    } else {
+        if (activated) {
+            for (int i; i < buffer.size(); i++) {
 
-            buffer[i]->setPosition(positions[i].x, positions[i].y);
-            buffer[i]->Draw();
-        };
+                buffer[i]->setPosition(positions[i].x, positions[i].y);
+                buffer[i]->Draw();
+            };
+        }
     }
 }
 
 void ComboButtonsView::addButton(Events button) {
+    if (this->timer->getCurrentTime() == 0) {
+        this->timer->run();
+    }
     if (activated) {
         string spriteName;
         switch (button) {

@@ -1,23 +1,23 @@
 #include <SDL2/SDL_timer.h>
-#include "RoundTimer.h"
+#include "Timer.h"
 
-RoundTimer::RoundTimer() {
+Timer::Timer() {
     this->startTime = 0;
 }
 
-RoundTimer::~RoundTimer() {
+Timer::~Timer() {
 
 }
 
-void RoundTimer::stop() {
+void Timer::stop() {
     this->startTime = 0;
 }
 
-void RoundTimer::run() {
+void Timer::run() {
     this->startTime = SDL_GetTicks();
 }
 
-int RoundTimer::getCurrentTime() {
+int Timer::getCurrentTime() {
     if (!this->startTime == 0)
         return SDL_GetTicks() - this->startTime;
     return 0;
