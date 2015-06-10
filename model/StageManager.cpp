@@ -54,6 +54,7 @@ bool StageManager::mainLoop() {
 			ComboButtonsView::getInstance()->activate();
 		} else {
 			this->inputController->disableAI();
+			ComboButtonsView::getInstance()->deactivate();
 		}
 		
 		setStageController(new CharacterSelectionController());

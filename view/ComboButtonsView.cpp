@@ -2,6 +2,7 @@
 // Created by mauri on 08/06/15.
 //
 
+#include <algorithm>
 #include "ComboButtonsView.h"
 
 ComboButtonsView* ComboButtonsView::instance = 0;
@@ -9,12 +10,25 @@ ComboButtonsView* ComboButtonsView::instance = 0;
 ComboButtonsView::ComboButtonsView() {
     this->activated = false;
     this->timer = new Timer();
+    this->comboShowTimer = new Timer();
+    this->highLightingCombo = false;
 };
 
 ComboButtonsView::~ComboButtonsView() {
     delete timer;
     delete this->buttonSprites.at("MoveUp");
+    delete this->buttonSprites.at("MoveDown");
+    delete this->buttonSprites.at("MoveLeft");
+    delete this->buttonSprites.at("MoveRight");
+    delete this->buttonSprites.at("LowPunch");
+    delete this->buttonSprites.at("LowKick");
+    delete this->buttonSprites.at("HighKick");
+    delete this->buttonSprites.at("HighPunch");
+    delete this->buttonSprites.at("Block");
+    delete this->buttonSprites.at("Weapon");
     delete instance;
+    delete this->timer;
+    delete this->comboShowTimer;
 }
 
 void ComboButtonsView::draw() {
@@ -26,10 +40,24 @@ void ComboButtonsView::draw() {
         if (activated) {
             for (int i; i < buffer.size(); i++) {
 
-                buffer[i]->setPosition(positions[i].x, positions[i].y);
-                buffer[i]->Draw();
-            };
+                if (this->highLightingCombo) {
+                    if (this->selectedButtons.at(i) == 1) {
+                        buffer[i]->setPosition(positions[i].x, positions[i].y);
+                        buffer[i]->Draw();
+                    }
+                } else {
+                    buffer[i]->setPosition(positions[i].x, positions[i].y);
+                    buffer[i]->Draw();
+
+                }
+
+            }
         }
+    }
+
+    if (this->comboShowTimer->getCurrentTime() >= TIME_TO_SHOW_BUTTONS) {
+        this->comboShowTimer->stop();
+        this->highLightingCombo = false;
     }
 }
 
@@ -37,7 +65,7 @@ void ComboButtonsView::addButton(Events button) {
     if (this->timer->getCurrentTime() == 0) {
         this->timer->run();
     }
-    if (activated) {
+    if (activated && !highLightingCombo) {
         string spriteName;
         switch (button) {
             case Jump:
@@ -120,4 +148,28 @@ void ComboButtonsView::shiftPositions() {
 
 void ComboButtonsView::activate() {
     this->activated = true;
+}
+
+void ComboButtonsView::deactivate() {
+    this->activated = false;
+}
+
+void ComboButtonsView::comboDetected(std::vector<Events>* comboBuffer, int errorIndex) {
+    int j = 0;
+    for (int i = comboBuffer->size() - 1; i >=0 ; i--) {
+        if (errorIndex != -1 && i == errorIndex)
+            this->selectedButtons.push_back(0);
+        else
+            this->selectedButtons.push_back(1);
+        j++;
+    }
+    for (int k = 0; k < this->buffer.size() - j ; k++) {
+        this->selectedButtons.push_back(0);
+    }
+
+    highLightingCombo = true;
+    std::reverse(this->selectedButtons.begin(), this->selectedButtons.end());
+
+    if (this->comboShowTimer->getCurrentTime() == 0)
+        this->comboShowTimer->run();
 }

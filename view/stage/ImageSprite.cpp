@@ -37,6 +37,14 @@ void ImageSprite::setPosition(int x, int y) {
     this->draw.y = y;
 }
 
+void ImageSprite::setWidth(int w) {
+    this->draw.w = w;
+}
+
+void ImageSprite::setHeight(int h) {
+    this->draw.h = h;
+}
+
 int ImageSprite::getX() {
     return this->draw.x;
 }
@@ -47,4 +55,8 @@ int ImageSprite::getY() {
 
 int ImageSprite::getWidth() {
     return this->draw.w;
+}
+
+int ImageSprite::getHieght() {
+    return this->draw.h;
 }

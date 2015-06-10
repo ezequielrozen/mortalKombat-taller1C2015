@@ -7,7 +7,7 @@
 #include <SDL2/SDL_image.h>
 #include "../../model/util/Util.h"
 
-class ImageSprite 
+class ImageSprite
 {
 public:
 	ImageSprite(SDL_Renderer* aRenderer, string path, int x, int y, int w, int h);
@@ -17,6 +17,10 @@ public:
     int getX();
     int getY();
     int getWidth();
+    void setWidth(int w);
+    int getHieght();
+    void setHeight(int h);
+
 private:
 	SDL_Renderer* renderer;
     SDL_Texture* texture;
@@ -25,6 +29,7 @@ private:
     SDL_Rect crop;
     int img_width;
     int img_height;
+
 };
 
 #endif // IMAGESPRITE_H
