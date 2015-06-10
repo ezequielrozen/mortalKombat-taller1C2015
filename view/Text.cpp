@@ -68,5 +68,6 @@ void Text::Draw() {
 
 void Text::update(const char* text) {
     this->text = text;
+    SDL_DestroyTexture(this->textTexture);
     this->initText("center");
 }

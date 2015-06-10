@@ -35,6 +35,9 @@ void GameLoader::loadJSON(char* passed_path) {
 }
 
 GameLoader::~GameLoader() {
+    delete fatality;
+    delete combo2;
+    delete combo1;
     delete this->layers;
     delete this->stage;
     std::list<MKCharacter*>::iterator it = this->characters->begin();

@@ -46,7 +46,7 @@ bool StageManager::mainLoop() {
 		this->setStageController(new ModeSelectionController());
 		this->modeSelection->linkInputController();
 		GameModes mode = this->modeSelection->loop();
-
+		
 		if (mode == OneVsAI) {
 			this->inputController->enableAI();
 		} else if (mode == Practice) {
@@ -55,13 +55,14 @@ bool StageManager::mainLoop() {
 		} else {
 			this->inputController->disableAI();
 		}
-
+		
 		setStageController(new CharacterSelectionController());
 		this->characterSelection->linkInputController();
 		this->characterSelection->loop();
 		
 		setStageController(new EventController(this->gameLoader->getCombo1(), this->gameLoader->getCombo2(), this->gameLoader->getFatality()));
 		restart = this->game->GameLoop(mode);
+		
 	}
 
 	return restart;

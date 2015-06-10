@@ -62,6 +62,11 @@ GameView::GameView(SDL_Renderer* aRenderer, MKCharacter* character, MKCharacter*
 }
 
 GameView::~GameView() {
+
+    delete timerText;
+    delete characterTwoName;
+    delete characterName;
+
     delete characterOneLifebarView;
     delete characterTwoLifebarView;
 
@@ -130,6 +135,7 @@ void GameView::Render() {
     int i = 0;
     bool painted = false;
     // We render the layers' sprites iterating through the layerSprites' array
+    
     std::list<Layer*>::iterator it = this->stage->getLayers()->begin();
     for(it; it != this->stage->getLayers()->end(); it++) {
         if (scorpion->getZ_index() == i+1) {
@@ -162,6 +168,7 @@ void GameView::Render() {
         i++;
     }
 
+
     characterOneLifebarView->Draw(FULL_LIFE - this->scorpion->getLife());
     characterTwoLifebarView->Draw(FULL_LIFE - this->raiden->getLife());
 
@@ -169,10 +176,11 @@ void GameView::Render() {
     characterTwoName->Draw();
 
     comboButtons->draw();
-
+    
     int timeToShow = (TIME_TO_FIGHT_ENDING - this->timer->getCurrentTime()) / 1000;
     this->timerText->update((std::to_string(timeToShow).c_str()));
     this->timerText->Draw();
+    
     if (!painted) {
         if (this->raiden->isHitting()) {
             this->runCharacter(this->scorpion, this->raiden, this->scorpionSprites);
@@ -184,6 +192,7 @@ void GameView::Render() {
         }
         //this->runCharacter();
     }
+    
 }
 
 void GameView::LoadSprites(string name1, string name2) {

@@ -93,7 +93,7 @@ const Map DAMAGE = {{"HighKickHitting", 10}, {"LowKickHitting", 10},{"HighPunchH
 //Fija el delay que tiene el personaje para cambiar de direccion. (A mayor, mas tarda en cambiar de direccion. Osea, a mayor, patina mas)
 const int COMMANDDELAY                      =  300;
 const int COMMANDDELAYKIT                   =  600;
-const int GAMEDELAY                         =   4;
+const int GAMEDELAY                         =   10;
 const int TIME_FOR_DOING_FATALITY   		= 2000;
 const int TIME_TO_RESTART_ROUND				= 4000;
 const int TIME_TO_FIGHT_ENDING				= 90000;

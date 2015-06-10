@@ -44,6 +44,7 @@ Game::~Game() {
     delete gameView;
     delete cameraController;
     delete collider;
+    delete timer;
 }
 
 bool Game::GameLoop(GameModes mode) {

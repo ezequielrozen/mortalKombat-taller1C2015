@@ -12,6 +12,7 @@ ComboButtonsView::ComboButtonsView() {
 };
 
 ComboButtonsView::~ComboButtonsView() {
+    delete timer;
     delete this->buttonSprites.at("MoveUp");
     delete instance;
 }
