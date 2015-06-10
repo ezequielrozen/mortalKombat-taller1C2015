@@ -93,7 +93,7 @@ const Map DAMAGE = {{"HighKickHitting", 10}, {"LowKickHitting", 10},{"HighPunchH
 //Fija el delay que tiene el personaje para cambiar de direccion. (A mayor, mas tarda en cambiar de direccion. Osea, a mayor, patina mas)
 const int COMMANDDELAY                      =  300;
 const int COMMANDDELAYKIT                   =  600;
-const int GAMEDELAY                         =   4;
+const int GAMEDELAY                         =   8;
 const int TIME_FOR_DOING_FATALITY   		= 2000;
 const int TIME_TO_RESTART_ROUND				= 4000;
 const int TIME_TO_FIGHT_ENDING				= 90000;
@@ -117,7 +117,7 @@ const double DEFAULT_OFFSET                 = 30;
 const unsigned char DEFAULT_KEY[20] = "adwscezqxokljmnbypb";
 
 const int COMBO_TOLERANCE = 1;
-const int COMBO_TIMER     = 200;
+const int COMBO_TIMER     = 1000;
 
 enum Events { MoveRight, MoveLeft, Jump, Duck, WeaponHit, HighPunch, LowPunch, HighKick, LowKick, Block, ReceiveHit,
 	ReceiveDuckingPunch, ReceiveDuckingKick, ReceiveWeapon, MoveRightRelease, MoveLeftRelease, DuckRelease, BlockRelease,

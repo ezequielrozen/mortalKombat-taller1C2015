@@ -19,6 +19,8 @@ public:
     static ComboButtonsView* getInstance();
     void init(SDL_Renderer* renderer);
     void activate();
+    void deactivate();
+    void comboDetected(std::vector<Events>* comboBuffer, int errorIndex);
     Timer* timer;
 
 private:
@@ -27,9 +29,14 @@ private:
     ButtonSpriteMap buttonSprites;
     std::vector<ImageSprite*> buffer;
     std::vector<Position> positions;
+    std::vector<int> selectedButtons;
     bool activated;
+    bool highLightingCombo;
 
     void shiftPositions();
+
+    Timer *comboShowTimer;
+
 };
 
 
