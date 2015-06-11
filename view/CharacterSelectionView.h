@@ -20,7 +20,7 @@ using namespace std;
 class CharacterSelectionView 
 {
 public:
-	CharacterSelectionView(SDL_Renderer* aRenderer, std::vector<Button*> buttons1, std::vector<Button*> buttons2);
+	CharacterSelectionView(SDL_Renderer* aRenderer, Button** buttons1, Button** buttons2);
 	~CharacterSelectionView();
 	void render();
 private:
@@ -32,11 +32,10 @@ private:
 
 	ImageSprite* characters;
 
-	std::vector<ButtonSprite*> buttonSprites1;
-	std::vector<ButtonSprite*> buttonSprites2;
-
-	std::vector<CharacterSprite*> characterSprites1;
-	std::vector<CharacterSprite*> characterSprites2;
+	ButtonSprite* buttonSprites1[12];
+	ButtonSprite* buttonSprites2[12];
+	CharacterSprite* characterSprites1[12];
+	CharacterSprite* characterSprites2[12];
 
 };
 #endif // CHARACTERSELECTIONVIEW_H

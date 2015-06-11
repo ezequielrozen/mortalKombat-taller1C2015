@@ -5,18 +5,23 @@ ModeSelection::ModeSelection(SDL_Renderer* renderer, InputController* inputContr
 	this->inputController = inputController; // ESTO DEBERÍA VOLAR, EL CONTROLLER CONOCE Y ACTUALICA EL MODELO, PERO EL MODELO NO (Creo)
 	//this->inputController = new InputController(new EventController());
 	
-	this->buttons.push_back(new Button("1v1", true));
-	this->buttons.push_back(new Button("1vPC", false));
-	this->buttons.push_back(new Button("practice", false));
+	this->buttons = new Button*[3];
+
+	this->buttons[0] = new Button("1v1", true);
+	this->buttons[1] = new Button("1vPC", false);
+	this->buttons[2] = new Button("practice", false);
 	this->view = new ModeSelectionView(renderer, this->buttons);
 	this->index = 0;
 	this->selectionMade = false;
 }
 
 ModeSelection::~ModeSelection() {
-	for(int i = 0; i < 3; i++) {
-        delete buttons.at(i);
+
+    for (int i = 0; i < 3; i++) {
+    	delete this->buttons[i];
     }
+    delete [] buttons;
+
 	delete view;
 }
 
@@ -29,13 +34,13 @@ GameModes ModeSelection::loop() {
 
 		if (selectionMade) {
 			selectionMade = false;
-			if (buttons.at(index)->getName() == "1v1") {
+			if (buttons[index]->getName() == "1v1") {
 				return OneVsTwo;
 			}
-			if (buttons.at(index)->getName() == "1vPC") {
+			if (buttons[index]->getName() == "1vPC") {
 				return OneVsAI;
 			}
-			if (buttons.at(index)->getName() == "practice") {
+			if (buttons[index]->getName() == "practice") {
 				return Practice;
 			}
 		}
@@ -62,20 +67,19 @@ void ModeSelection::moveUp() {
 
 	if(this->index > 0) {
 		this->index--;
-		this->buttons.at(index+1)->setSelected(false);
-		this->buttons.at(index)->setSelected(true);
+		this->buttons[index+1]->setSelected(false);
+		this->buttons[index]->setSelected(true);
 	}
 }
 
 void ModeSelection::moveDown() {
 	if(this->index < 2) {
 		index++;
-		this->buttons.at(index-1)->setSelected(false);
-		this->buttons.at(index)->setSelected(true);
+		this->buttons[index-1]->setSelected(false);
+		this->buttons[index]->setSelected(true);
 	}
 }
 
 void ModeSelection::select() {
-	cout << "SELECT" << endl;
 	this->selectionMade = true;
 }

@@ -29,7 +29,7 @@ public:
 private:
 	ModeSelectionView* view;
 	InputController* inputController;
-	std::vector<Button*> buttons;
+	Button** buttons;
 	int peviousKey;
 	int index;
 	bool selectionMade;

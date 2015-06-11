@@ -31,6 +31,7 @@ Util::~Util()
 	}
 
 	delete characterMovements;
+
 }
 
 unsigned char Util::getCantidadPersonajes()

@@ -40,11 +40,12 @@ public:
 private:
 	CharacterSelectionView* view;
 	InputController* inputController;
-	std::vector<Button*> buttons1;
-	std::vector<Button*> buttons2;
 
-	std::vector<ButtonInfo> buttonInfo;
+	Button** buttons1;
+	Button** buttons2;
 
+	ButtonInfo buttonInfo[2];
+	
 };
 
 #endif // CHARACTERSELECTION_H

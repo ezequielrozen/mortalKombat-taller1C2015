@@ -15,8 +15,11 @@ ComboButtonsView::ComboButtonsView() {
 };
 
 ComboButtonsView::~ComboButtonsView() {
-    delete timer;
-    delete this->buttonSprites.at("MoveUp");
+   
+}
+
+void ComboButtonsView::clear() {
+    /*delete this->buttonSprites.at("MoveUp");
     delete this->buttonSprites.at("MoveDown");
     delete this->buttonSprites.at("MoveLeft");
     delete this->buttonSprites.at("MoveRight");
@@ -26,9 +29,21 @@ ComboButtonsView::~ComboButtonsView() {
     delete this->buttonSprites.at("HighPunch");
     delete this->buttonSprites.at("Block");
     delete this->buttonSprites.at("Weapon");
-    delete instance;
+    */
+    this->buttonSprites.clear();
     delete this->timer;
     delete this->comboShowTimer;
+    /*
+    buffer.clear();
+    buffer.shrink_to_fit();
+    selectedButtons.clear();
+    selectedButtons.shrink_to_fit();
+    positions.clear();
+    positions.shrink_to_fit();
+    */
+    cout << buffer.capacity() << endl;
+    cout << positions.capacity() << endl;
+    cout << selectedButtons.capacity() << endl;
 }
 
 void ComboButtonsView::draw() {

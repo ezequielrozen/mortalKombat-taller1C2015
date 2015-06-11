@@ -62,7 +62,7 @@ bool ComboManager::bufferMatchesCombo(std::vector<Events>* combo, char side) {
 
     if (errorCounter <= COMBO_TOLERANCE && comboProgress == combo->size()) {
         cout << "COMBO DETECTADO" << endl;
-        ComboButtonsView::getInstance()->comboDetected(this->buffer, errorIndex);
+        //ComboButtonsView::getInstance()->comboDetected(this->buffer, errorIndex);
 
         this->cleanBuffer();
         return true;

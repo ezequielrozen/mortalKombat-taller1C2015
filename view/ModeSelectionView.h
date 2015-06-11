@@ -20,7 +20,7 @@ using namespace std;
 class ModeSelectionView 
 {
 public:
-	ModeSelectionView(SDL_Renderer* aRenderer, std::vector<Button*> buttons);
+	ModeSelectionView(SDL_Renderer* aRenderer, Button** buttons);
 	~ModeSelectionView();
 	void render();
 

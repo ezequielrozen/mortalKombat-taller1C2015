@@ -35,6 +35,13 @@ void GameLoader::loadJSON(char* passed_path) {
 }
 
 GameLoader::~GameLoader() {
+    fatality->clear();
+    fatality->shrink_to_fit();
+    combo1->clear();
+    combo1->shrink_to_fit();
+    combo2->clear();
+    combo2->shrink_to_fit();
+
     delete fatality;
     delete combo2;
     delete combo1;

@@ -14,6 +14,7 @@ typedef std::map<std::string, ImageSprite*> ButtonSpriteMap;
 class ComboButtonsView {
 public:
     ~ComboButtonsView();
+    void clear();
     void draw();
     void addButton(Events button);
     static ComboButtonsView* getInstance();

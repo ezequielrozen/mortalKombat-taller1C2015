@@ -37,6 +37,7 @@ StageManager::~StageManager() {
 
 	delete this->stageController;
 	delete this->inputController;
+
 }
 
 bool StageManager::mainLoop() {
