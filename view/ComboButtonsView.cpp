@@ -12,6 +12,7 @@ ComboButtonsView::ComboButtonsView() {
     this->timer = new Timer();
     this->comboShowTimer = new Timer();
     this->highLightingCombo = false;
+    this->buffer = {};
 };
 
 ComboButtonsView::~ComboButtonsView() {
@@ -77,9 +78,7 @@ void ComboButtonsView::draw() {
 }
 
 void ComboButtonsView::addButton(Events button) {
-    if (this->timer->getCurrentTime() == 0) {
-        this->timer->run();
-    }
+    this->timer->run();
     if (activated && !highLightingCombo) {
         string spriteName;
         switch (button) {
@@ -178,7 +177,7 @@ void ComboButtonsView::comboDetected(std::vector<Events>* comboBuffer, int error
             this->selectedButtons.push_back(1);
         j++;
     }
-    for (int k = 0; k < this->buffer.size() - j ; k++) {
+    for (int k = 0; k < (int) this->buffer.size() - j ; k++) {
         this->selectedButtons.push_back(0);
     }
 
