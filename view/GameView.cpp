@@ -54,6 +54,8 @@ GameView::GameView(SDL_Renderer* aRenderer, MKCharacter* character, MKCharacter*
     //this->comboButtons->addButton("asd");
     //this->comboButtons->addButton("asd");
 
+    this->practiceMode = false;
+
     stageBackgroundMusic = NULL;
 
     // Here we initialize SDL_mixer and then load each sound and music
@@ -168,13 +170,12 @@ void GameView::Render() {
         i++;
     }
 
-
-    characterOneLifebarView->Draw(FULL_LIFE - this->scorpion->getLife());
-    characterTwoLifebarView->Draw(FULL_LIFE - this->raiden->getLife());
-
-    characterName->Draw();
-    characterTwoName->Draw();
-
+    if (!practiceMode) {
+        characterOneLifebarView->Draw(FULL_LIFE - this->scorpion->getLife());
+        characterTwoLifebarView->Draw(FULL_LIFE - this->raiden->getLife());
+        characterName->Draw();
+        characterTwoName->Draw();
+    }
     comboButtons->draw();
     
     int timeToShow = (TIME_TO_FIGHT_ENDING - this->timer->getCurrentTime()) / 1000;
@@ -605,4 +606,12 @@ void GameView::loadMusicAndSounds() {
         }
     }
 
+}
+
+void GameView::enablePracticeMode() {
+    this->practiceMode = true;
+}
+
+void GameView::disablePracticeMode() {
+    this->practiceMode = true;
 }

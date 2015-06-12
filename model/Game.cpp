@@ -7,6 +7,7 @@
 Game::Game(GameLoader* aGameLoader, SDL_Renderer* renderer, InputController* inputController) {
     this->gameLoader = aGameLoader;
     this->timer = new Timer();
+    this->practiceMode = false;
     this->initGame(renderer, inputController);
     this->diedTimeElapsed = 0;
     this->timeToResetRound = 0;
@@ -152,4 +153,16 @@ bool Game::endFightTime() {
 
 bool Game::endOfRound() {
     return SDL_GetTicks() - this->timeToResetRound >= TIME_TO_RESTART_ROUND;
+}
+
+void Game::enablePracticeMode() {
+        this->gameView->enablePracticeMode();
+        this->scorpion->enablePracticeMode();
+        this->raiden->enablePracticeMode();
+}
+
+void Game::disablePracticeMode() {
+        this->gameView->disablePracticeMode();
+        this->scorpion->disablePracticeMode();
+        this->raiden->disablePracticeMode();
 }

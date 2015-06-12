@@ -127,6 +127,8 @@ public:
     void setFinalPosX(float oponentPosX, float oponentWidth);
     int getCharacterNumber();
 
+    void enablePracticeMode();
+    void disablePracticeMode();
 
 private:
 
@@ -161,6 +163,8 @@ private:
     Throwable* weaponIce;
     bool weaponFireUsed;
     bool fatalityEnable;
+
+    bool practiceMode;
 
 };
 

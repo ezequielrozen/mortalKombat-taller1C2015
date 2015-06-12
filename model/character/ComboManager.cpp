@@ -45,12 +45,15 @@ bool ComboManager::bufferMatchesCombo(std::vector<Events>* combo, char side) {
     int errorCounter = 0;
     unsigned int comboProgress = 0;
     int errorIndex = -1;
+    std::vector<int> errors;
     while (i < this->buffer->size() && errorCounter <= COMBO_TOLERANCE) {
-        if (comboProgress < combo->size() && combo->at(comboProgress) == this->changeSideEvent(this->buffer->at(i),side))
+        if (comboProgress < combo->size() && combo->at(comboProgress) == this->changeSideEvent(this->buffer->at(i),side)) {
             comboProgress++;
+        }
         else if (comboProgress < combo->size()) {
             errorCounter++;
             errorIndex = i;
+            errors.push_back(i);
         } else
             break;
         i++;
@@ -60,7 +63,7 @@ bool ComboManager::bufferMatchesCombo(std::vector<Events>* combo, char side) {
 
     if (errorCounter <= COMBO_TOLERANCE && comboProgress == combo->size()) {
         cout << "COMBO DETECTADO" << endl;
-        ComboButtonsView::getInstance()->comboDetected(this->buffer, errorIndex);
+        ComboButtonsView::getInstance()->comboDetected(this->buffer, errors);
 
         this->cleanBuffer();
         return true;

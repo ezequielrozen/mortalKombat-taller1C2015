@@ -51,6 +51,9 @@ public:
     void endRender();
     void initializeCharactersSprites();
 
+    void enablePracticeMode();
+    void disablePracticeMode();
+
 private:
 
     MKCharacter* scorpion;
@@ -139,6 +142,7 @@ private:
 
     Mix_Music* stageBackgroundMusic;
 
+    bool practiceMode;
 
    // void loadAsRaiden();
     void loadMusicAndSounds();

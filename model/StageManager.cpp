@@ -52,6 +52,7 @@ bool StageManager::mainLoop() {
 			this->inputController->enableAI();
 		} else if (mode == Practice) {
 			this->inputController->enablePracticeAI();
+			this->game->enablePracticeMode();
 			ComboButtonsView::getInstance()->activate();
 		} else {
 			this->inputController->disableAI();

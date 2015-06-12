@@ -22,7 +22,7 @@ public:
     void init(SDL_Renderer* renderer);
     void activate();
     void deactivate();
-    void comboDetected(std::vector<Events>* comboBuffer, int errorIndex);
+    void comboDetected(std::vector<Events>* comboBuffer, std::vector<int> errors);
     Timer* timer;
 
 private:

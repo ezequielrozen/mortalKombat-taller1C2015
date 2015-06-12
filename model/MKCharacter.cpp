@@ -30,6 +30,8 @@ MKCharacter::MKCharacter(float initialPosX, float ancho, float alto, int z_index
 	this->weaponFireUsed = false;
 	this->fatalityEnable = false;
 
+	this->practiceMode = false;
+
 }
 
 MKCharacter::~MKCharacter(void) {
@@ -239,10 +241,10 @@ int MKCharacter::getLife() {
 }
 
 void MKCharacter::setLife(int life) {
-	if (life > 0)
-		this->life = life;
-	else
-		this->life = 100;
+		if (life > 0)
+			this->life = life;
+		else
+			this->life = 100;
 }
 
 char* MKCharacter::getFileMovement(const char* moveName){
@@ -264,12 +266,12 @@ bool MKCharacter::isAlive() {
 }
 void MKCharacter::receiveBlow(int force, char direction) {
 	extern logger* Mylog;
-
 	if (this->state->getName() == "Dizzy"){
 		this->update(ReceiveFire);
 	}else
 	{
-		this->life -= force;
+		if (!this->practiceMode)
+			this->life -= force;
 
 		if (force <= 10) {
 			this->update(ReceiveHit);
@@ -457,4 +459,12 @@ void MKCharacter::setFinalPosX(float oponentPosX, float oponentWidth) {
 
 int MKCharacter::getCharacterNumber() {
 	return this->characterNumber;
+}
+
+void MKCharacter::enablePracticeMode() {
+	this->practiceMode = true;
+}
+
+void MKCharacter::disablePracticeMode() {
+	this->practiceMode = false;
 }

@@ -26,6 +26,8 @@ public:
     ~Game();
     bool GameLoop(GameModes mode);
     void initGame(SDL_Renderer* renderer, InputController* stageController);
+    void enablePracticeMode();
+    void disablePracticeMode();
 
 private:
     void updateGameState(int &roundCount);
@@ -51,6 +53,7 @@ private:
     void restartRound();
     bool endFightTime();
     bool endOfRound();
+    bool practiceMode;
     Timer* timer;
 };
 

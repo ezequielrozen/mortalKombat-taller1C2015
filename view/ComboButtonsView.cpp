@@ -71,11 +71,16 @@ void ComboButtonsView::draw() {
                 }
 
             }
+
+
         }
     }
 
     if (this->comboShowTimer->getCurrentTime() >= TIME_TO_SHOW_BUTTONS) {
         this->comboShowTimer->stop();
+        if (this->highLightingCombo) {
+            this->selectedButtons.clear();
+        }
         this->highLightingCombo = false;
     }
 }
@@ -123,7 +128,7 @@ void ComboButtonsView::addButton(Events button) {
             ImageSprite *sprite = this->buttonSprites.at(spriteName);
             this->buffer.push_back(sprite);
             if (this->buffer.size() == 1)
-                this->positions.push_back(Position((int) Util::getInstance()->getLogicalWindowWidth() * Util::getInstance()->getScalingConstant() * 0.5 - this->buffer[0]->getWidth() * 3.5, (int) Util::getInstance()->getLogicalWindowWidth() * Util::getInstance()->getScalingConstant() * 0.1));
+                this->positions.push_back(Position((int) Util::getInstance()->getLogicalWindowWidth() * Util::getInstance()->getScalingConstant() * 0.5 - this->buffer[0]->getWidth() * 5, (int) Util::getInstance()->getLogicalWindowWidth() * Util::getInstance()->getScalingConstant() * 0.1));
             else
                 this->positions.push_back(Position(this->positions[this->positions.size() - 1].x + this->buffer[this->buffer.size() - 1]->getWidth(), this->positions[this->positions.size() - 1].y));
             if (buffer.size() >= BUTTONS_BUFFER_PRACTICE_MAX) {
@@ -173,22 +178,29 @@ void ComboButtonsView::deactivate() {
     this->activated = false;
 }
 
-void ComboButtonsView::comboDetected(std::vector<Events>* comboBuffer, int errorIndex) {
-    int j = 0;
-    for (int i = comboBuffer->size() - 1; i >=0 ; i--) {
-        if (errorIndex != -1 && i == errorIndex)
-            this->selectedButtons.push_back(0);
-        else
+void ComboButtonsView::comboDetected(std::vector<Events>* comboBuffer, std::vector<int> errors) {
+    if (!highLightingCombo) {
+        int j = 0;
+        for (int i = comboBuffer->size() - 1; i >= 0; i--) {
+            //if (errorIndex != -1 && i == errorIndex)
+            //  this->selectedButtons.push_back(0);
+            //else
             this->selectedButtons.push_back(1);
-        j++;
-    }
-    for (int k = 0; k < (int) this->buffer.size() - j ; k++) {
-        this->selectedButtons.push_back(0);
-    }
+            j++;
+        }
 
-    highLightingCombo = true;
-    std::reverse(this->selectedButtons.begin(), this->selectedButtons.end());
+        for (int l = 0; l < errors.size(); l++) {
+            this->selectedButtons.at(errors.at(l)) = 0;
+        }
 
-    if (this->comboShowTimer->getCurrentTime() == 0)
-        this->comboShowTimer->run();
+        for (int k = 0; k < (int) this->buffer.size() - j; k++) {
+            this->selectedButtons.push_back(0);
+        }
+
+        highLightingCombo = true;
+        std::reverse(this->selectedButtons.begin(), this->selectedButtons.end());
+
+        if (this->comboShowTimer->getCurrentTime() == 0)
+            this->comboShowTimer->run();
+    }
 }
