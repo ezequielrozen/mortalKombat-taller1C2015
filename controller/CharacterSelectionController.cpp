@@ -129,3 +129,11 @@ void CharacterSelectionController::lowKick(int n) {
        // this->characterSelection->select(n);
 
 }
+
+void CharacterSelectionController::select() {
+    this->characterSelection->mouseSelect();
+}
+
+void CharacterSelectionController::updateMousePosition(unsigned short x, unsigned short y) {
+    this->characterSelection->updateMousePosition(x, y);
+}

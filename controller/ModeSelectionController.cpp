@@ -55,3 +55,11 @@ void ModeSelectionController::moveDownRelease(int n) {
         this->movingDown = false;
     }
 }
+
+void ModeSelectionController::select() {
+    this->modeSelection->mouseSelect();
+}
+
+void ModeSelectionController::updateMousePosition(unsigned short x, unsigned short y) {
+    this->modeSelection->updateMousePosition(x, y);
+}

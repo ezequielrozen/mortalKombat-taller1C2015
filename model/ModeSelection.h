@@ -24,7 +24,9 @@ public:
 	void moveUp();
 	void moveDown();
 	void select();
+	void mouseSelect();
 	void linkInputController();
+	void updateMousePosition(unsigned short x, unsigned short y);
 
 private:
 	ModeSelectionView* view;
@@ -33,6 +35,7 @@ private:
 	int peviousKey;
 	int index;
 	bool selectionMade;
+	bool mouseOnButton;
 };
 
 #endif // MODESELECTION_H

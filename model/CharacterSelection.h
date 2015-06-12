@@ -36,6 +36,8 @@ public:
 	void randomSelection();
 	void reset();
 
+	void mouseSelect();
+	void updateMousePosition(unsigned short x, unsigned short y);
 
 private:
 	CharacterSelectionView* view;
@@ -46,6 +48,7 @@ private:
 
 	ButtonInfo buttonInfo[2];
 	
+	bool mouseOnButton;
 };
 
 #endif // CHARACTERSELECTION_H

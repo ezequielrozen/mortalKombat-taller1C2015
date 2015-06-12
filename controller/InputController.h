@@ -20,6 +20,7 @@
 #include "../model/stage/Layer.h"
 #include "MKStageController.h"
 #include "AIController.h"
+#include "MouseController.h"
 #include "../model/ModeSelection.h"
 #include "../model/CharacterSelection.h"
 
@@ -58,6 +59,7 @@ private:
 	MKCharacter* character;
 	MKCharacter* character2;
 	AIController* aiController;
+	MouseController* mouseController;
 	bool iaIsActive;
 };
 

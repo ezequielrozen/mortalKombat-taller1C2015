@@ -24,6 +24,8 @@ public:
     virtual void shoot() {};
     virtual void block() {};
     virtual void duckPunch() {};
+    virtual void select() {};
+    virtual void updateMousePosition(unsigned short x, unsigned short y) {};
 
     virtual void moveLeftRelease(int n) {};
     virtual void moveRightRelease(int n) {};

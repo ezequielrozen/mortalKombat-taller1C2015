@@ -20,6 +20,8 @@ public:
     void moveUpRelease(int n);
     void moveDownRelease(int n);
     void lowKick(int n);
+    void select();
+    void updateMousePosition(unsigned short x, unsigned short y);
 private:
         ModeSelection* modeSelection;
         bool movingUp;

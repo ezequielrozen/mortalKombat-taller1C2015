@@ -10,11 +10,11 @@ ModeSelectionView::ModeSelectionView(SDL_Renderer* aRenderer, Button** buttons) 
 
     this->logo = new ImageSprite(this->renderer, "data/logo.png", 0.0714*scWidth, 0.06*scHeight, 0.85*scWidth, 0.17*scHeight);
 
-    this->button1 = new ButtonSprite(this->renderer, buttons[0], 0.343*scWidth, 0.29*scHeight, 0.314*scWidth, 0.16*scHeight);
+    this->button1 = new ButtonSprite(this->renderer, buttons[0]);
 
-    this->button2 = new ButtonSprite(this->renderer, buttons[1], 0.343*scWidth, 0.51*scHeight, 0.314*scWidth, 0.16*scHeight);
+    this->button2 = new ButtonSprite(this->renderer, buttons[1]);
 
-    this->button3 = new ButtonSprite(this->renderer, buttons[2], 0.343*scWidth, 0.73*scHeight, 0.314*scWidth, 0.16*scHeight); 
+    this->button3 = new ButtonSprite(this->renderer, buttons[2]); 
 }
 
 ModeSelectionView::~ModeSelectionView() {

@@ -1,13 +1,13 @@
 #include "ButtonSprite.h"
 
-ButtonSprite::ButtonSprite(SDL_Renderer* aRenderer, Button* aButton, int x, int y, int w, int h) {
+ButtonSprite::ButtonSprite(SDL_Renderer* aRenderer, Button* aButton) {
 
 	this->button = aButton;
 	string pathSelected = "data/buttons/"+button->getName()+"Selected.png";
 	string pathNotSelected = "data/buttons/"+button->getName()+"NotSelected.png";
 
-    selectedSprite = new ImageSprite(aRenderer, pathSelected, x, y, w, h);
-    notSelectedSprite = new ImageSprite(aRenderer, pathNotSelected, x, y, w, h);
+    selectedSprite = new ImageSprite(aRenderer, pathSelected, this->button->getX(), this->button->getY(), this->button->getWidth(), this->button->getHeight());
+    notSelectedSprite = new ImageSprite(aRenderer, pathNotSelected, this->button->getX(), this->button->getY(), this->button->getWidth(), this->button->getHeight());
 
 }
 

@@ -5,14 +5,18 @@ ModeSelection::ModeSelection(SDL_Renderer* renderer, InputController* inputContr
 	this->inputController = inputController; // ESTO DEBERÍA VOLAR, EL CONTROLLER CONOCE Y ACTUALICA EL MODELO, PERO EL MODELO NO (Creo)
 	//this->inputController = new InputController(new EventController());
 	
+	int scWidth = Util::getInstance()->getWindowWidth();
+    int scHeight = Util::getInstance()->getWindowHeight();
+	
 	this->buttons = new Button*[3];
 
-	this->buttons[0] = new Button("1v1", true);
-	this->buttons[1] = new Button("1vPC", false);
-	this->buttons[2] = new Button("practice", false);
+	this->buttons[0] = new Button("1v1", true, 0.343*scWidth, 0.29*scHeight, 0.314*scWidth, 0.16*scHeight);
+	this->buttons[1] = new Button("1vPC", false, 0.343*scWidth, 0.51*scHeight, 0.314*scWidth, 0.16*scHeight);
+	this->buttons[2] = new Button("practice", false, 0.343*scWidth, 0.73*scHeight, 0.314*scWidth, 0.16*scHeight);
 	this->view = new ModeSelectionView(renderer, this->buttons);
 	this->index = 0;
 	this->selectionMade = false;
+	this->mouseOnButton = false;
 }
 
 ModeSelection::~ModeSelection() {
@@ -44,16 +48,6 @@ GameModes ModeSelection::loop() {
 				return Practice;
 			}
 		}
-		//	Esto es temporal hasta que tengamos hecha la pantalla de seleccion de juego.
-		/*if (peviousKey == SDLK_a && inputController->getEvent()->key.keysym.sym == SDLK_a) {
-			return OneVsAI;
-		} else if (peviousKey == SDLK_s && inputController->getEvent()->key.keysym.sym == SDLK_s) {
-			return OneVsTwo;
-		} else if (peviousKey == SDLK_d && inputController->getEvent()->key.keysym.sym == SDLK_d) {
-			return Practice;
-		} else {
-			peviousKey = inputController->getEvent()->key.keysym.sym;
-		}*/
 
 	}
 
@@ -69,6 +63,7 @@ void ModeSelection::moveUp() {
 		this->index--;
 		this->buttons[index+1]->setSelected(false);
 		this->buttons[index]->setSelected(true);
+		this->mouseOnButton = false;
 	}
 }
 
@@ -77,9 +72,31 @@ void ModeSelection::moveDown() {
 		index++;
 		this->buttons[index-1]->setSelected(false);
 		this->buttons[index]->setSelected(true);
+		this->mouseOnButton = false;
 	}
 }
 
 void ModeSelection::select() {
 	this->selectionMade = true;
+}
+
+void ModeSelection::updateMousePosition(unsigned short x, unsigned short y) {
+	bool mouseOnButtonAux = false;
+
+	for (int i = 0; i < 3; i++) {
+		if (buttons[i]->checkBoundaries(x, y)) {
+			this->buttons[index]->setSelected(false);
+			index = i;
+			this->buttons[i]->setSelected(true);
+			mouseOnButtonAux = true;
+		}
+	}
+
+	this->mouseOnButton = mouseOnButtonAux;
+}
+
+void ModeSelection::mouseSelect() {
+	if (this->mouseOnButton) {
+		this->selectionMade = true;		
+	}
 }

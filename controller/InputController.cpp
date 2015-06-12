@@ -14,6 +14,7 @@ InputController::InputController(MKStageController* stageController) {
 	this->iaIsActive = false;
 	this->keyboardController = new KeyboardController(stageController);
 	this->aiController = new AIController(stageController);
+	this->mouseController = new MouseController(stageController);
 	SDL_Init(SDL_INIT_JOYSTICK);
 	joystickConnected = false;
 	if (SDL_NumJoysticks() > 0)	{
@@ -29,6 +30,7 @@ InputController::~InputController() {
     delete mainEvent;
     delete this->keyboardController;
 	delete this->aiController;
+	delete this->mouseController;
 }
 
 SDL_Event* InputController::getEvent() {
@@ -69,6 +71,8 @@ void InputController::update() {
 		this->joystickControllerManager->update(character, character2, this->getEvent());
 	//}
 
+		this->mouseController->update(this->getEvent());
+
 	if (this->iaIsActive) {
 		this->aiController->update(character, character2, this->getEvent());
 	}
@@ -78,6 +82,7 @@ void InputController::setStageController(MKStageController *stageController) {
 	this->stageController = stageController;
 	this->keyboardController->setStageController(stageController);
 	this->aiController->setStageController(stageController);
+	this->mouseController->setStageController(stageController);
 	if (joystickConnected) {
 		this->joystickControllerManager->setStageController(stageController);
 	}

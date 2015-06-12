@@ -17,19 +17,9 @@ CharacterSelectionView::CharacterSelectionView(SDL_Renderer* aRenderer, Button**
 
 	this->characters = new ImageSprite(this->renderer, "data/CharacterSelection/characters.png", 0.175*scWidth, 0.14*scHeight, 0.65*scWidth, 0.65*scHeight);
 
-	float displaceX = 0.1588;
-	float displaceY = 0.212;
-	int i = 0;
-	int j = 0;
-    
-	while (i < 3) {
-		while (j < 4) {
-			buttonSprites1[(4*i)+j] = new ButtonSprite(this->renderer, buttons1[(4*i)+j], (0.189+(displaceX*j))*scWidth, (0.148+(displaceY*i))*scHeight, 0.1488*scWidth, 0.202*scHeight);
-			buttonSprites2[(4*i)+j] = new ButtonSprite(this->renderer, buttons2[(4*i)+j], (0.189+(displaceX*j))*scWidth, (0.148+(displaceY*i))*scHeight, 0.1488*scWidth, 0.202*scHeight);
-			j++;
-		}
-		i++;
-		j = 0;
+	for (int i = 0; i < 12; i++) {
+		buttonSprites1[i] = new ButtonSprite(this->renderer, buttons1[i]);
+		buttonSprites2[i] = new ButtonSprite(this->renderer, buttons2[i]);
 	}
 
 	float scaledScWidth = scWidth/Util::getInstance()->getScalingConstant();

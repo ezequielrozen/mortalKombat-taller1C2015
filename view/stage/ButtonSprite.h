@@ -12,7 +12,7 @@
 class ButtonSprite 
 {
 public:
-	ButtonSprite(SDL_Renderer* aRenderer, Button* aButton, int x, int y, int w, int h);
+	ButtonSprite(SDL_Renderer* aRenderer, Button* aButton);
 	~ButtonSprite();
 	void Draw();
 	bool isSelected();
