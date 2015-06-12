@@ -4,6 +4,7 @@
 
 #include <algorithm>
 #include "ComboButtonsView.h"
+#include "Text.h"
 
 ComboButtonsView* ComboButtonsView::instance = 0;
 
@@ -34,6 +35,7 @@ void ComboButtonsView::clear() {
     this->buttonSprites.clear();
     delete this->timer;
     delete this->comboShowTimer;
+    delete this->comboText;
     /*
     buffer.clear();
     buffer.shrink_to_fit();
@@ -60,6 +62,7 @@ void ComboButtonsView::draw() {
                     if (this->selectedButtons.at(i) == 1) {
                         buffer[i]->setPosition(positions[i].x, positions[i].y);
                         buffer[i]->Draw();
+                        comboText->Draw();
                     }
                 } else {
                     buffer[i]->setPosition(positions[i].x, positions[i].y);
@@ -120,8 +123,7 @@ void ComboButtonsView::addButton(Events button) {
             ImageSprite *sprite = this->buttonSprites.at(spriteName);
             this->buffer.push_back(sprite);
             if (this->buffer.size() == 1)
-                this->positions.push_back(Position(
-                        (int) Util::getInstance()->getLogicalWindowWidth() * Util::getInstance()->getScalingConstant() * 0.5 - this->buffer[0]->getWidth() * 3.5, (int) Util::getInstance()->getLogicalWindowWidth() * Util::getInstance()->getScalingConstant() * 0.1));
+                this->positions.push_back(Position((int) Util::getInstance()->getLogicalWindowWidth() * Util::getInstance()->getScalingConstant() * 0.5 - this->buffer[0]->getWidth() * 3.5, (int) Util::getInstance()->getLogicalWindowWidth() * Util::getInstance()->getScalingConstant() * 0.1));
             else
                 this->positions.push_back(Position(this->positions[this->positions.size() - 1].x + this->buffer[this->buffer.size() - 1]->getWidth(), this->positions[this->positions.size() - 1].y));
             if (buffer.size() >= BUTTONS_BUFFER_PRACTICE_MAX) {
@@ -152,6 +154,9 @@ void ComboButtonsView::init(SDL_Renderer *renderer) {
                            {"Block", new ImageSprite(renderer, "data/buttons/joystick/l1.png", 0,0, 32, 32)},
                            {"Weapon", new ImageSprite(renderer, "data/buttons/joystick/r1.png", 0,0, 32, 32)}
     };
+    this->comboText = new Text("COMBO DETECTED", renderer, "center", {255, 0, 0});
+    this->comboText->setDimensions(this->comboText->getWidth() * 32 / this->comboText->getHeight(), 32);
+    this->comboText->setPosition(Util::getInstance()->getLogicalWindowWidth() * Util::getInstance()->getScalingConstant() * 0.5 - this->comboText->getWidth() * 0.5, (int) Util::getInstance()->getLogicalWindowWidth() * Util::getInstance()->getScalingConstant() * 0.1 + 32 * 1.2);
 }
 
 void ComboButtonsView::shiftPositions() {

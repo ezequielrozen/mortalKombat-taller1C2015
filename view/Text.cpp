@@ -10,13 +10,17 @@
 using namespace std;
 
 Text::Text(const char* text, SDL_Renderer *renderer, string position) {
-
     this->renderer = renderer;
     this->text = text;
-    this->initText(position);
+    this->initText(position, {255, 255, 255});
 }
 
-void Text::initText(string position) {
+Text::Text(const char *text, SDL_Renderer *renderer, string position, SDL_Color colour) {
+    this->renderer = renderer;
+    this->text = text;
+    this->initText(position, colour);}
+
+void Text::initText(string position, SDL_Color colour) {
     if( TTF_Init() == -1 ) {
         printf( "SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError() );
     }
@@ -29,7 +33,7 @@ void Text::initText(string position) {
 
     //We need to first render to a surface as that's what TTF_RenderText
     //returns, then load that surface into a texture
-    SDL_Color colour = { 255, 255, 255 };
+    //SDL_Color colour = { 255, 255, 255 };
 
     SDL_Surface *surface = TTF_RenderText_Blended(font, this->text, colour);
     if (surface == NULL){
@@ -44,6 +48,7 @@ void Text::initText(string position) {
     this->draw.y = 5;
     this->draw.w = surface->w;
     this->draw.h = surface->h;
+
     if (position == "left")
         this->draw.x = 5;
     else if (position == "right")
@@ -69,5 +74,24 @@ void Text::Draw() {
 void Text::update(const char* text) {
     this->text = text;
     SDL_DestroyTexture(this->textTexture);
-    this->initText("center");
+    this->initText("center", {255, 255, 255});
+}
+
+void Text::setPosition(int x, int y) {
+    this->draw.x = x;
+    this->draw.y = y;
+}
+
+int Text::getWidth() {
+    return this->draw.w;
+}
+
+
+void Text::setDimensions(int width, int height) {
+    this->draw.w = width;
+    this->draw.h = height;
+}
+
+int Text::getHeight() {
+    return this->draw.h;
 }

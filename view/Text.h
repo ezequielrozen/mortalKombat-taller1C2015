@@ -12,16 +12,21 @@ using namespace std;
 class Text {
     public:
         Text(const char* text, SDL_Renderer* renderer, string position);
+        Text(const char* text, SDL_Renderer* renderer, string position, SDL_Color colour);
         ~Text();
         void Draw();
         void update(const char *text);
+        void setPosition(int x, int y);
+        int getWidth();
+        int getHeight();
+        void setDimensions(int width, int height);
     private:
         SDL_Texture* textTexture;
         SDL_Renderer* renderer;
         SDL_Rect draw;
         const char* text;
+        void initText(string position, SDL_Color colour);
 
-    void initText(string position);
 };
 
 

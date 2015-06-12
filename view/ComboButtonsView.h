@@ -8,6 +8,7 @@
 #include "ComboButtonsView.h"
 #include "Position.h"
 #include "../model/util/Timer.h"
+#include "Text.h"
 
 typedef std::map<std::string, ImageSprite*> ButtonSpriteMap;
 
@@ -33,11 +34,10 @@ private:
     std::vector<int> selectedButtons;
     bool activated;
     bool highLightingCombo;
-
     void shiftPositions();
 
     Timer *comboShowTimer;
-
+    Text* comboText;
 };
 
 
