@@ -20,6 +20,19 @@
 
 using namespace std;
 
+struct Commands {
+	bool upPressed;
+	bool downPressed;
+	bool leftPressed;
+	bool rightPressed;
+	bool highPunchPressed;
+	bool lowPunchPressed;
+	bool highKickPressed;
+	bool lowKickPressed;
+	bool blockPressed;
+	bool weaponThrowPressed;
+};
+
 class EventController : public MKStageController {
 
 
@@ -30,12 +43,12 @@ public:
 	void moveLeft(int n);
 	void moveUp(int n);
 	void moveDown(int n);
-	void highKick();
+	void highKick(int n);
 	void lowKick(int n);
-	void highPunch();
-	void lowPunch();
-	void shoot();
-	void block();
+	void highPunch(int n);
+	void lowPunch(int n);
+	void shoot(int n);
+	void block(int n);
 	void duckPunch();
 
 	virtual void moveLeftRelease(int n) ;
@@ -46,8 +59,8 @@ public:
 	virtual void highKickRelease(int n);
 	virtual void lowPunchRelease(int n);
 	virtual void highPunchRelease(int n);
-	virtual void blockRelease();
-	virtual void weaponRelease();
+	virtual void blockRelease(int n);
+	virtual void weaponRelease(int n);
 
 	ComboManager* getComboManager();
 	void setCharacterToMove(MKCharacter* character);
@@ -55,17 +68,7 @@ private:
 	static void Void();
 	MKCharacter* characterToMove;
 
-	bool upPressed;
-	bool downPressed;
-	bool leftPressed;
-	bool rightPressed;
-
-	bool highPunchPressed;
-	bool lowPunchPressed;
-	bool highKickPressed;
-	bool lowKickPressed;
-	bool blockPressed;
-	bool weaponThrowPressed;
+	Commands commands[2];
 
 	ComboManager* comboManager;
 };

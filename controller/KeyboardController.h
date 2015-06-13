@@ -11,7 +11,6 @@
 #include "../model/stage/Layer.h"
 #include "EventController.h"
 
-
 using namespace std;
 
 class KeyboardController
@@ -42,17 +41,7 @@ private:
     bool key_u_Released; //La uso para q no pueda volver a hacer el shoot sin soltar la tecla xq sino cdo esta cerca lo mata de una.
     bool key_e_Released; //La uso para q no pueda volver a hacer el shoot sin soltar la tecla xq sino cdo esta cerca lo mata de una.
 
-    bool upPressed;
-    bool downPressed;
-    bool leftPressed;
-    bool rightPressed;
-
-    bool highPunchPressed;
-    bool lowPunchPressed;
-    bool highKickPressed;
-    bool lowKickPressed;
-    bool blockPressed;
-    bool weaponThrowPressed;
+    Commands commands[2];
 
 //	void testElapsedTime(MKCharacter* character, MKCharacter* character2);
     MKStageController* stageController;

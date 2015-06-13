@@ -3,16 +3,18 @@
 extern logger* Mylog;
 
 EventController::EventController(std::vector<Events>* combo1, std::vector<Events>* combo2, std::vector<Events>* fatality) {
-	upPressed = false;
-	downPressed = false;
-	leftPressed = false;
-	rightPressed = false;
-	highPunchPressed = false;
-	lowPunchPressed = false;
-	highKickPressed = false;
-	lowKickPressed = false;
-	blockPressed = false;
-	weaponThrowPressed = false;
+	for (int i = 0; i < 2; i++) {
+		commands[i].upPressed = false;
+		commands[i].downPressed = false;
+		commands[i].leftPressed = false;
+		commands[i].rightPressed = false;
+		commands[i].highPunchPressed = false;
+		commands[i].lowPunchPressed = false;
+		commands[i].highKickPressed = false;
+		commands[i].lowKickPressed = false;
+		commands[i].blockPressed = false;
+		commands[i].weaponThrowPressed = false;
+	}
 	this->comboManager = new ComboManager();
 	this->comboManager->loadCombos(combo1, combo2, fatality);
 }
@@ -28,60 +30,60 @@ void EventController::setCharacterToMove(MKCharacter* character) {
 
 void EventController::moveRight(int n){
 //	cout << "moveRight : " << this->characterToMove->getName() << endl;
-	if (!rightPressed) {
+	if (!commands[n].rightPressed) {
 		Mylog->Log("movimiento del personaje: hacia la derecha", ERROR_LEVEL_INFO);
 
 		this->characterToMove->update(this->comboManager->checkCombo(MoveRight, this->characterToMove->getCharacterSide()));
 		cout << "RIGHT PRESSED" << endl;
-		rightPressed = true;
+		commands[n].rightPressed = true;
 	}
 }
 
 void EventController::moveRightRelease(int n){
 //	cout << "moveRightRelease : " << this->characterToMove->getName() << endl;
 	this->characterToMove->update(MoveRightRelease);
-	rightPressed = false;
-	upPressed = false;
+	commands[n].rightPressed = false;
+	commands[n].upPressed = false;
 }
 
 void EventController::moveLeft(int n){
 //	cout << "moveLeft : " << this->characterToMove->getName() << endl;
-	if (!leftPressed) {
+	if (!commands[n].leftPressed) {
 		Mylog->Log("movimiento del personaje: hacia la Izquierda", ERROR_LEVEL_INFO);
 		this->characterToMove->update(this->comboManager->checkCombo(MoveLeft, this->characterToMove->getCharacterSide()));
 		cout << "LEFT PRESSED" << endl;
-		leftPressed = true;
+		commands[n].leftPressed = true;
 	}
 }
 
 void EventController::moveLeftRelease(int n){
 //	cout << "moveLeftRelease : " << this->characterToMove->getName() << endl;
 	this->characterToMove->update(MoveLeftRelease);
-	leftPressed = false;
-	upPressed = false;
+	commands[n].leftPressed = false;
+	commands[n].upPressed = false;
 }
 
 void EventController::moveUp(int n){
 //	cout << "moveUp : " << this->characterToMove->getName() << endl;
-	if (!upPressed) {
+	if (!commands[n].upPressed) {
 		Mylog->Log("movimiento del personaje: hacia arriba", ERROR_LEVEL_INFO);
 		this->characterToMove->update(this->comboManager->checkCombo(Jump, this->characterToMove->getCharacterSide()));
 		cout << "UP PRESSED" << endl;
-		upPressed = true;
+		commands[n].upPressed = true;
 	}
 }
 
 void EventController::moveUpRelease(int n) {
-	upPressed = false;
+	commands[n].upPressed = false;
 }
 
 void EventController::moveDown(int n){
 //	cout << "moveDown : " << this->characterToMovegetName() << endl;
-	if (!downPressed) {
+	if (!commands[n].downPressed) {
 		Mylog->Log("movimiento del personaje: agachandose", ERROR_LEVEL_INFO);
 		this->characterToMove->update(this->comboManager->checkCombo(Duck, this->characterToMove->getCharacterSide()));
 		cout << "DOWN PRESSED" << endl;
-		downPressed = true;
+		commands[n].downPressed = true;
 	}
 }
 
@@ -89,69 +91,69 @@ void EventController::moveDownRelease(int n){
 //	cout << "moveDownRelease : " << this->this->characterToMoveToMove->getName() << endl;
 	Mylog->Log("movimiento del personaje: Levantandose", ERROR_LEVEL_INFO);
 	this->characterToMove->update(DuckRelease);
-	downPressed = false;
+	commands[n].downPressed = false;
 }
 
-void EventController::highKick(){
+void EventController::highKick(int n){
 //	cout << "highKick : " << this->characterToMove->getName() << endl;
-	if (!highKickPressed) {
+	if (!commands[n].highKickPressed) {
 		Mylog->Log("movimiento del personaje: Patada alta", ERROR_LEVEL_INFO);
 		this->characterToMove->update(this->comboManager->checkCombo(HighKick, this->characterToMove->getCharacterSide()));
-		highKickPressed = true;
+		commands[n].highKickPressed = true;
 	}
 }
 
 void EventController::lowKick(int n){
 //	cout << "lowKick : " << this->characterToMove->getName() << endl;
-	if (!lowKickPressed) {
+	if (!commands[n].lowKickPressed) {
 		Mylog->Log("movimiento del personaje: Patada baja", ERROR_LEVEL_INFO);
 		this->characterToMove->update(this->comboManager->checkCombo(LowKick, this->characterToMove->getCharacterSide()));
-		lowKickPressed = true;
+		commands[n].lowKickPressed = true;
 	}
 }
 
-void EventController::highPunch(){
+void EventController::highPunch(int n){
 //	cout << "highPunch : " << this->characterToMovegetName() << endl;
-	if (!highPunchPressed) {
+	if (!commands[n].highPunchPressed) {
 		Mylog->Log("movimiento del personaje: Golpe de puño alto.", ERROR_LEVEL_INFO);
 		this->characterToMove->update(this->comboManager->checkCombo(HighPunch, this->characterToMove->getCharacterSide()));
-		highPunchPressed = true;
+		commands[n].highPunchPressed = true;
 		cout << "HIGGH PUNCH APRETADO" << endl;
 	}
 }
 
-void EventController::lowPunch(){
+void EventController::lowPunch(int n){
 //	cout << "lowPunch : " << character->getName() << endl;
-	if (!lowPunchPressed) {
+	if (!commands[n].lowPunchPressed) {
 		Mylog->Log("movimiento del personaje: Golpe de puño bajo.", ERROR_LEVEL_INFO);
 		this->characterToMove->update(this->comboManager->checkCombo(LowPunch, this->characterToMove->getCharacterSide()));
-		lowPunchPressed = true;
+		commands[n].lowPunchPressed = true;
 	}
 }
 
-void EventController::shoot(){
+void EventController::shoot(int n){
 //	cout << "shoot : " << this->characterToMove->getName() << endl;
-	if (!weaponThrowPressed) {
+	if (!commands[n].weaponThrowPressed) {
 		Mylog->Log("movimiento del personaje: Disparando.", ERROR_LEVEL_INFO);
 		this->characterToMove->update(this->comboManager->checkCombo(WeaponHit, this->characterToMove->getCharacterSide()));
-		weaponThrowPressed = true;
+		commands[n].weaponThrowPressed = true;
 	}
 
 //	this->characterToMove->update(WeaponHitIce);
 }
 
-void EventController::block(){
+void EventController::block(int n){
 //	cout << "block : " << this->characterToMove->getName() << endl;
-	if (!blockPressed) {
+	if (!commands[n].blockPressed) {
 		Mylog->Log("movimiento del personaje: Defensa.", ERROR_LEVEL_INFO);
 		this->characterToMove->update(this->comboManager->checkCombo(Block, this->characterToMove->getCharacterSide()));
-		blockPressed = true;
+		commands[n].blockPressed = true;
 	}
 }
 
-void EventController::blockRelease(){
+void EventController::blockRelease(int n){
 //	cout << "blockRelease : " << this->characterToMove->getName() << endl;
-	blockPressed = false;
+	commands[n].blockPressed = false;
 	this->characterToMove->update(BlockRelease);
 }
 
@@ -164,24 +166,24 @@ void EventController::duckPunch() {
 
 
 
-void EventController::weaponRelease() {
-	weaponThrowPressed = false;
+void EventController::weaponRelease(int n) {
+	commands[n].weaponThrowPressed = false;
 }
 
 void EventController::lowKickRelease(int n) {
-	lowKickPressed = false;
+	commands[n].lowKickPressed = false;
 }
 
 void EventController::highKickRelease(int n) {
-	highKickPressed = false;
+	commands[n].highKickPressed = false;
 }
 
 void EventController::lowPunchRelease(int n) {
-	lowPunchPressed = false;
+	commands[n].lowPunchPressed = false;
 }
 
 void EventController::highPunchRelease(int n) {
-	highPunchPressed = false;
+	commands[n].highPunchPressed = false;
 }
 
 ComboManager *EventController::getComboManager() {

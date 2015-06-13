@@ -131,11 +131,11 @@ void JoystickController::update(MKCharacter *character, MKCharacter *character2,
 		if (pressedButton == c0block && !c0blockReleased){
 			c0blockReleased = true;
 			printCout ? cout << "KeyUp: BlockRelease"	<< endl : "";
-			this->stageController->blockRelease();
+			this->stageController->blockRelease(((int)joystickNumber));
 		}
 		if (pressedButton == c0shoot) {
 			this->c0shootReleased = true;
-			this->stageController->weaponRelease();
+			this->stageController->weaponRelease(((int)joystickNumber));
 		}
 	}
 
@@ -212,12 +212,12 @@ void JoystickController::update(MKCharacter *character, MKCharacter *character2,
 	}
 	if (mainEvent->type == SDL_JOYBUTTONDOWN && pressedButton == c0HighKick) {
 		printCout ? cout << "KeyDown: Boton c0HighKick"	<< endl : "";
-		this->stageController->highKick();
+		this->stageController->highKick(((int)joystickNumber));
 	}
 
 	if (mainEvent->type == SDL_JOYBUTTONUP && pressedButton == c0HighKick) {
 		printCout ? cout << "KeyDown: Boton c0HighKick"	<< endl : "";
-		this->stageController->highKickRelease(0);
+		this->stageController->highKickRelease(((int)joystickNumber));
 	}
 
 	if (mainEvent->type == SDL_JOYBUTTONDOWN && pressedButton == c0LowKick) {
@@ -227,7 +227,7 @@ void JoystickController::update(MKCharacter *character, MKCharacter *character2,
 
 	if (mainEvent->type == SDL_JOYBUTTONUP && pressedButton == c0LowKick) {
 		printCout ? cout << "KeyDown: Boton c0HighKick"	<< endl : "";
-		this->stageController->lowKickRelease(0);
+		this->stageController->lowKickRelease(((int)joystickNumber));
 	}
 
 	if (mainEvent->type == SDL_JOYBUTTONDOWN && pressedButton == c0duckPunch) {
@@ -237,34 +237,34 @@ void JoystickController::update(MKCharacter *character, MKCharacter *character2,
 
 	if (mainEvent->type == SDL_JOYBUTTONDOWN && pressedButton == c0HighPunch) {
 			printCout ? cout << "KeyDown: Boton c0HighPunch"	<< endl: "";
-			this->stageController->highPunch();
+			this->stageController->highPunch(((int)joystickNumber));
 	}
 
 	if (mainEvent->type == SDL_JOYBUTTONUP && pressedButton == c0HighPunch) {
 		printCout ? cout << "KeyDown: Boton c0HighPunch"	<< endl: "";
-		this->stageController->highPunchRelease(0);
+		this->stageController->highPunchRelease(((int)joystickNumber));
 	}
 
 	if (mainEvent->type == SDL_JOYBUTTONDOWN && pressedButton == c0LowPunch) {
 			printCout ? cout << "KeyDown: Boton c0LowPunch"	<< endl: "";
-			this->stageController->lowPunch();
+			this->stageController->lowPunch(((int)joystickNumber));
 	}
 
 	if (mainEvent->type == SDL_JOYBUTTONUP && pressedButton == c0LowPunch) {
 		printCout ? cout << "KeyDown: Boton c0LowPunch"	<< endl: "";
-		this->stageController->lowPunchRelease(0);
+		this->stageController->lowPunchRelease(((int)joystickNumber));
 	}
 
 	if (mainEvent->type == SDL_JOYBUTTONDOWN && pressedButton == c0shoot && (this->c0shootReleased)) {
 		this->c0shootReleased = false;
 		printCout ? cout << "KeyDown: Boton c0shoot"	<< endl : "";
-		this->stageController->shoot();
+		this->stageController->shoot(((int)joystickNumber));
 	}
 
 	if (mainEvent->type == SDL_JOYBUTTONDOWN && pressedButton == c0block) {
 		c0blockReleased = false;
 		printCout ? cout << "KeyDown: Boton c0block"	<< endl : "";
-		this->stageController->block();
+		this->stageController->block(((int)joystickNumber));
 	}
 
 }

@@ -17,12 +17,12 @@ public:
     virtual void moveLeft(int n) {};
     virtual void moveUp(int n) {};
     virtual void moveDown(int n) {};
-    virtual void highKick() {};
+    virtual void highKick(int n) {};
     virtual void lowKick(int n) {};
-    virtual void highPunch() {};
-    virtual void lowPunch() {};
-    virtual void shoot() {};
-    virtual void block() {};
+    virtual void highPunch(int n) {};
+    virtual void lowPunch(int n) {};
+    virtual void shoot(int n) {};
+    virtual void block(int n) {};
     virtual void duckPunch() {};
     virtual void select() {};
     virtual void updateMousePosition(unsigned short x, unsigned short y) {};
@@ -35,8 +35,8 @@ public:
     virtual void highKickRelease(int n) {};
     virtual void lowPunchRelease(int n) {};
     virtual void highPunchRelease(int n) {};
-    virtual void blockRelease() {};
-    virtual void weaponRelease() {};
+    virtual void blockRelease(int n) {};
+    virtual void weaponRelease(int n) {};
 
     virtual void setCharacterToMove(MKCharacter* character) {};
     virtual void setModeSelection(ModeSelection* modeSelection) {};
