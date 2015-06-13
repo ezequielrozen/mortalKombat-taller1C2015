@@ -173,7 +173,7 @@ void CharacterSelection::updateMousePosition(unsigned short x, unsigned short y)
 	bool mouseOnButtonAux = false;
 
 	for (int i = 0; i < 12; i++) {
-		if (buttons1[i]->checkBoundaries(x, y)) {
+		if (buttons1[i]->checkBoundaries(x, y) && !this->buttonInfo[0].buttonPressed) {
 			this->buttonInfo[0].lastButton = this->buttonInfo[0].actualButton;
 			this->buttonInfo[0].actualButton = i;
 			mouseOnButtonAux = true;
