@@ -47,6 +47,13 @@ private:
     bool leftPressed;
     bool rightPressed;
 
+    bool highPunchPressed;
+    bool lowPunchPressed;
+    bool highKickPressed;
+    bool lowKickPressed;
+    bool blockPressed;
+    bool weaponThrowPressed;
+
 //	void testElapsedTime(MKCharacter* character, MKCharacter* character2);
     MKStageController* stageController;
 

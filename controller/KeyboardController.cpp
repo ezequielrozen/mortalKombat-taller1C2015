@@ -9,6 +9,12 @@ KeyboardController::KeyboardController(MKStageController* stageController)  {
 	this->upPressed = false;
 	this->rightPressed = false;
 	this->leftPressed = false;
+	this->highPunchPressed = false;
+	this->lowPunchPressed = false;
+	this->highKickPressed = false;
+	this->lowKickPressed = false;
+	this->blockPressed = false;
+	this->weaponThrowPressed = false;
 }
 
 KeyboardController::~KeyboardController(void) {
@@ -53,24 +59,39 @@ void KeyboardController::update(MKCharacter* character, MKCharacter* character2,
 				}
 				break;
 			case SDLK_k:
-				this->stageController->setCharacterToMove(character);
-				this->stageController->highKick();
+				if (!highKickPressed) {
+					this->stageController->setCharacterToMove(character);
+					this->stageController->highKick();
+					this->highKickPressed = true;
+				}
 				break;
 			case SDLK_l:
-				this->stageController->setCharacterToMove(character);
-				this->stageController->lowKick(0);
+				if (!lowKickPressed) {
+					this->stageController->setCharacterToMove(character);
+					this->stageController->lowKick(0);
+					this->lowKickPressed = true;
+				}
 				break;
 			case SDLK_p:
-				this->stageController->setCharacterToMove(character);
-				this->stageController->highPunch();
+				if (!highPunchPressed) {
+					this->stageController->setCharacterToMove(character);
+					this->stageController->highPunch();
+					this->highPunchPressed = true;
+				}
 				break;
 			case SDLK_i:
-				this->stageController->setCharacterToMove(character);
-				this->stageController->lowPunch();
+				if (!lowPunchPressed) {
+					this->stageController->setCharacterToMove(character);
+					this->stageController->lowPunch();
+					this->lowPunchPressed = true;
+				}
 				break;
 			case SDLK_b:
-				this->stageController->setCharacterToMove(character);
-				this->stageController->block();
+				if (!blockPressed) {
+					this->stageController->setCharacterToMove(character);
+					this->stageController->block();
+					this->blockPressed = true;
+				}
 				break;
 			case SDLK_u:
 				if (key_u_Released) {
@@ -161,9 +182,27 @@ void KeyboardController::update(MKCharacter* character, MKCharacter* character2,
 				case SDLK_b:
 					this->stageController->setCharacterToMove(character);
 					this->stageController->blockRelease();
+					this->blockPressed = false;
 					break;
+				case SDLK_k:
+					this->stageController->setCharacterToMove(character);
+					this->stageController->highKickRelease(0);
+					this->highKickPressed = false;
+				case SDLK_l:
+					this->stageController->setCharacterToMove(character);
+					this->stageController->lowKickRelease(0);
+					this->lowKickPressed = false;
+				case SDLK_p:
+					this->stageController->setCharacterToMove(character);
+					this->stageController->highPunchRelease(0);
+					this->highPunchPressed = false;
+				case SDLK_i:
+					this->stageController->setCharacterToMove(character);
+					this->stageController->lowPunchRelease(0);
+					this->lowPunchPressed = false;
 				case SDLK_u:
 					key_u_Released = true;
+					this->stageController->weaponRelease();
 					break;
 
 
