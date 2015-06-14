@@ -14,10 +14,14 @@ Events ComboManager::checkCombo(Events originalEvent, char side) {
     }
     this->buffer->push_back(originalEvent);
 
-    if (bufferMatchesCombo(this->combo1, side))
+    if (bufferMatchesCombo(this->combo1, side)) {
+        cout << "Teleportation" << endl;
         return Teleportation; // SE EJECTUA EL COMBO 1: RETURN COMBO1EVENT
-    else if (bufferMatchesCombo(this->combo2, side))
+    }
+    else if (bufferMatchesCombo(this->combo2, side)) {
+        cout << "WeaponIce" << endl;
         return WeaponHitIce; // SE EJECTUA EL COMBO 2: RETURN COMBO2EVENT
+    }
     else if (bufferMatchesCombo(this->fatality, side))
         return FatalityHit;
 

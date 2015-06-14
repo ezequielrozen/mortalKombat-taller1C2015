@@ -37,7 +37,7 @@ public:
                                   CharacterSprite*& shoot, CharacterSprite*& dizzy,  CharacterSprite*& fall, CharacterSprite*& beingHit,
                                   CharacterSprite*& beingHitDown, CharacterSprite*& blockDown,
                                   CharacterSprite*& block,CharacterSprite*& fatalityHit, CharacterSprite*& fatalityFire, CharacterSprite*& onFire,
-                                  CharacterSprite*& teleportation,
+                                  CharacterSprite*& teleportation, CharacterSprite*& shootIce,CharacterSprite*& weaponIce,CharacterSprite*&  weaponIceImpacting,
                                   bool colorAltered);
     void loadAsRaiden(CharacterSprite*& walk, CharacterSprite*& stance, CharacterSprite*& jump, CharacterSprite*& sideJump,
 								CharacterSprite*& duck, CharacterSprite*& highKick, CharacterSprite*& lowKick, CharacterSprite*& dukKick,
@@ -97,6 +97,9 @@ private:
     CharacterSprite* scorpionFatalityFire;
     CharacterSprite* scorpionReceivingFire;
     CharacterSprite* scorpionTeleportation;
+    CharacterSprite* scorpionShootIce;
+    CharacterSprite* scorpionWeaponIce;
+    CharacterSprite* scorpionWeaponIceImpacting;
 
     CharacterSprite* raidenWalk;
     CharacterSprite* raidenStance;
@@ -136,15 +139,14 @@ private:
     string oponentSide;
 
     void runCharacter(MKCharacter* character1, MKCharacter* character2, SpriteMap characterSprites);
-	void RestartAllScorpionSprites();
-	void RestartAllRaidenSprites();
+/*	void RestartAllScorpionSprites();
+	void RestartAllRaidenSprites();*/
     Painter* painter;
 
     Mix_Music* stageBackgroundMusic;
 
     bool practiceMode;
 
-   // void loadAsRaiden();
     void loadMusicAndSounds();
 };
 
