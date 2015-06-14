@@ -32,8 +32,8 @@ StageManager::~StageManager() {
 	delete this->modeSelection;
 	delete this->gameLoader;
 
+	SDL_DestroyRenderer(this->renderer);
     SDL_DestroyWindow(this->window);
-    SDL_DestroyRenderer(this->renderer);
 
 	delete this->stageController;
 	delete this->inputController;

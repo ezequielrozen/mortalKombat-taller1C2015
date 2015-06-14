@@ -121,7 +121,7 @@ GameView::~GameView() {
     if (raidenWeaponIce != NULL ) delete  raidenWeaponIce;
     if (raidenWeaponIceImpacting != NULL ) delete raidenWeaponIceImpacting;
 
-    for (int i = 1 ; i < layerCount ; i++) {
+    for (int i = 0 ; i < layerCount ; i++) {
         delete layerSprites[i];
     }
     delete layerSprites;
