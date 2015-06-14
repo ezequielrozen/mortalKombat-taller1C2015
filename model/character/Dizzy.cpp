@@ -1,7 +1,9 @@
 #include "Dizzy.h"
 #include "ReceivingFire.h"
-Dizzy::Dizzy() {
+#include "../../view/SoundManager.h"
 
+Dizzy::Dizzy() {
+    SoundManager::getInstance()->playSound("finishhim");
 }
 
 Dizzy::~Dizzy() {

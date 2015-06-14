@@ -4,6 +4,7 @@
 #include "../controller/InputController.h"
 #include "Text.h"
 #include "SDL2/SDL.h"
+#include "SoundManager.h"
 
 GameView::GameView(SDL_Renderer* aRenderer, MKCharacter* character, MKCharacter* character2, Stage* pStage,
                    string OponentSide, Painter* painter, Timer* timer) {
@@ -56,11 +57,8 @@ GameView::GameView(SDL_Renderer* aRenderer, MKCharacter* character, MKCharacter*
 
     this->practiceMode = false;
 
-    stageBackgroundMusic = NULL;
-
+    SoundManager::getInstance()->loadSounds();
     // Here we initialize SDL_mixer and then load each sound and music
-    loadMusicAndSounds();
-    Mix_PlayMusic(stageBackgroundMusic, -1);
 }
 
 GameView::~GameView() {
@@ -609,8 +607,8 @@ void GameView::loadMusicAndSounds() {
         printf( "SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError() );
         // Loggear
     } else {
-        stageBackgroundMusic = Mix_LoadMUS( "data/Sounds/mkw_umk3_sounds/longmusiccues/mk3-00056.mp3");
-        if( stageBackgroundMusic == NULL ) {
+        fx = Mix_LoadWAV( "data/Sounds/mk3-00100.wav");
+        if( fx == NULL ) {
             printf( "Failed to load beat music! SDL_mixer Error: %s\n", Mix_GetError() );
             // Cargar sonido "vacio" por default?
         }

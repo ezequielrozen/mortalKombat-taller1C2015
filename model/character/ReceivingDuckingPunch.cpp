@@ -4,9 +4,10 @@
 
 #include "ReceivingDuckingPunch.h"
 #include "CharacterStance.h"
+#include "../../view/SoundManager.h"
 
 ReceivingDuckingPunch::ReceivingDuckingPunch() {
-
+    SoundManager::getInstance()->playSound("fall");
 }
 
 ReceivingDuckingPunch::~ReceivingDuckingPunch() {

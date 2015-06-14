@@ -5,8 +5,10 @@
 #include "WeaponHItting.h"
 #include "MovingLeft.h"
 #include "KickLeftJumpingHitting.h"
+#include "../../view/SoundManager.h"
 
 JumpingLeft::JumpingLeft() {
+    SoundManager::getInstance()->playSound("jump");
 }
 
 JumpingLeft::~JumpingLeft() {

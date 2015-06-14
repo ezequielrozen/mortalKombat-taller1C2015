@@ -6,9 +6,12 @@
 #include "BeingOverPassedLeft.h"
 #include "BeingOverPassedRight.h"
 #include "TeleportationDoing.h"
+#include "../../view/SoundManager.h"
 
 DuckingPunch::DuckingPunch() {
     this->timer = 33;
+    SoundManager::getInstance()->playSound("getoverhere");
+
 }
 
 DuckingPunch::~DuckingPunch() {

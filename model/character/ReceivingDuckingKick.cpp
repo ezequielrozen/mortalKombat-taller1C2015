@@ -1,8 +1,10 @@
 #include "ReceivingDuckingKick.h"
 #include "CharacterStance.h"
+#include "../../view/SoundManager.h"
 
 ReceivingDuckingKick::ReceivingDuckingKick() {
     this->timer = 30;
+    SoundManager::getInstance()->playSound("fall");
 }
 
 ReceivingDuckingKick::~ReceivingDuckingKick() {

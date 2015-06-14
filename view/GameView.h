@@ -144,6 +144,7 @@ private:
     Painter* painter;
 
     Mix_Music* stageBackgroundMusic;
+    Mix_Chunk* fx;
 
     bool practiceMode;
 

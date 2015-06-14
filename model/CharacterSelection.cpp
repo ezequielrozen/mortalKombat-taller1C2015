@@ -1,4 +1,5 @@
 #include "CharacterSelection.h"
+#include "../view/SoundManager.h"
 
 CharacterSelection::CharacterSelection(SDL_Renderer* renderer, InputController* inputController) {
 	
@@ -56,6 +57,7 @@ void CharacterSelection::linkInputController() {
 void CharacterSelection::moveUp(int n) {
 	if (!this->buttonInfo[n].buttonPressed && !(n == 1 && this->inputController->isAIEnabled())) {
 		this->buttonInfo[n].lastButton = this->buttonInfo[n].actualButton;
+		SoundManager::getInstance()->playSound("select2");
 
 		if (this->buttonInfo[n].actualButton > 3) {
 			this->buttonInfo[n].actualButton = this->buttonInfo[n].actualButton - 4;
@@ -72,7 +74,8 @@ void CharacterSelection::moveUp(int n) {
 void CharacterSelection::moveDown(int n) {
 	if (!this->buttonInfo[n].buttonPressed && !(n == 1 && this->inputController->isAIEnabled())) {
 		this->buttonInfo[n].lastButton = this->buttonInfo[n].actualButton;
-	
+		SoundManager::getInstance()->playSound("select2");
+
 		if (this->buttonInfo[n].actualButton < 8) {
 			this->buttonInfo[n].actualButton = buttonInfo[n].actualButton + 4;
 		}
@@ -88,6 +91,7 @@ void CharacterSelection::moveDown(int n) {
 void CharacterSelection::moveRight(int n) {
 	if (!this->buttonInfo[n].buttonPressed && !(n == 1 && this->inputController->isAIEnabled())) {
 		this->buttonInfo[n].lastButton = this->buttonInfo[n].actualButton;
+		SoundManager::getInstance()->playSound("select2");
 
 		if (this->buttonInfo[n].actualButton < 11) {
 			this->buttonInfo[n].actualButton++;
@@ -104,6 +108,7 @@ void CharacterSelection::moveRight(int n) {
 void CharacterSelection::moveLeft(int n) {
 	if (!this->buttonInfo[n].buttonPressed && !(n == 1 && this->inputController->isAIEnabled())) {
 		this->buttonInfo[n].lastButton = this->buttonInfo[n].actualButton;
+		SoundManager::getInstance()->playSound("select2");
 
 		if (this->buttonInfo[n].actualButton > 0) {
 			this->buttonInfo[n].actualButton--;
@@ -120,6 +125,7 @@ void CharacterSelection::moveLeft(int n) {
 void CharacterSelection::select(int n) {
 	if (!(n == 1 && this->inputController->isAIEnabled())) {
 		this->buttonInfo[n].buttonPressed = true;
+		SoundManager::getInstance()->playSound("confirmselection");
 	}
 }
 

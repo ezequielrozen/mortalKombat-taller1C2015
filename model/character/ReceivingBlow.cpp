@@ -1,7 +1,8 @@
 #include "ReceivingBlow.h"
+#include "../../view/SoundManager.h"
 
 ReceivingBlow::ReceivingBlow() {
-
+	SoundManager::getInstance()->playSound("receivehit");
 }
 
 ReceivingBlow::~ReceivingBlow() {

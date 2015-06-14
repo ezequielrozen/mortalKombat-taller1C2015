@@ -1,4 +1,5 @@
 #include "ModeSelection.h"
+#include "../view/SoundManager.h"
 
 ModeSelection::ModeSelection(SDL_Renderer* renderer, InputController* inputController) {
 	
@@ -64,6 +65,7 @@ void ModeSelection::moveUp() {
 		this->buttons[index+1]->setSelected(false);
 		this->buttons[index]->setSelected(true);
 		this->mouseOnButton = false;
+		SoundManager::getInstance()->playSound("select");
 	}
 }
 
@@ -73,11 +75,13 @@ void ModeSelection::moveDown() {
 		this->buttons[index-1]->setSelected(false);
 		this->buttons[index]->setSelected(true);
 		this->mouseOnButton = false;
+		SoundManager::getInstance()->playSound("select");
 	}
 }
 
 void ModeSelection::select() {
 	this->selectionMade = true;
+	SoundManager::getInstance()->playSound("confirmselection");
 }
 
 void ModeSelection::updateMousePosition(unsigned short x, unsigned short y) {

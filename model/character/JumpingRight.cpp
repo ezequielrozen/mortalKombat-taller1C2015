@@ -5,8 +5,11 @@
 #include "MovingRight.h"
 #include "PunchLeftJumping.h"
 #include "KickRightJumpingHitting.h"
+#include "../../view/SoundManager.h"
 
 JumpingRight::JumpingRight() {
+    SoundManager::getInstance()->playSound("jump");
+
 }
 
 JumpingRight::~JumpingRight() {

@@ -3,9 +3,11 @@
 #include "CharacterStance.h"
 #include "ReceivingDuckingPunch.h"
 #include "RecevingHit.h"
+#include "../../view/SoundManager.h"
 
 WeaponHittingIce::WeaponHittingIce() {
 	this->timer = 20;
+	SoundManager::getInstance()->playSound("ray");
 }
 
 WeaponHittingIce::~WeaponHittingIce() {

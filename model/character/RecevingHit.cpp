@@ -1,9 +1,11 @@
 #include "RecevingHit.h"
 #include "../MKCharacter.h"
 #include "CharacterStance.h"
+#include "../../view/SoundManager.h"
 
 RecevingHit::RecevingHit() {
 	this->timer = 23;
+	SoundManager::getInstance()->playSound("receivehit");
 }
 
 RecevingHit::~RecevingHit() {

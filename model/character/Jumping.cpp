@@ -2,8 +2,11 @@
 #include "CharacterStance.h"
 #include "ReceivingDuckingPunch.h"
 #include "WeaponHItting.h"
+#include "../../view/SoundManager.h"
 
 Jumping::Jumping() {
+    SoundManager::getInstance()->playSound("jump");
+
 }
 
 Jumping::~Jumping() {

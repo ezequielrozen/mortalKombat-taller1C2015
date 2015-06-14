@@ -6,9 +6,11 @@
 #include "BeingOverPassedRight.h"
 #include "BeingOverPassedLeft.h"
 #include "TeleportationDoing.h"
+#include "../../view/SoundManager.h"
 
 HighPunchHitting::HighPunchHitting() {
     this->timer = 40;
+    SoundManager::getInstance()->playSound("hit1");
 }
 
 HighPunchHitting::~HighPunchHitting() {

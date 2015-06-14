@@ -83,7 +83,8 @@ bool Game::GameLoop(GameModes mode) {
 void Game::updateGameState(int &roundCount) {
     if (!scorpion->isAlive()) {
         if (scorpion->getState() != "ReceivingFire") {
-            scorpion->setState(new Dizzy());
+            if (!(scorpion->getState() == "Dizzy"))
+                scorpion->setState(new Dizzy());
             scorpion->setPosY(this->stage->getFloor());
             if (diedTimeElapsed == 0) {
                 diedTimeElapsed = SDL_GetTicks();
@@ -105,7 +106,8 @@ void Game::updateGameState(int &roundCount) {
 
     } else if (!raiden->isAlive()) {
     	if (raiden->getState() != "ReceivingFire") {
-			raiden->setState(new Dizzy());
+            if (!(raiden->getState() == "Dizzy"))
+                raiden->setState(new Dizzy());
             raiden->setPosY(this->stage->getFloor());
             if (diedTimeElapsed == 0) {
                 diedTimeElapsed = SDL_GetTicks();

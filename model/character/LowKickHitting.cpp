@@ -7,9 +7,12 @@
 #include "BeingOverPassedRight.h"
 #include "BeingOverPassedLeft.h"
 #include "TeleportationDoing.h"
+#include "../../view/SoundManager.h"
 
 LowKickHitting::LowKickHitting() {
     this->timer = 40;
+    SoundManager::getInstance()->playSound("hit2");
+
 }
 
 LowKickHitting::~LowKickHitting() {

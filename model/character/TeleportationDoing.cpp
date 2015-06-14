@@ -10,11 +10,13 @@
 #include "CharacterStance.h"
 #include "ReceivingDuckingPunch.h"
 #include "RecevingHit.h"
+#include "../../view/SoundManager.h"
 
 TeleportationDoing::TeleportationDoing() {
 	// TODO Auto-generated constructor stub
 	this->finalPosX = 0;
 	this->timer=60;
+	SoundManager::getInstance()->playSound("teleport");
 }
 
 TeleportationDoing::~TeleportationDoing() {
