@@ -83,7 +83,9 @@ void CharacterStance::update(MKCharacter * character, Events aEvent) {
         		character->setState(new TeleportationDoing());
             break;
         case WeaponHitIce:
-			character->setState(new WeaponHittingIce());;
+            if (character->getName() == "raiden"){
+			    character->setState(new WeaponHittingIce());
+            }
             break;
         case OverPassed:
             if (character->getCharacterSide() == 'l') {
