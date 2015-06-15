@@ -27,6 +27,8 @@ public:
 
     void select();
     void updateMousePosition(unsigned short x, unsigned short y);
+
+    void updateName(string letter);
 private:
 	CharacterSelection* characterSelection;
 	bool movingUpOne;

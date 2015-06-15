@@ -39,6 +39,8 @@ public:
 	void mouseSelect();
 	void updateMousePosition(unsigned short x, unsigned short y);
 
+	void updateName(string letter);
+
 private:
 	CharacterSelectionView* view;
 	InputController* inputController;
@@ -48,7 +50,13 @@ private:
 
 	ButtonInfo buttonInfo[2];
 	
+	Button** nameButtons;
+	int nameButtonIndex;
+
+	string names[2];
+
 	bool mouseOnButton;
+	bool characterSelectionFinished;
 };
 
 #endif // CHARACTERSELECTION_H

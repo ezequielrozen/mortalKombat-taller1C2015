@@ -30,14 +30,22 @@ CharacterSelectionView::CharacterSelectionView(SDL_Renderer* aRenderer, Button**
 
 	for(int k = 0; k < 12; k++) {
 		name = "data/CharacterSelection/"+ch[k].name+"Stance.png";
-		characterSprites1[k] = new CharacterSprite(this->renderer, (char*)name.c_str(), 0.025*scaledScWidth,0.615*scaledScHeight, 0.17*scaledScWidth,0.345*scaledScHeight, ch[k].frames, "RIGHT", false, false, NULL);
+		characterSprites1[k] = new CharacterSprite(this->renderer, (char*)name.c_str(), 0.005*scaledScWidth,0.615*scaledScHeight, 0.17*scaledScWidth,0.345*scaledScHeight, ch[k].frames, "RIGHT", false, false, NULL);
     	characterSprites2[k] = new CharacterSprite(this->renderer, (char*)name.c_str(), 0.825*scaledScWidth,0.615*scaledScHeight, 0.17*scaledScWidth,0.345*scaledScHeight, ch[k].frames, "LEFT", false, false, NULL);	
     }
     
+    this->characterNames[0] = new Text("SCORPION", this->renderer, "center",{255, 222, 39});
+    this->characterNames[0]->setPosition(0.175*scWidth, 0.89*scHeight);
+    this->characterNames[0]->setDimensions(0.3*scWidth, 0.1*scHeight);
+    this->characterNames[1] = new Text("RAIDEN", this->renderer, "center",{255, 222, 39});
+    this->characterNames[1]->setPosition(0.525*scWidth, 0.89*scHeight);
+    this->characterNames[1]->setDimensions(0.3*scWidth, 0.1*scHeight);
 }
 
 CharacterSelectionView::~CharacterSelectionView() {
-    
+    delete this->characterNames[0];
+    delete this->characterNames[1];
+
     for (int i = 0; i < 12; i++) {
         delete buttonSprites1[i];
         delete buttonSprites2[i];
@@ -48,6 +56,22 @@ CharacterSelectionView::~CharacterSelectionView() {
 	delete characters;
 	delete title;
 	delete background;
+}
+
+void CharacterSelectionView::updateCharacterNames(string name1, string name2) {
+
+    delete this->characterNames[0];
+    delete this->characterNames[1];
+
+    int scWidth = Util::getInstance()->getWindowWidth();
+    int scHeight = Util::getInstance()->getWindowHeight();
+
+    this->characterNames[0] = new Text(name1.c_str(), this->renderer, "center",{255, 222, 39});
+    this->characterNames[0]->setPosition(0.175*scWidth, 0.89*scHeight);
+    this->characterNames[0]->setDimensions(0.3*scWidth, 0.1*scHeight);
+    this->characterNames[1] = new Text(name2.c_str(), this->renderer, "center",{255, 222, 39});
+    this->characterNames[1]->setPosition(0.525*scWidth, 0.89*scHeight);
+    this->characterNames[1]->setDimensions(0.3*scWidth, 0.1*scHeight);
 }
 
 void CharacterSelectionView::render() {
@@ -74,6 +98,8 @@ void CharacterSelectionView::render() {
     	i++;
     }
     
+    this->characterNames[0]->Draw();
+    this->characterNames[1]->Draw();
 
     SDL_RenderPresent(renderer);
 }

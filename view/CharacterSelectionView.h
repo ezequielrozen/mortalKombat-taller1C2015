@@ -23,6 +23,7 @@ public:
 	CharacterSelectionView(SDL_Renderer* aRenderer, Button** buttons1, Button** buttons2);
 	~CharacterSelectionView();
 	void render();
+	void updateCharacterNames(string name1, string name2);
 private:
 	SDL_Renderer* renderer;
 
@@ -36,6 +37,8 @@ private:
 	ButtonSprite* buttonSprites2[12];
 	CharacterSprite* characterSprites1[12];
 	CharacterSprite* characterSprites2[12];
+
+	Text* characterNames[2];
 
 };
 #endif // CHARACTERSELECTIONVIEW_H

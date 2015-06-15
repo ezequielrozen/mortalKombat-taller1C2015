@@ -41,6 +41,8 @@ public:
     virtual void setCharacterToMove(MKCharacter* character) {};
     virtual void setModeSelection(ModeSelection* modeSelection) {};
     virtual void setCharacterSelection(CharacterSelection* characterSelection) {};
+
+    virtual void updateName(string letter) {};
 };
 
 

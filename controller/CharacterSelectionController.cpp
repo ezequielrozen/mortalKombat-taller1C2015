@@ -120,14 +120,7 @@ void CharacterSelectionController::moveDownRelease(int n) {
 }
 
 void CharacterSelectionController::lowKick(int n) {
-    if (n == 0) {
-        this->characterSelection->select(n);
-    }
-    else {
-        this->characterSelection->select(n);
-    }
-       // this->characterSelection->select(n);
-
+    this->characterSelection->select(n);
 }
 
 void CharacterSelectionController::select() {
@@ -136,4 +129,8 @@ void CharacterSelectionController::select() {
 
 void CharacterSelectionController::updateMousePosition(unsigned short x, unsigned short y) {
     this->characterSelection->updateMousePosition(x, y);
+}
+
+void CharacterSelectionController::updateName(string letter) {
+    this->characterSelection->updateName(letter);
 }

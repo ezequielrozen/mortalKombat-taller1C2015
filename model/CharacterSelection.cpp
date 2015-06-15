@@ -10,6 +10,7 @@ CharacterSelection::CharacterSelection(SDL_Renderer* renderer, InputController* 
 
 	this->buttons1 = new Button*[12];
 	this->buttons2 = new Button*[12];
+	//this->nameButtons = new Button*[2];
 
 	float displaceX = 0.1588;
 	float displaceY = 0.212;
@@ -29,12 +30,21 @@ CharacterSelection::CharacterSelection(SDL_Renderer* renderer, InputController* 
 	this->buttons1[0]->setSelected(true);
 	this->buttons2[0]->setSelected(true);
 
+	//this->nameButtons[0] = new Button("name", false, 0,0,0,0);
+	//this->nameButtons[0] = new Button("name", false, 0,0,0,0);
+
 	this->view = new CharacterSelectionView(renderer, this->buttons1, this->buttons2);
 
 	this->buttonInfo[0] = {0,1,false};
 	this->buttonInfo[1] = {0,1,false};
 
+	this->names[0] = "SCORPION";
+	this->names[1] = "RAIDEN";
+
 	this->mouseOnButton = false;
+	this->nameButtonIndex = 0;
+
+	this->characterSelectionFinished = false;
 
 }
 
@@ -45,6 +55,10 @@ CharacterSelection::~CharacterSelection() {
         delete buttons2[i];
     }
 
+   	//delete nameButtons[0];
+   	//delete nameButtons[1];
+
+   	//delete [] nameButtons;
     delete [] buttons1;
     delete [] buttons2;
 
@@ -103,6 +117,10 @@ void CharacterSelection::moveRight(int n) {
 			this->mouseOnButton = false;
 		}
 	}
+
+	if (this->buttonInfo[0].buttonPressed && this->buttonInfo[1].buttonPressed && n == 0) {
+		this->nameButtonIndex = 1;
+	}
 }
 
 void CharacterSelection::moveLeft(int n) {
@@ -120,9 +138,20 @@ void CharacterSelection::moveLeft(int n) {
 			this->mouseOnButton = false;
 		}
 	}
+
+	if (this->buttonInfo[0].buttonPressed && this->buttonInfo[1].buttonPressed && n == 0) {
+		this->nameButtonIndex = 0;
+	}
 }
 
 void CharacterSelection::select(int n) {
+	if (n == 0 && this->buttonInfo[0].buttonPressed && this->buttonInfo[1].buttonPressed) {
+		this->updateName("L");
+	}
+	else if (n == 1 && this->buttonInfo[0].buttonPressed && this->buttonInfo[1].buttonPressed) {
+		this->updateName("G");
+	}
+
 	if (!(n == 1 && this->inputController->isAIEnabled())) {
 		this->buttonInfo[n].buttonPressed = true;
 		SoundManager::getInstance()->playSound("confirmselection");
@@ -165,6 +194,7 @@ void CharacterSelection::reset() {
 	this->switchSelected();
 
 	this->mouseOnButton = false;
+	this->characterSelectionFinished = false;
 
 }
 
@@ -189,9 +219,25 @@ void CharacterSelection::updateMousePosition(unsigned short x, unsigned short y)
 	this->mouseOnButton = mouseOnButtonAux;
 }
 
+void CharacterSelection::updateName(string letter) {
+	if (this->buttonInfo[0].buttonPressed && this->buttonInfo[1].buttonPressed) {
+		if (letter == "DEL") {
+			this->names[nameButtonIndex].pop_back();
+		}
+		else if (letter == "ENTER") {
+			this->characterSelectionFinished = true;
+		}
+		else {
+			this->names[nameButtonIndex] = this->names[nameButtonIndex] + letter;
+		}
+		this->view->updateCharacterNames(this->names[0], this->names[1]);
+	}
+	
+}
+
 void CharacterSelection::loop() {
 	
-	while ( inputController->getEvent()->type != SDL_QUIT && !(this->buttonInfo[0].buttonPressed && this->buttonInfo[1].buttonPressed)) {
+	while ( inputController->getEvent()->type != SDL_QUIT && !this->characterSelectionFinished) {
 		inputController->checkEvent();
 		inputController->update();
 
@@ -199,7 +245,7 @@ void CharacterSelection::loop() {
 
 		this->switchSelected();
 
-		view->render();
+		this->view->render();
 
 	}
 	this->reset();
