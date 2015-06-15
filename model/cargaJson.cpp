@@ -23,6 +23,7 @@ bool cargaArchivoJSON(char* filename, float &stageWidth, float &stageHeight, flo
 
 	Json::Value root;   // will contains the root value after parsing.
 	Json::Reader reader;
+
 	std::ifstream test(filename, std::ifstream::binary);
 	bool parsingSuccessful = reader.parse( test, root, false );
 	if ( !parsingSuccessful )
@@ -206,6 +207,7 @@ bool cargaArchivoJSON(char* filename, float &stageWidth, float &stageHeight, flo
     }
 
     Mylog->Log("Parseo completo", ERROR_LEVEL_INFO);
+    test.close();
     return true;
 }
 

@@ -71,7 +71,7 @@ GameView::~GameView() {
     if (characterTwoLifebarView != NULL ) delete characterTwoLifebarView;
 
     if (scorpionJump != NULL ) delete scorpionJump;
-	if (scorpionWalk != NULL ) delete scorpionWalk;
+    if (scorpionWalk != NULL ) delete scorpionWalk;
     if (scorpionStance != NULL ) delete scorpionStance;
     if (scorpionSideJump != NULL ) delete scorpionSideJump;
     if (scorpionDuck != NULL ) delete scorpionDuck;
@@ -81,6 +81,7 @@ GameView::~GameView() {
     if (scorpionJumpKick != NULL ) delete  scorpionJumpKick;
     if (scorpionPunchJump != NULL ) delete  scorpionPunchJump;
     if (scorpionDuckPunch != NULL ) delete  scorpionDuckPunch;
+    //if (scorpionPunch != NULL ) delete  scorpionPunch;
     if (scorpionHighPunch != NULL ) delete  scorpionHighPunch;
     if (scorpionLowPunch != NULL ) delete  scorpionLowPunch;
     if (scorpionWinner != NULL ) delete  scorpionWinner;
@@ -88,22 +89,32 @@ GameView::~GameView() {
     if (scorpionDizzy != NULL ) delete  scorpionDizzy;
     if (scorpionFall != NULL ) delete  scorpionFall;
     if (scorpionBeingHit != NULL ) delete  scorpionBeingHit;
+    if (scorpionBeingHitDown != NULL ) delete scorpionBeingHitDown;
     if (scorpionBlockDown != NULL ) delete  scorpionBlockDown;
     if (scorpionBlock != NULL ) delete  scorpionBlock;
     if (scorpionFatalityHit != NULL ) delete  scorpionFatalityHit;
     if (scorpionFatalityFire != NULL ) delete  scorpionFatalityFire;
     if (scorpionReceivingFire != NULL ) delete  scorpionReceivingFire;
-    
-    if (raidenStance != NULL) delete  raidenStance;
+    if (scorpionTeleportation != NULL ) delete  scorpionTeleportation;
+    if (scorpionShootIce != NULL ) delete  scorpionShootIce;
+    if (scorpionWeaponIce != NULL ) delete  scorpionWeaponIce;
+    if (scorpionWeaponIceImpacting != NULL) delete scorpionWeaponIceImpacting;
+
+
     if (raidenJump != NULL ) delete  raidenJump;
+    if (raidenWalk != NULL ) delete raidenWalk;
+    if (raidenStance != NULL) delete  raidenStance;
     if (raidenSideJump != NULL ) delete  raidenSideJump;
     if (raidenDuck != NULL ) delete  raidenDuck;
     if (raidenHighKick != NULL ) delete  raidenHighKick;
+    if (raidenLowKick != NULL ) delete  raidenLowKick;
     if (raidenDuckKick != NULL ) delete  raidenDuckKick;
     if (raidenJumpKick != NULL ) delete  raidenJumpKick;
     if (raidenPunchJump != NULL ) delete  raidenPunchJump;
     if (raidenDuckPunch != NULL ) delete  raidenDuckPunch;
     if (raidenPunch != NULL ) delete  raidenPunch;
+    //if (raidenHighPunch != NULL ) delete raidenHighPunch;
+    if (raidenLowPunch != NULL ) delete  raidenLowPunch;
     if (raidenWinner != NULL ) delete  raidenWinner;
     if (raidenShoot != NULL ) delete  raidenShoot;
     if (raidenDizzy != NULL ) delete  raidenDizzy;
@@ -115,8 +126,11 @@ GameView::~GameView() {
     if (raidenFatalityHit != NULL ) delete  raidenFatalityHit;
     if (raidenFatalityFire != NULL ) delete  raidenFatalityFire;
     if (raidenReceivingFire != NULL ) delete  raidenReceivingFire;
+    if (raidenTeleportation != NULL ) delete  raidenTeleportation;
+    if (raidenShootIce != NULL ) delete  raidenShootIce;
     if (raidenWeaponIce != NULL ) delete  raidenWeaponIce;
-    if (raidenWeaponIceImpacting != NULL ) delete raidenWeaponIceImpacting;
+    if (raidenWeaponIceImpacting != NULL) delete raidenWeaponIceImpacting;
+
 
     for (int i = 0 ; i < layerCount ; i++) {
         delete layerSprites[i];
@@ -124,9 +138,10 @@ GameView::~GameView() {
     if (layerSprites != NULL ) delete layerSprites;
 
     cout << "END "  << endl;
-    //scorpionSprites.clear();
-    //raidenSprites.clear();
-
+    scorpionSprites.clear();
+    raidenSprites.clear();
+    scorpionSprites.~map();
+    raidenSprites.~map();
     //cout << "end: " << scorpionSprites.size() << endl;
 
 }
