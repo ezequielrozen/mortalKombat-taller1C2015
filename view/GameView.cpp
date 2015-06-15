@@ -90,11 +90,10 @@ GameView::~GameView() {
     if (scorpionBeingHit != NULL ) delete  scorpionBeingHit;
     if (scorpionBlockDown != NULL ) delete  scorpionBlockDown;
     if (scorpionBlock != NULL ) delete  scorpionBlock;
-    if (scorpionWalk != NULL ) delete  scorpionWalk;
     if (scorpionFatalityHit != NULL ) delete  scorpionFatalityHit;
     if (scorpionFatalityFire != NULL ) delete  scorpionFatalityFire;
     if (scorpionReceivingFire != NULL ) delete  scorpionReceivingFire;
-
+    
     if (raidenStance != NULL) delete  raidenStance;
     if (raidenJump != NULL ) delete  raidenJump;
     if (raidenSideJump != NULL ) delete  raidenSideJump;
