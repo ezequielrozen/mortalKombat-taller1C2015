@@ -130,7 +130,7 @@
   "combos": {
     "combo1": "abajo,izquierda",
     "combo2": "abajo,arriba",
-    "fatality": "abajo,abajo"
+    "fatality": "derecha,abajo,abajo"
   },
 
 
