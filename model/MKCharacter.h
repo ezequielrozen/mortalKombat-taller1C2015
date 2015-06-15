@@ -129,6 +129,7 @@ public:
 
     void enablePracticeMode();
     void disablePracticeMode();
+    void setWeaponFireUsed(bool isFiring);
 
 private:
 
@@ -165,7 +166,6 @@ private:
     bool fatalityEnable;
 
     bool practiceMode;
-
 };
 
 #endif /* MKCHARACTER_H_ */

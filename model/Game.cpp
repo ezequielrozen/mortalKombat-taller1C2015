@@ -11,13 +11,9 @@ Game::Game(GameLoader* aGameLoader, SDL_Renderer* renderer, InputController* inp
     this->initGame(renderer, inputController);
     this->diedTimeElapsed = 0;
     this->timeToResetRound = 0;
-//    this->timeFightStart = 0;
 }
 
 void Game::initGame(SDL_Renderer* renderer, InputController* inputController) {
-    //this->gameLoader->loadJSON(filePath);
-    //this->ScreenWidth = Util::getInstance()->getWindowWidth();
-    //this->ScreenHeight = Util::getInstance()->getWindowHeight();
     this->stage = this->gameLoader->getStage();
     this->oponentSide = this->gameLoader->getOponentSide();
 
@@ -89,18 +85,18 @@ void Game::updateGameState(int &roundCount) {
             if (diedTimeElapsed == 0) {
                 diedTimeElapsed = SDL_GetTicks();
             }
-            if ((SDL_GetTicks() - diedTimeElapsed >=  TIME_FOR_DOING_FATALITY) && !raiden->isJumping()) {
+            if ((SDL_GetTicks() - diedTimeElapsed >=  TIME_FOR_DOING_FATALITY) && !raiden->isJumping() && !(raiden->getState() == "FatalityHitting")) {
                 raiden->setState(new Victory());
             }
             raiden->setPosY(this->stage->getFloor());
-            if(this->timeToResetRound == 0) {
-                this->timeToResetRound = SDL_GetTicks();
-            } else if(endOfRound()) {
-                this->restartRound();
-                if(this->isRoundEnd) {
-                    roundCount++;
-                    this->isRoundEnd = false;
-                }
+        }
+        if(this->timeToResetRound == 0) {
+            this->timeToResetRound = SDL_GetTicks();
+        } else if(endOfRound()) {
+            this->restartRound();
+            if(this->isRoundEnd) {
+                roundCount++;
+                this->isRoundEnd = false;
             }
         }
 
@@ -112,20 +108,20 @@ void Game::updateGameState(int &roundCount) {
             if (diedTimeElapsed == 0) {
                 diedTimeElapsed = SDL_GetTicks();
             }
-            if ((SDL_GetTicks() - diedTimeElapsed >=  TIME_FOR_DOING_FATALITY) && !scorpion->isJumping()) {
+            if ((SDL_GetTicks() - diedTimeElapsed >=  TIME_FOR_DOING_FATALITY) && !scorpion->isJumping() && !(scorpion->getState() == "FatalityHitting")) {
                 scorpion->setState(new Victory());
             }
 			scorpion->setPosY(this->stage->getFloor());
-            if(this->timeToResetRound == 0) {
-                this->timeToResetRound = SDL_GetTicks();
-            } else if(endOfRound()) {
-                this->restartRound();
-                if(this->isRoundEnd) {
-                    roundCount++;
-                    this->isRoundEnd = false;
-                }
-            }
     	}
+        if(this->timeToResetRound == 0) {
+            this->timeToResetRound = SDL_GetTicks();
+        } else if(endOfRound()) {
+            this->restartRound();
+            if(this->isRoundEnd) {
+                roundCount++;
+                this->isRoundEnd = false;
+            }
+        }
     }
 }
 
@@ -149,6 +145,8 @@ void Game::restartRound() {
     this->raiden->setState(new CharacterStance());
     this->raiden->setFatalityEnable(false);
     this->scorpion->setFatalityEnable(false);
+    this->scorpion->setWeaponFireUsed(false);
+    this->raiden->setWeaponFireUsed(false);
 }
 
 bool Game::endFightTime() {
