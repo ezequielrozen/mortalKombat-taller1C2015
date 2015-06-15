@@ -49,6 +49,7 @@ CharacterSprite::CharacterSprite(SDL_Renderer* pRenderer, char* path, float x, f
 
 void CharacterSprite::Play(float Speed, float width)
 {
+
     if (animationDelay+Speed < SDL_GetTicks())
     {
 
@@ -70,9 +71,38 @@ void CharacterSprite::Play(float Speed, float width)
         crop.h = img_height;
 
         animationDelay = SDL_GetTicks();
+
     }
 }
 
+void CharacterSprite::PlayFatality(float Speed, float width)
+{
+    //cout << " CurrentFrame: " << CurrentFrame << endl;
+    if (animationDelay+Speed < SDL_GetTicks())
+    {
+
+        if ((this->framesX - 1) <= CurrentFrame)
+        {
+            if (this->getRepeatLastSprite())
+                CurrentFrame = this->framesX -1;
+            else
+                CurrentFrame = 0;
+        }
+        else
+            CurrentFrame++;
+
+        draw.w = width*Util::getInstance()->getScalingConstant();
+
+        crop.x = CurrentFrame * (img_width/framesX);
+        crop.y = 0;
+        crop.w = img_width/framesX;
+        crop.h = img_height;
+
+        animationDelay = SDL_GetTicks();
+
+      //  cout << " Entro: " << CurrentFrame << endl;
+    }
+}
 void CharacterSprite::PlayBack(float Speed) {
 
 	if (animationDelay+Speed < SDL_GetTicks())

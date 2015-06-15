@@ -141,6 +141,8 @@ void Game::restartRound() {
         this->raiden->setInitialPosition(0.2*(Util::getInstance()->getLogicalWindowWidth()-this->scorpion->getWidth()));
     }
     this->stage->resetLayers();
+    this->gameView->restartAllScorpionSprites();
+    this->gameView->restartAllRaidenSprites();
     this->scorpion->setState(new CharacterStance());
     this->raiden->setState(new CharacterStance());
     this->raiden->setFatalityEnable(false);

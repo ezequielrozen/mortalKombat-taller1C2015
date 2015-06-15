@@ -22,6 +22,7 @@ string FatalityHitting::getName() {
 }
 
 void FatalityHitting::refreshTimer(MKCharacter* character) {
+	//cout << "startThrow: " << startThrow << endl;
 	if (this->timer == 0) {
 		startThrow = true;
 	}

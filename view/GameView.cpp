@@ -62,13 +62,13 @@ GameView::GameView(SDL_Renderer* aRenderer, MKCharacter* character, MKCharacter*
 }
 
 GameView::~GameView() {
+    cout << "init: " << scorpionSprites.size() << endl;
+    if (timerText != NULL ) delete timerText;
+    if (characterTwoName != NULL ) delete characterTwoName;
+    if (characterName != NULL ) delete characterName;
 
-    delete timerText;
-    delete characterTwoName;
-    delete characterName;
-
-    delete characterOneLifebarView;
-    delete characterTwoLifebarView;
+    if (characterOneLifebarView != NULL ) delete characterOneLifebarView;
+    if (characterTwoLifebarView != NULL ) delete characterTwoLifebarView;
 
     if (scorpionJump != NULL ) delete scorpionJump;
 	if (scorpionWalk != NULL ) delete scorpionWalk;
@@ -90,7 +90,7 @@ GameView::~GameView() {
     if (scorpionBeingHit != NULL ) delete  scorpionBeingHit;
     if (scorpionBlockDown != NULL ) delete  scorpionBlockDown;
     if (scorpionBlock != NULL ) delete  scorpionBlock;
-    if (raidenWalk != NULL ) delete  raidenWalk;
+    if (scorpionWalk != NULL ) delete  scorpionWalk;
     if (scorpionFatalityHit != NULL ) delete  scorpionFatalityHit;
     if (scorpionFatalityFire != NULL ) delete  scorpionFatalityFire;
     if (scorpionReceivingFire != NULL ) delete  scorpionReceivingFire;
@@ -110,7 +110,7 @@ GameView::~GameView() {
     if (raidenDizzy != NULL ) delete  raidenDizzy;
     if (raidenFall != NULL ) delete  raidenFall;
     if (raidenBeingHit != NULL ) delete  raidenBeingHit;
-    if (scorpionBeingHitDown != NULL ) delete  scorpionBeingHitDown;
+    if (raidenBeingHitDown != NULL ) delete  raidenBeingHitDown;
     if (raidenBlockDown != NULL ) delete  raidenBlockDown;
     if (raidenBlock != NULL ) delete  raidenBlock;
     if (raidenFatalityHit != NULL ) delete  raidenFatalityHit;
@@ -122,12 +122,13 @@ GameView::~GameView() {
     for (int i = 0 ; i < layerCount ; i++) {
         delete layerSprites[i];
     }
-    delete layerSprites;
+    if (layerSprites != NULL ) delete layerSprites;
 
-    //Free the music
-    if (stageBackgroundMusic != NULL)
-        Mix_FreeMusic( stageBackgroundMusic );
-    stageBackgroundMusic = NULL;
+    cout << "END "  << endl;
+    //scorpionSprites.clear();
+    //raidenSprites.clear();
+
+    //cout << "end: " << scorpionSprites.size() << endl;
 
 }
 
@@ -267,7 +268,7 @@ void GameView::LoadSprites(string name1, string name2) {
     {"KickLeftJumpingHitting",scorpionJumpKick},{"KickRightJumpingHitting",scorpionJumpKick},{"LowPunchHitting",scorpionLowPunch},
     {"LowKickHitting", scorpionLowKick},{"FatalityHitting", scorpionFatalityHit},{"FireHitting", scorpionFatalityFire},
     {"ReceivingFire", scorpionReceivingFire},{"TeleportationDoing", scorpionTeleportation},{"WeaponHittingIce", scorpionShootIce},
-                       {"WeaponIce", scorpionWeaponIce}, {"WeaponIceImpacting", scorpionWeaponIceImpacting}};
+                       {"WeaponIce", scorpionWeaponIce}, {"WeaponIceImpacting", scorpionWeaponIceImpacting}, {"ReceivingIce", scorpionDizzy}};
 
     raidenSprites = {{"Stance", raidenStance},{"MovingRight", raidenWalk},{"MovingLeft", raidenWalk},{"Jumping", raidenJump},
 	{"JumpingRight", raidenSideJump},{"JumpingLeft", raidenSideJump},{"Ducking", raidenDuck},{"HighKickHitting", raidenHighKick},
@@ -278,7 +279,7 @@ void GameView::LoadSprites(string name1, string name2) {
     {"KickLeftJumpingHitting",raidenJumpKick},{"KickRightJumpingHitting",raidenJumpKick},{"LowPunchHitting",raidenLowPunch},
     {"LowKickHitting", raidenLowKick},{"FatalityHitting", raidenFatalityHit},{"FireHitting", raidenFatalityFire},
     {"ReceivingFire", raidenReceivingFire},{"TeleportationDoing", raidenTeleportation},{"WeaponHittingIce", raidenShootIce},
-    {"WeaponIce", raidenWeaponIce}, {"WeaponIceImpacting", raidenWeaponIceImpacting}};
+    {"WeaponIce", raidenWeaponIce}, {"WeaponIceImpacting", raidenWeaponIceImpacting}, {"ReceivingIce", raidenDizzy}};
 
 }
 
@@ -364,7 +365,7 @@ void GameView::loadAsRaiden(CharacterSprite*& walk, CharacterSprite*& stance, Ch
 	weaponIceImpacting  = new CharacterSprite(this->renderer, "data/raiden/raidenWeaponIceImpacting.png", raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 5, oponentSide, false, colorAltered, this->painter);
 }
 
-/*void GameView::RestartAllScorpionSprites()
+void GameView::restartAllScorpionSprites()
 {
 	scorpionFall->reset();
 	scorpionDuck->reset();
@@ -389,9 +390,9 @@ void GameView::loadAsRaiden(CharacterSprite*& walk, CharacterSprite*& stance, Ch
 	scorpionFatalityFire->reset();
 	scorpionReceivingFire->reset();
 
-}*/
+}
 
-/*void GameView::RestartAllRaidenSprites()
+void GameView::restartAllRaidenSprites()
 {
 	raidenFall->reset();
 	raidenDuck->reset();
@@ -414,7 +415,7 @@ void GameView::loadAsRaiden(CharacterSprite*& walk, CharacterSprite*& stance, Ch
 	raidenFatalityFire->reset();
 	raidenReceivingFire->reset();
 	raidenWeaponIce->reset();
-}*/
+}
 
 void GameView::startRender() {
     SDL_RenderClear(renderer);
@@ -431,7 +432,8 @@ void GameView::runCharacter(MKCharacter* character1, MKCharacter* character2, Sp
     bool aux = (character1->getX() < character2->getX());
 
     if (character1->getState() != "WeaponHitting" && character1->getState() != "FireHitting" && character1->getState() != "WeaponHittingIce"
-    		&& character1->getState() != "MovingRight" && character1->getState() != "MovingLeft") {
+    		&& character1->getState() != "MovingRight" && character1->getState() != "MovingLeft"
+            && character1->getState() != "FatalityHitting") {
         sprite = characterSprites.at(character1->getState());
         sprite->Play(6.66*GAMEDELAY, character1->getStateWidth());
     }
@@ -450,6 +452,10 @@ void GameView::runCharacter(MKCharacter* character1, MKCharacter* character2, Sp
     else if (character1->getState() == "WeaponHittingIce"){
         sprite = characterSprites.at("WeaponHittingIce");
         sprite->Play(6.66*GAMEDELAY, character1->getStateWidth());
+    }
+    else if (character1->getState() == "FatalityHitting"){
+        sprite = characterSprites.at("FatalityHitting");
+        sprite->PlayFatality(6.66*GAMEDELAY, character1->getStateWidth());
     }
 
     if (character1->getWeapon()->isActive()) {

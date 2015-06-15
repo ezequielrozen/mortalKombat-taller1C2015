@@ -1,8 +1,9 @@
+//
+// Created by her on 14/06/15.
+//
+#include "ReceivingIce.h"
 #include "Jumping.h"
-#include <iostream>
 #include "CharacterStance.h"
-#include "MovingRight.h"
-#include "MovingLeft.h"
 #include "Ducking.h"
 #include "HighPunchHitting.h"
 #include "LowPunchHitting.h"
@@ -15,30 +16,21 @@
 #include "ReceivingDuckingKick.h"
 #include "BeingOverPassedLeft.h"
 #include "BeingOverPassedRight.h"
-#include "FatalityHitting.h"
 #include "TeleportationDoing.h"
 #include "WeaponHittingIce.h"
-#include "ReceivingIce.h"
 
-CharacterStance::CharacterStance() {
-//    this->timer = -1
+
+ReceivingIce::ReceivingIce() {
+    this->timer = 80;
+    //SoundManager::getInstance()->playSound("burn");
 }
 
-CharacterStance::~CharacterStance() {
-
+ReceivingIce::~ReceivingIce() {
 }
 
-void CharacterStance::update(MKCharacter * character, Events aEvent) {
-
-//    std::cout << "Update desde StanceState." << std::endl;
+void ReceivingIce::update(MKCharacter * character, Events aEvent) {
 
     switch (aEvent) {
-        case MoveRight:
-            character->setState(new MovingRight());
-            break;
-        case MoveLeft:
-            character->setState(new MovingLeft());
-            break;
         case Jump:
             character->setState(new Jumping());
             break;
@@ -61,7 +53,7 @@ void CharacterStance::update(MKCharacter * character, Events aEvent) {
             character->setState(new Blocking());
             break;
         case WeaponHit:
-			character->setState(new WeaponHitting());
+            character->setState(new WeaponHitting());
             break;
         case ReceiveDuckingPunch:
             character->setState(new ReceivingDuckingPunch());
@@ -75,18 +67,14 @@ void CharacterStance::update(MKCharacter * character, Events aEvent) {
         case ReceiveHit:
             character->setState(new RecevingHit());
             break;
-        case FatalityHit:
-        	if (character->getFatalityEnable())
-        		character->setState(new FatalityHitting());
-            break;
         case Teleportation:
-        		character->setState(new TeleportationDoing());
+            character->setState(new TeleportationDoing());
             break;
-        case WeaponHitIce:
-            if (character->getName() == "raiden"){
-			    character->setState(new WeaponHittingIce());
-            }
-            break;
+//        case WeaponHitIce:
+//            if (character->getName() == "raiden"){
+//                character->setState(new WeaponHittingIce());
+//            }
+//            break;
         case OverPassed:
             if (character->getCharacterSide() == 'l') {
                 character->setState(new BeingOverPassedLeft());
@@ -104,7 +92,21 @@ void CharacterStance::update(MKCharacter * character, Events aEvent) {
 
     }
 }
-
-string CharacterStance::getName() {
-    return "Stance";
+string ReceivingIce::getName() {
+    return "ReceivingIce";
 }
+
+void ReceivingIce::refreshTimer(MKCharacter* character) {
+
+    if (this->timer == 0) {
+        character->setState(new CharacterStance());
+//		cout << "stance " << endl;
+        this->timer = 80;
+    }
+
+    this->timer -= 1;
+}
+
+//float ReceivingIce::getWidth() {
+//    return 1.37;
+//}

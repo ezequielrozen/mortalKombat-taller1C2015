@@ -121,7 +121,7 @@ const int COMBO_TIMER     = 1000;
 
 enum Events { MoveRight, MoveLeft, Jump, Duck, WeaponHit, HighPunch, LowPunch, HighKick, LowKick, Block, ReceiveHit,
 	ReceiveDuckingPunch, ReceiveDuckingKick, ReceiveWeapon, MoveRightRelease, MoveLeftRelease, DuckRelease, BlockRelease,
-	JumpFinished, OverPassed, OverPassedFinished, FatalityHit, ReceiveFire, Teleportation, WeaponHitIce};
+	JumpFinished, OverPassed, OverPassedFinished, FatalityHit, ReceiveFire, Teleportation, WeaponHitIce, ReceiveIce};
 
 enum GameModes { OneVsTwo, OneVsAI, Practice};
 

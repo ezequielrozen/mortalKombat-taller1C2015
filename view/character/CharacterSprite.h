@@ -34,6 +34,7 @@ public:
 	void vibrate();
 	bool vibrationFinished();
 	void playBlock(float speed, float width);
+	void PlayFatality(float Speed, float width);
 
 	void resetFinished();
 

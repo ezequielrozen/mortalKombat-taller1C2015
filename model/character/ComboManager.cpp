@@ -15,11 +15,9 @@ Events ComboManager::checkCombo(Events originalEvent, char side) {
     this->buffer->push_back(originalEvent);
 
     if (bufferMatchesCombo(this->combo1, side)) {
-        cout << "Teleportation" << endl;
         return Teleportation; // SE EJECTUA EL COMBO 1: RETURN COMBO1EVENT
     }
     else if (bufferMatchesCombo(this->combo2, side)) {
-        cout << "WeaponIce" << endl;
         return WeaponHitIce; // SE EJECTUA EL COMBO 2: RETURN COMBO2EVENT
     }
     else if (bufferMatchesCombo(this->fatality, side))
@@ -63,10 +61,10 @@ bool ComboManager::bufferMatchesCombo(std::vector<Events>* combo, char side) {
         i++;
     }
 
-    cout << "ERRORES COMETIDOS: " << errorCounter << "COMBO PROGRESS: " << comboProgress << endl;
+    //cout << "ERRORES COMETIDOS: " << errorCounter << "COMBO PROGRESS: " << comboProgress << endl;
 
     if (errorCounter <= COMBO_TOLERANCE && comboProgress == combo->size()) {
-        cout << "COMBO DETECTADO" << endl;
+        //cout << "COMBO DETECTADO" << endl;
         ComboButtonsView::getInstance()->comboDetected(this->buffer, errors);
 
         this->cleanBuffer();

@@ -273,18 +273,22 @@ void MKCharacter::receiveBlow(int force, char direction) {
 		if (!this->practiceMode)
 			this->life -= force;
 
-		if (force <= 10) {
-			this->update(ReceiveHit);
-		}
-		else if (force > 10 && force <= 15) {
-			this->update(ReceiveDuckingPunch);
+		if (this->state->getName() != "ReceivingIce") {
+			if (force <= 10) {
+				this->update(ReceiveHit);
+			}
+			else if (force > 10 && force <= 15) {
+				this->update(ReceiveDuckingPunch);
+				InputController::setVibrating(true);
+			}
+			else {
+				this->update(ReceiveDuckingPunch);
+				InputController::setVibrating(true);
+			}
+		} else
+		{
 			InputController::setVibrating(true);
 		}
-		else {
-			this->update(ReceiveDuckingPunch);
-			InputController::setVibrating(true);
-		}
-
 		Mylog->Log("Personaje (PONERLE NOMBRE) recibe golpe", ERROR_LEVEL_INFO); //FALTA: nombre, vida restada, vida restante.
 		if (this->life <= 0) {
 			this->life = 0;//marcar fin de juego. Preferentemente donde se invoca esta función (control de colisión y golpe)

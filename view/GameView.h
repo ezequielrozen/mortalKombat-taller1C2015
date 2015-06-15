@@ -53,7 +53,8 @@ public:
 
     void enablePracticeMode();
     void disablePracticeMode();
-
+    void restartAllScorpionSprites();
+    void restartAllRaidenSprites();
 private:
 
     MKCharacter* scorpion;
@@ -139,8 +140,7 @@ private:
     string oponentSide;
 
     void runCharacter(MKCharacter* character1, MKCharacter* character2, SpriteMap characterSprites);
-/*	void RestartAllScorpionSprites();
-	void RestartAllRaidenSprites();*/
+
     Painter* painter;
 
     Mix_Music* stageBackgroundMusic;

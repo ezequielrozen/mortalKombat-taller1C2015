@@ -2,7 +2,7 @@
 #include "../../view/SoundManager.h"
 
 ReceivingFire::ReceivingFire() {
-	this->timer = 99999999;
+	this->timer = 80;
 	//SoundManager::getInstance()->playSound("burn");
 }
 

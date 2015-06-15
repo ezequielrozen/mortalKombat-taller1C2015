@@ -74,6 +74,7 @@ void Collider::checkHits(MKCharacter* character1, MKCharacter* character2) {
 						character2->receiveBlow(DAMAGE.at("WeaponHitting"),0);
 						character1->getWeapon()->destroy();
 					} else if (character1->getWeaponIce()->isActive()) {
+						character2->update(ReceiveIce);
 						character2->receiveBlow(DAMAGE.at("WeaponHitting"),0);
 						character1->getWeaponIce()->setImpactingWeaponIce(true);
 						character1->getWeaponIce()->destroy();
@@ -81,16 +82,18 @@ void Collider::checkHits(MKCharacter* character1, MKCharacter* character2) {
 					} else
 					{
 						character2->receiveBlow(DAMAGE.at(character1->getState()),0);
-						cout << "IMPACT" << endl;
+						//cout << "IMPACT" << endl;
 						if (character1->isJumping()) {
 							character1->disableImpact();
 						}
 					}
 					//Solo puede hacer la fatality cuando el oponente esta Dizzy
 					if (!character2->isAlive()){
+//						cout << "faltality enabled" << endl;
 						character1->setFatalityEnable(true);
 					}
 				}else if (character1->getWeaponFire()->isActive()) {
+//					cout << "recibiendo fire" << endl;
 					character2->receiveBlow(0,0);
 					character1->getWeaponFire()->destroy();
 				}
