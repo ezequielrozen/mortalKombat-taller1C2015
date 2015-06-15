@@ -230,7 +230,9 @@ void CharacterSelection::updateName(string letter) {
 		else {
 			this->names[nameButtonIndex] = this->names[nameButtonIndex] + letter;
 		}
-		this->view->updateCharacterNames(this->names[0], this->names[1]);
+		if (!(this->names[0].empty() || this->names[1].empty())) {
+			this->view->updateCharacterNames(this->names[0], this->names[1]);
+		}
 	}
 	
 }
