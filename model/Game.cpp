@@ -147,6 +147,8 @@ void Game::restartRound() {
     this->stage->resetLayers();
     this->scorpion->setState(new CharacterStance());
     this->raiden->setState(new CharacterStance());
+    this->raiden->setFatalityEnable(false);
+    this->scorpion->setFatalityEnable(false);
 }
 
 bool Game::endFightTime() {
