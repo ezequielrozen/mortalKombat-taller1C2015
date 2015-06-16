@@ -34,7 +34,7 @@ void EventController::moveRight(int n){
 		Mylog->Log("movimiento del personaje: hacia la derecha", ERROR_LEVEL_INFO);
 
 		this->characterToMove->update(this->comboManager->checkCombo(MoveRight, this->characterToMove->getCharacterSide()));
-		cout << "RIGHT PRESSED" << endl;
+		//cout << "RIGHT PRESSED" << endl;
 		commands[n].rightPressed = true;
 	}
 }
@@ -51,7 +51,7 @@ void EventController::moveLeft(int n){
 	if (!commands[n].leftPressed) {
 		Mylog->Log("movimiento del personaje: hacia la Izquierda", ERROR_LEVEL_INFO);
 		this->characterToMove->update(this->comboManager->checkCombo(MoveLeft, this->characterToMove->getCharacterSide()));
-		cout << "LEFT PRESSED" << endl;
+		//cout << "LEFT PRESSED" << endl;
 		commands[n].leftPressed = true;
 	}
 }
@@ -68,7 +68,7 @@ void EventController::moveUp(int n){
 	if (!commands[n].upPressed) {
 		Mylog->Log("movimiento del personaje: hacia arriba", ERROR_LEVEL_INFO);
 		this->characterToMove->update(this->comboManager->checkCombo(Jump, this->characterToMove->getCharacterSide()));
-		cout << "UP PRESSED" << endl;
+		//cout << "UP PRESSED" << endl;
 		commands[n].upPressed = true;
 	}
 }
@@ -82,7 +82,7 @@ void EventController::moveDown(int n){
 	if (!commands[n].downPressed) {
 		Mylog->Log("movimiento del personaje: agachandose", ERROR_LEVEL_INFO);
 		this->characterToMove->update(this->comboManager->checkCombo(Duck, this->characterToMove->getCharacterSide()));
-		cout << "DOWN PRESSED" << endl;
+		//cout << "DOWN PRESSED" << endl;
 		commands[n].downPressed = true;
 	}
 }
@@ -118,7 +118,7 @@ void EventController::highPunch(int n){
 		Mylog->Log("movimiento del personaje: Golpe de puño alto.", ERROR_LEVEL_INFO);
 		this->characterToMove->update(this->comboManager->checkCombo(HighPunch, this->characterToMove->getCharacterSide()));
 		commands[n].highPunchPressed = true;
-		cout << "HIGGH PUNCH APRETADO" << endl;
+		//cout << "HIGGH PUNCH APRETADO" << endl;
 	}
 }
 
@@ -158,10 +158,11 @@ void EventController::blockRelease(int n){
 }
 
 void EventController::duckPunch() {
-//	cout << "duckPunch : " << this->characterToMove->getName() << endl;
+	cout << "duckPunch : " << this->characterToMove->getName() << endl;
 //	this->characterToMove->update(DuckPunch);
-	this->characterToMove->update(FatalityHit);
+//	this->characterToMove->update(FatalityHit);
 //	this->characterToMove->update(Teleportation);
+	this->characterToMove->update(FlyHit);
 }
 
 

@@ -81,7 +81,10 @@ const char* const NAME_CHARACTER_2          = "raiden";
 const int         FULL_LIFE                 = 100;
 
 typedef std::map<std::string, int> Map;
-const Map DAMAGE = {{"HighKickHitting", 10}, {"LowKickHitting", 10},{"HighPunchHitting", 5}, {"DuckingKickHitting", 15} ,{"DuckingPunch", 20},{"SHOOT", 10}, {"PunchLeftJumping", 15}, {"KickRightJumpingHitting", 15}, {"KickLeftJumpingHitting", 15}, {"PunchRightJumping", 15},{"LowPunchHitting", 5}, {"WeaponHitting", 20}};
+const Map DAMAGE = {{"HighKickHitting", 10}, {"LowKickHitting", 10},{"HighPunchHitting", 5}, {"DuckingKickHitting", 15} ,
+					{"DuckingPunch", 20},{"SHOOT", 10}, {"PunchLeftJumping", 15}, {"KickRightJumpingHitting", 15},
+					{"KickLeftJumpingHitting", 15}, {"PunchRightJumping", 15},{"LowPunchHitting", 5}, {"WeaponHitting", 20},
+					{"FlyHitting", 20}};
 //
 //const int OPONENTLEFT                       =    1;
 //const int OPONENTRIGHT                      =    2;
@@ -121,7 +124,7 @@ const int COMBO_TIMER     = 1000;
 
 enum Events { MoveRight, MoveLeft, Jump, Duck, WeaponHit, HighPunch, LowPunch, HighKick, LowKick, Block, ReceiveHit,
 	ReceiveDuckingPunch, ReceiveDuckingKick, ReceiveWeapon, MoveRightRelease, MoveLeftRelease, DuckRelease, BlockRelease,
-	JumpFinished, OverPassed, OverPassedFinished, FatalityHit, ReceiveFire, Teleportation, WeaponHitIce, ReceiveIce};
+	JumpFinished, OverPassed, OverPassedFinished, FatalityHit, ReceiveFire, Teleportation, WeaponHitIce, ReceiveIce, FlyHit};
 
 enum GameModes { OneVsTwo, OneVsAI, Practice};
 

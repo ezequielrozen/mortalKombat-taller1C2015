@@ -89,3 +89,16 @@ float CharacterState::getFinalPosX()
 {
 	return 0;
 }
+
+char CharacterState::getSideWhenInit()
+{
+	return ' ';
+}
+
+bool CharacterState::getCheckSide() {
+	return true;
+}
+
+void CharacterState::setCheckSide(bool value) {
+
+}

@@ -38,7 +38,7 @@ public:
                                   CharacterSprite*& beingHitDown, CharacterSprite*& blockDown,
                                   CharacterSprite*& block,CharacterSprite*& fatalityHit, CharacterSprite*& fatalityFire, CharacterSprite*& onFire,
                                   CharacterSprite*& teleportation, CharacterSprite*& shootIce,CharacterSprite*& weaponIce,CharacterSprite*&  weaponIceImpacting,
-                                  bool colorAltered);
+                                  CharacterSprite*&  flyingHit, bool colorAltered);
     void loadAsRaiden(CharacterSprite*& walk, CharacterSprite*& stance, CharacterSprite*& jump, CharacterSprite*& sideJump,
 								CharacterSprite*& duck, CharacterSprite*& highKick, CharacterSprite*& lowKick, CharacterSprite*& dukKick,
 								CharacterSprite*& punchJump, CharacterSprite*& duckPunch,CharacterSprite*& jumpKick, CharacterSprite*& highPunch,
@@ -46,7 +46,8 @@ public:
 								CharacterSprite*& shoot,  CharacterSprite*& dizzy, CharacterSprite*& fall,
 								CharacterSprite*& beingHit, CharacterSprite*& beingHitDown, CharacterSprite*& blockDown, CharacterSprite*& block,
 								CharacterSprite*& fatalityHit, CharacterSprite*& fatalityFire, CharacterSprite*& onFire, CharacterSprite*& teleportation,
-								CharacterSprite*& shootIce,CharacterSprite*& weaponIce,CharacterSprite*&  weaponIceImpacting, bool colorAltered);
+								CharacterSprite*& shootIce,CharacterSprite*& weaponIce,CharacterSprite*&  weaponIceImpacting,
+                                CharacterSprite*&  flyingHit,bool colorAltered);
     void startRender();
     void endRender();
     void initializeCharactersSprites();
@@ -104,6 +105,7 @@ private:
     CharacterSprite* scorpionShootIce;
     CharacterSprite* scorpionWeaponIce;
     CharacterSprite* scorpionWeaponIceImpacting;
+    CharacterSprite* scorpionFlyingHit;
 
     CharacterSprite* raidenWalk;
     CharacterSprite* raidenStance;
@@ -133,6 +135,7 @@ private:
     CharacterSprite* raidenShootIce;
     CharacterSprite* raidenWeaponIce;
     CharacterSprite* raidenWeaponIceImpacting;
+    CharacterSprite* raidenFlyingHit;
 
     LayerSprite** layerSprites;
     int layerCount;

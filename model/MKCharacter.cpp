@@ -74,7 +74,24 @@ void MKCharacter::characterUpdate() {
 		throwWeaponIce();
 	}
 	this->weaponIce->update();
-	
+
+	if (this->state->getName() == "FlyHitting")
+	{
+		//cuando cambia de lado seteo checkSide en false porq sino se da vuelta el sprite.
+		if (this->state->getSideWhenInit() == 'l') {
+			if (this->getCharacterSide() == 'r'){
+				this->state->setCheckSide(false);
+			}
+			this->posX += step*2;
+		}else
+		{
+			if (this->getCharacterSide() == 'l'){
+				this->state->setCheckSide(false);
+			}
+			this->posX -= step*2;
+			//this->moveLeft();
+		}
+	}
 }
 
 
@@ -91,14 +108,14 @@ Throwable *MKCharacter::getWeaponFire() {
 }
 
 void MKCharacter::throwWeaponFire() {
-	if (!weaponFireUsed && fatalityEnable){
+	if (!this->weaponFireUsed && this->fatalityEnable){
 		if (this->getCharacterSide() == 'l') {
 			this->weaponFire->throwWeapon(this->posX + (this->getWidth() * 1.3),this->posY+(this->alto*0.35) ,this->getCharacterSide());
 		}else
 		{
 			this->weaponFire->throwWeapon(this->posX - (this->getWidth()*0.7),this->posY+(this->alto*0.45) ,this->getCharacterSide());
 		}
-		weaponFireUsed = true;
+		this->weaponFireUsed = true;
 	}
 }
 
@@ -372,7 +389,9 @@ bool MKCharacter::isBeingOverPassedLeft() {
 string MKCharacter::getState() {
 	return this->state->getName();
 }
-
+bool MKCharacter::getStateCheckSide() {
+	return this->state->getCheckSide();
+}
 float MKCharacter::getStateWidth() {
 	return (this->ancho)*(this->state->getWidth());
 }
@@ -451,6 +470,46 @@ void MKCharacter::setFinalPosX(float oponentPosX, float oponentWidth) {
 			//Verifico que no se vaya de la pantalla por izquierda
 			if (pos >= 0) {
 				this->state->setFinalPosX(pos);
+			}
+			else
+			{
+				this->setState(new CharacterStance());
+			}
+
+		}
+	}
+}
+
+void MKCharacter::setFinalPosXAfterFlyHitting(float oponentPosX, float oponentWidth) {
+	float pos = 0;
+	if (this->state->getFinalPosX() == 0){
+
+		if (this->getCharacterSide() == 'r') {
+
+			pos = oponentPosX + (oponentWidth*2);
+
+			//cout << oponentPosX << " -- " << pos << " - " << endl;
+
+			//Verifico que no se vaya de la pantalla por derecha
+			if ((pos + getWidth() <= Util::getInstance()->getLogicalWindowWidth())) {
+				this->posX = pos;
+				this->setState(new CharacterStance());
+			}
+			else
+			{
+				this->setState(new CharacterStance());
+			}
+
+		}else
+		{
+			pos = oponentPosX - (getWidth() *2);
+
+			//cout << oponentPosX << " - " << pos << " - " << endl;
+
+			//Verifico que no se vaya de la pantalla por izquierda
+			if (pos >= 0) {
+				this->posX = pos;
+				this->setState(new CharacterStance());
 			}
 			else
 			{

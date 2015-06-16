@@ -31,7 +31,9 @@ public:
     virtual bool impact();
     virtual void setFinalPosX(float finalX);
     virtual float getFinalPosX();
-
+    virtual char getSideWhenInit();
+    virtual bool getCheckSide();
+    virtual void setCheckSide(bool value);
 protected:
     virtual void setState(MKCharacter * character, CharacterState* aState);
     map<Events, CharacterState>* eventMap;

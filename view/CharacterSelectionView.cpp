@@ -31,7 +31,7 @@ CharacterSelectionView::CharacterSelectionView(SDL_Renderer* aRenderer, Button**
 	for(int k = 0; k < 12; k++) {
 		name = "data/CharacterSelection/"+ch[k].name+"Stance.png";
 		characterSprites1[k] = new CharacterSprite(this->renderer, (char*)name.c_str(), 0.005*scaledScWidth,0.615*scaledScHeight, 0.17*scaledScWidth,0.345*scaledScHeight, ch[k].frames, "RIGHT", false, false, NULL);
-    	characterSprites2[k] = new CharacterSprite(this->renderer, (char*)name.c_str(), 0.825*scaledScWidth,0.615*scaledScHeight, 0.17*scaledScWidth,0.345*scaledScHeight, ch[k].frames, "LEFT", false, false, NULL);	
+    	characterSprites2[k] = new CharacterSprite(this->renderer, (char*)name.c_str(), 0.825*scaledScWidth,0.615*scaledScHeight, 0.17*scaledScWidth,0.345*scaledScHeight, ch[k].frames, "LEFT", false, false, NULL);
     }
     
     this->nameButtonSprites[0] = new ButtonSprite(this->renderer, nameButtons[0]);
@@ -93,11 +93,11 @@ void CharacterSelectionView::render() {
     	this->buttonSprites2[i]->Draw();
    
     	if (this->buttonSprites1[i]->isSelected()) {
-    		this->characterSprites1[i]->Draw();
+    		this->characterSprites1[i]->Draw(true);
     		this->characterSprites1[i]->Play(6.66*GAMEDELAY, 0.17*scaledScWidth);
     	}
     	if (this->buttonSprites2[i]->isSelected()) {
-    		this->characterSprites2[i]->Draw();
+    		this->characterSprites2[i]->Draw(true);
     		this->characterSprites2[i]->Play(6.66*GAMEDELAY, 0.17*scaledScWidth);
     	}
     	i++;

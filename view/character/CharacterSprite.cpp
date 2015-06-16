@@ -239,11 +239,11 @@ CharacterSprite::~CharacterSprite(void)
     SDL_DestroyTexture(texture);
 }
 
-void CharacterSprite::Draw()
+void CharacterSprite::Draw(bool checkSide)
 {
 	SDL_RendererFlip flipType = SDL_FLIP_NONE;
 
-	if (oponentSide == "LEFT")
+	if (oponentSide == "LEFT" && checkSide)
 	{
 		flipType = SDL_FLIP_HORIZONTAL;
 	}

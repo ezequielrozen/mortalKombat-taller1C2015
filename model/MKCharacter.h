@@ -125,12 +125,14 @@ public:
     bool getFatalityEnable();
 
     void setFinalPosX(float oponentPosX, float oponentWidth);
+    void setFinalPosXAfterFlyHitting(float oponentPosX, float oponentWidth);
+
     int getCharacterNumber();
 
     void enablePracticeMode();
     void disablePracticeMode();
     void setWeaponFireUsed(bool isFiring);
-
+    bool getStateCheckSide();
 private:
 
     // State
