@@ -504,14 +504,21 @@ void GameView::runCharacter(MKCharacter* character1, MKCharacter* character2, Sp
 				shootChar->setX(character1->getWeaponIce()->getPositionX());
 				shootChar->setY(character1->getWeaponIce()->getPositionY());
             }else if (character1->getWeaponIce()->getImpactingWeaponIce()){
-            	shootChar->setX(character1->getWeaponIce()->getPositionX()+(character2->getWidth()*0.8));
+                cout << "entra 1: " << character1->getName()  << endl;
+                cout << "WeaponPos: " << character1->getWeaponIce()->getPositionX()  << endl;
+                cout << "Char 2 posX: " << character2->getX()  << endl;
+                cout << "Adicion:  " << character2->getWidth()*0.4 << endl;
+                cout << "Impacting posX: " << character1->getWeaponIce()->getPositionX()/*+(character2->getWidth()*0.4)*/  << endl;
+
+                cout << " " << endl;
+
+            	shootChar->setX(character1->getWeaponIce()->getPositionX()/*+(character2->getWidth()*0.4)*/);
 				shootChar->setY(character1->getWeaponIce()->getPositionY());
             }
         }
     } 
     else {
         sprite->switchSide('l');
-
         if (shootChar != NULL) {
             shootChar->switchSide('l');
             if (character1->getWeapon()->isActive()){
@@ -524,6 +531,9 @@ void GameView::runCharacter(MKCharacter* character1, MKCharacter* character2, Sp
 				shootChar->setX(character1->getWeaponIce()->getPositionX());
 				shootChar->setY(character1->getWeaponIce()->getPositionY());
             }else if (character1->getWeaponIce()->getImpactingWeaponIce()){
+                /*cout << "entra 2: " << character1->getName()  << endl;
+                cout << "WeaponPos: " << character1->getWeaponIce()->getPositionX()  << endl;
+                cout << "Char 2 posX: " << character2->getX()  << endl;*/
             	shootChar->setX(character1->getWeaponIce()->getPositionX()-character2->getWidth()*0.8);
 				shootChar->setY(character1->getWeaponIce()->getPositionY());
             }
@@ -546,12 +556,12 @@ void GameView::runCharacter(MKCharacter* character1, MKCharacter* character2, Sp
         else
             sprite->resetFinished();
 
+    sprite->Draw();
+
     if (shootChar != NULL) {
 
         shootChar->Draw();
     }
-
-    sprite->Draw();
 
 }
 

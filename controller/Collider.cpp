@@ -53,7 +53,8 @@ void Collider::checkHits(MKCharacter* character1, MKCharacter* character2) {
 	if (character2->isBeingOverPassedRight() ||	character2->isBeingOverPassedLeft() ||
 		((superpositionRight(character1,character2) || superpositionLeft(character1, character2)) &&
 				(character1->isHitting()) && superpositionDown(character1, character2))	||
-		((superpositionWeaponRight(character1->getWeapon(), character2) || superpositionWeaponLeft(character1->getWeapon(), character2)) &&
+		((superpositionWeaponRight(character1->getWeapon(), character2) ||
+				superpositionWeaponLeft(character1->getWeapon(), character2)) &&
 				character1->getWeapon()->isActive() && superpositionWeaponDown(character1->getWeapon(), character2))||
 		((superpositionWeaponRight(character1->getWeaponFire(), character2) ||
 				superpositionWeaponLeft(character1->getWeaponFire(), character2)) && character1->getWeaponFire()->isActive()) ||
@@ -74,7 +75,9 @@ void Collider::checkHits(MKCharacter* character1, MKCharacter* character2) {
 						character2->receiveBlow(DAMAGE.at("WeaponHitting"),0);
 						character1->getWeapon()->destroy();
 					} else if (character1->getWeaponIce()->isActive()) {
+						//cout << "Collider0: char2_PosX" << character2->getX() << endl;
 						character2->update(ReceiveIce);
+						//cout << "Collider: WeaponPosX: " << character2->getWeaponIce()->getPositionX() << endl;
 						character2->receiveBlow(DAMAGE.at("WeaponHitting"),0);
 						character1->getWeaponIce()->setImpactingWeaponIce(true);
 						character1->getWeaponIce()->destroy();
