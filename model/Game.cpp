@@ -170,3 +170,7 @@ void Game::disablePracticeMode() {
         this->scorpion->disablePracticeMode();
         this->raiden->disablePracticeMode();
 }
+
+void Game::setCharacterNames(string name1, string name2) {
+    this->gameView->setCharacterNames(name1, name2);
+}

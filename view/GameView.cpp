@@ -38,13 +38,9 @@ GameView::GameView(SDL_Renderer* aRenderer, MKCharacter* character, MKCharacter*
         i++;
     }
 
-    string charName = character->getName();
-    transform(charName.begin(), charName.end(), charName.begin(), ::toupper);
-    characterName = new Text(charName.c_str(), this->renderer, "left");
-
-    string charTwoName = character2->getName();
-    transform(charTwoName.begin(), charTwoName.end(), charTwoName.begin(), ::toupper);
-    characterTwoName = new Text(charTwoName.c_str(), this->renderer, "right");
+    characterName = NULL;
+    characterTwoName = NULL;
+    this->setCharacterNames(character->getName(), character2->getName());
 
     this->timer = timer;
     int timeToShow = (TIME_TO_FIGHT_ENDING - this->timer->getCurrentTime()) / 1000;
@@ -642,4 +638,20 @@ void GameView::enablePracticeMode() {
 
 void GameView::disablePracticeMode() {
     this->practiceMode = true;
+}
+
+void GameView::setCharacterNames(string name1, string name2) {
+    if (this->characterName != NULL) {
+        delete this->characterName;
+    }
+    if (this->characterTwoName != NULL) {
+        delete this->characterTwoName;
+    }
+    string charName = name1;
+    transform(charName.begin(), charName.end(), charName.begin(), ::toupper);
+    characterName = new Text(charName.c_str(), this->renderer, "left");
+
+    string charTwoName = name2;
+    transform(charTwoName.begin(), charTwoName.end(), charTwoName.begin(), ::toupper);
+    characterTwoName = new Text(charTwoName.c_str(), this->renderer, "right");
 }

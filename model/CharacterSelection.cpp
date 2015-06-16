@@ -254,3 +254,11 @@ void CharacterSelection::loop() {
 	this->reset();
 }
 
+string CharacterSelection::getNameOne() {
+	return this->names[0];
+}
+
+string CharacterSelection::getNameTwo() {
+	return this->names[1];
+}
+

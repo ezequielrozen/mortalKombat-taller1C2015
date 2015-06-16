@@ -28,6 +28,7 @@ public:
     void initGame(SDL_Renderer* renderer, InputController* stageController);
     void enablePracticeMode();
     void disablePracticeMode();
+    void setCharacterNames(string name1, string name2);
 
 private:
     void updateGameState(int &roundCount);

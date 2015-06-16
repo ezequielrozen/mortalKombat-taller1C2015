@@ -41,6 +41,9 @@ public:
 
 	void updateName(string letter);
 
+	string getNameOne();
+	string getNameTwo();
+
 private:
 	CharacterSelectionView* view;
 	InputController* inputController;

@@ -55,6 +55,9 @@ public:
     void disablePracticeMode();
     void restartAllScorpionSprites();
     void restartAllRaidenSprites();
+
+    void setCharacterNames(string name1, string name2);
+
 private:
 
     MKCharacter* scorpion;
