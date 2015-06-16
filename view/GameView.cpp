@@ -54,7 +54,7 @@ GameView::GameView(SDL_Renderer* aRenderer, MKCharacter* character, MKCharacter*
     this->practiceMode = false;
 
     SoundManager::getInstance()->loadSounds();
-    // Here we initialize SDL_mixer and then load each sound and music
+    // Here we initialize SDL_mixer and then load each sound and music /**/
 }
 
 GameView::~GameView() {

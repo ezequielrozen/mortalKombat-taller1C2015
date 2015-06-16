@@ -34,7 +34,7 @@ StageManager::~StageManager() {
 
 	SDL_DestroyRenderer(this->renderer);
     SDL_DestroyWindow(this->window);
-
+	SDL_Quit();
 	delete this->stageController;
 	delete this->inputController;
 

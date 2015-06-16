@@ -19,6 +19,7 @@ CharacterSprite::CharacterSprite(SDL_Renderer* pRenderer, char* path, float x, f
 		SDL_UnlockSurface(surface);
 	}
 	this->texture = SDL_CreateTextureFromSurface(this->renderer,surface);
+    SDL_FreeSurface(surface);
 //    this->texture = IMG_LoadTexture(renderer,path);
 
     if (this->texture == NULL)
