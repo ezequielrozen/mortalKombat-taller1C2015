@@ -66,6 +66,7 @@ bool StageManager::mainLoop() {
 		
 		setStageController(new EventController(this->gameLoader->getCombo1(), this->gameLoader->getCombo2(), this->gameLoader->getFatality()));
 		this->game->setCharacterNames(this->characterSelection->getNameOne(), this->characterSelection->getNameTwo());
+		this->characterSelection->restartNames();
 		restart = this->game->GameLoop(mode);
 		
 	}

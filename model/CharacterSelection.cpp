@@ -262,3 +262,8 @@ string CharacterSelection::getNameTwo() {
 	return this->names[1];
 }
 
+void CharacterSelection::restartNames() {
+	this->names[0] = "SCORPION";
+	this->names[1] = "RAIDEN";
+	this->view->updateCharacterNames(this->names[0], this->names[1]);
+}

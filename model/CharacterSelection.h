@@ -44,6 +44,8 @@ public:
 	string getNameOne();
 	string getNameTwo();
 
+	void restartNames();
+
 private:
 	CharacterSelectionView* view;
 	InputController* inputController;
