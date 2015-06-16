@@ -89,6 +89,9 @@ void ModeSelection::updateMousePosition(unsigned short x, unsigned short y) {
 
 	for (int i = 0; i < 3; i++) {
 		if (buttons[i]->checkBoundaries(x, y)) {
+			if (!buttons[i]->isSelected()) {
+				SoundManager::getInstance()->playSound("select");
+			}
 			this->buttons[index]->setSelected(false);
 			index = i;
 			this->buttons[i]->setSelected(true);
@@ -101,6 +104,7 @@ void ModeSelection::updateMousePosition(unsigned short x, unsigned short y) {
 
 void ModeSelection::mouseSelect() {
 	if (this->mouseOnButton) {
-		this->selectionMade = true;		
+		this->selectionMade = true;
+		SoundManager::getInstance()->playSound("confirmselection");
 	}
 }

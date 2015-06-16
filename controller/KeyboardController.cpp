@@ -60,6 +60,7 @@ void KeyboardController::update(MKCharacter* character, MKCharacter* character2,
 			case SDLK_l:
 				if (!keysPressed[5]) {
 					this->stageController->setCharacterToMove(character);
+					this->stageController->updateName("L");
 					this->stageController->lowKick(0);
 					this->keysPressed[5] = true;
 				}
@@ -151,6 +152,7 @@ void KeyboardController::update(MKCharacter* character, MKCharacter* character2,
 			case SDLK_g:
 				if (!keysPressed[16]) {
 					this->stageController->setCharacterToMove(character2);
+					this->stageController->updateName("G");
 					this->stageController->lowKick(1);
 					this->keysPressed[16] = true;
 				}

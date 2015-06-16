@@ -5,7 +5,7 @@ struct character {
   int frames;
 };
 
-CharacterSelectionView::CharacterSelectionView(SDL_Renderer* aRenderer, Button** buttons1, Button** buttons2) {
+CharacterSelectionView::CharacterSelectionView(SDL_Renderer* aRenderer, Button** buttons1, Button** buttons2, Button** nameButtons) {
 	this->renderer = aRenderer;
 
 	int scWidth = Util::getInstance()->getWindowWidth();
@@ -34,10 +34,13 @@ CharacterSelectionView::CharacterSelectionView(SDL_Renderer* aRenderer, Button**
     	characterSprites2[k] = new CharacterSprite(this->renderer, (char*)name.c_str(), 0.825*scaledScWidth,0.615*scaledScHeight, 0.17*scaledScWidth,0.345*scaledScHeight, ch[k].frames, "LEFT", false, false, NULL);	
     }
     
-    this->characterNames[0] = new Text("SCORPION", this->renderer, "center",{255, 222, 39});
+    this->nameButtonSprites[0] = new ButtonSprite(this->renderer, nameButtons[0]);
+    this->nameButtonSprites[1] = new ButtonSprite(this->renderer, nameButtons[1]);
+
+    this->characterNames[0] = new Text("SCORPION  ", this->renderer, "center",{255, 222, 39});
     this->characterNames[0]->setPosition(0.175*scWidth, 0.89*scHeight);
     this->characterNames[0]->setDimensions(0.3*scWidth, 0.1*scHeight);
-    this->characterNames[1] = new Text("RAIDEN", this->renderer, "center",{255, 222, 39});
+    this->characterNames[1] = new Text("RAIDEN    ", this->renderer, "center",{255, 222, 39});
     this->characterNames[1]->setPosition(0.525*scWidth, 0.89*scHeight);
     this->characterNames[1]->setDimensions(0.3*scWidth, 0.1*scHeight);
 }
@@ -45,6 +48,8 @@ CharacterSelectionView::CharacterSelectionView(SDL_Renderer* aRenderer, Button**
 CharacterSelectionView::~CharacterSelectionView() {
     delete this->characterNames[0];
     delete this->characterNames[1];
+    delete nameButtonSprites[0];
+    delete nameButtonSprites[1];
 
     for (int i = 0; i < 12; i++) {
         delete buttonSprites1[i];
@@ -99,7 +104,9 @@ void CharacterSelectionView::render() {
     }
     
     this->characterNames[0]->Draw();
+    this->nameButtonSprites[0]->Draw();
     this->characterNames[1]->Draw();
+    this->nameButtonSprites[1]->Draw();
 
     SDL_RenderPresent(renderer);
 }

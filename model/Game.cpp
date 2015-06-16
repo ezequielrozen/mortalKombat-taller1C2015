@@ -172,5 +172,17 @@ void Game::disablePracticeMode() {
 }
 
 void Game::setCharacterNames(string name1, string name2) {
-    this->gameView->setCharacterNames(name1, name2);
+    string name1aux, name2aux;
+
+    name1aux = name1;
+    name2aux = name2;
+
+    if (name1.empty()) {
+        name1aux = "PLAYER1";
+    }
+    if (name2.empty()) {
+        name2aux = "PLAYER2";
+    }
+
+    this->gameView->setCharacterNames(name1aux, name2aux);
 }
