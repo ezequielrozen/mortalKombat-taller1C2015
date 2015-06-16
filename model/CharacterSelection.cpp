@@ -221,10 +221,11 @@ void CharacterSelection::updateMousePosition(unsigned short x, unsigned short y)
 
 void CharacterSelection::updateName(string letter) {
 	if (this->buttonInfo[0].buttonPressed && this->buttonInfo[1].buttonPressed) {
-		if (letter == "DEL") {
-			this->names[nameButtonIndex].pop_back();
-		}
-		else if (letter == "ENTER") {
+		if (letter == "DEL" ) {
+			if (!this->names[0].empty() || this->names[1].empty()) {
+				this->names[nameButtonIndex].pop_back();
+			}
+		} else if (letter == "ENTER") {
 			this->characterSelectionFinished = true;
 		}
 		else {
