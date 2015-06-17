@@ -14,6 +14,7 @@
 #include "BeingOverPassedRight.h"
 #include "Blocking.h"
 #include "TeleportationDoing.h"
+#include "WeaponHittingIce.h"
 
 MovingLeft::MovingLeft() {
     this->timer = 10;
@@ -77,6 +78,11 @@ void MovingLeft::update(MKCharacter * character, Events aEvent) {
             break;
         case Teleportation:
             character->setState(new TeleportationDoing());
+            break;
+        case WeaponHitIce:
+            if (character->getName() == "raiden"){
+                character->setState(new WeaponHittingIce());
+            }
             break;
         default:
             break;

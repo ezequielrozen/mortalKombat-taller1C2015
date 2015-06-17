@@ -3,7 +3,7 @@
 
 ReceivingFire::ReceivingFire() {
 	this->timer = 80;
-	//SoundManager::getInstance()->playSound("burn");
+	SoundManager::getInstance()->playSound("burn");
 }
 
 ReceivingFire::~ReceivingFire() {

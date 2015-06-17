@@ -7,6 +7,7 @@
 #include "BeingOverPassedRight.h"
 #include "TeleportationDoing.h"
 #include "../../view/SoundManager.h"
+#include "WeaponHittingIce.h"
 
 DuckingPunch::DuckingPunch() {
     this->timer = 33;
@@ -38,6 +39,11 @@ void DuckingPunch::update(MKCharacter *character, Events aEvent) {
             break;
         case Teleportation:
             character->setState(new TeleportationDoing());
+            break;
+        case WeaponHitIce:
+            if (character->getName() == "raiden"){
+                character->setState(new WeaponHittingIce());
+            }
             break;
         default:
             break;

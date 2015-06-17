@@ -7,6 +7,7 @@
 #include "BeingOverPassedLeft.h"
 #include "TeleportationDoing.h"
 #include "../../view/SoundManager.h"
+#include "WeaponHittingIce.h"
 
 HighPunchHitting::HighPunchHitting() {
     this->timer = 40;
@@ -40,6 +41,11 @@ void HighPunchHitting::update(MKCharacter *character, Events aEvent) {
             break;
         case Teleportation:
             character->setState(new TeleportationDoing());
+            break;
+        case WeaponHitIce:
+            if (character->getName() == "raiden"){
+                character->setState(new WeaponHittingIce());
+            }
             break;
         default:
             break;

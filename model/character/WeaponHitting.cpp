@@ -4,6 +4,8 @@
 #include "ReceivingDuckingPunch.h"
 #include "RecevingHit.h"
 #include "../../view/SoundManager.h"
+#include "WeaponHittingIce.h"
+#include "TeleportationDoing.h"
 
 WeaponHitting::WeaponHitting() {
 	this->timer = 1;
@@ -21,6 +23,14 @@ void WeaponHitting::update(MKCharacter* character, Events aEvent) {
 			break;
 		case ReceiveHit:
 			character->setState(new RecevingHit());
+			break;
+		case Teleportation:
+			character->setState(new TeleportationDoing());
+			break;
+		case WeaponHitIce:
+			if (character->getName() == "raiden"){
+				character->setState(new WeaponHittingIce());
+			}
 			break;
 		default:
 			//si no recibe ninguno de los otros eventos, en principio no hay que hacer nada, porque no afectan a este estado
