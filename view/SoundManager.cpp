@@ -54,7 +54,7 @@ void SoundManager::loadSounds() {
 }
 
 void SoundManager::freeSounds() {
-    Mix_FreeChunk(sounds.at("hit"));
+    Mix_FreeChunk(sounds.at("hit1"));
     Mix_FreeChunk(sounds.at("hit2"));
     Mix_FreeChunk(sounds.at("select"));
     Mix_FreeChunk(sounds.at("select2"));
@@ -80,8 +80,4 @@ SoundManager::SoundManager() {
 
 SoundManager::~SoundManager() {
     freeSounds();
-}
-
-void SoundManager::setLoad(bool loaded) {
-    this->loaded = loaded;
 }
