@@ -26,6 +26,7 @@ public:
     virtual void setImpactingWeaponIce(bool);
     virtual bool getImpactingWeaponIce();
 	virtual int getCurrentWeaponIce();
+	virtual void setCurrentWeaponIce(int value);
 };
 
 #endif /* THROWABLE_H_ */

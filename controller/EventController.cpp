@@ -3,7 +3,7 @@
 extern logger* Mylog;
 
 EventController::EventController(std::vector<Events>* combo1, std::vector<Events>* combo2, std::vector<Events>* fatality) {
-	for (int i = 0; i < 2; i++) {
+	for (int i = 0; i < 3; i++) {
 		commands[i].upPressed = false;
 		commands[i].downPressed = false;
 		commands[i].leftPressed = false;

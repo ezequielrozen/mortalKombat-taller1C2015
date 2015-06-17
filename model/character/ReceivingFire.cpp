@@ -3,7 +3,8 @@
 #include "CharacterStance.h"
 
 ReceivingFire::ReceivingFire() {
-	this->timer = 400;
+	//el fire lo tira 60 ticks despues de q comenzo la fatality, por eso este tiene un timer 60 ticks menor que FatalityHitting
+	this->timer = 340;
 	SoundManager::getInstance()->playSound("burn");
 }
 

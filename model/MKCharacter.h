@@ -113,7 +113,7 @@ public:
 
     void disableImpact();
 
-    void moveForced(double x);
+//    void moveForced(double x);
 
     void moveRightFaster();
 

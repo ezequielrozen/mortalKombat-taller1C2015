@@ -69,9 +69,10 @@ void MKCharacter::characterUpdate() {
 		throwWeaponFire();
 	}
 	this->weaponFire->update();
-/*	if (this->practiceMode && this->weaponFire->getCurrentWeaponIce() > 28){
+	//El 400 coincide con el valor de FatalityHitting.timer. Se agrego por el modo practica.
+	if (this->practiceMode && this->weaponFire->getCurrentWeaponIce() > 400){
 		this->weaponFireUsed = false;
-	}*/
+	}
 
 	if (this->state->getName() == "WeaponHittingIce" && this->state->startThrowing() && !this->weaponIce->isActive() && !this->weaponIce->getImpactingWeaponIce()) {
 		throwWeaponIce();
@@ -80,19 +81,11 @@ void MKCharacter::characterUpdate() {
 
 	if (this->state->getName() == "FlyHitting")
 	{
-
-		//cuando cambia de lado seteo checkSide en false porq sino se da vuelta el sprite.
 		if (this->state->getSideWhenInit() == 'l') {
-			/*//if (this->getCharacterSide() == 'r'){
-				this->state->setCheckSide(false);
-			//}*/
 			this->moveRight();
 			this->moveRight();
 		}else
 		{
-			/*if (this->getCharacterSide() == 'l'){
-				this->state->setCheckSide(false);
-			}*/
 			this->moveLeft();
 			this->moveLeft();
 		}
@@ -114,7 +107,10 @@ Throwable *MKCharacter::getWeaponFire() {
 
 void MKCharacter::throwWeaponFire() {
 
+	//this->weaponFireUsed se usa para que tire fuego una sola vez en toda la fatality. Desp de 400 ticks se resetea para que
+	//se pueda volver a usar en el modo preactica.
 	if (!this->weaponFireUsed && this->fatalityEnable){
+		this->weaponFire->setCurrentWeaponIce(0);
 		if (this->getCharacterSide() == 'l') {
 			this->weaponFire->throwWeapon(this->posX + (this->getWidth() * 1.3),this->posY+(this->alto*0.35) ,this->getCharacterSide());
 		}else
@@ -345,10 +341,10 @@ void MKCharacter::setPosY(double d) {
 	this->posY = d;
 }
 
-void MKCharacter::moveForced(double x) {
+/*void MKCharacter::moveForced(double x) {
 	//if ((x + this->getStateWidth() < Util::getInstance()->getLogicalStageWidth() * 0.4) && x > this->getWidth())
 				posX = x;
-}
+}*/
 
 void MKCharacter::setCharacterSide(char side) {
 	this->characterSide = side;

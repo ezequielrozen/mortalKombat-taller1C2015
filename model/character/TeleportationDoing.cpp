@@ -13,14 +13,11 @@
 #include "../../view/SoundManager.h"
 
 TeleportationDoing::TeleportationDoing() {
-	// TODO Auto-generated constructor stub
 	this->finalPosX = 0;
 	this->timer=60;
-	SoundManager::getInstance()->playSound("teleport");
 }
 
 TeleportationDoing::~TeleportationDoing() {
-	// TODO Auto-generated destructor stub
 }
 
 string TeleportationDoing::getName() {
@@ -43,6 +40,7 @@ void TeleportationDoing::update(MKCharacter* character, Events aEvent) {
 
 void TeleportationDoing::refreshTimer(MKCharacter* character) {
 	if (this->timer == 20) {
+		SoundManager::getInstance()->playSound("teleport");
 		character->setX(this->finalPosX);
 	}
 	if (this->timer == 0) {

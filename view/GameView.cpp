@@ -504,12 +504,6 @@ void GameView::runCharacter(MKCharacter* character1, MKCharacter* character2, Sp
 	else {
 		shootChar = NULL;
 	}
-//    //resteo los sprites de la fatality porq en modo practica la puede tirar n veces y estos sprites tienen repeatLast = true
-//    if (!character1->getWeaponFire()->isActive()) {
-//        cout << "restart2 " << endl;
-//        (character1->getName() == "scorpion") ? scorpionReceivingFire->reset() : raidenReceivingFire->reset();
-//    }
-
 
     if(character1->getX() < character2->getX()) {
         sprite->switchSide('r');

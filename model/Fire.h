@@ -25,6 +25,7 @@ public:
     float getHeight();
     bool isImpact();
     int getCurrentWeaponIce();
+    void setCurrentWeaponIce(int value);
 
 private:
     float speed;
