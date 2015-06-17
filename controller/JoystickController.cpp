@@ -96,7 +96,7 @@ void JoystickController::KeyUP_Up(unsigned char pressedAxis, int pressedAxisValu
 									MKCharacter* character2) {
 	c0previousAxis = pressedAxis;
 	c0previousAxisValue = pressedAxisValue;
-	/*printCout ?*/ cout << "KeyUp: Boton arriba" << endl;
+	printCout ? cout << "KeyUp: Boton arriba" << endl : "";
 	this->c0Upped = false;
 	this->stageController->moveUpRelease(((int)joystickNumber));
 }

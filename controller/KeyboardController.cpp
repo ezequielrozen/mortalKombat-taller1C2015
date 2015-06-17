@@ -252,7 +252,6 @@ void KeyboardController::update(MKCharacter* character, MKCharacter* character2,
 				break;
 			case SDLK_RETURN:
 				if (!keysPressed[31]) {
-					cout << "ENTER" << endl;
 					this->stageController->updateName("ENTER");
 					this->keysPressed[31] = true;
 				}

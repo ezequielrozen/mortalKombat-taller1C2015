@@ -62,7 +62,6 @@ void Collider::checkHits(MKCharacter* character1, MKCharacter* character2) {
 				superpositionWeaponLeft(character1->getWeaponIce(), character2)) && character1->getWeaponIce()->isActive())){
 
 
-		cout << "IMPACT" << endl;
 		if (character1->impacts()) {
 			if (character1->getState() == "DuckingKickHitting" ||
 				(!character2->isBlocking() && !character2->isDucking() && !character2->isReceivingHit()) ||
@@ -84,7 +83,6 @@ void Collider::checkHits(MKCharacter* character1, MKCharacter* character2) {
 
 					} else
 					{
-						cout << "IMPACT2" << endl;
 						character2->receiveBlow(DAMAGE.at(character1->getState()),0);
 						if (character1->getState() == "FlyHitting"){
 							character1->setFinalPosXAfterFlyHitting(character2->getX(), character2->getWidth());
@@ -190,13 +188,11 @@ void Collider::checkOverPassing(MKCharacter* character1, MKCharacter* character2
 			character1->getState() != "FlyHitting"*/) {
 		character2->setStopX(character1->getX() + character1->getStateWidth() - character2->getWidth() * 0.5);
 		character2->update(OverPassed);
-		cout << "OVERPASSED" << endl;
 	}
 	else if (character2->getX() >= character1->getX() - (character1->getStateWidth() - character1->getWidth()) &&
 			character1->getCharacterSide() == 'r' && character1->isHitting() && !character1->isBeingOverPassedRight() /*&&
 			character1->getState() != "FlyHitting"*/) {
 		character2->setStopX(character1->getX() - (character1->getStateWidth() - character1->getWidth()) + character2->getStateWidth() * 0.5);
 		character2->update(OverPassed);
-		cout << "OVERPASSED" << endl;
 	}
 }

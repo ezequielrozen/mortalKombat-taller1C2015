@@ -69,7 +69,6 @@ void WeaponIce::destroy() {
     this->active = false;
     this->impact = false;
     this->currentUpdate = 0;
-    cout << "destroy" << endl;
 }
 
 void WeaponIce::setImpactingWeaponIce(bool value){

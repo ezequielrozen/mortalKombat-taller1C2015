@@ -24,7 +24,7 @@ JoysticksControllerManager::JoysticksControllerManager(MKStageController* stageC
         case 1:
             this->joystickOne = SDL_JoystickOpen(0);
             Mylog->Log(SDL_JoystickName(joystickOne), ERROR_LEVEL_INFO);
-            cout << SDL_JoystickName(joystickOne) << endl;
+            //cout << SDL_JoystickName(joystickOne) << endl;
             joystick0 = new JoystickController(0, stageController);
             joystickCount = 1;
             SDL_JoystickEventState(SDL_ENABLE);
@@ -34,8 +34,8 @@ JoysticksControllerManager::JoysticksControllerManager(MKStageController* stageC
             this->joystickTwo = SDL_JoystickOpen(1);
             Mylog->Log(SDL_JoystickName(joystickOne), ERROR_LEVEL_INFO);
             Mylog->Log(SDL_JoystickName(joystickTwo), ERROR_LEVEL_INFO);
-            cout << SDL_JoystickName(joystickOne) << endl;
-            cout << SDL_JoystickName(joystickTwo) << endl;
+            //cout << SDL_JoystickName(joystickOne) << endl;
+            //cout << SDL_JoystickName(joystickTwo) << endl;
 
             joystick0 = new JoystickController(0, stageController);
             joystick1 = new JoystickController(1, stageController);
