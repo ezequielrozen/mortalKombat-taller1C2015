@@ -236,7 +236,9 @@ double MKCharacter::getX() {
 }
 
 void MKCharacter::setX(double X) {
-	posX = X;
+
+	stagePosX = stagePosX - (posX - X);
+	posX = posX - (posX - X);
 }
 
 double MKCharacter::getStagePosX() {
@@ -505,7 +507,9 @@ void MKCharacter::setFinalPosXAfterFlyHitting(float oponentPosX, float oponentWi
 
 			//Verifico que no se vaya de la pantalla por derecha
 			if ((pos + getWidth() <= Util::getInstance()->getLogicalWindowWidth())) {
-				this->posX = pos;
+
+				stagePosX = stagePosX - (posX - pos);
+				posX = posX - (posX - pos);
 				this->setState(new CharacterStance());
 			}
 			else
@@ -521,7 +525,9 @@ void MKCharacter::setFinalPosXAfterFlyHitting(float oponentPosX, float oponentWi
 
 			//Verifico que no se vaya de la pantalla por izquierda
 			if (pos >= 0) {
-				this->posX = pos;
+
+				stagePosX = stagePosX - (posX - pos);
+				posX = posX - (posX - pos);
 				this->setState(new CharacterStance());
 			}
 			else

@@ -81,3 +81,7 @@ SoundManager::SoundManager() {
 SoundManager::~SoundManager() {
     freeSounds();
 }
+
+void SoundManager::setLoad(bool loaded) {
+    this->loaded = loaded;
+}

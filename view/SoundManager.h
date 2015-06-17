@@ -17,6 +17,7 @@ public:
     void loadSounds();
     void freeSounds();
     void playSound(std::string soundId);
+    void setLoad(bool loaded);
 private:
     SoundManager();
     ~SoundManager();
