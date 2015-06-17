@@ -84,7 +84,7 @@ typedef std::map<std::string, int> Map;
 const Map DAMAGE = {{"HighKickHitting", 10}, {"LowKickHitting", 10},{"HighPunchHitting", 5}, {"DuckingKickHitting", 15} ,
 					{"DuckingPunch", 20},{"SHOOT", 10}, {"PunchLeftJumping", 15}, {"KickRightJumpingHitting", 15},
 					{"KickLeftJumpingHitting", 15}, {"PunchRightJumping", 15},{"LowPunchHitting", 5}, {"WeaponHitting", 20},
-					{"FlyHitting", 20}};
+					{"FlyHitting", 20},{"FatalityHitting", 0}};
 //
 //const int OPONENTLEFT                       =    1;
 //const int OPONENTRIGHT                      =    2;

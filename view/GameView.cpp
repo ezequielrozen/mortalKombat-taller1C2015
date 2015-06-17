@@ -474,7 +474,11 @@ void GameView::runCharacter(MKCharacter* character1, MKCharacter* character2, Sp
     else if (character1->getState() == "FatalityHitting"){
         sprite = characterSprites.at("FatalityHitting");
         sprite->PlayFatality(6.66*GAMEDELAY, character1->getStateWidth());
+    }else {
+        (character1->getName() == "scorpion") ? scorpionFatalityHit->reset() : raidenFatalityHit->reset();
     }
+
+
 
     if (character1->getWeapon()->isActive()) {
         shootChar = characterSprites.at("WeaponHitting");
@@ -485,14 +489,16 @@ void GameView::runCharacter(MKCharacter* character1, MKCharacter* character2, Sp
 		shootChar->PlayShootFire(9*GAMEDELAY, character1->getWeaponFire()->getWidth(), character1->getWeaponFire()->getHeight());
     }
     else if (character1->getWeaponIce()->isActive()) {
-    	shootChar = characterSprites.at("WeaponIce");
-		shootChar->PlayShootIce(4*GAMEDELAY, character1->getWeaponIce()->getWidth(), character1->getWeaponIce()->getHeight(), character1->getWeaponIce()->isStarting());
+        shootChar = characterSprites.at("WeaponIce");
+        shootChar->PlayShootIce(4 * GAMEDELAY, character1->getWeaponIce()->getWidth(),
+                                character1->getWeaponIce()->getHeight(), character1->getWeaponIce()->isStarting());
     }
     else if (character1->getWeaponIce()->getImpactingWeaponIce()){
     	shootChar = characterSprites.at("WeaponIceImpacting");
 		shootChar->PlayShootFire(6*GAMEDELAY, character1->getWeaponIce()->getWidth()*1.8, character1->getWeaponIce()->getHeight()*4);
 	}
 	else {
+        (character1->getName() == "scorpion") ? scorpionFatalityFire->reset() : raidenFatalityFire->reset();
 		shootChar = NULL;
 	}
 

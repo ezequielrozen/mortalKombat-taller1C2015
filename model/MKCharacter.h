@@ -69,7 +69,7 @@ public:
 
     char* getFileMovement(const char* moveName);
 
-    void receiveBlow(int force, char direction);
+    void receiveBlow(int force, bool receivingFire);
 
     int getLife();
 

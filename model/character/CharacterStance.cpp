@@ -20,6 +20,7 @@
 #include "WeaponHittingIce.h"
 #include "ReceivingIce.h"
 #include "FlyHitting.h"
+#include "ReceivingFire.h"
 
 CharacterStance::CharacterStance() {
 //    this->timer = -1
@@ -102,6 +103,9 @@ void CharacterStance::update(MKCharacter * character, Events aEvent) {
             if (character->getName() == "raiden") {
                 character->setState(new FlyHitting());
             }
+            break;
+        case ReceiveFire:
+            character->setState(new ReceivingFire());
             break;
         default:
             //si no recibe ninguno de los otros eventos, en principio no hay que hacer nada, porque no afectan a este estado

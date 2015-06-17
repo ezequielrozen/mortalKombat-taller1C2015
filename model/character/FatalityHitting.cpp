@@ -9,7 +9,7 @@
 #include "CharacterStance.h"
 
 FatalityHitting::FatalityHitting() {
-	this->timer = 60;
+	this->timer = 300;
 	startThrow = false;
 
 }
@@ -22,16 +22,19 @@ string FatalityHitting::getName() {
 }
 
 void FatalityHitting::refreshTimer(MKCharacter* character) {
-	//cout << "startThrow: " << startThrow << endl;
-	if (this->timer == 0) {
+
+	if (this->timer == 240) {
 		startThrow = true;
+	}
+	if (this->timer == 0) {
+		character->setState(new CharacterStance());
 	}
 
 	this->timer -= 1;
 }
 
 bool FatalityHitting::startThrowingFire() {
-	return startThrow;
+	return this->startThrow;
 }
 
 float FatalityHitting::getWidth() {
