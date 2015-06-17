@@ -133,6 +133,7 @@ public:
     void disablePracticeMode();
     void setWeaponFireUsed(bool isFiring);
     bool getStateCheckSide();
+    bool getWeaponFireStatus();
 private:
 
     // State

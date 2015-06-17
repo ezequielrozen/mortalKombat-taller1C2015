@@ -535,3 +535,7 @@ void MKCharacter::disablePracticeMode() {
 void MKCharacter::setWeaponFireUsed(bool isFiring) {
 	this->weaponFireUsed = isFiring;
 }
+
+bool MKCharacter::getWeaponFireStatus() {
+	return this->weaponFireUsed;
+}

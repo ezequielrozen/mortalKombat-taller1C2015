@@ -49,6 +49,8 @@ bool Game::GameLoop(GameModes mode) {
 //    this->timeFightStart= SDL_GetTicks();
     if (mode != Practice) {
         this->timer->run();
+    } else {
+        this->scorpion->setFatalityEnable(true);
     }
     bool cameraMoved;
     int roundCount = 1;
@@ -61,7 +63,6 @@ bool Game::GameLoop(GameModes mode) {
         updateGameState(roundCount);
         cameraMoved = cameraController->update(scorpion, raiden, stage->getLayers());
         collider->update(scorpion, raiden, cameraMoved);
-
         gameView->endRender();
         SDL_Delay(GAMEDELAY);
 
