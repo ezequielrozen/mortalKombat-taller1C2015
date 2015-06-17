@@ -80,15 +80,15 @@ void MKCharacter::characterUpdate() {
 
 		//cuando cambia de lado seteo checkSide en false porq sino se da vuelta el sprite.
 		if (this->state->getSideWhenInit() == 'l') {
-			//if (this->getCharacterSide() == 'r'){
+			/*//if (this->getCharacterSide() == 'r'){
 				this->state->setCheckSide(false);
-			//}
+			//}*/
 			this->posX += step*2;
 		}else
 		{
-			if (this->getCharacterSide() == 'l'){
+			/*if (this->getCharacterSide() == 'l'){
 				this->state->setCheckSide(false);
-			}
+			}*/
 			this->posX -= step*2;
 		}
 	}
