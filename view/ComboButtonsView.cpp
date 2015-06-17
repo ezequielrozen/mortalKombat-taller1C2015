@@ -44,9 +44,6 @@ void ComboButtonsView::clear() {
     positions.clear();
     positions.shrink_to_fit();
     */
-    cout << buffer.capacity() << endl;
-    cout << positions.capacity() << endl;
-    cout << selectedButtons.capacity() << endl;
 }
 
 void ComboButtonsView::draw() {
@@ -67,12 +64,8 @@ void ComboButtonsView::draw() {
                 } else {
                     buffer[i]->setPosition(positions[i].x, positions[i].y);
                     buffer[i]->Draw();
-
                 }
-
             }
-
-
         }
     }
 

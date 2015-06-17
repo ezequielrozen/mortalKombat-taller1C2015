@@ -9,7 +9,7 @@ class ComboManager {
 public:
     ComboManager();
     ~ComboManager();
-    Events checkCombo(Events originalEvent, char side);
+    Events checkCombo(Events originalEvent, char side, string name);
     void loadCombos(std::vector<Events>* combo1, std::vector<Events>* combo2, std::vector<Events>* fatality);
 
 private:

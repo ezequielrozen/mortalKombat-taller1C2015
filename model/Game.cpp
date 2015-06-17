@@ -73,6 +73,9 @@ bool Game::GameLoop(GameModes mode) {
         }
 
     }
+    if (endFightTime()) {
+        this->restartRound();
+    }
     return false;
 }
 

@@ -3,7 +3,7 @@
 #include "ComboManager.h"
 #include "../../view/ComboButtonsView.h"
 
-Events ComboManager::checkCombo(Events originalEvent, char side) {
+Events ComboManager::checkCombo(Events originalEvent, char side, string name) {
     ComboButtonsView::getInstance()->addButton(originalEvent);
 
     if (this->startTime == 0) {
@@ -14,10 +14,10 @@ Events ComboManager::checkCombo(Events originalEvent, char side) {
     }
     this->buffer->push_back(originalEvent);
 
-    if (bufferMatchesCombo(this->combo1, side)) {
+    if (bufferMatchesCombo(this->combo1, side) && name == "scorpion") {
         return Teleportation; // SE EJECTUA EL COMBO 1: RETURN COMBO1EVENT
     }
-    else if (bufferMatchesCombo(this->combo2, side)) {
+    else if (bufferMatchesCombo(this->combo2, side) && name == "raiden") {
         return WeaponHitIce; // SE EJECTUA EL COMBO 2: RETURN COMBO2EVENT
     }
     else if (bufferMatchesCombo(this->fatality, side))
