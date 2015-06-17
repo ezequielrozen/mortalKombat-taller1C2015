@@ -164,6 +164,7 @@ void ComboButtonsView::shiftPositions() {
 }
 
 void ComboButtonsView::activate() {
+    this->buffer.clear();
     this->activated = true;
 }
 
