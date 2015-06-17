@@ -239,16 +239,30 @@ CharacterSprite::~CharacterSprite(void)
     SDL_DestroyTexture(texture);
 }
 
-void CharacterSprite::Draw(bool checkSide)
+void CharacterSprite::Draw()
 {
 	SDL_RendererFlip flipType = SDL_FLIP_NONE;
 
-	if (oponentSide == "LEFT" && checkSide)
-	{
+	if (oponentSide == "LEFT"){
 		flipType = SDL_FLIP_HORIZONTAL;
 	}
 
 	SDL_RenderCopyEx(renderer,texture,&crop, &draw,0,NULL,flipType);
+}
+
+void CharacterSprite::DrawFlying(char side)
+{
+    SDL_RendererFlip flipType = SDL_FLIP_NONE;
+
+    /*if (!checkSide) {
+        cout << "draw: " << checkSide << endl;
+    }*/
+
+    if (side == 'r'){
+        flipType = SDL_FLIP_HORIZONTAL;
+    }
+
+    SDL_RenderCopyEx(renderer,texture,&crop, &draw,0,NULL,flipType);
 }
 
 void CharacterSprite::setX(float passedX) {

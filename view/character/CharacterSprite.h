@@ -16,8 +16,8 @@ public:
 			bool repearLastSprite, bool colorAltered, Painter* painter);
 
 	~CharacterSprite(void);
-	void Draw(bool checkSide);
-
+	void Draw();
+	void DrawFlying(char Side);
 	void Play(float Speed, float width);
 	void PlayBack(float Speed);
 	float getX();

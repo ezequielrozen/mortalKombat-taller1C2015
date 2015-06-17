@@ -93,11 +93,11 @@ void CharacterSelectionView::render() {
     	this->buttonSprites2[i]->Draw();
    
     	if (this->buttonSprites1[i]->isSelected()) {
-    		this->characterSprites1[i]->Draw(true);
+    		this->characterSprites1[i]->Draw();
     		this->characterSprites1[i]->Play(6.66*GAMEDELAY, 0.17*scaledScWidth);
     	}
     	if (this->buttonSprites2[i]->isSelected()) {
-    		this->characterSprites2[i]->Draw(true);
+    		this->characterSprites2[i]->Draw();
     		this->characterSprites2[i]->Play(6.66*GAMEDELAY, 0.17*scaledScWidth);
     	}
     	i++;

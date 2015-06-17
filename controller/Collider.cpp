@@ -60,8 +60,6 @@ void Collider::checkHits(MKCharacter* character1, MKCharacter* character2) {
 				superpositionWeaponLeft(character1->getWeaponFire(), character2)) && character1->getWeaponFire()->isActive()) ||
 		((superpositionWeaponRight(character1->getWeaponIce(), character2) ||
 				superpositionWeaponLeft(character1->getWeaponIce(), character2)) && character1->getWeaponIce()->isActive())){
-
-
 		if (character1->impacts()) {
 			if (character1->getState() == "DuckingKickHitting" ||
 				(!character2->isBlocking() && !character2->isDucking() && !character2->isReceivingHit()) ||

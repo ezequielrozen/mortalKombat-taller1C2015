@@ -560,14 +560,19 @@ void GameView::runCharacter(MKCharacter* character1, MKCharacter* character2, Sp
             sprite->vibrate();
         else
             InputController::setVibrating(false);
-        else
-            sprite->resetFinished();
+    else
+        sprite->resetFinished();
 
-    sprite->Draw(character1->getStateCheckSide());
+    if (character1->getState() == "FlyHitting"){
+        sprite->DrawFlying(character1->getStateSideWhenInit());
+    }
+    else{
+        sprite->Draw();
+    }
 
     if (shootChar != NULL) {
 
-        shootChar->Draw(character1->getStateCheckSide());
+        shootChar->Draw();
     }
 
 }

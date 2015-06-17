@@ -77,11 +77,12 @@ void MKCharacter::characterUpdate() {
 
 	if (this->state->getName() == "FlyHitting")
 	{
+
 		//cuando cambia de lado seteo checkSide en false porq sino se da vuelta el sprite.
 		if (this->state->getSideWhenInit() == 'l') {
-			if (this->getCharacterSide() == 'r'){
+			//if (this->getCharacterSide() == 'r'){
 				this->state->setCheckSide(false);
-			}
+			//}
 			this->posX += step*2;
 		}else
 		{
@@ -89,7 +90,6 @@ void MKCharacter::characterUpdate() {
 				this->state->setCheckSide(false);
 			}
 			this->posX -= step*2;
-			//this->moveLeft();
 		}
 	}
 }
@@ -389,8 +389,8 @@ bool MKCharacter::isBeingOverPassedLeft() {
 string MKCharacter::getState() {
 	return this->state->getName();
 }
-bool MKCharacter::getStateCheckSide() {
-	return this->state->getCheckSide();
+char MKCharacter::getStateSideWhenInit() {
+	return this->state->getSideWhenInit();
 }
 float MKCharacter::getStateWidth() {
 	return (this->ancho)*(this->state->getWidth());
