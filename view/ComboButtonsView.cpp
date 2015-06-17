@@ -50,6 +50,7 @@ void ComboButtonsView::draw() {
     if (this->timer->getCurrentTime() >= TIME_TO_SHOW_BUTTONS) {
         this->timer->stop();
         this->buffer.clear();
+        this->selectedButtons.clear();
         this->positions.clear();
     } else {
         if (activated) {
