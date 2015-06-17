@@ -94,11 +94,3 @@ char CharacterState::getSideWhenInit()
 {
 	return ' ';
 }
-
-bool CharacterState::getCheckSide() {
-	return true;
-}
-
-void CharacterState::setCheckSide(bool value) {
-
-}

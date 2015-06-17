@@ -18,8 +18,6 @@ public:
     float getWidth();
     float getHeight();
     char getSideWhenInit();
-    bool getCheckSide();
-    void setCheckSide(bool value);
     bool isMovingLeft();
     bool isMovingRight();
 private:

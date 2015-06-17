@@ -54,15 +54,6 @@ char FlyHitting::getSideWhenInit()
     return this->sideWhenInit;
 }
 
-bool FlyHitting::getCheckSide() {
-    cout << " state: " << this->checkSide << endl;
-    return this->checkSide;
-}
-
-void FlyHitting::setCheckSide(bool value) {
-    this->checkSide = value;
-}
-
 bool FlyHitting::isMovingLeft() {
     return false;
 }
