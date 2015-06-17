@@ -20,6 +20,8 @@ public:
     char getSideWhenInit();
     bool getCheckSide();
     void setCheckSide(bool value);
+    bool isMovingLeft();
+    bool isMovingRight();
 private:
     int timer;
     char sideWhenInit;

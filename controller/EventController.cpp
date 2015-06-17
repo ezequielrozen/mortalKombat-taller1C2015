@@ -158,7 +158,7 @@ void EventController::blockRelease(int n){
 }
 
 void EventController::duckPunch() {
-	cout << "duckPunch : " << this->characterToMove->getName() << endl;
+	//cout << "duckPunch : " << this->characterToMove->getName() << endl;
 //	this->characterToMove->update(DuckPunch);
 //	this->characterToMove->update(FatalityHit);
 //	this->characterToMove->update(Teleportation);

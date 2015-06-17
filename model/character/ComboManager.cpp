@@ -14,7 +14,7 @@ Events ComboManager::checkCombo(Events originalEvent, char side, string name) {
     }
     this->buffer->push_back(originalEvent);
 
-    if (bufferMatchesCombo(this->combo1, side) && name == "scorpion") {
+    if (bufferMatchesCombo(this->combo1, side)) {
         return Teleportation; // SE EJECTUA EL COMBO 1: RETURN COMBO1EVENT
     }
     else if (bufferMatchesCombo(this->combo2, side) && name == "raiden") {
