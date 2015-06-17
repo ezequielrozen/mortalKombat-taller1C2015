@@ -125,9 +125,9 @@ void Collider::update(MKCharacter* character1, MKCharacter* character2, bool cam
 				character2->move();
 		};
 
-		if ((this->superpositionLeft(character1, character2) && this->superpositionUp(character1, character2) &&
-				character1->isMovingRight() || this->superpositionRight(character1, character2) &&
-				this->superpositionUp(character1, character2) && character1->isMovingLeft()) &&	character1->isJumping()) {
+		if ((this->superpositionLeft(character1, character2) && this->superpositionUp(character1, character2) /*&&
+				character1->isMovingRight()*/ || this->superpositionRight(character1, character2) &&
+				this->superpositionUp(character1, character2) /*&& character1->isMovingLeft()*/) &&	character1->isJumping()) {
 				if (character1->getX() + character1->getWidth() <= character2->getX() + (character2->getWidth() / 2)) {
 					character1->moveLeft();
 					character1->moveLeft();
@@ -138,9 +138,9 @@ void Collider::update(MKCharacter* character1, MKCharacter* character2, bool cam
 				}
 		}
 
-		if ((this->superpositionLeft(character2, character1) && this->superpositionUp(character2, character1) &&
-				character2->isMovingRight() || this->superpositionRight(character2, character1) &&
-				this->superpositionUp(character2, character1) && character2->isMovingLeft()) &&	character2->isJumping()) {
+		if ((this->superpositionLeft(character2, character1) && this->superpositionUp(character2, character1) /*&&
+				character2->isMovingRight()*/ || this->superpositionRight(character2, character1) &&
+				this->superpositionUp(character2, character1) /*&& character2->isMovingLeft()*/) &&	character2->isJumping()) {
 				if (character2->getX() + character2->getWidth() <= character1->getX() + (character1->getWidth() / 2)) {
 					character2->moveLeft();
 					character2->moveLeft();

@@ -83,13 +83,15 @@ void MKCharacter::characterUpdate() {
 			/*//if (this->getCharacterSide() == 'r'){
 				this->state->setCheckSide(false);
 			//}*/
-			this->posX += step*2;
+			this->moveRight();
+			this->moveRight();
 		}else
 		{
 			/*if (this->getCharacterSide() == 'l'){
 				this->state->setCheckSide(false);
 			}*/
-			this->posX -= step*2;
+			this->moveLeft();
+			this->moveLeft();
 		}
 	}
 }
