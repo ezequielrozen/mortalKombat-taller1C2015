@@ -50,7 +50,7 @@ JoystickController::JoystickController(char number, MKStageController* stageCont
 	this->c0Upped = false;
 	this->c0walkingLeft = false;
 	this->c0walkingRight = false;
-
+	this->xButtonPressed = false;
 	this->stageController = stageController;
 }
 
@@ -221,13 +221,17 @@ void JoystickController::update(MKCharacter *character, MKCharacter *character2,
 	}
 
 	if (mainEvent->type == SDL_JOYBUTTONDOWN && pressedButton == c0LowKick) {
-		printCout ? cout << "KeyDown: Boton c0LowKick"	<< endl : "";
-		this->stageController->lowKick(((int)joystickNumber));
+		printCout ? cout << "KeyDown: Boton c0LowKick" << endl : "";
+		if (!xButtonPressed) {
+			this->stageController->lowKick(((int) joystickNumber));
+			this->xButtonPressed = true;
+		}
 	}
 
 	if (mainEvent->type == SDL_JOYBUTTONUP && pressedButton == c0LowKick) {
 		printCout ? cout << "KeyDown: Boton c0HighKick"	<< endl : "";
 		this->stageController->lowKickRelease(((int)joystickNumber));
+		this->xButtonPressed = false;
 	}
 
 	if (mainEvent->type == SDL_JOYBUTTONDOWN && pressedButton == c0duckPunch) {

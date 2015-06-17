@@ -44,6 +44,7 @@ private:
 	bool c0walkingRight;
 	bool c0shootReleased;
     bool c0Upped;
+    bool xButtonPressed;
 
 	void setDucked(bool value);
 	void setWalkingLeft(bool value);
@@ -55,6 +56,7 @@ private:
     void KeyUP_Up(unsigned char pressedAxis, int pressedAxisValue, bool printCout, MKCharacter *character, MKCharacter *character2);
     MKStageController* stageController;
     MKCharacter* characterToMove;
+
 
 
 };
