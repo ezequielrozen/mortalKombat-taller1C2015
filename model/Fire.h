@@ -24,6 +24,7 @@ public:
     float getWidth();
     float getHeight();
     bool isImpact();
+    int getCurrentWeaponIce();
 
 private:
     float speed;
@@ -34,8 +35,8 @@ private:
     bool active;
     char direction;
     void stepForward();
-    float traveledDistance;
     bool impact;
+    int currentUpdate;
 };
 
 #endif /* FIRE_H_ */

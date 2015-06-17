@@ -14,6 +14,7 @@ Fire::Fire(float width, float height) {
     this->height = height;
     this->speed = 1;
     this->impact = false;
+    this->currentUpdate = 0;
 }
 
 Fire::~Fire() {
@@ -22,7 +23,11 @@ Fire::~Fire() {
 
 
 void Fire::update() {
+
 	if (this->isActive()) {
+        this->currentUpdate ++;
+        //cout << this->currentUpdate << endl;
+
 		this->stepForward();
 		int posHit = 330; //ACa tiene q ir la posY del piso donde impacta el fuego con raiden
 
@@ -32,7 +37,11 @@ void Fire::update() {
 		if (this->positionY >= posHit+3){
 			this->destroy();
 		}
-	}
+    }/*else
+    {
+         this->currentUpdate ++;
+    }*/
+
 }
 
 void Fire::throwWeapon(float initialX, float initialY, char direction) {
@@ -66,6 +75,7 @@ float Fire::getPositionX() {
 void Fire::destroy() {
     this->active = false;
     this->impact = false;
+    this->currentUpdate = 0;
 }
 
 float Fire::getWidth() {
@@ -84,3 +94,6 @@ bool Fire::isImpact() {
     return this->impact;
 }
 
+int Fire::getCurrentWeaponIce(){
+    return this->currentUpdate;
+}

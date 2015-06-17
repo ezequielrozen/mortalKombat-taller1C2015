@@ -55,3 +55,7 @@ void Throwable::setImpactingWeaponIce(bool value){
 bool Throwable::getImpactingWeaponIce(){
 	return false;
 }
+
+int Throwable::getCurrentWeaponIce(){
+	return 0;
+}

@@ -16,6 +16,7 @@ public:
 	virtual ~ReceivingFire();
 	string getName();
 	float getWidth();
+	void refreshTimer(MKCharacter* character);
 private:
 	int timer;
 };

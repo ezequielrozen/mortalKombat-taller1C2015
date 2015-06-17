@@ -69,6 +69,9 @@ void MKCharacter::characterUpdate() {
 		throwWeaponFire();
 	}
 	this->weaponFire->update();
+/*	if (this->practiceMode && this->weaponFire->getCurrentWeaponIce() > 28){
+		this->weaponFireUsed = false;
+	}*/
 
 	if (this->state->getName() == "WeaponHittingIce" && this->state->startThrowing() && !this->weaponIce->isActive() && !this->weaponIce->getImpactingWeaponIce()) {
 		throwWeaponIce();
@@ -110,6 +113,7 @@ Throwable *MKCharacter::getWeaponFire() {
 }
 
 void MKCharacter::throwWeaponFire() {
+
 	if (!this->weaponFireUsed && this->fatalityEnable){
 		if (this->getCharacterSide() == 'l') {
 			this->weaponFire->throwWeapon(this->posX + (this->getWidth() * 1.3),this->posY+(this->alto*0.35) ,this->getCharacterSide());
@@ -294,7 +298,6 @@ void MKCharacter::receiveBlow(int force, bool receivingFire) {
 		}
 
 		if (this->practiceMode && force == 0 && receivingFire){
-			cout << "ReceiveFire" << endl;
 			this->update(ReceiveFire);
 		}
 		else {
@@ -546,6 +549,6 @@ void MKCharacter::setWeaponFireUsed(bool isFiring) {
 	this->weaponFireUsed = isFiring;
 }
 
-bool MKCharacter::getWeaponFireStatus() {
-	return this->weaponFireUsed;
-}
+//bool MKCharacter::getWeaponFireStatus() {
+//	return this->weaponFireUsed;
+//}

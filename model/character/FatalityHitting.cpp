@@ -9,7 +9,7 @@
 #include "CharacterStance.h"
 
 FatalityHitting::FatalityHitting() {
-	this->timer = 300;
+	this->timer = 400;
 	startThrow = false;
 
 }
@@ -23,7 +23,7 @@ string FatalityHitting::getName() {
 
 void FatalityHitting::refreshTimer(MKCharacter* character) {
 
-	if (this->timer == 240) {
+	if (this->timer == 340) {
 		startThrow = true;
 	}
 	if (this->timer == 0) {

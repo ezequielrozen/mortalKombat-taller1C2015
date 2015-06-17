@@ -474,10 +474,14 @@ void GameView::runCharacter(MKCharacter* character1, MKCharacter* character2, Sp
     else if (character1->getState() == "FatalityHitting"){
         sprite = characterSprites.at("FatalityHitting");
         sprite->PlayFatality(6.66*GAMEDELAY, character1->getStateWidth());
-    }else {
+    }
+    //resteo los sprites de la fatality porq en modo practica la puede tirar n veces y estos sprites tienen repeatLast = true
+    if (character1->getState() != "FatalityHitting")    {
         (character1->getName() == "scorpion") ? scorpionFatalityHit->reset() : raidenFatalityHit->reset();
     }
-
+    if (character1->getState() != "ReceivingFire")    {
+        (character1->getName() == "scorpion") ? scorpionReceivingFire->reset() : raidenReceivingFire->reset();
+    }
 
 
     if (character1->getWeapon()->isActive()) {
@@ -498,9 +502,13 @@ void GameView::runCharacter(MKCharacter* character1, MKCharacter* character2, Sp
 		shootChar->PlayShootFire(6*GAMEDELAY, character1->getWeaponIce()->getWidth()*1.8, character1->getWeaponIce()->getHeight()*4);
 	}
 	else {
-        (character1->getName() == "scorpion") ? scorpionFatalityFire->reset() : raidenFatalityFire->reset();
 		shootChar = NULL;
 	}
+//    //resteo los sprites de la fatality porq en modo practica la puede tirar n veces y estos sprites tienen repeatLast = true
+//    if (!character1->getWeaponFire()->isActive()) {
+//        cout << "restart2 " << endl;
+//        (character1->getName() == "scorpion") ? scorpionReceivingFire->reset() : raidenReceivingFire->reset();
+//    }
 
 
     if(character1->getX() < character2->getX()) {

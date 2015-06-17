@@ -25,6 +25,7 @@ public:
 	virtual bool isStarting();
     virtual void setImpactingWeaponIce(bool);
     virtual bool getImpactingWeaponIce();
+	virtual int getCurrentWeaponIce();
 };
 
 #endif /* THROWABLE_H_ */
