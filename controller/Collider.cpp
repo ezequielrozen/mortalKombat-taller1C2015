@@ -151,16 +151,17 @@ void Collider::update(MKCharacter* character1, MKCharacter* character2, bool cam
 				}
 		}
 
-	/*	if (this->superpositionLeft(character1, character2) &&
+		/*if (this->superpositionLeft(character1, character2) &&
 				this->superpositionUp(character1, character2) &&
 				!(character1->isJumping() || character2->isJumping()) &&
 			!(character1->isMovingRight() || character2->isMovingLeft()) &&
-				character1->getState() != "FlyHitting" && character2->getState() != "FlyHitting") {
+				character1->getState() != "FlyHitting" && character2->getState() != "FlyHitting" && !(character1->isHitting()) && !(character2->isHitting())) {
 			character1->moveLeft();
 			character1->moveLeft();
 		}
 		if (this->superpositionRight(character1, character2) && this->superpositionUp(character1, character2) && !(character1->isJumping() || character2->isJumping()) &&
-			!(character1->isMovingLeft() || character2->isMovingRight()) && character1->getState() != "FlyHitting" && character2->getState() != "FlyHitting") {
+			!(character1->isMovingLeft() || character2->isMovingRight()) && character1->getState() != "FlyHitting" && character2->getState() != "FlyHitting"
+			&& !(character1->isHitting()) && !(character2->isHitting())) {
 			character1->moveRight();
 			character1->moveRight();
 		}*/

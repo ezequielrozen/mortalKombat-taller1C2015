@@ -68,7 +68,7 @@ private:
 	static void Void();
 	MKCharacter* characterToMove;
 
-	Commands commands[2];
+	Commands commands[3];
 
 	ComboManager* comboManager;
 };
