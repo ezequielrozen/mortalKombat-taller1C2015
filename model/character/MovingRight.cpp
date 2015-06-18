@@ -14,6 +14,7 @@
 #include "Blocking.h"
 #include "TeleportationDoing.h"
 #include "WeaponHittingIce.h"
+#include "FatalityHitting.h"
 
 MovingRight::MovingRight() {
 //    this->timer =
@@ -82,6 +83,10 @@ void MovingRight::update(MKCharacter * character, Events aEvent) {
             if (character->getName() == "raiden"){
                 character->setState(new WeaponHittingIce());
             }
+            break;
+        case FatalityHit:
+            if (character->getFatalityEnable())
+                character->setState(new FatalityHitting());
             break;
         default:
             break;

@@ -9,6 +9,7 @@
 #include "TeleportationDoing.h"
 #include "../../view/SoundManager.h"
 #include "WeaponHittingIce.h"
+#include "FatalityHitting.h"
 
 HighKickHitting::HighKickHitting() {
     this->timer = 40;
@@ -39,6 +40,10 @@ void HighKickHitting::update(MKCharacter *character, Events aEvent) {
             } else {
                 character->setState(new BeingOverPassedRight());
             };
+            break;
+        case FatalityHit:
+            if (character->getFatalityEnable())
+                character->setState(new FatalityHitting());
             break;
         case Teleportation:
             character->setState(new TeleportationDoing());

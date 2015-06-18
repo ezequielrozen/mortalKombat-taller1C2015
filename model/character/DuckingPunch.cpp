@@ -8,6 +8,8 @@
 #include "TeleportationDoing.h"
 #include "../../view/SoundManager.h"
 #include "WeaponHittingIce.h"
+#include "FatalityHitting.h"
+#include "WeaponHItting.h"
 
 DuckingPunch::DuckingPunch() {
     this->timer = 33;
@@ -44,6 +46,13 @@ void DuckingPunch::update(MKCharacter *character, Events aEvent) {
             if (character->getName() == "raiden"){
                 character->setState(new WeaponHittingIce());
             }
+            break;
+        case FatalityHit:
+            if (character->getFatalityEnable())
+                character->setState(new FatalityHitting());
+            break;
+        case WeaponHit:
+            character->setState(new WeaponHitting());
             break;
         default:
             break;

@@ -3,6 +3,7 @@
 #include "CharacterStance.h"
 #include "ReceivingDuckingPunch.h"
 #include "TeleportationDoing.h"
+#include "FatalityHitting.h"
 
 Blocking::Blocking() {
 
@@ -25,6 +26,10 @@ void Blocking::update(MKCharacter *character, Events aEvent) {
             break;
         case Teleportation:
             character->setState(new TeleportationDoing());
+            break;
+        case FatalityHit:
+            if (character->getFatalityEnable())
+                character->setState(new FatalityHitting());
             break;
         default:
             break;

@@ -10,6 +10,7 @@
 #include "BeingOverPassedLeft.h"
 #include "TeleportationDoing.h"
 #include "WeaponHittingIce.h"
+#include "FatalityHitting.h"
 
 Ducking::Ducking() {
     this->timer = 10;
@@ -50,6 +51,10 @@ void Ducking::update(MKCharacter * character, Events aEvent) {
             if (character->getName() == "raiden"){
                 character->setState(new WeaponHittingIce());
             }
+            break;
+        case FatalityHit:
+            if (character->getFatalityEnable())
+                character->setState(new FatalityHitting());
             break;
         default:
             //si no recibe ninguno de los otros eventos, en principio no hay que hacer nada, porque no afectan a este estado

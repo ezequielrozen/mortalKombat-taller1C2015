@@ -5,6 +5,7 @@
 #include "BeingOverPassedLeft.h"
 #include "TeleportationDoing.h"
 #include "WeaponHittingIce.h"
+#include "FatalityHitting.h"
 
 DuckingKickHitting::DuckingKickHitting() {
     this->timer = 33;
@@ -33,6 +34,10 @@ void DuckingKickHitting::update(MKCharacter *character, Events aEvent) {
             if (character->getName() == "raiden"){
                 character->setState(new WeaponHittingIce());
             }
+            break;
+        case FatalityHit:
+            if (character->getFatalityEnable())
+                character->setState(new FatalityHitting());
             break;
         default:
             break;

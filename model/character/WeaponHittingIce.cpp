@@ -22,6 +22,7 @@ void WeaponHittingIce::update(MKCharacter* character, Events aEvent) {
 		case ReceiveHit:
 			character->setState(new RecevingHit());
 			break;
+
 		default:
 			//si no recibe ninguno de los otros eventos, en principio no hay que hacer nada, porque no afectan a este estado
 

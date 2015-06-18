@@ -8,6 +8,7 @@
 #include "TeleportationDoing.h"
 #include "../../view/SoundManager.h"
 #include "WeaponHittingIce.h"
+#include "FatalityHitting.h"
 
 LowPunchHitting::LowPunchHitting() {
     this->timer = 40;
@@ -46,6 +47,10 @@ void LowPunchHitting::update(MKCharacter *character, Events aEvent) {
             if (character->getName() == "raiden"){
                 character->setState(new WeaponHittingIce());
             }
+            break;
+        case FatalityHit:
+            if (character->getFatalityEnable())
+                character->setState(new FatalityHitting());
             break;
         default:
             break;

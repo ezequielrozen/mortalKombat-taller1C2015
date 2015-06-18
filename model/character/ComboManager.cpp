@@ -42,35 +42,37 @@ ComboManager::~ComboManager() {
 }
 
 bool ComboManager::bufferMatchesCombo(std::vector<Events>* combo, char side) {
-    unsigned int i = 0;
+    int i = 0;
     int errorCounter = 0;
     unsigned int comboProgress = 0;
-    int errorIndex = -1;
     std::vector<int> errors;
-    while (i < this->buffer->size() && errorCounter <= COMBO_TOLERANCE) {
+
+    if (this->buffer->size() < combo->size())
+        return false;
+
+    i = (int) this->buffer->size() - (int) combo->size() - 1;
+    if (i < 0)
+        i = 0;
+    while (i  < this->buffer->size() && errorCounter <= COMBO_TOLERANCE) {
         if (comboProgress < combo->size() && combo->at(comboProgress) == this->changeSideEvent(this->buffer->at(i),side)) {
             comboProgress++;
         }
         else if (comboProgress < combo->size()) {
             errorCounter++;
-            errorIndex = i;
             errors.push_back(i);
         } else
             break;
         i++;
     }
 
-    //cout << "ERRORES COMETIDOS: " << errorCounter << "COMBO PROGRESS: " << comboProgress << endl;
+    cout << "ERRORES COMETIDOS: " << errorCounter << " COMBO PROGRESS: " << comboProgress << endl;
 
     if (errorCounter <= COMBO_TOLERANCE && comboProgress == combo->size()) {
-        //cout << "COMBO DETECTADO" << endl;
+        cout << "COMBO DETECTADO" << endl;
         ComboButtonsView::getInstance()->comboDetected(this->buffer, errors);
-
         this->cleanBuffer();
         return true;
-    } /*else if (errorCounter > COMBO_TOLERANCE)
-        this->cleanBuffer();
-*/
+    }
     return false;
 }
 
@@ -82,7 +84,7 @@ void ComboManager::cleanBuffer() {
 
 bool ComboManager::isTimeOut() {
     return SDL_GetTicks() - this->startTime > COMBO_TIMER*this->combo1->size()
-            && SDL_GetTicks() - this->startTime > COMBO_TIMER*this->combo2->size();
+            && SDL_GetTicks() - this->startTime > COMBO_TIMER*this->combo2->size() && SDL_GetTicks() - this->startTime > COMBO_TIMER*this->fatality->size();
 }
 
 Events ComboManager::changeSideEvent(Events event, char side) {
