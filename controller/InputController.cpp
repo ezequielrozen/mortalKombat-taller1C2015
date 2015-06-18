@@ -116,6 +116,11 @@ void InputController::enablePracticeAI() {
 	this->aiController->enablePracticeAI();
 }
 
+void InputController::disablePracticeAI() {
+	this->disableAI();
+	this->aiController->disablePracticeAI();
+}
+
 bool InputController::isAIEnabled() {
 	return this->iaIsActive;
 }

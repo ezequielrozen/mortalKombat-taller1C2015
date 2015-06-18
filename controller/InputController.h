@@ -45,7 +45,7 @@ public:
 	void enableAI();
 	void disableAI();
 	bool isAIEnabled();
-
+	void disablePracticeAI();
 	void enablePracticeAI();
 
 private:
@@ -61,6 +61,7 @@ private:
 	AIController* aiController;
 	MouseController* mouseController;
 	bool iaIsActive;
+
 };
 
 #endif

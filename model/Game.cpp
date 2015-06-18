@@ -51,6 +51,8 @@ bool Game::GameLoop(GameModes mode) {
         this->timer->run();
     } else {
         this->scorpion->setFatalityEnable(true);
+        this->raiden->setState(new CharacterStance());
+        this->scorpion->setState(new CharacterStance());
     }
     bool cameraMoved;
     int roundCount = 1;

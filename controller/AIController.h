@@ -15,6 +15,8 @@ public:
     void setStageController(MKStageController* stageController);
     void enablePracticeAI();
     bool key_u_Released;
+    void disablePracticeAI();
+
 private:
     MKStageController *stageController;
     Events makeRandomGroundHit();

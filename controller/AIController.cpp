@@ -21,6 +21,7 @@ void AIController::setStageController(MKStageController* stageController) {
 void AIController::update(MKCharacter* character1, MKCharacter* character2, SDL_Event* mainEvent) {
     if (!this->practiceMode)
         this->updateAIPlayer(character1, character2);
+
 }
 
 Events AIController::makeRandomGroundHit() {
@@ -94,4 +95,8 @@ void AIController::updateAIPlayer(MKCharacter *character1, MKCharacter *characte
 
 void AIController::enablePracticeAI() {
     this->practiceMode = true;
+}
+
+void AIController::disablePracticeAI() {
+    this->practiceMode = false;
 }
