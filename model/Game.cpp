@@ -11,6 +11,8 @@ Game::Game(GameLoader* aGameLoader, SDL_Renderer* renderer, InputController* inp
     this->initGame(renderer, inputController);
     this->diedTimeElapsed = 0;
     this->timeToResetRound = 0;
+    this->roundsWonByCharacter = {{"scorpion", 0}, {"raiden",0}};
+    this->countWinnerIncreased = false;
 }
 
 void Game::initGame(SDL_Renderer* renderer, InputController* inputController) {
@@ -56,15 +58,16 @@ bool Game::GameLoop(GameModes mode) {
     }
     bool cameraMoved;
     int roundCount = 1;
+    bool endFight = false;
 
-    while (inputController->getEvent()->type != SDL_QUIT && roundCount <= ROUNDS_TO_FIGHT && !endFightTime()) {
+    while (inputController->getEvent()->type != SDL_QUIT && roundCount <= ROUNDS_TO_FIGHT && !endFightTime() && !endFight) {
     	inputController->checkEvent();
         gameView->startRender();
         gameView->Render();
         inputController->update();
-        updateGameState(roundCount);
+        endFight = updateGameState(roundCount);
         cameraMoved = cameraController->update(scorpion, raiden, stage->getLayers());
-        collider->update(scorpion, raiden, cameraMoved);
+        collider->update(scorpion, raiden, cameraMoved, thereIsAWinner());
         gameView->endRender();
         SDL_Delay(GAMEDELAY);
 
@@ -77,12 +80,13 @@ bool Game::GameLoop(GameModes mode) {
 
     }
     if (endFightTime()) {
-        this->restartRound();
+        this->restartRound(roundCount);
     }
     return false;
 }
 
-void Game::updateGameState(int &roundCount) {
+bool Game::updateGameState(int &roundCount) {
+    bool aux = false;
     if (!scorpion->isAlive()) {
         if (scorpion->getState() != "ReceivingFire") {
             if (!(scorpion->getState() == "Dizzy"))
@@ -98,8 +102,12 @@ void Game::updateGameState(int &roundCount) {
         }
         if(this->timeToResetRound == 0) {
             this->timeToResetRound = SDL_GetTicks();
-        } else if(endOfRound()) {
-            this->restartRound();
+        } if (!this->countWinnerIncreased) {
+            this->roundsWonByCharacter["raiden"]++;
+            this->countWinnerIncreased = true;
+        }
+        if(endOfRound()) {
+            aux = this->restartRound(roundCount);
             if(this->isRoundEnd) {
                 roundCount++;
                 this->isRoundEnd = false;
@@ -121,22 +129,38 @@ void Game::updateGameState(int &roundCount) {
     	}
         if(this->timeToResetRound == 0) {
             this->timeToResetRound = SDL_GetTicks();
-        } else if(endOfRound()) {
-            this->restartRound();
-            if(this->isRoundEnd) {
-                roundCount++;
-                this->isRoundEnd = false;
+        } else {
+            if (!this->countWinnerIncreased) {
+                this->roundsWonByCharacter["scorpion"]++;
+                this->countWinnerIncreased = true;
+            }
+            if(endOfRound()) {
+                aux = this->restartRound(roundCount);
+                if(this->isRoundEnd) {
+                    roundCount++;
+                    this->isRoundEnd = false;
+                }
             }
         }
     }
+    return aux;
 }
 
-void Game::restartRound() {
+bool Game::restartRound(int roundCount) {
+    bool aux = false;
+    if (roundCount == ROUNDS_TO_FIGHT || thereIsAWinner()) {
+        this->restartRoundCounts();
+        this->timeToResetRound = 0;
+        this->timer->stop();
+        aux = true;
+    } else {
+        this->timeToResetRound = 0;
+        this->timer->stop();
+        this->timer->run();
+    }
+    this->countWinnerIncreased = false;
     this->diedTimeElapsed = 0;
     this->isRoundEnd = true;
-    this->timeToResetRound = 0;
-    this->timer->stop();
-    this->timer->run();
     this->scorpion->setLife(FULL_LIFE);
     this->raiden->setLife(FULL_LIFE);
     if (this->scorpion->getCharacterNumber() == 0) {
@@ -155,6 +179,7 @@ void Game::restartRound() {
     this->scorpion->setFatalityEnable(false);
     this->scorpion->setWeaponFireUsed(false);
     this->raiden->setWeaponFireUsed(false);
+    return aux;
 }
 
 bool Game::endFightTime() {
@@ -171,12 +196,6 @@ void Game::enablePracticeMode() {
         this->raiden->enablePracticeMode();
 }
 
-void Game::disablePracticeMode() {
-        this->gameView->disablePracticeMode();
-        this->scorpion->disablePracticeMode();
-        this->raiden->disablePracticeMode();
-}
-
 void Game::setCharacterNames(string name1, string name2) {
     string name1aux, name2aux;
 
@@ -191,4 +210,14 @@ void Game::setCharacterNames(string name1, string name2) {
     }
 
     this->gameView->setCharacterNames(name1aux, name2aux);
+}
+
+bool Game::thereIsAWinner() {
+    return ( this->roundsWonByCharacter["scorpion"] == ROUNDS_TO_FIGHT - 1 && this->roundsWonByCharacter["raiden"] < ROUNDS_TO_FIGHT - 1
+            || this->roundsWonByCharacter["raiden"] == ROUNDS_TO_FIGHT - 1 && this->roundsWonByCharacter["scorpion"] < ROUNDS_TO_FIGHT - 1);
+}
+
+void Game::restartRoundCounts() {
+    this->roundsWonByCharacter["scorpion"] = 0;
+    this->roundsWonByCharacter["raiden"] = 0;
 }

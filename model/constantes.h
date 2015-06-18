@@ -101,7 +101,7 @@ const int TIME_FOR_DOING_FATALITY   		= 2000;
 const int TIME_TO_RESTART_ROUND				= 6000;
 const int TIME_TO_FIGHT_ENDING				= 90000;
 const int TIME_TO_SHOW_BUTTONS				= 5000;
-const int ROUNDS_TO_FIGHT					= 2;
+const int ROUNDS_TO_FIGHT					= 3;
 ////Velocidad inicial del salto del personaje.
 //const float SPEED                             =  0.04285*ANCHOVENTANAL;
 ////Aceleracion aplicada al salto del personaje.

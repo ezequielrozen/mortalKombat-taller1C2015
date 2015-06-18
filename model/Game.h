@@ -27,11 +27,10 @@ public:
     bool GameLoop(GameModes mode);
     void initGame(SDL_Renderer* renderer, InputController* stageController);
     void enablePracticeMode();
-    void disablePracticeMode();
     void setCharacterNames(string name1, string name2);
 
 private:
-    void updateGameState(int &roundCount);
+    bool updateGameState(int &roundCount);
     MKCharacter* scorpion;
     MKCharacter* raiden;
     Stage* stage;
@@ -51,11 +50,17 @@ private:
     int peviousKey;
     bool isRoundEnd;
 
-    void restartRound();
+    bool restartRound(int roundCount);
     bool endFightTime();
     bool endOfRound();
     bool practiceMode;
+    bool countWinnerIncreased;
     Timer* timer;
+    std::map<std::string, int> roundsWonByCharacter;
+
+    bool thereIsAWinner();
+
+    void restartRoundCounts();
 };
 
 #endif // GAME_H
