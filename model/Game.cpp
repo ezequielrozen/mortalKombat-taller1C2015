@@ -148,7 +148,7 @@ bool Game::updateGameState(int &roundCount) {
 
 bool Game::restartRound(int roundCount) {
     bool aux = false;
-    if (roundCount == ROUNDS_TO_FIGHT || thereIsAWinner()) {
+    if (roundCount == ROUNDS_TO_FIGHT || thereIsAWinner() || endFightTime()) {
         this->restartRoundCounts();
         this->timeToResetRound = 0;
         this->timer->stop();
