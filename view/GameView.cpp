@@ -55,9 +55,14 @@ GameView::GameView(SDL_Renderer* aRenderer, MKCharacter* character, MKCharacter*
 
     SoundManager::getInstance()->loadSounds();
     // Here we initialize SDL_mixer and then load each sound and music /**/
+
+    finishHim = new CharacterSprite(this->renderer, (char*)"data/finishHim.png", 0.20*Util::getInstance()->getLogicalWindowWidth(), 0.25*Util::getInstance()->getLogicalWindowHeight(), 0.60*Util::getInstance()->getLogicalWindowWidth(), 0.114*Util::getInstance()->getLogicalWindowHeight(),
+                                 13, "RIGHT", false, false, NULL);
 }
 
 GameView::~GameView() {
+
+    if (finishHim != NULL) delete finishHim;
 
     if (timerText != NULL ) delete timerText;
     if (characterTwoName != NULL ) delete characterTwoName;
@@ -581,6 +586,11 @@ void GameView::runCharacter(MKCharacter* character1, MKCharacter* character2, Sp
     if (shootChar != NULL) {
 
         shootChar->Draw();
+    }
+
+    if (character1->getState() == "Dizzy") {
+        finishHim->Play(6.66*GAMEDELAY, 0.60*Util::getInstance()->getLogicalWindowWidth());
+        finishHim->Draw();
     }
 
 }

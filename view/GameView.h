@@ -70,6 +70,8 @@ private:
     Text* timerText;
     Timer* timer;
 
+    CharacterSprite* finishHim;
+
     ComboButtonsView* comboButtons;
 
     SpriteMap scorpionSprites;

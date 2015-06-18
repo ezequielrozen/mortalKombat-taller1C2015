@@ -4,6 +4,9 @@
 
 #include <SDL2/SDL.h>
 #include "SoundManager.h"
+#include <iostream>
+
+using namespace std;
 
 SoundManager* SoundManager::instance = 0;
 
