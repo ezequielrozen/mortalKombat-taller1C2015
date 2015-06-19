@@ -27,6 +27,7 @@ public:
 	void mouseSelect();
 	void linkInputController();
 	void updateMousePosition(unsigned short x, unsigned short y);
+	void skipSplashScreen();
 
 private:
 	ModeSelectionView* view;
@@ -36,6 +37,7 @@ private:
 	int index;
 	bool selectionMade;
 	bool mouseOnButton;
+	bool splashScreen;
 };
 
 #endif // MODESELECTION_H

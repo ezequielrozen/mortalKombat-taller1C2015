@@ -22,12 +22,15 @@ class ModeSelectionView
 public:
 	ModeSelectionView(SDL_Renderer* aRenderer, Button** buttons);
 	~ModeSelectionView();
+	void setSplashScreen(bool show);
 	void render();
 
 private:
 	SDL_Renderer* renderer;
 
 	LayerSprite* background;
+
+	ImageSprite* splashScreen;
 
 	ImageSprite* logo;
 
@@ -36,6 +39,8 @@ private:
 	ButtonSprite* button2;
 
 	ButtonSprite* button3;
+
+	bool splashScreenShown;
 
 };
 

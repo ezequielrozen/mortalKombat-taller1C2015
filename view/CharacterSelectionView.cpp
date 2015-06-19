@@ -43,6 +43,7 @@ CharacterSelectionView::CharacterSelectionView(SDL_Renderer* aRenderer, Button**
     this->characterNames[1] = new Text("RAIDEN    ", this->renderer, "center",{255, 222, 39});
     this->characterNames[1]->setPosition(0.525*scWidth, 0.89*scHeight);
     this->characterNames[1]->setDimensions(0.3*scWidth, 0.1*scHeight);
+
 }
 
 CharacterSelectionView::~CharacterSelectionView() {

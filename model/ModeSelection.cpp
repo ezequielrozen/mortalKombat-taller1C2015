@@ -18,6 +18,7 @@ ModeSelection::ModeSelection(SDL_Renderer* renderer, InputController* inputContr
 	this->index = 0;
 	this->selectionMade = false;
 	this->mouseOnButton = false;
+	this->splashScreen = true;
 }
 
 ModeSelection::~ModeSelection() {
@@ -32,6 +33,8 @@ ModeSelection::~ModeSelection() {
 
 GameModes ModeSelection::loop() {
 
+	view->setSplashScreen(true);
+	this->splashScreen = true;
 	while ( inputController->getEvent()->type != SDL_QUIT) {
 		inputController->checkEvent();
 		inputController->update();
@@ -52,6 +55,7 @@ GameModes ModeSelection::loop() {
 
 	}
 
+
 }
 
 void ModeSelection::linkInputController() {
@@ -59,52 +63,82 @@ void ModeSelection::linkInputController() {
 }
 
 void ModeSelection::moveUp() {
-
-	if(this->index > 0) {
-		this->index--;
-		this->buttons[index+1]->setSelected(false);
-		this->buttons[index]->setSelected(true);
-		this->mouseOnButton = false;
-		SoundManager::getInstance()->playSound("select");
+	if (this->splashScreen) {
+		this->splashScreen = false;
+		this->view->setSplashScreen(false);
+	}
+	else {
+		if(this->index > 0) {
+			this->index--;
+			this->buttons[index+1]->setSelected(false);
+			this->buttons[index]->setSelected(true);
+			this->mouseOnButton = false;
+			SoundManager::getInstance()->playSound("select");
+		}
 	}
 }
 
 void ModeSelection::moveDown() {
-	if(this->index < 2) {
-		index++;
-		this->buttons[index-1]->setSelected(false);
-		this->buttons[index]->setSelected(true);
-		this->mouseOnButton = false;
-		SoundManager::getInstance()->playSound("select");
+	if (this->splashScreen) {
+		this->splashScreen = false;
+		this->view->setSplashScreen(false);
+	}
+	else {
+		if(this->index < 2) {
+			index++;
+			this->buttons[index-1]->setSelected(false);
+			this->buttons[index]->setSelected(true);
+			this->mouseOnButton = false;
+			SoundManager::getInstance()->playSound("select");
+		}
 	}
 }
 
 void ModeSelection::select() {
-	this->selectionMade = true;
-	SoundManager::getInstance()->playSound("confirmselection");
-}
-
-void ModeSelection::updateMousePosition(unsigned short x, unsigned short y) {
-	bool mouseOnButtonAux = false;
-
-	for (int i = 0; i < 3; i++) {
-		if (buttons[i]->checkBoundaries(x, y)) {
-			if (!buttons[i]->isSelected()) {
-				SoundManager::getInstance()->playSound("select");
-			}
-			this->buttons[index]->setSelected(false);
-			index = i;
-			this->buttons[i]->setSelected(true);
-			mouseOnButtonAux = true;
-		}
+	if (this->splashScreen) {
+		this->splashScreen = false;
+		this->view->setSplashScreen(false);
 	}
-
-	this->mouseOnButton = mouseOnButtonAux;
-}
-
-void ModeSelection::mouseSelect() {
-	if (this->mouseOnButton) {
+	else {
 		this->selectionMade = true;
 		SoundManager::getInstance()->playSound("confirmselection");
 	}
+}
+
+void ModeSelection::updateMousePosition(unsigned short x, unsigned short y) {
+	if (!this->splashScreen) {
+		bool mouseOnButtonAux = false;
+
+		for (int i = 0; i < 3; i++) {
+			if (buttons[i]->checkBoundaries(x, y)) {
+				if (!buttons[i]->isSelected()) {
+					SoundManager::getInstance()->playSound("select");
+				}
+				this->buttons[index]->setSelected(false);
+				index = i;
+				this->buttons[i]->setSelected(true);
+				mouseOnButtonAux = true;
+			}
+		}
+
+		this->mouseOnButton = mouseOnButtonAux;
+	}
+}
+
+void ModeSelection::mouseSelect() {
+	if (this->splashScreen) {
+		this->splashScreen = false;
+		this->view->setSplashScreen(false);
+	}
+	else {
+		if (this->mouseOnButton) {
+			this->selectionMade = true;
+			SoundManager::getInstance()->playSound("confirmselection");
+		}
+	}
+}
+
+void ModeSelection::skipSplashScreen() {
+	this->splashScreen = false;
+	this->view->setSplashScreen(false);
 }

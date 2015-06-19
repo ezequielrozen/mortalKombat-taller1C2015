@@ -62,3 +62,39 @@ void ModeSelectionController::select() {
 void ModeSelectionController::updateMousePosition(unsigned short x, unsigned short y) {
     this->modeSelection->updateMousePosition(x, y);
 }
+
+void ModeSelectionController::updateName(string letter) {
+    if (letter != "L") {
+        this->modeSelection->skipSplashScreen();
+    }
+}
+
+void ModeSelectionController::moveRight(int n) {
+    if (n == 0) {
+        this->modeSelection->skipSplashScreen();
+    }
+}
+
+void ModeSelectionController::moveLeft(int n) {
+    if (n == 0) {
+        this->modeSelection->skipSplashScreen();
+    }
+}
+
+void ModeSelectionController::highKick(int n) {
+    if (n == 0) {
+        this->modeSelection->skipSplashScreen();
+    }
+}
+
+void ModeSelectionController::highPunch(int n) {
+    if (n == 0) {
+        this->modeSelection->skipSplashScreen();
+    }
+}
+
+void ModeSelectionController::lowPunch(int n) {
+    if (n == 0) {
+        this->modeSelection->skipSplashScreen();
+    }
+}

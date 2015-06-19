@@ -22,6 +22,13 @@ public:
     void lowKick(int n);
     void select();
     void updateMousePosition(unsigned short x, unsigned short y);
+    void updateName(string letter);
+
+    void moveRight(int n);
+    void moveLeft(int n);
+    void highKick(int n);
+    void highPunch(int n);
+    void lowPunch(int n);
 private:
         ModeSelection* modeSelection;
         bool movingUp;
