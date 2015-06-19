@@ -58,6 +58,7 @@ public:
     void restartAllRaidenSprites();
 
     void setCharacterNames(string name1, string name2);
+    void resetFightSprite();
 
 private:
 
@@ -71,6 +72,8 @@ private:
     Timer* timer;
 
     CharacterSprite* finishHim;
+    CharacterSprite* fight;
+    int fightCounter;
 
     ComboButtonsView* comboButtons;
 

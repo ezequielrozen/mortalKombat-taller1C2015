@@ -56,12 +56,17 @@ GameView::GameView(SDL_Renderer* aRenderer, MKCharacter* character, MKCharacter*
     SoundManager::getInstance()->loadSounds();
     // Here we initialize SDL_mixer and then load each sound and music /**/
 
-    finishHim = new CharacterSprite(this->renderer, (char*)"data/finishHim.png", 0.20*Util::getInstance()->getLogicalWindowWidth(), 0.25*Util::getInstance()->getLogicalWindowHeight(), 0.60*Util::getInstance()->getLogicalWindowWidth(), 0.114*Util::getInstance()->getLogicalWindowHeight(),
+    this->finishHim = new CharacterSprite(this->renderer, (char*)"data/finishHim.png", 0.20*Util::getInstance()->getLogicalWindowWidth(), 0.25*Util::getInstance()->getLogicalWindowHeight(), 0.60*Util::getInstance()->getLogicalWindowWidth(), 0.114*Util::getInstance()->getLogicalWindowHeight(),
                                  13, "RIGHT", false, false, NULL);
+    this->fight = new CharacterSprite(this->renderer, (char*)"data/fight.png", 0.345*Util::getInstance()->getLogicalWindowWidth(), 0.25*Util::getInstance()->getLogicalWindowHeight(), 0.31*Util::getInstance()->getLogicalWindowWidth(), 0.082*Util::getInstance()->getLogicalWindowHeight(),
+                                 21, "RIGHT", false, false, NULL);
+
+    this->fightCounter = 220;
 }
 
 GameView::~GameView() {
 
+    if (fight != NULL) delete fight;
     if (finishHim != NULL) delete finishHim;
 
     if (timerText != NULL ) delete timerText;
@@ -609,6 +614,12 @@ void GameView::runCharacter(MKCharacter* character1, MKCharacter* character2, Sp
         finishHim->Draw();
     }
 
+    if (this->fightCounter > 0) {
+        fight->Play(6.66*GAMEDELAY, 0.31*Util::getInstance()->getLogicalWindowWidth());
+        fight->Draw();
+        this->fightCounter--;   
+    }
+
 }
 
 void GameView::initializeCharactersSprites() {
@@ -716,4 +727,9 @@ void GameView::setCharacterNames(string name1, string name2) {
     string charTwoName = name2;
     transform(charTwoName.begin(), charTwoName.end(), charTwoName.begin(), ::toupper);
     characterTwoName = new Text(charTwoName.c_str(), this->renderer, "right");
+}
+
+void GameView::resetFightSprite() {
+    this->fightCounter = 220;
+    this->fight->reset();
 }

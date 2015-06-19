@@ -60,6 +60,8 @@ bool Game::GameLoop(GameModes mode) {
     int roundCount = 1;
     bool endFight = false;
 
+    gameView->resetFightSprite();
+
     while (inputController->getEvent()->type != SDL_QUIT && roundCount <= ROUNDS_TO_FIGHT && !endFightTime() && !endFight) {
     	inputController->checkEvent();
         gameView->startRender();
@@ -173,6 +175,7 @@ bool Game::restartRound(int roundCount) {
     this->stage->resetLayers();
     this->gameView->restartAllScorpionSprites();
     this->gameView->restartAllRaidenSprites();
+    this->gameView->resetFightSprite();    
     this->scorpion->setState(new CharacterStance());
     this->raiden->setState(new CharacterStance());
     this->raiden->setFatalityEnable(false);
