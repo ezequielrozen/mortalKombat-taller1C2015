@@ -4,7 +4,8 @@ using namespace std;
 
 bool cargaArchivoJSON(char* filename, float &stageWidth, float &stageHeight, float &floor, std::string &oponentSide,
 						std::list<Layer*>* layers, std::list<MKCharacter*>* characters, double& initialH, double& finalH,
-                        double& offset, std::vector<Events>* combo1, std::vector<Events>* combo2, std::vector<Events>* fatality) {
+                        double& offset, std::vector<Events>* combo1, std::vector<Events>* combo2, std::vector<Events>* combo3,
+                        std::vector<Events>* combo4, std::vector<Events>* combo5, std::vector<Events>* combo6, std::vector<Events>* fatality) {
 
     extern logger* Mylog;
     char mensaje[200];
@@ -200,10 +201,10 @@ bool cargaArchivoJSON(char* filename, float &stageWidth, float &stageHeight, flo
 
     Mylog->Log("----------Combos-----------", ERROR_LEVEL_INFO);
     if (root.isMember("combos")) {
-        cargarCombos(root["combos"], combo1, combo2, fatality);
+        cargarCombos(root["combos"], combo1, combo2,combo3,combo4,combo5,combo6, fatality);
     } else {
         Mylog->Log("Cargando combos por default por no estar presente seccion en JSON", ERROR_LEVEL_INFO);
-        cargarCombosDefaults(combo1, combo2, fatality);
+        cargarCombosDefaults(combo1, combo2,combo3,combo4,combo5,combo6, fatality);
     }
 
     Mylog->Log("Parseo completo", ERROR_LEVEL_INFO);
@@ -211,27 +212,55 @@ bool cargaArchivoJSON(char* filename, float &stageWidth, float &stageHeight, flo
     return true;
 }
 
-void cargarCombos(Json::Value combos, vector<Events>* combo1, vector<Events>* combo2, vector<Events>* fatality) {
+void cargarCombos(Json::Value combos, vector<Events>* combo1, vector<Events>* combo2,vector<Events>* combo3,vector<Events>* combo4,
+                  vector<Events>* combo5,vector<Events>* combo6,vector<Events>* fatality) {
+
     string builderCombo1 = combos.isMember("combo1") && combos["combo1"].isString() && combos["combo1"].asString().find(",",0) != -1
                             && combos["combo1"].asString().size() > 0 ? combos["combo1"].asString() : "";
     string builderCombo2 = combos.isMember("combo2") && combos["combo2"].isString() && combos["combo2"].asString().find(",",0) != -1
                            && combos["combo2"].asString().size() > 0 ? combos["combo2"].asString() : "";
+    string builderCombo3 = combos.isMember("combo3") && combos["combo3"].isString() && combos["combo3"].asString().find(",",0) != -1
+                           && combos["combo3"].asString().size() > 0 ? combos["combo3"].asString() : "";
+    string builderCombo4 = combos.isMember("combo4") && combos["combo4"].isString() && combos["combo4"].asString().find(",",0) != -1
+                           && combos["combo4"].asString().size() > 0 ? combos["combo4"].asString() : "";
+    string builderCombo5 = combos.isMember("combo5") && combos["combo5"].isString() && combos["combo5"].asString().find(",",0) != -1
+                           && combos["combo5"].asString().size() > 0 ? combos["combo5"].asString() : "";
+    string builderCombo6 = combos.isMember("combo6") && combos["combo6"].isString() && combos["combo6"].asString().find(",",0) != -1
+                           && combos["combo6"].asString().size() > 0 ? combos["combo6"].asString() : "";
+
     string builderFatality = combos.isMember("fatality") && combos["fatality"].isString() && combos["fatality"].asString().find(",",0) != -1
                              && combos["fatality"].asString().size() > 0 ? combos["fatality"].asString() : "";
-    procesarComboBuilders(builderCombo1, builderCombo2, builderFatality, combo1, combo2, fatality);
+
+    procesarComboBuilders(builderCombo1, builderCombo2,builderCombo3,builderCombo4,builderCombo5,builderCombo6, builderFatality,
+                          combo1, combo2,combo3,combo4,combo5,combo6, fatality);
 }
 
-void procesarComboBuilders(string builderCombo1, string buildercombo2, string builderFatality, vector<Events>* combo1, vector<Events>* combo2, vector<Events>* fatality) {
-    if (builderCombo1.length() == 0 || buildercombo2.size() == 0 || builderFatality.size() == 0) {
-        cargarCombosDefaults(combo1, combo2, fatality);
+void procesarComboBuilders(string builderCombo1, string buildercombo2, string buildercombo3,string buildercombo4,
+                           string buildercombo5,string buildercombo6,string builderFatality,
+                           vector<Events>* combo1, vector<Events>* combo2,vector<Events>* combo3,vector<Events>* combo4,
+                           vector<Events>* combo5,vector<Events>* combo6,vector<Events>* fatality) {
+
+    if (builderCombo1.length() == 0 || buildercombo2.size() == 0 || buildercombo3.size() == 0 || buildercombo4.size() == 0 ||
+            buildercombo5.size() == 0 || buildercombo6.size() == 0 || builderFatality.size() == 0) {
+        cargarCombosDefaults(combo1, combo2,combo3,combo4,combo5,combo6, fatality);
     } else {
         buildCombo(builderCombo1, combo1);
         buildCombo(buildercombo2, combo2);
+        buildCombo(buildercombo3, combo3);
+        buildCombo(buildercombo4, combo4);
+        buildCombo(buildercombo5, combo5);
+        buildCombo(buildercombo6, combo6);
         buildCombo(builderFatality, fatality);
     }
-    if(combo1->size() == 0 || combo2->size() == 0 || fatality->size() == 0 || sonPrefijos(combo1,combo2) || sonPrefijos(combo1,fatality)
-            || sonPrefijos(combo2,fatality)) {
-        cargarCombosDefaults(combo1,combo2, fatality);
+    if(combo1->size() == 0 || combo2->size() == 0 || combo3->size() == 0 || combo4->size() == 0 || combo5->size() == 0 || combo6->size() == 0 || fatality->size() == 0 ||
+            sonPrefijos(combo1,combo2) || sonPrefijos(combo1,combo3) || sonPrefijos(combo1,combo4) || sonPrefijos(combo1,combo5) || sonPrefijos(combo1,combo6) ||sonPrefijos(combo1,fatality) ||
+            sonPrefijos(combo2,combo3) || sonPrefijos(combo2,combo4) || sonPrefijos(combo2,combo5) || sonPrefijos(combo2,combo6) || sonPrefijos(combo2,fatality) ||
+            sonPrefijos(combo3,combo4) || sonPrefijos(combo3,combo5) || sonPrefijos(combo3,combo6) || sonPrefijos(combo3,fatality) ||
+            sonPrefijos(combo4,combo5) || sonPrefijos(combo4,combo6) || sonPrefijos(combo4,fatality) ||
+            sonPrefijos(combo5,combo6) || sonPrefijos(combo5,fatality) ||
+            sonPrefijos(combo6,fatality) )
+            {
+        cargarCombosDefaults(combo1,combo2,combo3,combo4,combo5,combo6, fatality);
     }
 }
 
@@ -257,15 +286,33 @@ void buildCombo(string builderCombo, vector<Events>* combo) {
     }
 }
 
-void cargarCombosDefaults(vector<Events>* combo1, vector<Events>* combo2, vector<Events>* fatality) {
+void cargarCombosDefaults(vector<Events>* combo1, vector<Events>* combo2,vector<Events>* combo3,vector<Events>* combo4,vector<Events>* combo5,
+                          vector<Events>* combo6, vector<Events>* fatality) {
     for(int i = 0; i < DEFAULT_COMBO1.size(); i++) {
         combo1->push_back(DEFAULT_COMBO1[i]);
     }
+
     for(int j = 0; j < DEFAULT_COMBO2.size(); j++) {
         combo2->push_back(DEFAULT_COMBO2[j]);
     }
+
+    for(int j = 0; j < DEFAULT_COMBO3.size(); j++) {
+        combo3->push_back(DEFAULT_COMBO3[j]);
+    }
+
+    for(int j = 0; j < DEFAULT_COMBO4.size(); j++) {
+        combo4->push_back(DEFAULT_COMBO4[j]);
+    }
+
+    for(int j = 0; j < DEFAULT_COMBO5.size(); j++) {
+        combo5->push_back(DEFAULT_COMBO5[j]);
+    }
+
+    for(int j = 0; j < DEFAULT_COMBO6.size(); j++) {
+        combo6->push_back(DEFAULT_COMBO6[j]);
+    }
     for(int k = 0; k < DEFAULT_FATALITY.size(); k++) {
-        fatality->push_back(DEFAULT_COMBO2[k]);
+        fatality->push_back(DEFAULT_FATALITY[k]);
     }
 }
 

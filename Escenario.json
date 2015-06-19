@@ -131,6 +131,9 @@
     "combo1": "abajo,izquierda",
     "combo2": "abajo,arriba",
     "combo3": "arriba,arriba",
+    "combo4": "arriba,derecha,arriba",
+    "combo5": "arriba,izquierda,arriba",
+    "combo6": "izquierda,arriba,izquierda",
     "fatality": "abajo,abajo"
   },
 

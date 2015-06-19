@@ -20,15 +20,38 @@ Events ComboManager::checkCombo(Events originalEvent, char side, string name) {
     else if (name == "raiden" && bufferMatchesCombo(this->combo2, side)) {
         return WeaponHitIce; // SE EJECTUA EL COMBO 2: RETURN COMBO2EVENT
     }
+
+    else if (name == "raiden" && bufferMatchesCombo(this->combo3, side)) {
+        return FlyHit;
+    }
+
+    /*else if (name == "raiden" && bufferMatchesCombo(this->combo4, side)) {
+        return WeaponHitIce; // SE EJECTUA EL COMBO4: RETURN COMBO2EVENT
+    }
+    else if (name == "raiden" && bufferMatchesCombo(this->combo5, side)) {
+        return WeaponHitIce; // SE EJECTUA EL COMBO 5: RETURN COMBO2EVENT
+    }
+    else if (name == "raiden" && bufferMatchesCombo(this->combo6, side)) {
+        return WeaponHitIce; // SE EJECTUA EL COMBO 6: RETURN COMBO2EVENT
+    }*/
+
     else if (name == "scorpion" && bufferMatchesCombo(this->fatality, side))
         return FatalityHit;
 
     return originalEvent;
 }
 
-void ComboManager::loadCombos(std::vector<Events>* combo1, std::vector<Events>* combo2, std::vector<Events>* fatality) {
+void ComboManager::loadCombos(std::vector<Events>* combo1, std::vector<Events>* combo2,
+                              std::vector<Events>* combo3,
+                              std::vector<Events>* combo4,
+                              std::vector<Events>* combo5,
+                              std::vector<Events>* combo6, std::vector<Events>* fatality) {
     this->combo1 = combo1;
     this->combo2 = combo2;
+    this->combo3 = combo3;
+    this->combo4 = combo4;
+    this->combo5 = combo5;
+    this->combo6 = combo6;
     this->fatality = fatality;
 }
 
@@ -83,8 +106,13 @@ void ComboManager::cleanBuffer() {
 }
 
 bool ComboManager::isTimeOut() {
-    return SDL_GetTicks() - this->startTime > COMBO_TIMER*this->combo1->size()
-            && SDL_GetTicks() - this->startTime > COMBO_TIMER*this->combo2->size() && SDL_GetTicks() - this->startTime > COMBO_TIMER*this->fatality->size();
+    return  SDL_GetTicks() - this->startTime > COMBO_TIMER*this->combo1->size() &&
+            SDL_GetTicks() - this->startTime > COMBO_TIMER*this->combo2->size() &&
+            SDL_GetTicks() - this->startTime > COMBO_TIMER*this->combo3->size() &&
+            SDL_GetTicks() - this->startTime > COMBO_TIMER*this->combo4->size() &&
+            SDL_GetTicks() - this->startTime > COMBO_TIMER*this->combo5->size() &&
+            SDL_GetTicks() - this->startTime > COMBO_TIMER*this->combo6->size() &&
+            SDL_GetTicks() - this->startTime > COMBO_TIMER*this->fatality->size();
 }
 
 Events ComboManager::changeSideEvent(Events event, char side) {

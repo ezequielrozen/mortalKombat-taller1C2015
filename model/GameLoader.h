@@ -18,6 +18,10 @@ public:
     Painter* getPainter();
     vector<Events> *getCombo1();
     vector<Events> *getCombo2();
+    vector<Events> *getCombo3();
+    vector<Events> *getCombo4();
+    vector<Events> *getCombo5();
+    vector<Events> *getCombo6();
     vector<Events> *getFatality();
 
 private:
@@ -31,6 +35,10 @@ private:
     Stage* stage;
     vector<Events>* combo1;
     vector<Events>* combo2;
+    vector<Events>* combo3;
+    vector<Events>* combo4;
+    vector<Events>* combo5;
+    vector<Events>* combo6;
     vector<Events> *fatality;
 };
 
