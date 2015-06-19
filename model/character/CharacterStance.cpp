@@ -21,6 +21,7 @@
 #include "ReceivingIce.h"
 #include "FlyHitting.h"
 #include "ReceivingFire.h"
+#include "BeingPushed.h"
 
 CharacterStance::CharacterStance() {
 //    this->timer = -1
@@ -102,6 +103,11 @@ void CharacterStance::update(MKCharacter * character, Events aEvent) {
         case FlyHit:
             if (character->getName() == "raiden") {
                 character->setState(new FlyHitting());
+            }
+            break;
+        case ReceivingFlyHit:
+            if (character->getName() == "raiden") {
+                character->setState(new BeingPushed());
             }
             break;
         case ReceiveFire:

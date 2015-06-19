@@ -31,30 +31,6 @@ ReceivingIce::~ReceivingIce() {
 void ReceivingIce::update(MKCharacter * character, Events aEvent) {
 
     switch (aEvent) {
-        case Jump:
-            character->setState(new Jumping());
-            break;
-        case Duck:
-            character->setState(new Ducking());
-            break;
-        case HighPunch:
-            character->setState(new HighPunchHitting());
-            break;
-        case LowPunch:
-            character->setState(new LowPunchHitting());
-            break;
-        case HighKick:
-            character->setState(new HighKickHitting());
-            break;
-        case LowKick:
-            character->setState(new LowKickHitting());
-            break;
-        case Block:
-            character->setState(new Blocking());
-            break;
-        case WeaponHit:
-            character->setState(new WeaponHitting());
-            break;
         case ReceiveDuckingPunch:
             character->setState(new ReceivingDuckingPunch());
             break;
@@ -67,14 +43,6 @@ void ReceivingIce::update(MKCharacter * character, Events aEvent) {
         case ReceiveHit:
             character->setState(new RecevingHit());
             break;
-        case Teleportation:
-            character->setState(new TeleportationDoing());
-            break;
-//        case WeaponHitIce:
-//            if (character->getName() == "raiden"){
-//                character->setState(new WeaponHittingIce());
-//            }
-//            break;
         case OverPassed:
             if (character->getCharacterSide() == 'l') {
                 character->setState(new BeingOverPassedLeft());

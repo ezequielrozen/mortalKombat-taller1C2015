@@ -80,11 +80,12 @@ void Collider::checkHits(MKCharacter* character1, MKCharacter* character2, bool 
 					} else
 					{
 						if (character1->getState() != "FatalityHitting") {
-							character2->receiveBlow(DAMAGE.at(character1->getState()), "FlyHitting");
+
 							if (character1->getState() == "FlyHitting") {
 								character1->setFinalPosXAfterFlyHitting(character2->getX(), character2->getWidth());
+								character2->receiveBlow(DAMAGE.at(character1->getState()), "FlyHitting");
 							}
-
+							character2->receiveBlow(DAMAGE.at(character1->getState()), "");
 							if (character1->isJumping()) {
 								character1->disableImpact();
 							}

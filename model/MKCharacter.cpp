@@ -300,7 +300,11 @@ void MKCharacter::receiveBlow(int force, string oponentStateName) {
 		}
 		else if (oponentStateName == "WeaponHittingIce"){
 			this->update(ReceiveIce);
-			InputController::setVibrating(true);
+			//InputController::setVibrating(true);
+		}
+		else if (oponentStateName == "FlyHitting"){
+			this->update(ReceivingFlyHit);
+			//InputController::setVibrating(true);
 		}
 		else {
 

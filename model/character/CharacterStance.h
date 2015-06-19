@@ -2,7 +2,7 @@
 #define MORTALKOMBAT_TALLER1C2015_CHARACTERSTANCE_H
 
 #include "../MKCharacter.h"
-class Frozen;
+
 class CharacterStance : public CharacterState {
 
 public:
