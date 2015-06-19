@@ -33,7 +33,7 @@ CharacterStance::~CharacterStance() {
 
 void CharacterStance::update(MKCharacter * character, Events aEvent) {
 
-//    std::cout << "Update desde StanceState." << std::endl;
+    //cout << "ReceivingFlyHit --------------------------------- " << aEvent << endl;
 
     switch (aEvent) {
         case MoveRight:
@@ -106,7 +106,7 @@ void CharacterStance::update(MKCharacter * character, Events aEvent) {
             }
             break;
         case ReceivingFlyHit:
-            if (character->getName() == "raiden") {
+            if (character->getName() == "scorpion") {
                 character->setState(new BeingPushed());
             }
             break;

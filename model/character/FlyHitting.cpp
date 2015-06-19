@@ -6,7 +6,7 @@
 #include "CharacterStance.h"
 
 FlyHitting::FlyHitting() {
-    this->timer = 50;
+    this->timer = 120;
     this->sideWhenInit=' ';
     this->checkSide = true;
 }
@@ -37,7 +37,7 @@ void FlyHitting::refreshTimer(MKCharacter* character) {
         character->setState(new CharacterStance());
         this->sideWhenInit=' ';
         this->checkSide = true;
-        this->timer = 60;
+        this->timer = 120;
     }
     this->timer -= 1;
 }
@@ -55,7 +55,7 @@ char FlyHitting::getSideWhenInit()
 }
 
 bool FlyHitting::isMovingLeft() {
-    return false;
+    return true;
 }
 
 bool FlyHitting::isMovingRight() {

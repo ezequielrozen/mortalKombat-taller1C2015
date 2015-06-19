@@ -83,11 +83,11 @@ void MKCharacter::characterUpdate() {
 	{
 		if (this->state->getSideWhenInit() == 'l') {
 			this->moveRight();
-			this->moveRight();
+			//this->moveRight();
 		}else
 		{
 			this->moveLeft();
-			this->moveLeft();
+			//this->moveLeft();
 		}
 	}
 }
@@ -514,11 +514,11 @@ void MKCharacter::setFinalPosXAfterFlyHitting(float oponentPosX, float oponentWi
 
 				stagePosX = stagePosX - (posX - pos);
 				posX = posX - (posX - pos);
-				this->setState(new CharacterStance());
+				//this->setState(new CharacterStance());
 			}
 			else
 			{
-				this->setState(new CharacterStance());
+				//this->setState(new CharacterStance());
 			}
 
 		}else
@@ -532,11 +532,11 @@ void MKCharacter::setFinalPosXAfterFlyHitting(float oponentPosX, float oponentWi
 
 				stagePosX = stagePosX - (posX - pos);
 				posX = posX - (posX - pos);
-				this->setState(new CharacterStance());
+				//this->setState(new CharacterStance());
 			}
 			else
 			{
-				this->setState(new CharacterStance());
+				//this->setState(new CharacterStance());
 			}
 
 		}

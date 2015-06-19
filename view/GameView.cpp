@@ -464,7 +464,10 @@ void GameView::endRender() {
 void GameView::runCharacter(MKCharacter* character1, MKCharacter* character2, SpriteMap characterSprites) {
     CharacterSprite* sprite = NULL;
     CharacterSprite* shootChar = NULL;
-
+//    if (character1->getName() == "scorpion")
+//        cout << "scorpion: " << character1->getState() << endl;
+//    else
+//        cout << " " << character1->getState() << endl;
     bool aux = (character1->getX() < character2->getX());
 
     if (character1->getState() != "WeaponHitting" && character1->getState() != "FireHitting" && character1->getState() != "WeaponHittingIce"

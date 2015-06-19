@@ -99,7 +99,7 @@ void KeyboardController::update(MKCharacter* character, MKCharacter* character2,
 				break;
 			case SDLK_o:
 				if (!keysPressed[10]) {
-					this->stageController->setCharacterToMove(character);
+					this->stageController->setCharacterToMove(character2);
 					this->stageController->duckPunch();
 					this->stageController->updateName("O");
 					this->keysPressed[10] = true;

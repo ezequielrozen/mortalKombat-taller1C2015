@@ -89,10 +89,10 @@ bool ComboManager::bufferMatchesCombo(std::vector<Events>* combo, char side) {
         i++;
     }
 
-    cout << "ERRORES COMETIDOS: " << errorCounter << " COMBO PROGRESS: " << comboProgress << endl;
+    //cout << "ERRORES COMETIDOS: " << errorCounter << " COMBO PROGRESS: " << comboProgress << endl;
 
     if (errorCounter <= COMBO_TOLERANCE && comboProgress == combo->size()) {
-        cout << "COMBO DETECTADO" << endl;
+        //cout << "COMBO DETECTADO" << endl;
         ComboButtonsView::getInstance()->comboDetected(this->buffer, errors);
         this->cleanBuffer();
         return true;

@@ -7,6 +7,7 @@
 #include "ReceivingDuckingKick.h"
 #include "ReceivingDuckingPunch.h"
 #include "CharacterStance.h"
+#include "BeingPushed.h"
 
 
 BeingOverPassedLeft::BeingOverPassedLeft() {
@@ -29,6 +30,11 @@ void BeingOverPassedLeft::update(MKCharacter * character, Events aEvent) {
             break;
         case OverPassedFinished:
             character->setState(new CharacterStance());
+            break;
+        case ReceivingFlyHit:
+            if (character->getName() == "scorpion") {
+                character->setState(new BeingPushed());
+            }
             break;
         default:
             break;
