@@ -21,7 +21,7 @@
 
 
 ReceivingIce::ReceivingIce() {
-    this->timer = 80;
+    this->timer = 400;
     //SoundManager::getInstance()->playSound("burn");
 }
 
@@ -101,7 +101,7 @@ void ReceivingIce::refreshTimer(MKCharacter* character) {
     if (this->timer == 0) {
         character->setState(new CharacterStance());
 //		cout << "stance " << endl;
-        this->timer = 80;
+        this->timer = 30;
     }
 
     this->timer -= 1;

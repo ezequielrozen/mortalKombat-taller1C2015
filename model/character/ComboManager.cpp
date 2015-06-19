@@ -25,7 +25,7 @@ Events ComboManager::checkCombo(Events originalEvent, char side, string name) {
         return FlyHit;
     }
 
-    /*else if (name == "raiden" && bufferMatchesCombo(this->combo4, side)) {
+        /*else if (name == "raiden" && bufferMatchesCombo(this->combo4, side)) {
         return WeaponHitIce; // SE EJECTUA EL COMBO4: RETURN COMBO2EVENT
     }
     else if (name == "raiden" && bufferMatchesCombo(this->combo5, side)) {
@@ -35,8 +35,9 @@ Events ComboManager::checkCombo(Events originalEvent, char side, string name) {
         return WeaponHitIce; // SE EJECTUA EL COMBO 6: RETURN COMBO2EVENT
     }*/
 
-    else if (name == "scorpion" && bufferMatchesCombo(this->fatality, side))
+    else if (name == "scorpion" && bufferMatchesCombo(this->fatality, side)) {
         return FatalityHit;
+    }
 
     return originalEvent;
 }

@@ -101,6 +101,8 @@ GameView::~GameView() {
     if (scorpionWeaponIce != NULL ) delete  scorpionWeaponIce;
     if (scorpionWeaponIceImpacting != NULL) delete scorpionWeaponIceImpacting;
     if (scorpionFlyingHit != NULL) delete scorpionFlyingHit;
+    if (scorpionFrozen != NULL) delete scorpionFrozen;
+    if (scorpionBeingPushed != NULL) delete scorpionBeingPushed;
 
 
     if (raidenJump != NULL ) delete  raidenJump;
@@ -133,6 +135,8 @@ GameView::~GameView() {
     if (raidenWeaponIce != NULL ) delete  raidenWeaponIce;
     if (raidenWeaponIceImpacting != NULL) delete raidenWeaponIceImpacting;
     if (raidenFlyingHit != NULL) delete raidenFlyingHit;
+    if (raidenFrozen != NULL) delete raidenFrozen;
+    if (raidenBeingPushed != NULL) delete raidenBeingPushed;
 
     for (int i = 0 ; i < layerCount ; i++) {
         delete layerSprites[i];
@@ -223,26 +227,26 @@ void GameView::LoadSprites(string name1, string name2) {
             					scorpionWinner, scorpionShoot, scorpionDizzy,scorpionFall,scorpionBeingHit,
             					scorpionBeingHitDown, scorpionBlockDown, scorpionBlock, scorpionFatalityHit, scorpionFatalityFire,
             					scorpionReceivingFire, scorpionTeleportation,scorpionShootIce,scorpionWeaponIce,scorpionWeaponIceImpacting,
-                                scorpionFlyingHit, false);
+                                scorpionFlyingHit, scorpionFrozen,scorpionBeingPushed, false);
 
             this->loadAsScorpion(raidenWalk,raidenStance,raidenJump,raidenDuck,raidenSideJump,raidenHighKick,raidenLowKick,
             		raidenDuckKick,raidenJumpKick,raidenPunchJump,raidenDuckPunch,raidenPunch,raidenLowPunch,raidenWinner,
                                 raidenShoot, raidenDizzy,raidenFall,raidenBeingHit,raidenBeingHitDown,
                                 raidenBlockDown, raidenBlock,raidenFatalityHit, raidenFatalityFire,raidenReceivingFire, raidenTeleportation,
-                                 raidenShootIce,raidenWeaponIce, raidenWeaponIceImpacting, raidenFlyingHit, colorAltered);
+                                 raidenShootIce,raidenWeaponIce, raidenWeaponIceImpacting, raidenFlyingHit, raidenFrozen,raidenBeingPushed, colorAltered);
         } else {
             this->loadAsRaiden(scorpionWalk,scorpionStance,scorpionJump,scorpionSideJump,scorpionDuck,scorpionHighKick,scorpionLowKick,
             					scorpionDuckKick,scorpionJumpKick, scorpionPunchJump,scorpionDuckPunch,scorpionHighPunch,scorpionLowPunch,
             					scorpionWinner, scorpionShoot,scorpionDizzy,scorpionFall,scorpionBeingHit,
                                 scorpionBeingHitDown,scorpionBlockDown,scorpionBlock,scorpionFatalityHit, scorpionFatalityFire,
                                 scorpionReceivingFire, scorpionTeleportation,scorpionShootIce,scorpionWeaponIce,scorpionWeaponIceImpacting,
-                                scorpionFlyingHit,false);
+                                scorpionFlyingHit,scorpionFrozen,scorpionBeingPushed,false);
 
             this->loadAsRaiden(raidenWalk,raidenStance,raidenJump,raidenSideJump,raidenDuck,raidenHighKick,raidenLowKick,
             		raidenDuckKick,raidenJumpKick,raidenPunchJump,raidenDuckPunch,raidenPunch,raidenLowPunch,raidenWinner,
                                 raidenShoot,raidenDizzy,raidenFall,raidenBeingHit, raidenBeingHitDown,raidenBlockDown,raidenBlock,
                                 raidenFatalityHit, raidenFatalityFire,raidenReceivingFire,raidenTeleportation,raidenShootIce,raidenWeaponIce,
-                                raidenWeaponIceImpacting,raidenFlyingHit,colorAltered);
+                                raidenWeaponIceImpacting,raidenFlyingHit,raidenFrozen,raidenBeingPushed,colorAltered);
         }
     }
 
@@ -252,13 +256,14 @@ void GameView::LoadSprites(string name1, string name2) {
 							 scorpionShoot, scorpionDizzy,scorpionFall,scorpionBeingHit,scorpionBeingHitDown,
 							 scorpionBlockDown, scorpionBlock,scorpionFatalityHit, scorpionFatalityFire,scorpionReceivingFire,
 							 scorpionTeleportation,scorpionShootIce,scorpionWeaponIce,scorpionWeaponIceImpacting,
-                             scorpionFlyingHit,false);
+                             scorpionFlyingHit,scorpionFrozen,scorpionBeingPushed,false);
 
         this->loadAsRaiden(raidenWalk,raidenStance,raidenJump,raidenSideJump,raidenDuck,raidenHighKick,raidenLowKick,
         					raidenDuckKick,raidenJumpKick,raidenPunchJump,raidenDuckPunch,raidenPunch,raidenLowPunch,raidenWinner,
                            raidenShoot,raidenDizzy,raidenFall,raidenBeingHit,
                            raidenBeingHitDown,raidenBlockDown,raidenBlock,raidenFatalityHit, raidenFatalityFire,raidenReceivingFire,
-                           raidenTeleportation, raidenShootIce,raidenWeaponIce,raidenWeaponIceImpacting,raidenFlyingHit,false);
+                           raidenTeleportation, raidenShootIce,raidenWeaponIce,raidenWeaponIceImpacting,raidenFlyingHit,raidenFrozen,
+                           raidenBeingPushed,false);
 
     } else if (name1 == "raiden" && name2 == "scorpion") {
 
@@ -267,13 +272,13 @@ void GameView::LoadSprites(string name1, string name2) {
         					scorpionShoot,scorpionDizzy,scorpionFall,scorpionBeingHit,
         					scorpionBeingHitDown,scorpionBlockDown,scorpionBlock,scorpionFatalityHit, scorpionFatalityFire,scorpionReceivingFire,
         					scorpionTeleportation,scorpionShootIce,scorpionWeaponIce,scorpionWeaponIceImpacting,
-                            scorpionFlyingHit,false);
+                            scorpionFlyingHit,scorpionFrozen,scorpionBeingPushed,false);
 
         this->loadAsScorpion(raidenWalk,raidenStance,raidenJump,raidenDuck,raidenSideJump,raidenHighKick,raidenLowKick,
         					raidenDuckKick,raidenJumpKick,raidenPunchJump,raidenDuckPunch,raidenPunch,raidenLowPunch,raidenWinner,
                              raidenShoot, raidenDizzy,raidenFall,raidenBeingHit,raidenBeingHitDown, raidenBlockDown,
                              raidenBlock,raidenFatalityHit, raidenFatalityFire,raidenReceivingFire,raidenTeleportation,
-                             raidenShootIce,raidenWeaponIce, raidenWeaponIceImpacting,raidenFlyingHit,false);
+                             raidenShootIce,raidenWeaponIce, raidenWeaponIceImpacting,raidenFlyingHit,raidenFrozen,raidenBeingPushed,false);
     }
 
     scorpionSprites = {{"Stance", scorpionStance},{"MovingRight", scorpionWalk},{"MovingLeft", scorpionWalk},{"Jumping", scorpionJump},
@@ -285,8 +290,8 @@ void GameView::LoadSprites(string name1, string name2) {
     {"KickLeftJumpingHitting",scorpionJumpKick},{"KickRightJumpingHitting",scorpionJumpKick},{"LowPunchHitting",scorpionLowPunch},
     {"LowKickHitting", scorpionLowKick},{"FatalityHitting", scorpionFatalityHit},{"FireHitting", scorpionFatalityFire},
     {"ReceivingFire", scorpionReceivingFire},{"TeleportationDoing", scorpionTeleportation},{"WeaponHittingIce", scorpionShootIce},
-    {"WeaponIce", scorpionWeaponIce}, {"WeaponIceImpacting", scorpionWeaponIceImpacting}, {"ReceivingIce", scorpionDizzy},
-    {"FlyHitting", scorpionFlyingHit}};
+    {"WeaponIce", scorpionWeaponIce}, {"WeaponIceImpacting", scorpionWeaponIceImpacting}, {"ReceivingIce", scorpionFrozen},
+    {"FlyHitting", scorpionFlyingHit},{"BeingPushed", scorpionBeingPushed}};
 
     raidenSprites = {{"Stance", raidenStance},{"MovingRight", raidenWalk},{"MovingLeft", raidenWalk},{"Jumping", raidenJump},
 	{"JumpingRight", raidenSideJump},{"JumpingLeft", raidenSideJump},{"Ducking", raidenDuck},{"HighKickHitting", raidenHighKick},
@@ -297,8 +302,8 @@ void GameView::LoadSprites(string name1, string name2) {
     {"KickLeftJumpingHitting",raidenJumpKick},{"KickRightJumpingHitting",raidenJumpKick},{"LowPunchHitting",raidenLowPunch},
     {"LowKickHitting", raidenLowKick},{"FatalityHitting", raidenFatalityHit},{"FireHitting", raidenFatalityFire},
     {"ReceivingFire", raidenReceivingFire},{"TeleportationDoing", raidenTeleportation},{"WeaponHittingIce", raidenShootIce},
-    {"WeaponIce", raidenWeaponIce}, {"WeaponIceImpacting", raidenWeaponIceImpacting}, {"ReceivingIce", raidenDizzy},
-    {"FlyHitting", raidenFlyingHit}};
+    {"WeaponIce", raidenWeaponIce}, {"WeaponIceImpacting", raidenWeaponIceImpacting}, {"ReceivingIce", raidenFrozen},
+    {"FlyHitting", raidenFlyingHit},{"BeingPushed", raidenBeingPushed}};
 
 }
 
@@ -310,7 +315,7 @@ void GameView::loadAsScorpion(CharacterSprite*& walk, CharacterSprite*& stance, 
 							 CharacterSprite*& beingHitDown, CharacterSprite*& blockDown, CharacterSprite*& block,
 							 CharacterSprite*& fatalityHit, CharacterSprite*& fatalityFire, CharacterSprite*& onFire, CharacterSprite*& teleportation,
                               CharacterSprite*& shootIce,CharacterSprite*& weaponIce,CharacterSprite*&  weaponIceImpacting,CharacterSprite*&  flyingHit,
-							 bool colorAltered) {
+                              CharacterSprite*&  frozen,CharacterSprite*& beingPushed, bool colorAltered) {
 
     walk = new CharacterSprite(this->renderer, scorpion->getFileMovement(MOVE_NAME_WALK) , scorpion->getX(),scorpion->getY(), scorpion->getWidth(),scorpion->getHeight(), 9, oponentSide, false, colorAltered, this->painter);
     stance = new CharacterSprite(this->renderer, scorpion->getFileMovement(MOVE_NAME_STANCE), scorpion->getX(),scorpion->getY(), scorpion->getWidth(),scorpion->getHeight(), 7, oponentSide, false, colorAltered,this->painter);
@@ -342,6 +347,8 @@ void GameView::loadAsScorpion(CharacterSprite*& walk, CharacterSprite*& stance, 
     weaponIce = new CharacterSprite(this->renderer, "data/raiden/raidenWeaponIce.png", scorpion->getX(), scorpion->getY(), scorpion->getWidth(), scorpion->getHeight(), 6, oponentSide, false, colorAltered, this->painter);
     weaponIceImpacting  = new CharacterSprite(this->renderer, "data/raiden/raidenWeaponIceImpacting.png", scorpion->getX(), scorpion->getY(), scorpion->getWidth(), scorpion->getHeight(), 5, oponentSide, false, colorAltered, this->painter);
     flyingHit  = new CharacterSprite(this->renderer, "data/raiden/raidenFlyingHit.png", scorpion->getX(), scorpion->getY(), scorpion->getWidth(), scorpion->getHeight(), 4, oponentSide, true, colorAltered, this->painter);
+    frozen  = new CharacterSprite(this->renderer, "data/frozen.png", raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 1, oponentSide, false, colorAltered, this->painter);
+    beingPushed  = new CharacterSprite(this->renderer, "data/beingPushed.png", raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 1, oponentSide, false, colorAltered, this->painter);
 }
 
 void GameView::loadAsRaiden(CharacterSprite*& walk, CharacterSprite*& stance, CharacterSprite*& jump, CharacterSprite*& sideJump,
@@ -352,7 +359,7 @@ void GameView::loadAsRaiden(CharacterSprite*& walk, CharacterSprite*& stance, Ch
                             CharacterSprite*& beingHitDown, CharacterSprite*& blockDown, CharacterSprite*& block,
                             CharacterSprite*& fatalityHit, CharacterSprite*& fatalityFire, CharacterSprite*& onFire,CharacterSprite*& teleportation,
                             CharacterSprite*& shootIce,CharacterSprite*& weaponIce, CharacterSprite*&  weaponIceImpacting,CharacterSprite*&  flyingHit,
-                            bool colorAltered) {
+                            CharacterSprite*&  frozen, CharacterSprite*& beingPushed,  bool colorAltered) {
 
     walk = new CharacterSprite(this->renderer, raiden->getFileMovement(MOVE_NAME_WALK) , raiden->getX(),raiden->getY(), raiden->getWidth(),raiden->getHeight(), 9, oponentSide, false, colorAltered, this->painter);
     stance = new CharacterSprite(this->renderer, raiden->getFileMovement(MOVE_NAME_STANCE), raiden->getX(),raiden->getY(), raiden->getWidth(),raiden->getHeight(), 10, oponentSide, false, colorAltered, this->painter);
@@ -384,6 +391,8 @@ void GameView::loadAsRaiden(CharacterSprite*& walk, CharacterSprite*& stance, Ch
 	weaponIce = new CharacterSprite(this->renderer, "data/raiden/raidenWeaponIce.png", raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 6, oponentSide, false, colorAltered, this->painter);
 	weaponIceImpacting  = new CharacterSprite(this->renderer, "data/raiden/raidenWeaponIceImpacting.png", raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 5, oponentSide, false, colorAltered, this->painter);
     flyingHit  = new CharacterSprite(this->renderer, "data/raiden/raidenFlyingHit.png", raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 4, oponentSide, true, colorAltered, this->painter);
+    frozen  = new CharacterSprite(this->renderer, "data/frozen.png", raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 1, oponentSide, false, colorAltered, this->painter);
+    beingPushed  = new CharacterSprite(this->renderer, "data/beingPushed.png", raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 1, oponentSide, false, colorAltered, this->painter);
 }
 
 void GameView::restartAllScorpionSprites()
@@ -411,6 +420,8 @@ void GameView::restartAllScorpionSprites()
 	scorpionFatalityFire->reset();
 	scorpionReceivingFire->reset();
     scorpionFlyingHit->reset();
+    scorpionFrozen->reset();
+    scorpionBeingPushed->reset();
 
 }
 
@@ -438,6 +449,8 @@ void GameView::restartAllRaidenSprites()
 	raidenReceivingFire->reset();
 	raidenWeaponIce->reset();
     raidenFlyingHit->reset();
+    raidenFrozen->reset();
+    raidenBeingPushed->reset();
 }
 
 void GameView::startRender() {
@@ -596,33 +609,35 @@ void GameView::runCharacter(MKCharacter* character1, MKCharacter* character2, Sp
 }
 
 void GameView::initializeCharactersSprites() {
-    scorpionJump=NULL;
-    scorpionWalk=NULL;
-    scorpionStance=NULL;
-    scorpionSideJump=NULL;
-    scorpionDuck=NULL;
-    scorpionHighKick=NULL;
-    scorpionLowKick=NULL;
-    scorpionDuckKick=NULL;
-    scorpionJumpKick=NULL;
-    scorpionPunchJump=NULL;
-    scorpionDuckPunch=NULL;
-    scorpionHighPunch=NULL;
-    scorpionLowPunch=NULL;
-    scorpionWinner=NULL;
-    scorpionShoot=NULL;
-    scorpionDizzy=NULL;
-    scorpionFall=NULL;
-    scorpionBeingHit=NULL;
-    scorpionBlockDown=NULL;
-    scorpionBlock=NULL;
-    scorpionFatalityHit=NULL;
-    scorpionFatalityFire=NULL;
-    scorpionReceivingFire=NULL;
+    scorpionJump = NULL;
+    scorpionWalk = NULL;
+    scorpionStance = NULL;
+    scorpionSideJump = NULL;
+    scorpionDuck = NULL;
+    scorpionHighKick = NULL;
+    scorpionLowKick = NULL;
+    scorpionDuckKick = NULL;
+    scorpionJumpKick = NULL;
+    scorpionPunchJump = NULL;
+    scorpionDuckPunch = NULL;
+    scorpionHighPunch = NULL;
+    scorpionLowPunch = NULL;
+    scorpionWinner = NULL;
+    scorpionShoot = NULL;
+    scorpionDizzy = NULL;
+    scorpionFall = NULL;
+    scorpionBeingHit = NULL;
+    scorpionBlockDown = NULL;
+    scorpionBlock = NULL;
+    scorpionFatalityHit = NULL;
+    scorpionFatalityFire = NULL;
+    scorpionReceivingFire = NULL;
     scorpionShootIce = NULL;
     scorpionWeaponIce = NULL;
     scorpionWeaponIceImpacting = NULL;
     scorpionFlyingHit = NULL;
+    scorpionFrozen = NULL;
+    scorpionBeingPushed = NULL;
 
     raidenWalk=NULL;
     raidenStance=NULL;
@@ -650,6 +665,8 @@ void GameView::initializeCharactersSprites() {
     raidenWeaponIce = NULL;
     raidenWeaponIceImpacting = NULL;
     raidenFlyingHit = NULL;
+    raidenFrozen = NULL;
+    raidenBeingPushed = NULL;
 }
 
 void GameView::loadMusicAndSounds() {

@@ -285,7 +285,7 @@ bool MKCharacter::isAlive() {
 //	return true;
 
 }
-void MKCharacter::receiveBlow(int force, bool receivingFire) {
+void MKCharacter::receiveBlow(int force, string oponentStateName) {
 	extern logger* Mylog;
 	if (this->state->getName() == "Dizzy"){
 		this->update(ReceiveFire);
@@ -295,8 +295,12 @@ void MKCharacter::receiveBlow(int force, bool receivingFire) {
 			this->life -= force;
 		}
 
-		if (this->practiceMode && force == 0 && receivingFire){
+		if (this->practiceMode && force == 0 && oponentStateName == "FatalityHitting"){
 			this->update(ReceiveFire);
+		}
+		else if (oponentStateName == "WeaponHittingIce"){
+			this->update(ReceiveIce);
+			InputController::setVibrating(true);
 		}
 		else {
 
@@ -315,12 +319,12 @@ void MKCharacter::receiveBlow(int force, bool receivingFire) {
 			} else {
 				InputController::setVibrating(true);
 			}
-			Mylog->Log("Personaje (PONERLE NOMBRE) recibe golpe",
-					   ERROR_LEVEL_INFO); //FALTA: nombre, vida restada, vida restante.
-			if (this->life <= 0) {
-				this->life = 0;//marcar fin de juego. Preferentemente donde se invoca esta función (control de colisión y golpe)
-			}
 		}
+	}
+	Mylog->Log("Personaje (PONERLE NOMBRE) recibe golpe",
+			   ERROR_LEVEL_INFO); //FALTA: nombre, vida restada, vida restante.
+	if (this->life <= 0) {
+		this->life = 0;//marcar fin de juego. Preferentemente donde se invoca esta función (control de colisión y golpe)
 	}
 }
 

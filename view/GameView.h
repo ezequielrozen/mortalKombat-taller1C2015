@@ -38,7 +38,7 @@ public:
                                   CharacterSprite*& beingHitDown, CharacterSprite*& blockDown,
                                   CharacterSprite*& block,CharacterSprite*& fatalityHit, CharacterSprite*& fatalityFire, CharacterSprite*& onFire,
                                   CharacterSprite*& teleportation, CharacterSprite*& shootIce,CharacterSprite*& weaponIce,CharacterSprite*&  weaponIceImpacting,
-                                  CharacterSprite*&  flyingHit, bool colorAltered);
+                                  CharacterSprite*&  flyingHit,CharacterSprite*&  frozen,CharacterSprite*& beingPushed, bool colorAltered);
     void loadAsRaiden(CharacterSprite*& walk, CharacterSprite*& stance, CharacterSprite*& jump, CharacterSprite*& sideJump,
 								CharacterSprite*& duck, CharacterSprite*& highKick, CharacterSprite*& lowKick, CharacterSprite*& dukKick,
 								CharacterSprite*& punchJump, CharacterSprite*& duckPunch,CharacterSprite*& jumpKick, CharacterSprite*& highPunch,
@@ -47,7 +47,7 @@ public:
 								CharacterSprite*& beingHit, CharacterSprite*& beingHitDown, CharacterSprite*& blockDown, CharacterSprite*& block,
 								CharacterSprite*& fatalityHit, CharacterSprite*& fatalityFire, CharacterSprite*& onFire, CharacterSprite*& teleportation,
 								CharacterSprite*& shootIce,CharacterSprite*& weaponIce,CharacterSprite*&  weaponIceImpacting,
-                                CharacterSprite*&  flyingHit,bool colorAltered);
+                                CharacterSprite*&  flyingHit,CharacterSprite*&  frozen,CharacterSprite*& beingPushed,bool colorAltered);
     void startRender();
     void endRender();
     void initializeCharactersSprites();
@@ -108,6 +108,8 @@ private:
     CharacterSprite* scorpionWeaponIce;
     CharacterSprite* scorpionWeaponIceImpacting;
     CharacterSprite* scorpionFlyingHit;
+    CharacterSprite* scorpionFrozen;
+    CharacterSprite* scorpionBeingPushed;
 
     CharacterSprite* raidenWalk;
     CharacterSprite* raidenStance;
@@ -138,6 +140,8 @@ private:
     CharacterSprite* raidenWeaponIce;
     CharacterSprite* raidenWeaponIceImpacting;
     CharacterSprite* raidenFlyingHit;
+    CharacterSprite* raidenFrozen;
+    CharacterSprite* raidenBeingPushed;
 
     LayerSprite** layerSprites;
     int layerCount;

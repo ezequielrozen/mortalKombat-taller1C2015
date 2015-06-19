@@ -70,20 +70,17 @@ void Collider::checkHits(MKCharacter* character1, MKCharacter* character2, bool 
 
 				if (character2->isAlive()){
 					if (character1->getWeapon()->isActive()) {
-						character2->receiveBlow(DAMAGE.at("WeaponHitting"),false);
+						character2->receiveBlow(DAMAGE.at("WeaponHitting"),"");
 						character1->getWeapon()->destroy();
 					} else if (character1->getWeaponIce()->isActive()) {
-						//cout << "Collider0: char2_PosX" << character2->getX() << endl;
-						character2->update(ReceiveIce);
-						//cout << "Collider: WeaponPosX: " << character2->getWeaponIce()->getPositionX() << endl;
-						character2->receiveBlow(DAMAGE.at("WeaponHitting"),false);
+						character2->receiveBlow(DAMAGE.at("WeaponHitting"),"WeaponHittingIce");
 						character1->getWeaponIce()->setImpactingWeaponIce(true);
 						character1->getWeaponIce()->destroy();
 
 					} else
 					{
 						if (character1->getState() != "FatalityHitting") {
-							character2->receiveBlow(DAMAGE.at(character1->getState()), false);
+							character2->receiveBlow(DAMAGE.at(character1->getState()), "FlyHitting");
 							if (character1->getState() == "FlyHitting") {
 								character1->setFinalPosXAfterFlyHitting(character2->getX(), character2->getWidth());
 							}
@@ -93,15 +90,16 @@ void Collider::checkHits(MKCharacter* character1, MKCharacter* character2, bool 
 							}
 						}else
 						{
-							character2->receiveBlow(0,true);
+							character2->receiveBlow(0,"");
 						}
 					}
+
 					//Solo puede hacer la fatality cuando el oponente esta Dizzy
 					if (!character2->isAlive() && endFight){
 						character1->setFatalityEnable(true);
 					}
 				}else if (character1->getWeaponFire()->isActive()) {
-					character2->receiveBlow(0,false);
+					character2->receiveBlow(0,"");
 					character1->getWeaponFire()->destroy();
 				}
 
