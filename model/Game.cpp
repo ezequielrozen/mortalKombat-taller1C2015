@@ -2,6 +2,7 @@
 #include "character/Dizzy.h"
 #include "character/Victory.h"
 #include "character/CharacterStance.h"
+#include "character/Dead.h"
 #include <SDL2/SDL_mixer.h>
 
 Game::Game(GameLoader* aGameLoader, SDL_Renderer* renderer, InputController* inputController) {
@@ -90,7 +91,7 @@ bool Game::GameLoop(GameModes mode) {
 bool Game::updateGameState(int &roundCount) {
     bool aux = false;
     if (!scorpion->isAlive()) {
-        if (scorpion->getState() != "ReceivingFire") {
+        if (scorpion->getState() != "ReceivingFire" && scorpion->getState() != "Dead") {
             if (!(scorpion->getState() == "Dizzy"))
                 scorpion->setState(new Dizzy());
             scorpion->setPosY(this->stage->getFloor());
@@ -99,6 +100,7 @@ bool Game::updateGameState(int &roundCount) {
             }
             if ((SDL_GetTicks() - diedTimeElapsed >=  TIME_FOR_DOING_FATALITY) && !raiden->isJumping() && !(raiden->getState() == "FatalityHitting")) {
                 raiden->setState(new Victory());
+                scorpion->setState(new Dead());
             }
             raiden->setPosY(this->stage->getFloor());
         }
@@ -120,7 +122,7 @@ bool Game::updateGameState(int &roundCount) {
         }
 
     } else if (!raiden->isAlive()) {
-    	if (raiden->getState() != "ReceivingFire") {
+    	if (raiden->getState() != "ReceivingFire" && raiden->getState() != "Dead") {
             if (!(raiden->getState() == "Dizzy"))
                 raiden->setState(new Dizzy());
             raiden->setPosY(this->stage->getFloor());
@@ -129,6 +131,7 @@ bool Game::updateGameState(int &roundCount) {
             }
             if ((SDL_GetTicks() - diedTimeElapsed >=  TIME_FOR_DOING_FATALITY) && !scorpion->isJumping() && !(scorpion->getState() == "FatalityHitting")) {
                 scorpion->setState(new Victory());
+                raiden->setState(new Dead());
             }
 			scorpion->setPosY(this->stage->getFloor());
     	}

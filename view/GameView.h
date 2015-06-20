@@ -34,7 +34,7 @@ public:
     void loadAsScorpion(CharacterSprite*& walk, CharacterSprite*& stance, CharacterSprite*& jump, CharacterSprite*& duck, CharacterSprite*& sideJump,
                                   CharacterSprite*& highKick,CharacterSprite*& lowKick, CharacterSprite*& dukKick,CharacterSprite*& jumpKick, CharacterSprite*& punchJump, CharacterSprite*& duckPunch,
                                   CharacterSprite*& highPunch,CharacterSprite*& lowPunch, CharacterSprite*& winner,
-                                  CharacterSprite*& shoot, CharacterSprite*& dizzy,  CharacterSprite*& fall, CharacterSprite*& beingHit,
+                                  CharacterSprite*& shoot, CharacterSprite*& dizzy, CharacterSprite*& dead,  CharacterSprite*& fall, CharacterSprite*& beingHit,
                                   CharacterSprite*& beingHitDown, CharacterSprite*& blockDown,
                                   CharacterSprite*& block,CharacterSprite*& fatalityHit, CharacterSprite*& fatalityFire, CharacterSprite*& onFire,
                                   CharacterSprite*& teleportation, CharacterSprite*& shootIce,CharacterSprite*& weaponIce,CharacterSprite*&  weaponIceImpacting,
@@ -43,7 +43,7 @@ public:
 								CharacterSprite*& duck, CharacterSprite*& highKick, CharacterSprite*& lowKick, CharacterSprite*& dukKick,
 								CharacterSprite*& punchJump, CharacterSprite*& duckPunch,CharacterSprite*& jumpKick, CharacterSprite*& highPunch,
 								CharacterSprite*& lowPunch, CharacterSprite*& winner,
-								CharacterSprite*& shoot,  CharacterSprite*& dizzy, CharacterSprite*& fall,
+								CharacterSprite*& shoot,  CharacterSprite*& dizzy, CharacterSprite*& dead, CharacterSprite*& fall,
 								CharacterSprite*& beingHit, CharacterSprite*& beingHitDown, CharacterSprite*& blockDown, CharacterSprite*& block,
 								CharacterSprite*& fatalityHit, CharacterSprite*& fatalityFire, CharacterSprite*& onFire, CharacterSprite*& teleportation,
 								CharacterSprite*& shootIce,CharacterSprite*& weaponIce,CharacterSprite*&  weaponIceImpacting,
@@ -98,6 +98,7 @@ private:
     CharacterSprite* scorpionWinner;
     CharacterSprite* scorpionShoot;
     CharacterSprite* scorpionDizzy;
+    CharacterSprite* scorpionDead;
     CharacterSprite* scorpionFall;
     CharacterSprite* scorpionBeingHit;
     CharacterSprite* scorpionBeingHitDown;
@@ -130,6 +131,7 @@ private:
 	CharacterSprite* raidenWinner;
 	CharacterSprite* raidenShoot;
 	CharacterSprite* raidenDizzy;
+	CharacterSprite* raidenDead;
 	CharacterSprite* raidenFall;
 	CharacterSprite* raidenBeingHit;
     CharacterSprite* raidenBeingHitDown;
