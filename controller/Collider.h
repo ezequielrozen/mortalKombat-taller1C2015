@@ -10,7 +10,7 @@ public:
     Collider();
     ~Collider();
 
-    void update(MKCharacter* character1, MKCharacter* character2, bool cameraMoved, bool endFight);
+    void update(MKCharacter* character1, MKCharacter* character2, bool cameraMoved);
 
 private:
 
@@ -22,7 +22,7 @@ private:
 
     bool superpositionDown(MKCharacter* character1, MKCharacter* character2);
 
-    void checkHits(MKCharacter* character1, MKCharacter* character2, bool endFight);
+    void checkHits(MKCharacter* character1, MKCharacter* character2);
 
     bool superpositionWeaponDown(Throwable* weapon, MKCharacter* character2);
 

@@ -46,7 +46,7 @@ bool Collider::superpositionWeaponRight(Throwable* weapon, MKCharacter* characte
 
 
 
-void Collider::checkHits(MKCharacter* character1, MKCharacter* character2, bool endFight) {
+void Collider::checkHits(MKCharacter* character1, MKCharacter* character2) {
 
 	checkOverPassing(character1, character2);
 
@@ -97,9 +97,9 @@ void Collider::checkHits(MKCharacter* character1, MKCharacter* character2, bool 
 					}
 
 					//Solo puede hacer la fatality cuando el oponente esta Dizzy
-					if (!character2->isAlive() && endFight){
-						character1->setFatalityEnable(true);
-					}
+//					if (!character2->isAlive() && endFight){
+//						character1->setFatalityEnable(true);
+//					}
 				}else if (character1->getWeaponFire()->isActive()) {
 					character2->receiveBlow(0,"");
 					character1->getWeaponFire()->destroy();
@@ -111,7 +111,7 @@ void Collider::checkHits(MKCharacter* character1, MKCharacter* character2, bool 
 }
 
 
-void Collider::update(MKCharacter* character1, MKCharacter* character2, bool cameraMoved, bool endFight) {
+void Collider::update(MKCharacter* character1, MKCharacter* character2, bool cameraMoved) {
 
 	if (!cameraMoved) {
 		if (!(this->superpositionLeft(character1, character2) && this->superpositionUp(character1, character2) &&
@@ -185,12 +185,12 @@ void Collider::update(MKCharacter* character1, MKCharacter* character2, bool cam
 			int randomizer = rand() % 2;
 
 			if (randomizer == 0) {
-				this->checkHits(character1, character2, endFight);
-				this->checkHits(character2, character1, endFight);
+				this->checkHits(character1, character2);
+				this->checkHits(character2, character1);
 			}
 			else {
-				this->checkHits(character2, character1, endFight);
-				this->checkHits(character1, character2, endFight);
+				this->checkHits(character2, character1);
+				this->checkHits(character1, character2);
 			}
 	}
 

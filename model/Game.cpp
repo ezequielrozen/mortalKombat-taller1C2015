@@ -69,7 +69,7 @@ bool Game::GameLoop(GameModes mode) {
         inputController->update();
         endFight = updateGameState(roundCount);
         cameraMoved = cameraController->update(scorpion, raiden, stage->getLayers());
-        collider->update(scorpion, raiden, cameraMoved, thereIsAWinner());
+        collider->update(scorpion, raiden, cameraMoved);
         gameView->endRender();
         SDL_Delay(GAMEDELAY);
 
@@ -105,8 +105,11 @@ bool Game::updateGameState(int &roundCount) {
         if(this->timeToResetRound == 0) {
             this->timeToResetRound = SDL_GetTicks();
         } if (!this->countWinnerIncreased) {
-            this->roundsWonByCharacter["raiden"]++;
+            this->roundsWonByCharacter.at("raiden")++;
             this->countWinnerIncreased = true;
+        }
+        if (this->roundsWonByCharacter.at("raiden") == ROUNDS_TO_FIGHT - 1) {
+            raiden->setFatalityEnable(true);
         }
         if(endOfRound()) {
             aux = this->restartRound(roundCount);
@@ -133,8 +136,11 @@ bool Game::updateGameState(int &roundCount) {
             this->timeToResetRound = SDL_GetTicks();
         } else {
             if (!this->countWinnerIncreased) {
-                this->roundsWonByCharacter["scorpion"]++;
+                this->roundsWonByCharacter.at("scorpion")++;
                 this->countWinnerIncreased = true;
+            }
+            if (this->roundsWonByCharacter.at("scorpion") == ROUNDS_TO_FIGHT - 1) {
+                scorpion->setFatalityEnable(true);
             }
             if(endOfRound()) {
                 aux = this->restartRound(roundCount);
@@ -216,11 +222,11 @@ void Game::setCharacterNames(string name1, string name2) {
 }
 
 bool Game::thereIsAWinner() {
-    return ( this->roundsWonByCharacter["scorpion"] == ROUNDS_TO_FIGHT - 1 && this->roundsWonByCharacter["raiden"] < ROUNDS_TO_FIGHT - 1
-            || this->roundsWonByCharacter["raiden"] == ROUNDS_TO_FIGHT - 1 && this->roundsWonByCharacter["scorpion"] < ROUNDS_TO_FIGHT - 1);
+    return ( this->roundsWonByCharacter.at("scorpion") == ROUNDS_TO_FIGHT - 1 && this->roundsWonByCharacter.at("raiden") < ROUNDS_TO_FIGHT - 1
+            || this->roundsWonByCharacter.at("raiden") == ROUNDS_TO_FIGHT - 1 && this->roundsWonByCharacter.at("scorpion") < ROUNDS_TO_FIGHT - 1);
 }
 
 void Game::restartRoundCounts() {
-    this->roundsWonByCharacter["scorpion"] = 0;
-    this->roundsWonByCharacter["raiden"] = 0;
+    this->roundsWonByCharacter.at("scorpion") = 0;
+    this->roundsWonByCharacter.at("raiden") = 0;
 }
