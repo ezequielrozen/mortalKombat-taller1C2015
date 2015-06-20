@@ -32,6 +32,10 @@ public:
     virtual void setFinalPosX(float finalX);
     virtual float getFinalPosX();
     virtual char getSideWhenInit();
+    virtual void setTimer(int timer);
+    virtual int getTimer();
+    virtual void setMovingLeft(bool);
+    virtual void setMovingRight(bool);
 
 protected:
     virtual void setState(MKCharacter * character, CharacterState* aState);

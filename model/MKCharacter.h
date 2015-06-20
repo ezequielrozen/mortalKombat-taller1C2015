@@ -125,7 +125,7 @@ public:
     bool getFatalityEnable();
 
     void setFinalPosX(float oponentPosX, float oponentWidth);
-    void setFinalPosXAfterFlyHitting(float oponentPosX, float oponentWidth);
+    bool setFinalPosXAfterFlyHitting(float oponentPosX, float oponentWidth);
 
     int getCharacterNumber();
 
@@ -134,6 +134,12 @@ public:
     void setWeaponFireUsed(bool isFiring);
     char getStateSideWhenInit();
 //    bool getWeaponFireStatus();
+    int getStateTimer();
+    void setStateTimer(int timer);
+    bool getStateMovingLeft();
+    bool getStateMovingRight();
+    void setStateMovingLeft(bool);
+    void setStateMovingRight(bool);
 private:
 
     // State

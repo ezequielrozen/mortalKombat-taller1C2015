@@ -6,7 +6,11 @@
 #include "CharacterStance.h"
 
 BeingPushed::BeingPushed() {
-    this->timer = 100;
+    this->timer = 3;
+    this->setMovingRight(false);
+    this->setMovingLeft(false);
+    this->movingLeft = false;
+    this->movingRight = false;
 }
 
 BeingPushed::~BeingPushed() {
@@ -25,12 +29,28 @@ void BeingPushed::refreshTimer(MKCharacter* character) {
     if (this->timer == 0) {
         character->setState(new CharacterStance());
 //		cout << "stance " << endl;
-        this->timer = 100;
+        this->timer = 3;
     }
 
     this->timer -= 1;
 }
+void BeingPushed::setTimer(int time){
+    //Para q lo setee solo una vez.
+    if (this->timer == 3)
+        this->timer = time;
+}
 
 bool BeingPushed::isMovingLeft() {
-    return true;
+    return this->movingLeft;
+}
+
+bool BeingPushed::isMovingRight(){
+    return this->movingRight;
+}
+
+void BeingPushed::setMovingLeft(bool state){
+    this->movingLeft = state;
+}
+void BeingPushed::setMovingRight(bool state){
+    this->movingRight = state;
 }

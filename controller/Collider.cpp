@@ -1,6 +1,7 @@
 #include "Collider.h"
 #include "../model/character/BeingOverPassedRight.h"
 #include "../model/character/BeingOverPassedLeft.h"
+#include "../model/character/CharacterStance.h"
 
 
 Collider::Collider() {
@@ -81,8 +82,21 @@ void Collider::checkHits(MKCharacter* character1, MKCharacter* character2) {
 					{
 						if (character1->getState() != "FatalityHitting") {
 							if (character1->getState() == "FlyHitting") {
-								character1->setFinalPosXAfterFlyHitting(character2->getX(), character2->getWidth());
-								character2->receiveBlow(DAMAGE.at("FlyHitting"), "FlyHitting");
+								//Si devuelve false es porq no lo puede empujar porq esta muy cerca del borde.
+								if (character1->setFinalPosXAfterFlyHitting(character2->getX(), character2->getWidth())) {
+									//Pone al q recibe el golpe en estado BeingPushed
+									character2->receiveBlow(DAMAGE.at("FlyHitting"), "FlyHitting");
+									character2->setStateTimer(character1->getStateTimer());
+									character2->setStateMovingLeft(character1->getStateMovingLeft());
+									character2->setStateMovingRight(character1->getStateMovingRight());
+								} else
+								{
+									//Pone al q recibe el golpe en estado BeingPushed
+									character2->receiveBlow(DAMAGE.at("FlyHitting"), "FlyHitting");
+									//character1->setStateTimer(1);
+									character1->setState(new CharacterStance());
+								}
+
 							}
 							else{
 								character2->receiveBlow(DAMAGE.at(character1->getState()), "");

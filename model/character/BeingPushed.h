@@ -17,8 +17,14 @@ public:
     void refreshTimer(MKCharacter* character);
     void update(MKCharacter * character, Events aEvent);
     bool isMovingLeft();
+    bool isMovingRight();
+    void setTimer(int timer);
+    void setMovingLeft(bool);
+    void setMovingRight(bool);
 private:
     int timer;
+    bool movingRight;
+    bool movingLeft;
 };
 
 

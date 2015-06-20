@@ -94,3 +94,17 @@ char CharacterState::getSideWhenInit()
 {
 	return ' ';
 }
+
+void CharacterState::setTimer(int time){
+
+}
+int CharacterState::getTimer(){
+	return 0;
+}
+
+void CharacterState::setMovingLeft(bool state){
+
+}
+void CharacterState::setMovingRight(bool state){
+
+}

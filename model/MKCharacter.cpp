@@ -419,6 +419,29 @@ float MKCharacter::getStateHeight() {
 	return (this->alto)*(this->state->getHeight());
 }
 
+int MKCharacter::getStateTimer() {
+	return this->state->getTimer();
+}
+
+void MKCharacter::setStateTimer(int timer) {
+	this->state->setTimer(timer);
+}
+
+bool MKCharacter::getStateMovingLeft() {
+	return this->state->isMovingLeft();
+}
+
+void MKCharacter::setStateMovingLeft(bool state) {
+	this->state->setMovingLeft(state);
+}
+bool MKCharacter::getStateMovingRight() {
+	return this->state->isMovingRight();
+}
+
+void MKCharacter::setStateMovingRight(bool state) {
+	this->state->setMovingRight(state);
+}
+
 bool MKCharacter::isHitting() {
 	return this->state->isHitting();
 }
@@ -499,47 +522,47 @@ void MKCharacter::setFinalPosX(float oponentPosX, float oponentWidth) {
 	}
 }
 
-void MKCharacter::setFinalPosXAfterFlyHitting(float oponentPosX, float oponentWidth) {
+bool MKCharacter::setFinalPosXAfterFlyHitting(float oponentPosX, float oponentWidth) {
 	float pos = 0;
 	if (this->state->getFinalPosX() == 0){
 
+		//cout << this->getCharacterSide() << " - OpX: " << oponentPosX << " - posX " << this->posX << " - stage " << this->stagePosX  << " - timer " << this->state->getTimer() << endl;
+
 		if (this->getCharacterSide() == 'r') {
+			//si al momento del impacto no estoy a cierta distancia del final del escenario por izq, no lo empujo porq se superponen.
+			if (stagePosX - this->state->getTimer()> 50) {
 
-			pos = oponentPosX + (oponentWidth*2);
+				pos = oponentPosX + (oponentWidth * 1.5);
 
-			//cout << oponentPosX << " -- " << pos << " - " << endl;
-
-			//Verifico que no se vaya de la pantalla por derecha
-			if ((pos + getWidth() <= Util::getInstance()->getLogicalWindowWidth())) {
-
-				stagePosX = stagePosX - (posX - pos);
-				posX = posX - (posX - pos);
-				//this->setState(new CharacterStance());
+				//Verifico que no se vaya de la pantalla por derecha
+				if ((pos + getWidth() <= Util::getInstance()->getLogicalWindowWidth())) {
+					this->stagePosX = this->stagePosX - (this->posX - pos);
+					this->posX = this->posX - (this->posX - pos);
+					return  true;
+				}
 			}
-			else
-			{
-				//this->setState(new CharacterStance());
+			else{
+				return false;
 			}
-
 		}else
 		{
-			pos = oponentPosX - (getWidth() *2);
+			//si al momento del impacto no estoy a cierta distancia del final del escenario por der, no lo empujo porq se superponen.
+			if (stagePosX + this->state->getTimer()< 900) {
+				pos = oponentPosX - (getWidth() * 1.5);
 
-			//cout << oponentPosX << " - " << pos << " - " << endl;
+				//Verifico que no se vaya de la pantalla por izquierda
+				if (pos >= 0) {
 
-			//Verifico que no se vaya de la pantalla por izquierda
-			if (pos >= 0) {
-
-				stagePosX = stagePosX - (posX - pos);
-				posX = posX - (posX - pos);
-				//this->setState(new CharacterStance());
-			}
-			else
+					this->stagePosX = this->stagePosX - (this->posX - pos);
+					this->posX = posX - (this->posX - pos);
+					return true;
+				}
+			} else
 			{
-				//this->setState(new CharacterStance());
+				return false;
 			}
-
 		}
+		//cout << this->posX << " - opX " << oponentPosX << endl;
 	}
 }
 

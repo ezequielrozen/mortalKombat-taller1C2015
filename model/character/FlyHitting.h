@@ -20,10 +20,16 @@ public:
     char getSideWhenInit();
     bool isMovingLeft();
     bool isMovingRight();
+    int getTimer();
+    void setMovingLeft(bool);
+    void setMovingRight(bool);
 private:
     int timer;
     char sideWhenInit;
     bool checkSide;
+    bool movingRight;
+    bool movingLeft;
+
 };
 
 
