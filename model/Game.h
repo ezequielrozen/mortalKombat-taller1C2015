@@ -49,7 +49,7 @@ private:
     ComboManager* comboManager;
     int peviousKey;
     bool isRoundEnd;
-
+    bool startSoundRang;
     bool restartRound(int roundCount);
     bool endFightTime();
     bool endOfRound();
@@ -61,6 +61,8 @@ private:
     bool thereIsAWinner();
 
     void restartRoundCounts();
+
+    void ringRoundStartSound(int roundCount);
 };
 
 #endif // GAME_H

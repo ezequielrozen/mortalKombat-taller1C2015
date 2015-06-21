@@ -42,6 +42,9 @@ void SoundManager::loadSounds() {
                       {"ray", Mix_LoadWAV("data/Sounds/ray.wav")},
                       {"getoverhere", Mix_LoadWAV("data/Sounds/getoverhere.wav")},
                       {"finishhim", Mix_LoadWAV("data/Sounds/finishhim.wav")},
+                      {"roundOneFight", Mix_LoadWAV("data/Sounds/roundOneFight.wav")},
+                      {"roundTwoFight", Mix_LoadWAV("data/Sounds/roundTwoFight.wav")},
+                      {"roundThreeFight", Mix_LoadWAV("data/Sounds/roundThreeFight.wav")},
 
             };
 
@@ -71,6 +74,9 @@ void SoundManager::freeSounds() {
     Mix_FreeChunk(sounds.at("ray"));
     Mix_FreeChunk(sounds.at("getoverhere"));
     Mix_FreeChunk(sounds.at("finishhim"));
+    Mix_FreeChunk(sounds.at("roundOneFight"));
+    Mix_FreeChunk(sounds.at("roundTwoFight"));
+    Mix_FreeChunk(sounds.at("roundThreeFight"));
 }
 
 void SoundManager::playSound(std::string soundId) {

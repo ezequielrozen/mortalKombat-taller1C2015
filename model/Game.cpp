@@ -3,6 +3,7 @@
 #include "character/Victory.h"
 #include "character/CharacterStance.h"
 #include "character/Dead.h"
+#include "../view/SoundManager.h"
 #include <SDL2/SDL_mixer.h>
 
 Game::Game(GameLoader* aGameLoader, SDL_Renderer* renderer, InputController* inputController) {
@@ -14,6 +15,7 @@ Game::Game(GameLoader* aGameLoader, SDL_Renderer* renderer, InputController* inp
     this->timeToResetRound = 0;
     this->roundsWonByCharacter = {{"scorpion", 0}, {"raiden",0}};
     this->countWinnerIncreased = false;
+    this->startSoundRang = false;
 }
 
 void Game::initGame(SDL_Renderer* renderer, InputController* inputController) {
@@ -64,7 +66,8 @@ bool Game::GameLoop(GameModes mode) {
     gameView->resetFightSprite();
 
     while (inputController->getEvent()->type != SDL_QUIT && roundCount <= ROUNDS_TO_FIGHT && !endFightTime() && !endFight) {
-    	inputController->checkEvent();
+        ringRoundStartSound(roundCount);
+        inputController->checkEvent();
         gameView->startRender();
         gameView->Render();
         inputController->update();
@@ -191,6 +194,7 @@ bool Game::restartRound(int roundCount) {
     this->scorpion->setFatalityEnable(false);
     this->scorpion->setWeaponFireUsed(false);
     this->raiden->setWeaponFireUsed(false);
+    this->startSoundRang = false;
     return aux;
 }
 
@@ -232,4 +236,25 @@ bool Game::thereIsAWinner() {
 void Game::restartRoundCounts() {
     this->roundsWonByCharacter.at("scorpion") = 0;
     this->roundsWonByCharacter.at("raiden") = 0;
+}
+
+void Game::ringRoundStartSound(int roundCount) {
+    if (!this->startSoundRang) {
+        switch (roundCount) {
+            case 1:
+                SoundManager::getInstance()->playSound("roundOneFight");
+                this->startSoundRang = true;
+                break;
+            case 2:
+                SoundManager::getInstance()->playSound("roundTwoFight");
+                this->startSoundRang = true;
+                break;
+            case 3:
+                SoundManager::getInstance()->playSound("roundThreeFight");
+                this->startSoundRang = true;
+                break;
+            default:
+                break;
+        }
+    }
 }
