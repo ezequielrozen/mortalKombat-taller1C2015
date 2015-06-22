@@ -83,7 +83,7 @@ bool DuckingPunch::isBlocking() {
 }
 
 bool DuckingPunch::isDucking() {
-    return true;
+    return false;
 }
 
 float DuckingPunch::getWidth() {
