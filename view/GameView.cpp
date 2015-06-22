@@ -216,6 +216,17 @@ void GameView::Render() {
         }
         //this->runCharacter();
     }
+
+    if (this->scorpion->getState() == "Dizzy" || this->raiden->getState() == "Dizzy") {
+        finishHim->Play(6.66*GAMEDELAY, 0.60*Util::getInstance()->getLogicalWindowWidth());
+        finishHim->Draw();
+    }
+
+    if (this->fightCounter > 0) {
+        fight->Play(6.66*GAMEDELAY, 0.31*Util::getInstance()->getLogicalWindowWidth());
+        fight->Draw();
+        this->fightCounter--;   
+    }
     
 }
 
@@ -617,16 +628,7 @@ void GameView::runCharacter(MKCharacter* character1, MKCharacter* character2, Sp
         shootChar->Draw();
     }
 
-    if (character1->getState() == "Dizzy") {
-        finishHim->Play(6.66*GAMEDELAY, 0.60*Util::getInstance()->getLogicalWindowWidth());
-        finishHim->Draw();
-    }
-
-    if (this->fightCounter > 0) {
-        fight->Play(6.66*GAMEDELAY, 0.31*Util::getInstance()->getLogicalWindowWidth());
-        fight->Draw();
-        this->fightCounter--;   
-    }
+    
 
 }
 
