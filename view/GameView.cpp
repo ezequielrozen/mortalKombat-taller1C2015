@@ -322,7 +322,7 @@ void GameView::loadAsScorpion(CharacterSprite*& walk, CharacterSprite*& stance, 
 							 CharacterSprite*& beingHitDown, CharacterSprite*& blockDown, CharacterSprite*& block,
 							 CharacterSprite*& fatalityHit, CharacterSprite*& fatalityFire, CharacterSprite*& onFire, CharacterSprite*& teleportation,
                               CharacterSprite*& shootIce,CharacterSprite*& weaponIce,CharacterSprite*&  weaponIceImpacting,CharacterSprite*&  flyingHit,
-                              CharacterSprite*&  frozen,CharacterSprite*& beingPushed, bool colorAltered) {
+                              CharacterSprite*&  frozen,CharacterSprite*& beingPushed,bool colorAltered) {
 
     walk = new CharacterSprite(this->renderer, scorpion->getFileMovement(MOVE_NAME_WALK) , scorpion->getX(),scorpion->getY(), scorpion->getWidth(),scorpion->getHeight(), 9, oponentSide, false, colorAltered, this->painter);
     stance = new CharacterSprite(this->renderer, scorpion->getFileMovement(MOVE_NAME_STANCE), scorpion->getX(),scorpion->getY(), scorpion->getWidth(),scorpion->getHeight(), 7, oponentSide, false, colorAltered,this->painter);
@@ -340,7 +340,7 @@ void GameView::loadAsScorpion(CharacterSprite*& walk, CharacterSprite*& stance, 
     winner = new CharacterSprite(this->renderer, scorpion->getFileMovement(MOVE_NAME_WINNER), scorpion->getX(), scorpion->getY(), scorpion->getWidth(), scorpion->getHeight(), 4, oponentSide, false, colorAltered, this->painter);
     shoot = new CharacterSprite(this->renderer, scorpion->getFileMovement(MOVE_NAME_SHOOT), scorpion->getX(), scorpion->getY(), scorpion->getWeapon()->getWidth(), scorpion->getWeapon()->getHeight(), 1, oponentSide, true, colorAltered, this->painter);
     dizzy = new CharacterSprite(this->renderer, scorpion->getFileMovement(MOVE_NAME_DIZZY), scorpion->getX(), scorpion->getY(), scorpion->getWidth(), scorpion->getHeight(), 7, oponentSide, false, colorAltered, this->painter);
-    dead = new CharacterSprite(this->renderer, scorpion->getFileMovement(MOVE_NAME_STANCE), scorpion->getX(), scorpion->getY(), scorpion->getWidth(), scorpion->getHeight(), 7, oponentSide, false, colorAltered, this->painter);
+    dead = new CharacterSprite(this->renderer, "data/scorpion/scorpionDead.png", scorpion->getX(), scorpion->getY(), scorpion->getWidth(), scorpion->getHeight(), 3, oponentSide, true, colorAltered, this->painter);
     fall = new CharacterSprite(this->renderer, scorpion->getFileMovement(MOVE_NAME_FALL), scorpion->getX(), scorpion->getY(), scorpion->getWidth(), scorpion->getHeight(), 9, oponentSide, false, colorAltered, this->painter);
     beingHit = new CharacterSprite(this->renderer, scorpion->getFileMovement(MOVE_NAME_BEINGHIT), scorpion->getX(), scorpion->getY(), scorpion->getWidth(), scorpion->getHeight(), 3, oponentSide, false, colorAltered, this->painter);
     beingHitDown = new CharacterSprite(this->renderer, scorpion->getFileMovement(MOVE_NAME_BEINGHIT_DOWN), scorpion->getX(), scorpion->getY(), scorpion->getWidth(), scorpion->getHeight(), 3, oponentSide, false, colorAltered, this->painter);
@@ -357,6 +357,7 @@ void GameView::loadAsScorpion(CharacterSprite*& walk, CharacterSprite*& stance, 
     flyingHit  = new CharacterSprite(this->renderer, "data/raiden/raidenFlyingHit.png", scorpion->getX(), scorpion->getY(), scorpion->getWidth(), scorpion->getHeight(), 4, oponentSide, true, colorAltered, this->painter);
     frozen  = new CharacterSprite(this->renderer, "data/frozen.png", raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 1, oponentSide, false, colorAltered, this->painter);
     beingPushed  = new CharacterSprite(this->renderer, "data/scorpion/scorpionBeingPushed.gif", raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 1, oponentSide, false, colorAltered, this->painter);
+
 }
 
 void GameView::loadAsRaiden(CharacterSprite*& walk, CharacterSprite*& stance, CharacterSprite*& jump, CharacterSprite*& sideJump,
@@ -367,7 +368,7 @@ void GameView::loadAsRaiden(CharacterSprite*& walk, CharacterSprite*& stance, Ch
                             CharacterSprite*& beingHitDown, CharacterSprite*& blockDown, CharacterSprite*& block,
                             CharacterSprite*& fatalityHit, CharacterSprite*& fatalityFire, CharacterSprite*& onFire,CharacterSprite*& teleportation,
                             CharacterSprite*& shootIce,CharacterSprite*& weaponIce, CharacterSprite*&  weaponIceImpacting,CharacterSprite*&  flyingHit,
-                            CharacterSprite*&  frozen, CharacterSprite*& beingPushed,  bool colorAltered) {
+                            CharacterSprite*&  frozen, CharacterSprite*& beingPushed,bool colorAltered) {
 
     walk = new CharacterSprite(this->renderer, raiden->getFileMovement(MOVE_NAME_WALK) , raiden->getX(),raiden->getY(), raiden->getWidth(),raiden->getHeight(), 9, oponentSide, false, colorAltered, this->painter);
     stance = new CharacterSprite(this->renderer, raiden->getFileMovement(MOVE_NAME_STANCE), raiden->getX(),raiden->getY(), raiden->getWidth(),raiden->getHeight(), 10, oponentSide, false, colorAltered, this->painter);
@@ -402,6 +403,7 @@ void GameView::loadAsRaiden(CharacterSprite*& walk, CharacterSprite*& stance, Ch
     flyingHit  = new CharacterSprite(this->renderer, "data/raiden/raidenFlyingHit.png", raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 4, oponentSide, true, colorAltered, this->painter);
     frozen  = new CharacterSprite(this->renderer, "data/frozen.png", raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 1, oponentSide, false, colorAltered, this->painter);
     beingPushed  = new CharacterSprite(this->renderer, "data/scorpion/scorpionBeingPushed.gif", raiden->getX(), raiden->getY(), raiden->getWidth(), raiden->getHeight(), 1, oponentSide, false, colorAltered, this->painter);
+
 }
 
 void GameView::restartAllScorpionSprites()
@@ -431,6 +433,7 @@ void GameView::restartAllScorpionSprites()
     scorpionFlyingHit->reset();
     scorpionFrozen->reset();
     scorpionBeingPushed->reset();
+    scorpionDead->reset();
 
 }
 
@@ -460,6 +463,7 @@ void GameView::restartAllRaidenSprites()
     raidenFlyingHit->reset();
     raidenFrozen->reset();
     raidenBeingPushed->reset();
+    raidenDead->reset();
 }
 
 void GameView::startRender() {
@@ -656,6 +660,7 @@ void GameView::initializeCharactersSprites() {
     scorpionFlyingHit = NULL;
     scorpionFrozen = NULL;
     scorpionBeingPushed = NULL;
+    scorpionDead = NULL;
 
     raidenWalk=NULL;
     raidenStance=NULL;
@@ -685,6 +690,7 @@ void GameView::initializeCharactersSprites() {
     raidenFlyingHit = NULL;
     raidenFrozen = NULL;
     raidenBeingPushed = NULL;
+    raidenDead = NULL;
 }
 
 void GameView::loadMusicAndSounds() {

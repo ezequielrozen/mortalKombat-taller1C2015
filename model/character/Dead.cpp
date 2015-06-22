@@ -19,3 +19,7 @@ void Dead::update(MKCharacter *character, Events aEvent) {
 string Dead::getName() {
     return "Dead";
 }
+
+float Dead::getWidth() {
+	return 1.78;
+}
