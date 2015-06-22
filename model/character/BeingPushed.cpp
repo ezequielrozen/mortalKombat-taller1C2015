@@ -4,6 +4,8 @@
 
 #include "BeingPushed.h"
 #include "CharacterStance.h"
+#include "../../view/SoundManager.h"
+
 
 BeingPushed::BeingPushed() {
     this->timer = 3;
@@ -11,6 +13,7 @@ BeingPushed::BeingPushed() {
     this->setMovingLeft(false);
     this->movingLeft = false;
     this->movingRight = false;
+    SoundManager::getInstance()->playSound("receivehit");
 }
 
 BeingPushed::~BeingPushed() {
