@@ -54,6 +54,8 @@ void DuckingPunch::update(MKCharacter *character, Events aEvent) {
         case WeaponHit:
             character->setState(new WeaponHitting());
             break;
+        case ReceiveWeapon:
+            character->setState(new ReceivingDuckingPunch());
         default:
             break;
     }
