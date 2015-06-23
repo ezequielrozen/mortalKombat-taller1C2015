@@ -94,6 +94,7 @@ bool Game::GameLoop(GameModes mode) {
 bool Game::updateGameState(int &roundCount) {
     bool aux = false;
     if (!scorpion->isAlive()) {
+        this->timer->stop();
         if (scorpion->getState() != "ReceivingFire" && scorpion->getState() != "Dead") {
             if (!(scorpion->getState() == "Dizzy"))
                 scorpion->setState(new Dizzy());
@@ -125,6 +126,7 @@ bool Game::updateGameState(int &roundCount) {
         }
 
     } else if (!raiden->isAlive()) {
+        this->timer->stop();
     	if (raiden->getState() != "ReceivingFire" && raiden->getState() != "Dead") {
             if (!(raiden->getState() == "Dizzy"))
                 raiden->setState(new Dizzy());
@@ -165,11 +167,9 @@ bool Game::restartRound(int roundCount) {
     if (roundCount == ROUNDS_TO_FIGHT || thereIsAWinner() || endFightTime()) {
         this->restartRoundCounts();
         this->timeToResetRound = 0;
-        this->timer->stop();
         aux = true;
     } else {
         this->timeToResetRound = 0;
-        this->timer->stop();
         this->timer->run();
     }
     this->countWinnerIncreased = false;
