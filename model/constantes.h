@@ -130,7 +130,7 @@ enum GameModes { OneVsTwo, OneVsAI, Practice};
 
 const std::vector<Events> DEFAULT_COMBO1 = {MoveRight, MoveLeft, Duck, LowKick};
 const std::vector<Events> DEFAULT_COMBO2 = {MoveRight, Duck, MoveRight, HighPunch, LowPunch, LowKick};
-const std::vector<Events> DEFAULT_COMBO3 = {MoveRight, MoveRight, MoveRight, MoveRight, MoveRight, MoveRight};
+const std::vector<Events> DEFAULT_COMBO3 = {HighPunch, HighPunch};
 const std::vector<Events> DEFAULT_COMBO4 = {MoveLeft, MoveLeft, MoveLeft, MoveLeft, MoveLeft, MoveLeft};
 const std::vector<Events> DEFAULT_COMBO5 = {Duck, Duck, Duck, Duck, Duck, Duck};
 const std::vector<Events> DEFAULT_COMBO6 = {LowKick, LowKick, LowKick, LowKick, LowKick, LowKick};

@@ -4,6 +4,7 @@
 #include "ReceivingDuckingPunch.h"
 #include "TeleportationDoing.h"
 #include "FatalityHitting.h"
+#include "BeingPushed.h"
 
 Blocking::Blocking() {
 
@@ -30,6 +31,11 @@ void Blocking::update(MKCharacter *character, Events aEvent) {
         case FatalityHit:
             if (character->getFatalityEnable())
                 character->setState(new FatalityHitting());
+            break;
+        case ReceivingFlyHit:
+            if (character->getName() == "scorpion") {
+                character->setState(new BeingPushed());
+            }
             break;
         default:
             break;

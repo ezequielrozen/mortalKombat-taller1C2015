@@ -5,13 +5,15 @@
 
 Events ComboManager::checkCombo(Events originalEvent, char side, string name) {
     ComboButtonsView::getInstance()->addButton(originalEvent);
-        if (this->startTime == 0) {
-            this->startTime = SDL_GetTicks();
-        }
-        if (this->isTimeOut()) {
-            this->cleanBuffer();
-        }
-    if (!ComboButtonsView::getInstance()->isShowingCombo())
+
+    if (this->startTime == 0) {
+        this->startTime = SDL_GetTicks();
+    }
+    if (this->isTimeOut()) {
+        this->cleanBuffer();
+    }
+
+    //if (!ComboButtonsView::getInstance()->isShowingCombo())
         this->buffer->push_back(originalEvent);
 
         if (bufferMatchesCombo(this->combo1, side)) {
@@ -24,7 +26,9 @@ Events ComboManager::checkCombo(Events originalEvent, char side, string name) {
         else if (name == "raiden" && bufferMatchesCombo(this->combo3, side)) {
             return FlyHit;
         }
-
+        else if (name == "scorpion" && bufferMatchesCombo(this->fatality, side)) {
+            return FatalityHit;
+        }
             /*else if (name == "raiden" && bufferMatchesCombo(this->combo4, side)) {
         return WeaponHitIce; // SE EJECTUA EL COMBO4: RETURN COMBO2EVENT
     }
@@ -35,9 +39,7 @@ Events ComboManager::checkCombo(Events originalEvent, char side, string name) {
         return WeaponHitIce; // SE EJECTUA EL COMBO 6: RETURN COMBO2EVENT
     }*/
 
-        else if (name == "scorpion" && bufferMatchesCombo(this->fatality, side)) {
-            return FatalityHit;
-        }
+
 
         return originalEvent;
 }
@@ -75,8 +77,10 @@ bool ComboManager::bufferMatchesCombo(std::vector<Events>* combo, char side) {
         return false;
 
     i = (int) this->buffer->size() - (int) combo->size() - 1;
+
     if (i < 0)
         i = 0;
+
     while (i  < this->buffer->size() && errorCounter <= COMBO_TOLERANCE) {
         if (comboProgress < combo->size() && combo->at(comboProgress) == this->changeSideEvent(this->buffer->at(i),side)) {
             comboProgress++;

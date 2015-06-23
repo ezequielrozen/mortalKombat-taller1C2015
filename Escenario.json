@@ -130,7 +130,7 @@
   "combos": {
     "combo1": "abajo,izquierda",
     "combo2": "abajo,arriba",
-    "combo3": "arriba,arriba",
+    "combo3": "defensa,defensa",
     "combo4": "arriba,derecha,arriba",
     "combo5": "arriba,izquierda,arriba",
     "combo6": "izquierda,arriba,izquierda",

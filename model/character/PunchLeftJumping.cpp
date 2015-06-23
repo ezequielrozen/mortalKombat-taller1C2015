@@ -1,5 +1,6 @@
 #include "PunchLeftJumping.h"
 #include "JumpingLeft.h"
+#include "BeingPushed.h"
 
 PunchLeftJumping::PunchLeftJumping() {
 
@@ -22,6 +23,11 @@ void PunchLeftJumping::update(MKCharacter *character, Events aEvent) {
             break;
         case JumpFinished:
             character->setState(new CharacterStance());
+            break;
+        case ReceivingFlyHit:
+            if (character->getName() == "scorpion") {
+                character->setState(new BeingPushed());
+            }
             break;
         default:
             break;

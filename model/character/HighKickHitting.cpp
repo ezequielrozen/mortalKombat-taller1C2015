@@ -10,6 +10,7 @@
 #include "../../view/SoundManager.h"
 #include "WeaponHittingIce.h"
 #include "FatalityHitting.h"
+#include "BeingPushed.h"
 
 HighKickHitting::HighKickHitting() {
     this->timer = 40;
@@ -51,6 +52,11 @@ void HighKickHitting::update(MKCharacter *character, Events aEvent) {
         case WeaponHitIce:
             if (character->getName() == "raiden"){
                 character->setState(new WeaponHittingIce());
+            }
+            break;
+        case ReceivingFlyHit:
+            if (character->getName() == "scorpion") {
+                character->setState(new BeingPushed());
             }
             break;
         default:

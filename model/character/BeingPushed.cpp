@@ -13,7 +13,7 @@ BeingPushed::BeingPushed() {
     this->setMovingLeft(false);
     this->movingLeft = false;
     this->movingRight = false;
-    SoundManager::getInstance()->playSound("receivehit");
+    SoundManager::getInstance()->playSound("receivehit");r
 }
 
 BeingPushed::~BeingPushed() {

@@ -2,6 +2,7 @@
 #include "CharacterStance.h"
 #include "ReceivingDuckingPunch.h"
 #include "JumpingRight.h"
+#include "BeingPushed.h"
 
 KickRightJumpingHitting::KickRightJumpingHitting() {
 
@@ -18,6 +19,11 @@ void KickRightJumpingHitting::update(MKCharacter *character, Events aEvent) {
             break;
         case ReceiveWeapon:
             character->setState(new ReceivingDuckingPunch());
+            break;
+        case ReceivingFlyHit:
+            if (character->getName() == "scorpion") {
+                character->setState(new BeingPushed());
+            }
             break;
         default:
             break;

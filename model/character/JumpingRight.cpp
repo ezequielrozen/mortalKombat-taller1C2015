@@ -6,6 +6,7 @@
 #include "PunchLeftJumping.h"
 #include "KickRightJumpingHitting.h"
 #include "../../view/SoundManager.h"
+#include "BeingPushed.h"
 
 JumpingRight::JumpingRight() {
     SoundManager::getInstance()->playSound("jump");
@@ -40,6 +41,11 @@ void JumpingRight::update(MKCharacter * character, Events aEvent) {
             break;
         case ReceiveWeapon:
             character->setState(new ReceivingDuckingPunch());
+            break;
+        case ReceivingFlyHit:
+            if (character->getName() == "scorpion") {
+                character->setState(new BeingPushed());
+            }
             break;
         /*case WeaponHit:
             if (!character->getWeapon()->isActive()) {

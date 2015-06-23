@@ -93,7 +93,6 @@ void Collider::checkHits(MKCharacter* character1, MKCharacter* character2) {
 								{
 									//Pone al q recibe el golpe en estado BeingPushed
 									character2->receiveBlow(DAMAGE.at("FlyHitting"), "FlyHitting");
-									//character1->setStateTimer(1);
 									character1->setState(new CharacterStance());
 								}
 

@@ -3,6 +3,8 @@
 #include "ReceivingDuckingPunch.h"
 #include "WeaponHItting.h"
 #include "../../view/SoundManager.h"
+#include "BeingPushed.h"
+
 
 Jumping::Jumping() {
     SoundManager::getInstance()->playSound("jump");
@@ -25,6 +27,11 @@ void Jumping::update(MKCharacter * character, Events aEvent) {
             break;
         case ReceiveWeapon:
             character->setState(new ReceivingDuckingPunch());
+            break;
+        case ReceivingFlyHit:
+            if (character->getName() == "scorpion") {
+                character->setState(new BeingPushed());
+            }
             break;
        /* case WeaponHit:
             if (!character->getWeapon()->isActive()) {

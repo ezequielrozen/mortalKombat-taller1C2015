@@ -369,6 +369,7 @@ bool MKCharacter::isAscending() {
 void MKCharacter::setInitialPosition(double d) {
 	posX = d;
 	auxPosX = d;
+	this->stagePosX = ((Util::getInstance()->getLogicalStageWidth()-Util::getInstance()->getLogicalWindowWidth())/2) + posX;
 }
 
 void MKCharacter::setState(CharacterState *state) {
@@ -524,7 +525,7 @@ void MKCharacter::setFinalPosX(float oponentPosX, float oponentWidth) {
 
 bool MKCharacter::setFinalPosXAfterFlyHitting(float oponentPosX, float oponentWidth) {
 	float pos = 0;
-	if (this->state->getFinalPosX() == 0){
+	//if (this->state->getFinalPosX() == 0){
 
 		//cout << this->getCharacterSide() << " - OpX: " << oponentPosX << " - posX " << this->posX << " - stage " << this->stagePosX  << " - timer " << this->state->getTimer() << endl;
 
@@ -563,7 +564,7 @@ bool MKCharacter::setFinalPosXAfterFlyHitting(float oponentPosX, float oponentWi
 			}
 		}
 		//cout << this->posX << " - opX " << oponentPosX << endl;
-	}
+	//}
 }
 
 int MKCharacter::getCharacterNumber() {

@@ -15,6 +15,7 @@
 #include "TeleportationDoing.h"
 #include "WeaponHittingIce.h"
 #include "FatalityHitting.h"
+#include "BeingPushed.h"
 
 MovingRight::MovingRight() {
 //    this->timer =
@@ -87,6 +88,11 @@ void MovingRight::update(MKCharacter * character, Events aEvent) {
         case FatalityHit:
             if (character->getFatalityEnable())
                 character->setState(new FatalityHitting());
+            break;
+        case ReceivingFlyHit:
+            if (character->getName() == "scorpion") {
+                character->setState(new BeingPushed());
+            }
             break;
         default:
             break;

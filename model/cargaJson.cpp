@@ -288,6 +288,8 @@ void buildCombo(string builderCombo, vector<Events>* combo) {
 
 void cargarCombosDefaults(vector<Events>* combo1, vector<Events>* combo2,vector<Events>* combo3,vector<Events>* combo4,vector<Events>* combo5,
                           vector<Events>* combo6, vector<Events>* fatality) {
+
+    cout << "cargo combos default " << endl;
     for(int i = 0; i < DEFAULT_COMBO1.size(); i++) {
         combo1->push_back(DEFAULT_COMBO1[i]);
     }
