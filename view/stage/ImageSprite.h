@@ -11,8 +11,10 @@ class ImageSprite
 {
 public:
 	ImageSprite(SDL_Renderer* aRenderer, string path, int x, int y, int w, int h);
+	ImageSprite(SDL_Renderer* aRenderer, string path, string alternatepath, int x, int y, int w, int h);
 	~ImageSprite();
 	void Draw();
+    void DrawAlternate();
     void setPosition(int x, int y);
     int getX();
     int getY();
@@ -24,6 +26,7 @@ public:
 private:
 	SDL_Renderer* renderer;
     SDL_Texture* texture;
+    SDL_Texture* alternateTexture;
     SDL_Rect draw;
 
     SDL_Rect crop;

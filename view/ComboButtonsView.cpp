@@ -57,10 +57,13 @@ void ComboButtonsView::draw() {
             for (int i; i < buffer.size(); i++) {
 
                 if (this->highLightingCombo) {
+                    buffer[i]->setPosition(positions[i].x, positions[i].y);
+
                     if (this->selectedButtons.at(i) == 1) {
-                        buffer[i]->setPosition(positions[i].x, positions[i].y);
-                        buffer[i]->Draw();
+                        buffer[i]->DrawAlternate();
                         comboText->Draw();
+                    } else {
+                        buffer[i]->Draw();
                     }
                 } else {
                     buffer[i]->setPosition(positions[i].x, positions[i].y);
@@ -73,6 +76,8 @@ void ComboButtonsView::draw() {
     if (this->comboShowTimer->getCurrentTime() >= TIME_TO_SHOW_BUTTONS) {
         this->comboShowTimer->stop();
         if (this->highLightingCombo) {
+            this->buffer.clear();
+            this->positions.clear();
             this->selectedButtons.clear();
         }
         this->highLightingCombo = false;
@@ -142,16 +147,16 @@ ComboButtonsView *ComboButtonsView::getInstance() {
 }
 
 void ComboButtonsView::init(SDL_Renderer *renderer) {
-    this->buttonSprites = {{"MoveUp", new ImageSprite(renderer, "data/buttons/joystick/up.png", 0,0, 32, 32)},
-                           {"MoveDown", new ImageSprite(renderer, "data/buttons/joystick/down.png", 0,0, 32, 32)},
-                           {"MoveLeft", new ImageSprite(renderer, "data/buttons/joystick/left.png", 0,0, 32, 32)},
-                           {"MoveRight", new ImageSprite(renderer, "data/buttons/joystick/right.png", 0,0, 32, 32)},
-                           {"LowPunch", new ImageSprite(renderer, "data/buttons/joystick/square.png", 0,0, 32, 32)},
-                           {"HighPunch", new ImageSprite(renderer, "data/buttons/joystick/triangle.png", 0,0, 32, 32)},
-                           {"LowKick", new ImageSprite(renderer, "data/buttons/joystick/x.png", 0,0, 32, 32)},
-                           {"HighKick", new ImageSprite(renderer, "data/buttons/joystick/circle.png", 0,0, 32, 32)},
-                           {"Block", new ImageSprite(renderer, "data/buttons/joystick/l1.png", 0,0, 32, 32)},
-                           {"Weapon", new ImageSprite(renderer, "data/buttons/joystick/r1.png", 0,0, 32, 32)}
+    this->buttonSprites = {{"MoveUp", new ImageSprite(renderer, "data/buttons/joystick/up.png", "data/buttons/joystick/up_selected.png", 0,0, 32, 32)},
+                           {"MoveDown", new ImageSprite(renderer, "data/buttons/joystick/down.png", "data/buttons/joystick/down_selected.png", 0,0, 32, 32)},
+                           {"MoveLeft", new ImageSprite(renderer, "data/buttons/joystick/left.png", "data/buttons/joystick/left_selected.png",0,0, 32, 32)},
+                           {"MoveRight", new ImageSprite(renderer, "data/buttons/joystick/right.png", "data/buttons/joystick/right_selected.png",0,0, 32, 32)},
+                           {"LowPunch", new ImageSprite(renderer, "data/buttons/joystick/square.png", "data/buttons/joystick/square_selected.png",0,0, 32, 32)},
+                           {"HighPunch", new ImageSprite(renderer, "data/buttons/joystick/triangle.png", "data/buttons/joystick/triangle_selected.png",0,0, 32, 32)},
+                           {"LowKick", new ImageSprite(renderer, "data/buttons/joystick/x.png", "data/buttons/joystick/x_selected.png",0,0, 32, 32)},
+                           {"HighKick", new ImageSprite(renderer, "data/buttons/joystick/circle.png", "data/buttons/joystick/circle_selected.png",0,0, 32, 32)},
+                           {"Block", new ImageSprite(renderer, "data/buttons/joystick/l1.png", "data/buttons/joystick/l1_selected.png",0,0, 32, 32)},
+                           {"Weapon", new ImageSprite(renderer, "data/buttons/joystick/r1.png", "data/buttons/joystick/r1_selected.png",0,0, 32, 32)}
     };
     this->comboText = new Text("COMBO DETECTED", renderer, "center", {255, 0, 0});
     this->comboText->setDimensions(this->comboText->getWidth() * 32 / this->comboText->getHeight(), 32);
@@ -198,4 +203,8 @@ void ComboButtonsView::comboDetected(std::vector<Events>* comboBuffer, std::vect
         if (this->comboShowTimer->getCurrentTime() == 0)
             this->comboShowTimer->run();
     }
+}
+
+bool ComboButtonsView::isShowingCombo() {
+    return this->highLightingCombo;
 }

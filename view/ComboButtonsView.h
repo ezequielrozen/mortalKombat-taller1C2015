@@ -24,6 +24,7 @@ public:
     void deactivate();
     void comboDetected(std::vector<Events>* comboBuffer, std::vector<int> errors);
     Timer* timer;
+    bool isShowingCombo();
 
 private:
     ComboButtonsView();
