@@ -9,13 +9,12 @@ Events ComboManager::checkCombo(Events originalEvent, char side, string name) {
     if (this->startTime == 0) {
         this->startTime = SDL_GetTicks();
     }
+    this->buffer->push_back(originalEvent);
+
     if (this->isTimeOut()) {
         this->cleanBuffer();
+        ComboButtonsView::getInstance()->reset();
     }
-
-    //if (!ComboButtonsView::getInstance()->isShowingCombo())
-        this->buffer->push_back(originalEvent);
-
         if (bufferMatchesCombo(this->combo1, side)) {
             return Teleportation; // SE EJECTUA EL COMBO 1: RETURN COMBO1EVENT
         }
@@ -72,6 +71,7 @@ bool ComboManager::bufferMatchesCombo(std::vector<Events>* combo, char side) {
     int errorCounter = 0;
     unsigned int comboProgress = 0;
     std::vector<int> errors;
+    std::vector<int> asserts;
 
     if (this->buffer->size() < combo->size())
         return false;
@@ -84,6 +84,7 @@ bool ComboManager::bufferMatchesCombo(std::vector<Events>* combo, char side) {
     while (i  < this->buffer->size() && errorCounter <= COMBO_TOLERANCE) {
         if (comboProgress < combo->size() && combo->at(comboProgress) == this->changeSideEvent(this->buffer->at(i),side)) {
             comboProgress++;
+            asserts.push_back(i);
         }
         else if (comboProgress < combo->size()) {
             errorCounter++;
@@ -97,8 +98,7 @@ bool ComboManager::bufferMatchesCombo(std::vector<Events>* combo, char side) {
 
     if (errorCounter <= COMBO_TOLERANCE && comboProgress == combo->size()) {
         //cout << "COMBO DETECTADO" << endl;
-        ComboButtonsView::getInstance()->comboDetected(this->buffer, errors);
-        this->cleanBuffer();
+        ComboButtonsView::getInstance()->comboDetected(this->buffer, errors, asserts);
         return true;
     }
     return false;

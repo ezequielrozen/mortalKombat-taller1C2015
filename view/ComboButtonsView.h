@@ -22,9 +22,10 @@ public:
     void init(SDL_Renderer* renderer);
     void activate();
     void deactivate();
-    void comboDetected(std::vector<Events>* comboBuffer, std::vector<int> errors);
+    void comboDetected(std::vector<Events>* comboBuffer, std::vector<int> errors,  std::vector<int> asserts);
     Timer* timer;
     bool isShowingCombo();
+    void reset();
 
 private:
     ComboButtonsView();
