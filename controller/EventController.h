@@ -73,6 +73,7 @@ private:
 	Commands commands[3];
 
 	ComboManager* comboManager;
+	ComboManager* comboManagerChar2;
 };
 
 #endif /* EVENTCONTROLLER_H_ */
