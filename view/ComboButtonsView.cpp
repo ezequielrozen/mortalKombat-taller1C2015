@@ -198,10 +198,14 @@ void ComboButtonsView::comboDetected(std::vector<Events>* comboBuffer, std::vect
         }
 
         int extra;
-        ((int) comboBuffer->size() - BUTTONS_BUFFER_PRACTICE_MAX) <= 0 ? extra = 0 : extra = (int) comboBuffer->size() - BUTTONS_BUFFER_PRACTICE_MAX + 1;
+        ((int) comboBuffer->size() - BUTTONS_BUFFER_PRACTICE_MAX) <= 0 ?
+                extra = 0 :
+                extra = (int) comboBuffer->size() - BUTTONS_BUFFER_PRACTICE_MAX + 1;
 
         for (int l = 0; l < asserts.size() ; l++) {
+            cout << "rompe " << " extra: " << extra << " size: " << comboBuffer->size() << endl;
             this->selectedButtons.at(asserts.at(l) - extra) = 1;
+            cout << "rompe2 " << endl;
         }
 /*
         for (int k = 0; k < (int) this->buffer.size() - j; k++) {
