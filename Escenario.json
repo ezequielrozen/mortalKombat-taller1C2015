@@ -134,12 +134,12 @@
     "combo4": "arriba,derecha,arriba",
     "combo5": "arriba,izquierda,arriba",
     "combo6": "izquierda,arriba,izquierda",
-    "fatality": "abajo,abajo"
+    "fatality": "puñoAlto,puñoAlto"
   },
 
 
-  "j1elige": 0,
-  "j2elige": 1
+  "j1elige": 1,
+  "j2elige": 0
 
 
 }
